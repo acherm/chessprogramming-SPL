@@ -1,0 +1,39 @@
+{
+  "title": "Titboards",
+  "url": "https://www.chessprogramming.org/Titboards",
+  "source_type": "api",
+  "retrieved_at": "2026-03-01T08:56:14.500902+00:00",
+  "content_hash": "4d34769994cc1dc482e09b1469f262d202b73d230fce0191662f529fe2e813e1",
+  "text": "Home * Board Representation * Bitboards * Sliding Piece Attacks * Titboards Titboards , a bitboard-based move generation technique invented by Zach Wegner [1] and first implemented by Malik Tremain [2] . Titboards are based on an extension of bitboards to ternary boards, hence the name (\"bit\" means binary digit, \"tit\" mean ternary digit ). Titboards are only used for move generation, not for any other purposes that typical bitboard attack-getters will be used for. The idea of titboards is to eliminate bitscans . Typical bitboard move generation techniques generate a bitboard, intersect it with the set of allowable squares (empty or enemy-occupied), and then serialize that into a list of moves. Titboards take a bitboard occupancy for each side for just one rank, file, or diagonal, and convert them to ternary representations and add them together. This index can determine which squares can actually be moved to, instead of just attacked. It is used in a lookup table of 3^7=2187 entries per direction per square. Titboards are not typically used (there is one known engine that implements them [2] ). This is because they are currently slower than modern alternatives while being harder to implement. They require a large look-up table (~8.9 MB) and they work very differently from modern generation techniques likes Magic Bitboards , where they require each direction to be calculated individually {File, Rank, Diagonal, Anti-Diagonal}. For each direction they require the input of (square, us, them), as a pose to (square, occupied) which is more commonly used. Speed [ edit ] Testing shows that titboards have no speed advantage over magic bitboards on modern hardware, however, the gap seemingly narrows on older CPUs that offer less efficient bitscan operations. A full array of results can be found here [3] . CPU: AMD Ryzen 9 5950X 16-Core Processor Titboard perft group: All tests completed with mean nps: 22290500 Pext perft group: All tests completed with mean nps: 40633688 Magic Bitboard perft group: All tests completed with mean nps: 37989088 CPU: Ryzen 5 5600x Titboard perft group: All tests completed with mean nps: 21250050 Pext perft group: All tests completed with mean nps: 36773955 Magic Bitboard perft group: All tests completed with mean nps: 34421651 Forum Posts [ edit ] Yet another new bitboard move generation method by Zach Wegner , Winboard Forum , September 22, 2006 » Move Generation Re: Yet another new bitboard move generation method by Harm Geert Muller , Winboard Forum , October 01, 2006 [4] References [ edit ] ↑ Yet another new bitboard move generation method by Zach Wegner , Winboard Forum , September 22, 2006 ↑ 2.0 2.1 TDFA - Titboard Engine by Malik Tremain, January 22, 2024 ↑ TDFA - Perft result comparison ↑ Re: multi-dimensional piece/square tables by Tony P., CCC , January 28, 2020 » Piece-Square Tables Up one level",
+  "headings": [
+    "Speed[edit]",
+    "Forum Posts[edit]",
+    "References[edit]"
+  ],
+  "links": [
+    "BitScan",
+    "Bitboard Serialization",
+    "Bitboards",
+    "Board Representation",
+    "CCC",
+    "Computer Chess Forums",
+    "Direction",
+    "Harm Geert Muller",
+    "Magic Bitboards",
+    "Main Page",
+    "Move Generation",
+    "Piece-Square Tables",
+    "Sliding Piece Attacks",
+    "Squares",
+    "Zach Wegner",
+    "index.php"
+  ],
+  "bold_terms": [
+    "Home * Board Representation * Bitboards * Sliding Piece Attacks * Titboards",
+    "Titboards",
+    "Up one level"
+  ],
+  "categories": [],
+  "page_type": "technique",
+  "raw_payload_path": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/data/chessprogramming_cache/raw/Titboards.api.json"
+}

@@ -1,0 +1,601 @@
+{
+  "parse": {
+    "title": "Ethereal",
+    "pageid": 3827,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Engines\" title=\"Engines\">Engines</a> * Ethereal</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"/File:VLT_Cerro_Paranal_Total_Lunar_Eclipse_21_December_2010.jpg\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/VLT_Cerro_Paranal_Total_Lunar_Eclipse_21_December_2010.jpg/330px-VLT_Cerro_Paranal_Total_Lunar_Eclipse_21_December_2010.jpg\" width=\"300\" height=\"82\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/VLT_Cerro_Paranal_Total_Lunar_Eclipse_21_December_2010.jpg/500px-VLT_Cerro_Paranal_Total_Lunar_Eclipse_21_December_2010.jpg 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/VLT_Cerro_Paranal_Total_Lunar_Eclipse_21_December_2010.jpg/960px-VLT_Cerro_Paranal_Total_Lunar_Eclipse_21_December_2010.jpg 2x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:VLT_Cerro_Paranal_Total_Lunar_Eclipse_21_December_2010.jpg\" class=\"internal\" title=\"Enlarge\"></a></div>Ethereal night sky <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>Ethereal</b>,<br />\nan <a href=\"/UCI\" title=\"UCI\">UCI</a> compliant <a href=\"/Category:Open_Source\" title=\"Category:Open Source\">open source chess engine</a> written by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a> in <a href=\"/C\" title=\"C\">C</a>, licensed under the <a href=\"/Free_Software_Foundation#GPL\" title=\"Free Software Foundation\">GNU GPL</a> and first officially released in June 2016 <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>. Ethereal is greatly influenced from <a href=\"/Crafty\" title=\"Crafty\">Crafty</a>, <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a>, <a href=\"/TSCP\" title=\"TSCP\">TSCP</a>, <a href=\"/MadChess\" title=\"MadChess\">MadChess</a>, and <a href=\"/Fruit\" title=\"Fruit\">Fruit</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>. \nOn October 09, 2020, Andrew Grant initially announced his withdrawal from Ethereal's development with the releases of Ethereal <b>V12.75</b> \n<sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>\nand Ethereal <b>12.75 SF-NNUE</b>, the latter a <a href=\"/NNUE\" title=\"NNUE\">NNUE</a> implementation based on <a href=\"/Stockfish_NNUE\" title=\"Stockfish NNUE\">Stockfish NNUE</a>, to deliberately demonstrate how everybody may considerably improve the <a href=\"/Playing_Strength\" title=\"Playing Strength\">playing strength</a> of their engines without much effort \n<sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup>.\nHowever, Andrew Grant voted for another direction, and announced a commercial release of Ethereal <b>13.00</b> (NNUE) ,\nthe free standard version still available on <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/GitHub\">Github</a> <sup id=\"cite_ref-Ethereal13NNUE_6-0\" class=\"reference\"><a href=\"#cite_note-Ethereal13NNUE-6\">&#91;6&#93;</a></sup>.\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Ethereal_13_.28NNUE.29\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Ethereal 13 (NNUE)</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Features\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Features</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#Board_Representation\"><span class=\"tocnumber\">2.1</span> <span class=\"toctext\">Board Representation</span></a></li>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#Search\"><span class=\"tocnumber\">2.2</span> <span class=\"toctext\">Search</span></a></li>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#Evaluation\"><span class=\"tocnumber\">2.3</span> <span class=\"toctext\">Evaluation</span></a></li>\n<li class=\"toclevel-2 tocsection-6\"><a href=\"#Misc\"><span class=\"tocnumber\">2.4</span> <span class=\"toctext\">Misc</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#Publications\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Publications</span></a></li>\n<li class=\"toclevel-1 tocsection-8\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#2016_...\"><span class=\"tocnumber\">4.1</span> <span class=\"toctext\">2016 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#2020_...\"><span class=\"tocnumber\">4.2</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-11\"><a href=\"#External_Links\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">External Links</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-12\"><a href=\"#Chess_Engine\"><span class=\"tocnumber\">5.1</span> <span class=\"toctext\">Chess Engine</span></a></li>\n<li class=\"toclevel-2 tocsection-13\"><a href=\"#Misc_2\"><span class=\"tocnumber\">5.2</span> <span class=\"toctext\">Misc</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-14\"><a href=\"#References\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Ethereal_13_.28NNUE.29\">Ethereal 13 (NNUE)</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Ethereal&amp;action=edit&amp;section=1\" title=\"Edit section: Ethereal 13 (NNUE)\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><b>Ethereal 13 (NNUE)</b>, the commercial Ethereal version for <a href=\"/AVX2\" title=\"AVX2\">AVX2</a> systems was released on June 04, 2021. The program comes with two <a href=\"/NNUE\" title=\"NNUE\">NNUEs</a> for  <a href=\"/Evaluation\" title=\"Evaluation\">evaluation</a>, \none for standard chess, and the secondary network trained exclusively for <a href=\"/Chess960\" title=\"Chess960\">Chess960</a>. The NNUEs are not derived from, trained on, nor duplicated from the works of the <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a> team  <sup id=\"cite_ref-Ethereal13NNUE_6-1\" class=\"reference\"><a href=\"#cite_note-Ethereal13NNUE-6\">&#91;6&#93;</a></sup>. Andrew Grant on his NNUE approach <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup>:\n</p>\n<pre>Ethereal is using the <a href=\"/Stockfish_NNUE#NNUE_Structure\" title=\"Stockfish NNUE\">HalfKP</a> paradigm, with a 40960x256 -&gt; 512x32x32x1 Network. This is the textbook approach, but with some changes. Firstly, not all weights are quantized to int8 / int16 for the input layer. Instead, the network goes like this: int16_t =&gt; int16_t =&gt; (int32_t -&gt; <a href=\"/Float\" title=\"Float\">float_t</a>) =&gt; float_t =&gt; float_t. This approach allows us to never have to pack the data downwards, saving many operations, and also lets us take a slightly more expensive approach to the later layers in exchange for massively increased precision. If I eventually add support for <a href=\"/AVX\" title=\"AVX\">AVX</a> (not avx2) machines, it will be a significant gain as AVX does not have 256-bit vector support for integer types in a meaningful way.\n</pre>\n<pre>During training the Network actually has 43850 input parameters, using a few factorization of the board to aid in training without having tens of billions of positions. In practice, each Net was trained somewhere between 2 and 4 billion positions total, evaluated by Ethereal / Ethereal NNUE. The networks are trained using a modified form of the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Stochastic_gradient_descent#Adam\">Adam</a> optimizer, which allows better performance for datasets with extremely sparse input fields. For example, with a Batch Size of 16384, only about 50% of the 43,850 parameters are used on average.\n</pre>\n<pre>Data generation for a given network takes about 3 weeks, completed on a 104 core machine. From there, processing that data down into a list of <a href=\"/Forsyth-Edwards_Notation\" title=\"Forsyth-Edwards Notation\">FENs</a> and then into the format used by Ethereal's NNTrainer takes another 12 hours or so. Finally, training the actual Network can take a few days, with many stops and starts to drop the learning rate and find a global optima.\n</pre>\n<pre>The trainer itself is a fully original work, written in <a href=\"/C\" title=\"C\">C</a> and making use of all 104 threads. It includes some AVX2 and even AVX512 code for use in updating the network parameters. This toolkit was used in training the Halogen networks as well. It is fairly flexible and trying things like HalfKA, changing layer sizes, adding layers, changing activation functions, or adding more factorizers is only a few minutes of effort in the code. It rivals speeds of <a href=\"/GPU\" title=\"GPU\">GPU</a> based trainers, by leveraging massive SMP and efficient implementations.\n</pre>\n<h1><span class=\"mw-headline\" id=\"Features\">Features</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Ethereal&amp;action=edit&amp;section=2\" title=\"Edit section: Features\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup>\n</p>\n<h2><span class=\"mw-headline\" id=\"Board_Representation\"><a href=\"/Board_Representation\" title=\"Board Representation\">Board Representation</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Ethereal&amp;action=edit&amp;section=3\" title=\"Edit section: Board Representation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Bitboards\" title=\"Bitboards\">Bitboards</a></li>\n<li> <a href=\"/Magic_Bitboards#Fancy\" title=\"Magic Bitboards\">Fancy Magic Bitboards</a></li>\n<li> <a href=\"/8x8_Board\" title=\"8x8 Board\">8x8 Board</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Search\"><a href=\"/Search\" title=\"Search\">Search</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Ethereal&amp;action=edit&amp;section=4\" title=\"Edit section: Search\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Lazy_SMP\" title=\"Lazy SMP\">Lazy SMP</a> since 8.60 SMP <sup id=\"cite_ref-9\" class=\"reference\"><a href=\"#cite_note-9\">&#91;9&#93;</a></sup></li>\n<li> <a href=\"/Iterative_Deepening\" title=\"Iterative Deepening\">Iterative Deepening</a></li>\n<li> <a href=\"/Aspiration_Windows\" title=\"Aspiration Windows\">Aspiration Windows</a></li>\n<li> <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">PVS</a> <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">Alpha-Beta</a></li>\n<li> <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Table</a></li>\n<li> <a href=\"/Selectivity\" title=\"Selectivity\">Selectivity</a>\n<ul><li> <a href=\"/Check_Extensions\" title=\"Check Extensions\">Check Extensions</a></li>\n<li> <a href=\"/Delta_Pruning\" title=\"Delta Pruning\">Delta Pruning</a></li>\n<li> <a href=\"/Futility_Pruning\" title=\"Futility Pruning\">Futility Pruning</a></li>\n<li> <a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">Late Move Reductions</a></li>\n<li> <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">Null Move Pruning</a></li>\n<li> <a href=\"/Razoring\" title=\"Razoring\">Razoring</a></li>\n<li> <a href=\"/Reverse_Futility_Pruning\" title=\"Reverse Futility Pruning\">Reverse Futility Pruning</a> (Static Null Move Pruning)</li>\n<li> <a href=\"/Static_Exchange_Evaluation\" title=\"Static Exchange Evaluation\">Static Exchange Evaluation Pruning</a></li>\n<li> <a href=\"/Multi-Cut\" title=\"Multi-Cut\">Multi-Cut</a> (12.00)</li></ul></li>\n<li> <a href=\"/Move_Ordering\" title=\"Move Ordering\">Move Ordering</a>\n<ul><li> <a href=\"/Internal_Iterative_Deepening\" title=\"Internal Iterative Deepening\">Internal Iterative Deepening</a></li>\n<li> <a href=\"/MVV-LVA\" title=\"MVV-LVA\">MVV/LVA</a></li>\n<li> <a href=\"/Killer_Heuristic\" title=\"Killer Heuristic\">Killer Heuristic</a></li>\n<li> <a href=\"/History_Heuristic\" title=\"History Heuristic\">History Heuristic</a></li>\n<li> <a href=\"/Piece-Square_Tables\" title=\"Piece-Square Tables\">Piece-Square Tables</a> </li></ul></li></ul>\n<h2><span class=\"mw-headline\" id=\"Evaluation\"><a href=\"/Evaluation\" title=\"Evaluation\">Evaluation</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Ethereal&amp;action=edit&amp;section=5\" title=\"Edit section: Evaluation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/NNUE\" title=\"NNUE\">NNUE</a> (Ethereal 13.00 NNUE)</li>\n<li> <a href=\"/Tapered_Eval\" title=\"Tapered Eval\">Tapered Eval</a></li>\n<li> <a href=\"/Material\" title=\"Material\">Material</a></li>\n<li> <a href=\"/Piece-Square_Tables\" title=\"Piece-Square Tables\">Piece-Square Tables</a></li>\n<li> <a href=\"/Mobility\" title=\"Mobility\">Mobility</a></li>\n<li> <a href=\"/Outposts\" title=\"Outposts\">Outposts</a></li>\n<li> <a href=\"/Rook_on_Open_File\" title=\"Rook on Open File\">Rook on (Half) Open File</a></li>\n<li> <a href=\"/Rook_on_Seventh\" title=\"Rook on Seventh\">Rook on 7th Rank</a></li>\n<li> <a href=\"/Castling\" title=\"Castling\">Castling Ability</a></li>\n<li> <a href=\"/Pawn_Hash_Table\" title=\"Pawn Hash Table\">Pawn Hash Table</a></li>\n<li> <a href=\"/Pawn_Structure\" title=\"Pawn Structure\">Pawn Structure</a></li>\n<li> <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">Automated Tuning</a> by <a href=\"/Automated_Tuning#LogisticRegression\" title=\"Automated Tuning\">Logistic Regression</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Stochastic_gradient_descent#AdaGrad\">AdaGrad</a> (12.50) <sup id=\"cite_ref-10\" class=\"reference\"><a href=\"#cite_note-10\">&#91;10&#93;</a></sup><sup id=\"cite_ref-11\" class=\"reference\"><a href=\"#cite_note-11\">&#91;11&#93;</a></sup></li></ul>\n<h2><span class=\"mw-headline\" id=\"Misc\">Misc</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Ethereal&amp;action=edit&amp;section=6\" title=\"Edit section: Misc\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Syzygy_Bases\" title=\"Syzygy Bases\">Syzygy Bases</a> using <a href=\"/Syzygy_Bases#Fathom\" title=\"Syzygy Bases\">Fathom's</a> probing code (9.65), superseded by 7-men <a href=\"/Syzygy_Bases#Pyrrhic\" title=\"Syzygy Bases\">Pyrrhic</a> (12.50)</li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Ethereal&amp;action=edit&amp;section=7\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a> (<b>2020</b>). <i>Evaluation &amp; Tuning in Chess Engines</i>. <sup id=\"cite_ref-12\" class=\"reference\"><a href=\"#cite_note-12\">&#91;12&#93;</a></sup> <sup id=\"cite_ref-13\" class=\"reference\"><a href=\"#cite_note-13\">&#91;13&#93;</a></sup></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Ethereal&amp;action=edit&amp;section=8\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"2016_...\">2016 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Ethereal&amp;action=edit&amp;section=9\" title=\"Edit section: 2016 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=60023&amp;start=18\">Re: How to speed up my engine</a> by <a href=\"/G%C3%BCnther_Simon\" title=\"Günther Simon\">Günther Simon</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 03, 2016</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=60023&amp;start=19\">Re: How to speed up my engine</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 03, 2016</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=60161\">Ethereal Bitboard 6.26 Chess Engine...a star is born!</a> by AA Ross, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 14, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=60596\">Ethereal - Official Release</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 25, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://kirill-kryukov.com/chess/discussion-board/viewtopic.php?f=7&amp;t=8645\">Ethereal - Official Release</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">CCRL Discussion Board</a>, June 25, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61335\">Release of Ethereal7.78</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 04, 2016</li></ul>\n<p><b>2017</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64162\">Official release of Ethereal8.16</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 03, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65165\">Ethereal8.28 Release</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 13, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65685\">Ethereal8.37 Release</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 10, 2017 </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65968\">Release of Ethereal 8.60 SMP</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 10, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65989\">Ethereal 8.61 -- Small bugfix to 8.60</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 12, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66099\">Time Managment translating to SMP</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 23, 2017&#160;» <a href=\"/Parallel_Search\" title=\"Parallel Search\">Parallel Search</a>, <a href=\"/Time_Management\" title=\"Time Management\">Time Management</a></li></ul>\n<p><b>2018</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66606\">Official Release of Ethereal9.00</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 15, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66882\">Official Release of Ethereal9.30</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 20, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=67272&amp;p=760110\">Official Release of Ethereal9.65 with Syzygy Support</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 29, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=67602&amp;p=763874\">Official Release of Ethereal 10.00 (Two-years Anniversary)</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 30, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=67993&amp;p=76840\">Official Release of Ethereal 10.55</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 16, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=68293\">Ethereal 10.88 NUMA</a> by <a href=\"/Norman_Schmidt\" title=\"Norman Schmidt\">Norman Schmidt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 24, 2018&#160;» <a href=\"/NUMA\" title=\"NUMA\">NUMA</a></li></ul>\n<p><b>2019</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=69669\">Official Release of Ethereal 11.25</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 21, 2019</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=72215\">For those that like to toy with Ethereal...</a>  by <a href=\"/Dann_Corbit\" title=\"Dann Corbit\">Dann Corbit</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 30, 2019</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=72299\">Official Release of Ethereal 11.75, supporting MultiPV</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 11, 2019</li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Ethereal&amp;action=edit&amp;section=10\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=73233\">Official Release of Ethereal 12.00</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 29, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=73629\">Pawn structure tuning</a> by <a href=\"/Vivien_Clauzon\" title=\"Vivien Clauzon\">Vivien Clauzon</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>,  April 11, 2020&#160;» <a href=\"/Pawn_Structure\" title=\"Pawn Structure\">Pawn Structure</a>, <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">Automated Tuning</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=74809\">Pyrrhic, Fathom for Humanoids</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 16, 2020&#160;» <a href=\"/Syzygy_Bases#Pyrrhic\" title=\"Syzygy Bases\">Pyrrhic</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=74877\">Evaluation &amp; Tuning in Chess Engines</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 24, 2020&#160;» <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">Automated Tuning</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=75047\">Official Release of Ethereal 12.50</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 08, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=75159\">Ethereal Pawn-King NN</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 19, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=75335\">Final Release of Ethereal, V12.75</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 09, 2020</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=75335&amp;start=91\">Re: Final Release of Ethereal, V12.75</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 09, 2020</dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=75335&amp;start=134\">Re: Final Release of Ethereal, V12.75</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 12, 2020</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=75345\">Request for someone to train an NNUE for Ethereal</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 09, 2020&#160;» <a href=\"/NNUE\" title=\"NNUE\">NNUE</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=75350\">Ethereal Tuning - Data Dump</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 10, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=76049\">Ethereal questions</a> by <a href=\"/Gabor_Szots\" title=\"Gabor Szots\">Gabor Szots</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 12, 2020</li></ul>\n<p><b>2021</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=77438\">Commercial Release of Ethereal 13.00 (NNUE) for AVX2 Systems</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 04, 2021</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=77438&amp;start=17\">Re: Commercial Release of Ethereal 13.00 (NNUE) for AVX2 Systems</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 04, 2021</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=77503&amp;start=55\">Re: will Tcec allow Stockfish with a Leela net to play?</a> by <a href=\"/Connor_McMonigle\" title=\"Connor McMonigle\">Connor McMonigle</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 17, 2021&#160;» <a href=\"/NNUE\" title=\"NNUE\">NNUE</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=77571\">I declare that HCE is dead...</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 29, 2021&#160;» <a href=\"/Evaluation\" title=\"Evaluation\">HCE</a>, <a href=\"/NNUE\" title=\"NNUE\">NNUE</a></li></ul>\n<p><b>2022</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=79160\">Resolving once in a trillion crashes</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 18, 2022&#160;» <a href=\"/Debugging\" title=\"Debugging\">Debugging</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=79179\">Commercial Release of Ethereal 13.50</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 20, 2022</li></ul>\n<p><b>2023</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum3/viewtopic.php?f=2&amp;t=82750\">Commercial Release of Ethereal 14.25</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 21, 2023</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Ethereal&amp;action=edit&amp;section=11\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Chess_Engine\">Chess Engine</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Ethereal&amp;action=edit&amp;section=12\" title=\"Edit section: Chess Engine\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://chess.grantnet.us/Ethereal/\">Ethereal 13.00 (NNUE)</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/AndyGrant/Ethereal\">GitHub - AndyGrant/Ethereal: Ethereal UCI Chess Engine</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.computerchess.org.uk/ccrl/404/cgi/compare_engines.cgi?family=Ethereal&amp;print=Rating+list&amp;print=Results+table&amp;print=LOS+table&amp;print=Ponder+hit+table&amp;print=Eval+difference+table&amp;print=Comopp+gamenum+table&amp;print=Overlap+table&amp;print=Score+with+common+opponents\">Ethereal</a> in <a href=\"/CCRL\" title=\"CCRL\">CCRL Blitz</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.computerchess.org.uk/ccrl/4040/cgi/compare_engines.cgi?family=Ethereal&amp;print=Rating+list&amp;print=Results+table&amp;print=LOS+table&amp;print=Ponder+hit+table&amp;print=Eval+difference+table&amp;print=Comopp+gamenum+table&amp;print=Overlap+table&amp;print=Score+with+common+opponents\">Ethereal</a> in <a href=\"/CCRL\" title=\"CCRL\">CCRL 40/15</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.chessdom.com/ethereal-wins-tcec-division-4/\">Ethereal wins TCEC Division 4</a>, Interview with <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/index.php?title=Chessdom&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Chessdom (page does not exist)\">Chessdom</a>, April 30, 2018&#160;» <a href=\"/TCEC_Season_12\" title=\"TCEC Season 12\">TCEC Season 12</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.chessdom.com/ethereal-chess-engine-leads-tcec-div-3-convincingly/\">Ethereal chess engine leads TCEC Div 3 convincingly</a>, <a href=\"/index.php?title=Chessdom&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Chessdom (page does not exist)\">Chessdom</a>, August 12, 2018&#160;» <a href=\"/TCEC_Season_13\" title=\"TCEC Season 13\">TCEC Season 13</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.chessdom.com/ethereal-chess-engine-wins-the-gold-at-tcec-div-3/\">Ethereal chess engine wins the gold at TCEC Div 3</a>, <a href=\"/index.php?title=Chessdom&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Chessdom (page does not exist)\">Chessdom</a>, August 17, 2018</li></ul>\n<h2><span class=\"mw-headline\" id=\"Misc_2\">Misc</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Ethereal&amp;action=edit&amp;section=13\" title=\"Edit section: Misc\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wiktionary.org/wiki/ethereal\">ethereal - Wiktionary</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Ethereal\">Ethereal from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Ether\">Ether from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Ethereal_wave\">Ethereal wave from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Subtle_cardinal\">Ethereal cardinal from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.truth-is-beauty.com/blog/style-identities-the-ethereal\">The Ethereal</a> from <a rel=\"nofollow\" class=\"external text\" href=\"https://www.truth-is-beauty.com/home.html\">Truth is Beauty</a>, July 07, 2015</li>\n<li> <a href=\"/Category:Jean-Luc_Ponty\" title=\"Category:Jean-Luc Ponty\">Jean-Luc Ponty</a> - <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Cosmic_Messenger\">Ethereal Mood</a> (1978), <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/Va5_Y4QS3Eo?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Ethereal&amp;action=edit&amp;section=14\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap mw-references-columns\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\">A <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Eclipse#Umbra,_penumbra_and_antumbra\">total eclipse</a> of the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Moon\">Moon</a> is an impressive spectacle. But it also provides another viewing opportunity: a dark, moonlight-free starry sky. At <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Cerro_Paranal\">Cerro Paranal</a> in the Chilean <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Atacama_Desert\">Atacama Desert</a>, one of the most remote places in the world, the distance from sources of light pollution makes the night sky all the more remarkable during a total <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Lunar_eclipse\">lunar eclipse</a>. This <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Panoramic_photography\">panoramic photo</a>, taken by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/European_Southern_Observatory\">ESO</a> Photo Ambassador  <a rel=\"nofollow\" class=\"external text\" href=\"https://www.facebook.com/yuribeletskyphoto\">Yuri Beletsky</a>, shows the view of the starry sky from the site of ESO’s <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Very_Large_Telescope\">Very Large Telescope</a> (VLT) at Cerro Paranal during the total lunar eclipse of December 21, 2010. The reddish disc of the Moon is seen on the right of the image, while the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Milky_Way\">Milky Way</a> arches across the heavens in all its beauty. Another faint glow of light is also visible, surrounding the brilliant planet <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Venus\">Venus</a> in the bottom left corner of the picture. This phenomenon, known as <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Zodiacal_light\">zodiacal light</a>, is produced by sunlight reflecting off dust in the plane of the planets. It is so faint that it’s normally obscured by moonlight or light pollution. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.eso.org/public/images/potw1119a/\">Image</a> by ESO, Yuri Beletsky, <a rel=\"nofollow\" class=\"external text\" href=\"https://creativecommons.org/licenses/by/4.0/deed.en\">CC BY 4.0</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wikimedia_Commons\">Wikimedia Commons</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Beauty\">Beauty from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://kirill-kryukov.com/chess/discussion-board/viewtopic.php?f=7&amp;t=8645\">Ethereal - Official Release</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">CCRL Discussion Board</a>, June 25, 2016</span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/AndyGrant/Ethereal/blob/master/README.md\">Ethereal/README.md at master · AndyGrant/Ethereal · GitHub</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=75335\">Final Release of Ethereal, V12.75</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 09, 2020</span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=75335&amp;start=91\">Re: Final Release of Ethereal, V12.75</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 09, 2020</span>\n</li>\n<li id=\"cite_note-Ethereal13NNUE-6\"><span class=\"mw-cite-backlink\">↑ <sup><a href=\"#cite_ref-Ethereal13NNUE_6-0\">6.0</a></sup> <sup><a href=\"#cite_ref-Ethereal13NNUE_6-1\">6.1</a></sup></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=77438\">Commercial Release of Ethereal 13.00 (NNUE) for AVX2 Systems</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 04, 2021</span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=77438&amp;start=17\">Re: Commercial Release of Ethereal 13.00 (NNUE) for AVX2 Systems</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 04, 2021</span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\">Features based on <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/AndyGrant/Ethereal\">GitHub - AndyGrant/Ethereal: Ethereal UCI Chess Engine</a></span>\n</li>\n<li id=\"cite_note-9\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-9\">↑</a></span> <span class=\"reference-text\">Ethereal's 8.60 <a href=\"/Lazy_SMP\" title=\"Lazy SMP\">Lazy SMP</a> inspired by <a href=\"/Demolito\" title=\"Demolito\">Demolito</a> by Lucas Braesch, see <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65968\">Release of Ethereal 8.60 SMP</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 10, 2017</span>\n</li>\n<li id=\"cite_note-10\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-10\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=74877\">Evaluation &amp; Tuning in Chess Engines</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 24, 2020 </span>\n</li>\n<li id=\"cite_note-11\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-11\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=75350\">Ethereal Tuning - Data Dump</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 10, 2020</span>\n</li>\n<li id=\"cite_note-12\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-12\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=74877\">Evaluation &amp; Tuning in Chess Engines</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 24, 2020 </span>\n</li>\n<li id=\"cite_note-13\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-13\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=75350\">Ethereal Tuning - Data Dump</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 10, 2020</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Engines\" title=\"Engines\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301011616\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.085 seconds\nReal time usage: 0.616 seconds\nPreprocessor visited node count: 253/1000000\nPreprocessor generated node count: 544/1000000\nPost‐expand include size: 27/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:3827-0!canonical and timestamp 20260301011615 and revision id 26830\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Open_Source"
+      },
+      {
+        "sortkey": "",
+        "*": "GPL"
+      },
+      {
+        "sortkey": "",
+        "*": "UCI"
+      },
+      {
+        "sortkey": "",
+        "*": "PC"
+      },
+      {
+        "sortkey": "",
+        "*": "X86"
+      },
+      {
+        "sortkey": "",
+        "*": "X64"
+      },
+      {
+        "sortkey": "",
+        "*": "Linux"
+      },
+      {
+        "sortkey": "",
+        "*": "Windows"
+      },
+      {
+        "sortkey": "",
+        "*": "Chess960"
+      },
+      {
+        "sortkey": "",
+        "*": "OpenBench"
+      },
+      {
+        "sortkey": "",
+        "*": "Commercial"
+      },
+      {
+        "sortkey": "",
+        "*": "NNUE"
+      },
+      {
+        "sortkey": "",
+        "*": "Jean-Luc_Ponty"
+      },
+      {
+        "sortkey": "",
+        "*": "Astronomy"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "8x8 Board"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "AVX"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "AVX2"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha-Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Andrew Grant"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aspiration Windows"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Automated Tuning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Board Representation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "C"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCRL"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Castling"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Check Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess960"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Connor McMonigle"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Crafty"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dann Corbit"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Debugging"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Delta Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Demolito"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engines"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Float"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Forsyth-Edwards Notation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Free Software Foundation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fruit"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Futility Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "GPU"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gabor Szots"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Günther Simon"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "History Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Internal Iterative Deepening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iterative Deepening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Killer Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Late Move Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lazy SMP"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "MVV-LVA"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "MadChess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Magic Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Material"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mobility"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Ordering"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Multi-Cut"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "NNUE"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "NUMA"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Norman Schmidt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Outposts"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Parallel Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Hash Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Structure"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Piece-Square Tables"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Playing Strength"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Razoring"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Reverse Futility Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rook on Open File"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rook on Seventh"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Selectivity"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Static Exchange Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stockfish"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stockfish NNUE"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Syzygy Bases"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "TCEC Season 12"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "TCEC Season 13"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "TSCP"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tapered Eval"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Time Management"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "UCI"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vivien Clauzon"
+      },
+      {
+        "ns": 0,
+        "*": "Chessdom"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Jean-Luc Ponty"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Open Source"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Ethereal 13 (NNUE)",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Ethereal",
+        "byteoffset": 3796,
+        "anchor": "Ethereal_13_.28NNUE.29"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Features",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Ethereal",
+        "byteoffset": 6750,
+        "anchor": "Features"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Board Representation",
+        "number": "2.1",
+        "index": "3",
+        "fromtitle": "Ethereal",
+        "byteoffset": 6885,
+        "anchor": "Board_Representation"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Search",
+        "number": "2.2",
+        "index": "4",
+        "fromtitle": "Ethereal",
+        "byteoffset": 6996,
+        "anchor": "Search"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Evaluation",
+        "number": "2.3",
+        "index": "5",
+        "fromtitle": "Ethereal",
+        "byteoffset": 7872,
+        "anchor": "Evaluation"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Misc",
+        "number": "2.4",
+        "index": "6",
+        "fromtitle": "Ethereal",
+        "byteoffset": 8648,
+        "anchor": "Misc"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "3",
+        "index": "7",
+        "fromtitle": "Ethereal",
+        "byteoffset": 8798,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "4",
+        "index": "8",
+        "fromtitle": "Ethereal",
+        "byteoffset": 9190,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2016 ...",
+        "number": "4.1",
+        "index": "9",
+        "fromtitle": "Ethereal",
+        "byteoffset": 9204,
+        "anchor": "2016_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "4.2",
+        "index": "10",
+        "fromtitle": "Ethereal",
+        "byteoffset": 12337,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "5",
+        "index": "11",
+        "fromtitle": "Ethereal",
+        "byteoffset": 15369,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Chess Engine",
+        "number": "5.1",
+        "index": "12",
+        "fromtitle": "Ethereal",
+        "byteoffset": 15386,
+        "anchor": "Chess_Engine"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Misc",
+        "number": "5.2",
+        "index": "13",
+        "fromtitle": "Ethereal",
+        "byteoffset": 16686,
+        "anchor": "Misc_2"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "6",
+        "index": "14",
+        "fromtitle": "Ethereal",
+        "byteoffset": 17472,
+        "anchor": "References"
+      }
+    ]
+  }
+}

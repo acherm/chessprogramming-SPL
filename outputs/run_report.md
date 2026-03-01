@@ -1,0 +1,99 @@
+# CPW Variability Run Report
+
+## Metrics
+- pages_discovered: 600
+- engines_discovered: 103
+- features_total: 163
+- features_traced: 163
+- trace_coverage_percent: 100.0
+- matrix_rows: 16686
+- matrix_supported: 783
+- matrix_unsupported_explicit: 959
+- matrix_unknown: 14944
+
+## Warnings
+- Unable to fetch page 'Category:Chess Engines' from API or HTML
+- Unable to fetch page 'Category:Evaluation' from API or HTML
+- Unable to fetch page 'Category:Endgame' from API or HTML
+- Unable to fetch page 'Category:Chess Engines' from API or HTML
+- Unable to fetch page 'Category:Evaluation' from API or HTML
+- Unable to fetch page 'Category:Endgame' from API or HTML
+- Unable to fetch page 'Herbert Marquardt' from API or HTML
+- Unable to fetch page 'Torsten Schoop' from API or HTML
+- Unable to fetch page 'AlphaGo' from API or HTML
+- Unable to fetch page 'Boris Alterman' from API or HTML
+- Unable to fetch page 'Boshra Haghighi' from API or HTML
+- Unable to fetch page 'Brian Schwab' from API or HTML
+- Unable to fetch page 'David Darling' from API or HTML
+- Unable to fetch page 'David J. Stracuzzi' from API or HTML
+- Unable to fetch page 'DeepMind' from API or HTML
+- Unable to fetch page 'Diego Rasskin-Gutman' from API or HTML
+- Unable to fetch page 'Dinesh Gadwal' from API or HTML
+- Unable to fetch page 'George Tecuci' from API or HTML
+- Unable to fetch page 'Google' from API or HTML
+- Unable to fetch page 'Héctor Muñoz-Avila' from API or HTML
+- Unable to fetch page 'Janet Wiles' from API or HTML
+- Unable to fetch page 'Jay Burmeister' from API or HTML
+- Unable to fetch page 'John Lloyd' from API or HTML
+- Unable to fetch page 'Kee Siong Ng' from API or HTML
+- Unable to fetch page 'Marc Ponsen' from API or HTML
+- Unable to fetch page 'Ofer Shamai' from API or HTML
+- Unable to fetch page 'Paul S. Rosenbloom' from API or HTML
+- Unable to fetch page 'Psychology' from API or HTML
+- Unable to fetch page 'Rachelle Heller' from API or HTML
+- Unable to fetch page 'Robert W. Howard' from API or HTML
+- Unable to fetch page 'Sander Bakkes' from API or HTML
+- Unable to fetch page 'Santos Gerardo Lazzeri' from API or HTML
+- Unable to fetch page 'Shazril Azman' from API or HTML
+- Unable to fetch page 'Simon Colton' from API or HTML
+- Unable to fetch page 'Vipin Kumar' from API or HTML
+- Unable to fetch page 'Yves Kodratoff' from API or HTML
+- Unable to fetch page 'Zongmin Ma' from API or HTML
+- Unable to fetch page 'Adam Marczyk' from API or HTML
+- Unable to fetch page 'Amine Bourki' from API or HTML
+- Unable to fetch page 'Aryel Beck' from API or HTML
+- Unable to fetch page 'Bo-Han Lin' from API or HTML
+- Unable to fetch page 'Brent Knight' from API or HTML
+- Unable to fetch page 'Broch Davison' from API or HTML
+- Unable to fetch page 'Carlos Artemio Coello Coello' from API or HTML
+- Unable to fetch page 'Cheney Nattress' from API or HTML
+- Unable to fetch page 'Diogo Real' from API or HTML
+- Unable to fetch page 'Eduardo Vázquez-Fernández' from API or HTML
+- Unable to fetch page 'Feliú Davino Sagols Troncoso' from API or HTML
+- Unable to fetch page 'François Scharffe' from API or HTML
+- Unable to fetch page 'Gang-Yu Fan' from API or HTML
+- Unable to fetch page 'Glenn Whitwell' from API or HTML
+- Unable to fetch page 'Hallam Nasreddine' from API or HTML
+- Unable to fetch page 'Hendra Suhanto Poh' from API or HTML
+- Unable to fetch page 'Hervé Luga' from API or HTML
+- Unable to fetch page 'J. Wesley Cleveland' from API or HTML
+- Unable to fetch page 'Jan Willem de Kort' from API or HTML
+- Unable to fetch page 'Jeremy Rapin' from API or HTML
+- Unable to fetch page 'Jeremy Wright' from API or HTML
+- Unable to fetch page 'Kanako Komiya' from API or HTML
+- Unable to fetch page 'Mathieu Autonès' from API or HTML
+- Unable to fetch page 'Matthieu Coulm' from API or HTML
+- Unable to fetch page 'Nicolas Lassabe' from API or HTML
+- Unable to fetch page 'Norman Treloar' from API or HTML
+- Unable to fetch page 'Paul Vayssière' from API or HTML
+- Unable to fetch page 'Petr Aksenov' from API or HTML
+- Unable to fetch page 'Philippe Rolet' from API or HTML
+- Unable to fetch page 'Phillippe Camacho' from API or HTML
+- Unable to fetch page 'Ryan Weber' from API or HTML
+- Unable to fetch page 'Sander Maassen vd Brink' from API or HTML
+- Unable to fetch page 'Sean Mintz' from API or HTML
+- Unable to fetch page 'Takafumi Nakamichi' from API or HTML
+- Unable to fetch page 'Thitipong Kanjanapa' from API or HTML
+- Unable to fetch page 'Tinghan Wei' from API or HTML
+- Unable to fetch page 'Tomáš Hřebejk' from API or HTML
+- Unable to fetch page 'Arch D. Robison' from API or HTML
+- Unable to fetch page 'Brian J. Hafner' from API or HTML
+- Unable to fetch page 'Ed Trice' from API or HTML
+- Unable to fetch page 'Elias Nilsson' from API or HTML
+- Unable to fetch page 'Fred Hamilton' from API or HTML
+- Unable to fetch page 'Martin Schreiber' from API or HTML
+- Unable to fetch page 'Stefano Carlini' from API or HTML
+- Unable to fetch page 'Stephen Tavener' from API or HTML
+- Unable to fetch page 'TAAI 2013' from API or HTML
+- Unable to fetch page 'Tai-Ning Yang' from API or HTML
+- Detected duplicate trace ids: ['tr_00ee4364fab0', 'tr_ccd8041b0ab9']

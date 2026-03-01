@@ -1,0 +1,336 @@
+{
+  "parse": {
+    "title": "Pawn Advantage, Win Percentage, and Elo",
+    "pageid": 1457,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Evaluation\" title=\"Evaluation\">Evaluation</a> * Pawn Advantage, Win Percentage and Elo</b>\n</p><p>An examination by <a href=\"/Sune_Fischer\" title=\"Sune Fischer\">Sune Fischer</a> and <a href=\"/Pradu_Kannan\" title=\"Pradu Kannan\">Pradu Kannan</a> in December 2007 on the approximate relations between <b>Win Percentage</b>, <b>Pawn Advantage</b>, and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Elo_rating_system\">Elo rating</a> advantage for computer chess resulted in following findings. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Relationship\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Relationship</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Data_Acquisition\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Data Acquisition</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Data_Reduction_and_Modeling\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Data Reduction and Modeling</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#See_also\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#Publications\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Publications</span></a></li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#Postings\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Postings</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#1999\"><span class=\"tocnumber\">6.1</span> <span class=\"toctext\">1999</span></a></li>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#2000_...\"><span class=\"tocnumber\">6.2</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#2010_...\"><span class=\"tocnumber\">6.3</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#2015_...\"><span class=\"tocnumber\">6.4</span> <span class=\"toctext\">2015 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#2020_...\"><span class=\"tocnumber\">6.5</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-12\"><a href=\"#External_Links\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-13\"><a href=\"#References\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Relationship\">Relationship</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pawn_Advantage,_Win_Percentage,_and_Elo&amp;action=edit&amp;section=1\" title=\"Edit section: Relationship\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>It was found that the the approximate relationship between the winning <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Probability\">probability</a> W and the pawn advantage P is\n</p>\n<div class=\"floatnone\"><a href=\"/File:PawnWinELOFormula1.jpg\" class=\"image\"><img alt=\"PawnWinELOFormula1.jpg\" src=\"/images/b/bf/PawnWinELOFormula1.jpg\" width=\"183\" height=\"57\" style=\"vertical-align: text-bottom\" class=\"thumbborder\" /></a></div>\n<p>The inverse relationship can be given as\n</p>\n<div class=\"floatnone\"><a href=\"/File:PawnWinELOFormula2.jpg\" class=\"image\"><img alt=\"PawnWinELOFormula2.jpg\" src=\"/images/6/64/PawnWinELOFormula2.jpg\" width=\"225\" height=\"49\" style=\"vertical-align: text-bottom\" class=\"thumbborder\" /></a></div>\n<p>From the above, the relationship between the equivalent Elo rating advantage R and the pawn advantage P can be given as\n</p>\n<div class=\"floatnone\"><a href=\"/File:PawnWinELOFormula3.jpg\" class=\"image\"><img alt=\"PawnWinELOFormula3.jpg\" src=\"/images/4/42/PawnWinELOFormula3.jpg\" width=\"130\" height=\"36\" style=\"vertical-align: text-bottom\" class=\"thumbborder\" /></a></div>\n<h1><span class=\"mw-headline\" id=\"Data_Acquisition\">Data Acquisition</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pawn_Advantage,_Win_Percentage,_and_Elo&amp;action=edit&amp;section=2\" title=\"Edit section: Data Acquisition\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Data was taken from a collection of 405,460 computer games in <a href=\"/Portable_Game_Notation\" title=\"Portable Game Notation\">PGN format</a>. Whenever exactly 5 plys in a game had gone by without captures, the game result was accumulated twice in a table indexed by the material configuration. The data was accumulated twice because it was assumed that material values were equal for both colors. So if there was data for a KPK material configuration, the data was also tallied for the KKP. Only data pertaining to the material configuration was taken. This was considered reasonable because the material configuration is the most important quantity that affects the result of a game.\n</p>\n<h1><span class=\"mw-headline\" id=\"Data_Reduction_and_Modeling\">Data Reduction and Modeling</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pawn_Advantage,_Win_Percentage,_and_Elo&amp;action=edit&amp;section=3\" title=\"Edit section: Data Reduction and Modeling\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>For each material configuration, a pawn value was computed using conventional pawn-normalized material ratios that are close to those used in strong chess programs (P=1, N=4, B=4.1, R=6, Q=12). The relationship between Win Percentage and Pawn Advantage was assumed to follow a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Logistic_regression\">logistic model</a> <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup> with its <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Sigmoid_function\">sigmoid curve</a>, namely,\n</p>\n<div class=\"floatnone\"><a href=\"/File:PawnWinELOFormula4.jpg\" class=\"image\"><img alt=\"PawnWinELOFormula4.jpg\" src=\"/images/f/f4/PawnWinELOFormula4.jpg\" width=\"241\" height=\"54\" style=\"vertical-align: text-bottom\" class=\"thumbborder\" /></a></div>\n<p>where K is an unknown non-zero constant. When applying the condition that the win probability is 0.5 if there is no pawn advantage, the solution to the above seperable differential equation becomes\n</p>\n<div class=\"floatnone\"><a href=\"/File:PawnWinELOFormula5.jpg\" class=\"image\"><img alt=\"PawnWinELOFormula5.jpg\" src=\"/images/5/5c/PawnWinELOFormula5.jpg\" width=\"189\" height=\"58\" style=\"vertical-align: text-bottom\" class=\"thumbborder\" /></a></div>\n<p>For K=4, the proposed logistic model and the data is plotted here for comparison:\n</p>\n<div class=\"floatnone\"><a href=\"/File:Wp2pa.PNG\" class=\"image\"><img alt=\"Wp2pa.PNG\" src=\"/images/3/3a/Wp2pa.PNG\" width=\"712\" height=\"474\" style=\"vertical-align: text-bottom\" class=\"thumbborder\" /></a></div>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pawn_Advantage,_Win_Percentage,_and_Elo&amp;action=edit&amp;section=4\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Bishop_versus_Knight#WinningPercantages\" title=\"Bishop versus Knight\">Bishop versus Knight - Winning Percentages</a></li>\n<li> <a href=\"/Match_Statistics\" title=\"Match Statistics\">Match Statistics</a></li>\n<li> <a href=\"/Material\" title=\"Material\">Material</a></li>\n<li> <a href=\"/Playing_Strength\" title=\"Playing Strength\">Playing Strength</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pawn_Advantage,_Win_Percentage,_and_Elo&amp;action=edit&amp;section=5\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Shogo_Takeuchi\" title=\"Shogo Takeuchi\">Shogo Takeuchi</a>, <a href=\"/Tomoyuki_Kaneko\" title=\"Tomoyuki Kaneko\">Tomoyuki Kaneko</a>, <a href=\"/Kazunori_Yamaguchi\" title=\"Kazunori Yamaguchi\">Kazunori Yamaguchi</a>, <a href=\"/Satoru_Kawai\" title=\"Satoru Kawai\">Satoru Kawai</a> (<b>2007</b>). <i>Visualization and Adjustment of Evaluation Functions Based on Evaluation Values and Win Probability</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/conf/aaai/aaai2007.html\">AAAI 2007</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://www.aaai.org/Papers/AAAI/2007/AAAI07-136.pdf\">pdf</a></li>\n<li> <a href=\"/Kenneth_W._Regan\" title=\"Kenneth W. Regan\">Kenneth W. Regan</a>,  <a href=\"/Tamal_T._Biswas\" title=\"Tamal T. Biswas\">Tamal T. Biswas</a>, <a href=\"/index.php?title=Jason_Zhou&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Jason Zhou (page does not exist)\">Jason Zhou</a> (<b>2014</b>). <i>Human and Computer Preferences at Chess</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cse.buffalo.edu/~regan/papers/pdf/RBZ14aaai.pdf\">pdf</a></li>\n<li> <a href=\"/Tamal_T._Biswas\" title=\"Tamal T. Biswas\">Tamal T. Biswas</a>, <a href=\"/Kenneth_W._Regan\" title=\"Kenneth W. Regan\">Kenneth W. Regan</a> (<b>2015</b>). <i>Measuring Level-K Reasoning, Satisficing, and Human Error in Game-Play Data</i>. <a href=\"/IEEE\" title=\"IEEE\">IEEE</a> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.icmla-conference.org/icmla15/\">ICMLA 2015</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cse.buffalo.edu/~regan/papers/pdf/BiRe15_ICMLA2015.pdf\">pdf preprint</a></li>\n<li> <a href=\"/Shogo_Takeuchi\" title=\"Shogo Takeuchi\">Shogo Takeuchi</a>, <a href=\"/Tomoyuki_Kaneko\" title=\"Tomoyuki Kaneko\">Tomoyuki Kaneko</a> (<b>2015</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=7336038\">Estimating Ratings of Computer Players by the Evaluation Scores and Principal Variations in Shogi</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://ieeexplore.ieee.org/xpl/mostRecentIssue.jsp?punumber=7335993\">ACIT-CSI</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Postings\">Postings</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pawn_Advantage,_Win_Percentage,_and_Elo&amp;action=edit&amp;section=6\" title=\"Edit section: Postings\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1999\">1999</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pawn_Advantage,_Win_Percentage,_and_Elo&amp;action=edit&amp;section=7\" title=\"Edit section: 1999\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=52542\">Elo performance?</a> by <a href=\"/Stefan_Meyer-Kahlen\" title=\"Stefan Meyer-Kahlen\">Stefan Meyer-Kahlen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 22, 1999&#160;» <a href=\"/Match_Statistics\" title=\"Match Statistics\">Match Statistics</a>, <a href=\"/Playing_Strength\" title=\"Playing Strength\">Playing Strength</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pawn_Advantage,_Win_Percentage,_and_Elo&amp;action=edit&amp;section=8\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=261636\">likelihood instead of pawnunits? + chess knowledge</a> by <a href=\"/index.php?title=Ingo_Lindam&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Ingo Lindam (page does not exist)\">Ingo Lindam</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 25, 2002</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=30695\">Winning percentage and centipawns</a> by <a href=\"/Luca_Hemmerich\" title=\"Luca Hemmerich\">Luca Hemmerich</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 18, 2009</li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pawn_Advantage,_Win_Percentage,_and_Elo&amp;action=edit&amp;section=9\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=43323\">Pawn Advantage, Win Percentage, and Elo</a> by <a href=\"/Adam_Hair\" title=\"Adam Hair\">Adam Hair</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 15, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=44670\">normal vs logistic curve for Elo model</a> by <a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel Shawul</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 02, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=50266\">Houdini, much weaker engines, and Arpad Elo</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 29, 2013&#160;» <a href=\"/Houdini\" title=\"Houdini\">Houdini</a>, <a href=\"/Match_Statistics\" title=\"Match Statistics\">Match Statistics</a> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://macechess.blogspot.de/2014/03/pawn-advantage-in-ice.html\">Pawn Advantage in iCE</a> by <a href=\"/Thomas_Petzke\" title=\"Thomas Petzke\">Thomas Petzke</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://macechess.blogspot.de/\">mACE Chess</a>, March 16, 2014&#160;» <a href=\"/ICE\" title=\"ICE\">iCE</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://chesscomputer.tumblr.com/post/98632536555/using-the-stockfish-position-evaluation-score-to/embed\">Using the Stockfish position evaluation score to predict victory probability</a> by unavoidablegrain, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Tumblr\">Tumblr</a>, September 28, 2014&#160;» <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2015_...\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pawn_Advantage,_Win_Percentage,_and_Elo&amp;action=edit&amp;section=10\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://rjlipton.wordpress.com/2015/10/06/depth-of-satisficing/\">Depth of Satisficing</a> by <a href=\"/Kenneth_W._Regan\" title=\"Kenneth W. Regan\">Ken Regan</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://rjlipton.wordpress.com/\">Gödel's Lost Letter and P=NP</a>, October 06, 2015 &#160;» <a href=\"/Depth\" title=\"Depth\">Depth</a>, <a href=\"/Match_Statistics\" title=\"Match Statistics\">Match Statistics</a>, <a class=\"mw-selflink selflink\">Pawn Advantage, Win Percentage, and Elo</a>, <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a>, <a href=\"/Komodo\" title=\"Komodo\">Komodo</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://rjlipton.wordpress.com/2016/12/08/magnus-and-the-turkey-grinder/\">Magnus and the Turkey Grinder</a> by <a href=\"/Kenneth_W._Regan\" title=\"Kenneth W. Regan\">Ken Regan</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://rjlipton.wordpress.com/\">Gödel's Lost Letter and P=NP</a>, December 08, 2016&#160;» <a href=\"/Match_Statistics\" title=\"Match Statistics\">Match Statistics</a> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup> <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup> <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup> </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65764\">Statistical interpretation of search and eval scores</a> by <a href=\"/index.php?title=J._Wesley_Cleveland&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"J. Wesley Cleveland (page does not exist)\">J. Wesley Cleveland</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 18, 2017&#160;» <a href=\"/Match_Statistics\" title=\"Match Statistics\">Match Statistics</a>, <a href=\"/Score\" title=\"Score\">Score</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=68072\">Why Lc0 eval (in cp) is asymmetric against AB engines?</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 25, 2018&#160;» <a href=\"/Asymmetric_Evaluation\" title=\"Asymmetric Evaluation\">Asymmetric Evaluation</a>, <a href=\"/Leela_Chess_Zero\" title=\"Leela Chess Zero\">Leela Chess Zero</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=72140\">UCI Win/Draw/Loss reporting</a> by <a href=\"/Gian-Carlo_Pascutto\" title=\"Gian-Carlo Pascutto\">Gian-Carlo Pascutto</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 22, 2019</li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pawn_Advantage,_Win_Percentage,_and_Elo&amp;action=edit&amp;section=11\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://lczero.org/blog/2020/04/wdl-head/\">Win-Draw-Loss evaluation</a> by <a href=\"/Alexander_Lyashuk\" title=\"Alexander Lyashuk\">crem</a>, <a href=\"/Leela_Chess_Zero\" title=\"Leela Chess Zero\">LCZero blog</a>, April 20, 2020&#160;» <a href=\"/TCEC_Season_17#Superfinal\" title=\"TCEC Season 17\">TCEC Season 17 Superfinal</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=74339\">Stockfish has included WDL stats in engine output</a> by Deberger, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 02, 2020&#160;» <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pawn_Advantage,_Win_Percentage,_and_Elo&amp;action=edit&amp;section=12\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Elo_rating_system\">Elo rating system from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://wismuth.com/elo/calculator.html\">Elo Win Probability Calculator</a> by <a href=\"/Mathematician#FLabelle\" title=\"Mathematician\">François Labelle</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pawn_Advantage,_Win_Percentage,_and_Elo&amp;action=edit&amp;section=13\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://mathworld.wolfram.com/LogisticEquation.html\">logistic model from Wolfram MathWorld</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Arpad_Elo\">Arpad Elo - Wikipedia</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=57890\">Regan's latest: Depth of Satisficing</a> by <a href=\"/index.php?title=Carl_Lumma&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Carl Lumma (page does not exist)\">Carl Lumma</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 09, 2015</span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://rjlipton.wordpress.com/2016/11/30/when-data-serves-turkey/\">When Data Serves Turkey</a> by <a href=\"/Kenneth_W._Regan\" title=\"Kenneth W. Regan\">Ken Regan</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://rjlipton.wordpress.com/\">Gödel's Lost Letter and P=NP</a>, November 30, 2016</span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/World_Chess_Championship_2016\">World Chess Championship 2016 from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=62435\">Regan's conundrum</a> by <a href=\"/index.php?title=Carl_Lumma&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Carl Lumma (page does not exist)\">Carl Lumma</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 09, 2016</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Evaluation\" title=\"Evaluation\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260228145846\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.029 seconds\nReal time usage: 0.036 seconds\nPreprocessor visited node count: 139/1000000\nPreprocessor generated node count: 266/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1457-0!canonical and timestamp 20260228145846 and revision id 24254\n -->\n"
+    },
+    "categories": [],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Adam Hair"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alexander Lyashuk"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Asymmetric Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bishop versus Knight"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Daniel Shawul"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gian-Carlo Pascutto"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Houdini"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICE"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "IEEE"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kai Laskos"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kazunori Yamaguchi"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kenneth W. Regan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Komodo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Leela Chess Zero"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Luca Hemmerich"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Match Statistics"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Material"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mathematician"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Playing Strength"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Portable Game Notation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pradu Kannan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Satoru Kawai"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Score"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Shogo Takeuchi"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stefan Meyer-Kahlen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stockfish"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sune Fischer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "TCEC Season 17"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tamal T. Biswas"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Thomas Petzke"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tomoyuki Kaneko"
+      },
+      {
+        "ns": 0,
+        "*": "Carl Lumma"
+      },
+      {
+        "ns": 0,
+        "*": "Jason Zhou"
+      },
+      {
+        "ns": 0,
+        "*": "Ingo Lindam"
+      },
+      {
+        "ns": 0,
+        "*": "J. Wesley Cleveland"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Relationship",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Pawn_Advantage,_Win_Percentage,_and_Elo",
+        "byteoffset": 366,
+        "anchor": "Relationship"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Data Acquisition",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Pawn_Advantage,_Win_Percentage,_and_Elo",
+        "byteoffset": 868,
+        "anchor": "Data_Acquisition"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Data Reduction and Modeling",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Pawn_Advantage,_Win_Percentage,_and_Elo",
+        "byteoffset": 1533,
+        "anchor": "Data_Reduction_and_Modeling"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Pawn_Advantage,_Win_Percentage,_and_Elo",
+        "byteoffset": 2526,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "5",
+        "index": "5",
+        "fromtitle": "Pawn_Advantage,_Win_Percentage,_and_Elo",
+        "byteoffset": 2689,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Postings",
+        "number": "6",
+        "index": "6",
+        "fromtitle": "Pawn_Advantage,_Win_Percentage,_and_Elo",
+        "byteoffset": 3823,
+        "anchor": "Postings"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1999",
+        "number": "6.1",
+        "index": "7",
+        "fromtitle": "Pawn_Advantage,_Win_Percentage,_and_Elo",
+        "byteoffset": 3834,
+        "anchor": "1999"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "6.2",
+        "index": "8",
+        "fromtitle": "Pawn_Advantage,_Win_Percentage,_and_Elo",
+        "byteoffset": 4006,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "6.3",
+        "index": "9",
+        "fromtitle": "Pawn_Advantage,_Win_Percentage,_and_Elo",
+        "byteoffset": 4309,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "6.4",
+        "index": "10",
+        "fromtitle": "Pawn_Advantage,_Win_Percentage,_and_Elo",
+        "byteoffset": 5332,
+        "anchor": "2015_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "6.5",
+        "index": "11",
+        "fromtitle": "Pawn_Advantage,_Win_Percentage,_and_Elo",
+        "byteoffset": 7074,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "7",
+        "index": "12",
+        "fromtitle": "Pawn_Advantage,_Win_Percentage,_and_Elo",
+        "byteoffset": 7461,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "8",
+        "index": "13",
+        "fromtitle": "Pawn_Advantage,_Win_Percentage,_and_Elo",
+        "byteoffset": 7685,
+        "anchor": "References"
+      }
+    ]
+  }
+}

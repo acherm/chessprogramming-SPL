@@ -1,0 +1,444 @@
+{
+  "parse": {
+    "title": "Incremental Updates",
+    "pageid": 1250,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Chess\" title=\"Chess\">Chess</a> * <a href=\"/Chess_Position\" title=\"Chess Position\">Position</a> * Incremental Updates</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"/File:Kandinsky_-_Mouvement_I.jpg\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Kandinsky_-_Mouvement_I.jpg/330px-Kandinsky_-_Mouvement_I.jpg\" width=\"300\" height=\"380\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Kandinsky_-_Mouvement_I.jpg/500px-Kandinsky_-_Mouvement_I.jpg 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Kandinsky_-_Mouvement_I.jpg/960px-Kandinsky_-_Mouvement_I.jpg 2x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Kandinsky_-_Mouvement_I.jpg\" class=\"internal\" title=\"Enlarge\"></a></div><a href=\"/Category:Wassily_Kandinsky\" title=\"Category:Wassily Kandinsky\">Wassily Kandinsky</a> - Mouvement I <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div>\n<p><b>Incremental updates</b> keep global or shared structures up to date after <a href=\"/Make_Move\" title=\"Make Move\">making</a> and <a href=\"/Unmake_Move\" title=\"Unmake Move\">unmaking</a> <a href=\"/Moves\" title=\"Moves\">moves</a> on the <a href=\"/Board_Representation\" title=\"Board Representation\">internal board</a>, likely inside a <a href=\"/Depth-First\" title=\"Depth-First\">depth-first</a>, <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">alpha-beta</a> like <a href=\"/Search\" title=\"Search\">search-algorithm</a>. Incremental update on the same global or shared data ever and ever, will likely keep it in fast cache memory, and saves <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Memory_bandwidth\">memory bandwidth</a> compared to a <a href=\"/Copy-Make\" title=\"Copy-Make\">Copy-Make</a> approach, which needs a make-update on the copy as well, but no unmake-update rather than decrementing a <a href=\"/Ply\" title=\"Ply\">ply-index</a> or fetching a pointer.\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Chess_Position\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Chess Position</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Material_and_Hash_keys\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Material and Hash keys</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Evaluation\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Evaluation</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Attack_table\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Attack table</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#See_also\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#Publications\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Publications</span></a></li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#2005_...\"><span class=\"tocnumber\">7.1</span> <span class=\"toctext\">2005 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#2010_...\"><span class=\"tocnumber\">7.2</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#2015_...\"><span class=\"tocnumber\">7.3</span> <span class=\"toctext\">2015 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-11\"><a href=\"#External_Links\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-12\"><a href=\"#References\"><span class=\"tocnumber\">9</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Chess_Position\">Chess Position</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Incremental_Updates&amp;action=edit&amp;section=1\" title=\"Edit section: Chess Position\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Incremental updates by make/unmake are obligatory for square centric board <a href=\"/Array\" title=\"Array\">arrays</a> like <a href=\"/Mailbox\" title=\"Mailbox\">mailbox</a> and <a href=\"/0x88\" title=\"0x88\">0x88</a> along with their <a href=\"/Piece-Lists#IncrementalUpdate\" title=\"Piece-Lists\">piece-lists</a>, as well for the classical <a href=\"/Bitboard_Board-Definition\" title=\"Bitboard Board-Definition\">bitboard board-definition</a>. A move only affects a small fraction of the complete board structure and the update cost is small compared to a copy of the whole board. Also one usually doesn't need an array of boards for random access, but only the current one.\n</p><p>However, there are aspects of a <a href=\"/Chess_Position\" title=\"Chess Position\">chess position</a>, which can not generally restored from a child-position by unmaking a move, and which therefor need to be restored by either re-playing the whole game record from the root position, or to be memorized inside an <a href=\"/Array\" title=\"Array\">array</a> indexed by <a href=\"/Ply\" title=\"Ply\">ply</a> or on a <a href=\"/Stack\" title=\"Stack\">stack</a> (<a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/LIFO_(computing)\">LIFO</a>), most notably <a href=\"/En_passant\" title=\"En passant\">ep state</a>, <a href=\"/Castling_Rights\" title=\"Castling Rights\">castling rights</a> and the <a href=\"/Halfmove_Clock\" title=\"Halfmove Clock\">halfmove clock</a> enforcing the <a href=\"/Fifty-move_Rule\" title=\"Fifty-move Rule\">fify-move rule</a>. Also, if one doesn't keep a captured piece (if any) inside the move object, one has to memorize those pieces elsewhere as well, to restore the target square of the move about to unmake.\n</p>\n<h1><span class=\"mw-headline\" id=\"Material_and_Hash_keys\">Material and Hash keys</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Incremental_Updates&amp;action=edit&amp;section=2\" title=\"Edit section: Material and Hash keys\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Subject of incremental updates are further data which only change conditionally on certain move types, like <a href=\"/Material\" title=\"Material\">material</a> signature, only affected by <a href=\"/Captures\" title=\"Captures\">captures</a> or <a href=\"/Promotions\" title=\"Promotions\">promotions</a>, or for instance <a href=\"/Zobrist_Hashing\" title=\"Zobrist Hashing\">zobrist keys</a> for a <a href=\"/Pawn_Hash_Table\" title=\"Pawn Hash Table\">pawn hash table</a>, only affected by moving/capturing pawns. Standard zobrist keys for <a href=\"/Transposition_Table\" title=\"Transposition Table\">TT purpose</a> and dependent on ep state and castling rights, are slightly more complicated to restore. If stored inside a record anyway to detect <a href=\"/Repetitions\" title=\"Repetitions\">repetitions</a>, one has the option to restore the key after unmake from that record.\n</p><p>It is a good idea to compare incremental updated stuff like zobrist keys with its from scratch generated counterparts for <a href=\"/Debugging\" title=\"Debugging\">debug</a> purposes.\n</p>\n<h1><span class=\"mw-headline\" id=\"Evaluation\">Evaluation</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Incremental_Updates&amp;action=edit&amp;section=3\" title=\"Edit section: Evaluation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Other global structures or variables as candidates of an incremental update are related to <a href=\"/Evaluation\" title=\"Evaluation\">Evaluation</a>, beside the mentioned <a href=\"/Material\" title=\"Material\">material</a> (balance), <a href=\"/Lazy_Evaluation\" title=\"Lazy Evaluation\">lazy evaluation</a> terms, like the sum of all <a href=\"/Piece-Square_Tables\" title=\"Piece-Square Tables\">piece-square values</a> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup> .\n</p>\n<h1><span class=\"mw-headline\" id=\"Attack_table\">Attack table</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Incremental_Updates&amp;action=edit&amp;section=4\" title=\"Edit section: Attack table\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Some programs keep <a href=\"/Attack_and_Defend_Maps\" title=\"Attack and Defend Maps\">Attack and Defend Maps</a> up to date incrementally, which is runtime dependent on the number of squares whose attacks-to are influenced by the move. Due to its size and utilization, copy-make is no issue, but on the fly generation if actually needed.\n</p>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Incremental_Updates&amp;action=edit&amp;section=5\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Attack_and_Defend_Maps\" title=\"Attack and Defend Maps\">Attack and Defend Maps</a></li>\n<li> <a href=\"/BCH_Hashing\" title=\"BCH Hashing\">BCH Hashing</a></li>\n<li> <a href=\"/General_Setwise_Operations#UpdateByMove\" title=\"General Setwise Operations\">Bitboard Update By Move</a></li>\n<li> <a href=\"/Color_Flipping\" title=\"Color Flipping\">Color Flipping</a></li>\n<li> <a href=\"/Copy-Make\" title=\"Copy-Make\">Copy-Make</a></li>\n<li> <a href=\"/Encoding_Moves\" title=\"Encoding Moves\">Encoding Moves</a></li>\n<li> <a href=\"/Lazy_Evaluation\" title=\"Lazy Evaluation\">Lazy Evaluation</a></li>\n<li> <a href=\"/Make_Move\" title=\"Make Move\">Make Move</a></li>\n<li> <a href=\"/Material\" title=\"Material\">Material</a></li>\n<li> <a href=\"/NNUE\" title=\"NNUE\">NNUE</a></li>\n<li> <a href=\"/Unmake_Move\" title=\"Unmake Move\">Unmake Move</a></li>\n<li> <a href=\"/Zobrist_Hashing\" title=\"Zobrist Hashing\">Zobrist Hashing</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Incremental_Updates&amp;action=edit&amp;section=6\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/John_J._Scott\" title=\"John J. Scott\">John J. Scott</a> (<b>1969</b>). <i>A chess-playing program</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.doc.ic.ac.uk/~shm/MI/mi4.html\">Machine Intelligence Vol. 4</a></li>\n<li> <a href=\"/David_Slate\" title=\"David Slate\">David Slate</a>, <a href=\"/Larry_Atkin\" title=\"Larry Atkin\">Larry Atkin</a> (<b>1977</b>). <i>Chess 4.5 - The Northwestern University Chess Program.</i> <a href=\"/Chess_Skill_in_Man_and_Machine\" title=\"Chess Skill in Man and Machine\">Chess Skill in Man and Machine</a>, reprinted (1988) in <a href=\"/Computer_Chess_Compendium\" title=\"Computer Chess Compendium\">Computer Chess Compendium</a></li>\n<li> <a href=\"/Peter_W._Frey\" title=\"Peter W. Frey\">Peter W. Frey</a> (<b>1983</b>). <i>The Alpha-Beta Algorithm: Incremental Updating, Well-Behaved Evaluation Functions, and Non-Speculative Forward Pruning</i>. Computer Game-Playing (ed. <a href=\"/Max_Bramer\" title=\"Max Bramer\">Max Bramer</a>), pp. 285-289. Ellis Horwood Limited</li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Incremental_Updates&amp;action=edit&amp;section=7\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"2005_...\">2005 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Incremental_Updates&amp;action=edit&amp;section=8\" title=\"Edit section: 2005 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=20370\">Incremental updating for positional evaluation</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 27, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=28523\">Incremental Zobrist - slow?</a> by <a href=\"/Vlad_Stamate\" title=\"Vlad Stamate\">Vlad Stamate</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 20, 2009&#160;» <a href=\"/Zobrist_Hashing\" title=\"Zobrist Hashing\">Zobrist Hashing</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=29770\">undo move vs. Position Cloning</a> by BoldReceiver, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 16, 2009</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=291570&amp;t=29770\">Re: undo move vs. Position Cloning</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 16, 2009&#160;» <a href=\"/Doch\" title=\"Doch\">Doch</a></dd></dl>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Incremental_Updates&amp;action=edit&amp;section=9\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=42167\">Incremental or non-incremental PST evaluation calcs</a> by <a href=\"/index.php?title=Mark_Pearce&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Mark Pearce (page does not exist)\">Mark Pearce</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 26, 2012&#160;» <a href=\"/Piece-Square_Tables\" title=\"Piece-Square Tables\">Piece-Square Tables</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=50805\">copy/make vs make/unmake</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 07, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=52085\">Incrementally-updated attack map</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, April 21, 2014&#160;» <a href=\"/Attack_and_Defend_Maps\" title=\"Attack and Defend Maps\">Attack and Defend Maps</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=53502\">Memory usage in make/unmake vs logic complexity</a> by <a href=\"/Matthew_Lai\" title=\"Matthew Lai\">Matthew Lai</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 30, 2014</li></ul>\n<h2><span class=\"mw-headline\" id=\"2015_...\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Incremental_Updates&amp;action=edit&amp;section=10\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=58628\">Incremental update</a> by <a href=\"/Matthew_R._Brades\" title=\"Matthew R. Brades\">Matthew R. Brades</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 19, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?t=63356\">The Inferno thread</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 06, 2017&#160;» <a href=\"/Shogi#Tenjiku\" title=\"Shogi\">Tenjiku Shogi</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=68995\">How to incrementally update attack tables?</a> by <a href=\"/Maksim_Korzh\" title=\"Maksim Korzh\">Maksim Korzh</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 21, 2018&#160;» <a href=\"/Attack_and_Defend_Maps\" title=\"Attack and Defend Maps\">Attack and Defend Maps</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Incremental_Updates&amp;action=edit&amp;section=11\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.top-5000.nl/authors/rebel/chess840.htm#LAZY%20EVAL\">Search Techniques in REBEL (Lazy Eval)</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://www.top-5000.nl/authors/rebel/chess840.htm\">How Rebel Plays Chess</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>&#160;» <a href=\"/Lazy_Evaluation\" title=\"Lazy Evaluation\">Lazy Evaluation</a>, <a href=\"/Rebel\" title=\"Rebel\">Rebel</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Incremental_Updates&amp;action=edit&amp;section=12\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://commons.wikimedia.org/wiki/File:Kandinsky_-_Mouvement_I.jpg\">Wassily Kandinsky - Mouvement I</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Tretyakov_Gallery\">Tretyakov Gallery</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.top-5000.nl/authors/rebel/chess840.htm#LAZY%20EVAL\">Search Techniques in REBEL (Lazy Eval)</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://www.top-5000.nl/authors/rebel/chess840.htm\">How Rebel Plays Chess</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=20370\">Incremental updating for positional evaluation</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 27, 2008</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Chess_Position\" title=\"Chess Position\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260228155839\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.101 seconds\nReal time usage: 0.653 seconds\nPreprocessor visited node count: 93/1000000\nPreprocessor generated node count: 166/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1250-0!canonical and timestamp 20260228155838 and revision id 23846\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Wassily_Kandinsky"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "0x88"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha-Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Array"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Attack and Defend Maps"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "BCH Hashing"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboard Board-Definition"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Board Representation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Captures"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Castling Rights"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Position"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Skill in Man and Machine"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Color Flipping"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Compendium"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Copy-Make"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David Slate"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Debugging"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth-First"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Doch"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Don Dailey"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ed Schroder"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "En passant"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Encoding Moves"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fifty-move Rule"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "General Setwise Operations"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Halfmove Clock"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Harm Geert Muller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "John J. Scott"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Larry Atkin"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lazy Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mailbox"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Make Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Maksim Korzh"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Material"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Matthew Lai"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Matthew R. Brades"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Max Bramer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Moves"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "NNUE"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Hash Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter W. Frey"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Piece-Lists"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Piece-Square Tables"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ply"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Promotions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rebel"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Repetitions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Hyatt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Shogi"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stack"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Steven Edwards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Unmake Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vlad Stamate"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Zobrist Hashing"
+      },
+      {
+        "ns": 0,
+        "*": "Mark Pearce"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Wassily Kandinsky"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Chess Position",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Incremental_Updates",
+        "byteoffset": 1051,
+        "anchor": "Chess_Position"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Material and Hash keys",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Incremental_Updates",
+        "byteoffset": 2328,
+        "anchor": "Material_and_Hash_keys"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Evaluation",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Incremental_Updates",
+        "byteoffset": 3142,
+        "anchor": "Evaluation"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Attack table",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Incremental_Updates",
+        "byteoffset": 3811,
+        "anchor": "Attack_table"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "5",
+        "index": "5",
+        "fromtitle": "Incremental_Updates",
+        "byteoffset": 4099,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "6",
+        "index": "6",
+        "fromtitle": "Incremental_Updates",
+        "byteoffset": 4391,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "7",
+        "index": "7",
+        "fromtitle": "Incremental_Updates",
+        "byteoffset": 4973,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2005 ...",
+        "number": "7.1",
+        "index": "8",
+        "fromtitle": "Incremental_Updates",
+        "byteoffset": 4988,
+        "anchor": "2005_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "7.2",
+        "index": "9",
+        "fromtitle": "Incremental_Updates",
+        "byteoffset": 5615,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "7.3",
+        "index": "10",
+        "fromtitle": "Incremental_Updates",
+        "byteoffset": 6249,
+        "anchor": "2015_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "8",
+        "index": "11",
+        "fromtitle": "Incremental_Updates",
+        "byteoffset": 6736,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "9",
+        "index": "12",
+        "fromtitle": "Incremental_Updates",
+        "byteoffset": 7003,
+        "anchor": "References"
+      }
+    ]
+  }
+}

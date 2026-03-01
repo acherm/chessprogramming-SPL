@@ -1,0 +1,748 @@
+{
+  "parse": {
+    "title": "Algorithms",
+    "pageid": 63,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Programming\" title=\"Programming\">Programming</a> * Algorithms</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"/File:1983_CPA_5426_(1).png\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/1983_CPA_5426_%281%29.png/330px-1983_CPA_5426_%281%29.png\" width=\"300\" height=\"402\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/1983_CPA_5426_%281%29.png/500px-1983_CPA_5426_%281%29.png 1.5x, https://upload.wikimedia.org/wikipedia/commons/1/11/1983_CPA_5426_%281%29.png 2x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:1983_CPA_5426_(1).png\" class=\"internal\" title=\"Enlarge\"></a></div><a href=\"/Mathematician#Algoritmi\" title=\"Mathematician\">Muḥammad ibn Mūsā al-Khwārizmī</a> <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>Algorithms</b>,\n</p><p>in mathematics and computer science, methods for solving a problem expressed as a finite sequence of instructions. The term “algorithm” is derived from the name of <a href=\"/Mathematician#Algoritmi\" title=\"Mathematician\">Muḥammad ibn Mūsā al-Khwārizmī</a> (born approximately 780 in <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Khwarezm\">Khwarezm</a>, died between 835 and 850), the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Persian_people\">Persian</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Mathematics_in_medieval_Islam\">mathematician</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Astronomy_in_medieval_Islam\">astronomer</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Geography_and_cartography_in_medieval_Islam\">geographer</a>, and scholar in the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/House_of_Wisdom\">House of Wisdom</a> in <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Baghdad\">Baghdad</a>, from the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Khorasan_Province\">Khorasan province</a> of present-day <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Uzbekistan\">Uzbekistan</a> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup> . \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#General_Concepts\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">General Concepts</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Sorting_and_Searching\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Sorting and Searching</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Enumeration_and_Backtracking\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Enumeration and Backtracking</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Mathematical_Optimization\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Mathematical Optimization</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#Combinatorial\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Combinatorial</span></a></li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#See_also\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#Publications\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">Publications</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#1960_...\"><span class=\"tocnumber\">7.1</span> <span class=\"toctext\">1960 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#1970_...\"><span class=\"tocnumber\">7.2</span> <span class=\"toctext\">1970 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#1980_...\"><span class=\"tocnumber\">7.3</span> <span class=\"toctext\">1980 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#1990_...\"><span class=\"tocnumber\">7.4</span> <span class=\"toctext\">1990 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-12\"><a href=\"#2000_...\"><span class=\"tocnumber\">7.5</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-13\"><a href=\"#2010_...\"><span class=\"tocnumber\">7.6</span> <span class=\"toctext\">2010 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-14\"><a href=\"#External_Links\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">External Links</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-15\"><a href=\"#Algorithms\"><span class=\"tocnumber\">8.1</span> <span class=\"toctext\">Algorithms</span></a>\n<ul>\n<li class=\"toclevel-3 tocsection-16\"><a href=\"#Algebra_and_Calculus\"><span class=\"tocnumber\">8.1.1</span> <span class=\"toctext\">Algebra and Calculus</span></a></li>\n<li class=\"toclevel-3 tocsection-17\"><a href=\"#Graphics\"><span class=\"tocnumber\">8.1.2</span> <span class=\"toctext\">Graphics</span></a></li>\n<li class=\"toclevel-3 tocsection-18\"><a href=\"#Linear_Programming\"><span class=\"tocnumber\">8.1.3</span> <span class=\"toctext\">Linear Programming</span></a></li>\n<li class=\"toclevel-3 tocsection-19\"><a href=\"#Sorting_and_Searching_2\"><span class=\"tocnumber\">8.1.4</span> <span class=\"toctext\">Sorting and Searching</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-2 tocsection-20\"><a href=\"#Complexity\"><span class=\"tocnumber\">8.2</span> <span class=\"toctext\">Complexity</span></a></li>\n<li class=\"toclevel-2 tocsection-21\"><a href=\"#Misc\"><span class=\"tocnumber\">8.3</span> <span class=\"toctext\">Misc</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-22\"><a href=\"#References\"><span class=\"tocnumber\">9</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"General_Concepts\">General Concepts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Algorithms&amp;action=edit&amp;section=1\" title=\"Edit section: General Concepts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/General_Setwise_Operations\" title=\"General Setwise Operations\">General Setwise Operations</a></li>\n<li> <a href=\"/Iteration\" title=\"Iteration\">Iteration</a></li>\n<li> <a href=\"/Pseudorandom_Number_Generator\" title=\"Pseudorandom Number Generator\">Pseudorandom Number Generator</a></li>\n<li> <a href=\"/Recursion\" title=\"Recursion\">Recursion</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Sorting_and_Searching\">Sorting and Searching</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Algorithms&amp;action=edit&amp;section=2\" title=\"Edit section: Sorting and Searching\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/ABDADA\" title=\"ABDADA\">ABDADA</a></li>\n<li> <a href=\"/All_Shortest_Paths\" title=\"All Shortest Paths\">All shortest Paths</a></li>\n<li> <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">Alpha-Beta</a></li>\n<li> <a href=\"/B*\" title=\"B*\">B*</a></li>\n<li> <a href=\"/Best-First\" title=\"Best-First\">Best-First</a></li>\n<li> <a href=\"/Brute-Force\" title=\"Brute-Force\">Brute-Force</a></li>\n<li> <a href=\"/Depth-First\" title=\"Depth-First\">Depth-First</a></li>\n<li> <a href=\"/King_Pattern#FloodFillAlgorithms\" title=\"King Pattern\">Flood Fill Algorithm</a></li>\n<li> <a href=\"/Iterative_Search\" title=\"Iterative Search\">Iterative Search</a></li>\n<li> <a href=\"/Jamboree\" title=\"Jamboree\">Jamboree</a></li>\n<li> <a href=\"/Monte-Carlo_Tree_Search\" title=\"Monte-Carlo Tree Search\">Monte-Carlo Tree Search</a></li>\n<li> <a href=\"/Move_Ordering\" title=\"Move Ordering\">Move Ordering</a></li>\n<li> <a href=\"/MTD(f)\" title=\"MTD(f)\">MTD(f)</a></li>\n<li> <a href=\"/NegaC*\" title=\"NegaC*\">NegaC*</a></li>\n<li> <a href=\"/NegaScout\" title=\"NegaScout\">NegaScout</a></li>\n<li> <a href=\"/Cilk#ParallelAlphaBeta\" title=\"Cilk\">Parallel Alpha-Beta</a> in <a href=\"/Cilk\" title=\"Cilk\">Cilk</a></li>\n<li> <a href=\"/Parallel_Search\" title=\"Parallel Search\">Parallel Search</a></li>\n<li> <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">Principal Variation Search</a></li>\n<li> <a href=\"/Proof-Number_Search\" title=\"Proof-Number Search\">Proof-Number Search</a></li>\n<li> <a href=\"/Retrograde_Analysis\" title=\"Retrograde Analysis\">Retrograde Analysis</a></li>\n<li> <a href=\"/Search\" title=\"Search\">Search</a></li>\n<li> <a href=\"/SEE_-_The_Swap_Algorithm\" title=\"SEE - The Swap Algorithm\">SEE - The Swap Algorithm</a></li>\n<li> <a href=\"/SEX_Algorithm\" title=\"SEX Algorithm\">SEX Algorithm</a></li>\n<li> <a href=\"/SOMA#SOMAALGO\" title=\"SOMA\">SOMA Algorithm</a></li>\n<li> <a href=\"/SSS*_and_Dual*\" title=\"SSS* and Dual*\">SSS* and Dual*</a></li>\n<li> <a href=\"/UCT\" title=\"UCT\">UCT</a></li>\n<li> <a href=\"/Young_Brothers_Wait_Concept\" title=\"Young Brothers Wait Concept\">Young Brothers Wait Concept</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Enumeration_and_Backtracking\">Enumeration and Backtracking</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Algorithms&amp;action=edit&amp;section=3\" title=\"Edit section: Enumeration and Backtracking\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Backtracking\" title=\"Backtracking\">Backtracking</a></li>\n<li> <a href=\"/De_Bruijn_Sequence_Generator\" title=\"De Bruijn Sequence Generator\">De Bruijn Sequence Generator</a></li>\n<li> <a href=\"/Traversing_Subsets_of_a_Set\" title=\"Traversing Subsets of a Set\">Traversing Subsets of a Set</a></li>\n<li> <a href=\"/Trial_and_Error\" title=\"Trial and Error\">Trial and Error</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Mathematical_Optimization\">Mathematical Optimization</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Algorithms&amp;action=edit&amp;section=4\" title=\"Edit section: Mathematical Optimization\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/CLOP\" title=\"CLOP\">CLOP</a></li>\n<li> <a href=\"/Dynamic_Programming\" title=\"Dynamic Programming\">Dynamic Programming</a></li>\n<li> <a href=\"/Genetic_Programming#EvolutionaryAlgorithms\" title=\"Genetic Programming\">Evolutionary Algorithms</a></li>\n<li> <a href=\"/index.php?title=Hill_Climbing&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Hill Climbing (page does not exist)\">Hill Climbing</a></li>\n<li> <a href=\"/Simulated_Annealing\" title=\"Simulated Annealing\">Simulated Annealing</a></li>\n<li> <a href=\"/SPSA\" title=\"SPSA\">SPSA</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Combinatorial\">Combinatorial</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Algorithms&amp;action=edit&amp;section=5\" title=\"Edit section: Combinatorial\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Bit-Twiddling\" title=\"Bit-Twiddling\">Bit-Twiddling</a></li>\n<li> <a href=\"/BitScan\" title=\"BitScan\">BitScan</a></li>\n<li> <a href=\"/Flipping_Mirroring_and_Rotating\" title=\"Flipping Mirroring and Rotating\">Flipping Mirroring and Rotating</a></li>\n<li> <a href=\"/Kogge-Stone_Algorithm\" title=\"Kogge-Stone Algorithm\">Kogge-Stone Algorithm</a></li>\n<li> <a href=\"/Parallel_Prefix_Algorithms\" title=\"Parallel Prefix Algorithms\">Parallel Prefix Algorithms</a></li>\n<li> <a href=\"/Population_Count\" title=\"Population Count\">Population Count</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Algorithms&amp;action=edit&amp;section=6\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/BCH_Hashing\" title=\"BCH Hashing\">BCH Hashing</a></li>\n<li> <a href=\"/Data\" title=\"Data\">Data</a></li>\n<li> <a href=\"/Fill_Algorithms\" title=\"Fill Algorithms\">Fill Algorithms</a></li>\n<li> <a href=\"/Hash_Table\" title=\"Hash Table\">Hash Table</a></li>\n<li> <a href=\"/Learning\" title=\"Learning\">Learning</a></li>\n<li> <a href=\"/Mathematician\" title=\"Mathematician\">Mathematician</a></li>\n<li> <a href=\"/SIMD_and_SWAR_Techniques\" title=\"SIMD and SWAR Techniques\">SIMD and SWAR Techniques</a></li>\n<li> <a href=\"/Space-Time_Tradeoff\" title=\"Space-Time Tradeoff\">Space-Time Tradeoff</a></li>\n<li> <a href=\"/Zobrist_Hashing\" title=\"Zobrist Hashing\">Zobrist Hashing</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Algorithms&amp;action=edit&amp;section=7\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1960_...\">1960 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Algorithms&amp;action=edit&amp;section=8\" title=\"Edit section: 1960 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Donald_Knuth\" title=\"Donald Knuth\">Donald E. Knuth</a> (<b>1968 ...</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www-cs-faculty.stanford.edu/%7Eknuth/taocp.html\">The Art of Computer Programming (TAOCP)</a></i> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup> </li></ul>\n<dl><dd> Volume 1 - Fundamental Algorithms (<b>1968</b>)</dd>\n<dd> Volume 2 - Seminumerical Algorithms (<b>1969</b>)</dd>\n<dd> Volume 3 - Sorting and Searching (<b>1973</b>)</dd>\n<dd> Volume 4 - Combinatorial Algorithms in preparation (five fascicles have been published as of April 2009)</dd>\n<dd> Volume 4A - Enumeration and Backtracking</dd>\n<dd> Volume 4B - Graph and Network Algorithms</dd>\n<dd> Volume 4C and possibly 4D - Optimization and Recursion</dd>\n<dd> Volume 5 - Syntactic Algorithms, planned (as of August 2006, estimated in 2015).</dd></dl>\n<h2><span class=\"mw-headline\" id=\"1970_...\">1970 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Algorithms&amp;action=edit&amp;section=9\" title=\"Edit section: 1970 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Niklaus_Wirth\">Niklaus Wirth</a> (<b>1976</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Algorithms_%2B_Data_Structures_%3D_Programs\">Algorithms + Data Structures = Programs</a></i>.</li>\n<li> <a href=\"/Georgy_Adelson-Velsky\" title=\"Georgy Adelson-Velsky\">Georgy Adelson-Velsky</a>, <a href=\"/Vladimir_Arlazarov\" title=\"Vladimir Arlazarov\">Vladimir Arlazarov</a>, <a href=\"/Mikhail_Donskoy\" title=\"Mikhail Donskoy\">Mikhail Donskoy</a> (<b>1979</b>). <i>Algorithms of adaptive search</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.doc.ic.ac.uk/%7Eshm/MI/mi9.html\">Machine Intelligence 9</a> (eds. <a href=\"/Jean_Hayes_Michie\" title=\"Jean Hayes Michie\">Jean Hayes Michie</a>, <a href=\"/Donald_Michie\" title=\"Donald Michie\">Donald Michie</a> and L.I. Mikulich), pp. 373-384. Ellis Horwood, Chichester</li></ul>\n<h2><span class=\"mw-headline\" id=\"1980_...\">1980 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Algorithms&amp;action=edit&amp;section=10\" title=\"Edit section: 1980 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Mathematician#Ershov\" title=\"Mathematician\">Andrei P. Ershov</a>, <a href=\"/Donald_Knuth\" title=\"Donald Knuth\">Donald Knuth</a> (Eds.) (<b>1981</b>). <i>Algorithms in Modern Mathematics and Computer Science</i>. Proceedings, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Urgench\">Urgench</a>, Uzbek SSR, September 16-22, 1979. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Lecture_Notes_in_Computer_Science\">Lecture Notes in Computer Science</a>, Vol. 122, Springer&#160;» <a href=\"/Donald_Knuth#ErshovArchive\" title=\"Donald Knuth\">Ershov Archive</a></li>\n<li> <a href=\"/Michel_Gondran\" title=\"Michel Gondran\">Michel Gondran</a>, <a href=\"/Mathematician#MMinoux\" title=\"Mathematician\">Michel Minoux</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Steven_Vajda\">Steven Vajda</a> (<b>1984</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://portal.acm.org/citation.cfm?id=817\">Graphs and Algorithms</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/John_Wiley_%26_Sons\">John Wiley &amp; Sons</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://books.google.com/books?id=2uhQAAAAMAAJ\">google</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.amazon.com/Graphs-Algorithms-Discreet-Mathematics-1-484/dp/0471103748\">amazon</a></li>\n<li> <a href=\"/Paul_W._Purdom\" title=\"Paul W. Purdom\">Paul W. Purdom</a>, <a href=\"/Mathematician#CABrown\" title=\"Mathematician\">Cynthia A. Brown</a> (<b>1985</b>). <i>The Analysis of Algorithms</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Holt_McDougal#History\">Holt, Rinehart and Winston</a></li>\n<li> <a href=\"/Georgy_Adelson-Velsky\" title=\"Georgy Adelson-Velsky\">Georgy Adelson-Velsky</a>, <a href=\"/Vladimir_Arlazarov\" title=\"Vladimir Arlazarov\">Vladimir Arlazarov</a>, <a href=\"/Mikhail_Donskoy\" title=\"Mikhail Donskoy\">Mikhail Donskoy</a> (<b>1988</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://link.springer.com/book/10.1007%2F978-1-4612-3796-9\">Algorithms for Games</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Springer_Science%2BBusiness_Media\">Springer</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1990_...\">1990 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Algorithms&amp;action=edit&amp;section=11\" title=\"Edit section: 1990 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/John_Tromp\" title=\"John Tromp\">John Tromp</a> (<b>1993</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://homepages.cwi.nl/~tromp/thesis.html\">Aspects of Algorithms and Complexity</a></i>. Ph.D. thesis, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/University_of_Amsterdam\">University of Amsterdam</a>, advisor <a href=\"/Mathematician#PVitany\" title=\"Mathematician\">Paul Vitányi</a></li>\n<li> <a href=\"/Warren_D._Smith\" title=\"Warren D. Smith\">Warren D. Smith</a>, <a href=\"/index.php?title=Kevin_J._Lang&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Kevin J. Lang (page does not exist)\">Kevin J. Lang</a> (<b>1994</b>). <i>Values of the merging function and algorithm design as a game</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/NEC_Corporation_of_America\">NEC Research Institute</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://scorevoting.net/WarrenSmithPages/homepage/mergepap.ps\">ps</a></li>\n<li> <a href=\"/Leen_Ammeraal\" title=\"Leen Ammeraal\">Leen Ammeraal</a> (<b>1996</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://home.planet.nl/%7Eammeraal/algds.html\">Algorithms and Data Structures in C++</a></i>. Chichester: <a rel=\"nofollow\" class=\"external text\" href=\"http://eu.wiley.com/WileyCDA/Section/id-300022.html\">John Wiley</a></li>\n<li> <a href=\"/Steven_Skiena\" title=\"Steven Skiena\">Steven Skiena</a> (<b>1998</b>). <i>The Algorithm Design Manual</i>. 2nd Edition 2008</li>\n<li> <a href=\"/Harald_Prokop\" title=\"Harald Prokop\">Harald Prokop</a> (<b>1999</b>). <i>Cache-Oblivious Algorithms</i>. Masters thesis, Department of Electrical Engineering and Computer Science, <a href=\"/Massachusetts_Institute_of_Technology\" title=\"Massachusetts Institute of Technology\">MIT</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://supertech.csail.mit.edu/papers/Prokop99.pdf\">pdf</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Algorithms&amp;action=edit&amp;section=12\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Donald_Knuth\" title=\"Donald Knuth\">Donald Knuth</a> (<b>2000</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www-cs-faculty.stanford.edu/~uno/aa.html\">Selected Papers on Analysis of Algorithms</a></i>.  <a rel=\"nofollow\" class=\"external text\" href=\"http://web.stanford.edu/group/cslipublications/cslipublications/site/CSIN.shtml\">CSLI lecture notes series</a> 102</li>\n<li> <a href=\"/Paul_W._Purdom\" title=\"Paul W. Purdom\">Paul W. Purdom</a>, <a href=\"/Mathematician#CABrown\" title=\"Mathematician\">Cynthia A. Brown</a> (<b>2004</b>). <i>The Analysis of Algorithms</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Oxford_University_Press\">Oxford University Press</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://www.amazon.com/Analysis-Algorithms-Paul-Purdom-Jr/dp/0195174798\">amazon</a></li>\n<li> <a href=\"/Richard_C._T._Lee\" title=\"Richard C. T. Lee\">R. C. T. Lee</a>, et al. (<b>2005</b>). <i>Introduction to the Design and Analysis of Algorithms, a Strategic Approach</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/McGraw-Hill\">McGraw-Hill</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.amazon.com/Introduction-Design-Analysis-Algorithms-Y-T-Tsai/dp/0071243461\">amazon</a></li>\n<li> <a href=\"/Jill_Cirasella\" title=\"Jill Cirasella\">Jill Cirasella</a> (<b>2006</b>). <i>Classical and Quantum Algorithms for Finding Cycles</i>. M.Sc. thesis, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/University_of_Amsterdam\">University of Amsterdam</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://eprints.illc.uva.nl/769/1/MoL-2006-06.text.pdf\">pdf</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://jillcirasella.commons.gc.cuny.edu/files/2014/05/quantum_and_classical_cycles_slides.pdf\">slides as pdf</a></li>\n<li> <a href=\"/Mathematician#SDasgupta\" title=\"Mathematician\">Sanjoy Dasgupta</a>, <a href=\"/Mathematician#CHPapadimitriou\" title=\"Mathematician\">Christos H. Papadimitriou</a>, <a href=\"/Mathematician#UVVazirani\" title=\"Mathematician\">Umesh Vazirani</a> (<b>2006</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.berkeley.edu/%7Evazirani/algorithms.html\">Algorithms</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/McGraw-Hill\">McGraw-Hill</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.amazon.com/gp/product/0073523402?ie=UTF8&amp;tag=ebookdire-20&amp;link_code=as3&amp;camp=211189&amp;creative=373489&amp;creativeASIN=0073523402\">amazon</a></li>\n<li> <a href=\"/Jon_Kleinberg\" title=\"Jon Kleinberg\">Jon Kleinberg</a>, <a href=\"/Mathematician#ETardos\" title=\"Mathematician\">Éva Tardos</a> (<b>2006</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.pearson.com/us/higher-education/program/Kleinberg-Algorithm-Design/PGM319216.html\">Algorithm Design</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pearson_plc\">Pearson</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Addison-Wesley\">Addison-Wesley</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://info.iut-bm.univ-fcomte.fr/staff/bahi/\">Jacques Bahi</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.loria.fr/%7Econtasss/\">Sylvain Contassot-Vivier</a>, <a href=\"/index.php?title=Rapha%C3%ABl_Couturier&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Raphaël Couturier (page does not exist)\">Raphaël Couturier</a> (<b>2007</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.crcpress.com/ecommerce_product/product_detail.jsf?catno=C808X&amp;isbn=0000000000000&amp;parent_id=&amp;pc=\">Parallel Iterative Algorithms: From Sequential to Grid Computing</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Chapman_%26_Hall\">Chapman &amp; Hall</a>/CRC Numerical Analysis and Scientific Computing Series</li>\n<li> <a href=\"/index.php?title=David_J._Stracuzzi&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"David J. Stracuzzi (page does not exist)\">David J. Stracuzzi</a> (<b>2007</b>). <i>Randomized Feature Selection</i>. in <a rel=\"nofollow\" class=\"external text\" href=\"http://scholar.google.com/citations?user=Dzf46C8AAAAJ\">Huan Liu</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.ar.sanken.osaka-u.ac.jp/~motoda/motopreg.html\">Hiroshi Motoda</a> (eds.) <a rel=\"nofollow\" class=\"external text\" href=\"http://www.crcpress.com/product/isbn/9781584888789\">Computational Methods of Feature Selection</a>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/CRC_Press\">CRC Press</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.stracuzzi.info/david/manuscripts/cmfs07-randomized.pdf\">pdf</a></li>\n<li> <a href=\"/Steven_Skiena\" title=\"Steven Skiena\">Steven Skiena</a> (<b>2008</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.springer.com/us/book/9781848000698\">The Algorithm Design Manual</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Springer_Science%2BBusiness_Media\">Springer</a>, 2nd Edition </li>\n<li>  <a href=\"/Mathematician#KMehlhorn\" title=\"Mathematician\">Kurt Mehlhorn</a>, <a href=\"/Peter_Sanders\" title=\"Peter Sanders\">Peter Sanders</a> (<b>2008</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.mpi-inf.mpg.de/%7Emehlhorn/Toolbox.html\">Data Structures and Algorithms: The Basic Toolbox</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Springer_Science%2BBusiness_Media\">Springer</a></li>\n<li> <a href=\"/Michel_Gondran\" title=\"Michel Gondran\">Michel Gondran</a>, <a href=\"/Mathematician#MMinoux\" title=\"Mathematician\">Michel Minoux</a> (<b>2008, 2010</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.springer.com/mathematics/applications/book/978-0-387-75449-9\">Graphs, dioids and semirings - New Models and Algorithms</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Springer_Science%2BBusiness_Media\">Springer</a>, from <a rel=\"nofollow\" class=\"external text\" href=\"http://books.google.com/books/about/Graphs_dioids_and_semirings.html?id=XudA1RktfCAC\">google</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.amazon.com/Graphs-Dioids-Semirings-Algorithms-Operations/dp/1441945296/ref=ntt_at_ep_dpt_2\">amazon.com</a>, 2nd edition from <a rel=\"nofollow\" class=\"external text\" href=\"http://www.alibris.com/booksearch?qisbn=9781441945297\">alibris.com</a> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup></li>\n<li> <a href=\"/Mathematician#THCormen\" title=\"Mathematician\">Thomas H. Cormen</a>, <a href=\"/Charles_Leiserson\" title=\"Charles Leiserson\">Charles E. Leiserson</a>, <a href=\"/Ronald_L._Rivest\" title=\"Ronald L. Rivest\">Ronald L. Rivest</a>, <a href=\"/Mathematician#CliffordStein\" title=\"Mathematician\">Clifford Stein</a> (<b>2009</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Introduction_to_Algorithms\">Introduction to Algorithms, 3rd Edition</a></i>. </li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Algorithms&amp;action=edit&amp;section=13\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Donald_Knuth\" title=\"Donald Knuth\">Donald Knuth</a> (<b>2010</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www-cs-faculty.stanford.edu/~uno/da.html\">Selected Papers on Design of Algorithms</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://web.stanford.edu/group/cslipublications/cslipublications/site/CSIN.shtml\">CSLI lecture notes series</a> 191, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Cambridge_University_Press\">Cambridge University Press</a></li>\n<li> <a href=\"/Mathematician#BVoecking\" title=\"Mathematician\">Berthold Vöcking</a>  et al. (eds.) (<b>2011</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.springer.com/gp/book/9783642153273\">Algorithms Unplugged</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Springer_Science%2BBusiness_Media\">Springer</a></li>\n<li> <a href=\"/Matteo_Frigo\" title=\"Matteo Frigo\">Matteo Frigo</a>, <a href=\"/Charles_Leiserson\" title=\"Charles Leiserson\">Charles Leiserson</a>, <a href=\"/Harald_Prokop\" title=\"Harald Prokop\">Harald Prokop</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/pers/hd/r/Ramachandran:Sridhar\">Sridhar Ramachandran</a> (<b>2012</b>). <i>Cache-Oblivious Algorithms</i>. <a href=\"/ACM#TALG\" title=\"ACM\">ACM Transactions on Algorithms</a>, Vol. 8, No. 1, <a rel=\"nofollow\" class=\"external text\" href=\"http://supertech.csail.mit.edu/papers/FrigoLePr12.pdf\">pdf</a></li>\n<li> <span id=\"ACM-Turing\"></span><a href=\"/Mathematician#CHPapadimitriou\" title=\"Mathematician\">Christos H. Papadimitriou</a>, <a href=\"/Mathematician#LAdleman\" title=\"Mathematician\">Leonard Adleman</a>, <a href=\"/Richard_Karp\" title=\"Richard Karp\">Richard Karp</a>, <a href=\"/Donald_Knuth\" title=\"Donald Knuth\">Donald Knuth</a>, <a href=\"/Mathematician#RETarjan\" title=\"Mathematician\">Robert E. Tarjan</a>, <a href=\"/Mathematician#LValiant\" title=\"Mathematician\">Leslie Valiant</a> (<b>2012</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://dl.acm.org/citation.cfm?id=2322189\">An Algorithmic View of the Universe</a></i>. ACM-Turing 2012&#160;» <a href=\"/Alan_Turing\" title=\"Alan Turing\">Alan Turing</a></li></ul>\n<dl><dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/f6df3s3x3zo?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<ul><li> <a href=\"/index.php?title=Katja_Grace&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Katja Grace (page does not exist)\">Katja Grace</a> (<b>2013</b>). <i>Algorithmic Progress in Six Domains</i>. Technical report 2013-3, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Machine_Intelligence_Research_Institute\">Machine Intelligence Research Institute</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Berkeley,_California\">Berkeley, CA</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://intelligence.org/files/AlgorithmicProgress.pdf\">pdf</a>, 5 <a href=\"/Games\" title=\"Games\">Game Playing</a>, 5.1 <a href=\"/Chess\" title=\"Chess\">Chess</a>, 5.2 <a href=\"/Go\" title=\"Go\">Go</a>, 9 <a href=\"/Learning\" title=\"Learning\">Machine Learning</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Algorithms&amp;action=edit&amp;section=14\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Algorithm\">Algorithm from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Mu%E1%B8%A5ammad_ibn_M%C5%ABs%C4%81_al-Khw%C4%81rizm%C4%AB\">Muḥammad ibn Mūsā al-Khwārizmī</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Ban%C5%AB_M%C5%ABs%C4%81\">Banū Mūsā from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Algorithm_characterizations\">Algorithm characterizations from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Analysis_of_algorithms\">Analysis of algorithms from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Algorithmic_efficiency\">Algorithmic efficiency from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Big_O_notation\">Big O notation from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikibooks.org/wiki/Algorithms\">Algorithms - Wikibooks</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://xlinux.nist.gov/dads/\">Dictionary of Algorithms and Data Structures</a> by <a rel=\"nofollow\" class=\"external text\" href=\"http://hissa.nist.gov/%7Eblack/\">Paul E. Black</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/National_Institute_of_Standards_and_Technology\">National Institute of Standards and Technology</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Dictionary_of_Algorithms_and_Data_Structures\">Dictionary of Algorithms and Data Structures from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://aggregate.org/MAGIC\">The Aggregate Magic Algorithms</a> by <a href=\"/Hank_Dietz\" title=\"Hank Dietz\">Hank Dietz</a>&#160;» <a href=\"/Bit-Twiddling\" title=\"Bit-Twiddling\">Bit-Twiddling</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://webhome.cs.uvic.ca/%7Evanemden/mathart/mathart.html\">Algorithmic Art</a> by <a href=\"/Maarten_van_Emden\" title=\"Maarten van Emden\">Maarten van Emden</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/The_Art_of_Computer_Programming\">The Art of Computer Programming from Wikipedia</a></li>\n<li> <a href=\"/Java\" title=\"Java\">Java</a> <a rel=\"nofollow\" class=\"external text\" href=\"http://code.google.com/p/aima-java/\">implementation of algorithms</a> from <a href=\"/Peter_Norvig\" title=\"Peter Norvig\">Norvig</a> and <a href=\"/Stuart_Russell\" title=\"Stuart Russell\">Russell's</a> <i><a rel=\"nofollow\" class=\"external text\" href=\"http://aima.cs.berkeley.edu/\">Artificial Intelligence: A Modern Approach</a></i>. 3rd edition</li></ul>\n<h2><span class=\"mw-headline\" id=\"Algorithms\">Algorithms</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Algorithms&amp;action=edit&amp;section=15\" title=\"Edit section: Algorithms\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Category:Algorithms\">Category:Algorithms from Wikipedia</a></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Algorithms_for_calculating_variance\">Algorithms for calculating variance</a></dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Approximation_algorithm\">Approximation algorithm from Wikipedia</a></dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Cryptographic_hash_function#Cryptographic_hash_algorithms\">Cryptographic hash algorithms</a></dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Divide_and_conquer_algorithm\">Divide and conquer algorithm</a></dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/List_of_algorithms\">List of algorithms from Wikipedia</a></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Deterministic_algorithm\">Deterministic algorithm</a></dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Distributed_algorithms\">Distributed algorithms</a></dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Nondeterministic_algorithm\">Nondeterministic algorithm</a></dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Metaheuristic\">Metaheuristic</a></dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Online_algorithm\">Online algorithm</a></dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Parallel_algorithm\">Parallel algorithm</a></dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Quantum_algorithm\">Quantum algorithm</a></dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Streaming_algorithm\">Streaming algorithm</a></dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Randomized_algorithm\">Randomized algorithm from Wikipedia</a></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Las_Vegas_algorithm\">Las Vegas algorithm</a></dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Monte_Carlo_algorithm\">Monte Carlo algorithm</a></dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pseudorandom_number_generator\">Pseudorandom number generator</a></dd></dl>\n<h3><span class=\"mw-headline\" id=\"Algebra_and_Calculus\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Abstract_algebra\">Algebra</a> and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Calculus\">Calculus</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Algorithms&amp;action=edit&amp;section=16\" title=\"Edit section: Algebra and Calculus\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Algorism\">Algorism from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Berlekamp%27s_algorithm\">Berlekamp's algorithm from Wikipedia</a>&#160;» <a href=\"/Elwyn_Berlekamp\" title=\"Elwyn Berlekamp\">Elwyn Berlekamp</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Berlekamp%E2%80%93Massey_algorithm\">Berlekamp–Massey algorithm from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Buchberger%27s_algorithm\">Buchberger's algorithm from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Cantor%E2%80%93Zassenhaus_algorithm\">Cantor–Zassenhaus algorithm from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Computus\">Computus from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Divisibility_rule\">Divisibility rule from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Division_%28digital%29\">Division (digital) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Euclidean_algorithm\">Euclidean algorithm from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Gaussian_elimination\">Gaussian elimination from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Gauss%E2%80%93Newton_algorithm\">Gauss–Newton algorithm from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Householder%27s_method\">Householder's method from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Kuwaiti_algorithm\">Kuwaiti algorithm from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Levenberg%E2%80%93Marquardt_algorithm\">Levenberg–Marquardt algorithm from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Multiplication_algorithm\">Multiplication algorithm from Wikipedia</a></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Karatsuba_algorithm\">Karatsuba algorithm from Wikipedia</a></dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.coursera.org/learn/algorithm-design-analysis\">Algorithms: Design and Analysis, Part 1</a> by <a href=\"/Mathematician#TRoughgarden\" title=\"Mathematician\">Tim Roughgarden</a>, <a href=\"/Stanford_University\" title=\"Stanford University\">Stanford University</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Coursera\">Coursera</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</dd>\n<dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/SDgo4kVSiiw?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Numerical_analysis\">Numerical analysis from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Numerical_linear_algebra\">Numerical linear algebra from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pollard%27s_kangaroo_algorithm\">Pollard's kangaroo algorithm from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Quine%E2%80%93McCluskey_algorithm\">Quine–McCluskey algorithm from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Rod_calculus\">Rod calculus from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Root-finding_algorithm\">Root-finding algorithm from Wikipedia</a></li></ul>\n<h3><span class=\"mw-headline\" id=\"Graphics\">Graphics</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Algorithms&amp;action=edit&amp;section=17\" title=\"Edit section: Graphics\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Even-odd_rule\">Even-odd rule from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Flood_fill\">Flood fill from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Line_drawing_algorithm\">Line drawing algorithm from Wikipedia</a></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Digital_Differential_Analyzer_%28graphics_algorithm%29\">Digital Differential Analyzer (graphics algorithm)</a></dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm\">Bresenham's line algorithm</a></dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Xiaolin_Wu%27s_line_algorithm\">Xiaolin Wu's line algorithm</a></dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Ray_tracing_%28graphics%29\">Ray tracing (graphics) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Spline_interpolation\">Spline interpolation from Wikipedia</a></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/De_Boor%27s_algorithm\">De Boor's algorithm</a></dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/De_Casteljau%27s_algorithm\">De Casteljau's algorithm</a></dd></dl>\n<h3><span class=\"mw-headline\" id=\"Linear_Programming\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Linear_programming\">Linear Programming</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Algorithms&amp;action=edit&amp;section=18\" title=\"Edit section: Linear Programming\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Criss-cross_algorithm\">Criss-cross algorithm from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Karmarkar%27s_algorithm\">Karmarkar's algorithm from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Simplex_algorithm\">Simplex algorithm from Wikipedia</a></li></ul>\n<h3><span class=\"mw-headline\" id=\"Sorting_and_Searching_2\">Sorting and Searching</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Algorithms&amp;action=edit&amp;section=19\" title=\"Edit section: Sorting and Searching\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Merge_algorithm\">Merge algorithm from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Search_algorithm\">Search algorithm from Wikipedia</a></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/A*\">A* from Wikipedia</a></dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm\">Bellman–Ford algorithm</a></dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm\">Dijkstra's algorithm</a></dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Flooding_algorithm\">Flooding algorithm</a></dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm\">Floyd–Warshall algorithm</a></dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Greedy_algorithm\">Greedy algorithm</a></dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Hill_climbing\">Hill climbing</a></dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Kruskal%27s_algorithm\">Kruskal's algorithm</a></dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Nearest_neighbour_algorithm\">Nearest neighbour algorithm</a></dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/String_searching_algorithm\">String searching algorithm</a></dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Sorting_algorithm\">Sorting algorithm from Wikipedia</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Complexity\">Complexity</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Algorithms&amp;action=edit&amp;section=20\" title=\"Edit section: Complexity\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Complexity\">Complexity from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Combinatorial_explosion\">Combinatorial explosion from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Category:Computational_complexity_theory\">Category: Computational complexity theory from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Complexity_class\">Complexity class from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.ics.uci.edu/~eppstein/cgt/hard.html\">Computational Complexity of Games and Puzzles</a> by <a href=\"/David_Eppstein\" title=\"David Eppstein\">David Eppstein</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Computational_complexity_theory\">Computational complexity theory from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Game_complexity\">Game complexity from Wikipedia</a>&#160;» <a href=\"/Games\" title=\"Games\">Games</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Go_and_mathematics\">Go and mathematics from Wikipedia</a>&#160;» <a href=\"/Go\" title=\"Go\">Go</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/List_of_complexity_classes\">List of complexity classes from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Problem_solving\">Problem solving from Wikipedia</a>&#160;» <a href=\"/Artificial_Intelligence\" title=\"Artificial Intelligence\">Artificial Intelligence</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Reduction_%28complexity%29\">Reduction (complexity) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Shannon_number\">Shannon number from Wikipedia</a>&#160;» <a href=\"/Claude_Shannon\" title=\"Claude Shannon\">Claude Shannon</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Time_complexity\">Time complexity from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wheat_and_chessboard_problem\">Wheat and chessboard problem from Wikipedia</a>&#160;» <a href=\"/Chessboard\" title=\"Chessboard\">Chessboard</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Misc\">Misc</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Algorithms&amp;action=edit&amp;section=21\" title=\"Edit section: Misc\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Correctness\">Correctness (disambiguation) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Correctness_%28computer_science%29\">Correctness (computer science) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Halting_problem\">Halting problem from Wikipedia</a></li>\n<li> <a href=\"/Category:Kraan\" title=\"Category:Kraan\">Kraan</a> - <a rel=\"nofollow\" class=\"external text\" href=\"https://www.flashlyrics.com/lyrics/kraan/gut-und-richtig-03\">Gut und Richtig</a> (1973), <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/HjR320Y4NTQ?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Algorithms&amp;action=edit&amp;section=22\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\">A stamp issued September 6, 1983 in the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Soviet_Union\">Soviet Union</a>], commemorating <a href=\"/Mathematician#Algoritmi\" title=\"Mathematician\">Al-Khwārizmī's</a> (approximate) 1200th birthday</span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"> <a href=\"/Mathematician#KMehlhorn\" title=\"Mathematician\">Kurt Mehlhorn</a>, <a href=\"/Peter_Sanders\" title=\"Peter Sanders\">Peter Sanders</a> (<b>2008</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.mpi-inf.mpg.de/%7Emehlhorn/Toolbox.html\">Data Structures and Algorithms: The Basic Toolbox</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Springer_Science%2BBusiness_Media\">Springer</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.mpi-inf.mpg.de/%7Emehlhorn/ftp/Toolbox/Appetizer.pdf\">Appetizer: Integer Arithmetics</a> (pdf)</span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/The_Art_of_Computer_Programming\">The Art of Computer Programming from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Ordinal_optimization\">Ordinal optimization from Wikipedia</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Programming\" title=\"Programming\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260228181801\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.083 seconds\nReal time usage: 0.629 seconds\nPreprocessor visited node count: 167/1000000\nPreprocessor generated node count: 346/1000000\nPost‐expand include size: 994/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.947      1 Template:Graphic_Algorithms\n100.00%    0.947      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:63-0!canonical and timestamp 20260228181800 and revision id 24166\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Kraan"
+      },
+      {
+        "sortkey": "",
+        "*": "Hellmut_Hattler"
+      },
+      {
+        "sortkey": "",
+        "*": "Stamp"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ABDADA"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ACM"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alan Turing"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "All Shortest Paths"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha-Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Artificial Intelligence"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "B*"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "BCH Hashing"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Backtracking"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Best-First"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bit-Twiddling"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "BitScan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Brute-Force"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CLOP"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Charles Leiserson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chessboard"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cilk"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Claude Shannon"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Data"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David Eppstein"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "De Bruijn Sequence Generator"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth-First"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Donald Knuth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Donald Michie"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dynamic Programming"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Elwyn Berlekamp"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fill Algorithms"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Flipping Mirroring and Rotating"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Games"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "General Setwise Operations"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Genetic Programming"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Georgy Adelson-Velsky"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Go"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hank Dietz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Harald Prokop"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hash Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iteration"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iterative Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jamboree"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Java"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jean Hayes Michie"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jill Cirasella"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "John Tromp"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jon Kleinberg"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "King Pattern"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kogge-Stone Algorithm"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Learning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Leen Ammeraal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "MTD(f)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Maarten van Emden"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Massachusetts Institute of Technology"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mathematician"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Matteo Frigo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michel Gondran"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mikhail Donskoy"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Monte-Carlo Tree Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Ordering"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "NegaC*"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "NegaScout"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Parallel Prefix Algorithms"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Parallel Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Paul W. Purdom"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter Norvig"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter Sanders"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Population Count"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Programming"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Proof-Number Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pseudorandom Number Generator"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Recursion"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Retrograde Analysis"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Richard C. T. Lee"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Richard Karp"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ronald L. Rivest"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SEE - The Swap Algorithm"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SEX Algorithm"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SIMD and SWAR Techniques"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SOMA"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SPSA"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SSS* and Dual*"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Simulated Annealing"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Space-Time Tradeoff"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stanford University"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Steven Skiena"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stuart Russell"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Traversing Subsets of a Set"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Trial and Error"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "UCT"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vladimir Arlazarov"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Warren D. Smith"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Young Brothers Wait Concept"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Zobrist Hashing"
+      },
+      {
+        "ns": 0,
+        "*": "Hill Climbing"
+      },
+      {
+        "ns": 0,
+        "*": "Kevin J. Lang"
+      },
+      {
+        "ns": 0,
+        "*": "Raphaël Couturier"
+      },
+      {
+        "ns": 0,
+        "*": "David J. Stracuzzi"
+      },
+      {
+        "ns": 0,
+        "*": "Katja Grace"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Kraan"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "General Concepts",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Algorithms",
+        "byteoffset": 1662,
+        "anchor": "General_Concepts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Sorting and Searching",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Algorithms",
+        "byteoffset": 1784,
+        "anchor": "Sorting_and_Searching"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Enumeration and Backtracking",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Algorithms",
+        "byteoffset": 2468,
+        "anchor": "Enumeration_and_Backtracking"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Mathematical Optimization",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Algorithms",
+        "byteoffset": 2611,
+        "anchor": "Mathematical_Optimization"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Combinatorial",
+        "number": "5",
+        "index": "5",
+        "fromtitle": "Algorithms",
+        "byteoffset": 2807,
+        "anchor": "Combinatorial"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "6",
+        "index": "6",
+        "fromtitle": "Algorithms",
+        "byteoffset": 2981,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "7",
+        "index": "7",
+        "fromtitle": "Algorithms",
+        "byteoffset": 3176,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1960 ...",
+        "number": "7.1",
+        "index": "8",
+        "fromtitle": "Algorithms",
+        "byteoffset": 3192,
+        "anchor": "1960_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1970 ...",
+        "number": "7.2",
+        "index": "9",
+        "fromtitle": "Algorithms",
+        "byteoffset": 3963,
+        "anchor": "1970_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1980 ...",
+        "number": "7.3",
+        "index": "10",
+        "fromtitle": "Algorithms",
+        "byteoffset": 4469,
+        "anchor": "1980_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1990 ...",
+        "number": "7.4",
+        "index": "11",
+        "fromtitle": "Algorithms",
+        "byteoffset": 5752,
+        "anchor": "1990_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "7.5",
+        "index": "12",
+        "fromtitle": "Algorithms",
+        "byteoffset": 6826,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "7.6",
+        "index": "13",
+        "fromtitle": "Algorithms",
+        "byteoffset": 11095,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "8",
+        "index": "14",
+        "fromtitle": "Algorithms",
+        "byteoffset": 12871,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Algorithms",
+        "number": "8.1",
+        "index": "15",
+        "fromtitle": "Algorithms",
+        "byteoffset": 14551,
+        "anchor": "Algorithms"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Algebra and Calculus",
+        "number": "8.1.1",
+        "index": "16",
+        "fromtitle": "Algorithms",
+        "byteoffset": 16093,
+        "anchor": "Algebra_and_Calculus"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Graphics",
+        "number": "8.1.2",
+        "index": "17",
+        "fromtitle": "Algorithms",
+        "byteoffset": 18666,
+        "anchor": "Graphics"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Linear Programming",
+        "number": "8.1.3",
+        "index": "18",
+        "fromtitle": "Algorithms",
+        "byteoffset": 18705,
+        "anchor": "Linear_Programming"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Sorting and Searching",
+        "number": "8.1.4",
+        "index": "19",
+        "fromtitle": "Algorithms",
+        "byteoffset": 19055,
+        "anchor": "Sorting_and_Searching_2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Complexity",
+        "number": "8.2",
+        "index": "20",
+        "fromtitle": "Algorithms",
+        "byteoffset": 20102,
+        "anchor": "Complexity"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Misc",
+        "number": "8.3",
+        "index": "21",
+        "fromtitle": "Algorithms",
+        "byteoffset": 21540,
+        "anchor": "Misc"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "9",
+        "index": "22",
+        "fromtitle": "Algorithms",
+        "byteoffset": 22091,
+        "anchor": "References"
+      }
+    ]
+  }
+}

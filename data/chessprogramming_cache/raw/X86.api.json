@@ -1,0 +1,562 @@
+{
+  "parse": {
+    "title": "X86",
+    "pageid": 3573,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Hardware\" title=\"Hardware\">Hardware</a> * x86</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"/File:Intel_80386_DX_die.JPG\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Intel_80386_DX_die.JPG/330px-Intel_80386_DX_die.JPG\" width=\"300\" height=\"282\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Intel_80386_DX_die.JPG/500px-Intel_80386_DX_die.JPG 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Intel_80386_DX_die.JPG/960px-Intel_80386_DX_die.JPG 2x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Intel_80386_DX_die.JPG\" class=\"internal\" title=\"Enlarge\"></a></div><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Die_%28integrated_circuit%29\">Die</a> shot of <a href=\"/Intel\" title=\"Intel\">Intel</a> 80386 DX-25 <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>x86</b>, <br />\nreferring the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/IA-32\">IA-32</a> architecture of the 32-bit instruction set of the <a href=\"/Intel\" title=\"Intel\">Intel</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Intel_80386\">80386</a> processor released in 1985 - the successor of Intel's 16-bit <a href=\"/8086\" title=\"8086\">8086</a> until <a href=\"/index.php?title=80286&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"80286 (page does not exist)\">80286</a> processors. x86-32 could address up to 4GByte physical <a href=\"/Memory\" title=\"Memory\">memory</a>, had virtual memory pages and a mode to protect them over process boundaries - a requirement for multitasking operating systems, despite 16-bit <a href=\"/MS-DOS\" title=\"MS-DOS\">MS-DOS</a> was still popular. While the initial x86 was <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Complex_instruction_set_computer\">Complex Instruction Set Computing</a> (CISC), the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Reduced_instruction_set_computer\">RISC</a> versus CISC issue had become indistinct with more recent x86 processors, internally processing RISC like micro opcode. Over the time, modern architectural features, such as <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Out-of-order_execution\">Out-of-order execution</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Instruction_pipeline\">Pipelining</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Register_renaming\">Register Renaming</a> and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Branch_predication\">Branch Predication</a> became an issue. 80386 was once clocked by about 25MHz. The <a href=\"/Memory#RAM\" title=\"Memory\">RAM</a> access speed could not keep up with higher and higher clock frequency of later processors - small but faster <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/CPU_cache\">cache memory</a> became necessary and strategies to make them efficient, nowadays even with three cache levels with different size and speed. \n</p><p><i>see <a href=\"/X86-64\" title=\"X86-64\">x86-64</a> for x86 64-bit</i>\n<span id=\"chess\"></span>\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Computer_Chess\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Computer Chess</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Architectures\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Architectures</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Register_Files\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Register Files</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#General_Purpose\"><span class=\"tocnumber\">3.1</span> <span class=\"toctext\">General Purpose</span></a></li>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#MMX\"><span class=\"tocnumber\">3.2</span> <span class=\"toctext\">MMX</span></a></li>\n<li class=\"toclevel-2 tocsection-6\"><a href=\"#3DNow.21\"><span class=\"tocnumber\">3.3</span> <span class=\"toctext\">3DNow!</span></a></li>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#SSE.2FSSE2\"><span class=\"tocnumber\">3.4</span> <span class=\"toctext\">SSE/SSE2</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-8\"><a href=\"#CPUS\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">CPUS</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#Intel\"><span class=\"tocnumber\">4.1</span> <span class=\"toctext\">Intel</span></a></li>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#Cyrix\"><span class=\"tocnumber\">4.2</span> <span class=\"toctext\">Cyrix</span></a></li>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#AMD\"><span class=\"tocnumber\">4.3</span> <span class=\"toctext\">AMD</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-12\"><a href=\"#Software\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Software</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-13\"><a href=\"#Operating_Systems\"><span class=\"tocnumber\">5.1</span> <span class=\"toctext\">Operating Systems</span></a></li>\n<li class=\"toclevel-2 tocsection-14\"><a href=\"#Development\"><span class=\"tocnumber\">5.2</span> <span class=\"toctext\">Development</span></a>\n<ul>\n<li class=\"toclevel-3 tocsection-15\"><a href=\"#Assembly\"><span class=\"tocnumber\">5.2.1</span> <span class=\"toctext\">Assembly</span></a></li>\n<li class=\"toclevel-3 tocsection-16\"><a href=\"#Pascal\"><span class=\"tocnumber\">5.2.2</span> <span class=\"toctext\">Pascal</span></a></li>\n<li class=\"toclevel-3 tocsection-17\"><a href=\"#C-Compiler\"><span class=\"tocnumber\">5.2.3</span> <span class=\"toctext\">C-Compiler</span></a></li>\n</ul>\n</li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-18\"><a href=\"#Extensions\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Extensions</span></a></li>\n<li class=\"toclevel-1 tocsection-19\"><a href=\"#Manuals\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">Manuals</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-20\"><a href=\"#Intel_2\"><span class=\"tocnumber\">7.1</span> <span class=\"toctext\">Intel</span></a></li>\n<li class=\"toclevel-2 tocsection-21\"><a href=\"#AMD_2\"><span class=\"tocnumber\">7.2</span> <span class=\"toctext\">AMD</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-22\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">Forum Posts</span></a></li>\n<li class=\"toclevel-1 tocsection-23\"><a href=\"#External_Links\"><span class=\"tocnumber\">9</span> <span class=\"toctext\">External Links</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-24\"><a href=\"#Assembly_2\"><span class=\"tocnumber\">9.1</span> <span class=\"toctext\">Assembly</span></a></li>\n<li class=\"toclevel-2 tocsection-25\"><a href=\"#Modes\"><span class=\"tocnumber\">9.2</span> <span class=\"toctext\">Modes</span></a></li>\n<li class=\"toclevel-2 tocsection-26\"><a href=\"#Instruction_Sets\"><span class=\"tocnumber\">9.3</span> <span class=\"toctext\">Instruction Sets</span></a></li>\n<li class=\"toclevel-2 tocsection-27\"><a href=\"#Bugs\"><span class=\"tocnumber\">9.4</span> <span class=\"toctext\">Bugs</span></a></li>\n<li class=\"toclevel-2 tocsection-28\"><a href=\"#Security_Vulnerability\"><span class=\"tocnumber\">9.5</span> <span class=\"toctext\">Security Vulnerability</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-29\"><a href=\"#References\"><span class=\"tocnumber\">10</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Computer_Chess\">Computer Chess</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=X86&amp;action=edit&amp;section=1\" title=\"Edit section: Computer Chess\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>A lot of commercial and amateur <a href=\"/IBM_PC\" title=\"IBM PC\">PC</a> chess programs, notably under the operating systems <a href=\"/MS-DOS\" title=\"MS-DOS\">MS-DOS</a> and later <a href=\"/Windows\" title=\"Windows\">Windows</a> and <a href=\"/Linux\" title=\"Linux\">Linux</a>, were developed for this widespread architecture, often taking advantage of 32-bit registers and new instructions, for instance <b>bsf</b> and <b>btr</b> for <a href=\"/BitScan\" title=\"BitScan\">bitscanning</a> 2 * 32-bit <a href=\"/Bitboards\" title=\"Bitboards\">Bitboards</a> and 32-bit <a href=\"/Piece-Sets\" title=\"Piece-Sets\">Piece-Sets</a>. Those instructions were usually not available through high level programming languages, but through <a href=\"/Assembly\" title=\"Assembly\">Assembly</a> language, later often as <a href=\"/Assembly#InlineAssembly\" title=\"Assembly\">inline assembly</a> of various high level language compilers, for instance <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Visual_C%2B%2B\">Microsoft Visual C</a> and the <a href=\"/Free_Software_Foundation#GCC\" title=\"Free Software Foundation\">GNU C Compiler</a>. Under the 16-bit <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Real_mode\">real mode</a> operating system MS-DOS, it was quite common in chess programming to use the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Unreal_mode\">unreal mode</a> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup> to allocate much more physical <a href=\"/Memory\" title=\"Memory\">memory</a> for the <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Table</a>, the 16 bit operating system, not aware of the huge address space, could access. Other DOS programs relied on <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/DOS_extender\">memory extenders</a>.\n</p>\n<h1><span class=\"mw-headline\" id=\"Architectures\">Architectures</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=X86&amp;action=edit&amp;section=2\" title=\"Edit section: Architectures\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>While the 80386 represented the third microarchitecture (after 8086, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/80286\">80286</a>), <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Intel_80486\">80486</a> and Pentium were the fourth and fifth, later called <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/P5_%28microarchitecture%29\">P5 microarchitecture</a>. In 1995 with <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pentium_Pro\">Pentium Pro</a>, Intel introduced the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Intel_P6_%28microarchitecture%29\">P6 microarchitecture</a>, eventually revived in the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pentium_M\">Pentium M</a> line of microprocessors and the predecessor of Intel's <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Intel_Core_2\">Core 2 microarchitecture</a>. Intel's <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Intel_NetBurst_%28microarchitecture%29\">NetBurst</a> microarchitecture with the advent of the <a rel=\"nofollow\" class=\"external text\" href=\"https://chessprogramming.wikispaces.com/Pentium+4\">Pentium 4</a> processor, was famous for its clock speed, but no good reputation by most chess programmers, who favored the <a href=\"/AMD\" title=\"AMD\">AMD</a> K6- and K7-architecture, namely the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Athlon\">Athlon</a> processor at that time. To begin with the rebirth of P6 and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Intel_Core_2\">Intel Core 2</a> architecture in 2006, things changed in favor to Intel again. In November 2008 the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Nehalem_%28microarchitecture%29\">Nehalem</a> microarchitecture appeared.\n</p><p>Intel's <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/IA-64\">IA-64</a> architecture is a complete new and incompatible instruction set to IA-32. It is used by the <a href=\"/Itanium\" title=\"Itanium\">Itanium</a> line of processors. The backward compatible 64-bit successor was designed by <a href=\"/AMD\" title=\"AMD\">AMD</a> with the advent of Hammer or AMD64, later cloned by Intel and together referred to the <a href=\"/X86-64\" title=\"X86-64\">x86-64</a> architecture.\n</p>\n<h1><span class=\"mw-headline\" id=\"Register_Files\">Register Files</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=X86&amp;action=edit&amp;section=3\" title=\"Edit section: Register Files\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>x86 has eight 32-bit general purpose registers:\n</p>\n<h2><span class=\"mw-headline\" id=\"General_Purpose\">General Purpose</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=X86&amp;action=edit&amp;section=4\" title=\"Edit section: General Purpose\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>The eight general purpose registers may be treated as 32-bit <a href=\"/Double_Word\" title=\"Double Word\">Double Word</a>, 16-bit <a href=\"/Word\" title=\"Word\">Word</a> and high and low <a href=\"/Byte\" title=\"Byte\">Byte</a>:\n</p>\n<table class=\"wikitable\">\n\n<tr>\n<th> 32\n</th>\n<th> 16\n</th>\n<th> 8 high\n</th>\n<th> 8 low\n</th>\n<th> Purpose\n</th></tr>\n<tr>\n<td>  EAX\n</td>\n<td>  AX\n</td>\n<td>  AH\n</td>\n<td>  AL\n</td>\n<td>  GP, Accumulator\n</td></tr>\n<tr>\n<td>  EBX\n</td>\n<td>  BX\n</td>\n<td>  BH\n</td>\n<td>  BL\n</td>\n<td>  GP, Index Register\n</td></tr>\n<tr>\n<td>  ECX\n</td>\n<td>  CX\n</td>\n<td>  CH\n</td>\n<td>  CL\n</td>\n<td>  GP, Counter, variable shift, rotate via CL\n</td></tr>\n<tr>\n<td>  EDX\n</td>\n<td>  DX\n</td>\n<td>  DH\n</td>\n<td>  DL\n</td>\n<td>  GP, high Accumulator mul/div\n</td></tr>\n<tr>\n<td>  ESI\n</td>\n<td>  SI\n</td>\n<td>  -\n</td>\n<td>  -\n</td>\n<td>  GP, Source Index\n</td></tr>\n<tr>\n<td>  EDI\n</td>\n<td>  DI\n</td>\n<td>  -\n</td>\n<td>  -\n</td>\n<td>  GP, Destination Index\n</td></tr>\n<tr>\n<td>  ESP\n</td>\n<td>  SP\n</td>\n<td>  -\n</td>\n<td>  -\n</td>\n<td>  <a href=\"/Stack\" title=\"Stack\">Stack Pointer</a>\n</td></tr>\n<tr>\n<td>  EBP\n</td>\n<td>  BP\n</td>\n<td>  -\n</td>\n<td>  -\n</td>\n<td>  GP, Base Pointer\n</td></tr></table>\n<h2><span class=\"mw-headline\" id=\"MMX\">MMX</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=X86&amp;action=edit&amp;section=5\" title=\"Edit section: MMX\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p><a href=\"/MMX\" title=\"MMX\">MMX</a> was introduced with <a href=\"/index.php?title=Intel_P5_(microarchitecture)&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Intel P5 (microarchitecture) (page does not exist)\">Pentium MMX</a> in 1996, adopted by <a href=\"/AMD\" title=\"AMD\">AMD's</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/AMD_K6\">K6</a> in 1997.\nEight 64-bit MMX-Registers: <b>MM0</b> - <b>MM7</b>.\nTreated as <a href=\"/Double\" title=\"Double\">Double</a> or <a href=\"/Quad_Word\" title=\"Quad Word\">Quad Word</a>, <a href=\"/Array\" title=\"Array\">vector</a> of two <a href=\"/Float\" title=\"Float\">Floats</a> or <a href=\"/Double_Word\" title=\"Double Word\">Double Words</a>, and as vector if four <a href=\"/Word\" title=\"Word\">Words</a> or eight <a href=\"/Byte\" title=\"Byte\">Bytes</a>.\n</p>\n<h2><span class=\"mw-headline\" id=\"3DNow.21\">3DNow!</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=X86&amp;action=edit&amp;section=6\" title=\"Edit section: 3DNow!\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>An MMX-floating point extension by <a href=\"/AMD\" title=\"AMD\">AMD</a>, introduced in the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/AMD_K6-2\">K6-2</a> processor, 1998.\nIt uses the eight 64-bit <b>MMX</b>-Registers: <b>MM0</b> - <b>MM7</b>.\n</p>\n<h2><span class=\"mw-headline\" id=\"SSE.2FSSE2\">SSE/SSE2</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=X86&amp;action=edit&amp;section=7\" title=\"Edit section: SSE/SSE2\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>SSE was introduced by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pentium_III\">Pentium III</a> in 1997, <a href=\"/SSE2\" title=\"SSE2\">SSE2</a> by <a rel=\"nofollow\" class=\"external text\" href=\"https://chessprogramming.wikispaces.com/Pentium+4\">Pentium 4</a> in 2000\nEight 128-bit <b>XMM</b>-Registers: <b>XMM0</b> - <b>XMM7</b>.\nTreated as <a href=\"/Array\" title=\"Array\">vector</a> of two <a href=\"/Double\" title=\"Double\">Doubles</a> (SSE) or <a href=\"/Quad_Word\" title=\"Quad Word\">Quad Words</a> (SSE2), as vector of four <a href=\"/Float\" title=\"Float\">Floats</a> (SSE) or <a href=\"/Double_Word\" title=\"Double Word\">Double Words</a> (SSE2), and as vector if eight <a href=\"/Word\" title=\"Word\">Words</a> (SSE2) or 16 <a href=\"/Byte\" title=\"Byte\">Bytes</a> (SSE2).\n</p>\n<h1><span class=\"mw-headline\" id=\"CPUS\">CPUS</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=X86&amp;action=edit&amp;section=8\" title=\"Edit section: CPUS\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Intel\">Intel</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=X86&amp;action=edit&amp;section=9\" title=\"Edit section: Intel\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"/File:Intel_Pentium_P54C_die.jpg\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Intel_Pentium_P54C_die.jpg/330px-Intel_Pentium_P54C_die.jpg\" width=\"300\" height=\"277\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Intel_Pentium_P54C_die.jpg/500px-Intel_Pentium_P54C_die.jpg 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Intel_Pentium_P54C_die.jpg/960px-Intel_Pentium_P54C_die.jpg 2x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Intel_Pentium_P54C_die.jpg\" class=\"internal\" title=\"Enlarge\"></a></div>Pentium with P54C core <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup></div></div></div>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Intel_80386\">80386</a> 1985</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Intel_80486\">80486</a> 1989</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pentium\">Pentium</a> 1993 </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pentium_MMX\">Pentium MMX</a> 1993</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Intel_P6\">P6 microarchitecture</a>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pentium_Pro\">Pentium Pro</a> 1995</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pentium_II\">Pentium II</a> 1997</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pentium_III\">Pentium III</a> 1999</li></ul></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/NetBurst\">NetBurst microarchitecture</a>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://chessprogramming.wikispaces.com/Pentium+4\">Pentium 4</a> 2000</li></ul></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Intel_Core_microarchitecture\">Intel Core microarchitecture</a>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pentium_M\">Pentium M</a></li></ul></li>\n<li> <span id=\"Atom\"></span><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Intel_Atom\">Intel Atom</a> 2008</li></ul>\n<h2><span class=\"mw-headline\" id=\"Cyrix\">Cyrix</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=X86&amp;action=edit&amp;section=10\" title=\"Edit section: Cyrix\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Cyrix_6x86\">Cyrix 6x86</a> 1996</li></ul>\n<h2><span class=\"mw-headline\" id=\"AMD\">AMD</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=X86&amp;action=edit&amp;section=11\" title=\"Edit section: AMD\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"/File:AMD_Athlon_XP_Thoroughbred_die.JPG\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/AMD_Athlon_XP_Thoroughbred_die.JPG/330px-AMD_Athlon_XP_Thoroughbred_die.JPG\" width=\"300\" height=\"197\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/AMD_Athlon_XP_Thoroughbred_die.JPG/500px-AMD_Athlon_XP_Thoroughbred_die.JPG 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/AMD_Athlon_XP_Thoroughbred_die.JPG/960px-AMD_Athlon_XP_Thoroughbred_die.JPG 2x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:AMD_Athlon_XP_Thoroughbred_die.JPG\" class=\"internal\" title=\"Enlarge\"></a></div>AMD Athlon XP (Thoroughbred) <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup></div></div></div>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/AMD_K5\">K5</a> March 1996</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/AMD_K6\">K6</a> 1997</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/AMD_K6-2\">K6-2</a> 1998</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Athlon\">Athlon</a> (K7) 1999\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Athlon#Athlon_XP.2FMP\">Athlon XP</a> </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Athlon#Athlon_XP.2FMP\">Athlon MP</a></li></ul></li></ul>\n<dl><dd> AMD has continued the name with the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Athlon_64\">Athlon 64</a>, featuring AMD64 64-bit technology, later called <a href=\"/X86-64\" title=\"X86-64\">x86-64</a>.</dd></dl>\n<h1><span class=\"mw-headline\" id=\"Software\">Software</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=X86&amp;action=edit&amp;section=12\" title=\"Edit section: Software\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Operating_Systems\">Operating Systems</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=X86&amp;action=edit&amp;section=13\" title=\"Edit section: Operating Systems\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/MS-DOS\" title=\"MS-DOS\">MS-DOS</a></li>\n<li> <a href=\"/Unix\" title=\"Unix\">Unix</a></li>\n<li> <a href=\"/Unix\" title=\"Unix\">BSD</a></li>\n<li> <a href=\"/Linux\" title=\"Linux\">Linux</a></li>\n<li> <a href=\"/Windows\" title=\"Windows\">Windows</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Development\">Development</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=X86&amp;action=edit&amp;section=14\" title=\"Edit section: Development\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<h3><span class=\"mw-headline\" id=\"Assembly\">Assembly</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=X86&amp;action=edit&amp;section=15\" title=\"Edit section: Assembly\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<ul><li> <a href=\"/Assembly#x86\" title=\"Assembly\">MASM</a></li>\n<li> <a href=\"/Assembly#x86\" title=\"Assembly\">TASM</a></li></ul>\n<h3><span class=\"mw-headline\" id=\"Pascal\">Pascal</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=X86&amp;action=edit&amp;section=16\" title=\"Edit section: Pascal\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<ul><li> <a href=\"/Pascal#TurboPascal\" title=\"Pascal\">Turbo Pascal</a></li>\n<li> <a href=\"/Delphi\" title=\"Delphi\">Delphi</a></li></ul>\n<h3><span class=\"mw-headline\" id=\"C-Compiler\">C-Compiler</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=X86&amp;action=edit&amp;section=17\" title=\"Edit section: C-Compiler\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<ul><li> <a href=\"/index.php?title=Turbo_C&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Turbo C (page does not exist)\">Turbo C</a></li>\n<li> <a href=\"/index.php?title=Borland_C&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Borland C (page does not exist)\">Borland C</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Visual_C%2B%2B\">MSVC</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Intel_C%2B%2B_Compiler\">Intel-C</a></li>\n<li> <a href=\"/Free_Software_Foundation#GCC\" title=\"Free Software Foundation\">GCC</a></li>\n<li> <a href=\"/index.php?title=Clang&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Clang (page does not exist)\">Clang</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Extensions\">Extensions</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=X86&amp;action=edit&amp;section=18\" title=\"Edit section: Extensions\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/index.php?title=AMX&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"AMX (page does not exist)\">AMX</a> <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup></li>\n<li> <a href=\"/AVX\" title=\"AVX\">AVX</a></li>\n<li> <a href=\"/AVX2\" title=\"AVX2\">AVX2</a></li>\n<li> <a href=\"/AVX-512\" title=\"AVX-512\">AVX-512</a> </li>\n<li> <a href=\"/MMX\" title=\"MMX\">MMX</a></li>\n<li> <a href=\"/SSE2\" title=\"SSE2\">SSE2</a></li>\n<li> <a href=\"/SSE3\" title=\"SSE3\">SSE3</a></li>\n<li> <a href=\"/SSSE3\" title=\"SSSE3\">SSSE3</a></li>\n<li> <a href=\"/SSE4\" title=\"SSE4\">SSE4</a></li>\n<li> <a href=\"/SSE5\" title=\"SSE5\">SSE5</a></li>\n<li> <a href=\"/X86-64\" title=\"X86-64\">x86-64</a></li>\n<li> <a href=\"/XOP\" title=\"XOP\">XOP</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Manuals\">Manuals</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=X86&amp;action=edit&amp;section=19\" title=\"Edit section: Manuals\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Intel_2\">Intel</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=X86&amp;action=edit&amp;section=20\" title=\"Edit section: Intel\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://flint.cs.yale.edu/cs422/doc/24547012.pdf\">IA-32 Intel® Architecture Software Developer’s Manual Volume 1: Basic Architecture</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://flint.cs.yale.edu/cs422/doc/24547112.pdf\">IA-32 Intel® Architecture Software Developer’s Manual Volume 2: Instruction Set Reference</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://pdos.csail.mit.edu/6.828/2006/readings/ia32/IA32-3.pdf\">IA-32 Intel® Architecture Software Developer’s Manual Volume 3: System Programming Guide</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"AMD_2\">AMD</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=X86&amp;action=edit&amp;section=21\" title=\"Edit section: AMD\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.ii.uib.no/~osvik/amd_opt/22007k.pdf\">AMD Athlon Processor x86 Code Optimization Guide</a> (pdf)</li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=X86&amp;action=edit&amp;section=22\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=36988\">Question for Eugene Nalimov</a> by <a href=\"/James_Robertson\" title=\"James Robertson\">James Robertson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 21, 1998</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=212319\">why loop unrolling isn't as useful on x86 as it once was</a> by <a href=\"/index.php?title=Wylie_Garvin&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Wylie Garvin (page does not exist)\">Wylie Garvin</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 07, 2002</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=285555\">Programmer challenge</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 20, 2003</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=445557\">Expert Assembler Question</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 26, 2005</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66224\">Intel CPU performance-loss by security-patch?!?</a> by <a href=\"/index.php?title=Stefan_Pohl&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Stefan Pohl (page does not exist)\">Stefan Pohl</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 03, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=74377\">Intel AMX with TMUL on Xeon Sapphire Rapids (2021?)</a> by <a href=\"/Srdja_Matovic\" title=\"Srdja Matovic\">Srdja Matovic</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 05, 2020&#160;» <a href=\"/index.php?title=AMX&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"AMX (page does not exist)\">AMX</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=X86&amp;action=edit&amp;section=23\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/X86\">x86 from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/IA-32\">IA-32 from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/X87\">x87 from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.agner.org/optimize/#manuals\">Optimization manuals</a> by <a rel=\"nofollow\" class=\"external text\" href=\"http://www.agner.org/\">Agner Fog</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.agner.org/optimize/blog/\">Agner`s CPU blog</a> by <a rel=\"nofollow\" class=\"external text\" href=\"http://www.agner.org/\">Agner Fog</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.intel.com/museum/online/hist%5Fmicro/hof/\">Microprocessor Hall of Fame</a> from the <a rel=\"nofollow\" class=\"external text\" href=\"http://www.intel.com/museum/index.htm\">Intel Museum</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/X86_memory_segmentation\">x86 memory segmentation from Wikipedia</a>&#160;» <a href=\"/Memory\" title=\"Memory\">Memory</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/X86_calling_conventions\">x86 calling conventions from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.azillionmonkeys.com/qed/cpujihad.shtml\">7th generation x86 CPU Comparisons</a> by <a href=\"/Paul_Hsieh\" title=\"Paul Hsieh\">Paul Hsieh</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Assembly_2\">Assembly</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=X86&amp;action=edit&amp;section=24\" title=\"Edit section: Assembly\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://en.wikibooks.org/wiki/X86_Assembly/X86_Architecture\">X86 Assembly/X86 Architecture from Wikibooks</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/X86_assembly_language\">x86 assembly language from Wikipedia</a>&#160;» <a href=\"/Assembly\" title=\"Assembly\">Assembly</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/X86_instruction_listings\">x86 instruction listings from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://siyobik.info/index.php?document=x86_32bit_asm\">x86 32-bit Assembly for Atheists</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.virginia.edu/~evans/cs216/guides/x86.html\">x86 Assembly Guide</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Modes\">Modes</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=X86&amp;action=edit&amp;section=25\" title=\"Edit section: Modes\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Protected_mode\">Protected mode from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Real_mode\">Real mode from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Unreal_mode\">Unreal mode from Wikipedia</a> </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/LOADALL\">LOADALL from Wikipedia</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Instruction_Sets\">Instruction Sets</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=X86&amp;action=edit&amp;section=26\" title=\"Edit section: Instruction Sets\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/MMX_%28instruction_set%29\">MMX from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/3DNow\">3DNow! from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Streaming_SIMD_Extensions\">Streaming SIMD Extensions from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/SSE2\">SSE2 from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Advanced_Vector_Extensions\">Advanced Vector Extensions from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/AVX-512\">AVX-512 from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.agner.org/optimize/instruction_tables.pdf\">Instruction Tables</a> (pdf) by <a rel=\"nofollow\" class=\"external text\" href=\"http://www.agner.org/\">Agner Fog</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikichip.org/wiki/x86/amx\">Advanced Matrix Extension (AMX) - x86 - WikiChip</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Bugs\">Bugs</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=X86&amp;action=edit&amp;section=27\" title=\"Edit section: Bugs\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pentium_FDIV_bug\">Pentium FDIV bug from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pentium_F00F_bug\">Pentium F00F bug from Wikipedia</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Security_Vulnerability\">Security Vulnerability</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=X86&amp;action=edit&amp;section=28\" title=\"Edit section: Security Vulnerability\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Meltdown_(security_vulnerability)\">Meltdown (security vulnerability) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Spectre_(security_vulnerability)\">Spectre (security vulnerability) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://googleprojectzero.blogspot.de/2018/01/reading-privileged-memory-with-side.html\">Project Zero: Reading privileged memory with a side-channel</a> by <a rel=\"nofollow\" class=\"external text\" href=\"https://thejh.net/\">Jann Horn</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Project_Zero\">Project Zero</a>, January 03, 2018</li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=X86&amp;action=edit&amp;section=29\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://commons.wikimedia.org/wiki/File:Intel_80386_DX_die.JPG\">Die shot</a> of <a href=\"/Intel\" title=\"Intel\">Intel</a> 80386 DX-25 microprocessor (SX215) by <a rel=\"nofollow\" class=\"external text\" href=\"https://commons.wikimedia.org/wiki/User:Birdman86\">Pauli Rautakorpi</a>, October 28, 2013, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wikimedia_Commons\">Wikimedia Commons</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.programmersheaven.com/download/1364/download.aspx\">Flat real / real big / unreal mode (v1.2)</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://www.programmersheaven.com/\">Programmer's Heaven</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/group/comp.lang.asm.x86/browse_frm/thread/6ded3c0f3241b432\">Unreal mode</a> by Safronov's family, <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/group/comp.lang.asm.x86/topics\">comp.lang.asm.x86</a>, June 5, 2003</span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\">Die shot of <a href=\"/Intel\" title=\"Intel\">Intel</a> Pentium with P54C core by <a rel=\"nofollow\" class=\"external text\" href=\"https://commons.wikimedia.org/wiki/User:Birdman86\">Pauli Rautakorpi</a>, June 11, 2013, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wikimedia_Commons\">Wikimedia Commons</a></span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\">Die shot of <a href=\"/AMD\" title=\"AMD\">AMD</a> Athlon XP microprocessor with Thoroughbred core (AXDA1800DLT3C) by <a rel=\"nofollow\" class=\"external text\" href=\"https://commons.wikimedia.org/wiki/User:Birdman86\">Pauli Rautakorpi</a>, February 14, 2014, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wikimedia_Commons\">Wikimedia Commons</a></span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikichip.org/wiki/x86/amx\">Advanced Matrix Extension (AMX) - x86 - WikiChip</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Hardware\" title=\"Hardware\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301071030\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.180 seconds\nReal time usage: 1.822 seconds\nPreprocessor visited node count: 205/1000000\nPreprocessor generated node count: 334/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:3573-0!canonical and timestamp 20260301071028 and revision id 26811\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Die"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "8086"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "AMD"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "AVX"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "AVX-512"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "AVX2"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Array"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Assembly"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "BitScan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Byte"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Delphi"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Double"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Double Word"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ed Schroder"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Float"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Free Software Foundation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hardware"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "IBM PC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Intel"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Itanium"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "James Robertson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Linux"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "MMX"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "MS-DOS"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Memory"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pascal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Paul Hsieh"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Piece-Sets"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quad Word"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SSE2"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SSE3"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SSE4"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SSE5"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SSSE3"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Srdja Matovic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stack"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Unix"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Windows"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Word"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "X86-64"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "XOP"
+      },
+      {
+        "ns": 0,
+        "*": "80286"
+      },
+      {
+        "ns": 0,
+        "*": "Intel P5 (microarchitecture)"
+      },
+      {
+        "ns": 0,
+        "*": "Turbo C"
+      },
+      {
+        "ns": 0,
+        "*": "Borland C"
+      },
+      {
+        "ns": 0,
+        "*": "Clang"
+      },
+      {
+        "ns": 0,
+        "*": "AMX"
+      },
+      {
+        "ns": 0,
+        "*": "Wylie Garvin"
+      },
+      {
+        "ns": 0,
+        "*": "Stefan Pohl"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Computer Chess",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "X86",
+        "byteoffset": 2101,
+        "anchor": "Computer_Chess"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Architectures",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "X86",
+        "byteoffset": 3712,
+        "anchor": "Architectures"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Register Files",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "X86",
+        "byteoffset": 5455,
+        "anchor": "Register_Files"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "General Purpose",
+        "number": "3.1",
+        "index": "4",
+        "fromtitle": "X86",
+        "byteoffset": 5522,
+        "anchor": "General_Purpose"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "MMX",
+        "number": "3.2",
+        "index": "5",
+        "fromtitle": "X86",
+        "byteoffset": 6201,
+        "anchor": "MMX"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "3DNow!",
+        "number": "3.3",
+        "index": "6",
+        "fromtitle": "X86",
+        "byteoffset": 6596,
+        "anchor": "3DNow.21"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "SSE/SSE2",
+        "number": "3.4",
+        "index": "7",
+        "fromtitle": "X86",
+        "byteoffset": 6803,
+        "anchor": "SSE.2FSSE2"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "CPUS",
+        "number": "4",
+        "index": "8",
+        "fromtitle": "X86",
+        "byteoffset": 7298,
+        "anchor": "CPUS"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Intel",
+        "number": "4.1",
+        "index": "9",
+        "fromtitle": "X86",
+        "byteoffset": 7306,
+        "anchor": "Intel"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Cyrix",
+        "number": "4.2",
+        "index": "10",
+        "fromtitle": "X86",
+        "byteoffset": 8459,
+        "anchor": "Cyrix"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "AMD",
+        "number": "4.3",
+        "index": "11",
+        "fromtitle": "X86",
+        "byteoffset": 8531,
+        "anchor": "AMD"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Software",
+        "number": "5",
+        "index": "12",
+        "fromtitle": "X86",
+        "byteoffset": 9383,
+        "anchor": "Software"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Operating Systems",
+        "number": "5.1",
+        "index": "13",
+        "fromtitle": "X86",
+        "byteoffset": 9395,
+        "anchor": "Operating_Systems"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Development",
+        "number": "5.2",
+        "index": "14",
+        "fromtitle": "X86",
+        "byteoffset": 9483,
+        "anchor": "Development"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Assembly",
+        "number": "5.2.1",
+        "index": "15",
+        "fromtitle": "X86",
+        "byteoffset": 9500,
+        "anchor": "Assembly"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Pascal",
+        "number": "5.2.2",
+        "index": "16",
+        "fromtitle": "X86",
+        "byteoffset": 9564,
+        "anchor": "Pascal"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "C-Compiler",
+        "number": "5.2.3",
+        "index": "17",
+        "fromtitle": "X86",
+        "byteoffset": 9629,
+        "anchor": "C-Compiler"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Extensions",
+        "number": "6",
+        "index": "18",
+        "fromtitle": "X86",
+        "byteoffset": 9848,
+        "anchor": "Extensions"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Manuals",
+        "number": "7",
+        "index": "19",
+        "fromtitle": "X86",
+        "byteoffset": 10097,
+        "anchor": "Manuals"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Intel",
+        "number": "7.1",
+        "index": "20",
+        "fromtitle": "X86",
+        "byteoffset": 10107,
+        "anchor": "Intel_2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "AMD",
+        "number": "7.2",
+        "index": "21",
+        "fromtitle": "X86",
+        "byteoffset": 10551,
+        "anchor": "AMD_2"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "8",
+        "index": "22",
+        "fromtitle": "X86",
+        "byteoffset": 10667,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "9",
+        "index": "23",
+        "fromtitle": "X86",
+        "byteoffset": 11556,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Assembly",
+        "number": "9.1",
+        "index": "24",
+        "fromtitle": "X86",
+        "byteoffset": 12405,
+        "anchor": "Assembly_2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Modes",
+        "number": "9.2",
+        "index": "25",
+        "fromtitle": "X86",
+        "byteoffset": 12902,
+        "anchor": "Modes"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Instruction Sets",
+        "number": "9.3",
+        "index": "26",
+        "fromtitle": "X86",
+        "byteoffset": 13199,
+        "anchor": "Instruction_Sets"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Bugs",
+        "number": "9.4",
+        "index": "27",
+        "fromtitle": "X86",
+        "byteoffset": 13898,
+        "anchor": "Bugs"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Security Vulnerability",
+        "number": "9.5",
+        "index": "28",
+        "fromtitle": "X86",
+        "byteoffset": 14073,
+        "anchor": "Security_Vulnerability"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "10",
+        "index": "29",
+        "fromtitle": "X86",
+        "byteoffset": 14595,
+        "anchor": "References"
+      }
+    ]
+  }
+}

@@ -1,0 +1,350 @@
+{
+  "parse": {
+    "title": "SEE - The Swap Algorithm",
+    "pageid": 1268,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Board_Representation\" title=\"Board Representation\">Board Representation</a> * <a href=\"/Bitboards\" title=\"Bitboards\">Bitboards</a> * SEE - The Swap Algorithm</b>\n</p><p>The <a href=\"/Iteration\" title=\"Iteration\">iterative</a> <a href=\"/Static_Exchange_Evaluation\" title=\"Static Exchange Evaluation\">SEE</a> Swap-Algorithm in Bitboards creates a swap-list of best case <a href=\"/Material\" title=\"Material\">material</a> gains by traversing a <a href=\"/Square_Attacked_By\" title=\"Square Attacked By\">square attacked/defended by</a> set in least valuable piece order from <a href=\"/Pawn\" title=\"Pawn\">pawn</a>, <a href=\"/Knight\" title=\"Knight\">knight</a>, <a href=\"/Bishop\" title=\"Bishop\">bishop</a>, <a href=\"/Rook\" title=\"Rook\">rook</a>, <a href=\"/Queen\" title=\"Queen\">queen</a> until <a href=\"/King\" title=\"King\">king</a>, with alternating sides. The swap-list, an unary tree since there are no branches but just a series of captures, is <a href=\"/Negamax\" title=\"Negamax\">negamaxed</a> for a final static exchange evaluation <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup><sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>.\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Traversal_of_To-Attacks\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Traversal of To-Attacks</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#SEE_a_Capture\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">SEE a Capture</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Pseudo_C-Code\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Pseudo C-Code</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Traces\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Traces</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#Position_1\"><span class=\"tocnumber\">4.1</span> <span class=\"toctext\">Position 1</span></a></li>\n<li class=\"toclevel-2 tocsection-6\"><a href=\"#Position_2\"><span class=\"tocnumber\">4.2</span> <span class=\"toctext\">Position 2</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#See_also\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-8\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#2000_...\"><span class=\"tocnumber\">6.1</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#2010_...\"><span class=\"tocnumber\">6.2</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#2020_...\"><span class=\"tocnumber\">6.3</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-12\"><a href=\"#References\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Traversal_of_To-Attacks\">Traversal of To-Attacks</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=SEE_-_The_Swap_Algorithm&amp;action=edit&amp;section=1\" title=\"Edit section: Traversal of To-Attacks\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Assuming this arbitrary <a href=\"/Bitboard_Board-Definition#CBoardDef\" title=\"Bitboard Board-Definition\">Board-Definition</a> with color as least significant piece bit and \"even\" pieces are the white ones, following routine returns a single populated square set and passes the least valuable piece per <a href=\"/Cpp\" title=\"Cpp\">C++</a> reference to the caller. If no more piece is found for the appropriate side, it returns an empty set.\n</p>\n<pre>\nU64 Board::getLeastValuablePiece(U64 attadef, int bySide, int &amp;piece)\n{\n   for (piece = nWhitePawn + bySide; piece &lt;= nWhiteKing + bySide; piece += 2) {\n      U64 subset = attadef &amp; pieceBB[piece];\n      if ( subset )\n         return subset &amp; -subset; // single bit\n   }\n   return 0; // empty set\n}\n</pre>\n<h1><span class=\"mw-headline\" id=\"SEE_a_Capture\">SEE a Capture</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=SEE_-_The_Swap_Algorithm&amp;action=edit&amp;section=2\" title=\"Edit section: SEE a Capture\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>The first two members of the gain swap-list are likely determined by the <a href=\"/Captures\" title=\"Captures\">capture move</a> we like to prove. Thus, the first element of the swap-list is the value of the target piece, while the second is only written (or used) if the target square is further defended. In this case it is the value of the capturing piece minus the value of captured piece, this is the best-case material gain from the defending point of view. However during traversal, <a href=\"/X-ray_Attacks_(Bitboards)\" title=\"X-ray Attacks (Bitboards)\">X-ray attacks</a> are considered while capturing with a piece, which may have indirect attacks or defends behind, which unions the set of attackers and defenders. \n</p>\n<h1><span class=\"mw-headline\" id=\"Pseudo_C-Code\">Pseudo C-Code</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=SEE_-_The_Swap_Algorithm&amp;action=edit&amp;section=3\" title=\"Edit section: Pseudo C-Code\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<pre>\nint Board::see ( enumSquare toSq, enumPiece target, enumSquare frSq, enumPiece aPiece)\n{\n   int gain[32], d = 0;\n   U64 mayXray = pawns | bishops | rooks | queen;\n   U64 fromSet = 1ULL &lt;&lt; frSq;\n   U64 occ     = occupiedBB;\n   U64 attadef = attacksTo( occ, toSq );\n   gain[d]     = value[target];\n   do {\n      d++; // next depth and side\n      gain[d]  = value[aPiece] - gain[d-1]; // speculative store, if defended\n      attadef ^= fromSet; // reset bit in set to traverse\n      occ     ^= fromSet; // reset bit in temporary occupancy (for x-Rays)\n      if ( fromSet &amp; mayXray )\n         attadef |= considerXrays(occ, ..);\n      fromSet  = getLeastValuablePiece (attadef, d &amp; 1, aPiece);\n   } while (fromSet);\n   while (--d)\n      gain[d-1]= -max (-gain[d-1], gain[d])\n   return gain[0];\n}\n</pre>\n<p>Considering <a href=\"/X-ray_Attacks_(Bitboards)\" title=\"X-ray Attacks (Bitboards)\">X-ray attacks</a> leaves some implementation details left, dependent on what sliding attack-getter is handy, <a href=\"/Classical_Approach\" title=\"Classical Approach\">ray attacks</a> are sufficient, but requires some effort to determine the ray-direction. With <a href=\"/Magic_Bitboards\" title=\"Magic Bitboards\">Magic Bitboards</a> one will likely use something similar as the sliding piece subset of <a href=\"/Square_Attacked_By\" title=\"Square Attacked By\">Square Attacked By</a>. The preliminary pruning of the swap-list fill (if (max (-gain[d-1], gain[d]) &lt; 0) break;) and other improvements were proposed by <a href=\"/Michael_Hoffmann\" title=\"Michael Hoffmann\">Michael Hoffmann</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>.\n</p>\n<h1><span class=\"mw-headline\" id=\"Traces\">Traces</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=SEE_-_The_Swap_Algorithm&amp;action=edit&amp;section=4\" title=\"Edit section: Traces\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Two positions with traces of the swap-list during traversal and negamaxing with some arbitrary <a href=\"/Material\" title=\"Material\">piece values</a>.\n</p>\n<h2><span class=\"mw-headline\" id=\"Position_1\">Position 1</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=SEE_-_The_Swap_Algorithm&amp;action=edit&amp;section=5\" title=\"Edit section: Position 1\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>To demonstrate how SEE works in obvious cases, is Rook takes Pawn a winning capture?\n</p>\n<table class=\"fentt\" style=\"font-size:24pt\"><tr><td class=\"board\" style=\"width: 8em;\"><div class=\"board\"><div class=\"sq\">    <br/>    <br/>    <br/>    <br/>    <br/>    <br/>    <br/>    <br/></div><div class=\"pcbg\">      <br/>     <br/>       <br/>       <br/>        <br/>      <br/>     <br/>      <br/></div><div class=\"pcfg\"> ♚ ♜    <br/> ♟♟    ♟<br/>♟       <br/>    ♟   <br/>        <br/>♙     ♙ <br/> ♙♙    ♙<br/>  ♔ ♖   <br/></div></div></td></tr></table>\n<pre>1k1r4/1pp4p/p7/4p3/8/P5P1/1PP4P/2K1R3 w - -&#160;; Rxe5?\n</pre>\n<pre>\ngain[0]  =  100&#160;; win for white if black pawn e5 is en-prise by rxp\ngain[1]  =  400&#160;; win for black if white rook e5 is en-prise,  500-100, speculative store\nno further attacks for black at depth 1\n-&gt; SEE(rxe5) == 100\n</pre>\n<h2><span class=\"mw-headline\" id=\"Position_2\">Position 2</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=SEE_-_The_Swap_Algorithm&amp;action=edit&amp;section=6\" title=\"Edit section: Position 2\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>This position covers a more complicated case with X-rays. Is Knight takes pawn a winning capture?\n</p>\n<table class=\"fentt\" style=\"font-size:24pt\"><tr><td class=\"board\" style=\"width: 8em;\"><div class=\"board\"><div class=\"sq\">    <br/>    <br/>    <br/>    <br/>    <br/>    <br/>    <br/>    <br/></div><div class=\"pcbg\">     <br/>    <br/>      <br/>       <br/>        <br/>     <br/>   <br/>      <br/></div><div class=\"pcfg\"> ♚ ♜   ♛<br/> ♟♟♞   ♟<br/>♟    ♝  <br/>    ♟   <br/>        <br/>♙  ♘  ♙ <br/> ♙♙ ♖ ♗♙<br/>  ♔ ♕   <br/></div></div></td></tr></table>\n<pre>1k1r3q/1ppn3p/p4b2/4p3/8/P2N2P1/1PP1R1BP/2K1Q3 w - -&#160;; Nxe5?\n</pre>\n<pre>\ngain[0] =  100&#160;; win for white if black pawn   e5 is en-prise by nxp\ngain[1] =  225&#160;; win for black if white knight e5 is en-prise by nxn,  325- 100\ngain[2] =  100&#160;; win for white if black knight e5 is en-prise by rxn,  325- 225 -&gt; x-rays includes queen e1\ngain[3] =  400&#160;; win for black if white rook   e5 is en-prise by bxr,  500- 100 -&gt; x-rays includes queen h8\ngain[4] =  -75&#160;; win for white if black bishop e5 is en-prise by qxb,  325- 400\ngain[5] = 1075&#160;; win for black if white queen  e5 is en-prise by qxq, 1000- -75\ngain[6] =  -75&#160;; win for white if black queen  e5 is en-prise,        1000-1075 speculative store\nno further attacks for white at depth = 6\n\ngain[4] = -max(--75,  1075) = -1075\ngain[3] = -max(-400, -1075) =   400\ngain[2] = -max(-100,   400) =  -400\ngain[1] = -max(-225,  -400) =   225\ngain[0] = -max(-100,   225) =  -225\n-&gt; SEE(nxe5) == -225\n</pre>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=SEE_-_The_Swap_Algorithm&amp;action=edit&amp;section=7\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Attack_and_Defend_Maps#EDsLookup\" title=\"Attack and Defend Maps\">Ed's Lookup</a> from <a href=\"/Attack_and_Defend_Maps\" title=\"Attack and Defend Maps\">Attack and Defend Maps</a></li>\n<li> <a href=\"/MVV-LVA\" title=\"MVV-LVA\">MVV-LVA</a></li>\n<li> <a href=\"/SOMA\" title=\"SOMA\">SOMA</a></li>\n<li> <a href=\"/Static_Exchange_Evaluation\" title=\"Static Exchange Evaluation\">Static Exchange Evaluation</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=SEE_-_The_Swap_Algorithm&amp;action=edit&amp;section=8\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=SEE_-_The_Swap_Algorithm&amp;action=edit&amp;section=9\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=178979\">Static Exchange Eval</a> by <a href=\"/Artem_Petakov\" title=\"Artem Petakov\">Artem Pyatakov</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 02, 2001</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=341658\">Does swap of Crafty find bad promotions</a> by <a href=\"/Uri_Blass\" title=\"Uri Blass\">Uri Blass</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 11, 2004</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=18&amp;t=46486&amp;p=176048#p176025\">Re: WBEC Ridderkerk new results</a> by <a href=\"/Dann_Corbit\" title=\"Dann Corbit\">Dann Corbit</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, February 15, 2004&#160;» <a href=\"/DanChess\" title=\"DanChess\">DanChess</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?t=6104\">SEE with magic bitboards</a> by <a href=\"/Pradu_Kannan\" title=\"Pradu Kannan\">Pradu Kannan</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, January 24, 2007&#160;» <a href=\"/Magic_Bitboards\" title=\"Magic Bitboards\">Magic Bitboards</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=123511&amp;t=14168\">Re: Movei added to Crafty vs Rybka comaprison data</a> by <a href=\"/Edsel_Apostol\" title=\"Edsel Apostol\">Edsel Apostol</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 06, 2007</li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=SEE_-_The_Swap_Algorithm&amp;action=edit&amp;section=10\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=31479\">Question about SEE algorithm on Chessprogramming Wiki</a> by <a href=\"/Mathieu_Pag%C3%A9\" title=\"Mathieu Pagé\">Mathieu Pagé</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 05, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=40046\">Implementing SEE</a> by colin, <a href=\"/CCC\" title=\"CCC\">CCC</a>, Aug 12, 2011</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=419174&amp;t=40046\">Re: Implementing SEE</a> by <a href=\"/Michael_Hoffmann\" title=\"Michael Hoffmann\">Michael Hoffmann</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 13, 2011</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=40054\">SEE with alpha beta</a> by <a href=\"/Onno_Garms\" title=\"Onno Garms\">Onno Garms</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 14, 2011&#160;» <a href=\"/Onno\" title=\"Onno\">Onno</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/fishcooking/S_4E_Xs5HaE/mS3VTnuEFgAJ\">pin-aware see</a> by <a href=\"/Ronald_de_Man\" title=\"Ronald de Man\">Ronald de Man</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">FishCooking</a>, September 14, 2016&#160;» <a href=\"/Pin\" title=\"Pin\">Pin</a>, <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/fishcooking/9mcmjnyqbAQ/S6mDA0QsAAAJ\">Illegal moves in SEE</a> by <a href=\"/Stephane_Nicolet\" title=\"Stephane Nicolet\">Stephane Nicolet</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">FishCooking</a>, September 22, 2016&#160;» <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64166\">Problems with SEE</a> by <a href=\"/Matthew_R._Brades\" title=\"Matthew R. Brades\">Matthew R. Brades</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 03, 2017</li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=SEE_-_The_Swap_Algorithm&amp;action=edit&amp;section=11\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=72862\">SEE versus SEE_GE</a> by <a href=\"/Vivien_Clauzon\" title=\"Vivien Clauzon\">Vivien Clauzon</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 21, 2020 </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=77787\">Static exchange evaluation with promotion</a> by Guido Flohr, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 23, 2021</li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=SEE_-_The_Swap_Algorithm&amp;action=edit&amp;section=12\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=178981\">Subject: Re: Static Exchange Eval</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a> from <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">CCC</a>, August 02, 2001</span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a href=\"/Crafty\" title=\"Crafty\">Crafty</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, see <i><b>swap.c</b></i></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=419315&amp;t=40054\">Re: SEE with alpha beta</a> by <a href=\"/Michael_Hoffmann\" title=\"Michael Hoffmann\">Michael Hoffmann</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 14, 2011</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Bitboards\" title=\"Bitboards\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260228170325\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.011 seconds\nReal time usage: 0.012 seconds\nPreprocessor visited node count: 146/1000000\nPreprocessor generated node count: 286/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1268-0!canonical and timestamp 20260228170325 and revision id 27149\n -->\n"
+    },
+    "categories": [],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Artem Petakov"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Attack and Defend Maps"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bishop"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboard Board-Definition"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Board Representation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Captures"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Classical Approach"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cpp"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Crafty"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "DanChess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dann Corbit"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Edsel Apostol"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iteration"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "King"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Knight"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "MVV-LVA"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Magic Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Material"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mathieu Pagé"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Matthew R. Brades"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michael Hoffmann"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Negamax"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Onno"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Onno Garms"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pin"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pradu Kannan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Queen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Hyatt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ronald de Man"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rook"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SOMA"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Square Attacked By"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Static Exchange Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stephane Nicolet"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stockfish"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Uri Blass"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vivien Clauzon"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "X-ray Attacks (Bitboards)"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Traversal of To-Attacks",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "SEE_-_The_Swap_Algorithm",
+        "byteoffset": 867,
+        "anchor": "Traversal_of_To-Attacks"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "SEE a Capture",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "SEE_-_The_Swap_Algorithm",
+        "byteoffset": 1578,
+        "anchor": "SEE_a_Capture"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Pseudo C-Code",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "SEE_-_The_Swap_Algorithm",
+        "byteoffset": 2246,
+        "anchor": "Pseudo_C-Code"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Traces",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "SEE_-_The_Swap_Algorithm",
+        "byteoffset": 3761,
+        "anchor": "Traces"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Position 1",
+        "number": "4.1",
+        "index": "5",
+        "fromtitle": "SEE_-_The_Swap_Algorithm",
+        "byteoffset": 3894,
+        "anchor": "Position_1"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Position 2",
+        "number": "4.2",
+        "index": "6",
+        "fromtitle": "SEE_-_The_Swap_Algorithm",
+        "byteoffset": 4371,
+        "anchor": "Position_2"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "5",
+        "index": "7",
+        "fromtitle": "SEE_-_The_Swap_Algorithm",
+        "byteoffset": 5529,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "6",
+        "index": "8",
+        "fromtitle": "SEE_-_The_Swap_Algorithm",
+        "byteoffset": 5682,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "6.1",
+        "index": "9",
+        "fromtitle": "SEE_-_The_Swap_Algorithm",
+        "byteoffset": 5696,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "6.2",
+        "index": "10",
+        "fromtitle": "SEE_-_The_Swap_Algorithm",
+        "byteoffset": 6556,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "6.3",
+        "index": "11",
+        "fromtitle": "SEE_-_The_Swap_Algorithm",
+        "byteoffset": 7630,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "7",
+        "index": "12",
+        "fromtitle": "SEE_-_The_Swap_Algorithm",
+        "byteoffset": 7917,
+        "anchor": "References"
+      }
+    ]
+  }
+}

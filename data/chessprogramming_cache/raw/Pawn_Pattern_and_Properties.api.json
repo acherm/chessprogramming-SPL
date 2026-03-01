@@ -1,0 +1,309 @@
+{
+  "parse": {
+    "title": "Pawn Pattern and Properties",
+    "pageid": 1116,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Board_Representation\" title=\"Board Representation\">Board Representation</a> * <a href=\"/Bitboards\" title=\"Bitboards\">Bitboards</a> * Pawn Pattern and Properties</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:200px;\"><a href=\"http://chgs.elevator.umn.edu/asset/viewAsset/57f3b6787d58ae5f74bf8ba9#57f3b6d77d58ae5574bf8bbc\"><img alt=\"\" src=\"/images/3/34/BakHero.jpg\" width=\"198\" height=\"314\" class=\"thumbimage\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:BakHero.jpg\" class=\"internal\" title=\"Enlarge\"></a></div><a href=\"/Category:Samuel_Bak\" title=\"Category:Samuel Bak\">Samuel Bak</a> - Hero <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p>There are two approaches to determine <a href=\"/Pawn\" title=\"Pawn\">pawn</a> attack-sets, pawn move target squares or pawn-structure properties - using a single pawn or set-wise with multiple pawns. Since we have up to eight pawns per side, the set-wise approach has some merits. Disadvantage of set-wise operations is, we likely need different code for white and black pawns, while pre-calculated lookups by color and square allows to write more general code. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Moves_and_Captures\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Moves and Captures</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Properties\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Properties</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#Pawns_in_touch\"><span class=\"tocnumber\">2.1</span> <span class=\"toctext\">Pawns in touch</span></a></li>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#Fills_and_Spans\"><span class=\"tocnumber\">2.2</span> <span class=\"toctext\">Fills and Spans</span></a></li>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#Based_on_Spans\"><span class=\"tocnumber\">2.3</span> <span class=\"toctext\">Based on Spans</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#See_also\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#Publications\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Publications</span></a></li>\n<li class=\"toclevel-1 tocsection-8\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Forum Posts</span></a></li>\n<li class=\"toclevel-1 tocsection-9\"><a href=\"#External_Links\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-10\"><a href=\"#References\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Moves_and_Captures\">Moves and Captures</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pawn_Pattern_and_Properties&amp;action=edit&amp;section=1\" title=\"Edit section: Moves and Captures\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>A pawn captures diagonally forward, but otherwise pushes forward one - or optionally two steps from it's initial rank. For white versus black pawns forward and backward are considered relative from either whites or blacks point of view.\n</p>\n<ul><li> <a href=\"/Pawn_Pushes_(Bitboards)\" title=\"Pawn Pushes (Bitboards)\">Pawn Pushes</a></li>\n<li> <a href=\"/Pawn_Attacks_(Bitboards)\" title=\"Pawn Attacks (Bitboards)\">Pawn Attacks</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Properties\">Properties</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pawn_Pattern_and_Properties&amp;action=edit&amp;section=2\" title=\"Edit section: Properties\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Properties about the <a href=\"/Pawn_Structure\" title=\"Pawn Structure\">pawn structure</a> are likely subject of <a href=\"/Evaluation\" title=\"Evaluation\">evaluation</a>.\n</p>\n<h2><span class=\"mw-headline\" id=\"Pawns_in_touch\">Pawns in touch</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pawn_Pattern_and_Properties&amp;action=edit&amp;section=3\" title=\"Edit section: Pawns in touch\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Pawn_Rams_(Bitboards)\" title=\"Pawn Rams (Bitboards)\">Pawn Rams</a></li>\n<li> <a href=\"/Pawn_Levers_(Bitboards)\" title=\"Pawn Levers (Bitboards)\">Pawn Levers</a></li>\n<li> <a href=\"/Defended_Pawns_(Bitboards)\" title=\"Defended Pawns (Bitboards)\">Defended Pawns</a></li>\n<li> <a href=\"/Duo_Trio_Quart_(Bitboards)\" title=\"Duo Trio Quart (Bitboards)\">Duo Trio Quart</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Fills_and_Spans\">Fills and Spans</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pawn_Pattern_and_Properties&amp;action=edit&amp;section=4\" title=\"Edit section: Fills and Spans\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Pawn_Fills\" title=\"Pawn Fills\">Pawn Fills</a> are about Front-, Rear- and Filefills</li>\n<li> <a href=\"/Pawns_and_Files_(Bitboards)\" title=\"Pawns and Files (Bitboards)\">Pawns and Files</a> about closed, open and halfopen files</li>\n<li> <a href=\"/Pawn_Spans\" title=\"Pawn Spans\">Pawn Spans</a> are about Front-, Rear- and Interspans - Stop and Telestop</li>\n<li> <a href=\"/Attack_Spans\" title=\"Attack Spans\">Attack Spans</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Based_on_Spans\">Based on Spans</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pawn_Pattern_and_Properties&amp;action=edit&amp;section=5\" title=\"Edit section: Based on Spans\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Double_and_Triple_(Bitboards)\" title=\"Double and Triple (Bitboards)\">Double and Triple</a></li>\n<li> <a href=\"/Pawn_Islands_(Bitboards)\" title=\"Pawn Islands (Bitboards)\">Pawn Islands</a></li>\n<li> <a href=\"/Dispersion_and_Distortion\" title=\"Dispersion and Distortion\">Dispersion and Distortion</a></li>\n<li> <a href=\"/Isolated_Pawns_(Bitboards)\" title=\"Isolated Pawns (Bitboards)\">Isolated Pawns</a></li>\n<li> <a href=\"/Unfree_Pawns_(Bitboards)\" title=\"Unfree Pawns (Bitboards)\">Unfree Pawns</a></li>\n<li> <a href=\"/Open_Pawns_(Bitboards)\" title=\"Open Pawns (Bitboards)\">Open Pawns</a></li>\n<li> <a href=\"/Passed_Pawns_(Bitboards)\" title=\"Passed Pawns (Bitboards)\">Passed Pawns</a></li>\n<li> <a href=\"/Candidates_(Bitboards)\" title=\"Candidates (Bitboards)\">Candidates</a></li>\n<li> <a href=\"/Backward_Pawns_(Bitboards)\" title=\"Backward Pawns (Bitboards)\">Backward Pawns</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pawn_Pattern_and_Properties&amp;action=edit&amp;section=6\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Pawn_Center\" title=\"Pawn Center\">Pawn Center</a></li>\n<li> <a href=\"/Pawn_Structure\" title=\"Pawn Structure\">Pawn Structure</a></li>\n<li> <a href=\"/PawnKing\" title=\"PawnKing\">PawnKing</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pawn_Pattern_and_Properties&amp;action=edit&amp;section=7\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Hans_Kmoch\" title=\"Hans Kmoch\">Hans Kmoch</a> (<b>1959, 1990</b>). <i>Pawn Power in Chess</i>. New York: Dover, 1990. Previous ed.: New York: McKay, 1959</li>\n<li> <a href=\"/Lyudmil_Tsvetkov\" title=\"Lyudmil Tsvetkov\">Lyudmil Tsvetkov</a> (<b>2017</b>). <i>Pawns</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://www.amazon.com/Pawns-Lyudmil-Tsvetkov-ebook/dp/B074S2MYQV\">amazon</a> </li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pawn_Pattern_and_Properties&amp;action=edit&amp;section=8\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=271055\">how to detect information about pawn structure based on bitboard</a> by <a href=\"/Uri_Blass\" title=\"Uri Blass\">Uri Blass</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 17, 2002</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=20729\">Pawn Pattern Matching</a> by <a href=\"/Gerd_Isenberg\" title=\"Gerd Isenberg\">Gerd Isenberg</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 18, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=72461\">Pawn move generation in bitboards</a> by <a href=\"/Marc-Philippe_Huget\" title=\"Marc-Philippe Huget\">Marc-Philippe Huget</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 29, 2019</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=72461&amp;start=3\">Re: Pawn move generation in bitboards</a> by <a href=\"/%C3%81lvaro_Begu%C3%A9\" title=\"Álvaro Begué\">Álvaro Begué</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 05, 2019&#160;» <a href=\"/Cpp\" title=\"Cpp\">C++</a></dd></dl>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pawn_Pattern_and_Properties&amp;action=edit&amp;section=9\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.chess.com/forum/view/chess-equipment/pawn-power-in-chess-by-hans-kmoch-glossary-of-terms\">Pawn Power in Chess by Hans Kmoch - Glossary of Terms - Chess Forums</a> - <a href=\"/index.php?title=Chess.com&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Chess.com (page does not exist)\">Chess.com</a> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pawn_structure\">Pawn structure</a> pattern of common <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Chess_opening\">chess openings</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.justchess.biz/chesspawns.htm\">The Game of Chess: Pawns and Their Related Terms</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://www.justchess.biz/\">Just Chess .biz</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pawn_Pattern_and_Properties&amp;action=edit&amp;section=10\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://chgs.elevator.umn.edu/asset/viewAsset/57f3b6787d58ae5f74bf8ba9#57f3b6d77d58ae5574bf8bbc\">Chess in the Art of Samuel Bak</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.chgs.umn.edu/\">Center for Holocaust &amp; Genocide Studies</a>, <a href=\"/University_of_Minnesota\" title=\"University of Minnesota\">University of Minnesota</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a href=\"/Hans_Kmoch\" title=\"Hans Kmoch\">Hans Kmoch</a> (<b>1959, 1990</b>). <i>Pawn Power in Chess</i>. New York: Dover, 1990. Previous ed.: New York: McKay, 1959. ISBN 0-486-26486-6</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Bitboards\" title=\"Bitboards\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301085436\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.017 seconds\nReal time usage: 0.019 seconds\nPreprocessor visited node count: 71/1000000\nPreprocessor generated node count: 126/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1116-0!canonical and timestamp 20260301085436 and revision id 23788\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Samuel_Bak"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Attack Spans"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Backward Pawns (Bitboards)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Board Representation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Candidates (Bitboards)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cpp"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Defended Pawns (Bitboards)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dispersion and Distortion"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Double and Triple (Bitboards)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Duo Trio Quart (Bitboards)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gerd Isenberg"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hans Kmoch"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Isolated Pawns (Bitboards)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lyudmil Tsvetkov"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marc-Philippe Huget"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Open Pawns (Bitboards)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Passed Pawns (Bitboards)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "PawnKing"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Attacks (Bitboards)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Center"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Fills"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Islands (Bitboards)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Levers (Bitboards)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Pushes (Bitboards)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Rams (Bitboards)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Spans"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Structure"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawns and Files (Bitboards)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Unfree Pawns (Bitboards)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "University of Minnesota"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Uri Blass"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Álvaro Begué"
+      },
+      {
+        "ns": 0,
+        "*": "Chess.com"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Samuel Bak"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Moves and Captures",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Pawn_Pattern_and_Properties",
+        "byteoffset": 959,
+        "anchor": "Moves_and_Captures"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Properties",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Pawn_Pattern_and_Properties",
+        "byteoffset": 1306,
+        "anchor": "Properties"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Pawns in touch",
+        "number": "2.1",
+        "index": "3",
+        "fromtitle": "Pawn_Pattern_and_Properties",
+        "byteoffset": 1425,
+        "anchor": "Pawns_in_touch"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Fills and Spans",
+        "number": "2.2",
+        "index": "4",
+        "fromtitle": "Pawn_Pattern_and_Properties",
+        "byteoffset": 1622,
+        "anchor": "Fills_and_Spans"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Based on Spans",
+        "number": "2.3",
+        "index": "5",
+        "fromtitle": "Pawn_Pattern_and_Properties",
+        "byteoffset": 1882,
+        "anchor": "Based_on_Spans"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "3",
+        "index": "6",
+        "fromtitle": "Pawn_Pattern_and_Properties",
+        "byteoffset": 2297,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "4",
+        "index": "7",
+        "fromtitle": "Pawn_Pattern_and_Properties",
+        "byteoffset": 2364,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "5",
+        "index": "8",
+        "fromtitle": "Pawn_Pattern_and_Properties",
+        "byteoffset": 2625,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "6",
+        "index": "9",
+        "fromtitle": "Pawn_Pattern_and_Properties",
+        "byteoffset": 3248,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "7",
+        "index": "10",
+        "fromtitle": "Pawn_Pattern_and_Properties",
+        "byteoffset": 3892,
+        "anchor": "References"
+      }
+    ]
+  }
+}

@@ -1,0 +1,263 @@
+{
+  "parse": {
+    "title": "Copy-Make",
+    "pageid": 1251,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Chess\" title=\"Chess\">Chess</a> * <a href=\"/Chess_Position\" title=\"Chess Position\">Position</a> * Copy-Make</b>\n</p><p>While traversing a <a href=\"/Search_Tree\" title=\"Search Tree\">Search Tree</a>, the <b>Copy-Make</b> approach keeps and updates local copies of certain aspects of a <a href=\"/Chess_Position\" title=\"Chess Position\">chess position</a> inside an array indexed by <a href=\"/Ply\" title=\"Ply\">ply</a>, which could also be interpreted as explicit, random accessible search <a href=\"/Stack\" title=\"Stack\">stack</a>. It usually refers the irreversible aspects of the position, like <a href=\"/En_passant\" title=\"En passant\">ep state</a>, <a href=\"/Castling_Rights\" title=\"Castling Rights\">castling rights</a> and the <a href=\"/Halfmove_Clock\" title=\"Halfmove Clock\">halfmove clock</a>, which can not <a href=\"/Incremental_Updates\" title=\"Incremental Updates\">incrementally updated</a> during <a href=\"/Unmake_Move\" title=\"Unmake Move\">unmake move</a>. Some programs even keep reversible stuff inside an array, to avoid incremental update during unmake. Copy-Make is required, if aspects need to be accessed randomly in the current branch from the <a href=\"/Root\" title=\"Root\">root</a> (or even starting game position) to the current one. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Copy-Make\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Copy-Make</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Stack\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Stack</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#See_also\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#1995_...\"><span class=\"tocnumber\">4.1</span> <span class=\"toctext\">1995 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-6\"><a href=\"#2000_...\"><span class=\"tocnumber\">4.2</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#2010_...\"><span class=\"tocnumber\">4.3</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#2015_...\"><span class=\"tocnumber\">4.4</span> <span class=\"toctext\">2015 ...</span></a></li>\n</ul>\n</li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Copy-Make\">Copy-Make</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Copy-Make&amp;action=edit&amp;section=1\" title=\"Edit section: Copy-Make\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<pre>\n// make\nmemcpy (&amp;position[ply+1].irrvrsAspects, \n        &amp;position[ply  ].irrvrsAspects, \n        sizeof(irrvrsAspects));\nply++;\nupdate (position[ply], move)\n...\n// unmake\nply--;\n// position[ply] is still valid\n</pre>\n<h1><span class=\"mw-headline\" id=\"Stack\">Stack</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Copy-Make&amp;action=edit&amp;section=2\" title=\"Edit section: Stack\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>The alternative, to maintain those irreversible aspects inside a global structure, would require a <a href=\"/Stack\" title=\"Stack\">stack</a> (<a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/LIFO_%28computing%29\">LIFO</a>), with push and global update during make, and pop from stack to global structure during unmake, and therefor higher memory bandwidth for copying back and forth.\n</p>\n<pre>\n// make\npush (position.irreversibleAspects);\nply++;\nupdate (position, move)\n...\n// unmake\nply--;\npop (position.irreversibleAspects);\n// position is restored from stack\n</pre>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Copy-Make&amp;action=edit&amp;section=3\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Encoding_Moves\" title=\"Encoding Moves\">Encoding Moves</a></li>\n<li> <a href=\"/Incremental_Updates\" title=\"Incremental Updates\">Incremental Updates</a></li>\n<li> <a href=\"/Make_Move\" title=\"Make Move\">Make Move</a></li>\n<li> <a href=\"/Unmake_Move\" title=\"Unmake Move\">Unmake Move</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Copy-Make&amp;action=edit&amp;section=4\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1995_...\">1995 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Copy-Make&amp;action=edit&amp;section=5\" title=\"Edit section: 1995 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/d842e67212ab1034\">cheaper search&#160;?</a> by <a href=\"/James_Swafford\" title=\"James Swafford\">James F. Long</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, April 27, 1997&#160;» <a href=\"/Tristram\" title=\"Tristram\">Tristram</a></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/group/rec.games.chess.computer/msg/730c03a83bf92807\">Re: cheaper search&#160;?</a> by <a href=\"/Shaun_Press\" title=\"Shaun Press\">Shaun Press</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, April 28, 1997&#160;» <a href=\"/Vanilla_Chess\" title=\"Vanilla Chess\">Vanilla Chess</a>, <a href=\"/KnightCap\" title=\"KnightCap\">KnightCap</a></dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=40653\">Unmake move v copy the board</a> by Hugh Cumper, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 24, 1999</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=60557\">Move Make/Unmake Questions</a> by <a href=\"/Daniel_Homan\" title=\"Daniel Homan\">Daniel Homan</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 15, 1999&#160;» <a href=\"/Unmake_Move\" title=\"Unmake Move\">Unmake Move</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Copy-Make&amp;action=edit&amp;section=6\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=312031\">The need to unmake move</a> by <a href=\"/Mathieu_Pag%C3%A9\" title=\"Mathieu Pagé\">Mathieu Pagé</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 19, 2003&#160;» <a href=\"/Unmake_Move\" title=\"Unmake Move\">Unmake Move</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=29770\">undo move vs. Position Cloning</a> by BoldReceiver, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 16, 2009</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=29770&amp;start=1\">Re: undo move vs. Position Cloning</a> by <a href=\"/Marco_Costalba\" title=\"Marco Costalba\">Marco Costalba</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 16, 2009&#160;» <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a></dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=291570&amp;t=29770\">Re: undo move vs. Position Cloning</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 16, 2009&#160;» <a href=\"/Doch\" title=\"Doch\">Doch</a></dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=29798\">copy/make vs make/unmake test results</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 19, 2009&#160;» <a href=\"/Crafty\" title=\"Crafty\">Crafty</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Copy-Make&amp;action=edit&amp;section=7\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=5&amp;t=665\">Copy Board vs Unmake Move</a> by ChrisJ, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">OpenChess Forum</a>, September 29, 2010 </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=39938\">performance of copy-make</a> by <a href=\"/Rein_Halbersma\" title=\"Rein Halbersma\">Rein Halbersma</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 02, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=47882\">How costly is taking moves back&#160;?</a> by <a href=\"/index.php?title=Piotr_Lopusiewicz&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Piotr Lopusiewicz (page does not exist)\">Piotr Lopusiewicz</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 30, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=5&amp;t=2554\">Saving info before making a move</a> by <a href=\"/Christian_Daley\" title=\"Christian Daley\">CDaley11</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">OpenChess Forum</a>, December 30, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=50805\">copy/make vs make/unmake</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 07, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=53502\">Memory usage in make/unmake vs logic complexity</a> by <a href=\"/Matthew_Lai\" title=\"Matthew Lai\">Matthew Lai</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 30, 2014</li></ul>\n<h2><span class=\"mw-headline\" id=\"2015_...\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Copy-Make&amp;action=edit&amp;section=8\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=58647\">Unifying make/undo and copy-make</a> by <a href=\"/Rein_Halbersma\" title=\"Rein Halbersma\">Rein Halbersma</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 21, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=62090\">Copy-make vs Make/Unmake&#160;?</a> by <a href=\"/index.php?title=Mahmoud_Uthman&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Mahmoud Uthman (page does not exist)\">Mahmoud Uthman</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 12, 2016</li></ul>\n<p><b><a href=\"/Chess_Position\" title=\"Chess Position\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301032204\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.007 seconds\nReal time usage: 0.007 seconds\nPreprocessor visited node count: 49/1000000\nPreprocessor generated node count: 76/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1251-0!canonical and timestamp 20260301032204 and revision id 19568\n -->\n"
+    },
+    "categories": [],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Castling Rights"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Position"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Christian Daley"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Crafty"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Daniel Homan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Doch"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Don Dailey"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "En passant"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Encoding Moves"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Halfmove Clock"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Incremental Updates"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "James Swafford"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "KnightCap"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Make Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marco Costalba"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mathieu Pagé"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Matthew Lai"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ply"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rein Halbersma"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Hyatt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Root"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search Tree"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Shaun Press"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stack"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stockfish"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tristram"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Unmake Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vanilla Chess"
+      },
+      {
+        "ns": 0,
+        "*": "Piotr Lopusiewicz"
+      },
+      {
+        "ns": 0,
+        "*": "Mahmoud Uthman"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Copy-Make",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Copy-Make",
+        "byteoffset": 890,
+        "anchor": "Copy-Make"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Stack",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Copy-Make",
+        "byteoffset": 1127,
+        "anchor": "Stack"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Copy-Make",
+        "byteoffset": 1653,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Copy-Make",
+        "byteoffset": 1747,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1995 ...",
+        "number": "4.1",
+        "index": "5",
+        "fromtitle": "Copy-Make",
+        "byteoffset": 1761,
+        "anchor": "1995_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "4.2",
+        "index": "6",
+        "fromtitle": "Copy-Make",
+        "byteoffset": 2453,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "4.3",
+        "index": "7",
+        "fromtitle": "Copy-Make",
+        "byteoffset": 3241,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "4.4",
+        "index": "8",
+        "fromtitle": "Copy-Make",
+        "byteoffset": 4140,
+        "anchor": "2015_..."
+      }
+    ]
+  }
+}

@@ -1,0 +1,859 @@
+{
+  "parse": {
+    "title": "Arasan",
+    "pageid": 3830,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Engines\" title=\"Engines\">Engines</a> * Arasan</b>\n</p>\n<table>\n\n<tr>\n<td rowspan=\"2\"> <b>Arasan</b>,<br />\n<p>an <a href=\"/Category:Open_Source\" title=\"Category:Open Source\">open source engine</a> written by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a> in <a href=\"/Cpp\" title=\"Cpp\">C++</a>. Arasan's development started in the early 90s, the first version, released in 1994 was a 16-bit program running under <a href=\"/Windows\" title=\"Windows\">Windows 3.1</a> using an <a href=\"/8x8_Board\" title=\"8x8 Board\">8x8 Board</a>, <a href=\"/Incremental_Updates\" title=\"Incremental Updates\">incremental updated</a> <a href=\"/Attack_and_Defend_Maps\" title=\"Attack and Defend Maps\">attack tables</a> and its own <a href=\"/GUI\" title=\"GUI\">GUI</a>, evolving to a portable 32-bit and later 64-bit program, utilizing <a href=\"/Bitboards\" title=\"Bitboards\">bitboards</a> to determine its <a href=\"/Sliding_Piece_Attacks\" title=\"Sliding Piece Attacks\">sliding piece attacks</a> with <a href=\"/Rotated_Bitboards\" title=\"Rotated Bitboards\">rotated bitboard lookups</a>. In 2008, rotated were replaced by <a href=\"/Magic_Bitboards\" title=\"Magic Bitboards\">Magic bitboards</a>, which gave Arasan about a 20-25% speedup <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup>. \n</p><p>Despite its own GUI, Arasan early supported the <a href=\"/Chess_Engine_Communication_Protocol\" title=\"Chess Engine Communication Protocol\">Chess Engine Communication Protocol</a> and later <a href=\"/UCI\" title=\"UCI\">UCI</a> as well, to run under <a href=\"/Windows\" title=\"Windows\">Windows</a>, <a href=\"/Linux\" title=\"Linux\">Linux</a> and <a href=\"/Mac_OS\" title=\"Mac OS\">Mac OS</a> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>. The latest version of Arasan and all major versions, including Version 1.0 from March 1994, are available as source code from the Arasan.org site <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup> . Jon's change logs, bug fix reports and tournament reports over the time are available from <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">forum archives</a>, as well the recent ones from the Arasan blog <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>\n</p>\n</td>\n<td>   <span style=\"font-size: 600%;\">அரசன்</span>\n</td></tr>\n<tr>\n<td>  அரசன் <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup> (Arasan) , King in <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Tamil_language\">Tamil language</a> <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup>\n</td></tr></table>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Selected_Features\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Selected Features</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-2\"><a href=\"#Board_Representation\"><span class=\"tocnumber\">1.1</span> <span class=\"toctext\">Board Representation</span></a>\n<ul>\n<li class=\"toclevel-3 tocsection-3\"><a href=\"#Bitboard_Trials\"><span class=\"tocnumber\">1.1.1</span> <span class=\"toctext\">Bitboard Trials</span></a></li>\n<li class=\"toclevel-3 tocsection-4\"><a href=\"#Magic_Bitboards\"><span class=\"tocnumber\">1.1.2</span> <span class=\"toctext\">Magic Bitboards</span></a></li>\n<li class=\"toclevel-3 tocsection-5\"><a href=\"#PEXT.2FPDEP_Bitboards\"><span class=\"tocnumber\">1.1.3</span> <span class=\"toctext\">PEXT/PDEP Bitboards</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-2 tocsection-6\"><a href=\"#Search\"><span class=\"tocnumber\">1.2</span> <span class=\"toctext\">Search</span></a></li>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#Evaluation\"><span class=\"tocnumber\">1.3</span> <span class=\"toctext\">Evaluation</span></a>\n<ul>\n<li class=\"toclevel-3 tocsection-8\"><a href=\"#NNUE\"><span class=\"tocnumber\">1.3.1</span> <span class=\"toctext\">NNUE</span></a></li>\n<li class=\"toclevel-3 tocsection-9\"><a href=\"#Traditional\"><span class=\"tocnumber\">1.3.2</span> <span class=\"toctext\">Traditional</span></a></li>\n<li class=\"toclevel-3 tocsection-10\"><a href=\"#Automated_Tuning\"><span class=\"tocnumber\">1.3.3</span> <span class=\"toctext\">Automated Tuning</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#Syzygy_Bases\"><span class=\"tocnumber\">1.4</span> <span class=\"toctext\">Syzygy Bases</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-12\"><a href=\"#Tournament_Play\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Tournament Play</span></a></li>\n<li class=\"toclevel-1 tocsection-13\"><a href=\"#Photos_.26_Games\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Photos &amp; Games</span></a></li>\n<li class=\"toclevel-1 tocsection-14\"><a href=\"#See_also\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-15\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-16\"><a href=\"#1995_...\"><span class=\"tocnumber\">5.1</span> <span class=\"toctext\">1995 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-17\"><a href=\"#2000_...\"><span class=\"tocnumber\">5.2</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-18\"><a href=\"#2005_...\"><span class=\"tocnumber\">5.3</span> <span class=\"toctext\">2005 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-19\"><a href=\"#2010_...\"><span class=\"tocnumber\">5.4</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-20\"><a href=\"#2015_...\"><span class=\"tocnumber\">5.5</span> <span class=\"toctext\">2015 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-21\"><a href=\"#2020_...\"><span class=\"tocnumber\">5.6</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-22\"><a href=\"#External_Links\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">External Links</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-23\"><a href=\"#Chess_Engine\"><span class=\"tocnumber\">6.1</span> <span class=\"toctext\">Chess Engine</span></a></li>\n<li class=\"toclevel-2 tocsection-24\"><a href=\"#Misc\"><span class=\"tocnumber\">6.2</span> <span class=\"toctext\">Misc</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-25\"><a href=\"#References\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Selected_Features\">Selected Features</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Arasan&amp;action=edit&amp;section=1\" title=\"Edit section: Selected Features\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup>\n</p>\n<h2><span class=\"mw-headline\" id=\"Board_Representation\"><a href=\"/Board_Representation\" title=\"Board Representation\">Board Representation</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Arasan&amp;action=edit&amp;section=2\" title=\"Edit section: Board Representation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<h3><span class=\"mw-headline\" id=\"Bitboard_Trials\">Bitboard Trials</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Arasan&amp;action=edit&amp;section=3\" title=\"Edit section: Bitboard Trials\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p><a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, May 1996 <sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup>\n</p>\n<pre> Lately I've been working on a new major release of Arasan. I have spent the last few months working on the search engine, trying to improve speed and performance. I tried some experiments with a <a href=\"/Bitboards\" title=\"Bitboards\">bitboard</a> move representation, but I have backed off on that for now.\n</pre>\n<pre>With bitboards, I got a nice reduction in tree size (bitboards allow a more accurate <a href=\"/Static_Exchange_Evaluation\" title=\"Static Exchange Evaluation\">swap-down analysis</a> than I had before, and this improves <a href=\"/Move_Ordering\" title=\"Move Ordering\">move ordering</a> and allows better \"culling\" of losing captures in the <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">quiescence search</a>).\n</pre>\n<pre>However, currently the program relies pretty heavily on <a href=\"/Incremental_Updates\" title=\"Incremental Updates\">incrementally generated</a> <a href=\"/Attack_and_Defend_Maps\" title=\"Attack and Defend Maps\">attack information</a>, and I didn't have that implemented to work with bitboards, so I had to compute attacks as needed. Unfortunately, the current program \"needs\" to do this much more often than <a href=\"/Crafty\" title=\"Crafty\">Crafty</a> does, so the loss from computing attacks more than balanced out the gains from bitboards. This is fixable, I'm sure, but I've put off further work on it for now. \n</pre>\n<h3><span class=\"mw-headline\" id=\"Magic_Bitboards\"><a href=\"/Magic_Bitboards\" title=\"Magic Bitboards\">Magic Bitboards</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Arasan&amp;action=edit&amp;section=4\" title=\"Edit section: Magic Bitboards\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p><a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, August 2008 <sup id=\"cite_ref-9\" class=\"reference\"><a href=\"#cite_note-9\">&#91;9&#93;</a></sup>&#160;:\n</p>\n<pre>The main change has been to re-work the code to use <a href=\"/Magic_Bitboards\" title=\"Magic Bitboards\">\"magic\" bitboard logic</a> instead of <a href=\"/Rotated_Bitboards\" title=\"Rotated Bitboards\">rotated bitboards</a>. This has given about a 20-25% speedup. I have also had to re-write the <a href=\"/Evaluation\" title=\"Evaluation\">evaluation function</a> to take advantage of bitboard attack functions for <a href=\"/King_Safety\" title=\"King Safety\">king safety</a> and <a href=\"/Mobility\" title=\"Mobility\">mobility</a>. \n</pre>\n<h3><span class=\"mw-headline\" id=\"PEXT.2FPDEP_Bitboards\"><a href=\"/BMI2#PDEPBitboards\" title=\"BMI2\">PEXT/PDEP Bitboards</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Arasan&amp;action=edit&amp;section=5\" title=\"Edit section: PEXT/PDEP Bitboards\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p>Arasan <b>20.3</b>, released in November 2017, performs <a href=\"/BMI2#PDEPBitboards\" title=\"BMI2\">PEXT/PDEP Bitboards</a> if compiled for the <a href=\"/BMI2\" title=\"BMI2\">BMI2</a> instruction set <sup id=\"cite_ref-10\" class=\"reference\"><a href=\"#cite_note-10\">&#91;10&#93;</a></sup> to replace <a href=\"/Magic_Bitboards#Fancy\" title=\"Magic Bitboards\">Fancy Magic Bitboards</a> in looking up <a href=\"/Sliding_Piece_Attacks\" title=\"Sliding Piece Attacks\">sliding piece attacks</a> <sup id=\"cite_ref-11\" class=\"reference\"><a href=\"#cite_note-11\">&#91;11&#93;</a></sup>\n</p><p><span id=\"Tuning\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Search\"><a href=\"/Search\" title=\"Search\">Search</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Arasan&amp;action=edit&amp;section=6\" title=\"Edit section: Search\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Lazy_SMP\" title=\"Lazy SMP\">Lazy SMP</a> 21.0</li>\n<li> <a href=\"/Iterative_Deepening\" title=\"Iterative Deepening\">Iterative Deepening</a> <a href=\"/Depth#FractionalPlies\" title=\"Depth\">Depth Resolution 4</a> </li>\n<li> <a href=\"/Aspiration_Windows\" title=\"Aspiration Windows\">Aspiration Windows</a></li>\n<li> <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">Principal Variation Search</a></li>\n<li> <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Table</a>\n<ul><li> <a href=\"/Shared_Hash_Table\" title=\"Shared Hash Table\">Shared Hash Table</a></li>\n<li> <a href=\"/Shared_Hash_Table#Lockless\" title=\"Shared Hash Table\">Lockless Hashing</a> </li></ul></li>\n<li> <a href=\"/Move_Ordering\" title=\"Move Ordering\">Move Ordering</a>\n<ul><li> <a href=\"/Internal_Iterative_Deepening\" title=\"Internal Iterative Deepening\">Internal Iterative Deepening</a></li>\n<li> <a href=\"/Countermove_Heuristic\" title=\"Countermove Heuristic\">Countermove Heuristic</a></li>\n<li> <a href=\"/History_Heuristic#CMHist\" title=\"History Heuristic\">Counter Moves History</a></li>\n<li> <a href=\"/Killer_Heuristic\" title=\"Killer Heuristic\">Killer Heuristic</a></li>\n<li> <a href=\"/Refutation_Table\" title=\"Refutation Table\">Refutation Table</a></li>\n<li> <a href=\"/History_Heuristic\" title=\"History Heuristic\">History Heuristic</a></li>\n<li> <a href=\"/MVV-LVA\" title=\"MVV-LVA\">MVV/LVA</a></li>\n<li> <a href=\"/Static_Exchange_Evaluation\" title=\"Static Exchange Evaluation\">SEE</a></li></ul></li>\n<li> <a href=\"/Selectivity\" title=\"Selectivity\">Selectivity</a>\n<ul><li> <a href=\"/Depth#FractionalPlies\" title=\"Depth\">Fractional Ply</a> <a href=\"/Extensions\" title=\"Extensions\">Extensions</a>\n<ul><li> <a href=\"/Check_Extensions\" title=\"Check Extensions\">Check Extensions</a></li>\n<li> <a href=\"/Passed_Pawn_Extensions\" title=\"Passed Pawn Extensions\">Passed Pawn Extensions</a></li>\n<li> <a href=\"/Singular_Extensions\" title=\"Singular Extensions\">Singular Extensions</a></li></ul></li>\n<li> <a href=\"/Pruning\" title=\"Pruning\">Pruning</a>\n<ul><li> <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">Null Move Pruning</a></li>\n<li> <a href=\"/Reverse_Futility_Pruning\" title=\"Reverse Futility Pruning\">Static Null Move Pruning</a></li>\n<li> <a href=\"/Static_Exchange_Evaluation\" title=\"Static Exchange Evaluation\">SEE Pruning</a></li>\n<li> <a href=\"/Futility_Pruning\" title=\"Futility Pruning\">Futility Pruning</a></li>\n<li>  <a href=\"/Futility_Pruning#MoveCountBasedPruning\" title=\"Futility Pruning\">Late Move Pruning</a></li>\n<li> <a href=\"/ProbCut\" title=\"ProbCut\">ProbCut</a></li></ul></li>\n<li> <a href=\"/Reductions\" title=\"Reductions\">Reductions</a>\n<ul><li> <a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">Late Move Reductions</a></li>\n<li> <a href=\"/Razoring\" title=\"Razoring\">Razoring</a></li></ul></li>\n<li> <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">Quiescence Search</a></li></ul></li></ul>\n<h2><span class=\"mw-headline\" id=\"Evaluation\"><a href=\"/Evaluation\" title=\"Evaluation\">Evaluation</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Arasan&amp;action=edit&amp;section=7\" title=\"Edit section: Evaluation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<h3><span class=\"mw-headline\" id=\"NNUE\"><a href=\"/NNUE\" title=\"NNUE\">NNUE</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Arasan&amp;action=edit&amp;section=8\" title=\"Edit section: NNUE\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p>Arasan <b>23.0</b>, released in September 2021, uses a <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a> 13 compatible <a href=\"/NNUE\" title=\"NNUE\">NNUE</a> - trained by selfplay positions - to <a href=\"/Evaluation\" title=\"Evaluation\">evaluate</a> its positions <sup id=\"cite_ref-12\" class=\"reference\"><a href=\"#cite_note-12\">&#91;12&#93;</a></sup>. The neural network file is external to the program and is loaded at runtime.\n</p>\n<h3><span class=\"mw-headline\" id=\"Traditional\">Traditional</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Arasan&amp;action=edit&amp;section=9\" title=\"Edit section: Traditional\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<ul><li> <a href=\"/Material\" title=\"Material\">Material</a></li>\n<li> <a href=\"/Piece-Square_Tables\" title=\"Piece-Square Tables\">Piece-Square Tables</a></li>\n<li> <a href=\"/Development\" title=\"Development\">Development</a></li>\n<li> <a href=\"/Mobility\" title=\"Mobility\">Mobility</a>\n<ul><li> <a href=\"/Trapped_Pieces\" title=\"Trapped Pieces\">Trapped Pieces</a></li>\n<li> <a href=\"/Rook_on_Open_File\" title=\"Rook on Open File\">Rooks on (Semi) Open Files</a></li></ul></li>\n<li> <a href=\"/Outposts\" title=\"Outposts\">Outposts</a></li>\n<li> <a href=\"/Pawn_Structure\" title=\"Pawn Structure\">Pawn Structure</a>\n<ul><li> <a href=\"/Pawn_Hash_Table\" title=\"Pawn Hash Table\">Pawn Hash Table</a></li>\n<li> <a href=\"/Backward_Pawn\" title=\"Backward Pawn\">Backward Pawn</a></li>\n<li> <a href=\"/Doubled_Pawn\" title=\"Doubled Pawn\">Doubled Pawn</a></li>\n<li> <a href=\"/Isolated_Pawn\" title=\"Isolated Pawn\">Isolated Pawn</a></li></ul></li>\n<li> <a href=\"/Passed_Pawn\" title=\"Passed Pawn\">Passed Pawn</a>\n<ul><li> <a href=\"/Connected_Passed_Pawns\" title=\"Connected Passed Pawns\">Connected Passed Pawns</a></li>\n<li> <a href=\"/Outside_Passed_Pawn\" title=\"Outside Passed Pawn\">Outside Passed Pawn</a></li>\n<li> <a href=\"/Blockade_of_Stop\" title=\"Blockade of Stop\">Blockade of Stop</a></li>\n<li> <a href=\"/Tarrasch_Rule\" title=\"Tarrasch Rule\">Tarrasch Rule</a></li></ul></li>\n<li> <a href=\"/King_Safety\" title=\"King Safety\">King Safety</a>\n<ul><li> <a href=\"/King_Safety#KingTropism\" title=\"King Safety\">King Tropism</a></li>\n<li> <a href=\"/King_Safety#PawnShield\" title=\"King Safety\">Pawn Shelter</a></li>\n<li> <a href=\"/King_Safety#PawnStorm\" title=\"King Safety\">Pawn Storm</a></li></ul></li></ul>\n<h3><span class=\"mw-headline\" id=\"Automated_Tuning\"><a href=\"/Automated_Tuning\" title=\"Automated Tuning\">Automated Tuning</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Arasan&amp;action=edit&amp;section=10\" title=\"Edit section: Automated Tuning\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p>Arasan <b>19.2</b>, released in November 2016, applies <a href=\"/Texel%27s_Tuning_Method\" title=\"Texel&#39;s Tuning Method\">Texel's Tuning Method</a> by default and supports the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Stochastic_gradient_descent#Adam\">Adam</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Gradient_descent\">gradient descent</a> algorithm  <sup id=\"cite_ref-13\" class=\"reference\"><a href=\"#cite_note-13\">&#91;13&#93;</a></sup> <sup id=\"cite_ref-14\" class=\"reference\"><a href=\"#cite_note-14\">&#91;14&#93;</a></sup>. \n</p>\n<h2><span class=\"mw-headline\" id=\"Syzygy_Bases\"><a href=\"/Syzygy_Bases\" title=\"Syzygy Bases\">Syzygy Bases</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Arasan&amp;action=edit&amp;section=11\" title=\"Edit section: Syzygy Bases\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Arasan uses a <a href=\"/Syzygy_Bases#Fathom\" title=\"Syzygy Bases\">Fathom</a> fork with some bug fixes and enhancements <sup id=\"cite_ref-15\" class=\"reference\"><a href=\"#cite_note-15\">&#91;15&#93;</a></sup>, also supporting <a href=\"/Syzygy_Bases#7-man\" title=\"Syzygy Bases\">7-man</a> <sup id=\"cite_ref-16\" class=\"reference\"><a href=\"#cite_note-16\">&#91;16&#93;</a></sup>.\n</p>\n<h1><span class=\"mw-headline\" id=\"Tournament_Play\">Tournament Play</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Arasan&amp;action=edit&amp;section=12\" title=\"Edit section: Tournament Play\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Arasan went online in December, 1996 <sup id=\"cite_ref-17\" class=\"reference\"><a href=\"#cite_note-17\">&#91;17&#93;</a></sup> , and played almost all major online computer chess tournaments, such as <a href=\"/CCT_Tournaments\" title=\"CCT Tournaments\">CCT Tournaments</a>, <a href=\"/ACCA_Americas%27_Computer_Chess_Championship\" title=\"ACCA Americas&#39; Computer Chess Championship\">ACCA Americas' Computer Chess Championship</a>, <a href=\"/ACCA_World_Computer_Rapid_Chess_Championship\" title=\"ACCA World Computer Rapid Chess Championship\">ACCA World Computer Rapid Chess Championship</a>, <a href=\"/TCEC\" title=\"TCEC\">TCEC</a>, and <a href=\"/Italian_Computer_Chess_Championship#IGWT\" title=\"Italian Computer Chess Championship\">International Gsei Web Tournaments</a>. Arasan 15.1 <sup id=\"cite_ref-18\" class=\"reference\"><a href=\"#cite_note-18\">&#91;18&#93;</a></sup> won the <a href=\"/ACCA_2012\" title=\"ACCA 2012\">ACCA 2012</a> <sup id=\"cite_ref-19\" class=\"reference\"><a href=\"#cite_note-19\">&#91;19&#93;</a></sup> , Arasan 16.0 the <a href=\"/WCRCC_2013\" title=\"WCRCC 2013\">WCRCC 2013</a> <sup id=\"cite_ref-20\" class=\"reference\"><a href=\"#cite_note-20\">&#91;20&#93;</a></sup> . Over the board, Arasan was active at the <a href=\"/CSVN_Programmers_Tournament\" title=\"CSVN Programmers Tournament\">CSVN Programmers Tournaments</a> operated by <a href=\"/Tessa_Pijl\" title=\"Tessa Pijl\">Tessa Pijl</a>. Arasan was runner-up behind <a href=\"/The_Baron\" title=\"The Baron\">The Baron</a> in May 2014 at the <a href=\"/PT_46\" title=\"PT 46\">PT 46</a> one point behind, as well in June 2015 at the <a href=\"/PT_48\" title=\"PT 48\">PT 48</a> with the same score according to the tiebreak rules <sup id=\"cite_ref-21\" class=\"reference\"><a href=\"#cite_note-21\">&#91;21&#93;</a></sup>.\n</p>\n<h1><span class=\"mw-headline\" id=\"Photos_.26_Games\">Photos &amp; Games</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Arasan&amp;action=edit&amp;section=13\" title=\"Edit section: Photos &amp; Games\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"floatnone\"><a href=\"http://www.computerschaak.nl/index.php/nieuws/51-toernooien/704-pt48-round-7\" rel=\"nofollow\"><img alt=\"ArasanTheKingPT48.jpg\" src=\"/images/1/12/ArasanTheKingPT48.jpg\" width=\"640\" height=\"423\" style=\"vertical-align: text-bottom\" class=\"thumbborder\" /></a></div> \n<p><a href=\"/PT_48\" title=\"PT 48\">PT 48</a>, Two Kings fighting, <a href=\"/Johan_de_Koning\" title=\"Johan de Koning\">Johan de Koning</a> and <a href=\"/Tessa_Pijl\" title=\"Tessa Pijl\">Tessa Pijl</a> in <a class=\"mw-selflink selflink\">Arasan</a> vs. <a href=\"/The_King\" title=\"The King\">The King</a> <sup id=\"cite_ref-22\" class=\"reference\"><a href=\"#cite_note-22\">&#91;22&#93;</a></sup> \n</p>\n<pre>\n[Event \"PT 48\"]\n[Site \"Leiden, NL\"]\n[Date \"2015.06.14\"]\n[Round \"7\"]\n[White \"Arasan\"]\n[Black \"The King\"]\n[Result \"1-0\"]\n\n1.d4 d5 2.c4 c6 3.Nf3 Nf6 4.Nc3 e6 5.e3 Nbd7 6.Bd3 dxc4 7.Bxc4 b5 8.Bd3 a6 \n9.a4 b4 10.Ne4 c5 11.Nxf6+ Nxf6 12.dxc5 Bxc5 13.e4 Bb7 14.Qe2 O-O 15.O-O e5 \n16.Bg5 h6 17.Bh4 Qd6 18.Bg3 Rfe8 19.Rfd1 Re7 20.Bh4 Qc6 21.Rac1 Rc8 22.Rc4 Re6 \n23.Bxf6 Rxf6 24.Rdc1 Qb6 25.Kh1 a5 26.Qc2 b3 27.Qe2 Qd6 28.R4c3 Rf4 29.g3 Rf6 \n30.Bc4 Rb8 31.Rxb3 Bb4 32.Rd3 Qc7 33.Kg2 Rf8 34.Rdd1 Rc6 35.b3 Re8 36.Kg1 Rc8 \n37.Rd5 Re6 38.Rd3 Rf6 39.Rcd1 Re8 40.Nh4 Qb6 41.Nf5 Rf8 42.Rf3 Kh8 43.Nh4 Kg8 \n44.Rd7 Bc8 45.Rd5 Rd6 46.Rxd6 Qxd6 47.Rd3 Qc7 48.Qh5 Kh7 49.Nf3 f6 50.Nh4 Bd7 \n51.Bf7 Bc8 52.Bg6+ Kg8 53.Bf5 Qc2 54.Qf3 Re8 55.Kg2 Rf8 56.Rd5 Bc5 57.Bxc8 Rxc8 \n58.Rd7 Bf8 59.Qg4 h5 60.Qg6 Qe2 61.Nf3 Qc2 62.Qf7+ Kh8 63.Qxh5+ Kg8 64.Nd2 Rb8 \n65.g4 Rc8 66.Qf7+ Kh8 67.Qh5+ Kg8 68.Qg6 Kh8 69.Qf5 Kg8 70.g5 fxg5 71.Nf3 Qc6 \n72.Nxg5 Qh6 73.Rd3 Rc7 74.Rf3 Bb4 75.Rh3 Bf8 76.Rxh6 1-0\n</pre>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Arasan&amp;action=edit&amp;section=14\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/King\" title=\"King\">King</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Arasan&amp;action=edit&amp;section=15\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1995_...\">1995 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Arasan&amp;action=edit&amp;section=16\" title=\"Edit section: 1995 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess/browse_frm/thread/489bd1c77cf3f5a3\">Arasan 2.0 (Windows chess program) available via ftp</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rec.games.chess</a>, July 4, 1995</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.misc/browse_frm/thread/feab13109d3fea8d\">Arasan 2.1 (Windows chess program) available via ftp</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rec.games.chess.misc</a>, October 23, 1995</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.misc/browse_frm/thread/353af31249b8e71a\">Arasan 2.2 (Windows chess program) available via ftp</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rec.games.chess.misc</a>, December 10, 1995</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/d75cd258ea73a4a7\">Arasan progress report</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, May 23, 1996</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/da81bfa994db07e\">Arasan 3.0 (Windows chess program) available</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, July 8, 1996</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/4a4705301c3c3229\">Arasan goes online</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, January 6, 1997</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/400f58ce4133b3dc\">Arasan 4.0 is available</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, July 15, 1997</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=39273\">Arasan 5.0 released</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 13, 1999</li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Arasan&amp;action=edit&amp;section=17\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=112475\">Arasan 5.4 released</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 25, 2000</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=114810\">Arasan vs. IM Paunovic</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 16, 2000</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=127953\">Arasan now under Linux</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 02, 2000</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=136752\">A few notes from Arasan's games in CCT2</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 05, 2000&#160;» <a href=\"/CCT2\" title=\"CCT2\">CCT2</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=208715\">CCT4 notes - Arasan</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 20, 2002&#160;» <a href=\"/CCT4\" title=\"CCT4\">CCT4</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=253897\">Arasan 6.0</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 24, 2002</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=279622\">Arasan 6.3</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 26, 2003</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=310679\">Arasan 7.0</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 09, 2003</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=351899\">Arasan 7.4</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 28, 2004</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=357325\">Arasan 7.4 64-bit Speedup</a> by <a href=\"/index.php?title=Slater_Wold&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Slater Wold (page does not exist)\">Slater Wold</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 30, 2004</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=383566\">Arasan 8.0</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 22, 2004</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=397817\">Arasan 8.2</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 26, 2004</li></ul>\n<h2><span class=\"mw-headline\" id=\"2005_...\">2005 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Arasan&amp;action=edit&amp;section=18\" title=\"Edit section: 2005 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=414274\">Arasan 8.4</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 26, 2005</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=489903\">Arasan in CCT8</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 26, 2006&#160;» <a href=\"/CCT8\" title=\"CCT8\">CCT8</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=15306\">Arasan @ WCRCC tournament</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 23, 2007&#160;» <a href=\"/WCRCC_2007\" title=\"WCRCC 2007\">WCRCC 2007</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=16221\">Arasan 10.0</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 02, 2007</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=19673\">Arasan 10.2</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 16, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=22020\">Arasan 10.4</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 27, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=25134\">Arasan 11.0</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 28, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=27151\">Arasan 11.3</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 24, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=28528\">Arasan 11.4</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 20, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=29668\">Arasan 11.5</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 05, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=30678\">Arasan 11.6</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 18, 2009</li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Arasan&amp;action=edit&amp;section=19\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=32449\">Arasan 11.7</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 07, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=35724\">Arasan 12.0 released</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 07, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=36661\">Arasan 12.2 released</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 11, 2010</li></ul>\n<p><b>2011</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=37921\">Arasan 12.3 released</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 02, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=40091\">Arasan 13.0</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 18, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=40157\">Arasan 13.1</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 23, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=40186\">MORE about Arasan 13.1</a> by <a href=\"/Fernando_Villegas\" title=\"Fernando Villegas\">Fernando Villegas</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 26, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=40617\">Arasan 13.2</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 02, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=41086\">Arasan 13.3</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 14, 2011&#160;» <a href=\"/ACCA_2011\" title=\"ACCA 2011\">ACCA 2011</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=41369\">Arasan 13.4</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 07, 2011</li></ul>\n<p><b>2012</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=42736\">Arasan 14.0</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 04, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=44044\">Arasan 14.2</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 12, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=44492\">Arasan 14.3</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 18, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=45229\">Arasan 15.0</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 20, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=46077\">Arasan 15.1</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 19, 2012</li></ul>\n<p><b>2013</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=47333\">Arasan 15.2</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 26, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=47845\">Arasan 15.4</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 24, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48070\">Arasan 15.6</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 21, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48082\">Arasan on github</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 22, 2013 <sup id=\"cite_ref-23\" class=\"reference\"><a href=\"#cite_note-23\">&#91;23&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48703\">Arasan games from WCRCC</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 21, 2013&#160;» <a href=\"/WCRCC_2013\" title=\"WCRCC 2013\">WCRCC 2013</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48748\">Arasan 16.0</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 24, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=49205\">Arasan 16.1</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 01, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=49824\">Arasan 16.2</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 25, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=50348\">Arasan 16.3</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 06, 2013</li></ul>\n<p><b>2014</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=51071\">test position: Rookie-Arasan</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 27, 2014&#160;» <a href=\"/Rookie\" title=\"Rookie\">Rookie</a>, <a href=\"/Zugzwang\" title=\"Zugzwang\">Zugzwang</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=51760\">Arasan 17.0</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 27, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=51839\">Arasan GUI fixes</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 02, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=52242\">Arasan 17.1</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 07, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=52474\">Arasan 17.2</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 30, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=53532\">Arasan 17.3</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 01, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=53987\">Arasan 17.4</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 08, 2014</li></ul>\n<h2><span class=\"mw-headline\" id=\"2015_...\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Arasan&amp;action=edit&amp;section=20\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=55072\">Arasan 17.5</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 24, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=55621\">Experiments with eval tuning</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 10, 2015&#160;» <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">Automated Tuning</a>, <a href=\"/Texel%27s_Tuning_Method\" title=\"Texel&#39;s Tuning Method\">Texel's Tuning Method</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=57122\">Arasan 18.0</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 30, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=58130\">Arasan 18.1</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 02, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=58460\">Arasan 18.2</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 03, 2015</li></ul>\n<p><b>2016</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=59138\">Arasan 18.3</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 02, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=59463\">Arasan Syzygy support (working with Windows, too)</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 10, 2016&#160;» <a href=\"/Syzygy_Bases\" title=\"Syzygy Bases\">Syzygy Bases</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=59997\">Arasan 19.0 + updated test suite</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 29, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61077\">Arasan 19.1</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 09, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61948\">Arasan 19.2</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 03, 2016</li></ul>\n<p><b>2017</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=62987\">Arasan 20.0</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 31, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63773\">building for Android</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 19, 2017&#160;» <a href=\"/Android\" title=\"Android\">Android</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63855\">Arasan 20.1</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 28, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64364\">Arasan Programmer's Guide</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 21, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64610\">Arasan 20.2</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 15, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65636\">Arasan 20.3</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 05, 2017</li></ul>\n<p><b>2018</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66232\">Arasan 20.4</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 03, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66254\">Arasan 20.4.1</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 05, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=67040\">Arasan 20.5</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 08, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=67805\">Arasan 21.0 beta</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 23, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=67855\">Arasan 21.0</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 30, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=68554\">Arasan 21.1</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 02, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=69436\">Arasan 21.2</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 31, 2018</li></ul>\n<p><b>2019</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=70360\">Arasan 21.3</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 29, 2019</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=71169\">Arasan 21.4</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 02, 2019</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=72541\">Arasan 22.0</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 10, 2019</li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Arasan&amp;action=edit&amp;section=21\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=74331\">Arasan 22.1</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 01, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=76128\">Arasan 22.2</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 22, 2020 </li></ul>\n<p><b>2021</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=77414\">Arasan 22.3</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>,  May 31, 2021</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=78122\">Arasan 23.0</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 06, 2021</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=78122&amp;start=14\">Re: Arasan 23.0</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 08, 2021</dd></dl>\n<p><b>2022</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=79500\">Arasan 23.3</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 12, 2022</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Arasan&amp;action=edit&amp;section=22\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Chess_Engine\">Chess Engine</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Arasan&amp;action=edit&amp;section=23\" title=\"Edit section: Chess Engine\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/jdart1/arasan-chess\">jdart1/arasan-chess · GitHub</a> <sup id=\"cite_ref-24\" class=\"reference\"><a href=\"#cite_note-24\">&#91;24&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.arasanchess.org/index.shtml\">Arasan Chess</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.arasanchess.org/programr.shtml\">Arasan Programmer's Guide</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a> <sup id=\"cite_ref-25\" class=\"reference\"><a href=\"#cite_note-25\">&#91;25&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.arasanchess.org/testsuite.shtml\">Arasan Test Suite</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20120106012659/http://www.playwitharena.com/?Newsticker:Archive_5\">Arasan 8.4 released, short interview with Jon Dart</a> by <a href=\"/Frank_Quisinsky\" title=\"Frank Quisinsky\">Frank Quisinsky</a>, March 01, 2005, <a href=\"/Arena\" title=\"Arena\">Arena Chess GUI</a>, Archive 5, 72 (<a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wayback_Machine\">Wayback Machine</a>)</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.computerchess.org.uk/ccrl/4040/cgi/compare_engines.cgi?family=Arasan&amp;print=Rating+list&amp;print=Results+table&amp;print=LOS+table&amp;print=Ponder+hit+table&amp;print=Eval+difference+table&amp;print=Comopp+gamenum+table&amp;print=Overlap+table&amp;print=Score+with+common+opponents\">Arasan</a> in <a href=\"/CCRL\" title=\"CCRL\">CCRL 40/15</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Misc\">Misc</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Arasan&amp;action=edit&amp;section=24\" title=\"Edit section: Misc\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Arasan\">Arasan from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Imsai_Arasan_23rd_Pulikecei\">Imsai Arasan 23rd Pulikecei from Wikipedia</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Arasan&amp;action=edit&amp;section=25\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap mw-references-columns\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.arasanchess.org/blogs/aug08.html\">Arasan Blog - Aug 26, 2008</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.arasanchess.org/\">Arasan chess</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.arasanchess.org/downld.shtml\">Arasan Downloads</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://arasanchess.org/blog.shtml\">Arasan Tech Blog</a></span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Tamil_script\">Tamil script from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://ta.wikipedia.org/wiki/%E0%AE%85%E0%AE%B0%E0%AE%9A%E0%AE%A9%E0%AF%8D_(%E0%AE%9A%E0%AE%A4%E0%AF%81%E0%AE%B0%E0%AE%99%E0%AF%8D%E0%AE%95%E0%AE%AE%E0%AF%8D)\">அரசன் (சதுரங்கம்) - தமிழ் விக்கிப்பீடியா</a></span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.arasanchess.org/programr.shtml\">Arasan Programmer's Guide</a></span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/d75cd258ea73a4a7\">Arasan progress report</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, May 23, 1996</span>\n</li>\n<li id=\"cite_note-9\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-9\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.arasanchess.org/blogs/aug08.html\">Arasan Blog - Aug 26, 2008</a></span>\n</li>\n<li id=\"cite_note-10\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-10\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65636\">Arasan 20.3</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 05, 2017</span>\n</li>\n<li id=\"cite_note-11\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-11\">↑</a></span> <span class=\"reference-text\">arasan_source20.3.zip/src/attacks.h</span>\n</li>\n<li id=\"cite_note-12\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-12\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=78122&amp;start=14\">Re: Arasan 23.0</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 08, 2021</span>\n</li>\n<li id=\"cite_note-13\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-13\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61948\">Arasan 19.2</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 03, 2016</span>\n</li>\n<li id=\"cite_note-14\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-14\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://scholar.google.nl/citations?user=yyIoQu4AAAAJ\">Diederik P. Kingma</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://scholar.google.ca/citations?user=ymzxRhAAAAAJ&amp;hl=en\">Jimmy Lei Ba</a> (<b>2015</b>). <i>Adam: A Method for Stochastic Optimization</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1412.6980v8\">arXiv:1412.6980v8</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.iclr.cc/doku.php?id=iclr2015:main\">ICLR 2015</a></span>\n</li>\n<li id=\"cite_note-15\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-15\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/jdart1/Fathom\">jdart1/Fathom · GitHub</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a></span>\n</li>\n<li id=\"cite_note-16\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-16\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=70568\">7-man Syzygy support in Fathom</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 23, 2019</span>\n</li>\n<li id=\"cite_note-17\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-17\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/4a4705301c3c3229\">Arasan goes online</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, January 6, 1997</span>\n</li>\n<li id=\"cite_note-18\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-18\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=46077\">Arasan 15.1</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 19, 2012</span>\n</li>\n<li id=\"cite_note-19\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-19\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=46047\">Seventh Annual ACCA Americas' Computer Chess Championships</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 18, 2012</span>\n</li>\n<li id=\"cite_note-20\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-20\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48703\">Arasan games from WCRCC</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 21, 2013</span>\n</li>\n<li id=\"cite_note-21\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-21\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=56645&amp;start=3\">Baron 1st, Arasan 2nd</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 14, 2015</span>\n</li>\n<li id=\"cite_note-22\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-22\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.computerschaak.nl/index.php/nieuws/51-toernooien/704-pt48-round-7\">PT48 Round 7</a></span>\n</li>\n<li id=\"cite_note-23\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-23\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/jdart1/arasan-chess\">jdart1/arasan-chess · GitHub</a></span>\n</li>\n<li id=\"cite_note-24\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-24\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48082\">Arasan on github</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 22, 2013</span>\n</li>\n<li id=\"cite_note-25\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-25\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64364\">Arasan Programmer's Guide</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 21, 2017</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Engines\" title=\"Engines\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301063123\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.051 seconds\nReal time usage: 0.053 seconds\nPreprocessor visited node count: 464/1000000\nPreprocessor generated node count: 946/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:3830-0!canonical and timestamp 20260301063123 and revision id 26709\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Open_Source"
+      },
+      {
+        "sortkey": "",
+        "*": "MIT"
+      },
+      {
+        "sortkey": "",
+        "*": "Nobility"
+      },
+      {
+        "sortkey": "",
+        "*": "UCI"
+      },
+      {
+        "sortkey": "",
+        "*": "WinBoard"
+      },
+      {
+        "sortkey": "",
+        "*": "XBoard"
+      },
+      {
+        "sortkey": "",
+        "*": "X86"
+      },
+      {
+        "sortkey": "",
+        "*": "X64"
+      },
+      {
+        "sortkey": "",
+        "*": "PC"
+      },
+      {
+        "sortkey": "",
+        "missing": "",
+        "*": "ARM"
+      },
+      {
+        "sortkey": "",
+        "*": "Pi"
+      },
+      {
+        "sortkey": "",
+        "*": "Android"
+      },
+      {
+        "sortkey": "",
+        "*": "Linux"
+      },
+      {
+        "sortkey": "",
+        "*": "Mac"
+      },
+      {
+        "sortkey": "",
+        "*": "Windows"
+      },
+      {
+        "sortkey": "",
+        "*": "NNUE"
+      },
+      {
+        "sortkey": "",
+        "*": "Chess_Pieces"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "8x8 Board"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ACCA 2011"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ACCA 2012"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ACCA Americas' Computer Chess Championship"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ACCA World Computer Rapid Chess Championship"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Android"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Arena"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aspiration Windows"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Attack and Defend Maps"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Automated Tuning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "BMI2"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Backward Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Blockade of Stop"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Board Representation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCRL"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCT2"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCT4"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCT8"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCT Tournaments"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CSVN Programmers Tournament"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Check Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Engine Communication Protocol"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Connected Passed Pawns"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Countermove Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cpp"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Crafty"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Development"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Doubled Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engines"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fernando Villegas"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Frank Quisinsky"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Futility Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "GUI"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "History Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Incremental Updates"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Internal Iterative Deepening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Isolated Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Italian Computer Chess Championship"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iterative Deepening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Johan de Koning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jon Dart"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Killer Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "King"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "King Safety"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Late Move Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lazy SMP"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Linux"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "MVV-LVA"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mac OS"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Magic Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Material"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mobility"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Ordering"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "NNUE"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Outposts"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Outside Passed Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "PT 46"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "PT 48"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Passed Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Passed Pawn Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Hash Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Structure"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Piece-Square Tables"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ProbCut"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiescence Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Razoring"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Refutation Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Reverse Futility Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rook on Open File"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rookie"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rotated Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Selectivity"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Shared Hash Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Singular Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sliding Piece Attacks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Static Exchange Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stockfish"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Syzygy Bases"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "TCEC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tarrasch Rule"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tessa Pijl"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Texel's Tuning Method"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "The Baron"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "The King"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Trapped Pieces"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "UCI"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "WCRCC 2007"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "WCRCC 2013"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Windows"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Zugzwang"
+      },
+      {
+        "ns": 0,
+        "*": "Slater Wold"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Open Source"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Selected Features",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Arasan",
+        "byteoffset": 1989,
+        "anchor": "Selected_Features"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Board Representation",
+        "number": "1.1",
+        "index": "2",
+        "fromtitle": "Arasan",
+        "byteoffset": 2092,
+        "anchor": "Board_Representation"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Bitboard Trials",
+        "number": "1.1.1",
+        "index": "3",
+        "fromtitle": "Arasan",
+        "byteoffset": 2122,
+        "anchor": "Bitboard_Trials"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Magic Bitboards",
+        "number": "1.1.2",
+        "index": "4",
+        "fromtitle": "Arasan",
+        "byteoffset": 3439,
+        "anchor": "Magic_Bitboards"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "PEXT/PDEP Bitboards",
+        "number": "1.1.3",
+        "index": "5",
+        "fromtitle": "Arasan",
+        "byteoffset": 3940,
+        "anchor": "PEXT.2FPDEP_Bitboards"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Search",
+        "number": "1.2",
+        "index": "6",
+        "fromtitle": "Arasan",
+        "byteoffset": 4449,
+        "anchor": "Search"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Evaluation",
+        "number": "1.3",
+        "index": "7",
+        "fromtitle": "Arasan",
+        "byteoffset": 5494,
+        "anchor": "Evaluation"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "NNUE",
+        "number": "1.3.1",
+        "index": "8",
+        "fromtitle": "Arasan",
+        "byteoffset": 5514,
+        "anchor": "NNUE"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Traditional",
+        "number": "1.3.2",
+        "index": "9",
+        "fromtitle": "Arasan",
+        "byteoffset": 5915,
+        "anchor": "Traditional"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Automated Tuning",
+        "number": "1.3.3",
+        "index": "10",
+        "fromtitle": "Arasan",
+        "byteoffset": 6467,
+        "anchor": "Automated_Tuning"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Syzygy Bases",
+        "number": "1.4",
+        "index": "11",
+        "fromtitle": "Arasan",
+        "byteoffset": 7209,
+        "anchor": "Syzygy_Bases"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Tournament Play",
+        "number": "2",
+        "index": "12",
+        "fromtitle": "Arasan",
+        "byteoffset": 7593,
+        "anchor": "Tournament_Play"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Photos & Games",
+        "number": "3",
+        "index": "13",
+        "fromtitle": "Arasan",
+        "byteoffset": 9061,
+        "anchor": "Photos_.26_Games"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "4",
+        "index": "14",
+        "fromtitle": "Arasan",
+        "byteoffset": 10401,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "5",
+        "index": "15",
+        "fromtitle": "Arasan",
+        "byteoffset": 10425,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1995 ...",
+        "number": "5.1",
+        "index": "16",
+        "fromtitle": "Arasan",
+        "byteoffset": 10440,
+        "anchor": "1995_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "5.2",
+        "index": "17",
+        "fromtitle": "Arasan",
+        "byteoffset": 11975,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2005 ...",
+        "number": "5.3",
+        "index": "18",
+        "fromtitle": "Arasan",
+        "byteoffset": 13368,
+        "anchor": "2005_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "5.4",
+        "index": "19",
+        "fromtitle": "Arasan",
+        "byteoffset": 14646,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "5.5",
+        "index": "20",
+        "fromtitle": "Arasan",
+        "byteoffset": 18377,
+        "anchor": "2015_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "5.6",
+        "index": "21",
+        "fromtitle": "Arasan",
+        "byteoffset": 21545,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "6",
+        "index": "22",
+        "fromtitle": "Arasan",
+        "byteoffset": 22297,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Chess Engine",
+        "number": "6.1",
+        "index": "23",
+        "fromtitle": "Arasan",
+        "byteoffset": 22315,
+        "anchor": "Chess_Engine"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Misc",
+        "number": "6.2",
+        "index": "24",
+        "fromtitle": "Arasan",
+        "byteoffset": 23483,
+        "anchor": "Misc"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "7",
+        "index": "25",
+        "fromtitle": "Arasan",
+        "byteoffset": 23662,
+        "anchor": "References"
+      }
+    ]
+  }
+}

@@ -1,0 +1,204 @@
+{
+  "parse": {
+    "title": "Looking for Magics",
+    "pageid": 1664,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Board_Representation\" title=\"Board Representation\">Board Representation</a> * <a href=\"/Bitboards\" title=\"Bitboards\">Bitboards</a> * <a href=\"/Sliding_Piece_Attacks\" title=\"Sliding Piece Attacks\">Sliding Piece Attacks</a> * <a href=\"/Magic_Bitboards\" title=\"Magic Bitboards\">Magic Bitboards</a> * Looking for Magics</b>\n</p><p><a href=\"/Magic_Bitboards\" title=\"Magic Bitboards\">Magic Bitboards</a> is probably the fastest approach to generate <a href=\"/Sliding_Piece_Attacks\" title=\"Sliding Piece Attacks\">sliding piece attacks</a> on recent architectures with fast 64-bit multiplication. It performs a mask/mul/shift-&gt;lookup to gain all the attacked squares of a bishop or rook.\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Trial_and_Error\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Trial and Error</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Feeding_in_Randoms\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Feeding in Randoms</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Fixed_Shift_Magics\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Fixed Shift Magics</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#See_also\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Forum Posts</span></a></li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#External_Links\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#References\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Trial_and_Error\">Trial and Error</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Looking_for_Magics&amp;action=edit&amp;section=1\" title=\"Edit section: Trial and Error\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>So far the only approach to find 64-bit magic factors is <a href=\"/Trial_and_Error\" title=\"Trial and Error\">trial and error</a>. One has the idea, how many bits are needed for a <a href=\"/Hash_Table#PerfectHashing\" title=\"Hash Table\">perfect hashing</a> - and about constrains of least and most significant one-bit inside the magic factor. In September 2017, <a href=\"/Niklas_Fiekas\" title=\"Niklas Fiekas\">Niklas Fiekas</a> introduced a technique based on the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Least_common_multiple\">least common multiple</a> of the periods for all relevant occupancies to reduce the range for magic candidates, specially to find magics with one bit less than the number of relevant occupancies to half the individual tables sizes as mentioned in <a href=\"/Best_Magics_so_far\" title=\"Best Magics so far\">Best Magics so far</a> <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup>.\n</p>\n<pre>\n                                        any consecutive\nrelevant occupancy                      combination of\nbishop b1, 5 bits                       the masked bits\n. . . . . . . .     . . . . . . . .     . . .[C D E F G]\n. . . . . . . .     . 1 . . . . . .     . . . . . . . .\n. . . . . . G .     . 1 . . . . . .     . . . . . . . .\n. . . . . F . .     . 1 . . . . . .     . . . . . . . .\n. . . . E . . .  *  . 1 . . . . . .  =  . . garbage . .    &gt;&gt; (64- 5)\n. . . D . . . .     . 1 . . . . . .     . . . . . . . .\n. . C . . . . .     . . . . . . . .     . . . . . . . .\n. . . . . . . .     . . . . . . . .     . . . . . . . .\n\n                                        any consecutive\nrelevant occupancy                      combination of\nbishop d4, 9 bits                       the masked bits\n. . . . . . . .     . . . . . . . .     2 4 5 B C E F G]\n. . . . . . G .     . . .some . . .     . . . . . . .[1\n. 5 . . . F . .     . . . . . . . .     . . . . . . . .\n. . 4 . E . . .     . . .magic. . .     . . . . . . . .\n. . . . . . . .  *  . . . . . . . .  =  . . garbage . .    &gt;&gt; (64- 9)\n. . C . 2 . . .     . . .bits . . .     . . . . . . . .\n. B . . . 1 . .     . . . . . . . .     . . . . . . . .\n. . . . . . . .     . . . . . . . .     . . . . . . . .\n\n                                        any consecutive\nrelevant occupancy                      combination of\nrook d4, 10 bits                        the masked bits\n. . . . . . . .     . . . . . . . .     4 5 6 B C E F G]\n. . . 6 . . . .     . . .some . . .     . . . . . .[1 2\n. . . 5 . . . .     . . . . . . . .     . . . . . . . .\n. . . 4 . . . .     . . .magic. . .     . . . . . . . .\n. B C . E F G .  *  . . . . . . . .  =  . . garbage . .    &gt;&gt; (64-10)\n. . . 2 . . . .     . . .bits . . .     . . . . . . . .\n. . . 1 . . . .     . . . . . . . .     . . . . . . . .\n. . . . . . . .     . . . . . . . .     . . . . . . . .\n\n                                        any consecutive\nrelevant occupancy                      combination of\nrook a1, 12 bits                        the masked bits\n. . . . . . . .     . . . . . . . .     5 6 B C D E F G]\n6 . . . . . . .     . . .some . . .     . . . .[1 2 3 4\n5 . . . . . . .     . . . . . . . .     . . . . . . . .\n4 . . . . . . .     . . .magic. . .     . . . . . . . .\n3 . . . . . . .  *  . . . . . . . .  =  . . garbage . .    &gt;&gt; (64-12)\n2 . . . . . . .     . . .bits . . .     . . . . . . . .\n1 . . . . . . .     . . . . . . . .     . . . . . . . .\n. B C D E F G .     . . . . . . . .     . . . . . . . .\n</pre>\n<p><span id=\"FeedinginRandoms\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Feeding_in_Randoms\">Feeding in Randoms</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Looking_for_Magics&amp;action=edit&amp;section=2\" title=\"Edit section: Feeding in Randoms\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad's</a> proposal to find magics <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>&#160;:\n</p>\n<table class=\"wikitable\">\n\n<tr>\n<td>  Just trying out <a href=\"/Pseudorandom_Number_Generator\" title=\"Pseudorandom Number Generator\">random numbers</a> with a low number of nonzero bits until you find a number which works is by far the fastest and easiest way to generate the magic numbers, in my experience. On my Core Duo 2.8 GHz, it takes less than a second to find magic numbers for rooks and bishops for all squares (and I have made no attempt to optimize the code, it should be easy to make it much faster). Here is the source code:\n<pre>\n#include &lt;stdio.h&gt;\n#include &lt;stdlib.h&gt;\n\n#define USE_32_BIT_MULTIPLICATIONS\n\ntypedef unsigned long long uint64;\n\nuint64 random_uint64() {\n  uint64 u1, u2, u3, u4;\n  u1 = (uint64)(random()) &amp; 0xFFFF; u2 = (uint64)(random()) &amp; 0xFFFF;\n  u3 = (uint64)(random()) &amp; 0xFFFF; u4 = (uint64)(random()) &amp; 0xFFFF;\n  return u1 | (u2 &lt;&lt; 16) | (u3 &lt;&lt; 32) | (u4 &lt;&lt; 48);\n}\n\nuint64 random_uint64_fewbits() {\n  return random_uint64() &amp; random_uint64() &amp; random_uint64();\n}\n\nint count_1s(uint64 b) {\n  int r;\n  for(r = 0; b; r++, b &amp;= b - 1);\n  return r;\n}\n\nconst int BitTable[64] = {\n  63, 30, 3, 32, 25, 41, 22, 33, 15, 50, 42, 13, 11, 53, 19, 34, 61, 29, 2,\n  51, 21, 43, 45, 10, 18, 47, 1, 54, 9, 57, 0, 35, 62, 31, 40, 4, 49, 5, 52,\n  26, 60, 6, 23, 44, 46, 27, 56, 16, 7, 39, 48, 24, 59, 14, 12, 55, 38, 28,\n  58, 20, 37, 17, 36, 8\n};\n\nint pop_1st_bit(uint64 *bb) {\n  uint64 b = *bb ^ (*bb - 1);\n  unsigned int fold = (unsigned) ((b &amp; 0xffffffff) ^ (b &gt;&gt; 32));\n  *bb &amp;= (*bb - 1);\n  return BitTable[(fold * 0x783a9b23) &gt;&gt; 26];\n}\n\nuint64 index_to_uint64(int index, int bits, uint64 m) {\n  int i, j;\n  uint64 result = 0ULL;\n  for(i = 0; i &lt; bits; i++) {\n    j = pop_1st_bit(&amp;m);\n    if(index &amp; (1 &lt;&lt; i)) result |= (1ULL &lt;&lt; j);\n  }\n  return result;\n}\n\nuint64 rmask(int sq) {\n  uint64 result = 0ULL;\n  int rk = sq/8, fl = sq%8, r, f;\n  for(r = rk+1; r &lt;= 6; r++) result |= (1ULL &lt;&lt; (fl + r*8));\n  for(r = rk-1; r &gt;= 1; r--) result |= (1ULL &lt;&lt; (fl + r*8));\n  for(f = fl+1; f &lt;= 6; f++) result |= (1ULL &lt;&lt; (f + rk*8));\n  for(f = fl-1; f &gt;= 1; f--) result |= (1ULL &lt;&lt; (f + rk*8));\n  return result;\n}\n\nuint64 bmask(int sq) {\n  uint64 result = 0ULL;\n  int rk = sq/8, fl = sq%8, r, f;\n  for(r=rk+1, f=fl+1; r&lt;=6 &amp;&amp; f&lt;=6; r++, f++) result |= (1ULL &lt;&lt; (f + r*8));\n  for(r=rk+1, f=fl-1; r&lt;=6 &amp;&amp; f&gt;=1; r++, f--) result |= (1ULL &lt;&lt; (f + r*8));\n  for(r=rk-1, f=fl+1; r&gt;=1 &amp;&amp; f&lt;=6; r--, f++) result |= (1ULL &lt;&lt; (f + r*8));\n  for(r=rk-1, f=fl-1; r&gt;=1 &amp;&amp; f&gt;=1; r--, f--) result |= (1ULL &lt;&lt; (f + r*8));\n  return result;\n}\n\nuint64 ratt(int sq, uint64 block) {\n  uint64 result = 0ULL;\n  int rk = sq/8, fl = sq%8, r, f;\n  for(r = rk+1; r &lt;= 7; r++) {\n    result |= (1ULL &lt;&lt; (fl + r*8));\n    if(block &amp; (1ULL &lt;&lt; (fl + r*8))) break;\n  }\n  for(r = rk-1; r &gt;= 0; r--) {\n    result |= (1ULL &lt;&lt; (fl + r*8));\n    if(block &amp; (1ULL &lt;&lt; (fl + r*8))) break;\n  }\n  for(f = fl+1; f &lt;= 7; f++) {\n    result |= (1ULL &lt;&lt; (f + rk*8));\n    if(block &amp; (1ULL &lt;&lt; (f + rk*8))) break;\n  }\n  for(f = fl-1; f &gt;= 0; f--) {\n    result |= (1ULL &lt;&lt; (f + rk*8));\n    if(block &amp; (1ULL &lt;&lt; (f + rk*8))) break;\n  }\n  return result;\n}\n\nuint64 batt(int sq, uint64 block) {\n  uint64 result = 0ULL;\n  int rk = sq/8, fl = sq%8, r, f;\n  for(r = rk+1, f = fl+1; r &lt;= 7 &amp;&amp; f &lt;= 7; r++, f++) {\n    result |= (1ULL &lt;&lt; (f + r*8));\n    if(block &amp; (1ULL &lt;&lt; (f + r * 8))) break;\n  }\n  for(r = rk+1, f = fl-1; r &lt;= 7 &amp;&amp; f &gt;= 0; r++, f--) {\n    result |= (1ULL &lt;&lt; (f + r*8));\n    if(block &amp; (1ULL &lt;&lt; (f + r * 8))) break;\n  }\n  for(r = rk-1, f = fl+1; r &gt;= 0 &amp;&amp; f &lt;= 7; r--, f++) {\n    result |= (1ULL &lt;&lt; (f + r*8));\n    if(block &amp; (1ULL &lt;&lt; (f + r * 8))) break;\n  }\n  for(r = rk-1, f = fl-1; r &gt;= 0 &amp;&amp; f &gt;= 0; r--, f--) {\n    result |= (1ULL &lt;&lt; (f + r*8));\n    if(block &amp; (1ULL &lt;&lt; (f + r * 8))) break;\n  }\n  return result;\n}\n\n\nint transform(uint64 b, uint64 magic, int bits) {\n#if defined(USE_32_BIT_MULTIPLICATIONS)\n  return\n    (unsigned)((int)b*(int)magic ^ (int)(b&gt;&gt;32)*(int)(magic&gt;&gt;32)) &gt;&gt; (32-bits);\n#else\n  return (int)((b * magic) &gt;&gt; (64 - bits));\n#endif\n}\n\nuint64 find_magic(int sq, int m, int bishop) {\n  uint64 mask, b[4096], a[4096], used[4096], magic;\n  int i, j, k, n, fail;\n\n  mask = bishop? bmask(sq)&#160;: rmask(sq);\n  n = count_1s(mask);\n\n  for(i = 0; i &lt; (1 &lt;&lt; n); i++) {\n    b[i] = index_to_uint64(i, n, mask);\n    a[i] = bishop? batt(sq, b[i])&#160;: ratt(sq, b[i]);\n  }\n  for(k = 0; k &lt; 100000000; k++) {\n    magic = random_uint64_fewbits();\n    if(count_1s((mask * magic) &amp; 0xFF00000000000000ULL) &lt; 6) continue;\n    for(i = 0; i &lt; 4096; i++) used[i] = 0ULL;\n    for(i = 0, fail = 0;&#160;!fail &amp;&amp; i &lt; (1 &lt;&lt; n); i++) {\n      j = transform(b[i], magic, m);\n      if(used[j] == 0ULL) used[j] = a[i];\n      else if(used[j]&#160;!= a[i]) fail = 1;\n    }\n    if(!fail) return magic;\n  }\n  printf(\"***Failed***\\n\");\n  return 0ULL;\n}\n\nint RBits[64] = {\n  12, 11, 11, 11, 11, 11, 11, 12,\n  11, 10, 10, 10, 10, 10, 10, 11,\n  11, 10, 10, 10, 10, 10, 10, 11,\n  11, 10, 10, 10, 10, 10, 10, 11,\n  11, 10, 10, 10, 10, 10, 10, 11,\n  11, 10, 10, 10, 10, 10, 10, 11,\n  11, 10, 10, 10, 10, 10, 10, 11,\n  12, 11, 11, 11, 11, 11, 11, 12\n};\n\nint BBits[64] = {\n  6, 5, 5, 5, 5, 5, 5, 6,\n  5, 5, 5, 5, 5, 5, 5, 5,\n  5, 5, 7, 7, 7, 7, 5, 5,\n  5, 5, 7, 9, 9, 7, 5, 5,\n  5, 5, 7, 9, 9, 7, 5, 5,\n  5, 5, 7, 7, 7, 7, 5, 5,\n  5, 5, 5, 5, 5, 5, 5, 5,\n  6, 5, 5, 5, 5, 5, 5, 6\n};\n\nint main() {\n  int square;\n\n  printf(\"const uint64 RMagic[64] = {\\n\");\n  for(square = 0; square &lt; 64; square++)\n    printf(\"  0x%llxULL,\\n\", find_magic(square, RBits[square], 0));\n  printf(\"};\\n\\n\");\n\n  printf(\"const uint64 BMagic[64] = {\\n\");\n  for(square = 0; square &lt; 64; square++)\n    printf(\"  0x%llxULL,\\n\", find_magic(square, BBits[square], 1));\n  printf(\"};\\n\\n\");\n\n  return 0;\n}\n</pre>\n</td></tr></table>\n<h1><span class=\"mw-headline\" id=\"Fixed_Shift_Magics\">Fixed Shift Magics</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Looking_for_Magics&amp;action=edit&amp;section=3\" title=\"Edit section: Fixed Shift Magics\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Another application is Looking for overlapping Magics for a <a href=\"/Magic_Bitboards#FixedShiftFancy\" title=\"Magic Bitboards\">fixed shift approach</a>, as recently proposed by <a href=\"/Volker_Annuss\" title=\"Volker Annuss\">Volker Annuss</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup> .\n</p>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Looking_for_Magics&amp;action=edit&amp;section=4\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Best_Magics_so_far\" title=\"Best Magics so far\">Best Magics so far</a></li>\n<li> <a href=\"/Traversing_Subsets_of_a_Set\" title=\"Traversing Subsets of a Set\">Traversing Subsets of a Set</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Looking_for_Magics&amp;action=edit&amp;section=5\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=175544&amp;t=19699\">Magic Move Generation</a> by Colin, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 18, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=25810\">Magics revisited</a> by <a href=\"/Richard_Pijl\" title=\"Richard Pijl\">Richard Pijl</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 04, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=33346\">magic search</a> by <a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel Shawul</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 19, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=39298\">Build magics on the fly</a> by <a href=\"/Marco_Costalba\" title=\"Marco Costalba\">Marco Costalba</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 07, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=54138\">Super Fast 'Looking for magics' 1.0</a> by <a href=\"/Syed_Fahad\" title=\"Syed Fahad\">Syed Fahad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 25, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=55712\">question about magic keys generation time</a> by <a href=\"/Fermin_Serrano\" title=\"Fermin Serrano\">Fermin Serrano</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 19, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=58424\">Magic number generation taking 17 seconds or more</a> by <a href=\"/index.php?title=Kalyankumar_Ramaseshan&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Kalyankumar Ramaseshan (page does not exist)\">Kalyankumar Ramaseshan</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 29, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=59691&amp;start=9\">Re: Some questions from a beginner</a> by Tim Hagen, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 04, 2016</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=59691&amp;start=18\">Re: Some questions from a beginner</a> by <a href=\"/Gerd_Isenberg\" title=\"Gerd Isenberg\">Gerd Isenberg</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 05, 2016</dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=59691&amp;start=22\">Re: Some questions from a beginner</a> by <a href=\"/Mincho_Georgiev\" title=\"Mincho Georgiev\">Mincho Georgiev</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>,  April 06, 2016</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64578\">Looking for dense magics</a> by Lucas Braesch, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 11, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65187\">Disproving the existence of some magics</a> by <a href=\"/Niklas_Fiekas\" title=\"Niklas Fiekas\">Niklas Fiekas</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 16, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=67051\">No bishop magics with fixed shift 8</a> by <a href=\"/Niklas_Fiekas\" title=\"Niklas Fiekas\">Niklas Fiekas</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 09, 2018</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Looking_for_Magics&amp;action=edit&amp;section=6\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.chessprogramming.net/generating-magic-multipliers/\">Chess Programming | Generating Magic Multipliers</a> by <a href=\"/Steve_Maughan\" title=\"Steve Maughan\">Steve Maughan</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Looking_for_Magics&amp;action=edit&amp;section=7\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65187\">Disproving the existence of some magics</a> by <a href=\"/Niklas_Fiekas\" title=\"Niklas Fiekas\">Niklas Fiekas</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 16, 2017</span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=175834&amp;t=19699\">Re: Magic Move Generation</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 20, 2008</span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=51162\">Fixed shift magics with 800KB lookup table</a> by <a href=\"/Volker_Annuss\" title=\"Volker Annuss\">Volker Annuss</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, September, 05, 2010</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Magic_Bitboards\" title=\"Magic Bitboards\">Up one level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301085017\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.014 seconds\nReal time usage: 0.014 seconds\nPreprocessor visited node count: 92/1000000\nPreprocessor generated node count: 188/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1664-0!canonical and timestamp 20260301085017 and revision id 2272\n -->\n"
+    },
+    "categories": [],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Best Magics so far"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Board Representation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Daniel Shawul"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fermin Serrano"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gerd Isenberg"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hash Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Magic Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marco Costalba"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mincho Georgiev"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Niklas Fiekas"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pseudorandom Number Generator"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Richard Pijl"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sliding Piece Attacks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Steve Maughan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Syed Fahad"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tord Romstad"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Traversing Subsets of a Set"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Trial and Error"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Volker Annuss"
+      },
+      {
+        "ns": 0,
+        "*": "Kalyankumar Ramaseshan"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Trial and Error",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Looking_for_Magics",
+        "byteoffset": 402,
+        "anchor": "Trial_and_Error"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Feeding in Randoms",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Looking_for_Magics",
+        "byteoffset": 3818,
+        "anchor": "Feeding_in_Randoms"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Fixed Shift Magics",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Looking_for_Magics",
+        "byteoffset": 9715,
+        "anchor": "Fixed_Shift_Magics"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Looking_for_Magics",
+        "byteoffset": 10100,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "5",
+        "index": "5",
+        "fromtitle": "Looking_for_Magics",
+        "byteoffset": 10172,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "6",
+        "index": "6",
+        "fromtitle": "Looking_for_Magics",
+        "byteoffset": 11989,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "7",
+        "index": "7",
+        "fromtitle": "Looking_for_Magics",
+        "byteoffset": 12143,
+        "anchor": "References"
+      }
+    ]
+  }
+}

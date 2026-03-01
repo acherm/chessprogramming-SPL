@@ -1,0 +1,870 @@
+{
+  "parse": {
+    "title": "Depth",
+    "pageid": 1045,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Search\" title=\"Search\">Search</a> * Depth</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:233px;\"><a href=\"http://www.mcescher.com/Gallery/recogn-bmp/LW403.jpg\"><img alt=\"\" src=\"/images/6/68/EschersDepth.jpg\" width=\"231\" height=\"315\" class=\"thumbimage\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:EschersDepth.jpg\" class=\"internal\" title=\"Enlarge\"></a></div><a href=\"/Category:M._C._Escher\" title=\"Category:M. C. Escher\">M. C. Escher</a>, Depth, 1955 <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>Depth</b> is the height or <i>nominal</i> depth in <a href=\"/Ply\" title=\"Ply\">plies</a> between the <a href=\"/Root\" title=\"Root\">root</a> and so called <a href=\"/Horizon_Node\" title=\"Horizon Node\">horizon nodes</a> (depth 0), where a heuristic value is assigned to. Thus, depth is the number of half moves the search <i>nominally</i> looks ahead.\n</p><p>Despite <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">quiescence search</a>, where usually winning captures and even some checks are tried at or behind the search horizon, until positions become sufficiently quite, <a href=\"/Selectivity\" title=\"Selectivity\">selectivity</a> of modern chess programs, caused by <a href=\"/Extensions\" title=\"Extensions\">extensions</a>, <a href=\"/Pruning\" title=\"Pruning\">pruning</a> and <a href=\"/Reductions\" title=\"Reductions\">reductions</a>, notably <a href=\"/Check_Extensions\" title=\"Check Extensions\">check extensions</a>, <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">NMP</a> and <a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">LMR</a>, leads to bushy, non-uniform <a href=\"/Search_Tree\" title=\"Search Tree\">trees</a> where some branches are searched deeper than nominal, but others shallower. A <a href=\"/Depth_Reduction_R\" title=\"Depth Reduction R\">depth reduction R</a> of multiple plies is often performed in forward pruning techniques like <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">null move pruning</a> and <a href=\"/Multi-Cut\" title=\"Multi-Cut\">multi-cut</a>. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Draft_versus_Ply-Index\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Draft versus Ply-Index</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Fractional_Plies\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Fractional Plies</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Depth_Comparison_of_different_programs\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Depth Comparison of different programs</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Selective_Search_Depth\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Selective Search Depth</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#Maximum_Search_Depth\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Maximum Search Depth</span></a></li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#Diminishing_Returns\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Diminishing Returns</span></a></li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#See_also\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-8\"><a href=\"#Publications\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">Publications</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#1978_...\"><span class=\"tocnumber\">8.1</span> <span class=\"toctext\">1978 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#1980_...\"><span class=\"tocnumber\">8.2</span> <span class=\"toctext\">1980 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#1990_...\"><span class=\"tocnumber\">8.3</span> <span class=\"toctext\">1990 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-12\"><a href=\"#2000_...\"><span class=\"tocnumber\">8.4</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-13\"><a href=\"#2010_...\"><span class=\"tocnumber\">8.5</span> <span class=\"toctext\">2010 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-14\"><a href=\"#Postings\"><span class=\"tocnumber\">9</span> <span class=\"toctext\">Postings</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-15\"><a href=\"#1983_...\"><span class=\"tocnumber\">9.1</span> <span class=\"toctext\">1983 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-16\"><a href=\"#1996_...\"><span class=\"tocnumber\">9.2</span> <span class=\"toctext\">1996 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-17\"><a href=\"#2000_..._2\"><span class=\"tocnumber\">9.3</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-18\"><a href=\"#2010_..._2\"><span class=\"tocnumber\">9.4</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-19\"><a href=\"#2015_...\"><span class=\"tocnumber\">9.5</span> <span class=\"toctext\">2015 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-20\"><a href=\"#2020_...\"><span class=\"tocnumber\">9.6</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-21\"><a href=\"#External_Links\"><span class=\"tocnumber\">10</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-22\"><a href=\"#References\"><span class=\"tocnumber\">11</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Draft_versus_Ply-Index\">Draft versus Ply-Index</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Depth&amp;action=edit&amp;section=1\" title=\"Edit section: Draft versus Ply-Index\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Most likely inside the search routine, a ply-index is used to index <a href=\"/Stack\" title=\"Stack\">stacks</a> or <a href=\"/Array\" title=\"Array\">arrays</a> with pre-saved search information. This index is initialized with zero at the <a href=\"/Root\" title=\"Root\">root</a>, and is then incremented after making a move each time the <a href=\"/Recursion\" title=\"Recursion\">recursive</a> search is called. This index measures the ply-distance from the current <a href=\"/Node\" title=\"Node\">node</a> to the root and would therefor be sufficient to determine the remaining depth to the horizon, also called draft:\n</p>\n<pre>\ndraft&#160;::= depth at the root - ply index\n</pre>\n<p>However, there are various reasons to decouple the depth to horizon from the ply-index or depth from root, which are often passed as independent parameters to a recursive search routine (see code below). While the ply-index is incremented by one each time, the draft may be independently altered by various <a href=\"/Extensions\" title=\"Extensions\">extension</a>- or <a href=\"/Reductions\" title=\"Reductions\">reduction</a>-schemes and may also consider <a href=\"/Extensions#FractionalExtensions\" title=\"Extensions\">fractional extensions</a> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup> .\n<span id=\"FractionalPlies\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Fractional_Plies\">Fractional Plies</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Depth&amp;action=edit&amp;section=2\" title=\"Edit section: Fractional Plies\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Some programs extend or reduce in fractions of one ply. Fractional plies with integers, where one corresponds to 1/N, require a depth resolution of N. Inside an <a href=\"/Iterative_Deepening\" title=\"Iterative Deepening\">iterative deepening</a> framework, the search depth is incremented, usually by one ply, N - or by a fraction of one ply, for instance 1/2 ply.\n</p><p><a href=\"/Amir_Ban\" title=\"Amir Ban\">Amir Ban</a> on <a href=\"/Junior\" title=\"Junior\">Junior</a> in <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, March 1998 <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>&#160;:\n</p>\n<pre>The <a href=\"/Brute-Force\" title=\"Brute-Force\">brute-force</a> <a href=\"/Ply\" title=\"Ply\">ply</a> <a class=\"mw-selflink selflink\">depth</a> is indeed half the publicized depth. All the rest are <a href=\"/Extensions\" title=\"Extensions\">extensions</a> (in conventional terminology, I don't think of them this way). If you set Junior to depth 12, e.g., then you should be able to find a 7-ply combination where it fails. If I am doing a good job, then you should have a hard time finding one.\n</pre>\n<pre>The question of what this is equivalent to in terms of other programs, e.g. a null-mover with \"standard\" extensions is interesting, but I don't know the answer. In tournament conditions middlegame Junior typically gets 14-16 depths, and it looks competitive tactically. \n</pre>\n<h1><span class=\"mw-headline\" id=\"Depth_Comparison_of_different_programs\">Depth Comparison of different programs</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Depth&amp;action=edit&amp;section=3\" title=\"Edit section: Depth Comparison of different programs\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Due to different implementations, the reported search depth of chess programs is not comparable in general. Programs like <a href=\"/The_King\" title=\"The King\">The King</a> (<a href=\"/Chessmaster\" title=\"Chessmaster\">Chessmaster</a>), <a href=\"/Junior\" title=\"Junior\">Junior</a> and <a href=\"/Rybka\" title=\"Rybka\">Rybka</a> are known for interpreting depth differently for whatever reasons.\n</p>\n<h1><span class=\"mw-headline\" id=\"Selective_Search_Depth\">Selective Search Depth</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Depth&amp;action=edit&amp;section=4\" title=\"Edit section: Selective Search Depth\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Some programs also report a selective search depth beside the nominal search depth, most often much greater than the nominal search depth. Some programs determine the highest distance to the root at any node, others only at the horizon.\n</p>\n<pre>\nint highestDepth;\n\nint iterativeDeepening() {\n   ...\n   highestDepth = 0;\n   for (depth = 0; depth &lt;= maxdepth; depth += DEPTH_OF_ONE_PLY) {\n      score = abSearch( -oo, +oo, depth, 0 );\n      if (timeIsOver (...) )\n         break;\n   }\n   ...\n}\n\nint abSearch( int alpha, int beta, int depth, int ply ) {\n   depth += determineExtensions(...);\n   depth -= determineReductions(...);\n   if( depth &lt;= 0 ) return quiesce( alpha, beta );\n   if ( ply &gt; highestDepth )\n      highestDepth = ply;\n\n   for ( all moves)  {\n      score = -abSearch( -beta, -alpha, depth - DEPTH_OF_ONE_PLY, ply + 1 );\n      if( score &gt;= beta )\n         return beta;   // beta cutoff\n      if( score &gt; alpha )\n         alpha = score; // alpha acts like max in MiniMax\n   }\n   return alpha;\n}\n</pre>\n<p><span id=\"MaxPly\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Maximum_Search_Depth\">Maximum Search Depth</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Depth&amp;action=edit&amp;section=5\" title=\"Edit section: Maximum Search Depth\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>The Maximum Search Depth of a <a href=\"/Depth-First\" title=\"Depth-First\">depth-first search</a> is usually determined by a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Compile_time\">compile time</a> constant in <a href=\"/Ply\" title=\"Ply\">ply units</a> (MAX_PLAY). It is used to statically allocate <a href=\"/Array\" title=\"Array\">arrays</a> like a <a href=\"/Triangular_PV-Table\" title=\"Triangular PV-Table\">Triangular PV-Table</a>, or <a href=\"/Stack#SearchStack\" title=\"Stack\">search stacks</a> inside the programs <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Data_segment\">data-</a> or <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/.bss\">bss segment</a>. While 64 was quite common, todays programs tend to use higher values, e.g. 128. A search routine should nevertheless check the upper bound of the search stack to immediate return a <a href=\"/Lazy_Evaluation\" title=\"Lazy Evaluation\">lazy evaluation</a> score or <a href=\"/Material#Balance\" title=\"Material\">material balance</a> when the ply index threatens overflow.\n<span id=\"DiminishingReturns\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Diminishing_Returns\">Diminishing Returns</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Depth&amp;action=edit&amp;section=6\" title=\"Edit section: Diminishing Returns\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Despite the existence of <a href=\"/Search_Pathology\" title=\"Search Pathology\">pathology</a> in searching some trees, where a deeper <a href=\"/Minimax\" title=\"Minimax\">minimax</a> search results in worse play, it is quite consensus in Chess that deeper search yields in stronger play. <a href=\"/Playing_Strength\" title=\"Playing Strength\">Strength</a> improvement from depth d to depth d+1 was first systematically examined by <a href=\"/Ken_Thompson\" title=\"Ken Thompson\">Ken Thompson</a> with <a href=\"/Belle\" title=\"Belle\">Belle</a> in <i>Computer Chess Strength</i>, as introduced at the <a href=\"/Advances_in_Computer_Chess_3\" title=\"Advances in Computer Chess 3\">Advances in Computer Chess 3</a> conference in 1981 <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup> . Thompson found Belle (n+1) scored about 80% versus Belle (n), which roughly translates to a 200 <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Elo_rating_system\">Elo</a> improvement playing one ply deeper, while the improvement seemed constant independent from the used depths from 3 to 8, while a second experiment <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup> indicated a falloff beyond depth 7.\n</p>\n<table class=\"wikitable\">\n\n<tr>\n<th>\n</th>\n<th> P4\n</th>\n<th> P5\n</th>\n<th> P6\n</th>\n<th> P7\n</th>\n<th> P8\n</th>\n<th> P9\n</th>\n<th> Ratings\n</th>\n<th> Improvement\n</th></tr>\n<tr>\n<th> P4\n</th>\n<td style=\"text-align:center;\">\n</td>\n<td style=\"text-align:center;\"> 5\n</td>\n<td style=\"text-align:center;\"> ½\n</td>\n<td style=\"text-align:center;\"> 0\n</td>\n<td style=\"text-align:center;\"> 0\n</td>\n<td style=\"text-align:center;\"> 0\n</td>\n<td style=\"text-align:right;\"> 1235\n</td>\n<td style=\"text-align:right;\"> -\n</td></tr>\n<tr>\n<th> P5\n</th>\n<td style=\"text-align:center;\"> 15\n</td>\n<td style=\"text-align:center;\">\n</td>\n<td style=\"text-align:center;\"> 3½\n</td>\n<td style=\"text-align:center;\"> 3\n</td>\n<td style=\"text-align:center;\"> ½\n</td>\n<td style=\"text-align:center;\"> 0\n</td>\n<td style=\"text-align:right;\"> 1570\n</td>\n<td style=\"text-align:right;\"> 235\n</td></tr>\n<tr>\n<th> P6\n</th>\n<td style=\"text-align:center;\"> 19½\n</td>\n<td style=\"text-align:center;\"> 16½\n</td>\n<td style=\"text-align:center;\">\n</td>\n<td style=\"text-align:center;\"> 4\n</td>\n<td style=\"text-align:center;\"> 1½\n</td>\n<td style=\"text-align:center;\"> 1½\n</td>\n<td style=\"text-align:right;\"> 1826\n</td>\n<td style=\"text-align:right;\"> 256\n</td></tr>\n<tr>\n<th> P7\n</th>\n<td style=\"text-align:center;\"> 20\n</td>\n<td style=\"text-align:center;\"> 17\n</td>\n<td style=\"text-align:center;\"> 16\n</td>\n<td style=\"text-align:center;\">\n</td>\n<td style=\"text-align:center;\"> 5\n</td>\n<td style=\"text-align:center;\"> 4\n</td>\n<td style=\"text-align:right;\"> 2031\n</td>\n<td style=\"text-align:right;\"> 205\n</td></tr>\n<tr>\n<th> P8\n</th>\n<td style=\"text-align:center;\"> 20\n</td>\n<td style=\"text-align:center;\"> 19½\n</td>\n<td style=\"text-align:center;\"> 18½\n</td>\n<td style=\"text-align:center;\"> 15\n</td>\n<td style=\"text-align:center;\">\n</td>\n<td style=\"text-align:center;\"> 5½\n</td>\n<td style=\"text-align:right;\"> 2208\n</td>\n<td style=\"text-align:right;\"> 167\n</td></tr>\n<tr>\n<th> P9\n</th>\n<td style=\"text-align:center;\"> 20\n</td>\n<td style=\"text-align:center;\"> 20\n</td>\n<td style=\"text-align:center;\"> 18½\n</td>\n<td style=\"text-align:center;\"> 16\n</td>\n<td style=\"text-align:center;\"> 14½\n</td>\n<td style=\"text-align:center;\">\n</td>\n<td style=\"text-align:right;\"> 2328\n</td>\n<td style=\"text-align:right;\"> 120\n</td></tr></table>\n<p>Also, in other board games such as <a href=\"/Othello\" title=\"Othello\">Othello</a> and <a href=\"/Checkers\" title=\"Checkers\">Checkers</a>, additional plies of search translated into decreasing benefits, giving rise to <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Diminishing_returns\">Diminishing returns</a> for deeper searching. In their 1997 paper <i>Diminishing Returns for Additional Search in Chess</i> <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup> , <a href=\"/Andreas_Junghanns\" title=\"Andreas Junghanns\">Junghanns</a>, <a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Schaeffer</a>, <a href=\"/Mark_Brockington\" title=\"Mark Brockington\">Brockington</a>, <a href=\"/Yngvi_Bj%C3%B6rnsson\" title=\"Yngvi Björnsson\">Björnsson</a> and <a href=\"/Tony_Marsland\" title=\"Tony Marsland\">Marsland</a> conclude the existence of Diminishing returns in Chess as well, somehow hidden by the high percentage of errors made by chess programs for lower search depth.\n</p><p>In self-play experiments with <a href=\"/Crafty\" title=\"Crafty\">Crafty</a>, <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/Monroe_Newborn\" title=\"Monroe Newborn\">Monroe Newborn</a> <sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup> and later <a href=\"/Ernst_A._Heinz\" title=\"Ernst A. Heinz\">Ernst A. Heinz</a> with <a href=\"/DarkThought\" title=\"DarkThought\">DarkThought</a> <sup id=\"cite_ref-9\" class=\"reference\"><a href=\"#cite_note-9\">&#91;9&#93;</a></sup> steadily discovered new best moves while searching deeper. In further experiments <sup id=\"cite_ref-10\" class=\"reference\"><a href=\"#cite_note-10\">&#91;10&#93;</a></sup> , Heinz found indications of decreasing returns from increasing search in chess. In his 2001 <a href=\"/ICGA_Journal\" title=\"ICGA Journal\">ICGA Journal</a> paper <i>Self-Play, Deep Search and Diminishing Returns</i> <sup id=\"cite_ref-11\" class=\"reference\"><a href=\"#cite_note-11\">&#91;11&#93;</a></sup> he gave following match results (3,000 games each) <sup id=\"cite_ref-12\" class=\"reference\"><a href=\"#cite_note-12\">&#91;12&#93;</a></sup>&#160;:\n</p>\n<ul><li> 12-ply was 84 Elo points better than 11 ply</li>\n<li> 11-ply was 92 Elo points better than 10 ply</li>\n<li> 10-ply was 115 Elo points better than 9 ply</li></ul>\n<p><a href=\"/Tony_van_Roon-Werten\" title=\"Tony van Roon-Werten\">Tony van Roon-Werten</a> made following statement on <i>Diminishing Returns</i> <sup id=\"cite_ref-13\" class=\"reference\"><a href=\"#cite_note-13\">&#91;13&#93;</a></sup>&#160;:\n</p>\n<pre>If two programs play with 5 vs 6 ply search, the second engine has a 20% depth advantage. With 10 vs 11 it's only 10%. So of course the difference in wins is smaller. ...\n</pre>\n<pre>Diminishing returns are only proven (IMO) if 6 vs 5 wins more games than 12 vs 10 because only then are you comparing something linear and you give a linear advantage. \n</pre>\n<p><a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a> conducted self-play experiments with <a href=\"/ProDeo\" title=\"ProDeo\">ProDeo 1.74</a> playing different depths. Schröder also suggests that ProDeo has a <a href=\"/Branching_Factor\" title=\"Branching Factor\">branching-factor</a> of roughly 2, in other words an additional ply corresponds to a <a href=\"/Match_Statistics#DoublingTC\" title=\"Match Statistics\">doubling of time</a>. In the following table the values indicate the Elo advantage of ProDeo playing with depth A against itself with depth B. The exact tournament conditions can be studied on his webpage <sup id=\"cite_ref-14\" class=\"reference\"><a href=\"#cite_note-14\">&#91;14&#93;</a></sup> .\n</p>\n<table class=\"wikitable\">\n\n<tr>\n<th> depth A vs B\n</th>\n<th> 7\n</th>\n<th> 8\n</th>\n<th> 9\n</th>\n<th> 10\n</th>\n<th> 11\n</th></tr>\n<tr>\n<th style=\"text-align:right;\"> 6\n</th>\n<td style=\"text-align:right;\"> 180\n</td>\n<td style=\"text-align:right;\"> 321\n</td>\n<td style=\"text-align:right;\"> 401\n</td>\n<td style=\"text-align:right;\">\n</td>\n<td style=\"text-align:right;\">\n</td></tr>\n<tr>\n<th style=\"text-align:right;\"> 7\n</th>\n<td style=\"text-align:right;\"> 0\n</td>\n<td style=\"text-align:right;\"> 147\n</td>\n<td style=\"text-align:right;\"> 281\n</td>\n<td style=\"text-align:right;\"> 389\n</td>\n<td style=\"text-align:right;\">\n</td></tr>\n<tr>\n<th style=\"text-align:right;\"> 8\n</th>\n<td style=\"text-align:right;\">\n</td>\n<td style=\"text-align:right;\"> 0\n</td>\n<td style=\"text-align:right;\"> 151\n</td>\n<td style=\"text-align:right;\"> 255\n</td>\n<td style=\"text-align:right;\"> 386\n</td></tr>\n<tr>\n<th style=\"text-align:right;\"> 9\n</th>\n<td style=\"text-align:right;\">\n</td>\n<td style=\"text-align:right;\">\n</td>\n<td style=\"text-align:right;\"> 0\n</td>\n<td style=\"text-align:right;\"> 129\n</td>\n<td style=\"text-align:right;\"> 255\n</td></tr>\n<tr>\n<th style=\"text-align:right;\"> 10\n</th>\n<td style=\"text-align:right;\">\n</td>\n<td style=\"text-align:right;\">\n</td>\n<td style=\"text-align:right;\">\n</td>\n<td style=\"text-align:right;\"> 0\n</td>\n<td style=\"text-align:right;\"> 127\n</td></tr></table>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Depth&amp;action=edit&amp;section=7\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/index.php?title=Alpha-Beta_Conspiracy_Search&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Alpha-Beta Conspiracy Search (page does not exist)\">Alpha-Beta Conspiracy Search</a></li>\n<li> <a href=\"/Extensions#FractionalExtensions\" title=\"Extensions\">Fractional Extensions</a></li>\n<li> <a href=\"/Iterative_Deepening\" title=\"Iterative Deepening\">Iterative Deepening</a></li>\n<li> <a href=\"/Knowledge#SearchVersusEvaluation\" title=\"Knowledge\">Knowledge | Search versus Evaluation</a></li>\n<li> <a href=\"/Match_Statistics\" title=\"Match Statistics\">Match Statistics</a></li>\n<li> <a href=\"/Odd-Even_Effect\" title=\"Odd-Even Effect\">Odd-Even Effect</a></li>\n<li> <a href=\"/Playing_Strength\" title=\"Playing Strength\">Playing Strength</a></li>\n<li> <a href=\"/Ply\" title=\"Ply\">Ply</a></li>\n<li> <a href=\"/Search_Pathology\" title=\"Search Pathology\">Search Pathology</a></li>\n<li> <a href=\"/Selectivity\" title=\"Selectivity\">Selectivity</a></li>\n<li> <a href=\"/SEX_Algorithm\" title=\"SEX Algorithm\">SEX Algorithm</a></li>\n<li> <a href=\"/Alexander_Szabo#TechnologyCurve\" title=\"Alexander Szabo\">The Technology Curve</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Depth&amp;action=edit&amp;section=8\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1978_...\">1978 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Depth&amp;action=edit&amp;section=9\" title=\"Edit section: 1978 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/James_Gillogly\" title=\"James Gillogly\">James Gillogly</a> (<b>1978</b>). <i>Performance Analysis of the Technology Chess Program</i>. Ph.D. Thesis. Tech. Report CMU-CS-78-189, <a href=\"/Carnegie_Mellon_University\" title=\"Carnegie Mellon University\">Carnegie Mellon University</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1980_...\">1980 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Depth&amp;action=edit&amp;section=10\" title=\"Edit section: 1980 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Ken_Thompson\" title=\"Ken Thompson\">Ken Thompson</a> (<b>1982</b>). <i>Computer Chess Strength</i>. <a href=\"/Advances_in_Computer_Chess_3\" title=\"Advances in Computer Chess 3\">Advances in Computer Chess 3</a></li>\n<li> <a href=\"/Joe_Condon\" title=\"Joe Condon\">Joe Condon</a>, <a href=\"/Ken_Thompson\" title=\"Ken Thompson\">Ken Thompson</a> (<b>1983</b>). <i>BELLE</i>. <a href=\"/Chess_Skill_in_Man_and_Machine\" title=\"Chess Skill in Man and Machine\">Chess Skill in Man and Machine</a></li>\n<li> <a href=\"/Dana_S._Nau\" title=\"Dana S. Nau\">Dana S. Nau</a> (<b>1983</b>). <i>Decision quality as a function of search depth on game trees.</i> <a href=\"/ACM#Journal\" title=\"ACM\">Journal of the ACM</a>, Vol. 30, No. 4</li>\n<li> <a href=\"/Hermann_Kaindl\" title=\"Hermann Kaindl\">Hermann Kaindl</a> (<b>1983</b>). <i>Searching to Variable Depth in Computer Chess.</i> Proceedings of <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/conf/ijcai/ijcai83.html\">IJCAI 83</a>, pp. 760-762. Karlsruhe. <a rel=\"nofollow\" class=\"external text\" href=\"http://ijcai.org/Past%20Proceedings/IJCAI-83-VOL-2/PDF/039.pdf\">pdf</a></li>\n<li> <a href=\"/Monroe_Newborn\" title=\"Monroe Newborn\">Monroe Newborn</a> (<b>1985</b>). <i>A Hypothesis Concerning the Strength of Chess Programs</i>. <a href=\"/ICGA_Journal#8_4\" title=\"ICGA Journal\">ICCA Journal, Vol. 8, No. 4</a></li>\n<li> <a href=\"/Alexander_Szabo\" title=\"Alexander Szabo\">Alexander Szabo</a>, <a href=\"/Barbara_Szabo\" title=\"Barbara Szabo\">Barbara Szabo</a> (<b>1988</b>). <i>The Technology Curve Revisited</i>. <a href=\"/ICGA_Journal#11_1\" title=\"ICGA Journal\">ICCA Journal, Vol. 11, No. 1</a></li>\n<li> <a href=\"/David_Levy\" title=\"David Levy\">David Levy</a>, <a href=\"/David_Broughton\" title=\"David Broughton\">David Broughton</a>, <a href=\"/Mark_Taylor\" title=\"Mark Taylor\">Mark Taylor</a> (<b>1989</b>). <i>The SEX Algorithm in Computer Chess</i>. <a href=\"/ICGA_Journal#12_1\" title=\"ICGA Journal\">ICCA Journal, Vol. 12, No. 1</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1990_...\">1990 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Depth&amp;action=edit&amp;section=11\" title=\"Edit section: 1990 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/David_McAllester\" title=\"David McAllester\">David McAllester</a>, <a href=\"/Deniz_Yuret\" title=\"Deniz Yuret\">Deniz Yuret</a> (<b>1993</b>). <i>Alpha-Beta Conspiracy Search</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://ttic.uchicago.edu/~dmcallester/abc.ps\">ps (draft)</a>&#160;» <a href=\"/index.php?title=Alpha-Beta_Conspiracy_Search&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Alpha-Beta Conspiracy Search (page does not exist)\">Alpha-Beta Conspiracy Search</a></li>\n<li> <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/Monroe_Newborn\" title=\"Monroe Newborn\">Monroe Newborn</a> (<b>1997</b>). <i>CRAFTY Goes Deep</i>. <a href=\"/ICGA_Journal#20_2\" title=\"ICGA Journal\">ICCA Journal, Vol. 20, No. 2</a></li>\n<li> <a href=\"/Andreas_Junghanns\" title=\"Andreas Junghanns\">Andreas Junghanns</a>, <a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a>, <a href=\"/Mark_Brockington\" title=\"Mark Brockington\">Mark Brockington</a>, <a href=\"/Yngvi_Bj%C3%B6rnsson\" title=\"Yngvi Björnsson\">Yngvi Björnsson</a>, <a href=\"/Tony_Marsland\" title=\"Tony Marsland\">Tony Marsland</a> (<b>1997</b>). <i>Diminishing Returns for Additional Search in Chess</i>. <a href=\"/Advances_in_Computer_Chess_8\" title=\"Advances in Computer Chess 8\">Advances in Computer Chess 8</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.ru.is/faculty/yngvi/pdf/JunghannsSBBM97.pdf\">pdf</a></li>\n<li> <a href=\"/Ernst_A._Heinz\" title=\"Ernst A. Heinz\">Ernst A. Heinz</a> (<b>1998</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://people.csail.mit.edu/heinz/dt/node46.html\">DarkThought Goes Deep</a>.</i> <a href=\"/ICGA_Journal#21_4\" title=\"ICGA Journal\">ICCA Journal, Vol. 21, No. 4</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Depth&amp;action=edit&amp;section=12\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Ernst_A._Heinz\" title=\"Ernst A. Heinz\">Ernst A. Heinz</a> (<b>2000</b>). <i>A New Self-Play Experiment in Computer Chess</i>. <a href=\"/Massachusetts_Institute_of_Technology\" title=\"Massachusetts Institute of Technology\">Massachusetts Institute of Technology</a>, Laboratory of Computer Science, Technical Memo No. 608, <a rel=\"nofollow\" class=\"external text\" href=\"http://supertech.lcs.mit.edu/~heinz/ps/new_exp.ps.gz\">zipped ps</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://bitsavers.trailing-edge.com/pdf/mit/lcs/tm/MIT-LCS-TM-608.pdf\">pdf</a></li>\n<li> <a href=\"/Ernst_A._Heinz\" title=\"Ernst A. Heinz\">Ernst A. Heinz</a> (<b>2000</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/chapter/10.1007/3-540-45579-5_18\">New Self-Play Results in Computer Chess</a></i>. <a href=\"/CG_2000\" title=\"CG 2000\">CG 2000</a></li>\n<li> <a href=\"/Ernst_A._Heinz\" title=\"Ernst A. Heinz\">Ernst A. Heinz</a> (<b>2001</b>). <i>Self-play Experiments in Computer Chess Revisited.</i> <a href=\"/Advances_in_Computer_Games_9\" title=\"Advances in Computer Games 9\">Advances in Computer Games 9</a></li>\n<li> <a href=\"/Ernst_A._Heinz\" title=\"Ernst A. Heinz\">Ernst A. Heinz</a> (<b>2001</b>). <i>Modeling the “Go Deep” Behaviour of CRAFTY and DARK THOUGHT.</i> <a href=\"/Advances_in_Computer_Games_9\" title=\"Advances in Computer Games 9\">Advances in Computer Games 9</a></li>\n<li> <a href=\"/Ernst_A._Heinz\" title=\"Ernst A. Heinz\">Ernst A. Heinz</a> (<b>2001</b>). <i>Self-Play, Deep Search and Diminishing Returns.</i> <a href=\"/ICGA_Journal#24_2\" title=\"ICGA Journal\">ICGA Journal, Vol. 24, No. 2</a></li>\n<li> <a href=\"/David_Levy\" title=\"David Levy\">David Levy</a> (<b>2002</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://ticc.uvt.nl/icga/journal/contents/content25-3.htm#SOME%20COMMENTS%20ON%20REALIZATION%20PROBABILITIES\">SOME COMMENTS ON REALIZATION PROBABILITIES AND THE SEX ALGORITHM</a></i>. <a href=\"/ICGA_Journal#25_3\" title=\"ICGA Journal\">ICGA Journal, Vol. 25, No. 3</a></li>\n<li> <a href=\"/Ernst_A._Heinz\" title=\"Ernst A. Heinz\">Ernst A. Heinz</a> (<b>2003</b>). <i>Follow-Up on Self-Play, Deep Search, and Diminishing Returns.</i> <a href=\"/ICGA_Journal#26_2\" title=\"ICGA Journal\">ICGA Journal, Vol. 26, No. 2</a></li>\n<li> <a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a> (<b>2004</b>). <i>8. Search Depth</i>. in AI- and Search, Online Course, <a rel=\"nofollow\" class=\"external text\" href=\"http://webdocs.cs.ualberta.ca/%7Ejonathan/Courses/657/Notes/8.SearchDepth.pdf\">slides as pdf</a></li>\n<li> <a href=\"/Jan_Renze_Steenhuisen\" title=\"Jan Renze Steenhuisen\">Jan Renze Steenhuisen</a> (<b>2005</b>). <i>New Results in Deep-Search Behaviour</i>.  <a href=\"/ICGA_Journal#28_4\" title=\"ICGA Journal\">ICGA Journal, Vol. 28, No. 4</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.104.9527\">CiteSeerX</a></li>\n<li> <a href=\"/Matej_Guid\" title=\"Matej Guid\">Matej Guid</a>, <a href=\"/Ivan_Bratko\" title=\"Ivan Bratko\">Ivan Bratko</a> (<b>2007</b>). <i>Factors affecting diminishing returns for searching deeper</i>. <a href=\"/CGW_2007\" title=\"CGW 2007\">CGW 2007</a>&#160;» <a href=\"/Crafty\" title=\"Crafty\">Crafty</a>, <a href=\"/Rybka\" title=\"Rybka\">Rybka</a>, <a href=\"/Shredder\" title=\"Shredder\">Shredder</a>, <a href=\"/Depth#DiminishingReturns\" title=\"Depth\">Diminishing Returns</a></li>\n<li> <a href=\"/Matej_Guid\" title=\"Matej Guid\">Matej Guid</a>, <a href=\"/Ivan_Bratko\" title=\"Ivan Bratko\">Ivan Bratko</a> (<b>2007</b>). <i>Factors affecting diminishing returns for searching deeper</i>. <a href=\"/ICGA_Journal#30_2\" title=\"ICGA Journal\">ICGA Journal, Vol. 30, No. 2</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.ailab.si/matej/doc/Factors_Affecting_Diminishing_Returns.pdf\">pdf</a> </li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Depth&amp;action=edit&amp;section=13\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Diogo_R._Ferreira\" title=\"Diogo R. Ferreira\">Diogo R. Ferreira</a> (<b>2013</b>). <i>The Impact of the Search Depth on Chess Playing Strength</i>. <a href=\"/ICGA_Journal#36_2\" title=\"ICGA Journal\">ICGA Journal, Vol. 36, No. 2</a>&#160;» <a href=\"#DiminishingReturns\">Diminishing Returns</a>, <a href=\"/Match_Statistics\" title=\"Match Statistics\">Match Statistics</a>, <a href=\"/Playing_Strength\" title=\"Playing Strength\">Playing Strength</a>, <a href=\"/Houdini\" title=\"Houdini\">Houdini</a> <sup id=\"cite_ref-15\" class=\"reference\"><a href=\"#cite_note-15\">&#91;15&#93;</a></sup></li>\n<li> <a href=\"/Tamal_T._Biswas\" title=\"Tamal T. Biswas\">Tamal T. Biswas</a>, <a href=\"/Kenneth_W._Regan\" title=\"Kenneth W. Regan\">Kenneth W. Regan</a> (<b>2015</b>). <i>Quantifying Depth and Complexity of Thinking and Knowledge</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.icaart.org/EuropeanProjectSpace.aspx?y=2015\">ICAART 2015</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cse.buffalo.edu/~regan/papers/pdf/BiReICAART15CR.pdf\">pdf</a></li>\n<li> <a href=\"/Tamal_T._Biswas\" title=\"Tamal T. Biswas\">Tamal T. Biswas</a>, <a href=\"/Kenneth_W._Regan\" title=\"Kenneth W. Regan\">Kenneth W. Regan</a> (<b>2015</b>). <i>Measuring Level-K Reasoning, Satisficing, and Human Error in Game-Play Data</i>. <a href=\"/IEEE\" title=\"IEEE\">IEEE</a> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.icmla-conference.org/icmla15/\">ICMLA 2015</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cse.buffalo.edu/~regan/papers/pdf/BiRe15_ICMLA2015.pdf\">pdf preprint</a></li>\n<li> <a href=\"/Matej_Guid\" title=\"Matej Guid\">Matej Guid</a>, <a href=\"/Ivan_Bratko\" title=\"Ivan Bratko\">Ivan Bratko</a> (<b>2017</b>). <i>Influence of Search Depth on Position Evaluation</i>. <a href=\"/Advances_in_Computer_Games_15\" title=\"Advances in Computer Games 15\">Advances in Computer Games 15</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Postings\">Postings</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Depth&amp;action=edit&amp;section=14\" title=\"Edit section: Postings\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1983_...\">1983 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Depth&amp;action=edit&amp;section=15\" title=\"Edit section: 1983 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://quux.org:70/Archives/usenet-a-news/NET.chess/82.01.07_alice.349_net.chess.txt\">chess strength</a> by <a href=\"/Ken_Thompson\" title=\"Ken Thompson\">Ken Thompson</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://quux.org:70/Archives/usenet-a-news/NET.chess\">net.chess</a>, January 7, 1982</li></ul>\n<h2><span class=\"mw-headline\" id=\"1996_...\">1996 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Depth&amp;action=edit&amp;section=16\" title=\"Edit section: 1996 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/1uVIWZFB41k/VUcAUkzyFd0J\">Fractional depth increments</a> by S. Read, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, January 18, 1996</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/S2G3dexGt9c/UbX9UBq_xggJ\">Diminishing Returns in Search</a> by <a href=\"/Jouni_Uski\" title=\"Jouni Uski\">Jouni Uski</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, September 6, 1996</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/zJ1AyjmJ36w/bw5pRTcamXMJ\">HIARCS 5 Maximum Search Depth</a> by Kevin Miller, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, January 7, 1997</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/eaOE_hvSZwc/fBwfX6LzD0kJ\">Ply depth (was: Deep Blue)</a> by <a href=\"/Moritz_Berger\" title=\"Moritz Berger\">Moritz Berger</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, February 18, 1997</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/aqg3nQsm9qM/8UIE5idQoJUJ\">Suggested chess experiment</a> by Henri H. Arsenault, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, February 17, 1999</li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_..._2\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Depth&amp;action=edit&amp;section=17\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=92700\">diminishing returns w/ increased search depth?</a> by <a href=\"/Peter_Kappler\" title=\"Peter Kappler\">Peter Kappler</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 27, 2000</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=112359\">A New Self-Play Experiment - Diminishing Returns Shown with 95% Conf.</a> by <a href=\"/Ernst_A._Heinz\" title=\"Ernst A. Heinz\">Ernst A. Heinz</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 24, 2000&#160;» <a href=\"/Depth#DiminishingReturns\" title=\"Depth\">Diminishing Returns</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=129504\">Faster, deeper and more of such...</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 14, 2000&#160;» <a href=\"/Search_Statistics\" title=\"Search Statistics\">Search Statistics</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=187276\">ICGA_J (June) self-play information</a> by <a href=\"/Guy_Haworth\" title=\"Guy Haworth\">Guy Haworth</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 05, 2001 <sup id=\"cite_ref-16\" class=\"reference\"><a href=\"#cite_note-16\">&#91;16&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=198429\">About diminishing returns (Uri)</a> by <a href=\"/Jouni_Uski\" title=\"Jouni Uski\">Jouni Uski</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 22, 2001</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=212683\">The probability to find better move is simply irrelevant for diminishing returns</a> by <a href=\"/Uri_Blass\" title=\"Uri Blass\">Uri Blass</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 09, 2002</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=240056\">The law of diminishing returns</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 12, 2002</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=310897\">Regarding Qsearch with Fractional ply extensions</a> by <a href=\"/Federico_Andr%C3%A9s_Corigliano\" title=\"Federico Andrés Corigliano\">Federico Corigliano</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 11, 2003&#160;» <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">Quiescence Search</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=324345\">In chess we will reach diminishing returns just like in Checkers 1994</a> by Jorge Pichard, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 29, 2003 <sup id=\"cite_ref-17\" class=\"reference\"><a href=\"#cite_note-17\">&#91;17&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=345836\">diminishing returns</a> by Duncan Roberts, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 30, 2004</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=356109\">Shredder 8 secret: search depth?</a> by <a href=\"/Jouni_Uski\" title=\"Jouni Uski\">Jouni Uski</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 23, 2004</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=356131\">Re: Shredder 8 secret: search depth?</a> by <a href=\"/Vasik_Rajlich\" title=\"Vasik Rajlich\">Vasik Rajlich</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 23, 2004&#160;» <a href=\"/Shredder\" title=\"Shredder\">Shredder</a>, <a href=\"/Junior\" title=\"Junior\">Junior</a>, <a href=\"/Fritz\" title=\"Fritz\">Fritz</a></dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=362189\">Diminishing returns</a> by <a href=\"/Tony_van_Roon-Werten\" title=\"Tony van Roon-Werten\">Tony Werten</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 29, 2004</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?start=0&amp;t=29011\">Diminishing returns of increasing search depth</a> by Jarkko, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 18, 2009</li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_..._2\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Depth&amp;action=edit&amp;section=18\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=5&amp;t=1403\">Node counts at a given depth/iteration in search</a> by <a href=\"/Mark_Watkins\" title=\"Mark Watkins\">BB+</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">OpenChess Forum</a>, May 23, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=42677\">Counting depth as a function of number of legal moves</a> by <a href=\"/index.php?title=Pio_Korinth&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Pio Korinth (page does not exist)\">Pio Korinth</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 28, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=43134\">Elo versus speed</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 02, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=43596\">From 5 ply to 6....</a> by <a href=\"/Fernando_Villegas\" title=\"Fernando Villegas\">Fernando Villegas</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 06, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=43598\">Elo Increase per Doubling</a> by <a href=\"/Adam_Hair\" title=\"Adam Hair\">Adam Hair</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 07, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=44889\">Diminishing returns in fixed depth testing revisited</a> by <a href=\"/index.php?title=Jes%C3%BAs_Mu%C3%B1oz&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Jesús Muñoz (page does not exist)\">Jesús Muñoz</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 25, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://forum.computerschach.de/cgi-bin/mwf/topic_show.pl?tid=5184\">Houdini 3-Houdini 3: Nutzen der Bedenkzeitverlängerung</a> by Patrick Götz, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">CSS-Forum</a>, December 07, 2012 (German)&#160;» <a href=\"/Houdini\" title=\"Houdini\">Houdini</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=46370\">Elo points gain from doubling time</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 10, 2012&#160;» <a href=\"/Komodo\" title=\"Komodo\">Komodo</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48733\">Scaling at 2x nodes (or doubling time control).</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 23, 2013&#160;» <a href=\"/Houdini\" title=\"Houdini\">Houdini</a>, <a href=\"/Knowledge\" title=\"Knowledge\">Knowledge</a>, <a href=\"/Depth#DiminishingReturns\" title=\"Depth\">Diminishing Returns</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48780\">Time to depth measuring tool</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 28, 2013&#160;» <a href=\"/Parallel_Search\" title=\"Parallel Search\">Parallel Search</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=50220\">Stockfish depth vs. others; challenge</a> by <a href=\"/Larry_Kaufman\" title=\"Larry Kaufman\">Larry Kaufman</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 24, 2013&#160;» <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=54296\">How many plies are searched in a typical chess program?</a> by Stephen Dause, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 09, 2014</li></ul>\n<h2><span class=\"mw-headline\" id=\"2015_...\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Depth&amp;action=edit&amp;section=19\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=56044\">Fractional plies and transposition tables</a> by <a href=\"/Alexandru_Mosoi\" title=\"Alexandru Mosoi\">Alexandru Mosoi</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 18, 2015&#160;» <a href=\"/Depth#FractionalPlies\" title=\"Depth\">Depth - Fractional Plies</a>, <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Table</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61784\">Doubling of time control</a> by <a href=\"/Andreas_Strangm%C3%BCller\" title=\"Andreas Strangmüller\">Andreas Strangmüller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 21, 2016&#160;» <a href=\"/Match_Statistics#DoublingTC\" title=\"Match Statistics\">Doubling TC</a>, <a href=\"/Depth#DiminishingReturns\" title=\"Depth\">Diminishing Returns</a>, <a href=\"/Playing_Strength\" title=\"Playing Strength\">Playing Strength</a>, <a href=\"/Komodo\" title=\"Komodo\">Komodo</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=62146\">Stockfish 8 - Double time control vs. 2 threads</a> by <a href=\"/Andreas_Strangm%C3%BCller\" title=\"Andreas Strangmüller\">Andreas Strangmüller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>,  November 15, 2016&#160;» <a href=\"/Match_Statistics#DoublingTC\" title=\"Match Statistics\">Doubling TC</a>, <a href=\"/Depth#DiminishingReturns\" title=\"Depth\">Diminishing Returns</a>, <a href=\"/Playing_Strength\" title=\"Playing Strength\">Playing Strength</a>, <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=62622\">Diminishing returns and hyperthreading</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 27, 2016&#160;» <a href=\"/Depth#DiminishingReturns\" title=\"Depth\">Diminishing Returns</a>, <a href=\"/Match_Statistics\" title=\"Match Statistics\">Match Statistics</a>, <a href=\"/Playing_Strength\" title=\"Playing Strength\">Playing Strength</a>, <a href=\"/Thread\" title=\"Thread\">Thread</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63326\">Ridiculous QSearch Depth</a> by <a href=\"/Jonathan_Rosenthal\" title=\"Jonathan Rosenthal\">Jonathan Rosenthal</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 03, 2017&#160;» <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">Quiescence Search</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=70217\">Depth reduced but ELO increased</a> by <a href=\"/Tom_King\" title=\"Tom King\">Tom King</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 16, 2019&#160;» <a href=\"/Countermove_Heuristic\" title=\"Countermove Heuristic\">Countermove Heuristic</a>, <a href=\"/Playing_Strength\" title=\"Playing Strength\">Playing Strength</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Depth&amp;action=edit&amp;section=20\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.hiarcs.net/forums/viewtopic.php?t=10004\">Ply versus ELO</a> by Greg, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">HIARCS Forum</a>, May 30, 2020&#160;» <a href=\"/Diogo_R._Ferreira#Impact\" title=\"Diogo R. Ferreira\">Diogo R. Ferreira - Impact of the Search Depth ...</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=77202\">On reaching maximum ply</a> by <a href=\"/Martin_Bryant\" title=\"Martin Bryant\">Martin Bryant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 29, 2021&#160;» <a href=\"#MaxPly\">Maximum Search Depth</a>, <a href=\"/Ply\" title=\"Ply\">Ply</a>, <a href=\"/Search\" title=\"Search\">Search</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=77501\">Ares playing strength at various fixed depth levels</a> by <a href=\"/Charles_Roberson\" title=\"Charles Roberson\">Charles Roberson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 16, 2021&#160;» <a href=\"/Ares_US\" title=\"Ares US\">Ares</a>, <a href=\"/Playing_Strength\" title=\"Playing Strength\">Playing Strength</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=79294\">How calculate the seldepth</a> by ernesto, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 06, 2022</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Depth&amp;action=edit&amp;section=21\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Depth\">Depth from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Depth-limited_search\">Depth-limited search from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Diminishing_returns\">Diminishing returns from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Draft\">Draft (disambiguation) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://rjlipton.wordpress.com/2015/10/06/depth-of-satisficing/\">Depth of Satisficing</a> by <a href=\"/Kenneth_W._Regan\" title=\"Kenneth W. Regan\">Ken Regan</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://rjlipton.wordpress.com/\">Gödel's Lost Letter and P=NP</a>, October 06, 2015&#160;» <a class=\"mw-selflink selflink\">Depth</a>, <a href=\"/Match_Statistics\" title=\"Match Statistics\">Match Statistics</a>, <a href=\"/Pawn_Advantage,_Win_Percentage,_and_Elo\" title=\"Pawn Advantage, Win Percentage, and Elo\">Pawn Advantage, Win Percentage, and Elo</a>, <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a>, <a href=\"/Komodo\" title=\"Komodo\">Komodo</a> <sup id=\"cite_ref-18\" class=\"reference\"><a href=\"#cite_note-18\">&#91;18&#93;</a></sup></li>\n<li> <a href=\"/Category:Roy_Hargrove\" title=\"Category:Roy Hargrove\">Roy Hargrove Quintet</a> - Depth, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Newport_Jazz_Festival\">Newport Jazz Festival</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://www.setlist.fm/festival/2001/newport-jazz-festival-2001-73d69e8d.html\">August 11, 2001</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/8Edz7DZPtto?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Depth&amp;action=edit&amp;section=22\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap mw-references-columns\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.mcescher.com/Gallery/gallery-recogn.htm\">Picture gallery \"Recognition and Success 1955 - 1972\"</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://www.mcescher.com/\">The Official M.C. Escher Website</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a href=\"/David_Levy\" title=\"David Levy\">David Levy</a>, <a href=\"/David_Broughton\" title=\"David Broughton\">David Broughton</a>, <a href=\"/Mark_Taylor\" title=\"Mark Taylor\">Mark Taylor</a> (<b>1989</b>). <i>The SEX Algorithm in Computer Chess</i>. <a href=\"/ICGA_Journal#12_1\" title=\"ICGA Journal\">ICCA Journal, Vol. 12, No. 1</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a href=\"/David_Levy\" title=\"David Levy\">David Levy</a> (<b>2002</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://ticc.uvt.nl/icga/journal/contents/content25-3.htm#SOME%20COMMENTS%20ON%20REALIZATION%20PROBABILITIES\">SOME COMMENTS ON REALIZATION PROBABILITIES AND THE SEX ALGORITHM</a></i>. <a href=\"/ICGA_Journal#25_3\" title=\"ICGA Journal\">ICGA Journal, Vol. 25, No. 3</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/2163f0fa2f0715f1\">Funny Junior Engine in CBLight / Junior Engine ply depth</a> by Wolfgang Krietsch, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, February 27, 1998, post 7 and 16 by <a href=\"/Amir_Ban\" title=\"Amir Ban\">Amir Ban</a></span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a href=\"/Ken_Thompson\" title=\"Ken Thompson\">Ken Thompson</a> (<b>1982</b>). <i>Computer Chess Strength</i>. <a href=\"/Advances_in_Computer_Chess_3\" title=\"Advances in Computer Chess 3\">Advances in Computer Chess 3</a></span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a href=\"/Joe_Condon\" title=\"Joe Condon\">Joe Condon</a>, <a href=\"/Ken_Thompson\" title=\"Ken Thompson\">Ken Thompson</a> (<b>1983</b>). <i>BELLE</i>. <a href=\"/Chess_Skill_in_Man_and_Machine\" title=\"Chess Skill in Man and Machine\">Chess Skill in Man and Machine</a></span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a href=\"/Andreas_Junghanns\" title=\"Andreas Junghanns\">Andreas Junghanns</a>, <a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a>, <a href=\"/Mark_Brockington\" title=\"Mark Brockington\">Mark Brockington</a>, <a href=\"/Yngvi_Bj%C3%B6rnsson\" title=\"Yngvi Björnsson\">Yngvi Björnsson</a>, <a href=\"/Tony_Marsland\" title=\"Tony Marsland\">Tony Marsland</a> (<b>1997</b>). <i>Diminishing Returns for Additional Search in Chess</i>. <a href=\"/Advances_in_Computer_Chess_8\" title=\"Advances in Computer Chess 8\">Advances in Computer Chess 8</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.ru.is/faculty/yngvi/pdf/JunghannsSBBM97.pdf\">pdf</a></span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\"><a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/Monroe_Newborn\" title=\"Monroe Newborn\">Monroe Newborn</a> (<b>1997</b>). <i>CRAFTY Goes Deep</i>. <a href=\"/ICGA_Journal#20_2\" title=\"ICGA Journal\">ICCA Journal, Vol. 20, No. 2</a></span>\n</li>\n<li id=\"cite_note-9\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-9\">↑</a></span> <span class=\"reference-text\"><a href=\"/Ernst_A._Heinz\" title=\"Ernst A. Heinz\">Ernst A. Heinz</a> (<b>1998</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://people.csail.mit.edu/heinz/dt/node46.html\">DarkThought Goes Deep</a>.</i> <a href=\"/ICGA_Journal#21_4\" title=\"ICGA Journal\">ICCA Journal, Vol. 21, No. 4</a></span>\n</li>\n<li id=\"cite_note-10\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-10\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=112359\">A New Self-Play Experiment - Diminishing Returns Shown with 95% Conf.</a> by <a href=\"/Ernst_A._Heinz\" title=\"Ernst A. Heinz\">Ernst A. Heinz</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 24, 2000</span>\n</li>\n<li id=\"cite_note-11\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-11\">↑</a></span> <span class=\"reference-text\"><a href=\"/Ernst_A._Heinz\" title=\"Ernst A. Heinz\">Ernst A. Heinz</a> (<b>2001</b>). <i>Self-Play, Deep Search and Diminishing Returns.</i> <a href=\"/ICGA_Journal#24_2\" title=\"ICGA Journal\">ICGA Journal, Vol. 24, No. 2</a></span>\n</li>\n<li id=\"cite_note-12\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-12\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=187276\">ICGA_J (June) self-play information</a> by <a href=\"/Guy_Haworth\" title=\"Guy Haworth\">Guy Haworth</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 05, 2001</span>\n</li>\n<li id=\"cite_note-13\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-13\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=324592\">Re: In chess we will reach diminishing returns just like in Checkers 1994</a> by <a href=\"/Tony_van_Roon-Werten\" title=\"Tony van Roon-Werten\">Tony Werten</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 30, 2003</span>\n</li>\n<li id=\"cite_note-14\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-14\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.top-5000.nl/ply.htm\">Experiments in computer chess: The value of depth and diminishing return effects</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, June 2012</span>\n</li>\n<li id=\"cite_note-15\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-15\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.hiarcs.net/forums/viewtopic.php?t=10004\">Ply versus ELO</a> by Greg, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">HIARCS Forum</a>, May 30, 2020&#160;» <a href=\"/Diogo_R._Ferreira#Impact\" title=\"Diogo R. Ferreira\">Diogo R. Ferreira - Impact of the Search Depth ...</a></span>\n</li>\n<li id=\"cite_note-16\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-16\">↑</a></span> <span class=\"reference-text\"><a href=\"/Ernst_A._Heinz\" title=\"Ernst A. Heinz\">Ernst A. Heinz</a> (<b>2001</b>). <i>Self-Play, Deep Search and Diminishing Returns.</i> <a href=\"/ICGA_Journal#24_2\" title=\"ICGA Journal\">ICGA Journal, Vol. 24, No. 2</a></span>\n</li>\n<li id=\"cite_note-17\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-17\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.chessbase.com/newsdetail.asp?newsid=1270\">Perfection in checkers</a>, <a href=\"/ChessBase\" title=\"ChessBase\">ChessBase News</a>, October 29, 2003</span>\n</li>\n<li id=\"cite_note-18\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-18\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=57890\">Regan's latest: Depth of Satisficing</a> by Carl Lumma, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 09, 2015</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Search\" title=\"Search\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260228095504\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.049 seconds\nReal time usage: 0.051 seconds\nPreprocessor visited node count: 369/1000000\nPreprocessor generated node count: 764/1000000\nPost‐expand include size: 27/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1045-0!canonical and timestamp 20260228095504 and revision id 26269\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "M._C._Escher"
+      },
+      {
+        "sortkey": "",
+        "*": "Roy_Hargrove"
+      },
+      {
+        "sortkey": "",
+        "*": "Ban_Quotes"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ACM"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Adam Hair"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 3"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 8"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Games 15"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Games 9"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alexander Szabo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alexandru Mosoi"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Amir Ban"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Andreas Junghanns"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Andreas Strangmüller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ares US"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Array"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Barbara Szabo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Belle"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Branching Factor"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Brute-Force"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CGW 2007"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CG 2000"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Carnegie Mellon University"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Charles Roberson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Check Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Checkers"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ChessBase"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Skill in Man and Machine"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chessmaster"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Countermove Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Crafty"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dana S. Nau"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "DarkThought"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David Broughton"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David Levy"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David McAllester"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Deniz Yuret"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth-First"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth Reduction R"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Diogo R. Ferreira"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ed Schroder"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ernst A. Heinz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Federico Andrés Corigliano"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fernando Villegas"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fritz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Guy Haworth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hermann Kaindl"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Horizon Node"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Houdini"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA Journal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "IEEE"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iterative Deepening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ivan Bratko"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "James Gillogly"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jan Renze Steenhuisen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Joe Condon"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jonathan Rosenthal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jonathan Schaeffer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jouni Uski"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Junior"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kai Laskos"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ken Thompson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kenneth W. Regan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Knowledge"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Komodo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Larry Kaufman"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Late Move Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lazy Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mark Brockington"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mark Taylor"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mark Watkins"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Martin Bryant"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Massachusetts Institute of Technology"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Match Statistics"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Matej Guid"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Material"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Minimax"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Monroe Newborn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Moritz Berger"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Multi-Cut"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Node"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Odd-Even Effect"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Othello"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Parallel Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Advantage, Win Percentage, and Elo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter Kappler"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter Österlund"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Playing Strength"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ply"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ProDeo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiescence Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Recursion"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Hyatt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Root"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rybka"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SEX Algorithm"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search Pathology"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search Statistics"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search Tree"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Selectivity"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Shredder"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stack"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stockfish"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tamal T. Biswas"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "The King"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Thread"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tom King"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tony Marsland"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tony van Roon-Werten"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Triangular PV-Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Uri Blass"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vasik Rajlich"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Yngvi Björnsson"
+      },
+      {
+        "ns": 0,
+        "*": "Alpha-Beta Conspiracy Search"
+      },
+      {
+        "ns": 0,
+        "*": "Pio Korinth"
+      },
+      {
+        "ns": 0,
+        "*": "Jesús Muñoz"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:M. C. Escher"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Roy Hargrove"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Draft versus Ply-Index",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Depth",
+        "byteoffset": 1408,
+        "anchor": "Draft_versus_Ply-Index"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Fractional Plies",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Depth",
+        "byteoffset": 2893,
+        "anchor": "Fractional_Plies"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Depth Comparison of different programs",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Depth",
+        "byteoffset": 4232,
+        "anchor": "Depth_Comparison_of_different_programs"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Selective Search Depth",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Depth",
+        "byteoffset": 4521,
+        "anchor": "Selective_Search_Depth"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Maximum Search Depth",
+        "number": "5",
+        "index": "5",
+        "fromtitle": "Depth",
+        "byteoffset": 5585,
+        "anchor": "Maximum_Search_Depth"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Diminishing Returns",
+        "number": "6",
+        "index": "6",
+        "fromtitle": "Depth",
+        "byteoffset": 6388,
+        "anchor": "Diminishing_Returns"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "7",
+        "index": "7",
+        "fromtitle": "Depth",
+        "byteoffset": 13887,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "8",
+        "index": "8",
+        "fromtitle": "Depth",
+        "byteoffset": 14295,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1978 ...",
+        "number": "8.1",
+        "index": "9",
+        "fromtitle": "Depth",
+        "byteoffset": 14311,
+        "anchor": "1978_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1980 ...",
+        "number": "8.2",
+        "index": "10",
+        "fromtitle": "Depth",
+        "byteoffset": 14491,
+        "anchor": "1980_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1990 ...",
+        "number": "8.3",
+        "index": "11",
+        "fromtitle": "Depth",
+        "byteoffset": 15564,
+        "anchor": "1990_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "8.4",
+        "index": "12",
+        "fromtitle": "Depth",
+        "byteoffset": 16324,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "8.5",
+        "index": "13",
+        "fromtitle": "Depth",
+        "byteoffset": 18481,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Postings",
+        "number": "9",
+        "index": "14",
+        "fromtitle": "Depth",
+        "byteoffset": 19656,
+        "anchor": "Postings"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1983 ...",
+        "number": "9.1",
+        "index": "15",
+        "fromtitle": "Depth",
+        "byteoffset": 19668,
+        "anchor": "1983_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1996 ...",
+        "number": "9.2",
+        "index": "16",
+        "fromtitle": "Depth",
+        "byteoffset": 19887,
+        "anchor": "1996_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "9.3",
+        "index": "17",
+        "fromtitle": "Depth",
+        "byteoffset": 20813,
+        "anchor": "2000_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "9.4",
+        "index": "18",
+        "fromtitle": "Depth",
+        "byteoffset": 23299,
+        "anchor": "2010_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "9.5",
+        "index": "19",
+        "fromtitle": "Depth",
+        "byteoffset": 25256,
+        "anchor": "2015_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "9.6",
+        "index": "20",
+        "fromtitle": "Depth",
+        "byteoffset": 26648,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "10",
+        "index": "21",
+        "fromtitle": "Depth",
+        "byteoffset": 27397,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "11",
+        "index": "22",
+        "fromtitle": "Depth",
+        "byteoffset": 28562,
+        "anchor": "References"
+      }
+    ]
+  }
+}

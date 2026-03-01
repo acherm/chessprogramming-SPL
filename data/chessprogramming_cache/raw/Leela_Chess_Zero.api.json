@@ -1,0 +1,1061 @@
+{
+  "parse": {
+    "title": "Leela Chess Zero",
+    "pageid": 101,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Engines\" title=\"Engines\">Engines</a> * Leela Chess Zero</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"https://twitter.com/leelachesszero\"><img alt=\"\" src=\"/images/thumb/3/31/LC0-Logo.jpg/300px-LC0-Logo.jpg\" width=\"300\" height=\"300\" class=\"thumbimage\" srcset=\"/images/3/31/LC0-Logo.jpg 1.5x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:LC0-Logo.jpg\" class=\"internal\" title=\"Enlarge\"></a></div>Lc0 logo <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>Leela Chess Zero</b>, (LCZero, lc0)<br />\nan adaption of <a href=\"/Gian-Carlo_Pascutto\" title=\"Gian-Carlo Pascutto\">Gian-Carlo Pascutto's</a> <a href=\"/index.php?title=Leela_Zero&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Leela Zero (page does not exist)\">Leela Zero</a> <a href=\"/Go\" title=\"Go\">Go</a> project <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup> to <a href=\"/Chess\" title=\"Chess\">Chess</a>, initiated and announced by <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a> co-author <a href=\"/Gary_Linscott\" title=\"Gary Linscott\">Gary Linscott</a>, who was already responsible for the Stockfish <a href=\"/Stockfish#TestingFramework\" title=\"Stockfish\">Testing Framework</a> called <i>Fishtest</i>. Leela Chess is <a href=\"/Category:Open_Source\" title=\"Category:Open Source\">open source</a>, released under the terms of <a href=\"/Free_Software_Foundation#GPL\" title=\"Free Software Foundation\">GPL version 3</a> or later, and supports <a href=\"/UCI\" title=\"UCI\">UCI</a>. \nThe goal is to build a strong chess playing entity following the same type of <a href=\"/Deep_Learning\" title=\"Deep Learning\">deep learning</a> along with <a href=\"/Monte-Carlo_Tree_Search\" title=\"Monte-Carlo Tree Search\">Monte-Carlo tree search</a> (MCTS) techniques of <a href=\"/AlphaZero\" title=\"AlphaZero\">AlphaZero</a> as described in <a href=\"/index.php?title=DeepMind&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"DeepMind (page does not exist)\">DeepMind's</a> 2017 and 2018 papers \n<sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>\n<sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>\n<sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup>, \nbut using distributed training for the weights of the <a href=\"/Neural_Networks#Deep\" title=\"Neural Networks\">deep</a> <a href=\"/Neural_Networks#Convolutional\" title=\"Neural Networks\">convolutional neural network</a> (CNN, DNN, DCNN).\n</p><p>Since 2022 the network architecture switched from CNN, convolutional neural network, as used in image recognition to Transformers, as used in large language models<sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup><sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup><sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup><sup id=\"cite_ref-9\" class=\"reference\"><a href=\"#cite_note-9\">&#91;9&#93;</a></sup>.\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Lc0\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Lc0</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Description\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Description</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#Board_Representation\"><span class=\"tocnumber\">2.1</span> <span class=\"toctext\">Board Representation</span></a></li>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#Network\"><span class=\"tocnumber\">2.2</span> <span class=\"toctext\">Network</span></a></li>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#Training\"><span class=\"tocnumber\">2.3</span> <span class=\"toctext\">Training</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#Structure_Diagrams\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Structure Diagrams</span></a></li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#Tournament_Play\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Tournament Play</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#First_Experience\"><span class=\"tocnumber\">4.1</span> <span class=\"toctext\">First Experience</span></a></li>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#Breakthrough\"><span class=\"tocnumber\">4.2</span> <span class=\"toctext\">Breakthrough</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-10\"><a href=\"#Release_Dates\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Release Dates</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#2018\"><span class=\"tocnumber\">5.1</span> <span class=\"toctext\">2018</span></a></li>\n<li class=\"toclevel-2 tocsection-12\"><a href=\"#2019\"><span class=\"tocnumber\">5.2</span> <span class=\"toctext\">2019</span></a></li>\n<li class=\"toclevel-2 tocsection-13\"><a href=\"#2020\"><span class=\"tocnumber\">5.3</span> <span class=\"toctext\">2020</span></a></li>\n<li class=\"toclevel-2 tocsection-14\"><a href=\"#2021\"><span class=\"tocnumber\">5.4</span> <span class=\"toctext\">2021</span></a></li>\n<li class=\"toclevel-2 tocsection-15\"><a href=\"#2022\"><span class=\"tocnumber\">5.5</span> <span class=\"toctext\">2022</span></a></li>\n<li class=\"toclevel-2 tocsection-16\"><a href=\"#2023\"><span class=\"tocnumber\">5.6</span> <span class=\"toctext\">2023</span></a></li>\n<li class=\"toclevel-2 tocsection-17\"><a href=\"#2024\"><span class=\"tocnumber\">5.7</span> <span class=\"toctext\">2024</span></a></li>\n<li class=\"toclevel-2 tocsection-18\"><a href=\"#2025\"><span class=\"tocnumber\">5.8</span> <span class=\"toctext\">2025</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-19\"><a href=\"#Authors\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Authors</span></a></li>\n<li class=\"toclevel-1 tocsection-20\"><a href=\"#See_also\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-21\"><a href=\"#Publications\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">Publications</span></a></li>\n<li class=\"toclevel-1 tocsection-22\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">9</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-23\"><a href=\"#2018_2\"><span class=\"tocnumber\">9.1</span> <span class=\"toctext\">2018</span></a></li>\n<li class=\"toclevel-2 tocsection-24\"><a href=\"#2019_2\"><span class=\"tocnumber\">9.2</span> <span class=\"toctext\">2019</span></a></li>\n<li class=\"toclevel-2 tocsection-25\"><a href=\"#2020_2\"><span class=\"tocnumber\">9.3</span> <span class=\"toctext\">2020</span></a></li>\n<li class=\"toclevel-2 tocsection-26\"><a href=\"#2021_2\"><span class=\"tocnumber\">9.4</span> <span class=\"toctext\">2021</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-27\"><a href=\"#External_Links\"><span class=\"tocnumber\">10</span> <span class=\"toctext\">External Links</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-28\"><a href=\"#Chess_Engine\"><span class=\"tocnumber\">10.1</span> <span class=\"toctext\">Chess Engine</span></a></li>\n<li class=\"toclevel-2 tocsection-29\"><a href=\"#GitHub\"><span class=\"tocnumber\">10.2</span> <span class=\"toctext\">GitHub</span></a></li>\n<li class=\"toclevel-2 tocsection-30\"><a href=\"#Rating_Lists\"><span class=\"tocnumber\">10.3</span> <span class=\"toctext\">Rating Lists</span></a></li>\n<li class=\"toclevel-2 tocsection-31\"><a href=\"#ChessBase\"><span class=\"tocnumber\">10.4</span> <span class=\"toctext\">ChessBase</span></a></li>\n<li class=\"toclevel-2 tocsection-32\"><a href=\"#Chessdom\"><span class=\"tocnumber\">10.5</span> <span class=\"toctext\">Chessdom</span></a></li>\n<li class=\"toclevel-2 tocsection-33\"><a href=\"#Tuning\"><span class=\"tocnumber\">10.6</span> <span class=\"toctext\">Tuning</span></a></li>\n<li class=\"toclevel-2 tocsection-34\"><a href=\"#Misc\"><span class=\"tocnumber\">10.7</span> <span class=\"toctext\">Misc</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-35\"><a href=\"#References\"><span class=\"tocnumber\">11</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Lc0\">Lc0</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Leela_Chess_Zero&amp;action=edit&amp;section=1\" title=\"Edit section: Lc0\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Leela Chess Zero consists of an executable to play or analyze <a href=\"/Chess_Game\" title=\"Chess Game\">games</a>, initially dubbed <b>LCZero</b>, soon rewritten by a team around <a href=\"/Alexander_Lyashuk\" title=\"Alexander Lyashuk\">Alexander Lyashuk</a> for better performance and then called <b>Lc0</b> <sup id=\"cite_ref-10\" class=\"reference\"><a href=\"#cite_note-10\">&#91;10&#93;</a></sup> <sup id=\"cite_ref-11\" class=\"reference\"><a href=\"#cite_note-11\">&#91;11&#93;</a></sup>. This executable, the actual chess engine, performs the <a href=\"/Monte-Carlo_Tree_Search\" title=\"Monte-Carlo Tree Search\">MCTS</a> and reads the self-taught <a href=\"/Neural_Networks#Convolutional\" title=\"Neural Networks\">CNN</a>, which weights are persistent in a separate file.\nLc0 is written in <a href=\"/Cpp\" title=\"Cpp\">C++</a> (started with <a href=\"/Cpp#14\" title=\"Cpp\">C++14</a>, then upgraded to <a href=\"/Cpp#17\" title=\"Cpp\">C++17</a>) and may be compiled for various platforms and backends. Since deep CNN approaches are best suited to run massively in parallel on <a href=\"/GPU\" title=\"GPU\">GPUs</a> to perform all the <a href=\"/Float\" title=\"Float\">floating point</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Dot_product\">dot products</a> for thousands of neurons, \nthe preferred target platforms are <a href=\"/Nvidia\" title=\"Nvidia\">Nvidia</a> <a href=\"/GPU\" title=\"GPU\">GPUs</a> supporting <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/CUDA\">CUDA</a> and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/cuDNN\">cuDNN</a> libraries <sup id=\"cite_ref-12\" class=\"reference\"><a href=\"#cite_note-12\">&#91;12&#93;</a></sup>. <a href=\"/Ankan_Banerjee\" title=\"Ankan Banerjee\">Ankan Banerjee</a> wrote the cuDNN backend (also shared by <a href=\"/Deus_X\" title=\"Deus X\">Deus X</a> and <a href=\"/Allie\" title=\"Allie\">Allie</a> <sup id=\"cite_ref-13\" class=\"reference\"><a href=\"#cite_note-13\">&#91;13&#93;</a></sup>) and DX12 backend code. There exist different Lc0 backends to be used with different hardware, not all neural network architectures/features are supported on all backends. Different backends and different network architectures with different net sizes give different nodes per second and Elo. CPUs can be utilised, for example, via BLAS and DNNL and GPUs via CUDA, cuDNN, OpenCL, DX12, Metal, ONNX, oneDNN backends.\n</p>\n<h1><span class=\"mw-headline\" id=\"Description\">Description</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Leela_Chess_Zero&amp;action=edit&amp;section=2\" title=\"Edit section: Description\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Like <a href=\"/AlphaZero\" title=\"AlphaZero\">AlphaZero</a>, Lc0's <a href=\"/Evaluation\" title=\"Evaluation\">evaluates</a> <a href=\"/Chess_Position\" title=\"Chess Position\">positions</a> using non-linear function approximation based on a <a href=\"/Neural_Networks\" title=\"Neural Networks\">deep neural network</a>, rather than the <a href=\"/Evaluation#Linear\" title=\"Evaluation\">linear function approximation</a> as used in classical chess programs. \nThis neural network takes the board position as input and outputs position evaluation (QValue) and a vector of move probabilities (PValue, policy). \nOnce trained, these network is combined with a <a href=\"/Monte-Carlo_Tree_Search\" title=\"Monte-Carlo Tree Search\">Monte-Carlo Tree Search</a> (MCTS) using the policy to narrow down the search to high­probability moves, \nand using the value in conjunction with a fast rollout policy to evaluate positions in the tree. The MCTS selection is done by a variation of <a href=\"/Christopher_D._Rosin\" title=\"Christopher D. Rosin\">Rosin's</a> <a href=\"/UCT\" title=\"UCT\">UCT</a> improvement dubbed <a href=\"/Christopher_D._Rosin#PUCT\" title=\"Christopher D. Rosin\">PUCT</a> (Predictor + UCT).\n</p>\n<h2><span class=\"mw-headline\" id=\"Board_Representation\"><a href=\"/Board_Representation\" title=\"Board Representation\">Board Representation</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Leela_Chess_Zero&amp;action=edit&amp;section=3\" title=\"Edit section: Board Representation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Lc0's color agnostic board is represented by five <a href=\"/Bitboards\" title=\"Bitboards\">bitboards</a> (own pieces, opponent pieces, orthogonal sliding pieces, diagonal sliding pieces, and pawns including <a href=\"/En_passant\" title=\"En passant\">en passant</a> target information coded as pawns on rank 1 and 8), two king squares, <a href=\"/Castling_Rights\" title=\"Castling Rights\">castling rights</a>, and a flag whether the board is <a href=\"/Color_Flipping\" title=\"Color Flipping\">color flipped</a>. Getting individual piece bitboards requires some <a href=\"/General_Setwise_Operations\" title=\"General Setwise Operations\">setwise operations</a> such as <a href=\"/General_Setwise_Operations#Intersection\" title=\"General Setwise Operations\">intersection</a> and <a href=\"/General_Setwise_Operations#RelativeComplement\" title=\"General Setwise Operations\">set theoretic difference</a> <sup id=\"cite_ref-14\" class=\"reference\"><a href=\"#cite_note-14\">&#91;14&#93;</a></sup>.\n</p>\n<h2><span class=\"mw-headline\" id=\"Network\">Network</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Leela_Chess_Zero&amp;action=edit&amp;section=4\" title=\"Edit section: Network\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>While <a href=\"/index.php?title=AlphaGo&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"AlphaGo (page does not exist)\">AlphaGo</a> used two disjoint networks for policy and value, <a href=\"/AlphaZero\" title=\"AlphaZero\">AlphaZero</a> as well as Leela Chess Zero, share a common \"body\" connected to disjoint policy and value \"heads\". The “body” consists of spatial 8x8 planes, using B <a href=\"/Neural_Networks#Residual\" title=\"Neural Networks\">residual</a> blocks with F filters of kernel size 3x3, stride 1. So far, model sizes FxB of 64x6, 128x10, 192x15, and 256x20 were used. \n</p><p>Concerning <a href=\"/Nodes_per_Second\" title=\"Nodes per Second\">nodes per second</a> of the MCTS, smaller models are faster to calculate than larger models. They are faster to train and will recognise progress earlier, but they will also saturate earlier, so that at some point, more training will no longer improve the engine. Larger and deeper network models will improve the receptivity, the amount of knowledge and patterns to extract from the training samples, with potential for a <a href=\"/Playing_Strength\" title=\"Playing Strength\">stronger</a> engine. \nAs a further improvement, Leele Chess Zero applies the <i>Squeeze and Excite</i> (SE) extension to the residual block architecture <sup id=\"cite_ref-15\" class=\"reference\"><a href=\"#cite_note-15\">&#91;15&#93;</a></sup> <sup id=\"cite_ref-16\" class=\"reference\"><a href=\"#cite_note-16\">&#91;16&#93;</a></sup>. The body is connected to both the policy \"head\" for the move probability distribution, and the value \"head\" for the evaluation score, aka <a href=\"/Pawn_Advantage,_Win_Percentage,_and_Elo\" title=\"Pawn Advantage, Win Percentage, and Elo\">winning probability</a> of the current position and up to seven predecessor positions on the input planes.\n</p>\n<h2><span class=\"mw-headline\" id=\"Training\">Training</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Leela_Chess_Zero&amp;action=edit&amp;section=5\" title=\"Edit section: Training\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Like in <a href=\"/AlphaZero\" title=\"AlphaZero\">AlphaZero</a>, the <b>Zero</b> suffix implies no other initial knowledge than the rules of the game, to build a superhuman player, starting with truly random self-play games to apply <a href=\"/Reinforcement_Learning\" title=\"Reinforcement Learning\">reinforcement learning</a> based on the outcome of those games. However, there are derived approaches, such as <a href=\"/Albert_Silver\" title=\"Albert Silver\">Albert Silver's</a> <a href=\"/Deus_X\" title=\"Deus X\">Deus X</a>, trying to take a short-cut by initially using <a href=\"/Supervised_Learning\" title=\"Supervised Learning\">supervised learning</a> techniques, such as feeding in high quality games played by other strong chess playing entities, or huge records of positions with a given preferred move.\nThe unsupervised training of the NN is about to minimise the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Norm_(mathematics)#Euclidean_norm\">L2-norm</a> of the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Mean_squared_error\">mean squared error</a> loss of the value output and the policy loss. Further there are experiments to train the value head against not the game outcome, but against the accumulated value for a position after exploring some number of nodes with <a href=\"/UCT\" title=\"UCT\">UCT</a> <sup id=\"cite_ref-17\" class=\"reference\"><a href=\"#cite_note-17\">&#91;17&#93;</a></sup>.\n</p><p>The distributed training is realised with a sophisticated <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Client%E2%80%93server_model\">client-server model</a>. The client, written entirely in the <a href=\"/Go_(Programming_Language)\" title=\"Go (Programming Language)\">Go programming language</a>, incorporates Lc0 to produce self-play games. Controlled by the server, the client may download the latest network, start self-playing, and upload games to the server, which on the other hand, will regularly produce and distribute new neural network weights after a certain number of games available from contributors. The training software consists of <a href=\"/Python\" title=\"Python\">Python</a> code, the pipeline requires <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/NumPy\">NumPy</a> and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/TensorFlow\">TensorFlow</a> running on <a href=\"/Linux\" title=\"Linux\">Linux</a> <sup id=\"cite_ref-18\" class=\"reference\"><a href=\"#cite_note-18\">&#91;18&#93;</a></sup>. \nThe server is written in <a href=\"/Go_(Programming_Language)\" title=\"Go (Programming Language)\">Go</a> along with <a href=\"/Python\" title=\"Python\">Python</a> and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Shell_script\">shell scripts</a>.\n</p>\n<h1><span class=\"mw-headline\" id=\"Structure_Diagrams\">Structure Diagrams</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Leela_Chess_Zero&amp;action=edit&amp;section=6\" title=\"Edit section: Structure Diagrams\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"floatnone\"><a href=\"/File:Lc0diagram.png\" class=\"image\"><img alt=\"Lc0diagram.png\" src=\"/images/2/20/Lc0diagram.png\" width=\"669\" height=\"802\" style=\"vertical-align: text-bottom\" class=\"thumbborder\" /></a></div> \n<p>Related to <a href=\"/TCEC\" title=\"TCEC\">TCEC</a> clone discussions concerning <a href=\"/Deus_X\" title=\"Deus X\">Deus X</a> and <a href=\"/Allie\" title=\"Allie\">Allie</a> aka <a href=\"/Allie#AllieStein\" title=\"Allie\">AllieStein</a>,<br />\n<a href=\"/Alexander_Lyashuk\" title=\"Alexander Lyashuk\">Alexander Lyashuk</a> published diagrams with all components of the affected engines,<br />\nThe above shows the common legend, and the structure of all Leela Chess Zero's components based on the current Lc0 engine <sup id=\"cite_ref-19\" class=\"reference\"><a href=\"#cite_note-19\">&#91;19&#93;</a></sup>\n</p>\n<div class=\"floatnone\"><a href=\"/File:Lczero.png\" class=\"image\"><img alt=\"Lczero.png\" src=\"/images/4/40/Lczero.png\" width=\"670\" height=\"472\" style=\"vertical-align: text-bottom\" class=\"thumbborder\" /></a></div>\n<p>Same diagram, but initial LCZero engine, which played <a href=\"/TCEC_Season_12\" title=\"TCEC Season 12\">TCEC Season 12</a> <sup id=\"cite_ref-20\" class=\"reference\"><a href=\"#cite_note-20\">&#91;20&#93;</a></sup>\n</p>\n<h1><span class=\"mw-headline\" id=\"Tournament_Play\">Tournament Play</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Leela_Chess_Zero&amp;action=edit&amp;section=7\" title=\"Edit section: Tournament Play\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"First_Experience\">First Experience</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Leela_Chess_Zero&amp;action=edit&amp;section=8\" title=\"Edit section: First Experience\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>LCZero gained first tournament experience in April 2018 at <a href=\"/TCEC_Season_12\" title=\"TCEC Season 12\">TCEC Season 12</a> and over the board at the <a href=\"/WCCC_2018\" title=\"WCCC 2018\">WCCC 2018</a>\nin <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Stockholm\">Stockholm</a>, July 2018. It won the <a href=\"/TCEC_Season_13#Fourth\" title=\"TCEC Season 13\">fourth division</a> of <a href=\"/TCEC_Season_13\" title=\"TCEC Season 13\">TCEC Season 13</a> in August 2018, <a href=\"#Lc0\">Lc0</a> finally coming in third in the <a href=\"/TCEC_Season_13#Third\" title=\"TCEC Season 13\">third division</a>.\n</p>\n<h2><span class=\"mw-headline\" id=\"Breakthrough\">Breakthrough</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Leela_Chess_Zero&amp;action=edit&amp;section=9\" title=\"Edit section: Breakthrough\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p><a href=\"/TCEC_Season_14\" title=\"TCEC Season 14\">TCEC Season 14</a> from November 2018 until February 2019 became a breakthrough, Lc0 winning the <a href=\"/TCEC_Season_14#Third\" title=\"TCEC Season 14\">third</a>, <a href=\"/TCEC_Season_14#Second\" title=\"TCEC Season 14\">second</a> and <a href=\"/TCEC_Season_14#First\" title=\"TCEC Season 14\">first</a> division, \nto even <a href=\"/TCEC_Season_14#Premier\" title=\"TCEC Season 14\">qualify</a> for the <a href=\"/TCEC_Season_14#Superfinal\" title=\"TCEC Season 14\">superfinal</a>, losing by the narrow margin of +10 =81 -9, <b>50½ - 49½</b> versus <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a>.\nAgain runner-up at the <a href=\"/TCEC_Season_15#Premier\" title=\"TCEC Season 15\">TCEC Season 15 premier division</a> in April 2019,\nLc0 aka <b>LCZero v0.21.1-nT40.T8.610</b> won the <a href=\"/TCEC_Season_15#Superfinal\" title=\"TCEC Season 15\">superfinal</a> in May 2019 versus Stockfish with +14 =79 -7, <b>53½-46½</b> <sup id=\"cite_ref-21\" class=\"reference\"><a href=\"#cite_note-21\">&#91;21&#93;</a></sup>.\nAt the <a href=\"/TCEC_Season_16#Premier\" title=\"TCEC Season 16\">TCEC Season 16 premier division</a> in September 2019, Lc0 became in third behind Stockfish and the <a href=\"/Supervised_Learning\" title=\"Supervised Learning\">supervised</a> trained <a href=\"/Allie#AllieStein\" title=\"Allie\">AllieStein</a>,\nbut Lc0 took revenge by winning the <a href=\"/TCEC_Season_17#Premier\" title=\"TCEC Season 17\">TCEC Season 17 premier division</a> in spring 2020, as <b>LCZero v0.24-sv-t60-3010</b> fighting down Stockfish in a thrilling <a href=\"/TCEC_Season_17#Superfinal\" title=\"TCEC Season 17\">superfinal</a> in April 2020 with +17 =71 -12, <b>52½-47½</b> <sup id=\"cite_ref-22\" class=\"reference\"><a href=\"#cite_note-22\">&#91;22&#93;</a></sup>, but tables turned again in <a href=\"/TCEC_Season_18#Premier\" title=\"TCEC Season 18\">TCEC Season 18</a>, when Stockfish won the <a href=\"/TCEC_Season_18#Superfinal\" title=\"TCEC Season 18\">superfinal</a>.\n</p>\n<h1><span class=\"mw-headline\" id=\"Release_Dates\">Release Dates</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Leela_Chess_Zero&amp;action=edit&amp;section=10\" title=\"Edit section: Release Dates\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"2018\">2018</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Leela_Chess_Zero&amp;action=edit&amp;section=11\" title=\"Edit section: 2018\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a class=\"mw-selflink selflink\">Leela Chess Zero</a> / <a href=\"/Leela_Chess_Zero#Lc0\" title=\"Leela Chess Zero\">Lc0</a> v0.14.1 - July 08, 2018</li>\n<li> <a class=\"mw-selflink selflink\">Leela Chess Zero</a> / <a href=\"/Leela_Chess_Zero#Lc0\" title=\"Leela Chess Zero\">Lc0</a> v0.16.0 - July 20, 2018</li>\n<li> <a class=\"mw-selflink selflink\">Leela Chess Zero</a> / <a href=\"/Leela_Chess_Zero#Lc0\" title=\"Leela Chess Zero\">Lc0</a> v0.17.0 - August 27, 2018</li>\n<li> <a class=\"mw-selflink selflink\">Leela Chess Zero</a> / <a href=\"/Leela_Chess_Zero#Lc0\" title=\"Leela Chess Zero\">Lc0</a> v0.18.0 - September 30, 2018</li>\n<li> <a class=\"mw-selflink selflink\">Leela Chess Zero</a> / <a href=\"/Leela_Chess_Zero#Lc0\" title=\"Leela Chess Zero\">Lc0</a> v0.18.1 - October 02, 2018</li>\n<li> <a class=\"mw-selflink selflink\">Leela Chess Zero</a> / <a href=\"/Leela_Chess_Zero#Lc0\" title=\"Leela Chess Zero\">Lc0</a> v0.19.0 - November 19, 2018</li>\n<li> <a class=\"mw-selflink selflink\">Leela Chess Zero</a> / <a href=\"/Leela_Chess_Zero#Lc0\" title=\"Leela Chess Zero\">Lc0</a> v0.19.1.1 - December 10, 2018</li></ul>\n<h2><span class=\"mw-headline\" id=\"2019\">2019</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Leela_Chess_Zero&amp;action=edit&amp;section=12\" title=\"Edit section: 2019\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a class=\"mw-selflink selflink\">Leela Chess Zero</a> / <a href=\"/Leela_Chess_Zero#Lc0\" title=\"Leela Chess Zero\">Lc0</a> v0.20.9 - January 01, 2019</li>\n<li> <a class=\"mw-selflink selflink\">Leela Chess Zero</a> / <a href=\"/Leela_Chess_Zero#Lc0\" title=\"Leela Chess Zero\">Lc0</a> v0.20.1 - January 07, 2019</li>\n<li> <a class=\"mw-selflink selflink\">Leela Chess Zero</a> / <a href=\"/Leela_Chess_Zero#Lc0\" title=\"Leela Chess Zero\">Lc0</a> v0.20.2 - February 01, 2019</li>\n<li> <a class=\"mw-selflink selflink\">Leela Chess Zero</a> / <a href=\"/Leela_Chess_Zero#Lc0\" title=\"Leela Chess Zero\">Lc0</a> v0.21.1 - March 23, 2019</li>\n<li> <a class=\"mw-selflink selflink\">Leela Chess Zero</a> / <a href=\"/Leela_Chess_Zero#Lc0\" title=\"Leela Chess Zero\">Lc0</a> v0.21.2 - June 09, 2019</li>\n<li> <a class=\"mw-selflink selflink\">Leela Chess Zero</a> / <a href=\"/Leela_Chess_Zero#Lc0\" title=\"Leela Chess Zero\">Lc0</a> v0.21.4 - July 28, 2019</li>\n<li> <a class=\"mw-selflink selflink\">Leela Chess Zero</a> / <a href=\"/Leela_Chess_Zero#Lc0\" title=\"Leela Chess Zero\">Lc0</a> v0.22.0 - August 05, 2019</li>\n<li> <a class=\"mw-selflink selflink\">Leela Chess Zero</a> / <a href=\"/Leela_Chess_Zero#Lc0\" title=\"Leela Chess Zero\">Lc0</a> v0.23.2 - December 31, 2019</li></ul>\n<h2><span class=\"mw-headline\" id=\"2020\">2020</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Leela_Chess_Zero&amp;action=edit&amp;section=13\" title=\"Edit section: 2020\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a class=\"mw-selflink selflink\">Leela Chess Zero</a> / <a href=\"/Leela_Chess_Zero#Lc0\" title=\"Leela Chess Zero\">Lc0</a> v0.23.3 - February 18, 2020</li>\n<li> <a class=\"mw-selflink selflink\">Leela Chess Zero</a> / <a href=\"/Leela_Chess_Zero#Lc0\" title=\"Leela Chess Zero\">Lc0</a> v0.24.1 - March 15, 2020</li>\n<li> <a class=\"mw-selflink selflink\">Leela Chess Zero</a> / <a href=\"/Leela_Chess_Zero#Lc0\" title=\"Leela Chess Zero\">Lc0</a> v0.25.1 - April 30, 2020</li>\n<li> <a class=\"mw-selflink selflink\">Leela Chess Zero</a> / <a href=\"/Leela_Chess_Zero#Lc0\" title=\"Leela Chess Zero\">Lc0</a> v0.26.0 - July 02, 2020</li>\n<li> <a class=\"mw-selflink selflink\">Leela Chess Zero</a> / <a href=\"/Leela_Chess_Zero#Lc0\" title=\"Leela Chess Zero\">Lc0</a> v0.26.1 - July 15, 2020</li>\n<li> <a class=\"mw-selflink selflink\">Leela Chess Zero</a> / <a href=\"/Leela_Chess_Zero#Lc0\" title=\"Leela Chess Zero\">Lc0</a> v0.26.2 - September 02, 2020</li>\n<li> <a class=\"mw-selflink selflink\">Leela Chess Zero</a> / <a href=\"/Leela_Chess_Zero#Lc0\" title=\"Leela Chess Zero\">Lc0</a> v0.26.3 - October 10, 2020</li></ul>\n<h2><span class=\"mw-headline\" id=\"2021\">2021</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Leela_Chess_Zero&amp;action=edit&amp;section=14\" title=\"Edit section: 2021\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a class=\"mw-selflink selflink\">Leela Chess Zero</a> / <a href=\"/Leela_Chess_Zero#Lc0\" title=\"Leela Chess Zero\">Lc0</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/LeelaChessZero/lc0/releases/tag/v0.27.0\">v0.27.0</a> - February 21, 2021</li>\n<li> <a class=\"mw-selflink selflink\">Leela Chess Zero</a> / <a href=\"/Leela_Chess_Zero#Lc0\" title=\"Leela Chess Zero\">Lc0</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/LeelaChessZero/lc0/releases/tag/v0.28.0\">v0.28.0</a> - August 26, 2021</li>\n<li> <a class=\"mw-selflink selflink\">Leela Chess Zero</a> / <a href=\"/Leela_Chess_Zero#Lc0\" title=\"Leela Chess Zero\">Lc0</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/LeelaChessZero/lc0/releases/tag/v0.28.2\">v0.28.2</a> - December 13, 2021</li></ul>\n<h2><span class=\"mw-headline\" id=\"2022\">2022</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Leela_Chess_Zero&amp;action=edit&amp;section=15\" title=\"Edit section: 2022\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a class=\"mw-selflink selflink\">Leela Chess Zero</a> / <a href=\"/Leela_Chess_Zero#Lc0\" title=\"Leela Chess Zero\">Lc0</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/LeelaChessZero/lc0/releases/tag/v0.29.0\">v0.29.0</a> - December 13, 2022</li></ul>\n<h2><span class=\"mw-headline\" id=\"2023\">2023</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Leela_Chess_Zero&amp;action=edit&amp;section=16\" title=\"Edit section: 2023\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a class=\"mw-selflink selflink\">Leela Chess Zero</a> / <a href=\"/Leela_Chess_Zero#Lc0\" title=\"Leela Chess Zero\">Lc0</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/LeelaChessZero/lc0/releases/tag/v0.30.0\">v0.30.0</a> - July 21, 2023</li></ul>\n<h2><span class=\"mw-headline\" id=\"2024\">2024</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Leela_Chess_Zero&amp;action=edit&amp;section=17\" title=\"Edit section: 2024\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a class=\"mw-selflink selflink\">Leela Chess Zero</a> / <a href=\"/Leela_Chess_Zero#Lc0\" title=\"Leela Chess Zero\">Lc0</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/LeelaChessZero/lc0/releases/tag/v0.31.0\">v0.31.0</a> - Jun 16, 2024</li></ul>\n<h2><span class=\"mw-headline\" id=\"2025\">2025</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Leela_Chess_Zero&amp;action=edit&amp;section=18\" title=\"Edit section: 2025\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a class=\"mw-selflink selflink\">Leela Chess Zero</a> / <a href=\"/Leela_Chess_Zero#Lc0\" title=\"Leela Chess Zero\">Lc0</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/LeelaChessZero/lc0/releases/tag/v0.32.0\">v0.32.0</a> - August 26, 2025</li>\n<li> <a class=\"mw-selflink selflink\">Leela Chess Zero</a> / <a href=\"/Leela_Chess_Zero#Lc0\" title=\"Leela Chess Zero\">Lc0</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/LeelaChessZero/lc0/releases/tag/v0.32.1\">v0.32.1</a> - November 24, 2025</li></ul>\n<h1><span class=\"mw-headline\" id=\"Authors\">Authors</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Leela_Chess_Zero&amp;action=edit&amp;section=19\" title=\"Edit section: Authors\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Category:Leela_Chess_Contributor\" title=\"Category:Leela Chess Contributor\">Leela Chess Contributors</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Leela_Chess_Zero&amp;action=edit&amp;section=20\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Allie\" title=\"Allie\">Allie</a></li>\n<li> <a href=\"/AlphaZero\" title=\"AlphaZero\">AlphaZero</a></li>\n<li> <a href=\"/Ceres\" title=\"Ceres\">Ceres</a></li>\n<li> <a href=\"/Fat_Fritz\" title=\"Fat Fritz\">Fat Fritz</a></li>\n<li> <a href=\"/Deep_Learning\" title=\"Deep Learning\">Deep Learning</a></li>\n<li> <a href=\"/Deus_X\" title=\"Deus X\">Deus X</a></li>\n<li> <a href=\"/index.php?title=Leela_Zero&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Leela Zero (page does not exist)\">Leela Zero</a></li>\n<li> <a href=\"/Leila\" title=\"Leila\">Leila</a></li>\n<li> <a href=\"/Maia_Chess\" title=\"Maia Chess\">Maia Chess</a></li>\n<li> <a href=\"/Monte-Carlo_Tree_Search\" title=\"Monte-Carlo Tree Search\">Monte-Carlo Tree Search</a></li></ul>\n<dl><dd> <a href=\"/UCT\" title=\"UCT\">UCT</a></dd>\n<dd> <a href=\"/Christopher_D._Rosin#PUCT\" title=\"Christopher D. Rosin\">PUCT</a></dd></dl>\n<ul><li> <a href=\"/Stockfish_NNUE\" title=\"Stockfish NNUE\">Stockfish NNUE</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Leela_Chess_Zero&amp;action=edit&amp;section=21\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Bill_Jordan\" title=\"Bill Jordan\">Bill Jordan</a> (<b>2020</b>). <i>Calculation versus Intuition: Stockfish versus Leela</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://www.amazon.com/Calculation-versus-Intuition-Stockfish-Leela-ebook/dp/B08LYBQDMB/\">amazon</a>&#160;» <a href=\"/TCEC\" title=\"TCEC\">TCEC</a>, <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a></li>\n<li> <a href=\"/Dominik_Klein\" title=\"Dominik Klein\">Dominik Klein</a> (<b>2021</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/asdfjkl/neural_network_chess\">Neural Networks For Chess</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/asdfjkl/neural_network_chess/releases/tag/v1.1\">Release Version 1.1 · GitHub</a> <sup id=\"cite_ref-23\" class=\"reference\"><a href=\"#cite_note-23\">&#91;23&#93;</a></sup></li>\n<li> <a href=\"/index.php?title=Rejwana_Haque&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Rejwana Haque (page does not exist)\">Rejwana Haque</a>, <a href=\"/index.php?title=Ting_Han_Wei&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Ting Han Wei (page does not exist)\">Ting Han Wei</a>, <a href=\"/Martin_M%C3%BCller\" title=\"Martin Müller\">Martin Müller</a> (<b>2021</b>). <i>On the Road to Perfection? Evaluating Leela Chess Zero Against Endgame Tablebases</i>. <a href=\"/Advances_in_Computer_Games_17\" title=\"Advances in Computer Games 17\">Advances in Computer Games 17</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Leela_Chess_Zero&amp;action=edit&amp;section=22\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"2018_2\">2018</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Leela_Chess_Zero&amp;action=edit&amp;section=23\" title=\"Edit section: 2018\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66280\">Announcing lczero</a> by <a href=\"/Gary_Linscott\" title=\"Gary Linscott\">Gary</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 09, 2018</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66280&amp;start=67\">Re: Announcing lczero</a> by <a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel Shawul</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 21, 2018&#160;» <a href=\"/Bojun_Huang#Rollout\" title=\"Bojun Huang\">Rollout Paradigm</a></dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/glinscott/leela-chess/issues/47\">Policy and value heads are from AlphaGo Zero, not Alpha Zero Issue #47</a> by <a href=\"/Gian-Carlo_Pascutto\" title=\"Gian-Carlo Pascutto\">Gian-Carlo Pascutto</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/glinscott/leela-chess\">glinscott/leela-chess · GitHub</a>, January 24, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66452\">LCZero is learning</a> by <a href=\"/Gary_Linscott\" title=\"Gary Linscott\">Gary</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 30, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66824\">LCZero update</a> by <a href=\"/Gary_Linscott\" title=\"Gary Linscott\">Gary</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 14, 2018</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://talkchess.com/forum/viewtopic.php?t=66929\">LCZero update (2)</a> by <a href=\"/Rein_Halbersma\" title=\"Rein Halbersma\">Rein Halbersma</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 25, 2018</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66945\">LCZero: Progress and Scaling. Relation to CCRL Elo</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 28, 2018&#160;» <a href=\"/Playing_Strength\" title=\"Playing Strength\">Playing Strength</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=67013\">What does LCzero learn?</a> by <a href=\"/Uri_Blass\" title=\"Uri Blass\">Uri Blass</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 05, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=67044\">How to play vs LCZero with Cute Chess gui</a> by Hai, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 08, 2018&#160;» <a href=\"/Cute_Chess\" title=\"Cute Chess\">Cute Chess</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=67075\">LCZero in Aquarium / Fritz</a> by <a href=\"/index.php?title=Carl_Bicknell&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Carl Bicknell (page does not exist)\">Carl Bicknell</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 11, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=67087\">LCZero on 10x128 now</a> by <a href=\"/Gary_Linscott\" title=\"Gary Linscott\">Gary</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 12, 2018 </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=67092\">lczero faq</a> by Duncan Roberts, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 13, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=67104\">Run LC Zero in LittleBlitzerGUI</a> by <a href=\"/index.php?title=Stefan_Pohl&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Stefan Pohl (page does not exist)\">Stefan Pohl</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 14, 2018&#160;» <a href=\"/LittleBlitzer\" title=\"LittleBlitzer\">LittleBlitzer</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=67121\">LC0 - how to catch up?</a> by <a href=\"/Srdja_Matovic\" title=\"Srdja Matovic\">Srdja Matovic</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 16, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=67300\">Leela on more then one GPU?</a> by <a href=\"/Karlo_Balla\" title=\"Karlo Balla\">Karlo Balla</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 01, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=67357\">GPU contention</a> by <a href=\"/Ian_Kennedy\" title=\"Ian Kennedy\">Ian Kennedy</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 07, 2018&#160;» <a href=\"/GPU\" title=\"GPU\">GPU</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=67646\">New CLOP settings give Leela huge tactics boost</a> by <a href=\"/Albert_Silver\" title=\"Albert Silver\">Albert Silver</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 04, 2018&#160;» <a href=\"/CLOP\" title=\"CLOP\">CLOP</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=67668\">First Win by Leela Chess Zero against Stockfish dev</a> by <a href=\"/Ankan_Banerjee\" title=\"Ankan Banerjee\">Ankan Banerjee</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 07, 2018&#160;» <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=67718\">what may be two firsts...</a> by <a href=\"/Michael_Byrne\" title=\"Michael Byrne\">Michael B</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 13, 2018&#160;» <a href=\"/DGT_Pi\" title=\"DGT Pi\">DGT Pi</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=67728\">LcZero and STS</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 14, 2018&#160;» <a href=\"/Strategic_Test_Suite\" title=\"Strategic Test Suite\">Strategic Test Suite</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/lczero/S-rhiPLnbHg/XY9-Z1LWCAAJ\">Who entered Leela into WCCC? Bad idea!!</a> by <a href=\"/Chris_Whittington\" title=\"Chris Whittington\">Chris Whittington</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">LCZero Forum</a>, June  23, 2018&#160;» <a href=\"/WCCC_2018\" title=\"WCCC 2018\">WCCC 2018</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=67949\">how will Leela fare at the WCCC?</a> by dannyb, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 10, 2018&#160;» <a href=\"/WCCC_2018\" title=\"WCCC 2018\">WCCC 2018</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/lczero/EgEslxR04wg/6zY7sLiQAwAJ\">Lc0 will participate at the WCCC? Wow!</a> by Martin Renneke, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">LCZero Forum</a>, July 10, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/lczero/KUwypuefNdY/DDV8hfwCBQAJ\">How Leela uses history planes</a> by Tristrom Cooke, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">LCZero Forum</a>, July 19, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=68072\">Why Lc0 eval (in cp) is asymmetric against AB engines?</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 25, 2018&#160;» <a href=\"/Asymmetric_Evaluation\" title=\"Asymmetric Evaluation\">Asymmetric Evaluation</a>, <a href=\"/Pawn_Advantage,_Win_Percentage,_and_Elo\" title=\"Pawn Advantage, Win Percentage, and Elo\">Pawn Advantage, Win Percentage, and Elo</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=68094\">TCEC season 13, 2 NN engines will be participating, Leela and Deus X</a> by Nay Lin Tun, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 28, 2018</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://talkchess.com/forum3/viewtopic.php?f=2&amp;t=68094&amp;start=90#p770006\">Re: TCEC season 13, 2 NN engines will be participating, Leela and Deus X</a> by <a href=\"/Gian-Carlo_Pascutto\" title=\"Gian-Carlo Pascutto\">Gian-Carlo Pascutto</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 03, 2018</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/lczero/vGdNYW-Ou58/Kh0GCj2OCgAJ\">Has Silver written any code for \"his\" ZeusX?</a> by <a href=\"/Chris_Whittington\" title=\"Chris Whittington\">Chris Whittington</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">LCZero Forum</a>, July 31, 2018 </li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/lczero/vGdNYW-Ou58/-icwb0pjDAAJ\">Re: Has Silver written any code for \"his\" ZeusX?</a> by <a href=\"/Alexander_Lyashuk\" title=\"Alexander Lyashuk\">Alexander Lyashuk</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">LCZero Forum</a>, August 02, 2018 </dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=68441\">Some properties of Lc0 playing</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 14, 2018 </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=68448\">How good is the RTX 2080 Ti for Leela?</a> by Hai, September 15, 2018 <sup id=\"cite_ref-24\" class=\"reference\"><a href=\"#cite_note-24\">&#91;24&#93;</a></sup></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=68448&amp;start=2\">Re: How good is the RTX 2080 Ti for Leela?</a> by <a href=\"/Ankan_Banerjee\" title=\"Ankan Banerjee\">Ankan Banerjee</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 16, 2018</dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=68448&amp;start=9\">Re: How good is the RTX 2080 Ti for Leela?</a> by <a href=\"/Ankan_Banerjee\" title=\"Ankan Banerjee\">Ankan Banerjee</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 17, 2018 <sup id=\"cite_ref-25\" class=\"reference\"><a href=\"#cite_note-25\">&#91;25&#93;</a></sup></dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=68448&amp;start=37\">Re: How good is the RTX 2080 Ti for Leela?</a> by <a href=\"/Ankan_Banerjee\" title=\"Ankan Banerjee\">Ankan Banerjee</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 28, 2018</dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=68448&amp;start=44\">Re: How good is the RTX 2080 Ti for Leela?</a> by <a href=\"/Ankan_Banerjee\" title=\"Ankan Banerjee\">Ankan Banerjee</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 15, 2018</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=68511\">LC0 0.18rc1 released</a> by <a href=\"/G%C3%BCnther_Simon\" title=\"Günther Simon\">Günther Simon</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 25, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=68973\">My non-OC RTX 2070 is very fast with Lc0</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 19, 2018 <sup id=\"cite_ref-26\" class=\"reference\"><a href=\"#cite_note-26\">&#91;26&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=69045\">2900 Elo points progress, 10 million games, 330 nets</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 25, 2018</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=69045&amp;start=8\">Re: 2900 Elo points progress, 10 million games, 330 nets</a> by <a href=\"/Alexander_Lyashuk\" title=\"Alexander Lyashuk\">crem</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 25, 2018</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=69068\">Scaling of Lc0 at high Leela Ratio</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 27, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=69175&amp;start=75\">Re: Alphazero news</a> by <a href=\"/Gian-Carlo_Pascutto\" title=\"Gian-Carlo Pascutto\">Gian-Carlo Pascutto</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 07, 2018&#160;» <a href=\"/AlphaZero\" title=\"AlphaZero\">AlphaZero</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=69306\">Policy training in Alpha Zero, LC0 ..</a> by <a href=\"/Chris_Whittington\" title=\"Chris Whittington\">Chris Whittington</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 18, 2018&#160;» <a href=\"/AlphaZero\" title=\"AlphaZero\">AlphaZero</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=69400\">LC0 using 4 x 2080 Ti GPU's on Chess.com tourney?</a> by M. Ansari, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 28, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=69318\">Smallnet (128x10) run1 progresses remarkably well</a> by  <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 19, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/lczero/EGcJSrZYLiw/netJ4S38CgAJ\">use multiple neural nets?</a> by <a href=\"/Warren_D._Smith\" title=\"Warren D. Smith\">Warren D. Smith</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">LCZero Forum</a>, December 25, 2018</li></ul>\n<h2><span class=\"mw-headline\" id=\"2019_2\">2019</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Leela_Chess_Zero&amp;action=edit&amp;section=24\" title=\"Edit section: 2019\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=69478\">LCZero FAQ is missing one important fact</a> by <a href=\"/Jouni_Uski\" title=\"Jouni Uski\">Jouni Uski</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 01, 2019&#160;» <a href=\"/GPU\" title=\"GPU\">GPU</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/lczero/CrMiK3OR1og/mcFd0NDKDQAJ\">\"boosting\" endgames in leela training? Simple change to learning process proposed: \"forked\" training games</a> by <a href=\"/Warren_D._Smith\" title=\"Warren D. Smith\">Warren D. Smith</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">LCZero Forum</a>, January 03, 2019</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=69552\">Leela on a weak pc, question</a> by chessico, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 09, 2019</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/lczero/I0lTgR-fFFU/NGC3kJDzAwAJ\">Michael Larabel benches lc0 on various GPUs</a> by <a href=\"/Warren_D._Smith\" title=\"Warren D. Smith\">Warren D. Smith</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">LCZero Forum</a>, January 14, 2019&#160;» <a href=\"/GPU\" title=\"GPU\">GPU</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=69622\">Can somebody explain what makes Leela as strong as Komodo?</a> by Chessqueen, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 16, 2019</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=69668\">A0 policy head ambiguity</a> by <a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel Shawul</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 21, 2019&#160;» <a href=\"/AlphaZero\" title=\"AlphaZero\">AlphaZero</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=69672\">Schizophrenic rating model for Leela</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 21, 2019&#160;» <a href=\"/Match_Statistics\" title=\"Match Statistics\">Match Statistics</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://forum.computerschach.de/cgi-bin/mwf/topic_show.pl?tid=10194\">Leela Zero (Lc0) - NVIDIA Geforce RTX 2060</a> by <a href=\"/Andreas_Strangm%C3%BCller\" title=\"Andreas Strangmüller\">Andreas Strangmüller</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">CSS Forum</a>, January 29, 2019</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=69820\">11258-32x4-se distilled network released</a> by <a href=\"/Dietrich_Kappe\" title=\"Dietrich Kappe\">Dietrich Kappe</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 03, 2019</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://forum.computerschach.de/cgi-bin/mwf/topic_show.pl?tid=10213\">Lc0 setup Hilfe</a> by <a href=\"/index.php?title=Clemens_Keck&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Clemens Keck (page does not exist)\">Clemens Keck</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">CSS Forum</a>, February 07, 2019 (German)</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=69852\">Lc0 - macOS binary requested</a> by Steppenwolf, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 09, 2019&#160;» <a href=\"/Mac_OS\" title=\"Mac OS\">Mac OS</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=69957\">Thanks for LC0</a> by <a href=\"/Peter_Berger\" title=\"Peter Berger\">Peter Berger</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 19, 2019</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=70069&amp;start=10\">Re: Training the trainer: how is it done for Stockfish?</a> by Graham Jones, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 03, 2019&#160;» <a href=\"/Monte-Carlo_Tree_Search\" title=\"Monte-Carlo Tree Search\">Monte-Carlo Tree Search</a>, <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=70350\">Lc0 51010</a> by <a href=\"/Larry_Kaufman\" title=\"Larry Kaufman\">Larry Kaufman</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 29, 2019</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=70362\">Using LC0 with one or two GPUs - a guide</a> by <a href=\"/Srdja_Matovic\" title=\"Srdja Matovic\">Srdja Matovic</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 30, 2019&#160;» <a href=\"/GPU\" title=\"GPU\">GPU</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=70451\">32930 Boost network available</a> by <a href=\"/Dietrich_Kappe\" title=\"Dietrich Kappe\">Dietrich Kappe</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 09, 2019</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=71209\">Lc0 question</a> by <a href=\"/Larry_Kaufman\" title=\"Larry Kaufman\">Larry Kaufman</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 06, 2019</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=71651\">Some newbie questions about lc0</a> by <a href=\"/Pham_Hong_Nguyen\" title=\"Pham Hong Nguyen\">Nguyen Pham</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 25, 2019</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=71686\">Lc0 Evaluation Explanation</a> by Hamster, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 29, 2019</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=71686&amp;start=14\">Re: Lc0 Evaluation Explanation</a> by <a href=\"/Alexander_Lyashuk\" title=\"Alexander Lyashuk\">Alexander Lyashuk</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 03, 2019</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=71822\">My failed attempt to change TCEC NN clone rules</a> by <a href=\"/Alexander_Lyashuk\" title=\"Alexander Lyashuk\">Alexander Lyashuk</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 14, 2019&#160;» <a href=\"/TCEC\" title=\"TCEC\">TCEC</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=72640\">Best Nets for Lc0 Page</a> by <a href=\"/Ted_Summers\" title=\"Ted Summers\">Ted Summers</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 23, 2019 </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=72685\">Correct LC0 syntax for multiple GPUs</a> by <a href=\"/Dann_Corbit\" title=\"Dann Corbit\">Dann Corbit</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 30, 2019 </li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_2\">2020</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Leela_Chess_Zero&amp;action=edit&amp;section=25\" title=\"Edit section: 2020\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=73684\">Lc0 soon to support chess960&#160;?</a> by Modern Times, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 18, 2020&#160;» <a href=\"/Chess960\" title=\"Chess960\">Chess960</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=73714\">How to run rtx 2080ti for leela optimally?</a> by h1a8, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 20, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=74092\">Total noob Leela question</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 03, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/lczero/BvhCa-muLt0/ZzINQk_vCQAJ\">How strong is Stockfish NNUE compared to Leela..</a> by OmenhoteppIV, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">LCZero Forum</a>, July 13, 2020&#160;» <a href=\"/Stockfish_NNUE\" title=\"Stockfish NNUE\">Stockfish NNUE</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=74607\">LC0 vs. NNUE - some tech details...</a> by <a href=\"/Srdja_Matovic\" title=\"Srdja Matovic\">Srdja Matovic</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 29, 2020&#160;» <a href=\"/NNUE\" title=\"NNUE\">NNUE</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=74915\">The next step for LC0?</a> by <a href=\"/Srdja_Matovic\" title=\"Srdja Matovic\">Srdja Matovic</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 28, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=75262\">Checking the backends with the new lc0 binary</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 01, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=75950\">ZZ-tune conclusively better than the Kiudee default for Lc0</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 01, 2020 <sup id=\"cite_ref-27\" class=\"reference\"><a href=\"#cite_note-27\">&#91;27&#93;</a></sup></li></ul>\n<h2><span class=\"mw-headline\" id=\"2021_2\">2021</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Leela_Chess_Zero&amp;action=edit&amp;section=26\" title=\"Edit section: 2021\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://lczero.org/blog/2021/01/announcing-ceres/\">Announcing Ceres</a> by <a href=\"/Alexander_Lyashuk\" title=\"Alexander Lyashuk\">crem</a>, <a class=\"mw-selflink selflink\">LCZero blog</a>, January 01, 2021&#160;» <a href=\"/Ceres\" title=\"Ceres\">Ceres</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=76948\">leela</a> by <a href=\"/Stuart_Cracraft\" title=\"Stuart Cracraft\">Stuart Cracraft</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 29, 2021&#160;» <a href=\"/Banksia_GUI\" title=\"Banksia GUI\">Banksia GUI</a>, <a href=\"/index.php?title=IPhone&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"IPhone (page does not exist)\">iPhone</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://lczero.org/blog/2021/04/joking-ftw-seriously/\">Joking FTW, Seriously</a> by borg, <a class=\"mw-selflink selflink\">LCZero blog</a>, April 25, 2021</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://lczero.org/blog/2021/06/the-importance-of-open-data/\">The importance of open data</a> by borg, <a class=\"mw-selflink selflink\">LCZero blog</a>, June 15, 2021</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=77496\">Leela data publicly available for use</a> by Madeleine Birchfield, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 15, 2021</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=77503\">will Tcec allow Stockfish with a Leela net to play?</a> by Wilson, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 17, 2021&#160;» <a href=\"/TCEC_Season_21\" title=\"TCEC Season 21\">TCEC Season 21</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Leela_Chess_Zero&amp;action=edit&amp;section=27\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Chess_Engine\">Chess Engine</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Leela_Chess_Zero&amp;action=edit&amp;section=28\" title=\"Edit section: Chess Engine\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://lczero.org/\">Leela Chess Zero</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://lczero.org/blog/\">Blog - Leela Chess Zero</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/forum/#!forum/lczero\">LCZero – Forum</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://training.lczero.org/\">Testing instance of LCZero server</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Leela_Chess_Zero\">Leela Chess Zero from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Leela_(software)\">Leela (software) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.facebook.com/LeelaChessZero/\">Leela Chess Zero - Facebook</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://twitter.com/leelachesszero\">Leela Chess Zero (@LeelaChessZero) | Twitter</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://slides.com/crem/lc0#/logo\">Lc0 Slides</a> by <a href=\"/Alexander_Lyashuk\" title=\"Alexander Lyashuk\">Alexander Lyashuk</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"GitHub\">GitHub</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Leela_Chess_Zero&amp;action=edit&amp;section=29\" title=\"Edit section: GitHub\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/LeelaChessZero/\">LCZero · GitHub</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/LeelaChessZero/lczero\">GitHub - LeelaChessZero/lczero: A chess adaption of GCP's Leela Zero</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/LeelaChessZero/lc0\">GitHub - LeelaChessZero/lc0: The rewritten engine, originally for tensorflow. Now all other backends have been ported here</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/LeelaChessZero/lc0/wiki\">Home · LeelaChessZero/lc0 Wiki · GitHub</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/LeelaChessZero/lc0/wiki/Getting-Started\">Getting Started · LeelaChessZero/lc0 Wiki · GitHub</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/LeelaChessZero/lc0/wiki/FAQ\">FAQ · LeelaChessZero/lc0 Wiki · GitHub</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/LeelaChessZero/lc0/wiki/Technical-Explanation-of-Leela-Chess-Zero\">Technical Explanation of Leela Chess Zero · LeelaChessZero/lc0 Wiki · GitHub</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/LeelaChessZero/lc0/graphs/contributors\">Contributors to LeelaChessZero/lc0 · GitHub</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/LeelaChessZero/lc0/commit/62741d56252b23f74e8a7200a42812f27fe32b7d\">Use NHCW layout for fused winograd residual block (#1567) · LeelaChessZero/lc0@62741d5 · GitHub</a>, commit by <a href=\"/Ankan_Banerjee\" title=\"Ankan Banerjee\">Ankan Banerjee</a>, June 10, 2021</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/mooskagh/lc0\">GitHub - mooskagh/lc0: The rewritten engine, originally for cudnn. Now all other backends have been ported here</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/dkappe/leela-chess-weights/wiki/Distilled-Networks\">Distilled Networks · dkappe/leela-chess-weights Wiki · GitHub</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Rating_Lists\">Rating Lists</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Leela_Chess_Zero&amp;action=edit&amp;section=30\" title=\"Edit section: Rating Lists\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://computerchess.org.uk/ccrl/404/cgi/compare_engines.cgi?family=Leela%20Chess&amp;print=Rating+list&amp;print=Results+table&amp;print=LOS+table&amp;print=Ponder+hit+table&amp;print=Eval+difference+table&amp;print=Comopp+gamenum+table&amp;print=Overlap+table&amp;print=Score+with+common+opponents\">Leela Chess Zero</a> in <a href=\"/CCRL\" title=\"CCRL\">CCRL Blitz</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://computerchess.org.uk/ccrl/4040/cgi/compare_engines.cgi?family=Leela%20Chess&amp;print=Rating+list&amp;print=Results+table&amp;print=LOS+table&amp;print=Ponder+hit+table&amp;print=Eval+difference+table&amp;print=Comopp+gamenum+table&amp;print=Overlap+table&amp;print=Score+with+common+opponents\">Leela Chess Zero</a> in <a href=\"/CCRL\" title=\"CCRL\">CCRL 40/15</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"ChessBase\">ChessBase</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Leela_Chess_Zero&amp;action=edit&amp;section=31\" title=\"Edit section: ChessBase\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.chessbase.com/post/leela-chess-zero-alphazero-for-the-pc\">Leela Chess Zero: AlphaZero for the PC</a> by <a href=\"/Albert_Silver\" title=\"Albert Silver\">Albert Silver</a>, <a href=\"/ChessBase\" title=\"ChessBase\">ChessBase News</a>, April 26, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.chessbase.com/post/standing-on-the-shoulders-of-giants\">Standing on the shoulders of giants</a> by <a href=\"/Albert_Silver\" title=\"Albert Silver\">Albert Silver</a>, <a href=\"/ChessBase\" title=\"ChessBase\">ChessBase News</a>, September 18, 2019</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.chessbase.com/post/running-leela-and-fat-fritz-on-your-notebook\">Running Leela and Fat Fritz on your notebook</a> by <a rel=\"nofollow\" class=\"external text\" href=\"https://ratings.fide.com/card.phtml?event=2099713\">Evelyn Zhu</a>, <a href=\"/ChessBase\" title=\"ChessBase\">ChessBase News</a>, June 14, 2020&#160;» <a href=\"/Fat_Fritz\" title=\"Fat Fritz\">Fat Fritz</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Chessdom\">Chessdom</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Leela_Chess_Zero&amp;action=edit&amp;section=32\" title=\"Edit section: Chessdom\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.chessdom.com/interview-with-alexander-lyashuk-about-the-recent-success-of-lc0/\">Interview with Alexander Lyashuk about the recent success of Lc0</a>, <a href=\"/index.php?title=Chessdom&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Chessdom (page does not exist)\">Chessdom</a>, February 6, 2019&#160;» <a href=\"/TCEC_Season_14\" title=\"TCEC Season 14\">TCEC Season 14</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Tuning\">Tuning</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Leela_Chess_Zero&amp;action=edit&amp;section=33\" title=\"Edit section: Tuning\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/kiudee/bayes-skopt\">GitHub - kiudee/bayes-skopt: A fully Bayesian implementation of sequential model-based optimization</a> by <a href=\"/Karlson_Pfannschmidt\" title=\"Karlson Pfannschmidt\">Karlson Pfannschmidt</a>&#160;» <a href=\"/Fat_Fritz\" title=\"Fat Fritz\">Fat Fritz</a> <sup id=\"cite_ref-28\" class=\"reference\"><a href=\"#cite_note-28\">&#91;28&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/kiudee/chess-tuning-tools\">GitHub - kiudee/chess-tuning-tools</a> by <a href=\"/Karlson_Pfannschmidt\" title=\"Karlson Pfannschmidt\">Karlson Pfannschmidt</a> <sup id=\"cite_ref-29\" class=\"reference\"><a href=\"#cite_note-29\">&#91;29&#93;</a></sup></li></ul>\n<h2><span class=\"mw-headline\" id=\"Misc\">Misc</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Leela_Chess_Zero&amp;action=edit&amp;section=34\" title=\"Edit section: Misc\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Leela\">Leela from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Leela_(game)\">Leela (game) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Leela_(name)\">Leela (name) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Leela_(Doctor_Who)\">Leela (Doctor Who) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Leela_(Futurama)\">Leela (Futurama) from Wikipedia</a></li>\n<li> <a href=\"/Category:Soft_Machine\" title=\"Category:Soft Machine\">Soft Machine</a> - <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Hidden_Details\">Hidden Details</a>, 2018, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> Lineup: <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Theo_Travis\">Theo Travis</a>, <a href=\"/Category:Roy_Babbington\" title=\"Category:Roy Babbington\">Roy Babbington</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/John_Etheridge\">John Etheridge</a>, <a href=\"/Category:John_Marshall\" title=\"Category:John Marshall\">John Marshall</a></dd>\n<dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/uGIf97m243M?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Leela_Chess_Zero&amp;action=edit&amp;section=35\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap mw-references-columns\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://twitter.com/leelachesszero\">Leela Chess Zero (@LeelaChessZero) | Twitter</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/gcp/leela-zero\">GitHub - gcp/leela-zero: Go engine with no human-provided knowledge, modeled after the AlphaGo Zero paper</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a href=\"/David_Silver\" title=\"David Silver\">David Silver</a>, <a href=\"/Thomas_Hubert\" title=\"Thomas Hubert\">Thomas Hubert</a>, <a href=\"/Julian_Schrittwieser\" title=\"Julian Schrittwieser\">Julian Schrittwieser</a>, <a href=\"/Ioannis_Antonoglou\" title=\"Ioannis Antonoglou\">Ioannis Antonoglou</a>, <a href=\"/Matthew_Lai\" title=\"Matthew Lai\">Matthew Lai</a>, <a href=\"/Arthur_Guez\" title=\"Arthur Guez\">Arthur Guez</a>, <a href=\"/Marc_Lanctot\" title=\"Marc Lanctot\">Marc Lanctot</a>, <a href=\"/Laurent_Sifre\" title=\"Laurent Sifre\">Laurent Sifre</a>, <a href=\"/Dharshan_Kumaran\" title=\"Dharshan Kumaran\">Dharshan Kumaran</a>, <a href=\"/Thore_Graepel\" title=\"Thore Graepel\">Thore Graepel</a>, <a href=\"/Timothy_Lillicrap\" title=\"Timothy Lillicrap\">Timothy Lillicrap</a>, <a href=\"/Karen_Simonyan\" title=\"Karen Simonyan\">Karen Simonyan</a>, <a href=\"/Demis_Hassabis\" title=\"Demis Hassabis\">Demis Hassabis</a> (<b>2017</b>). <i>Mastering Chess and Shogi by Self-Play with a General Reinforcement Learning Algorithm</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1712.01815\">arXiv:1712.01815</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a href=\"/David_Silver\" title=\"David Silver\">David Silver</a>, <a href=\"/Thomas_Hubert\" title=\"Thomas Hubert\">Thomas Hubert</a>, <a href=\"/Julian_Schrittwieser\" title=\"Julian Schrittwieser\">Julian Schrittwieser</a>, <a href=\"/Ioannis_Antonoglou\" title=\"Ioannis Antonoglou\">Ioannis Antonoglou</a>, <a href=\"/Matthew_Lai\" title=\"Matthew Lai\">Matthew Lai</a>, <a href=\"/Arthur_Guez\" title=\"Arthur Guez\">Arthur Guez</a>, <a href=\"/Marc_Lanctot\" title=\"Marc Lanctot\">Marc Lanctot</a>, <a href=\"/Laurent_Sifre\" title=\"Laurent Sifre\">Laurent Sifre</a>, <a href=\"/Dharshan_Kumaran\" title=\"Dharshan Kumaran\">Dharshan Kumaran</a>, <a href=\"/Thore_Graepel\" title=\"Thore Graepel\">Thore Graepel</a>, <a href=\"/Timothy_Lillicrap\" title=\"Timothy Lillicrap\">Timothy Lillicrap</a>, <a href=\"/Karen_Simonyan\" title=\"Karen Simonyan\">Karen Simonyan</a>, <a href=\"/Demis_Hassabis\" title=\"Demis Hassabis\">Demis Hassabis</a> (<b>2018</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://science.sciencemag.org/content/362/6419/1140\">A general reinforcement learning algorithm that masters chess, shogi, and Go through self-play</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Science_(journal)\">Science</a>, Vol. 362, No. 6419</span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://blog.lczero.org/2018/12/alphazero-paper-and-lc0-v0191.html\">AlphaZero paper, and Lc0 v0.19.1</a> by <a href=\"/Alexander_Lyashuk\" title=\"Alexander Lyashuk\">crem</a>, <a class=\"mw-selflink selflink\">LCZero blog</a>, December 07, 2018</span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://lczero.org/blog/2024/02/transformer-progress/\">Transformer Progress</a> from Lc0 Blog, February 28, 2024</span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/2409.12272\">Mastering Chess with a Transformer Model</a> from arxiv.org, September 18, 2024</span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/2406.00877\">Evidence of Learned Look-Ahead in a Chess-Playing Neural Network</a> from arxiv.org, June 2, 2024</span>\n</li>\n<li id=\"cite_note-9\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-9\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1706.03762\">Attention Is All You Need</a> from arxiv.org, June 2, 2017</span>\n</li>\n<li id=\"cite_note-10\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-10\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/LeelaChessZero/lc0/wiki/lc0-transition\">lc0 transition · LeelaChessZero/lc0 Wiki · GitHub</a></span>\n</li>\n<li id=\"cite_note-11\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-11\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=68094&amp;start=91\">Re: TCEC season 13, 2 NN engines will be participating, Leela and Deus X</a> by <a href=\"/Gian-Carlo_Pascutto\" title=\"Gian-Carlo Pascutto\">Gian-Carlo Pascutto</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 03, 2018</span>\n</li>\n<li id=\"cite_note-12\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-12\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://developer.nvidia.com/cudnn\">NVIDIA cuDNN | NVIDIA Developer</a></span>\n</li>\n<li id=\"cite_note-13\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-13\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=71822&amp;start=48\">Re: My failed attempt to change TCEC NN clone rules</a> by <a href=\"/Adam_Treat\" title=\"Adam Treat\">Adam Treat</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 19, 2019</span>\n</li>\n<li id=\"cite_note-14\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-14\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/LeelaChessZero/lc0/blob/master/src/chess/board.h\">lc0/board.h at master · LeelaChessZero/lc0 · GitHub</a></span>\n</li>\n<li id=\"cite_note-15\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-15\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/LeelaChessZero/lc0/wiki/Technical-Explanation-of-Leela-Chess-Zero\">Technical Explanation of Leela Chess Zero · LeelaChessZero/lc0 Wiki · GitHub</a></span>\n</li>\n<li id=\"cite_note-16\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-16\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://towardsdatascience.com/squeeze-and-excitation-networks-9ef5e71eacd7\">Squeeze-and-Excitation Networks – Towards Data Science</a> by <a rel=\"nofollow\" class=\"external text\" href=\"http://plpp.de/\">Paul-Louis Pröve</a>, October 17, 2017</span>\n</li>\n<li id=\"cite_note-17\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-17\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://medium.com/oracledevs/lessons-from-alphazero-part-4-improving-the-training-target-6efba2e71628\">Lessons From AlphaZero (part 4): Improving the Training Target</a> by <a rel=\"nofollow\" class=\"external text\" href=\"https://blogs.oracle.com/author/vish-abrams\">Vish Abrams</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://blogs.oracle.com/\">Oracle Blog</a>, June 27, 2018</span>\n</li>\n<li id=\"cite_note-18\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-18\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/LeelaChessZero/lczero-training\">GitHub - LeelaChessZero/lczero-training: For code etc relating to the network training process.</a></span>\n</li>\n<li id=\"cite_note-19\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-19\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=71822\">My failed attempt to change TCEC NN clone rules</a> by <a href=\"/Alexander_Lyashuk\" title=\"Alexander Lyashuk\">Alexander Lyashuk</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 14, 2019&#160;» <a href=\"/TCEC\" title=\"TCEC\">TCEC</a></span>\n</li>\n<li id=\"cite_note-20\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-20\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=71822\">My failed attempt to change TCEC NN clone rules</a> by <a href=\"/Alexander_Lyashuk\" title=\"Alexander Lyashuk\">Alexander Lyashuk</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 14, 2019&#160;» <a href=\"/TCEC\" title=\"TCEC\">TCEC</a></span>\n</li>\n<li id=\"cite_note-21\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-21\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://blog.lczero.org/2019/05/lc0-won-tcec-15.html\">Lc0 won TCEC 15</a> by <a href=\"/Alexander_Lyashuk\" title=\"Alexander Lyashuk\">crem</a>, <a class=\"mw-selflink selflink\">LCZero blog</a>, May 28, 2019</span>\n</li>\n<li id=\"cite_note-22\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-22\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://lczero.org/blog/2020/04/tcec-s17-super-final-report/\">TCEC S17 SUper FInal report</a> by @glbchess64, <a class=\"mw-selflink selflink\">LCZero blog</a>, April 21, 2020</span>\n</li>\n<li id=\"cite_note-23\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-23\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=78283\">Book about Neural Networks for Chess</a> by dkl, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 29, 2021</span>\n</li>\n<li id=\"cite_note-24\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-24\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/GeForce_20_series\">GeForce 20 series from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-25\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-25\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Multiply%E2%80%93accumulate_operation\">Multiply–accumulate operation - Wikipedia</a></span>\n</li>\n<li id=\"cite_note-26\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-26\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.nvidia.com/en-us/geforce/graphics-cards/rtx-2070/\">GeForce RTX 2070 Graphics Card | NVIDIA</a></span>\n</li>\n<li id=\"cite_note-27\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-27\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/kiudee/chess-tuning-tools\">GitHub - kiudee/chess-tuning-tools</a> by <a href=\"/Karlson_Pfannschmidt\" title=\"Karlson Pfannschmidt\">Karlson Pfannschmidt</a></span>\n</li>\n<li id=\"cite_note-28\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-28\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.chessbase.com/post/fat-fritz-update-and-fat-fritz-jr\">Fat Fritz 1.1 update and a small gift</a> by <a href=\"/Albert_Silver\" title=\"Albert Silver\">Albert Silver</a>. <a href=\"/ChessBase\" title=\"ChessBase\">ChessBase News</a>, March 05, 2020</span>\n</li>\n<li id=\"cite_note-29\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-29\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://chess-tuning-tools.readthedocs.io/en/latest/\">Welcome to Chess Tuning Tools’s documentation!</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Engines\" title=\"Engines\">Up one level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260228111934\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.064 seconds\nReal time usage: 0.071 seconds\nPreprocessor visited node count: 551/1000000\nPreprocessor generated node count: 1122/1000000\nPost‐expand include size: 27/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:101-0!canonical and timestamp 20260228111934 and revision id 27414\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "UCI"
+      },
+      {
+        "sortkey": "",
+        "*": "Open_Source"
+      },
+      {
+        "sortkey": "",
+        "*": "GPL"
+      },
+      {
+        "sortkey": "",
+        "*": "GPU"
+      },
+      {
+        "sortkey": "",
+        "*": "DCNN"
+      },
+      {
+        "sortkey": "",
+        "*": "MCTS"
+      },
+      {
+        "sortkey": "",
+        "*": "PC"
+      },
+      {
+        "sortkey": "",
+        "*": "Windows"
+      },
+      {
+        "sortkey": "",
+        "*": "Linux"
+      },
+      {
+        "sortkey": "",
+        "*": "Mac"
+      },
+      {
+        "sortkey": "",
+        "*": "Fiction"
+      },
+      {
+        "sortkey": "",
+        "*": "Given_Name"
+      },
+      {
+        "sortkey": "",
+        "*": "Soft_Machine"
+      },
+      {
+        "sortkey": "",
+        "*": "Roy_Babbington"
+      },
+      {
+        "sortkey": "",
+        "*": "John_Marshall"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Leela Chess Zero"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Adam Treat"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Games 17"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Albert Silver"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alexander Lyashuk"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Allie"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "AlphaZero"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Andreas Strangmüller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ankan Banerjee"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Arthur Guez"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Asymmetric Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Banksia GUI"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bill Jordan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Board Representation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bojun Huang"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCRL"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CLOP"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Castling Rights"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ceres"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess960"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ChessBase"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Game"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Position"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chris Whittington"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Christopher D. Rosin"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Color Flipping"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cpp"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cute Chess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "DGT Pi"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Daniel Shawul"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dann Corbit"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David Silver"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Deep Learning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Demis Hassabis"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Deus X"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dharshan Kumaran"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dietrich Kappe"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dominik Klein"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ed Schroder"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "En passant"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engines"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fat Fritz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Float"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Free Software Foundation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "GPU"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gary Linscott"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "General Setwise Operations"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gian-Carlo Pascutto"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Go"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Go (Programming Language)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Günther Simon"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Harm Geert Muller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ian Kennedy"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ioannis Antonoglou"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jouni Uski"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Julian Schrittwieser"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kai Laskos"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Karen Simonyan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Karlo Balla"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Karlson Pfannschmidt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Larry Kaufman"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Laurent Sifre"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Leila"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Linux"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "LittleBlitzer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mac OS"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Maia Chess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marc Lanctot"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Martin Müller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Match Statistics"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Matthew Lai"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michael Byrne"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Monte-Carlo Tree Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "NNUE"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Neural Networks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Nodes per Second"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Nvidia"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Advantage, Win Percentage, and Elo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter Berger"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pham Hong Nguyen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Playing Strength"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Python"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rein Halbersma"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Reinforcement Learning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Srdja Matovic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stockfish"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stockfish NNUE"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Strategic Test Suite"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stuart Cracraft"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Supervised Learning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "TCEC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "TCEC Season 12"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "TCEC Season 13"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "TCEC Season 14"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "TCEC Season 15"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "TCEC Season 16"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "TCEC Season 17"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "TCEC Season 18"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "TCEC Season 21"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ted Summers"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Thomas Hubert"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Thore Graepel"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Timothy Lillicrap"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "UCI"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "UCT"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Uri Blass"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "WCCC 2018"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Warren D. Smith"
+      },
+      {
+        "ns": 0,
+        "*": "Leela Zero"
+      },
+      {
+        "ns": 0,
+        "*": "DeepMind"
+      },
+      {
+        "ns": 0,
+        "*": "AlphaGo"
+      },
+      {
+        "ns": 0,
+        "*": "Rejwana Haque"
+      },
+      {
+        "ns": 0,
+        "*": "Ting Han Wei"
+      },
+      {
+        "ns": 0,
+        "*": "Carl Bicknell"
+      },
+      {
+        "ns": 0,
+        "*": "Stefan Pohl"
+      },
+      {
+        "ns": 0,
+        "*": "Clemens Keck"
+      },
+      {
+        "ns": 0,
+        "*": "IPhone"
+      },
+      {
+        "ns": 0,
+        "*": "Chessdom"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:John Marshall"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Leela Chess Contributor"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Open Source"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Roy Babbington"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Soft Machine"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Lc0",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Leela_Chess_Zero",
+        "byteoffset": 3122,
+        "anchor": "Lc0"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Description",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Leela_Chess_Zero",
+        "byteoffset": 5175,
+        "anchor": "Description"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Board Representation",
+        "number": "2.1",
+        "index": "3",
+        "fromtitle": "Leela_Chess_Zero",
+        "byteoffset": 6026,
+        "anchor": "Board_Representation"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Network",
+        "number": "2.2",
+        "index": "4",
+        "fromtitle": "Leela_Chess_Zero",
+        "byteoffset": 6808,
+        "anchor": "Network"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Training",
+        "number": "2.3",
+        "index": "5",
+        "fromtitle": "Leela_Chess_Zero",
+        "byteoffset": 8494,
+        "anchor": "Training"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Structure Diagrams",
+        "number": "3",
+        "index": "6",
+        "fromtitle": "Leela_Chess_Zero",
+        "byteoffset": 10911,
+        "anchor": "Structure_Diagrams"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Tournament Play",
+        "number": "4",
+        "index": "7",
+        "fromtitle": "Leela_Chess_Zero",
+        "byteoffset": 11803,
+        "anchor": "Tournament_Play"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "First Experience",
+        "number": "4.1",
+        "index": "8",
+        "fromtitle": "Leela_Chess_Zero",
+        "byteoffset": 11821,
+        "anchor": "First_Experience"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Breakthrough",
+        "number": "4.2",
+        "index": "9",
+        "fromtitle": "Leela_Chess_Zero",
+        "byteoffset": 12203,
+        "anchor": "Breakthrough"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Release Dates",
+        "number": "5",
+        "index": "10",
+        "fromtitle": "Leela_Chess_Zero",
+        "byteoffset": 13791,
+        "anchor": "Release_Dates"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2018",
+        "number": "5.1",
+        "index": "11",
+        "fromtitle": "Leela_Chess_Zero",
+        "byteoffset": 13807,
+        "anchor": "2018"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2019",
+        "number": "5.2",
+        "index": "12",
+        "fromtitle": "Leela_Chess_Zero",
+        "byteoffset": 14382,
+        "anchor": "2019"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020",
+        "number": "5.3",
+        "index": "13",
+        "fromtitle": "Leela_Chess_Zero",
+        "byteoffset": 15032,
+        "anchor": "2020"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2021",
+        "number": "5.4",
+        "index": "14",
+        "fromtitle": "Leela_Chess_Zero",
+        "byteoffset": 15601,
+        "anchor": "2021"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2022",
+        "number": "5.5",
+        "index": "15",
+        "fromtitle": "Leela_Chess_Zero",
+        "byteoffset": 16037,
+        "anchor": "2022"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2023",
+        "number": "5.6",
+        "index": "16",
+        "fromtitle": "Leela_Chess_Zero",
+        "byteoffset": 16189,
+        "anchor": "2023"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2024",
+        "number": "5.7",
+        "index": "17",
+        "fromtitle": "Leela_Chess_Zero",
+        "byteoffset": 16337,
+        "anchor": "2024"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2025",
+        "number": "5.8",
+        "index": "18",
+        "fromtitle": "Leela_Chess_Zero",
+        "byteoffset": 16484,
+        "anchor": "2025"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Authors",
+        "number": "6",
+        "index": "19",
+        "fromtitle": "Leela_Chess_Zero",
+        "byteoffset": 16778,
+        "anchor": "Authors"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "7",
+        "index": "20",
+        "fromtitle": "Leela_Chess_Zero",
+        "byteoffset": 16854,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "8",
+        "index": "21",
+        "fromtitle": "Leela_Chess_Zero",
+        "byteoffset": 17099,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "9",
+        "index": "22",
+        "fromtitle": "Leela_Chess_Zero",
+        "byteoffset": 17878,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2018",
+        "number": "9.1",
+        "index": "23",
+        "fromtitle": "Leela_Chess_Zero",
+        "byteoffset": 17892,
+        "anchor": "2018_2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2019",
+        "number": "9.2",
+        "index": "24",
+        "fromtitle": "Leela_Chess_Zero",
+        "byteoffset": 25390,
+        "anchor": "2019_2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020",
+        "number": "9.3",
+        "index": "25",
+        "fromtitle": "Leela_Chess_Zero",
+        "byteoffset": 29062,
+        "anchor": "2020_2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2021",
+        "number": "9.4",
+        "index": "26",
+        "fromtitle": "Leela_Chess_Zero",
+        "byteoffset": 30432,
+        "anchor": "2021_2"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "10",
+        "index": "27",
+        "fromtitle": "Leela_Chess_Zero",
+        "byteoffset": 31358,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Chess Engine",
+        "number": "10.1",
+        "index": "28",
+        "fromtitle": "Leela_Chess_Zero",
+        "byteoffset": 31375,
+        "anchor": "Chess_Engine"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "GitHub",
+        "number": "10.2",
+        "index": "29",
+        "fromtitle": "Leela_Chess_Zero",
+        "byteoffset": 32016,
+        "anchor": "GitHub"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Rating Lists",
+        "number": "10.3",
+        "index": "30",
+        "fromtitle": "Leela_Chess_Zero",
+        "byteoffset": 33439,
+        "anchor": "Rating_Lists"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "ChessBase",
+        "number": "10.4",
+        "index": "31",
+        "fromtitle": "Leela_Chess_Zero",
+        "byteoffset": 34081,
+        "anchor": "ChessBase"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Chessdom",
+        "number": "10.5",
+        "index": "32",
+        "fromtitle": "Leela_Chess_Zero",
+        "byteoffset": 34701,
+        "anchor": "Chessdom"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Tuning",
+        "number": "10.6",
+        "index": "33",
+        "fromtitle": "Leela_Chess_Zero",
+        "byteoffset": 34926,
+        "anchor": "Tuning"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Misc",
+        "number": "10.7",
+        "index": "34",
+        "fromtitle": "Leela_Chess_Zero",
+        "byteoffset": 35530,
+        "anchor": "Misc"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "11",
+        "index": "35",
+        "fromtitle": "Leela_Chess_Zero",
+        "byteoffset": 36390,
+        "anchor": "References"
+      }
+    ]
+  }
+}

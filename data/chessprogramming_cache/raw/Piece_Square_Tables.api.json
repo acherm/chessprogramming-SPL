@@ -1,0 +1,739 @@
+{
+  "parse": {
+    "title": "Piece-Square Tables",
+    "pageid": 1462,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Evaluation\" title=\"Evaluation\">Evaluation</a> * Piece-Square Tables</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:177px;\"><a href=\"http://www.artnet.com/magazineus/reviews/davis/davis11-1-05_detail.asp?picnum=2\"><img alt=\"\" src=\"/images/d/d3/CageChessPieces.jpg\" width=\"175\" height=\"175\" class=\"thumbimage\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:CageChessPieces.jpg\" class=\"internal\" title=\"Enlarge\"></a></div><a href=\"/Category:John_Cage\" title=\"Category:John Cage\">John Cage</a>, Chess Pieces, ca. 1944 <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>Piece-Square Tables</b>,<br />\na simple way to assign values to specific <a href=\"/Pieces\" title=\"Pieces\">pieces</a> on specific <a href=\"/Squares\" title=\"Squares\">squares</a>. A table is created for each piece of each <a href=\"/Color\" title=\"Color\">color</a>, and values assigned to each square. This scheme is fast, since the evaluation term from the piece square tables can be <a href=\"/Incremental_Updates\" title=\"Incremental Updates\">incrementally updated</a> as <a href=\"/Moves\" title=\"Moves\">moves</a> are <a href=\"/Make_Move\" title=\"Make Move\">made</a> and <a href=\"/Unmake_Move\" title=\"Unmake Move\">unmade</a> in the <a href=\"/Search_Tree\" title=\"Search Tree\">search tree</a>. Because of that speed, piece-square tables are of great help when conducting <a href=\"/Lazy_Evaluation\" title=\"Lazy Evaluation\">lazy evaluation</a>.\n</p><p>The same technique can be used for a more subtle evaluation terms, instead of one fixed value for, say, an <a href=\"/Isolated_Pawn\" title=\"Isolated Pawn\">isolated pawn</a>. It is also possible to use piece-square tables for <a href=\"/Move_Ordering\" title=\"Move Ordering\">move ordering</a>, though <a href=\"/History_Heuristic\" title=\"History Heuristic\">history heuristic</a> tends to perform better. Some programs, like <a href=\"/Rebel\" title=\"Rebel\">Rebel</a>, use the combination of the two <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>. \n</p><p><span id=\"MultipleTables\"></span>\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Multiple_Tables\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Multiple Tables</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Pre-processing\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Pre-processing</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Examples\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Examples</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#See_also\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#Publications\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Publications</span></a></li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#1996_...\"><span class=\"tocnumber\">6.1</span> <span class=\"toctext\">1996 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#2000_...\"><span class=\"tocnumber\">6.2</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#2010_...\"><span class=\"tocnumber\">6.3</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#2015_...\"><span class=\"tocnumber\">6.4</span> <span class=\"toctext\">2015 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#2020_...\"><span class=\"tocnumber\">6.5</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-12\"><a href=\"#External_Links\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-13\"><a href=\"#References\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Multiple_Tables\">Multiple Tables</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Piece-Square_Tables&amp;action=edit&amp;section=1\" title=\"Edit section: Multiple Tables\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Most modern programs, influenced by <a href=\"/Fruit\" title=\"Fruit\">Fruit</a>, use two sets of tables. One for the <a href=\"/Opening\" title=\"Opening\">opening</a> of the game and another for the <a href=\"/Endgame\" title=\"Endgame\">endgame</a>. The final evaluation is then <a href=\"/Tapered_Eval\" title=\"Tapered Eval\">interpolated</a> between these two based on <a href=\"/Game_Phases\" title=\"Game Phases\">game stage</a> (often <a href=\"/Material\" title=\"Material\">material</a> on the board). This allows for changes in material as well, since the material part of the evaluation can also be stored in these tables. Using two tables also lets pieces change in evaluation as the game proceeds. For example, <a href=\"/Pawn\" title=\"Pawn\">pawns</a> can gain in value in the endgame using this method.\n<span id=\"Preprocessing\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Pre-processing\">Pre-processing</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Piece-Square_Tables&amp;action=edit&amp;section=2\" title=\"Edit section: Pre-processing\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Older programs, running on slow hardware and reaching low depths, used an <a href=\"/Oracle\" title=\"Oracle\">oracle approach</a> to speed up their evaluation by initializing the piece-square tables at the <a href=\"/Root\" title=\"Root\">beginning of each search</a>, taking into account complex characteristics of position, influence of <a href=\"/Pawn_Structure\" title=\"Pawn Structure\">pawn structure</a>, distance to the enemy king etc <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>. Pre-processing, also dubbed <b>Pre Scan Heuristics</b> as applied in <a href=\"/David_Kittinger\" title=\"David Kittinger\">Kittinger</a> programs <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>, most notably the <a href=\"/Super_Constellation\" title=\"Super Constellation\">Super Constellation</a> <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup>, were used by <a href=\"/Kaare_Danielsen\" title=\"Kaare Danielsen\">Kaare Danielsen</a> <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup>, <a href=\"/Richard_Lang\" title=\"Richard Lang\">Richard Lang</a> <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup>, <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, who even developed a little language so that <a href=\"/Larry_Kaufman\" title=\"Larry Kaufman\">Larry Kaufman</a> could express evaluation concepts in a more natural way <sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup>, <a href=\"/Chrilly_Donninger\" title=\"Chrilly Donninger\">Chrilly Donninger</a> with <a href=\"/Nimzo\" title=\"Nimzo\">Nimzo 3</a>, and <a href=\"/Frans_Morsch\" title=\"Frans Morsch\">Frans Morsch</a> and <a href=\"/Mathias_Feist\" title=\"Mathias Feist\">Mathias Feist</a> with <a href=\"/Fritz\" title=\"Fritz\">Fritz 3</a>, to name a few, the latter even with user modifiable rules or tables. However, the idea already originated from the program <a href=\"/Tech\" title=\"Tech\">Tech</a> by <a href=\"/James_Gillogly\" title=\"James Gillogly\">James Gillogly</a> in the late 1960's <sup id=\"cite_ref-9\" class=\"reference\"><a href=\"#cite_note-9\">&#91;9&#93;</a></sup>.\n</p><p>With today's search depth this approach seems to be impractical, since the difference between the root and leaf position may be very big. There also might be a problem with re-using hash scores from the previous entries. About the only recent chess program that sticks with pre-processing for good or bad is <a href=\"/RomiChess\" title=\"RomiChess\">RomiChess</a> <sup id=\"cite_ref-10\" class=\"reference\"><a href=\"#cite_note-10\">&#91;10&#93;</a></sup> <sup id=\"cite_ref-11\" class=\"reference\"><a href=\"#cite_note-11\">&#91;11&#93;</a></sup>.\n</p>\n<h1><span class=\"mw-headline\" id=\"Examples\">Examples</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Piece-Square_Tables&amp;action=edit&amp;section=3\" title=\"Edit section: Examples\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Material and piece-square tables alone are enough for a program to play a semi-decent game of chess. Indeed, <a href=\"/Tomasz_Michniewski\" title=\"Tomasz Michniewski\">Tomasz Michniewski</a> advocated a method of testing requiring all the tested programs to have identical, simplistic evaluation function, so that only search and efficiency issues would influence the result. One such tournament has been carried out in Poland. <a href=\"/Ronald_Friederich\" title=\"Ronald Friederich\">Ronald Friederich</a> improved this approach using a <a href=\"/Tapered_Eval\" title=\"Tapered Eval\">Tapered Eval</a> and <a href=\"/Texel%27s_Tuning_Method\" title=\"Texel&#39;s Tuning Method\">Texel's tuning method</a> as applied in <a href=\"/RofChade\" title=\"RofChade\">RofChade</a> and <a href=\"/PeSTO\" title=\"PeSTO\">PeSTO</a>.\n</p>\n<ul><li> <a href=\"/Simplified_Evaluation_Function\" title=\"Simplified Evaluation Function\">Simplified Evaluation Function</a></li>\n<li> <a href=\"/PeSTO%27s_Evaluation_Function\" title=\"PeSTO&#39;s Evaluation Function\">PeSTO's Evaluation Function</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Piece-Square_Tables&amp;action=edit&amp;section=4\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Center_Distance\" title=\"Center Distance\">Center Distance</a></li>\n<li> <a href=\"/Center_Manhattan-Distance\" title=\"Center Manhattan-Distance\">Center Manhattan-Distance</a></li>\n<li> <a href=\"/Rookie#Evaluation\" title=\"Rookie\">Evaluation in Rookie 2.0</a></li>\n<li> <a href=\"/Evaluation_of_Pieces\" title=\"Evaluation of Pieces\">Evaluation of Pieces</a></li>\n<li> <a href=\"/Game_Phases\" title=\"Game Phases\">Game Phases</a></li>\n<li> <a href=\"/Material\" title=\"Material\">Material</a></li>\n<li> <a href=\"/Mop-up_Evaluation\" title=\"Mop-up Evaluation\">Mop-up Evaluation</a></li>\n<li> <a href=\"/Oracle\" title=\"Oracle\">Oracle</a></li>\n<li> <a href=\"/Space\" title=\"Space\">Space</a></li>\n<li> <a href=\"/Tapered_Eval\" title=\"Tapered Eval\">Tapered Eval</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Piece-Square_Tables&amp;action=edit&amp;section=5\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Jack_Good\" title=\"Jack Good\">Jack Good</a> (<b>1968</b>). <i>A Five-Year Plan for Automatic Chess - Appendix F. The Value of the Pieces and Squares</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.doc.ic.ac.uk/~shm/MI/mi2.html\">Machine Intelligence Vol. 2</a></li>\n<li> <a href=\"/Don_Beal\" title=\"Don Beal\">Don Beal</a>, <a href=\"/Martin_C._Smith\" title=\"Martin C. Smith\">Martin C. Smith</a> (<b>1999</b>). <i>Learning Piece-Square Values using Temporal Differences.</i> <a href=\"/ICGA_Journal#22_4\" title=\"ICGA Journal\">ICCA Journal, Vol. 22, No. 4</a></li>\n<li> <a href=\"/Jun_Nagashima\" title=\"Jun Nagashima\">Jun Nagashima</a>, <a href=\"/Masahumi_Taketoshi\" title=\"Masahumi Taketoshi\">Masahumi Taketoshi</a>, <a href=\"/Yoichiro_Kajihara\" title=\"Yoichiro Kajihara\">Yoichiro Kajihara</a>, <a href=\"/Tsuyoshi_Hashimoto\" title=\"Tsuyoshi Hashimoto\">Tsuyoshi Hashimoto</a>, <a href=\"/Hiroyuki_Iida\" title=\"Hiroyuki Iida\">Hiroyuki Iida</a> (<b>2002</b>).  <i><a rel=\"nofollow\" class=\"external text\" href=\"http://ci.nii.ac.jp/naid/110006381103\">An Efficient Use of Piece-Square Tables in Computer Shogi</a></i>. </li>\n<li> <a href=\"/Sacha_Droste\" title=\"Sacha Droste\">Sacha Droste</a>, <a href=\"/Johannes_F%C3%BCrnkranz\" title=\"Johannes Fürnkranz\">Johannes Fürnkranz</a> (<b>2008</b>). <i>Learning of Piece Values for Chess Variants.</i> Technical Report TUD–KE–2008-07, Knowledge Engineering Group, <a href=\"/Darmstadt_University_of_Technology\" title=\"Darmstadt University of Technology\">TU Darmstadt</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.ke.tu-darmstadt.de/publications/reports/tud-ke-2008-07.pdf\">pdf</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Piece-Square_Tables&amp;action=edit&amp;section=6\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1996_...\">1996 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Piece-Square_Tables&amp;action=edit&amp;section=7\" title=\"Edit section: 1996 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/4e27d53cd9b6cc5e\">Re:Rebel Transposition Table discussion</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, April 18, 1996, <i>about clearing <a href=\"/Transposition_Table\" title=\"Transposition Table\">TT</a> if using a preprocessor</i>.</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/d962cff95d967c3\">The Diep Home page (more correction needed)</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, January 21, 1997</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/d67609b6c2e3063d\">Question about prescan and evaluating in Crafty</a> by Willem Broekema, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, January 07, 1998</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=18179\">What is \"pre-processing\"</a> by Howard Exner, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 07, 1998</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/ce25565232355c61\">Preprocessing vs leaf evaluating - any preprocessors left?</a> by <a href=\"/Tom_King\" title=\"Tom King\">Tom King</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, July 05, 1998</li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Piece-Square_Tables&amp;action=edit&amp;section=8\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=95525\">Preprocessor blues?</a> by <a href=\"/index.php?title=Ernst_Walet&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Ernst Walet (page does not exist)\">Ernst Walet</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 07, 2000</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=132894\">Re: What is Prescan Heuristics&#160;??</a> by <a href=\"/Vincent_Diepeveen\" title=\"Vincent Diepeveen\">Vincent Diepeveen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 13, 2000</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=304684\">Program settings (Re: Programmers Should Take A Cue From Chessmaster)</a> by <a href=\"/Albert_Bertilsson\" title=\"Albert Bertilsson\">Albert Bertilsson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 04, 2003&#160;» <a href=\"/Sharper\" title=\"Sharper\">Sharper</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=21281\">Pieze/square tables</a> by <a href=\"/Fermin_Serrano\" title=\"Fermin Serrano\">Fermin Serrano</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 21, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=29825\">Determining values for piece-square tables.</a> by <a href=\"/Mike_Leany\" title=\"Mike Leany\">Mike Leany</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 21, 2009</li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Piece-Square_Tables&amp;action=edit&amp;section=9\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=37191\">dynamically modified evaluation function</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 20, 2010</li></ul>\n<p><b>2011</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=38766\">Move ordering by PST</a> by <a href=\"/Onno_Garms\" title=\"Onno Garms\">Onno Garms</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 16, 2011&#160;» <a href=\"/History_Heuristic\" title=\"History Heuristic\">History Heuristic</a>, <a href=\"/Move_Ordering\" title=\"Move Ordering\">Move Ordering</a>, <a href=\"/Onno\" title=\"Onno\">Onno</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=5&amp;t=1535\">Questions for BB about Rybka PST = Fruit PST</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Rebel</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">OpenChess Forum</a>, August 4, 2011&#160;» <a href=\"/Rybka_Controversy\" title=\"Rybka Controversy\">Rybka Controversy</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://rybkaforum.net/cgi-bin/rybkaforum/topic_show.pl?tid=22572\">PST Calculation</a> by <a href=\"/Miguel_A._Ballicora\" title=\"Miguel A. Ballicora\">michiguel</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Rybka Forum</a>, August 5, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://rybkaforum.net/cgi-bin/rybkaforum/topic_show.pl?tid=22635\">Fruit and Crafty Bishop PSTs</a> by <a href=\"/Miguel_A._Ballicora\" title=\"Miguel A. Ballicora\">michiguel</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Rybka Forum</a>, August 12, 2011 <sup id=\"cite_ref-12\" class=\"reference\"><a href=\"#cite_note-12\">&#91;12&#93;</a></sup> <sup id=\"cite_ref-13\" class=\"reference\"><a href=\"#cite_note-13\">&#91;13&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://rybkaforum.net/cgi-bin/rybkaforum/topic_show.pl?tid=22642\">A small detail about additive constants to PSTs</a> by <a href=\"/Chris_Whittington\" title=\"Chris Whittington\">Trotsky</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Rybka Forum</a>, August 13, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=5&amp;t=1552\">Fruit 1.0 PST</a> by BB+ (<a href=\"/Mark_Watkins\" title=\"Mark Watkins\">Mark Watkins</a>), <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">OpenChess Forum</a>, August 13, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://rybkaforum.net/cgi-bin/rybkaforum/topic_show.pl?tid=22662\">About PSQ tables</a> by <a href=\"/Richard_Vida\" title=\"Richard Vida\">Richard Vida</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Rybka Forum</a>, August 15, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://rybkaforum.net/cgi-bin/rybkaforum/topic_show.pl?tid=22669\">Take the Fruit Bishop tables...</a> by <a href=\"/Miguel_A._Ballicora\" title=\"Miguel A. Ballicora\">michiguel</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Rybka Forum</a>, August 16, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=5&amp;t=1570\">PST of Fruit 2.1 and Rybka 1.0 Beta</a> by <a href=\"/Mark_Watkins\" title=\"Mark Watkins\">BB+</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">OpenChess Forum</a>, August 22, 2011</li></ul>\n<p><b>2012</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=42167\">Incremental or non-incremental PST evaluation calcs</a> by <a href=\"/index.php?title=Mark_Pearce&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Mark Pearce (page does not exist)\">Mark Pearce</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 26, 2012&#160;» <a href=\"/Incremental_Updates\" title=\"Incremental Updates\">Incremental Updates</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=475603&amp;t=44507\">Re: Some thoughts on QS</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 25, 2012&#160;» <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">Quiescence Search</a></li></ul>\n<p><b>2013</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48102\">On history and piece square tables</a> by <a href=\"/Evert_Glebbeek\" title=\"Evert Glebbeek\">Evert Glebbeek</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 24, 2013&#160;» <a href=\"/History_Heuristic\" title=\"History Heuristic\">History Heuristic</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=50294\">PSQ tables depending on king sides, pawn patterns etc.</a> by <a href=\"/Sergei_Markoff\" title=\"Sergei Markoff\">Sergei S. Markoff</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 01, 2013</li></ul>\n<p><b>2014</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=50840\">Piece/square table challenge</a> by <a href=\"/Pawel_Koziol\" title=\"Pawel Koziol\">Pawel Koziol</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 09, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=51518\">SEE logic</a> by <a href=\"/Youri_Matiounine\" title=\"Youri Matiounine\">Youri Matiounine</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 08, 2014&#160;» <a href=\"/Static_Exchange_Evaluation\" title=\"Static Exchange Evaluation\">Static Exchange Evaluation</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=52861\">multi-dimensional piece/square tables</a> by <a href=\"/Pawel_Koziol\" title=\"Pawel Koziol\">Pawel Koziol</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 04, 2014</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=52861&amp;start=7\">Re: multi-dimensional piece/square tables</a> by Tony P., <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 28, 2020&#160;» <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">Automated Tuning</a></dd></dl>\n<h2><span class=\"mw-headline\" id=\"2015_...\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Piece-Square_Tables&amp;action=edit&amp;section=10\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=57384\">about pst</a> by <a href=\"/Daniel_Anulliero\" title=\"Daniel Anulliero\">Daniel Anulliero</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 26, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=57575\">high values of pst</a> by <a href=\"/Daniel_Anulliero\" title=\"Daniel Anulliero\">Daniel Anulliero</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 09, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=58231\">pieces psqt</a> by <a href=\"/Alexandru_Mosoi\" title=\"Alexandru Mosoi\">Alexandru Mosoi</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 11, 2015</li></ul>\n<p><b>2016</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61631\">Sanity check on piece-value tables</a> by <a href=\"/Stuart_Riffle\" title=\"Stuart Riffle\">Stuart Riffle</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 06, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=62257\">Simple method for simple mates for programs without TBs</a> by <a href=\"/index.php?title=J._Wesley_Cleveland&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"J. Wesley Cleveland (page does not exist)\">J. Wesley Cleveland</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 25, 2016&#160;» <a href=\"/KBNK_Endgame\" title=\"KBNK Endgame\">KBNK Endgame</a>, <a href=\"/Mop-up_Evaluation\" title=\"Mop-up Evaluation\">Mop-up Evaluation</a></li></ul>\n<p><b>2017</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64972\">Approximating Stockfish's Evaluation by PSQTs</a> by <a href=\"/Thomas_Dybdahl_Ahle\" title=\"Thomas Dybdahl Ahle\">Thomas Dybdahl Ahle</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 23, 2017&#160;» <a href=\"/Automated_Tuning#Regression\" title=\"Automated Tuning\">Regression</a>,  <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a></li></ul>\n<p><b>2018</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66588\">Learning piece-square table</a> by <a href=\"/Mathieu_Pag%C3%A9\" title=\"Mathieu Pagé\">Mathieu Pagé</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 13, 2018&#160;» <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">Automated Tuning</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66966\">'ab-initio' piece values</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 30, 2018&#160;» <a href=\"/Point_Value\" title=\"Point Value\">Point Value</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=68311&amp;start=19\">Re: New uci engine: Rofchade</a> by <a href=\"/Ronald_Friederich\" title=\"Ronald Friederich\">Ronald Friederich</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 28, 2018&#160;» <a href=\"/RofChade\" title=\"RofChade\">RofChade</a>, <a href=\"/Tapered_Eval\" title=\"Tapered Eval\">Tapered Eval</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Piece-Square_Tables&amp;action=edit&amp;section=11\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=73865\">PST for FRC</a> by <a href=\"/Vivien_Clauzon\" title=\"Vivien Clauzon\">Vivien Clauzon</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 07, 2020&#160;» <a href=\"/Chess960\" title=\"Chess960\">Chess960</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=74752\">Using piece-square table score for move ordering</a> by <a href=\"/Maksim_Korzh\" title=\"Maksim Korzh\">Maksim Korzh</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 11, 2020&#160;» <a href=\"/Move_Ordering\" title=\"Move Ordering\">Move Ordering</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://prodeo.actieforum.com/t120-engine-choosing-between-sets-of-piece-square-tables\">Engine choosing between sets of piece/square tables</a> by <a href=\"/Pawel_Koziol\" title=\"Pawel Koziol\">nescitus</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">ProDeo Forum</a>, December 05, 2020</li></ul>\n<p><b>2021</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=76256\">Piece square tables</a> by <a href=\"/index.php?title=Elias_Nilsson&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Elias Nilsson (page does not exist)\">Elias Nilsson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 08, 2021</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://prodeo.actieforum.com/t252-little-fun-with-tscp\">little fun with TSCP</a> by <a href=\"/Pawel_Koziol\" title=\"Pawel Koziol\">nescitus</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">ProDeo Forum</a>, February 12, 2021&#160;» <a href=\"/TSCP\" title=\"TSCP\">TSCP</a>, <a href=\"/PeSTO%27s_Evaluation_Function\" title=\"PeSTO&#39;s Evaluation Function\">PeSTO's Evaluation Function</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=76831\">The PSTs of Carnivor</a> by <a href=\"/Michael_Sherwin\" title=\"Michael Sherwin\">Mike Sherwin</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 10, 2021</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=77089\">PST-only Evaluation for MinimalChess 0.4</a> by <a href=\"/Thomas_Jahn\" title=\"Thomas Jahn\">Thomas Jahn</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 15, 2021&#160;» <a href=\"/MinimalChess\" title=\"MinimalChess\">MinimalChess</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=77379\">Evaluating piece value</a> by Jon Lawrance, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 25, 2021&#160;» <a href=\"/Point_Value\" title=\"Point Value\">Point Value</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=77546\">Game Phase and tapered PSQT evaluation</a> by Jon12345, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 23, 2021&#160;» <a href=\"/PeSTO%27s_Evaluation_Function\" title=\"PeSTO&#39;s Evaluation Function\">PeSTO's Evaluation Function</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=77667\">multi-PST for middle-game depend from kings positions</a> by <a href=\"/index.php?title=Eugene_Kotlov&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Eugene Kotlov (page does not exist)\">Eugene Kotlov</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 08, 2021</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=77715\">Just an untested idea</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 12, 2021&#160;» <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">Automated Tuning</a></li></ul>\n<p><b>2022</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=79401\">Stuck trying to come up with my own PST values</a> by Kurt Peters, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 22, 2022</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=79049&amp;start=127\">Re: Devlog of Leorik - A.k.a. how to tune high-quality PSTs from scratch (material values) in 20 seconds</a> by <a href=\"/Thomas_Jahn\" title=\"Thomas Jahn\">Thomas Jahn</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 28, 2022&#160;» <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">Automated Tuning</a>, <a href=\"/Leorik\" title=\"Leorik\">Leorik</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Piece-Square_Tables&amp;action=edit&amp;section=12\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://home.hccnet.nl/h.g.muller/pcsqr.html\">Evaluation: Piece-Square Tables</a> from <a href=\"/Micro-Max\" title=\"Micro-Max\">Micro-Max</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a></li>\n<li> Cage. Music, art, chess - Film by Brian Brandt with <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Margaret_Leng_Tan\">Margaret Leng Tan</a> and <a rel=\"nofollow\" class=\"external text\" href=\"https://www.linkedin.com/in/larry-list-937b888\">Larry List</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Noguchi_Museum\">Noguchi Museum</a> <sup id=\"cite_ref-14\" class=\"reference\"><a href=\"#cite_note-14\">&#91;14&#93;</a></sup> <sup id=\"cite_ref-15\" class=\"reference\"><a href=\"#cite_note-15\">&#91;15&#93;</a></sup> <sup id=\"cite_ref-16\" class=\"reference\"><a href=\"#cite_note-16\">&#91;16&#93;</a></sup>, 2006, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/Hva8WMcRyOE?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Piece-Square_Tables&amp;action=edit&amp;section=13\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap mw-references-columns\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.artnet.com/magazineus/reviews/davis/davis11-1-05_detail.asp?picnum=2\">John Cage - Chess Pieces, Ca. 1944</a>, Courtesy <a rel=\"nofollow\" class=\"external text\" href=\"http://johncagetrust.blogspot.com/\">The John Cage Trust</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://www.artnet.com/magazineus/reviews/davis/davis11-1-05.asp\">artnet Magazine - We Are Duchampians</a> by Ben Davis</span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a> <i>How REBEL Plays Chess</i> as <a rel=\"nofollow\" class=\"external text\" href=\"http://members.home.nl/matador/Inside%20Rebel.pdf\">pdf</a>, see page 1,2 <a href=\"/Move_Ordering\" title=\"Move Ordering\">Move Ordering</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=18181\">Re: What is \"pre-processing\"</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 07, 1998</span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.schach-computer.info/wiki/index.php/PSH\">PSH</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://www.schach-computer.info/wiki/index.php/Hauptseite_En\">Schachcomputer.info Wiki</a> (German)</span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.schach-computer.info/wiki/index.php/Novag_Super_Constellation\">Novag Super Constellation</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://www.schach-computer.info/wiki/index.php/Hauptseite_En\">Schachcomputer.info - Wiki</a> (German)</span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\">\"<a href=\"/Oracle#Donninger\" title=\"Oracle\">This approach</a> seems to have been invented by <a href=\"/Kaare_Danielsen\" title=\"Kaare Danielsen\">Kaare Danielsen</a> for his program <a href=\"/CXG_Star_Chess#Advanced\" title=\"CXG Star Chess\">CXG Advanced Star Chess</a>\" from <a href=\"/Chrilly_Donninger\" title=\"Chrilly Donninger\">Chrilly Donninger</a> (<b>1996</b>). <i>CHE: A Graphical Language for Expressing Chess Knowledge</i>. <a href=\"/ICGA_Journal#19_4\" title=\"ICGA Journal\">ICCA Journal, Vol. 19, No. 4</a></span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=475574&amp;t=44507\">Re: Some thoughts on QS</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 25, 2012</span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=475603&amp;t=44507\">Re: Some thoughts on QS</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 25, 2012</span>\n</li>\n<li id=\"cite_note-9\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-9\">↑</a></span> <span class=\"reference-text\"><a href=\"/David_Kittinger\" title=\"David Kittinger\">David Kittinger</a> and <a href=\"/Scott_McDonald\" title=\"Scott McDonald\">Scott McDonald</a> (<b>1984</b>). <i>Report from the U.S. Open</i>. <a href=\"/Computer_Chess_Reports\" title=\"Computer Chess Reports\">Computer Chess Digest Annual 1984</a> pp. 15-33</span>\n</li>\n<li id=\"cite_note-10\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-10\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=18203\">Re: What is \"pre-processing\"</a> by <a href=\"/Ulrich_T%C3%BCrke\" title=\"Ulrich Türke\">Ulrich Türke</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 08, 1998</span>\n</li>\n<li id=\"cite_note-11\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-11\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=18213\">Re: What is \"pre-processing\"</a> by <a href=\"/Amir_Ban\" title=\"Amir Ban\">Amir Ban</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 08, 1998</span>\n</li>\n<li id=\"cite_note-12\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-12\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=40047\">Crafty accused of copying Fruit PST</a> by William O, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 13, 2011</span>\n</li>\n<li id=\"cite_note-13\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-13\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=40085\">Crafty *NOT* accused of copying Fruit PST</a> by <a href=\"/Miguel_A._Ballicora\" title=\"Miguel A. Ballicora\">Miguel A. Ballicora</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 17, 2011</span>\n</li>\n<li id=\"cite_note-14\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-14\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://shop.noguchi.org/imofchre.html\">The Imagery of Chess Revisited</a></span>\n</li>\n<li id=\"cite_note-15\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-15\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.youtube.com/watch?v=vegmCb9j4kE\">Discovering The Imagery of Chess featuring Larry List</a>, 2017, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video </span>\n</li>\n<li id=\"cite_note-16\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-16\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.edochess.ca/batgirl/Imagery_of_Chess3.html\">The Imagery of Chess -Surrealism and Chess</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Evaluation\" title=\"Evaluation\">Up one level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301024428\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.037 seconds\nReal time usage: 0.040 seconds\nPreprocessor visited node count: 286/1000000\nPreprocessor generated node count: 622/1000000\nPost‐expand include size: 27/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1462-0!canonical and timestamp 20260301024428 and revision id 26394\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "John_Cage"
+      },
+      {
+        "sortkey": "",
+        "*": "Videos"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Albert Bertilsson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alexandru Mosoi"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Amir Ban"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Automated Tuning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CXG Star Chess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Center Distance"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Center Manhattan-Distance"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess960"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chrilly Donninger"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chris Whittington"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Color"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Reports"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Daniel Anulliero"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Darmstadt University of Technology"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David Kittinger"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Don Beal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Don Dailey"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ed Schroder"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Endgame"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation of Pieces"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evert Glebbeek"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fermin Serrano"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Frans Morsch"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fritz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fruit"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Game Phases"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Harm Geert Muller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hiroyuki Iida"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "History Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA Journal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Incremental Updates"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Isolated Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jack Good"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "James Gillogly"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Johannes Fürnkranz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jun Nagashima"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "KBNK Endgame"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kaare Danielsen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Larry Kaufman"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lazy Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Leorik"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Make Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Maksim Korzh"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mark Watkins"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Martin C. Smith"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Masahumi Taketoshi"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Material"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mathias Feist"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mathieu Pagé"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michael Sherwin"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Micro-Max"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Miguel A. Ballicora"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mike Leany"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "MinimalChess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mop-up Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Ordering"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Moves"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Nimzo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Onno"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Onno Garms"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Opening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Oracle"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawel Koziol"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Structure"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "PeSTO"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "PeSTO's Evaluation Function"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pieces"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Point Value"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiescence Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rebel"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Richard Lang"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Richard Vida"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Hyatt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "RofChade"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "RomiChess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ronald Friederich"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rookie"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Root"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rybka Controversy"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sacha Droste"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Scott McDonald"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search Tree"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sergei Markoff"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sharper"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Simplified Evaluation Function"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Space"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Squares"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Static Exchange Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stockfish"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stuart Riffle"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Super Constellation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "TSCP"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tapered Eval"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tech"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Texel's Tuning Method"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Thomas Dybdahl Ahle"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Thomas Jahn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tom King"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tomasz Michniewski"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tsuyoshi Hashimoto"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ulrich Türke"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Unmake Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vincent Diepeveen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vivien Clauzon"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Yoichiro Kajihara"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Youri Matiounine"
+      },
+      {
+        "ns": 0,
+        "*": "Ernst Walet"
+      },
+      {
+        "ns": 0,
+        "*": "Mark Pearce"
+      },
+      {
+        "ns": 0,
+        "*": "J. Wesley Cleveland"
+      },
+      {
+        "ns": 0,
+        "*": "Elias Nilsson"
+      },
+      {
+        "ns": 0,
+        "*": "Eugene Kotlov"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:John Cage"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Multiple Tables",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Piece-Square_Tables",
+        "byteoffset": 1696,
+        "anchor": "Multiple_Tables"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Pre-processing",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Piece-Square_Tables",
+        "byteoffset": 2341,
+        "anchor": "Pre-processing"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Examples",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Piece-Square_Tables",
+        "byteoffset": 5258,
+        "anchor": "Examples"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Piece-Square_Tables",
+        "byteoffset": 5876,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "5",
+        "index": "5",
+        "fromtitle": "Piece-Square_Tables",
+        "byteoffset": 6120,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "6",
+        "index": "6",
+        "fromtitle": "Piece-Square_Tables",
+        "byteoffset": 7018,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1996 ...",
+        "number": "6.1",
+        "index": "7",
+        "fromtitle": "Piece-Square_Tables",
+        "byteoffset": 7033,
+        "anchor": "1996_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "6.2",
+        "index": "8",
+        "fromtitle": "Piece-Square_Tables",
+        "byteoffset": 8085,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "6.3",
+        "index": "9",
+        "fromtitle": "Piece-Square_Tables",
+        "byteoffset": 8815,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "6.4",
+        "index": "10",
+        "fromtitle": "Piece-Square_Tables",
+        "byteoffset": 12252,
+        "anchor": "2015_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "6.5",
+        "index": "11",
+        "fromtitle": "Piece-Square_Tables",
+        "byteoffset": 13721,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "7",
+        "index": "12",
+        "fromtitle": "Piece-Square_Tables",
+        "byteoffset": 15998,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "8",
+        "index": "13",
+        "fromtitle": "Piece-Square_Tables",
+        "byteoffset": 16902,
+        "anchor": "References"
+      }
+    ]
+  }
+}

@@ -1,0 +1,503 @@
+{
+  "parse": {
+    "title": "Search Tree",
+    "pageid": 949,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Search\" title=\"Search\">Search</a> * Tree</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"/File:Piet_Mondrian,_1911,_Gray_Tree_(De_grijze_boom),_oil_on_canvas,_79.7_x_109.1_cm,_Gemeentemuseum_Den_Haag,_Netherlands.jpg\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Piet_Mondrian%2C_1911%2C_Gray_Tree_%28De_grijze_boom%29%2C_oil_on_canvas%2C_79.7_x_109.1_cm%2C_Gemeentemuseum_Den_Haag%2C_Netherlands.jpg/330px-Piet_Mondrian%2C_1911%2C_Gray_Tree_%28De_grijze_boom%29%2C_oil_on_canvas%2C_79.7_x_109.1_cm%2C_Gemeentemuseum_Den_Haag%2C_Netherlands.jpg\" width=\"300\" height=\"217\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Piet_Mondrian%2C_1911%2C_Gray_Tree_%28De_grijze_boom%29%2C_oil_on_canvas%2C_79.7_x_109.1_cm%2C_Gemeentemuseum_Den_Haag%2C_Netherlands.jpg/500px-Piet_Mondrian%2C_1911%2C_Gray_Tree_%28De_grijze_boom%29%2C_oil_on_canvas%2C_79.7_x_109.1_cm%2C_Gemeentemuseum_Den_Haag%2C_Netherlands.jpg 1.5x, https://upload.wikimedia.org/wikipedia/commons/8/80/Piet_Mondrian%2C_1911%2C_Gray_Tree_%28De_grijze_boom%29%2C_oil_on_canvas%2C_79.7_x_109.1_cm%2C_Gemeentemuseum_Den_Haag%2C_Netherlands.jpg 2x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Piet_Mondrian,_1911,_Gray_Tree_(De_grijze_boom),_oil_on_canvas,_79.7_x_109.1_cm,_Gemeentemuseum_Den_Haag,_Netherlands.jpg\" class=\"internal\" title=\"Enlarge\"></a></div><a href=\"/Category:Piet_Mondrian\" title=\"Category:Piet Mondrian\">Piet Mondrian</a> - <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Gray_Tree\">Gray Tree</a>, 1912 <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p>The <b>Search Tree</b> as part of the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Game_tree\">game tree</a> is a dynamical, hierarchical data-structure, a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Graph_%28mathematics%29#Directed_graph\">directed graph</a> of <a href=\"/Node\" title=\"Node\">nodes</a>, also called <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Vertex_%28graph_theory%29\">vertices</a> or <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/State_diagram\">states</a>, connected by directed <b>edges</b>, also called <b>arcs</b>, or <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/State_transition_table\">state transitions</a>. In the game of chess, nodes represent the alternating white and black to move <a href=\"/Chess_Position\" title=\"Chess Position\">chess positions</a>, and directed edges represent the alternating white and black <a href=\"/Moves\" title=\"Moves\">moves</a>. \n</p><p>Opposed to the wooden <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Tree\">plants</a>, which are due to their similar structure <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Metaphor\">metaphor</a> of the search tree, where the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Root\">root</a> is inside the bottom ground, the root of a search tree is most often illustrated from the top down to the leaves at the bottom. Due to our text-flow from top to bottom (after left to right), this might considered as <a href=\"/Endianness\" title=\"Endianness\">endianness</a> of the search tree illustration. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Alpha-Beta_Tree\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Alpha-Beta Tree</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Topology\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Topology</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Transpositions\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Transpositions</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Cycles\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Cycles</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#Tree_walk\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Tree walk</span></a></li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#Minimal_Search_Trees\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Minimal Search Trees</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#Minimal_Alpha-Beta_Tree\"><span class=\"tocnumber\">6.1</span> <span class=\"toctext\">Minimal Alpha-Beta Tree</span></a></li>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#Minimal_PV_Tree\"><span class=\"tocnumber\">6.2</span> <span class=\"toctext\">Minimal PV Tree</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-9\"><a href=\"#See_also\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-10\"><a href=\"#Publications\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">Publications</span></a></li>\n<li class=\"toclevel-1 tocsection-11\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">9</span> <span class=\"toctext\">Forum Posts</span></a></li>\n<li class=\"toclevel-1 tocsection-12\"><a href=\"#External_Links\"><span class=\"tocnumber\">10</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-13\"><a href=\"#References\"><span class=\"tocnumber\">11</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Alpha-Beta_Tree\">Alpha-Beta Tree</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Tree&amp;action=edit&amp;section=1\" title=\"Edit section: Alpha-Beta Tree\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"floatnone\"><a href=\"http://www.ics.uci.edu/%7Eeppstein/180a/970422.html\" rel=\"nofollow\"><img alt=\"Deep-prune.gif\" src=\"/images/6/65/Deep-prune.gif\" width=\"480\" height=\"476\" style=\"vertical-align: text-bottom\" class=\"thumbborder\" /></a></div> \n<p>An <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">Alpha-Beta</a> Search Tree <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup> \n</p>\n<h1><span class=\"mw-headline\" id=\"Topology\">Topology</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Tree&amp;action=edit&amp;section=2\" title=\"Edit section: Topology\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>The <a href=\"/Root\" title=\"Root\">root</a> of the search tree is the position we like to evaluate to find the <a href=\"/Best_Move\" title=\"Best Move\">best move</a>. Leaves are either terminal nodes (mate, stalemate) or nodes which has been assigned a heuristic value, where the desired <a href=\"/Depth\" title=\"Depth\">depth</a> from the root is accomplished. \n</p>\n<ul><li> <a href=\"/Root\" title=\"Root\">Root Node</a></li>\n<li> <a href=\"/Leftmost_Node\" title=\"Leftmost Node\">Leftmost Node</a></li>\n<li> <a href=\"/Sibling_Node\" title=\"Sibling Node\">Sibling Node</a></li>\n<li> <a href=\"/Interior_Node\" title=\"Interior Node\">Interior Node</a></li>\n<li> <a href=\"/Leaf_Node\" title=\"Leaf Node\">Leaf Node</a></li>\n<li> <a href=\"/Terminal_Node\" title=\"Terminal Node\">Terminal Node</a></li>\n<li> <a href=\"/Branching_Factor\" title=\"Branching Factor\">Branching Factor</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Transpositions\">Transpositions</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Tree&amp;action=edit&amp;section=3\" title=\"Edit section: Transpositions\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Because of <a href=\"/Transposition\" title=\"Transposition\">transpositions</a> due to different move sequences, nodes inside the tree may occur from various ancestors - even within a different number of moves. A common sample from the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Sicilian_Defence#Sveshnikov_Variation:_4...Nf6_5.Nc3_e5\">Sveshnikov Variation</a> in the Sicilian:\n</p>\n<table class=\"fentt\" style=\"font-size:24pt\"><tr><td class=\"board\" style=\"width: 8em;\"><div class=\"board\"><div class=\"sq\">    <br/>    <br/>    <br/>    <br/>    <br/>    <br/>    <br/>    <br/></div><div class=\"pcbg\">  <br/>   <br/>     <br/>     <br/>       <br/>       <br/>  <br/>   <br/></div><div class=\"pcfg\">♜ ♝♛♚♝ ♜<br/>♟♟   ♟♟♟<br/>  ♞♟ ♞  <br/> ♘  ♟ ♗ <br/>    ♙   <br/>  ♘     <br/>♙♙♙  ♙♙♙<br/>♖  ♕♔♗ ♖<br/></div></div></td></tr></table>\n<p>1. e4 c5 2. Nf3 d6 3. d4 cxd 4. Nxd4 Nf6 5. Nc3 Nc6 6. Bg5 e5 7. Ndb5<br />\n1. e4 c5 2. Nc3 e6 3. Nf3 Nc6 4. d4 cxd 5. Nxd4 Nf6 6. Ndb5 d6 7. Bf4 e5 8 Bg5\n<span id=\"Cycles\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Cycles\">Cycles</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Tree&amp;action=edit&amp;section=4\" title=\"Edit section: Cycles\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>The search tree may contain various cycles, since both sides may <a href=\"/Repetitions\" title=\"Repetitions\">repeat</a> a former position with the minimum of two <a href=\"/Reversible_Moves\" title=\"Reversible Moves\">reversible moves</a> each, or four <a href=\"/Ply\" title=\"Ply\">plies</a>. Cycles are usually eliminated and not searched twice, which results in searching a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Directed_acyclic_graph\">directed acyclic graph</a> (DAG).\n</p>\n<h1><span class=\"mw-headline\" id=\"Tree_walk\">Tree walk</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Tree&amp;action=edit&amp;section=5\" title=\"Edit section: Tree walk\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Whether the search tree has to reside in memory the whole search, depends on which algorithm is used to <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Tree_traversal\">traverse</a> and expand it. So called <a href=\"/Depth-First\" title=\"Depth-First\">Depth-First</a> search algorithms, like <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">Alpha-Beta</a>, starts at the root and explores as far as possible along each branch before backtracking, and only has to keep one path from the root to the current position in memory. <a href=\"/Best-First\" title=\"Best-First\">Best-First</a> approaches build a search-tree by visiting and expanding the most promising nodes first.\n<span id=\"MinimalGameTree\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Minimal_Search_Trees\">Minimal Search Trees</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Tree&amp;action=edit&amp;section=6\" title=\"Edit section: Minimal Search Trees\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Minimal Search Trees require optimal move ordering in <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">Alpha-Beta</a> or its enhancements. Of course, this goal requires an <a href=\"/Oracle\" title=\"Oracle\">oracle</a>, since we don't know the best moves in advance - otherwise we wouldn't search at all. Thus rarely the expected <a href=\"/Node_Types\" title=\"Node Types\">Node Types</a> don't behave as expected, but Cut-Nodes don't fail high, because their All-Node child fails high instead. Anyway, due to <a href=\"/Iterative_Deepening\" title=\"Iterative Deepening\">Iterative Deepening</a> with <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Table</a>, <a href=\"/Move_Ordering\" title=\"Move Ordering\">Move Ordering</a> is already quite good, so this occurs quite rarely. Often, if the first move on an expected Cut-Node fails to cut, there are still other moves which do the cut.\n</p>\n<h2><span class=\"mw-headline\" id=\"Minimal_Alpha-Beta_Tree\">Minimal Alpha-Beta Tree</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Tree&amp;action=edit&amp;section=7\" title=\"Edit section: Minimal Alpha-Beta Tree\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>A perfectly ordered Tree, <a href=\"/Node_Types#ALL\" title=\"Node Types\">All-Nodes</a> (A) need to consider all successors, <a href=\"/Node_Types#CUT\" title=\"Node Types\">Cut-Nodes</a> (C) only the one which already refutes the opponent move.\n</p>\n<pre>\n                (A)\n               / | \\\n             /   |   \\\n           /     |     \\\n         /       |       \\\n       /         |         \\\n     [A]        [C]        [C]\n    / | \\        |          |\n   /  |  \\       |          |\n (A) (C) (C)    (A)        (A)\n /|\\  |   |     /|\\        /|\\\n[ACC][A] [A]   [CCC]      [CCC]\n</pre>\n<h2><span class=\"mw-headline\" id=\"Minimal_PV_Tree\">Minimal PV Tree</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Tree&amp;action=edit&amp;section=8\" title=\"Edit section: Minimal PV Tree\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>A minimal, perfectly ordered search tree, with <a href=\"/Donald_Knuth\" title=\"Donald Knuth\">Knuth's</a> <a href=\"/Node_Types\" title=\"Node Types\">Node Types</a>. Only the <a href=\"/Node_Types#PV\" title=\"Node Types\">PV-Nodes</a> (P) are searched with an open alpha-beta window. <a href=\"/Node_Types#CUT\" title=\"Node Types\">Cut-Nodes</a> as children or sibling of PV-Nodes require a <a href=\"/Scout\" title=\"Scout\">Scout-search</a>, to prove the nodes are greater or equal to beta. An <a href=\"/Node_Types#ALL\" title=\"Node Types\">All-Node</a> as successor of Cut-Nodes has to consider all moves to prove no move will cause a <a href=\"/Beta-Cutoff\" title=\"Beta-Cutoff\">beta-cutoff</a>.\n</p>\n<pre>\n                (P)\n               / | \\\n             /   |   \\\n           /     |     \\\n         /       |       \\\n       /         |         \\\n     [P]        [C]        [C]\n    / | \\        |          |\n   /  |  \\       |          |\n (P) (C) (C)    (A)        (A)\n /|\\  |   |     /|\\        /|\\\n[PCC][A] [A]   [CCC]      [CCC]\n</pre>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Tree&amp;action=edit&amp;section=9\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Conspiracy_Numbers\" title=\"Conspiracy Numbers\">Conspiracy Numbers</a></li>\n<li> <a href=\"/Graph_History_Interaction\" title=\"Graph History Interaction\">Graph History Interaction</a></li>\n<li> <a href=\"/NegaScout\" title=\"NegaScout\">NegaScout</a> or <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">Principal Variation Search</a></li>\n<li> <a href=\"/Path-Dependency\" title=\"Path-Dependency\">Path-Dependency</a></li>\n<li> <a href=\"/Perft\" title=\"Perft\">Perft</a></li>\n<li> <a href=\"/Repetitions\" title=\"Repetitions\">Repetitions</a></li>\n<li> <a href=\"/Scout\" title=\"Scout\">Scout</a></li>\n<li> <a href=\"/Search_Space\" title=\"Search Space\">Search Space</a></li>\n<li> <a href=\"/Transposition\" title=\"Transposition\">Transposition</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Tree&amp;action=edit&amp;section=10\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Donald_Michie\" title=\"Donald Michie\">Donald Michie</a> (<b>1966</b>). <i>Game Playing and Game Learning Automata.</i> Advances in Programming and Non-Numerical Computation, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Leslie_Fox\">Leslie Fox</a> (ed.), pp. 183-200. Oxford, Pergamon.&#160;» Includes Appendix: <i>Rules of SOMAC</i> by <a href=\"/John_Maynard_Smith\" title=\"John Maynard Smith\">John Maynard Smith</a>, introduces <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Expectiminimax_tree\">Expectiminimax tree</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup></li>\n<li> <a href=\"/Chun-Hung_Tzeng\" title=\"Chun-Hung Tzeng\">Chun-Hung Tzeng</a>, <a href=\"/Paul_W._Purdom\" title=\"Paul W. Purdom\">Paul W. Purdom</a> (<b>1983</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.aaai.org/Library/AAAI/1983/aaai83-080.php\">A Theory of Game Trees</a></i>. <a href=\"/Conferences#AAAI-83\" title=\"Conferences\">AAAI-83</a></li>\n<li> <a href=\"/Andy_Walker\" title=\"Andy Walker\">Andrew N. Walker</a> (<b>1984</b>). <i>Uniqueness in Game Trees</i>. <a href=\"/ICGA_Journal#7_4\" title=\"ICGA Journal\">ICCA Journal, Vol. 7, No. 4</a></li>\n<li> <a href=\"/Aske_Plaat\" title=\"Aske Plaat\">Aske Plaat</a>, <a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a>, <a href=\"/Wim_Pijls\" title=\"Wim Pijls\">Wim Pijls</a>, <a href=\"/Arie_de_Bruin\" title=\"Arie de Bruin\">Arie de Bruin</a> (<b>1996</b>). <i>Exploiting Graph Properties of Game Trees.</i> <a href=\"/Conferences#AAAI-96\" title=\"Conferences\">AAAI-96</a>&#160;» <a href=\"/Enhanced_Transposition_Cutoff\" title=\"Enhanced Transposition Cutoff\">Enhanced Transposition Cutoff</a></li>\n<li> <a href=\"/Wim_Pijls\" title=\"Wim Pijls\">Wim Pijls</a>, <a href=\"/Arie_de_Bruin\" title=\"Arie de Bruin\">Arie de Bruin</a> (<b>1998</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://link.springer.com/chapter/10.1007/3-540-48957-6_12\">Game Tree Algorithms and Solution Trees</a></i>. <a href=\"/CG_1998\" title=\"CG 1998\">CG 1998</a></li>\n<li> <a href=\"/R%C3%A9mi_Coulom\" title=\"Rémi Coulom\">Rémi Coulom</a> (<b>2002</b>). <i>Treemaps for Search-Tree Visualization</i>. <a href=\"/7th_Computer_Olympiad#Workshop\" title=\"7th Computer Olympiad\">7th Computer Olympiad Workshop</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://www.remi-coulom.fr/Publications/CGOlympiad2002.pdf\">pdf</a></li>\n<li> <a href=\"/Yngvi_Bj%C3%B6rnsson\" title=\"Yngvi Björnsson\">Yngvi Björnsson</a>, <a href=\"/J%C3%B3nhei%C3%B0ur_%C3%8Dsleifsd%C3%B3ttir\" title=\"Jónheiður Ísleifsdóttir\">Jónheiður Ísleifsdóttir</a> (<b>2006</b>). <i>Tools for debugging large game trees</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.computer-shogi.org/gpw/gpw11_e.html\">11th Game Programming Workshop</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Hakone,_Kanagawa\">Hakone</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Japan\">Japan</a>&#160;» <a href=\"/Debugging\" title=\"Debugging\">Debugging</a></li>\n<li> <a href=\"/J%C3%B3nhei%C3%B0ur_%C3%8Dsleifsd%C3%B3ttir\" title=\"Jónheiður Ísleifsdóttir\">Jónheiður Ísleifsdóttir</a>  (<b>2007</b>). <i>GTQL: A Query Language for Game Trees</i>. M.Sc. thesis, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Reykjav%C3%ADk_University\">Reykjavík University</a></li>\n<li> <a href=\"/J%C3%B3nhei%C3%B0ur_%C3%8Dsleifsd%C3%B3ttir\" title=\"Jónheiður Ísleifsdóttir\">Jónheiður Ísleifsdóttir</a>, <a href=\"/Yngvi_Bj%C3%B6rnsson\" title=\"Yngvi Björnsson\">Yngvi Björnsson</a>. (<b>2008</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/chapter/10.1007/978-3-540-87608-3_20\">GTQ: A Language and Tool for Game-Tree Analysis</a></i>. <a href=\"/CG_2008\" title=\"CG 2008\">CG 2008</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.ru.is/faculty/yngvi/pdf/IsleifsdottirB08.pdf\">pdf</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Tree&amp;action=edit&amp;section=11\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=291979\">Measuring closeness to a minimal tree</a> by <a href=\"/Ian_Kennedy\" title=\"Ian Kennedy\">Ian Kennedy</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 06, 2003</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=42588\">how to print tree non-recursively</a> by <a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel Shawul</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 24, 2012&#160;» <a href=\"/Recursion\" title=\"Recursion\">Recursion</a>, <a href=\"/Iteration\" title=\"Iteration\">Iteration</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=45264\">Probabilistic approach to optimize search tree</a> by <a href=\"/Sergei_Markoff\" title=\"Sergei Markoff\">Sergei S. Markoff</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 22, 2012</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Tree&amp;action=edit&amp;section=12\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Tree_%28graph_theory%29\">Tree (graph theory) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Tree_%28set_theory%29\">Tree (set theory) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Tree_data_structure\">Tree (data structure) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Tree_decomposition\">Tree decomposition from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Tree_traversal\">Tree traversal from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/AVL_tree\">AVL tree from Wikipedia</a> named after its inventors <a href=\"/Georgy_Adelson-Velsky\" title=\"Georgy Adelson-Velsky\">Georgy Adelson-Velsky</a>, <a href=\"/Mathematician#Landis\" title=\"Mathematician\">Evgenii Landis</a> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Expectiminimax_tree\">Expectiminimax tree from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Dancing_trees\">Dancing tree from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Decision_tree\">Decision tree from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Red-Black_Tree\">Red-black tree from Wikipedia</a></li>\n<li>  <a href=\"/Category:Jan_Garbarek\" title=\"Category:Jan Garbarek\">Jan Garbarek Group</a> - <i>Once I Dreamt A Tree Upside Down</i>, 37th international jazz festival in <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Burghausen,_Alt%C3%B6tting\">Burghausen</a>, 22.03.06 <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> Jan Garbarek, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Manu_Katch%C3%A9\">Manu Katché</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Rainer_Br%C3%BCninghaus\">Rainer Brüninghaus</a>, <a href=\"/Category:Eberhard_Weber\" title=\"Category:Eberhard Weber\">Eberhard Weber</a></dd>\n<dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/Uw4oc5fKzO4?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Tree&amp;action=edit&amp;section=13\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Gray_Tree\">Gray Tree from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.ics.uci.edu/%7Eeppstein/180a/970422.html\">Lecture notes for April 22, 1997 Alpha-Beta Search</a> by <a href=\"/David_Eppstein\" title=\"David Eppstein\">David Eppstein</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\">see <a href=\"/Helmut_Richter#Swapoff\" title=\"Helmut Richter\">Swap-off</a> by <a href=\"/Helmut_Richter\" title=\"Helmut Richter\">Helmut Richter</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a href=\"/Georgy_Adelson-Velsky\" title=\"Georgy Adelson-Velsky\">Georgy Adelson-Velsky</a> and <a href=\"/Mathematician#Landis\" title=\"Mathematician\">Evgenii Landis</a> (<b>1962</b>). <i>An algorithm for the organization of information</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Proceedings_of_the_USSR_Academy_of_Sciences\">Proceedings of the USSR Academy of Sciences</a> 146: 263–266. (Russian) English translation by Myron J. Ricci in Soviet Math. Doklady, 3:1259–1263, 1962</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Search\" title=\"Search\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260228103702\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.076 seconds\nReal time usage: 0.622 seconds\nPreprocessor visited node count: 145/1000000\nPreprocessor generated node count: 298/1000000\nPost‐expand include size: 26/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:949-0!canonical and timestamp 20260228103701 and revision id 27310\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Piet_Mondrian"
+      },
+      {
+        "sortkey": "",
+        "*": "Jan_Garbarek"
+      },
+      {
+        "sortkey": "",
+        "*": "Eberhard_Weber"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "7th Computer Olympiad"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha-Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Andy Walker"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Arie de Bruin"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aske Plaat"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Best-First"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Best Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Beta-Cutoff"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Branching Factor"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CG 1998"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CG 2008"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Position"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chun-Hung Tzeng"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Conferences"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Conspiracy Numbers"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Daniel Shawul"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David Eppstein"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Debugging"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth-First"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Donald Knuth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Donald Michie"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Endianness"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Enhanced Transposition Cutoff"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Georgy Adelson-Velsky"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Graph History Interaction"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Helmut Richter"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA Journal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ian Kennedy"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Interior Node"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iteration"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iterative Deepening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "John Maynard Smith"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jonathan Schaeffer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jónheiður Ísleifsdóttir"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Leaf Node"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Leftmost Node"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mathematician"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Ordering"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Moves"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "NegaScout"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Node"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Node Types"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Oracle"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Path-Dependency"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Paul W. Purdom"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Perft"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ply"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Recursion"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Repetitions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Reversible Moves"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Root"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rémi Coulom"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Scout"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search Space"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sergei Markoff"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sibling Node"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Terminal Node"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Wim Pijls"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Yngvi Björnsson"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Eberhard Weber"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Jan Garbarek"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Piet Mondrian"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Alpha-Beta Tree",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Search_Tree",
+        "byteoffset": 1593,
+        "anchor": "Alpha-Beta_Tree"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Topology",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Search_Tree",
+        "byteoffset": 1894,
+        "anchor": "Topology"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Transpositions",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Search_Tree",
+        "byteoffset": 2325,
+        "anchor": "Transpositions"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Cycles",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Search_Tree",
+        "byteoffset": 2958,
+        "anchor": "Cycles"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Tree walk",
+        "number": "5",
+        "index": "5",
+        "fromtitle": "Search_Tree",
+        "byteoffset": 3334,
+        "anchor": "Tree_walk"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Minimal Search Trees",
+        "number": "6",
+        "index": "6",
+        "fromtitle": "Search_Tree",
+        "byteoffset": 3896,
+        "anchor": "Minimal_Search_Trees"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Minimal Alpha-Beta Tree",
+        "number": "6.1",
+        "index": "7",
+        "fromtitle": "Search_Tree",
+        "byteoffset": 4542,
+        "anchor": "Minimal_Alpha-Beta_Tree"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Minimal PV Tree",
+        "number": "6.2",
+        "index": "8",
+        "fromtitle": "Search_Tree",
+        "byteoffset": 5093,
+        "anchor": "Minimal_PV_Tree"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "7",
+        "index": "9",
+        "fromtitle": "Search_Tree",
+        "byteoffset": 5919,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "8",
+        "index": "10",
+        "fromtitle": "Search_Tree",
+        "byteoffset": 6142,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "9",
+        "index": "11",
+        "fromtitle": "Search_Tree",
+        "byteoffset": 8231,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "10",
+        "index": "12",
+        "fromtitle": "Search_Tree",
+        "byteoffset": 8724,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "11",
+        "index": "13",
+        "fromtitle": "Search_Tree",
+        "byteoffset": 10580,
+        "anchor": "References"
+      }
+    ]
+  }
+}

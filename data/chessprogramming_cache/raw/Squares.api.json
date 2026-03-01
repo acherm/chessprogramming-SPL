@@ -1,0 +1,388 @@
+{
+  "parse": {
+    "title": "Squares",
+    "pageid": 1166,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Chess\" title=\"Chess\">Chess</a> * Squares</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"/File:Tableau_I,_by_Piet_Mondriaan.jpg\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Tableau_I%2C_by_Piet_Mondriaan.jpg/330px-Tableau_I%2C_by_Piet_Mondriaan.jpg\" width=\"300\" height=\"318\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Tableau_I%2C_by_Piet_Mondriaan.jpg/500px-Tableau_I%2C_by_Piet_Mondriaan.jpg 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Tableau_I%2C_by_Piet_Mondriaan.jpg/960px-Tableau_I%2C_by_Piet_Mondriaan.jpg 2x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Tableau_I,_by_Piet_Mondriaan.jpg\" class=\"internal\" title=\"Enlarge\"></a></div><a href=\"/Category:Piet_Mondrian\" title=\"Category:Piet Mondrian\">Piet Mondrian</a> - Tableau I <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p>A <b>Square</b> in chess is one of 64 elements of a <a href=\"/Chessboard\" title=\"Chessboard\">chessboard</a>, which might be empty or <a href=\"/Occupancy\" title=\"Occupancy\">occupied</a> by a chess <a href=\"/Pieces\" title=\"Pieces\">man</a>. <b>Square centric</b> <a href=\"/Board_Representation\" title=\"Board Representation\">representations</a>, like <a href=\"/Mailbox\" title=\"Mailbox\">mailbox</a> or <a href=\"/0x88\" title=\"0x88\">0x88</a> board <a href=\"/Array\" title=\"Array\">arrays</a>, contain <a href=\"/Pieces#PieceCoding\" title=\"Pieces\">piece codes</a>, the information, what piece, if any, resides on a particular square. The <b>piece centric</b> <a href=\"/Bitboards\" title=\"Bitboards\">bitboard</a>, as array of 64 bits, represent a boolean property of each square by a single bit. \n</p><p>Depending on the underlying data structure of the <a href=\"/Board_Representation\" title=\"Board Representation\">board representation</a>, each square has an <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Memory_address\">address</a> inside the <a href=\"/Chessboard\" title=\"Chessboard\">board</a>. Square centric representations keep arrays of squares, containing the information which piece (if any) resides on each square. That is why these representation is often called <a href=\"/Mailbox\" title=\"Mailbox\">mailbox</a> approach, since each square has a associated mailbox which is either empty or contains a chess piece. To find the address of a certain square index in the a1..h8 aka 0..63 range sometimes requires additional computation or lookup, for instance to map coordinates for <a href=\"/0x88\" title=\"0x88\">0x88</a> boards or surrounded mailbox boards.\n</p><p>In <a href=\"/Bitboards\" title=\"Bitboards\">bitboards</a> the address of a square correspondents to a bit-index, containing a boolean property of that square (bit set), or not (bit clear). The <a href=\"/Square_Mapping_Considerations\" title=\"Square Mapping Considerations\">square mapping</a> determines how bit-indices associate the squares on the <a href=\"/Chessboard\" title=\"Chessboard\">board</a>. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Square_by_Rank_and_File\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Square by Rank and File</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Algebraic_Square_Notation\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Algebraic Square Notation</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Square_Definition\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Square Definition</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Square_Properties\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Square Properties</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#Multiple_Squares\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Multiple Squares</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-6\"><a href=\"#Lines\"><span class=\"tocnumber\">5.1</span> <span class=\"toctext\">Lines</span></a></li>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#Two_squares\"><span class=\"tocnumber\">5.2</span> <span class=\"toctext\">Two squares</span></a></li>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#Areas\"><span class=\"tocnumber\">5.3</span> <span class=\"toctext\">Areas</span></a></li>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#The_whole_Board\"><span class=\"tocnumber\">5.4</span> <span class=\"toctext\">The whole Board</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-10\"><a href=\"#Pawn_Squares\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Pawn Squares</span></a></li>\n<li class=\"toclevel-1 tocsection-11\"><a href=\"#See_also\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-12\"><a href=\"#External_Links\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-13\"><a href=\"#References\"><span class=\"tocnumber\">9</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Square_by_Rank_and_File\">Square by Rank and File</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Squares&amp;action=edit&amp;section=1\" title=\"Edit section: Square by Rank and File\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>A Square, like a point inside a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Cartesian_coordinates\">cartesian coordinate system</a>, can be determined by x- and y-coordinates, here the labels of <a href=\"/Files\" title=\"Files\">files</a> and <a href=\"/Ranks\" title=\"Ranks\">ranks</a>. Since each rank and file has eight squares, the mentioned rank-file mapping implies following formulas to determine the the square address:\n</p>\n<pre>\nsquare = 8*rank + file;\nsquare = (rank &lt;&lt; 3) + file;\n</pre>\n<p>with the obvious relation to calculate rank- and file-indices from the square index:\n</p>\n<pre>\nrank = square &gt;&gt; 3; // div 8\nfile = square  &amp; 7; // modulo 8\n</pre>\n<p><span id=\"Algebraic\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Algebraic_Square_Notation\">Algebraic Square Notation</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Squares&amp;action=edit&amp;section=2\" title=\"Edit section: Algebraic Square Notation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>In <a href=\"/Algebraic_Chess_Notation\" title=\"Algebraic Chess Notation\">algebraic chess notation</a> a <a href=\"/Target_Square\" title=\"Target Square\">target square</a> of a <a href=\"/Moves\" title=\"Moves\">move</a> is specified by two characters for its <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Cartesian_coordinates\">cartesian coordinate</a>, per convention a letter for the <a href=\"/Files\" title=\"Files\">file</a> ('a'-'h'), followed by a digit for the <a href=\"/Ranks\" title=\"Ranks\">rank</a> number ('1'-'8').\n</p>\n<h1><span class=\"mw-headline\" id=\"Square_Definition\">Square Definition</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Squares&amp;action=edit&amp;section=3\" title=\"Edit section: Square Definition\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>A typical <a href=\"/Little-endian\" title=\"Little-endian\">little-endian</a> rank-file mapping enumeration in <a href=\"/Cpp\" title=\"Cpp\">C++</a>:\n</p>\n<pre>\nenum enumSquare {\n  a1, b1, c1, d1, e1, f1, g1, h1,\n  a2, b2, c2, d2, e2, f2, g2, h2,\n  a3, b3, c3, d3, e3, f3, g3, h3,\n  a4, b4, c4, d4, e4, f4, g4, h4,\n  a5, b5, c5, d5, e5, f5, g5, h5,\n  a6, b6, c6, d6, e6, f6, g6, h6,\n  a7, b7, c7, d7, e7, f7, g7, h7,\n  a8, b8, c8, d8, e8, f8, g8, h8\n};\n</pre>\n<h1><span class=\"mw-headline\" id=\"Square_Properties\">Square Properties</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Squares&amp;action=edit&amp;section=4\" title=\"Edit section: Square Properties\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Center_Distance\" title=\"Center Distance\">Center Distance</a></li>\n<li> <a href=\"/Center_Manhattan-Distance\" title=\"Center Manhattan-Distance\">Center Manhattan-Distance</a></li>\n<li> <a href=\"/Color_of_a_Square\" title=\"Color of a Square\">Color of a Square</a></li>\n<li> <a href=\"/Occupancy\" title=\"Occupancy\">Occupancy</a></li>\n<li> <a href=\"/Square_Attacked_By\" title=\"Square Attacked By\">Square Attacked By</a></li>\n<li> <a href=\"/Square_Control\" title=\"Square Control\">Square Control</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Multiple_Squares\">Multiple Squares</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Squares&amp;action=edit&amp;section=5\" title=\"Edit section: Multiple Squares\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Lines\">Lines</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Squares&amp;action=edit&amp;section=6\" title=\"Edit section: Lines\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Ranks\" title=\"Ranks\">Ranks</a></li>\n<li> <a href=\"/Files\" title=\"Files\">Files</a></li>\n<li> <a href=\"/Diagonals\" title=\"Diagonals\">Diagonals</a></li>\n<li> <a href=\"/Anti-Diagonals\" title=\"Anti-Diagonals\">Anti-Diagonals</a></li>\n<li> <a href=\"/Rays\" title=\"Rays\">Rays</a> as subset of Lines</li>\n<li> <a href=\"/On_an_empty_Board#LineAttacks\" title=\"On an empty Board\">Line-masks</a> from <a href=\"/Bitboards\" title=\"Bitboards\">Bitboards</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Two_squares\">Two squares</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Squares&amp;action=edit&amp;section=7\" title=\"Edit section: Two squares\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Often, but not always related to a <a href=\"/Moves\" title=\"Moves\">move</a>\n</p>\n<ul><li> <a href=\"/Origin_Square\" title=\"Origin Square\">Origin Square</a> </li>\n<li> <a href=\"/Target_Square\" title=\"Target Square\">Target Square</a></li>\n<li> <a href=\"/Distance\" title=\"Distance\">Distance</a></li>\n<li> <a href=\"/Manhattan-Distance\" title=\"Manhattan-Distance\">Manhattan-Distance</a></li>\n<li> <a href=\"/Knight-Distance\" title=\"Knight-Distance\">Knight-Distance</a></li>\n<li> <a href=\"/Direction\" title=\"Direction\">Direction</a></li>\n<li> <a href=\"/0x88#SquareRelations\" title=\"0x88\">0x88 Square Relations</a></li>\n<li> <a href=\"/Square_Attacked_By#InBetween\" title=\"Square Attacked By\">In Between</a></li>\n<li> <a href=\"/Intersection_Squares\" title=\"Intersection Squares\">Intersection Squares</a></li>\n<li> <a href=\"/Butterfly_Boards\" title=\"Butterfly Boards\">Butterfly Boards</a></li>\n<li> <a href=\"/Files#TwoSquares\" title=\"Files\">Two Squares on a File</a></li>\n<li> <a href=\"/Ranks#TwoSquares\" title=\"Ranks\">Two Squares on a Rank</a></li>\n<li> <a href=\"/Diagonals#TwoSquares\" title=\"Diagonals\">Two Squares on a Diagonal</a></li>\n<li> <a href=\"/Anti-Diagonals#TwoSquares\" title=\"Anti-Diagonals\">Two Squares on a Anti-Diagonal</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Areas\">Areas</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Squares&amp;action=edit&amp;section=8\" title=\"Edit section: Areas\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Center\" title=\"Center\">Center</a></li>\n<li> <a href=\"/index.php?title=Wings&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Wings (page does not exist)\">Wings</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"The_whole_Board\">The whole Board</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Squares&amp;action=edit&amp;section=9\" title=\"Edit section: The whole Board\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Lists, Arrays and Sets of Squares\n</p>\n<ul><li> <a href=\"/Chessboard\" title=\"Chessboard\">Chessboard</a></li>\n<li> <a href=\"/Board_Representation\" title=\"Board Representation\">Board Representation</a>\n<ul><li> <a href=\"/Mailbox\" title=\"Mailbox\">Mailbox</a></li>\n<li> <a href=\"/Vector_Attacks\" title=\"Vector Attacks\">Vector Attacks</a></li>\n<li> <a href=\"/Bitboards\" title=\"Bitboards\">Bitboards</a>\n<ul><li> <a href=\"/Flipping_Mirroring_and_Rotating\" title=\"Flipping Mirroring and Rotating\">Flipping Mirroring and Rotating</a></li>\n<li> <a href=\"/Square_Mapping_Considerations\" title=\"Square Mapping Considerations\">Square Mapping Considerations</a></li>\n<li> <a href=\"/King_Pattern#SetwiseRuleoftheSquare\" title=\"King Pattern\">Setwise Rule of the Square</a></li></ul></li>\n<li> <a href=\"/Quad-Bitboards\" title=\"Quad-Bitboards\">Quad-Bitboards</a></li></ul></li></ul>\n<h1><span class=\"mw-headline\" id=\"Pawn_Squares\">Pawn Squares</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Squares&amp;action=edit&amp;section=10\" title=\"Edit section: Pawn Squares\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/En_passant\" title=\"En passant\">En passant</a>\n<ul><li> <a href=\"/Forsyth-Edwards_Notation#Enpassanttargetsquare\" title=\"Forsyth-Edwards Notation\">En passant target square</a> inside the <a href=\"/Forsyth-Edwards_Notation\" title=\"Forsyth-Edwards Notation\">Forsyth-Edwards Notation</a></li></ul></li>\n<li> <a href=\"/Promotion_Square\" title=\"Promotion Square\">Promotion Square</a></li>\n<li> <a href=\"/Stop_Square\" title=\"Stop Square\">Stop Square</a></li>\n<li> <a href=\"/Pawn_Spans#StopandDistantStop\" title=\"Pawn Spans\">Stop and Telestop</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Squares&amp;action=edit&amp;section=11\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Corresponding_Squares\" title=\"Corresponding Squares\">Corresponding Squares</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Squares&amp;action=edit&amp;section=12\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Square\">Square from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Magic_square\">Magic square from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.chess.com/article/view/the-eulers-8x8-magic-square\">The Euler's 8x8 magic square</a>, <a href=\"/index.php?title=Chess.com&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Chess.com (page does not exist)\">Chess.com</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Squares&amp;action=edit&amp;section=13\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a href=\"/Category:Piet_Mondrian\" title=\"Category:Piet Mondrian\">Piet Mondrian</a> - <a rel=\"nofollow\" class=\"external text\" href=\"https://commons.wikimedia.org/wiki/File:Tableau_I,_by_Piet_Mondriaan.jpg\">Tableau I</a>, 1921, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Gemeentemuseum_Den_Haag\">Gemeentemuseum Den Haag</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Chess\" title=\"Chess\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301074145\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.066 seconds\nReal time usage: 0.616 seconds\nPreprocessor visited node count: 97/1000000\nPreprocessor generated node count: 168/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1166-0!canonical and timestamp 20260301074145 and revision id 23791\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Piet_Mondrian"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "0x88"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Algebraic Chess Notation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Anti-Diagonals"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Array"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Board Representation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Butterfly Boards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Center"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Center Distance"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Center Manhattan-Distance"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chessboard"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Color of a Square"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Corresponding Squares"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cpp"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Diagonals"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Direction"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Distance"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "En passant"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Files"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Flipping Mirroring and Rotating"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Forsyth-Edwards Notation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Intersection Squares"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "King Pattern"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Knight-Distance"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Little-endian"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mailbox"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Manhattan-Distance"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Moves"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Occupancy"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "On an empty Board"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Origin Square"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Spans"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pieces"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Promotion Square"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quad-Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ranks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rays"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Square Attacked By"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Square Control"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Square Mapping Considerations"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stop Square"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Target Square"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vector Attacks"
+      },
+      {
+        "ns": 0,
+        "*": "Wings"
+      },
+      {
+        "ns": 0,
+        "*": "Chess.com"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Piet Mondrian"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Square by Rank and File",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Squares",
+        "byteoffset": 1919,
+        "anchor": "Square_by_Rank_and_File"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Algebraic Square Notation",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Squares",
+        "byteoffset": 2554,
+        "anchor": "Algebraic_Square_Notation"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Square Definition",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Squares",
+        "byteoffset": 2928,
+        "anchor": "Square_Definition"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Square Properties",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Squares",
+        "byteoffset": 3343,
+        "anchor": "Square_Properties"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Multiple Squares",
+        "number": "5",
+        "index": "5",
+        "fromtitle": "Squares",
+        "byteoffset": 3505,
+        "anchor": "Multiple_Squares"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Lines",
+        "number": "5.1",
+        "index": "6",
+        "fromtitle": "Squares",
+        "byteoffset": 3525,
+        "anchor": "Lines"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Two squares",
+        "number": "5.2",
+        "index": "7",
+        "fromtitle": "Squares",
+        "byteoffset": 3693,
+        "anchor": "Two_squares"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Areas",
+        "number": "5.3",
+        "index": "8",
+        "fromtitle": "Squares",
+        "byteoffset": 4229,
+        "anchor": "Areas"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "The whole Board",
+        "number": "5.4",
+        "index": "9",
+        "fromtitle": "Squares",
+        "byteoffset": 4266,
+        "anchor": "The_whole_Board"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Pawn Squares",
+        "number": "6",
+        "index": "10",
+        "fromtitle": "Squares",
+        "byteoffset": 4591,
+        "anchor": "Pawn_Squares"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "7",
+        "index": "11",
+        "fromtitle": "Squares",
+        "byteoffset": 4838,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "8",
+        "index": "12",
+        "fromtitle": "Squares",
+        "byteoffset": 4878,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "9",
+        "index": "13",
+        "fromtitle": "Squares",
+        "byteoffset": 5145,
+        "anchor": "References"
+      }
+    ]
+  }
+}

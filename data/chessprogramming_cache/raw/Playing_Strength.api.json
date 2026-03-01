@@ -1,0 +1,1506 @@
+{
+  "parse": {
+    "title": "Playing Strength",
+    "pageid": 1574,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Chess\" title=\"Chess\">Chess</a> * Playing Strength</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"http://wiki.huen-un-perduen.de/index.php?title=Datei:Flottmann04.jpg\"><img alt=\"\" src=\"/images/thumb/c/c9/FlottmannDragonSnakeIII.JPG/300px-FlottmannDragonSnakeIII.JPG\" width=\"300\" height=\"214\" class=\"thumbimage\" srcset=\"/images/c/c9/FlottmannDragonSnakeIII.JPG 1.5x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:FlottmannDragonSnakeIII.JPG\" class=\"internal\" title=\"Enlarge\"></a></div>Dragon and Snake on ambos <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>Playing Strength</b>, (Performance, Skill Level)<br />\nof a chess player, or chess playing entity, program or engine, reflects the ability to win against other players, given by a number or other element of an <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Order_theory\">ordered set</a> such as an <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Elo_rating_system\">Elo number</a>.  \n</p><p>The ability to solve <a href=\"/Test-Positions\" title=\"Test-Positions\">test-positions</a>, that is, finding the specified, likely one and only best move, might be an indicator for various particular engine skills, but does not necessarily correlate with playing strength. In his <i><a href=\"/Tord_Romstad#Video\" title=\"Tord Romstad\">Parallelism and Selectivity in Game Tree Search</a></i> lecture, <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a> introduced the <i>Worst Moves Observation</i> (<b>WMO</b>), which states the practical playing strength is not primarily determined by the quality of the players best moves nor average moves, but by the quality of the players worst moves.  \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Measuring\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Measuring</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Strength\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Strength</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Computer_Analysis_of_Human_Players\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Computer Analysis of Human Players</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#See_also\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#Publications\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Publications</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-6\"><a href=\"#1970_...\"><span class=\"tocnumber\">5.1</span> <span class=\"toctext\">1970 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#1980_...\"><span class=\"tocnumber\">5.2</span> <span class=\"toctext\">1980 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#1990_...\"><span class=\"tocnumber\">5.3</span> <span class=\"toctext\">1990 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#2000_...\"><span class=\"tocnumber\">5.4</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#2005_...\"><span class=\"tocnumber\">5.5</span> <span class=\"toctext\">2005 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#2010_...\"><span class=\"tocnumber\">5.6</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-12\"><a href=\"#2015_...\"><span class=\"tocnumber\">5.7</span> <span class=\"toctext\">2015 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-13\"><a href=\"#Postings\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Postings</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-14\"><a href=\"#1982_...\"><span class=\"tocnumber\">6.1</span> <span class=\"toctext\">1982 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-15\"><a href=\"#1990_..._2\"><span class=\"tocnumber\">6.2</span> <span class=\"toctext\">1990 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-16\"><a href=\"#1995_...\"><span class=\"tocnumber\">6.3</span> <span class=\"toctext\">1995 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-17\"><a href=\"#2000_..._2\"><span class=\"tocnumber\">6.4</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-18\"><a href=\"#2005_..._2\"><span class=\"tocnumber\">6.5</span> <span class=\"toctext\">2005 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-19\"><a href=\"#2010_..._2\"><span class=\"tocnumber\">6.6</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-20\"><a href=\"#2015_..._2\"><span class=\"tocnumber\">6.7</span> <span class=\"toctext\">2015 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-21\"><a href=\"#2020_...\"><span class=\"tocnumber\">6.8</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-22\"><a href=\"#External_Links\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">External Links</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-23\"><a href=\"#Chess_Player\"><span class=\"tocnumber\">7.1</span> <span class=\"toctext\">Chess Player</span></a></li>\n<li class=\"toclevel-2 tocsection-24\"><a href=\"#Chess_Engines\"><span class=\"tocnumber\">7.2</span> <span class=\"toctext\">Chess Engines</span></a></li>\n<li class=\"toclevel-2 tocsection-25\"><a href=\"#Analysis\"><span class=\"tocnumber\">7.3</span> <span class=\"toctext\">Analysis</span></a></li>\n<li class=\"toclevel-2 tocsection-26\"><a href=\"#Rating_Systems\"><span class=\"tocnumber\">7.4</span> <span class=\"toctext\">Rating Systems</span></a></li>\n<li class=\"toclevel-2 tocsection-27\"><a href=\"#Misc\"><span class=\"tocnumber\">7.5</span> <span class=\"toctext\">Misc</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-28\"><a href=\"#References\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Measuring\">Measuring</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Playing_Strength&amp;action=edit&amp;section=1\" title=\"Edit section: Measuring\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>A <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Validity_(statistics)\">statistical valid</a> method to measure playing strength within a defined <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Confidence_interval\">confidence interval</a> is to play an appropriate huge number of games with both sides versus a wide range of different opponents <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup> with symmetric <a href=\"/Time_Management#Time_Controls\" title=\"Time Management\">time constraints</a>, and to apply <a href=\"/Match_Statistics\" title=\"Match Statistics\">match statistics</a>. Performance isn't measured absolutely; it is inferred from wins, losses, and draws against other players or engines. Players' rating depend on the ratings of their opponents, and the results scored against them <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>. While relative playing strength of chess engines is not strictly transmissive over various time controls, the number of games played is more relevant than their duration, the todays de facto standard in measuring playing strength is parallel playing <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Fast_chess\">fast chess</a> with (ultra) short time control, such as <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Fast_chess#Blitz\">blitz</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Fast_chess#Bullet\">bullet</a> or even <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Fast_chess#Lightning\">lightning</a> chess, as for instance used in the <a href=\"/Stockfish#TestingFramework\" title=\"Stockfish\">Fishtest framework</a> of <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>. \n</p>\n<h1><span class=\"mw-headline\" id=\"Strength\">Strength</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Playing_Strength&amp;action=edit&amp;section=2\" title=\"Edit section: Strength\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>The strength of a chess program depends on many things, the quality and efficiency of the <a href=\"/Algorithms\" title=\"Algorithms\">algorithms</a> involved to determine the best move of a position, the balance of the so called <a href=\"/Search\" title=\"Search\">search</a> versus <a href=\"/Knowledge\" title=\"Knowledge\">knowledge tradeoff</a> to <a href=\"/Evaluation\" title=\"Evaluation\">evaluate</a> or compare <a href=\"/Leaf_Node\" title=\"Leaf Node\">leaf nodes</a> of a <a href=\"/Search_Tree\" title=\"Search Tree\">search tree</a>, how to shape that tree and to propagate a <a href=\"/Score\" title=\"Score\">score</a> up to the <a href=\"/Root\" title=\"Root\">root</a>, and <a href=\"/Time_Management\" title=\"Time Management\">time management</a>, that is how to allocate time for searching a move under time control requirements. Time used is roughly proportional to the number of visited <a href=\"/Node\" title=\"Node\">nodes</a> of the common <a href=\"/Depth-First\" title=\"Depth-First\">depth-first search</a> inside an <a href=\"/Iterative_Deepening\" title=\"Iterative Deepening\">iterative deepening frame</a>, which <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Exponential_growth\">grows exponentially</a> by its <a href=\"/Branching_Factor#EffectiveBranchingFactor\" title=\"Branching Factor\">effective branching factor</a> raised to the power of <a href=\"/Depth\" title=\"Depth\">search depth</a>. Playing strength might be improved over the (playing) time due to <a href=\"/Learning\" title=\"Learning\">learning algorithms</a>.\n</p>\n<h1><span class=\"mw-headline\" id=\"Computer_Analysis_of_Human_Players\">Computer Analysis of Human Players</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Playing_Strength&amp;action=edit&amp;section=3\" title=\"Edit section: Computer Analysis of Human Players\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup>\n</p>\n<ul><li> <a href=\"/Matej_Guid#ComputerAnalysis\" title=\"Matej Guid\">Matej Guid - Computer Analysis of World Chess Champions</a></li>\n<li> <a href=\"/Jean-Marc_Alliot#WhoistheMaster\" title=\"Jean-Marc Alliot\">Jean-Marc Alliot - Who is the Master?</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Playing_Strength&amp;action=edit&amp;section=4\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">Automated Tuning</a></li>\n<li> <a href=\"/Depth\" title=\"Depth\">Depth</a></li>\n<li> <a href=\"/Depth#DiminishingReturns\" title=\"Depth\">Depth | Diminishing Returns</a></li>\n<li> <a href=\"/Engine_Rating_Lists\" title=\"Engine Rating Lists\">Engine Rating Lists</a></li>\n<li> <a href=\"/Engine_Testing\" title=\"Engine Testing\">Engine Testing</a></li>\n<li> <a href=\"/Engine_Similarity\" title=\"Engine Similarity\">Engine Similarity</a></li>\n<li> <a href=\"/Knowledge\" title=\"Knowledge\">Knowledge</a></li>\n<li> <a href=\"/Learning\" title=\"Learning\">Learning</a></li>\n<li> <a href=\"/Match_Statistics\" title=\"Match Statistics\">Match Statistics</a></li>\n<li> <a href=\"/Opponent_Model_Search\" title=\"Opponent Model Search\">Opponent Model Search</a></li>\n<li> <a href=\"/Pawn_Advantage,_Win_Percentage,_and_Elo\" title=\"Pawn Advantage, Win Percentage, and Elo\">Pawn Advantage, Win Percentage, and Elo</a></li>\n<li> <a href=\"/Pondering\" title=\"Pondering\">Pondering</a></li>\n<li> <a href=\"/Search_Pathology\" title=\"Search Pathology\">Search Pathology</a></li>\n<li> <a href=\"/Search_with_Random_Leaf_Values\" title=\"Search with Random Leaf Values\">Search with Random Leaf Values</a></li>\n<li> <a href=\"/Test-Positions\" title=\"Test-Positions\">Test-Positions</a></li>\n<li> <a href=\"/Alexander_Szabo#TechnologyCurve\" title=\"Alexander Szabo\">The Technology Curve</a></li>\n<li> <a href=\"/Time_Management\" title=\"Time Management\">Time Management</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Playing_Strength&amp;action=edit&amp;section=5\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1970_...\">1970 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Playing_Strength&amp;action=edit&amp;section=6\" title=\"Edit section: 1970 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <span id=\"Bloss\"></span><a rel=\"nofollow\" class=\"external text\" href=\"http://what-when-how.com/earth-scientists/bloss-f-donald-earth-scientist/\">F. Donald Bloss</a> (<b>1973</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.amazon.de/Rate-Your-Chess-F-Donald-Bloss/dp/0442008295\">Rate your own Chess</a></i>. Van Nostrand Reinhold Inc.</li>\n<li> <a href=\"/Tony_Marsland\" title=\"Tony Marsland\">Tony Marsland</a>, <a href=\"/Paul_Rushton\" title=\"Paul Rushton\">Paul Rushton</a> (<b>1973</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://dl.acm.org/citation.cfm?id=805703\">Mechanisms for Comparing Chess Programs</a>.</i> <a href=\"/ACM_1973\" title=\"ACM 1973\">ACM Annual Conference</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://webdocs.cs.ualberta.ca/~tony/OldPapers/Marsland-Rushton-ACM73\">pdf</a></li>\n<li> <a href=\"/Peter_W._Frey\" title=\"Peter W. Frey\">Peter W. Frey</a> (ed.) (<b>1977</b>). <i><a href=\"/Chess_Skill_in_Man_and_Machine\" title=\"Chess Skill in Man and Machine\">Chess Skill in Man and Machine</a></i>. Springer, New York, N.Y. 2nd ed. 1983</li>\n<li> <a href=\"/James_Gillogly\" title=\"James Gillogly\">James Gillogly</a> (<b>1978</b>). <i>Performance Analysis of the Technology Chess Program</i>. Ph.D. Thesis. Tech. Report CMU-CS-78-189, <a href=\"/Carnegie_Mellon_University\" title=\"Carnegie Mellon University\">Carnegie Mellon University</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://reports-archive.adm.cs.cmu.edu/anon/anon/usr/ftp/scan/CMU-CS-77-gillogly.pdf\">CMU-CS-77 pdf</a>&#160;» <a href=\"/Tech\" title=\"Tech\">Tech</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Arpad_Elo\">Arpad Elo</a> (<b>1978</b>). <i>The Rating of Chessplayers, Past and Present</i>. Arco Publications <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup></li>\n<li> <a href=\"/Don_Beal\" title=\"Don Beal\">Don Beal</a> (<b>1978</b>). <i>Handicapping Computer Chess Programs</i>. <a href=\"/ICGA_Journal#1_2\" title=\"ICGA Journal\">ICCA Newsletter, Vol. 1, No. 2</a></li>\n<li> <a href=\"/David_Cahlander\" title=\"David Cahlander\">David Cahlander</a> (<b>1979</b>). <i>Strength of a Chess Playing Computer</i>. <a href=\"/ICGA_Journal#2_1\" title=\"ICGA Journal\">ICCA Newsletter, Vol. 2, No. 1</a></li>\n<li> <a href=\"/Jack_Good\" title=\"Jack Good\">Jack Good</a> (<b>1979</b>). <i>On the Grading of Chess Players</i>. <a href=\"/Personal_Computing#3_3\" title=\"Personal Computing\">Personal Computing, Vol. 3, No. 3</a>, pp. 47</li>\n<li> <span id=\"Ratliff\"></span><a href=\"/index.php?title=Gary_L._Ratliff&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Gary L. Ratliff (page does not exist)\">Gary L. Ratliff</a> (<b>1979</b>). <i>Practical Rating Program</i>. <a href=\"/Personal_Computing#3_9\" title=\"Personal Computing\">Personal Computing, Vol. 3, No. 9</a>, pp. 62 &#160;» <a href=\"#Bloss\">Bloss</a></li>\n<li> <a href=\"/Frieder_Schwenkel\" title=\"Frieder Schwenkel\">Frieder Schwenkel</a> (<b>1979</b>). <i>Berating the ratings system</i>. <a href=\"/Personal_Computing#3_11\" title=\"Personal Computing\">Personal Computing, Vol. 3, No. 11</a>, pp. 77&#160;» <a href=\"#Ratliff\">Ratliff</a>, <a href=\"#Bloss\">Bloss</a></li>\n<li> <a href=\"/index.php?title=John_Shaposka&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"John Shaposka (page does not exist)\">John Shaposka</a> (<b>1979</b>). <i>\"JS\" Takes the Bloss Test</i>. <a href=\"/Personal_Computing#3_12\" title=\"Personal Computing\">Personal Computing, Vol. 3, No. 12</a>, pp. 75&#160;» <a href=\"#Ratliff\">Ratliff</a>, <a href=\"#Bloss\">Bloss</a></li>\n<li> Editor (<b>1979</b>). <i>Chess Ratings from Problem Solving</i>. <a href=\"/Personal_Computing#3_12\" title=\"Personal Computing\">Personal Computing, Vol. 3, No. 12</a>, pp. 77&#160;» <a href=\"/CAPS\" title=\"CAPS\">CAPS II</a>, <a href=\"/Chess_Problems,_Compositions_and_Studies\" title=\"Chess Problems, Compositions and Studies\">Chess Problems, Compositions and Studies</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1980_...\">1980 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Playing_Strength&amp;action=edit&amp;section=7\" title=\"Edit section: 1980 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> Floyd R. Kirk (<b>1980</b>). <i>Bloss Flunks Test</i>. <a href=\"/Personal_Computing#4_8\" title=\"Personal Computing\">Personal Computing, Vol. 4, No. 8</a>, pp. 72 &#160;» <a href=\"#Ratliff\">Ratliff</a>, <a href=\"#Bloss\">Bloss</a></li>\n<li> <a href=\"/David_E._Welsh\" title=\"David E. Welsh\">David E. Welsh</a> (<b>1980</b>). <i>Rating Boris 2.5</i>. <a href=\"/Personal_Computing#4_10\" title=\"Personal Computing\">Personal Computing, Vol. 4, No. 10</a>, pp. 78&#160;» <a href=\"/Boris#2.5\" title=\"Boris\">Boris 2.5</a></li>\n<li> W. W. Foster (<b>1980</b>). <i>Six Test Problems for Chess Playing Machines</i>. <a href=\"/Personal_Computing#4_10\" title=\"Personal Computing\">Personal Computing, Vol. 4, No. 10</a>, pp. 81</li>\n<li> <a href=\"/David_E._Welsh\" title=\"David E. Welsh\">David E. Welsh</a> (<b>1980</b>). <i>Rating Boris 2.5 - Part II</i>. <a href=\"/Personal_Computing#4_11\" title=\"Personal Computing\">Personal Computing, Vol. 4, No. 11</a>, pp. 87 </li>\n<li> <a href=\"/Ken_Thompson\" title=\"Ken Thompson\">Ken Thompson</a> (<b>1982</b>). <i>Computer Chess Strength</i>. <a href=\"/Advances_in_Computer_Chess_3\" title=\"Advances in Computer Chess 3\">Advances in Computer Chess 3</a></li>\n<li> <a href=\"/Ivan_Bratko\" title=\"Ivan Bratko\">Ivan Bratko</a>, <a href=\"/Danny_Kopec\" title=\"Danny Kopec\">Danny Kopec</a> (<b>1982</b>). <i>A Test for Comparison of Human and Computer Performance in Chess.</i> <a href=\"/Advances_in_Computer_Chess_3\" title=\"Advances in Computer Chess 3\">Advances in Computer Chess 3</a></li>\n<li> <a href=\"/Danny_Kopec\" title=\"Danny Kopec\">Danny Kopec</a>, <a href=\"/Ivan_Bratko\" title=\"Ivan Bratko\">Ivan Bratko</a> (<b>1982</b>). <i>The Bratko-Kopec experiment: a comparison of human and computer performance in chess</i>. <a href=\"/Advances_in_Computer_Chess_3\" title=\"Advances in Computer Chess 3\">Advances in Computer Chess 3</a></li>\n<li> <a href=\"/Danny_Kopec\" title=\"Danny Kopec\">Danny Kopec</a>, <a href=\"/Enrique_Irazoqui\" title=\"Enrique Irazoqui\">Enrique Irazoqui</a>, <a href=\"/Ivan_Bratko\" title=\"Ivan Bratko\">Ivan Bratko</a> (<b>1983</b>). <i>The Updated Bratko-Kopec Test.</i> <a href=\"/Computer_Chess_Reports\" title=\"Computer Chess Reports\">Computer Chess Digest Annual</a> pp. 45-63</li>\n<li> <a href=\"/Alexander_Szabo\" title=\"Alexander Szabo\">Alexander Szabo</a> (<b>1984</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://circle.ubc.ca/handle/2429/24780\">Computer-Chess Tactics and Strategy</a></i>. M.Sc. Thesis, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/University_of_British_Columbia\">University of British Columbia</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://circle.ubc.ca/bitstream/handle/2429/24780/UBC_1984_A6_7%20S98.pdf?sequence=1\">pdf</a></li>\n<li> <a href=\"/G%C3%B6ran_Grottling\" title=\"Göran Grottling\">Göran Grottling</a> (<b>1984</b>). <i>The Truth about their Strength</i>. <a href=\"/ICGA_Journal#7_4\" title=\"ICGA Journal\">ICCA Journal, Vol. 7, No. 4</a></li>\n<li> <a href=\"/G%C3%B6ran_Grottling\" title=\"Göran Grottling\">Göran Grottling</a> (<b>1985</b>). <i>How to Bracket the Truth in Playing Strength</i>. <a href=\"/ICGA_Journal#8_1\" title=\"ICGA Journal\">ICCA Journal, Vol. 8, No. 1</a> </li>\n<li> <a href=\"/Monroe_Newborn\" title=\"Monroe Newborn\">Monroe Newborn</a> (<b>1985</b>). <i>A Hypothesis Concerning the Strength of Chess Programs</i>. <a href=\"/ICGA_Journal#8_4\" title=\"ICGA Journal\">ICCA Journal, Vol. 8, No. 4</a></li>\n<li> <a href=\"/Peter_W._Frey\" title=\"Peter W. Frey\">Peter W. Frey</a> (<b>1986</b>). <i>Algorithmic Strategies for Improving the Performance of Game-Playing Programs</i>. In <a href=\"/Mathematician#JDFarmer\" title=\"Mathematician\">J. Doyne Farmer</a>, <a href=\"/Mathematician#AlanLapedes\" title=\"Mathematician\">Alan Lapedes</a>, <a href=\"/Mathematician#NHPackard\" title=\"Mathematician\">Norman Packard</a>, <a href=\"/Burton_Wendroff\" title=\"Burton Wendroff\">Burton Wendroff</a> (Ed.) (<b>1986</b>). <i>Evolution, Games and Learning: Models for Adaptation in Machines and Nature</i>. Proceedings of the Fifth Annual International Conference of the Center, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Elsevier\">Elsevier</a></li>\n<li> <a href=\"/Alexander_Szabo\" title=\"Alexander Szabo\">Alexander Szabo</a>, <a href=\"/Barbara_Szabo\" title=\"Barbara Szabo\">Barbara Szabo</a> (<b>1988</b>). <i>The Technology Curve Revisited</i>. <a href=\"/ICGA_Journal#11_1\" title=\"ICGA Journal\">ICCA Journal, Vol. 11, No. 1</a></li>\n<li> <a href=\"/Hans_Berliner\" title=\"Hans Berliner\">Hans Berliner</a>, <a href=\"/Gordon_Goetsch\" title=\"Gordon Goetsch\">Gordon Goetsch</a>, <a href=\"/Murray_Campbell\" title=\"Murray Campbell\">Murray Campbell</a>, <a href=\"/Carl_Ebeling\" title=\"Carl Ebeling\">Carl Ebeling</a> (<b>1989</b>). <i>Measuring the Performance Potential of Chess Programs</i>. <a href=\"/Advances_in_Computer_Chess_5\" title=\"Advances in Computer Chess 5\">Advances in Computer Chess 5</a></li>\n<li> <a href=\"/Eric_Hallsworth\" title=\"Eric Hallsworth\">Eric Hallsworth</a> (<b>1989</b>). <i>Playing Levels</i>. <a href=\"/Selective_Search\" title=\"Selective Search\">Computer Chess News Sheet</a> 23, pp 2, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.chesscomputeruk.com/SS_23.pdf\">pdf</a> hosted by <a href=\"/Mike_Watters\" title=\"Mike Watters\">Mike Watters</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1990_...\">1990 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Playing_Strength&amp;action=edit&amp;section=8\" title=\"Edit section: 1990 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Hans_Berliner\" title=\"Hans Berliner\">Hans Berliner</a>, <a href=\"/Gordon_Goetsch\" title=\"Gordon Goetsch\">Gordon Goetsch</a>, <a href=\"/Murray_Campbell\" title=\"Murray Campbell\">Murray Campbell</a>, <a href=\"/Carl_Ebeling\" title=\"Carl Ebeling\">Carl Ebeling</a> (<b>1990</b>). <i>Measuring the Performance Potential of Chess Programs.</i> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_%28journal%29\">Artificial Intelligence</a>, Vol. 43, No. 1</li>\n<li> <a href=\"/Eric_Hallsworth\" title=\"Eric Hallsworth\">Eric Hallsworth</a> (<b>1990</b>). <i>Speed, Processors and Ratings</i>. <a href=\"/Selective_Search\" title=\"Selective Search\">Computer Chess News Sheet</a> 25, pp 6, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.chesscomputeruk.com/SS_25.pdf\">pdf</a> hosted by <a href=\"/Mike_Watters\" title=\"Mike Watters\">Mike Watters</a></li>\n<li> <a href=\"/Hans_Berliner\" title=\"Hans Berliner\">Hans Berliner</a>, <a href=\"/Danny_Kopec\" title=\"Danny Kopec\">Danny Kopec</a>, <a href=\"/Ed_Northam\" title=\"Ed Northam\">Ed Northam</a> (<b>1991</b>). <i>A taxonomy of concepts for evaluating chess strength: examples from two difficult categories</i>. <a href=\"/Advances_in_Computer_Chess_6\" title=\"Advances in Computer Chess 6\">Advances in Computer Chess 6</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.sci.brooklyn.cuny.edu/%7Ekopec/Publications/Publications/O_20_C.pdf\">pdf</a></li>\n<li> <a href=\"/Steve_Maughan\" title=\"Steve Maughan\">Steve Maughan</a> (<b>1992</b>). <i>Are You Sure It's Better?</i> <a href=\"/Selective_Search\" title=\"Selective Search\">Selective Search</a> 40, pp. 21, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.chesscomputeruk.com/SS_40.pdf\">pdf</a> hosted by <a href=\"/Mike_Watters\" title=\"Mike Watters\">Mike Watters</a></li>\n<li> <a href=\"/Warren_D._Smith\" title=\"Warren D. Smith\">Warren D. Smith</a> (<b>1993</b>). <i>Rating Systems for Gameplayers, and Learning</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://scorevoting.net/WarrenSmithPages/homepage/ratingspap.ps\">ps</a></li>\n<li> <a href=\"/index.php?title=Luis_Antunes&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Luis Antunes (page does not exist)\">Luis Antunes</a>, <a href=\"/index.php?title=Luis_Moniz&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Luis Moniz (page does not exist)\">Luis Moniz</a>, <a href=\"/index.php?title=Carlos_Azevedo&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Carlos Azevedo (page does not exist)\">Carlos Azevedo</a> (<b>1993</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.semanticscholar.org/paper/Rb-the-Dynamic-Estimation-of-the-Opponent-s-Antunes-Moniz/4844e9d1694f61d4052a87de94c4aeb2510c2404\">Rb+: the Dynamic Estimation of the Opponent's Strength</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/INESC-ID\">INESC-ID</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Lisbon\">Lisbon</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Portugal\">Portugal</a>&#160;» <a href=\"/Opponent_Model_Search#RB\" title=\"Opponent Model Search\">RB</a></li>\n<li> <a href=\"/index.php?title=Mark_E._Glickman&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Mark E. Glickman (page does not exist)\">Mark E. Glickman</a> (<b>1993</b>). <i>Paired Comparison Models with Time Varying Parameters</i>. Ph.D. thesis, <a href=\"/Harvard_University\" title=\"Harvard University\">Harvard University</a>, advisor <a href=\"/Mathematician#HSStern\" title=\"Mathematician\">Hal Stern</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.glicko.net/research/thesis.pdf\">pdf</a></li>\n<li> <a href=\"/index.php?title=Mark_E._Glickman&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Mark E. Glickman (page does not exist)\">Mark E. Glickman</a> (<b>1995</b>). <i>A Comprehensive Guide To Chess Ratings</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.glicko.net/research/acjpaper.pdf\">pdf</a></li>\n<li> <a href=\"/index.php?title=Mark_E._Glickman&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Mark E. Glickman (page does not exist)\">Mark E. Glickman</a>, <a href=\"/Christopher_Chabris\" title=\"Christopher Chabris\">Christopher Chabris</a> (<b>1996</b>). <i>Using Chess Ratings as Data in Psychological Research</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://pdfs.semanticscholar.org/1ffd/3432f56476f0047426b37f7f433f5a6575b0.pdf\">pdf</a></li>\n<li> <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/Monroe_Newborn\" title=\"Monroe Newborn\">Monroe Newborn</a> (<b>1997</b>). <i>CRAFTY Goes Deep</i>. <a href=\"/ICGA_Journal#20_2\" title=\"ICGA Journal\">ICCA Journal, Vol. 20, No. 2</a>&#160;» <a href=\"/Crafty\" title=\"Crafty\">Crafty</a></li>\n<li> <a href=\"/index.php?title=Mark_E._Glickman&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Mark E. Glickman (page does not exist)\">Mark E. Glickman</a>, <a href=\"/Mathematician#ACJones\" title=\"Mathematician\">Albyn C. Jones</a> (<b>1999</b>). <i>Rating the Chess Rating System</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.glicko.net/research/chance.pdf\">pdf</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Playing_Strength&amp;action=edit&amp;section=9\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Ernst_A._Heinz\" title=\"Ernst A. Heinz\">Ernst A. Heinz</a> (<b>2000</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/chapter/10.1007/3-540-45579-5_18\">New Self-Play Results in Computer Chess</a></i>. <a href=\"/CG_2000\" title=\"CG 2000\">CG 2000</a></li>\n<li> <a href=\"/Ernst_A._Heinz\" title=\"Ernst A. Heinz\">Ernst A. Heinz</a> (<b>2001</b>). <i>Self-play Experiments in Computer Chess Revisited.</i> <a href=\"/Advances_in_Computer_Games_9\" title=\"Advances in Computer Games 9\">Advances in Computer Games 9</a></li>\n<li> <a href=\"/Ernst_A._Heinz\" title=\"Ernst A. Heinz\">Ernst A. Heinz</a> (<b>2001</b>). <i>Modeling the “Go Deep” Behaviour of CRAFTY and DARK THOUGHT.</i> <a href=\"/Advances_in_Computer_Games_9\" title=\"Advances in Computer Games 9\">Advances in Computer Games 9</a>&#160;» <a href=\"/Crafty\" title=\"Crafty\">Crafty</a>, <a href=\"/index.php?title=Dark_Thought&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Dark Thought (page does not exist)\">Dark Thought</a></li>\n<li> <a href=\"/Ernst_A._Heinz\" title=\"Ernst A. Heinz\">Ernst A. Heinz</a> (<b>2001</b>). <i>Self-Play, Deep Search and Diminishing Returns.</i> <a href=\"/ICGA_Journal#24_2\" title=\"ICGA Journal\">ICGA Journal, Vol. 24, No. 2</a></li>\n<li> <a href=\"/Guy_Haworth\" title=\"Guy Haworth\">Guy Haworth</a> (<b>2002</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://centaur.reading.ac.uk/5952/\">Self-play: Statistical Significance</a></i>. <a href=\"/7th_Computer_Olympiad#Workshop\" title=\"7th Computer Olympiad\">7th Computer Olympiad Workshop</a></li>\n<li> <a href=\"/Guy_Haworth\" title=\"Guy Haworth\">Guy Haworth</a> (<b>2002</b>). <i>Reference Fallible Endgame Play</i>. <a href=\"/7th_Computer_Olympiad#Workshop\" title=\"7th Computer Olympiad\">7th Computer Olympiad Workshop</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://centaur.reading.ac.uk/4579/1/2002c_CoW7_H_Reference_Fallible_Endgame_Play.pdf\">pdf</a></li>\n<li> <a href=\"/Guy_Haworth\" title=\"Guy Haworth\">Guy Haworth</a> (<b>2003</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://centaur.reading.ac.uk/4549/\">Self-Play: Statistical Significance</a></i>. <a href=\"/ICGA_Journal#26_2\" title=\"ICGA Journal\">ICGA Journal, Vol. 26, No. 2</a></li>\n<li> <a href=\"/Ernst_A._Heinz\" title=\"Ernst A. Heinz\">Ernst A. Heinz</a> (<b>2003</b>). <i>Follow-Up on Self-Play, Deep Search, and Diminishing Returns.</i> <a href=\"/ICGA_Journal#26_2\" title=\"ICGA Journal\">ICGA Journal, Vol. 26, No. 2</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2005_...\">2005 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Playing_Strength&amp;action=edit&amp;section=10\" title=\"Edit section: 2005 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Jan_Renze_Steenhuisen\" title=\"Jan Renze Steenhuisen\">Jan Renze Steenhuisen</a> (<b>2005</b>). <i>New Results in Deep-Search Behaviour</i>.  <a href=\"/ICGA_Journal#28_4\" title=\"ICGA Journal\">ICGA Journal, Vol. 28, No. 4</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.104.9527\">CiteSeerX</a></li>\n<li> <a href=\"/Matej_Guid\" title=\"Matej Guid\">Matej Guid</a>, <a href=\"/Ivan_Bratko\" title=\"Ivan Bratko\">Ivan Bratko</a> (<b>2006</b>). <i>Computer Analysis of World Chess Champions</i>. <a href=\"/ICGA_Journal#29_2\" title=\"ICGA Journal\">ICGA Journal, Vol. 29, No. 2</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.ailab.si/matej/doc/Computer_Analysis_of_World_Chess_Champions.pdf\">pdf</a> <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup><sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup></li>\n<li> <a href=\"/Matej_Guid\" title=\"Matej Guid\">Matej Guid</a>, <a href=\"/Ivan_Bratko\" title=\"Ivan Bratko\">Ivan Bratko</a> (<b>2006</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/chapter/10.1007/978-3-540-75538-8_1\">Computer Analysis of Chess Champions</a></i>. <a href=\"/CG_2006\" title=\"CG 2006\">CG 2006</a></li>\n<li> <a href=\"/Matej_Guid\" title=\"Matej Guid\">Matej Guid</a>, <a href=\"/Ivan_Bratko\" title=\"Ivan Bratko\">Ivan Bratko</a> (<b>2007</b>). <i>Factors affecting diminishing returns for searching deeper</i>. <a href=\"/CGW_2007\" title=\"CGW 2007\">CGW 2007</a>&#160;» <a href=\"/Crafty\" title=\"Crafty\">Crafty</a>, <a href=\"/Rybka\" title=\"Rybka\">Rybka</a>, <a href=\"/Shredder\" title=\"Shredder\">Shredder</a>, <a href=\"/Depth#DiminishingReturns\" title=\"Depth\">Diminishing Returns</a></li>\n<li> <a href=\"/Shogo_Takeuchi\" title=\"Shogo Takeuchi\">Shogo Takeuchi</a>, <a href=\"/Tomoyuki_Kaneko\" title=\"Tomoyuki Kaneko\">Tomoyuki Kaneko</a>, <a href=\"/Kazunori_Yamaguchi\" title=\"Kazunori Yamaguchi\">Kazunori Yamaguchi</a>, <a href=\"/Satoru_Kawai\" title=\"Satoru Kawai\">Satoru Kawai</a> (<b>2007</b>). <i>Visualization and Adjustment of Evaluation Functions Based on Evaluation Values and Win Probability</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/conf/aaai/aaai2007.html\">AAAI 2007</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://www.aaai.org/Papers/AAAI/2007/AAAI07-136.pdf\">pdf</a></li>\n<li> <a href=\"/Matej_Guid\" title=\"Matej Guid\">Matej Guid</a>, <a href=\"/Ivan_Bratko\" title=\"Ivan Bratko\">Ivan Bratko</a> (<b>2007</b>). <i>Factors affecting diminishing returns for searching deeper</i>. <a href=\"/ICGA_Journal#30_2\" title=\"ICGA Journal\">ICGA Journal, Vol. 30, No. 2</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.ailab.si/matej/doc/Factors_Affecting_Diminishing_Returns.pdf\">pdf</a> </li>\n<li> <a href=\"/Matej_Guid\" title=\"Matej Guid\">Matej Guid</a>, <a href=\"/Aritz_P%C3%A9rez\" title=\"Aritz Pérez\">Aritz Pérez</a>, <a href=\"/Ivan_Bratko\" title=\"Ivan Bratko\">Ivan Bratko</a> (<b>2007</b>). <i>How trustworthy is Crafty's analysis of world chess champions</i>? <a href=\"/CGW_2007\" title=\"CGW 2007\">CGW 2007</a>&#160;» <a href=\"/Crafty\" title=\"Crafty\">Crafty</a></li>\n<li> <a href=\"/Matej_Guid\" title=\"Matej Guid\">Matej Guid</a>, <a href=\"/Aritz_P%C3%A9rez\" title=\"Aritz Pérez\">Aritz Pérez</a>, <a href=\"/Ivan_Bratko\" title=\"Ivan Bratko\">Ivan Bratko</a> (<b>2008</b>). <i>How trustworthy is Crafty's analysis of world chess champions</i>? <a href=\"/ICGA_Journal#31_3\" title=\"ICGA Journal\">ICGA Journal, Vol. 31, No. 3</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.ailab.si/matej/doc/How_Trustworthy_is_Craftys_Analysis.pdf\">pdf</a></li>\n<li> <a href=\"/R%C3%A9mi_Coulom\" title=\"Rémi Coulom\">Rémi Coulom</a> (<b>2008</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/chapter/10.1007/978-3-540-87608-3_11\">Whole-History Rating: A Bayesian Rating System for Players of Time-Varying Strength</a></i>. <a href=\"/CG_2008\" title=\"CG 2008\">CG 2008</a></li>\n<li> <a href=\"/index.php?title=Giuseppe_Di_Fatta&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Giuseppe Di Fatta (page does not exist)\">Giuseppe Di Fatta</a>, <a href=\"/Guy_Haworth\" title=\"Guy Haworth\">Guy McCrossan Haworth</a>, <a href=\"/Kenneth_W._Regan\" title=\"Kenneth W. Regan\">Kenneth W. Regan</a> (<b>2009</b>). <i>Skill Rating by Bayesian Inference</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/conf/cidm/cidm2009.html\">CIDM 2009</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cse.buffalo.edu/~regan/papers/pdf/DFHR09.pdf\">pdf</a> <sup id=\"cite_ref-9\" class=\"reference\"><a href=\"#cite_note-9\">&#91;9&#93;</a></sup></li>\n<li> <a href=\"/Guy_Haworth\" title=\"Guy Haworth\">Guy McCrossan Haworth</a>, <a href=\"/Kenneth_W._Regan\" title=\"Kenneth W. Regan\">Kenneth W. Regan</a>, <a href=\"/index.php?title=Giuseppe_Di_Fatta&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Giuseppe Di Fatta (page does not exist)\">Giuseppe Di Fatta</a> (<b>2009</b>). <i>Performance and Prediction: Bayesian Modelling of Fallible Choice in Chess</i>. <a href=\"/Advances_in_Computer_Games_12\" title=\"Advances in Computer Games 12\">Advances in Computer Games 12</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cse.buffalo.edu/faculty/regan/papers/pdf/HRdF10.pdf\">pdf</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Playing_Strength&amp;action=edit&amp;section=11\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Diogo_R._Ferreira\" title=\"Diogo R. Ferreira\">Diogo R. Ferreira</a> (<b>2010</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://web.ist.utl.pt/diogo.ferreira/chess/\">Predicting the Outcome of Chess Games based on Historical Data</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Instituto_Superior_T%C3%A9cnico\">IST</a> - <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Technical_University_of_Lisbon\">Technical University of Lisbon</a> <sup id=\"cite_ref-10\" class=\"reference\"><a href=\"#cite_note-10\">&#91;10&#93;</a></sup></li>\n<li> <a href=\"/Matej_Guid\" title=\"Matej Guid\">Matej Guid</a> (<b>2010</b>). <i>Search and Knowledge for Human and Machine Problem Solving</i>. Ph.D. thesis, <a href=\"/University_of_Ljubljana\" title=\"University of Ljubljana\">University of Ljubljana</a></li>\n<li> <a href=\"/Kenneth_W._Regan\" title=\"Kenneth W. Regan\">Kenneth W. Regan</a>, <a href=\"/Guy_Haworth\" title=\"Guy Haworth\">Guy Haworth</a> (<b>2011</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.aaai.org/ocs/index.php/AAAI/AAAI11/paper/view/3779\">Intrinsic Chess Ratings</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/%7Eley/db/conf/aaai/aaai2011.html#ReganH11\">AAAI 2011</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.aaai.org/ocs/index.php/AAAI/AAAI11/paper/view/3779/3962\">pdf</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cse.buffalo.edu/%7Eregan/Talks/IntrinsicRatings.pdf\">slides as pdf</a> <sup id=\"cite_ref-11\" class=\"reference\"><a href=\"#cite_note-11\">&#91;11&#93;</a></sup></li>\n<li> <a href=\"/Kenneth_W._Regan\" title=\"Kenneth W. Regan\">Kenneth W. Regan</a>, <a href=\"/index.php?title=Bart%C5%82omiej_Macieja&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Bartłomiej Macieja (page does not exist)\">Bartłomiej Macieja</a>, <a href=\"/Guy_Haworth\" title=\"Guy Haworth\">Guy McCrossan Haworth</a> (<b>2011</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://centaur.reading.ac.uk/23800/\">Understanding Distributions of Chess Performances</a></i>. <a href=\"/Advances_in_Computer_Games_13\" title=\"Advances in Computer Games 13\">Advances in Computer Games 13</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cse.buffalo.edu/~regan/papers/pdf/RMH11.pdf\">pdf</a></li>\n<li> <a href=\"/Trevor_Fenner\" title=\"Trevor Fenner\">Trevor Fenner</a>, <a href=\"/Mark_Levene\" title=\"Mark Levene\">Mark Levene</a>, <a href=\"/Mathematician#GLoizou\" title=\"Mathematician\">George Loizou</a> (<b>2011</b>). <i>A Discrete Evolutionary Model for Chess Players' Ratings</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1103.1530\">arXiv:1103.1530</a></li>\n<li> <a href=\"/Matej_Guid\" title=\"Matej Guid\">Matej Guid</a>, <a href=\"/Ivan_Bratko\" title=\"Ivan Bratko\">Ivan Bratko</a> (<b>2011</b>). <i>Using Heuristic-Search Based Engines for Estimating Human Skill at Chess</i>. <a href=\"/ICGA_Journal#34_2\" title=\"ICGA Journal\">ICGA Journal, Vol. 34, No. 2</a></li>\n<li> <a href=\"/Diogo_R._Ferreira\" title=\"Diogo R. Ferreira\">Diogo R. Ferreira</a> (<b>2012</b>). <i>Determining the Strength of Chess Players based on actual Play</i>. <a href=\"/ICGA_Journal#35_1\" title=\"ICGA Journal\">ICGA Journal, Vol. 35, No. 1</a></li>\n<li> <a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel Shawul</a>, <a href=\"/R%C3%A9mi_Coulom\" title=\"Rémi Coulom\">Rémi Coulom</a> (<b>2013</b>). <i>Paired Comparisons with Ties: Modeling Game Outcomes in Chess</i>.  <sup id=\"cite_ref-12\" class=\"reference\"><a href=\"#cite_note-12\">&#91;12&#93;</a></sup> <sup id=\"cite_ref-13\" class=\"reference\"><a href=\"#cite_note-13\">&#91;13&#93;</a></sup> </li>\n<li> <a href=\"/Diogo_R._Ferreira\" title=\"Diogo R. Ferreira\">Diogo R. Ferreira</a> (<b>2013</b>). <i>The Impact of the Search Depth on Chess Playing Strength</i>. <a href=\"/ICGA_Journal#36_2\" title=\"ICGA Journal\">ICGA Journal, Vol. 36, No. 2</a>&#160;» <a href=\"/Depth\" title=\"Depth\">Depth</a>, <a href=\"/Depth#DiminishingReturns\" title=\"Depth\">Diminishing Returns</a>, <a href=\"/Match_Statistics\" title=\"Match Statistics\">Match Statistics</a>, <a href=\"/Houdini\" title=\"Houdini\">Houdini</a> <sup id=\"cite_ref-14\" class=\"reference\"><a href=\"#cite_note-14\">&#91;14&#93;</a></sup></li>\n<li> <a href=\"/Yoshikuni_Sato\" title=\"Yoshikuni Sato\">Yoshikuni Sato</a>, <a href=\"/Makoto_Miwa\" title=\"Makoto Miwa\">Makoto Miwa</a>, <a href=\"/Shogo_Takeuchi\" title=\"Shogo Takeuchi\">Shogo Takeuchi</a>, <a href=\"/Daisuke_Takahashi\" title=\"Daisuke Takahashi\">Daisuke Takahashi</a> (<b>2013</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.aaai.org/ocs/index.php/AAAI/AAAI13/paper/view/6402\">Optimizing Objective Function Parameters for Strength in Computer Game-Playing</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/conf/aaai/aaai2013.html#SatoMTT13\">AAAI 2013</a></li>\n<li> <a href=\"/index.php?title=Erik_Varend&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Erik Varend (page does not exist)\">Erik Varend</a> (<b>2014</b>). <i>Quality of play in chess and methods for measuring</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.chessanalysis.ee/Quality%20of%20play%20in%20chess%20and%20methods%20for%20measuring.pdf\">pdf</a> <sup id=\"cite_ref-15\" class=\"reference\"><a href=\"#cite_note-15\">&#91;15&#93;</a></sup> <sup id=\"cite_ref-16\" class=\"reference\"><a href=\"#cite_note-16\">&#91;16&#93;</a></sup></li></ul>\n<h2><span class=\"mw-headline\" id=\"2015_...\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Playing_Strength&amp;action=edit&amp;section=12\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/index.php?title=Marie-Liesse_Cauwet&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Marie-Liesse Cauwet (page does not exist)\">Marie-Liesse Cauwet</a>, <a href=\"/Olivier_Teytaud\" title=\"Olivier Teytaud\">Olivier Teytaud</a>, <a href=\"/index.php?title=Hua-Min_Liang&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Hua-Min Liang (page does not exist)\">Hua-Min Liang</a>, <a href=\"/Shi-Jim_Yen\" title=\"Shi-Jim Yen\">Shi-Jim Yen</a>, <a href=\"/Hung-Hsuan_Lin\" title=\"Hung-Hsuan Lin\">Hung-Hsuan Lin</a>, <a href=\"/I-Chen_Wu\" title=\"I-Chen Wu\">I-Chen Wu</a>, <a href=\"/Tristan_Cazenave\" title=\"Tristan Cazenave\">Tristan Cazenave</a>, <a href=\"/Abdallah_Saffidine\" title=\"Abdallah Saffidine\">Abdallah Saffidine</a> (<b>2015</b>). <i>Depth, balancing, and limits of the Elo model</i>. <a href=\"/IEEE#CIG\" title=\"IEEE\">IEEE Conference on Computational Intelligence and Games</a> 2015, <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1511.02006\">arXiv:1511.02006</a></li>\n<li> <a href=\"/Shogo_Takeuchi\" title=\"Shogo Takeuchi\">Shogo Takeuchi</a>, <a href=\"/Tomoyuki_Kaneko\" title=\"Tomoyuki Kaneko\">Tomoyuki Kaneko</a> (<b>2015</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=7336038\">Estimating Ratings of Computer Players by the Evaluation Scores and Principal Variations in Shogi</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://ieeexplore.ieee.org/xpl/mostRecentIssue.jsp?punumber=7335993\">ACIT-CSI</a></li>\n<li> <a href=\"/Guy_Haworth\" title=\"Guy Haworth\">Guy Haworth</a>, <a href=\"/Tamal_T._Biswas\" title=\"Tamal T. Biswas\">Tamal T. Biswas</a>, <a href=\"/Kenneth_W._Regan\" title=\"Kenneth W. Regan\">Kenneth W. Regan</a> (<b>2015</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://centaur.reading.ac.uk/39431/\">A Comparative Review of Skill Assessment: Performance, Prediction and Profiling</a></i>. <a href=\"/Advances_in_Computer_Games_14\" title=\"Advances in Computer Games 14\">Advances in Computer Games 14</a></li>\n<li> <a href=\"/Chu-Hsuan_Hsueh\" title=\"Chu-Hsuan Hsueh\">Chu-Hsuan Hsueh</a>, <a href=\"/I-Chen_Wu\" title=\"I-Chen Wu\">I-Chen Wu</a>, <a href=\"/Wen-Jie_Tseng\" title=\"Wen-Jie Tseng\">Wen-Jie Tseng</a>, <a href=\"/Shi-Jim_Yen\" title=\"Shi-Jim Yen\">Shi-Jim Yen</a>, <a href=\"/Jr-Chang_Chen\" title=\"Jr-Chang Chen\">Jr-Chang Chen</a> (<b>2015</b>). <i>Strength Improvement and Analysis for an MCTS-Based Chinese Dark Chess Program</i>. <a href=\"/Advances_in_Computer_Games_14\" title=\"Advances in Computer Games 14\">Advances in Computer Games 14</a></li>\n<li> <a href=\"/Ashton_Anderson\" title=\"Ashton Anderson\">Ashton Anderson</a>, <a href=\"/Jon_Kleinberg\" title=\"Jon Kleinberg\">Jon Kleinberg</a>, <a href=\"/index.php?title=Sendhil_Mullainathan&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Sendhil Mullainathan (page does not exist)\">Sendhil Mullainathan</a> (<b>2016</b>). <i>Assessing Human Error Against a Benchmark of Perfection</i>. <a href=\"/ACM#SIGKDD\" title=\"ACM\">ACM SIGKDD 2016</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1606.04956\">arXiv:1606.04956</a></li>\n<li> <a href=\"/Jean-Marc_Alliot\" title=\"Jean-Marc Alliot\">Jean-Marc Alliot</a> (<b>2017</b>). <i>Who is the Master</i>? <a href=\"/ICGA_Journal#39_1\" title=\"ICGA Journal\">ICGA Journal, Vol. 39, No. 1</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.alliot.fr/CHESS/draft-icga-39-1.pdf\">draft as pdf</a>&#160;» <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a>, <a href=\"/Jean-Marc_Alliot#WhoistheMaster\" title=\"Jean-Marc Alliot\">Who is the Master?</a></li>\n<li> <a href=\"/Ashton_Anderson\" title=\"Ashton Anderson\">Ashton Anderson</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://scholar.google.com/citations?user=l480S2EAAAAJ&amp;hl=en\">Etan A. Green</a> (<b>2018</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.pnas.org/content/115/8/1772\">Personal bests as reference points</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Proceedings_of_the_National_Academy_of_Sciences_of_the_United_States_of_America\">PNAS</a>, Vol. 115, No. 8 <sup id=\"cite_ref-17\" class=\"reference\"><a href=\"#cite_note-17\">&#91;17&#93;</a></sup></li>\n<li> <a href=\"/index.php?title=Takafumi_Nakamichi&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Takafumi Nakamichi (page does not exist)\">Takafumi Nakamichi</a>, <a href=\"/Takeshi_Ito\" title=\"Takeshi Ito\">Takeshi Ito</a> (<b>2018</b>). <i>Adjusting the evaluation function for weakening the competency level of a computer shogi program</i>. <a href=\"/ICGA_Journal#40_1\" title=\"ICGA Journal\">ICGA Journal, Vol. 40, No. 1</a></li>\n<li> <a href=\"/Chu-Hsuan_Hsueh\" title=\"Chu-Hsuan Hsueh\">Chu-Hsuan Hsueh</a>, <a href=\"/I-Chen_Wu\" title=\"I-Chen Wu\">I-Chen Wu</a>, <a href=\"/Tsan-sheng_Hsu\" title=\"Tsan-sheng Hsu\">Tsan-sheng Hsu</a>, <a href=\"/Jr-Chang_Chen\" title=\"Jr-Chang Chen\">Jr-Chang Chen</a> (<b>2018</b>). <i>An investigation of strength analysis metrics for game-playing programs: A case study in Chinese dark chess</i>. <a href=\"/ICGA_Journal#40_2\" title=\"ICGA Journal\">ICGA Journal, Vol. 40, No. 2</a>&#160;» <a href=\"/Chinese_Dark_Chess\" title=\"Chinese Dark Chess\">Chinese Dark Chess</a></li>\n<li> <a href=\"/index.php?title=Yuuto_Kosaka&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Yuuto Kosaka (page does not exist)\">Yuuto Kosaka</a>, <a href=\"/Takeshi_Ito\" title=\"Takeshi Ito\">Takeshi Ito</a> (<b>2018</b>). <i>Examination of Indicators for Estimating Players’ Strength by using Computer Go</i>. <a href=\"/TAAI_2018\" title=\"TAAI 2018\">TAAI 2018</a></li>\n<li> <a href=\"/index.php?title=Leszek_Szczecinski&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Leszek Szczecinski (page does not exist)\">Leszek Szczecinski</a>, <a href=\"/index.php?title=Aymen_Djebbi&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Aymen Djebbi (page does not exist)\">Aymen Djebbi</a> (<b>2019</b>). <i>Understanding and Pushing the Limits of the Elo Rating Algorithm</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1910.06081\">arXiv:1910.06081</a> <sup id=\"cite_ref-18\" class=\"reference\"><a href=\"#cite_note-18\">&#91;18&#93;</a></sup></li></ul>\n<h1><span class=\"mw-headline\" id=\"Postings\">Postings</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Playing_Strength&amp;action=edit&amp;section=13\" title=\"Edit section: Postings\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1982_...\">1982 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Playing_Strength&amp;action=edit&amp;section=14\" title=\"Edit section: 1982 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://quux.org:70/Archives/usenet-a-news/NET.chess/82.01.07_alice.349_net.chess.txt\">chess strength</a> by <a href=\"/Ken_Thompson\" title=\"Ken Thompson\">Ken Thompson</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://quux.org:70/Archives/usenet-a-news/NET.chess\">net.chess</a>, January 7, 1982&#160;» <a href=\"/Depth#DiminishingReturns\" title=\"Depth\">Depth | Diminishing Returns</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1990_..._2\">1990 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Playing_Strength&amp;action=edit&amp;section=15\" title=\"Edit section: 1990 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess/Qe_5lhAWTsc/Uj9UNvUrb0AJ\">Weakest Chess Program needed</a> by Jones Maxime Murphy, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgc</a>, November 12, 1991</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess/qH7LeruGk7E/J1fuNeXx2eMJ\">Estimating Playing Strength of Computers (was: Re: Rating of Radio Shack 1650)</a> by Peter Marko, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgc</a>, September 15, 1992&#160;» <a href=\"/SciSys_Explorer\" title=\"SciSys Explorer\">SciSys Explorer</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess/clI1kBtbGJM/Izx6gGvPIzEJ\">Rating boundaries</a> by Kevin Stokker, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgc</a>, January 14, 1993</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess/0Ml8HZYzFVQ/0As11AGu8KMJ\">Cognitive Psychology and Chess Skill</a> by John Rummel, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgc</a>, June 07, 1994&#160;» <a href=\"/Cognition\" title=\"Cognition\">Cognition</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1995_...\">1995 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Playing_Strength&amp;action=edit&amp;section=16\" title=\"Edit section: 1995 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess/2EHwLFQzeWE/cfNfLEYkLacJ\">Computer Strength</a> by Christopher Dorr, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, May 22, 1995</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess/NXEDz2iTbRc/k6uH2zBMmxMJ\">Primitive Chess Program</a> by David Ewart, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgc</a>, June 09, 1995</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess/ENWDInLp9yQ/JF9dKASgAOYJ\">Rating of perfect chess</a> by an18...@anon.penet.fi, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgc</a>, July 17, 1995</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/GkgFc3jOl84/vWn-SG8kVboJ\">Theoretical chess rating question...</a> by Cyber Linguist, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, April 17, 1996</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/3014e4ea570dbf38\">Statistical validity of medium-length match results</a> by <a href=\"/Bruce_Moreland\" title=\"Bruce Moreland\">Bruce Moreland</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, February 15, 1997</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=52542\">ELO performance?</a> by <a href=\"/Stefan_Meyer-Kahlen\" title=\"Stefan Meyer-Kahlen\">Stefan Meyer-Kahlen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 22, 1999&#160;» <a href=\"/Match_Statistics\" title=\"Match Statistics\">Match Statistics</a>, <a href=\"/Pawn_Advantage,_Win_Percentage,_and_Elo\" title=\"Pawn Advantage, Win Percentage, and Elo\">Pawn Advantage, Win Percentage, and Elo</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=69215\">from \"Scacco\": No steps forward in Computer Chess in the Last years&#160;!?</a> by <a href=\"/Gianluigi_Masciulli\" title=\"Gianluigi Masciulli\">Gianluigi Masciulli</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 18, 1999</li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_..._2\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Playing_Strength&amp;action=edit&amp;section=17\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=183787\">ELO of the chess programs in the 2010</a> by <a href=\"/Federico_Andr%C3%A9s_Corigliano\" title=\"Federico Andrés Corigliano\">Federico Corigliano</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 15, 2001</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=230488\">Strength of the engine in chess programs</a> by <a href=\"/Rolf_T%C3%BCschen\" title=\"Rolf Tüschen\">Rolf Tueschen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 20, 2002</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=275347\">Value of playing different versions of a program against each other</a> by <a href=\"/Tom_King\" title=\"Tom King\">Tom King</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 06, 2003 &#160;» <a href=\"/Engine_Testing\" title=\"Engine Testing\">Engine Testing</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=294537\">Rules of thumb for strength estimation?</a> by <a href=\"/Albert_Bertilsson\" title=\"Albert Bertilsson\">Albert Bertilsson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 25, 2003</li></ul>\n<h2><span class=\"mw-headline\" id=\"2005_..._2\">2005 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Playing_Strength&amp;action=edit&amp;section=18\" title=\"Edit section: 2005 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=411278\">bayeselo: new Elo-rating tool, applied to CCT7</a> by <a href=\"/R%C3%A9mi_Coulom\" title=\"Rémi Coulom\">Rémi Coulom</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 13, 2005&#160;» <a href=\"/CCT7\" title=\"CCT7\">CCT7</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=13800\">a beat b,b beat c,c beat a question</a> by <a href=\"/Uri_Blass\" title=\"Uri Blass\">Uri Blass</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 16, 2007</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/computer-go-archive/iZmzbavlbsI/oLGjUFelN3UJ\">A thought about ratings</a> by Dave Dyer, <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/forum/#!forum/computer-go-archive\">Computer Go Archive</a>, December 10, 2007&#160;» <a href=\"/Go\" title=\"Go\">Go</a></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/computer-go-archive/iZmzbavlbsI/1EJf4q2L4HIJ\">Re: A thought about ratings</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/forum/#!forum/computer-go-archive\">Computer Go Archive</a>, December 10, 2007</dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/computer-go-archive/iZmzbavlbsI/Z2AsWFaUu-EJ\">Re: A thought about ratings</a> by <a href=\"/Edward_de_Grijs\" title=\"Edward de Grijs\">Edward de Grijs</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/forum/#!forum/computer-go-archive\">Computer Go Archive</a>, December 10, 2007</dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/computer-go-archive/iZmzbavlbsI/K-5UMaK_CsYJ\">Re: A thought about ratings</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/forum/#!forum/computer-go-archive\">Computer Go Archive</a>, December 10, 2007</dd></dl>\n<p><b>2008</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=21208\">Glaurung Mac OS X: New GUI, now with adjustable strength.</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 18, 2008&#160;» <a href=\"/Glaurung\" title=\"Glaurung\">Glaurung</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=21264\">Artificial stupidity - making a program play badly</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 20, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=22832\">New testing thread</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 07, 2008&#160;» <a href=\"/Engine_Testing\" title=\"Engine Testing\">Engine Testing</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=24590\">Comparing two version of the same engine</a> by <a href=\"/Fermin_Serrano\" title=\"Fermin Serrano\">Fermin Serrano</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 26, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=25215\">Hardware vs Software</a> by <a href=\"/Charles_Roberson\" title=\"Charles Roberson\">Charles Roberson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 02, 2008</li></ul>\n<p><b>2009</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=26817\">Speed/ELO relationship, and question to engine programmers</a> by <a href=\"/Russell_Reagan\" title=\"Russell Reagan\">Russell Reagan</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 02, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=27516\">Elo Calcuation</a> by <a href=\"/Edmund_Moshammer\" title=\"Edmund Moshammer\">Edmund Moshammer</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 19, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=30550\">different kinds of testing</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 09, 2009</li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_..._2\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Playing_Strength&amp;action=edit&amp;section=19\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=33089\">How to reduce playing strenght to play against humans</a> by <a href=\"/Fermin_Serrano\" title=\"Fermin Serrano\">Fermin Serrano</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 05, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=35531\">Current skill command (Crafty) results</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 21, 2010&#160;» <a href=\"/Crafty\" title=\"Crafty\">Crafty</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=36006\">harware vs software advances</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 08, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=36031\">hardware advances - a different perspective</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 09, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=36040\">old crafty vs new crafty on new hardware</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 11, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=36050\">Crafty tests show that Software has advanced more</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 12, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=36059\">Final results - Crafty - hardware vs software</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 13, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=36058\">Deep Blue vs Rybka</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 13, 2010&#160;» <a href=\"/Deep_Blue\" title=\"Deep Blue\">Deep Blue</a>, <a href=\"/Rybka\" title=\"Rybka\">Rybka</a></li></ul>\n<p><b>2011</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=39511\">Ply vs ELO</a> by Andriy Dzyben, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 28, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=41341\">Increase in Elo ..Question For The Experts</a> by <a href=\"/Steve_Blincoe\" title=\"Steve Blincoe\">Steve B</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 05, 2011</li></ul>\n<p><b>2012</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=41732\">StockFish LS with LimitStrength feature</a> by <a href=\"/index.php?title=Alexander_Schmidt&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Alexander Schmidt (page does not exist)\">Alexander Schmidt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 01, 2012&#160;» <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=41902\">Depth vs playing strength</a> by David Whitten, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 09, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=42880\">Reducing Strength</a> by Ted Wong, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 15, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=44219\">Human Elo ratings: averages and standard deviations</a> by <a href=\"/index.php?title=Jes%C3%BAs_Mu%C3%B1oz&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Jesús Muñoz (page does not exist)\">Jesús Muñoz</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 18, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=43134\">Elo versus speed</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 02, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=43323\">Pawn Advantage, Win Percentage, and Elo</a> by <a href=\"/Adam_Hair\" title=\"Adam Hair\">Adam Hair</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 15, 2012&#160;» <a href=\"/Pawn_Advantage,_Win_Percentage,_and_Elo\" title=\"Pawn Advantage, Win Percentage, and Elo\">Pawn Advantage, Win Percentage, and Elo</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=43598\">Elo Increase per Doubling</a> by <a href=\"/Adam_Hair\" title=\"Adam Hair\">Adam Hair</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 07, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=44003\">Rybka odds matches and the strength of engines</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 09, 2012&#160;» <a href=\"/Rybka\" title=\"Rybka\">Rybka</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=45795\">Score Inaccuracy: An Engine Weakening Algorithm</a> by <a href=\"/Erik_Madsen\" title=\"Erik Madsen\">Erik Madsen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 31, 2012&#160;» <a href=\"/MadChess\" title=\"MadChess\">MadChess</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=46370\">Elo points gain from doubling time</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 10, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=46572\">A word for casual testers</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 25, 2012</li></ul>\n<p><b>2013</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=46786\">Noise in ELO estimators: a quantitative approach</a> by <a href=\"/Marco_Costalba\" title=\"Marco Costalba\">Marco Costalba</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 06, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48733\">Scaling at 2x nodes (or doubling time control)</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 23, 2013&#160;»  <a href=\"/Match_Statistics#DoublingTC\" title=\"Match Statistics\">Doubling TC</a>, <a href=\"/Depth#DiminishingReturns\" title=\"Depth\">Diminishing Returns</a>, <a class=\"mw-selflink selflink\">Playing Strength</a>, <a href=\"/Houdini\" title=\"Houdini\">Houdini</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48864\">How much elo is pondering worth</a> by <a href=\"/Michel_Van_den_Bergh\" title=\"Michel Van den Bergh\">Michel Van den Bergh</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 07, 2013&#160;» <a href=\"/Pondering\" title=\"Pondering\">Pondering</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=49248\">Contempt and the ELO model</a> by <a href=\"/Michel_Van_den_Bergh\" title=\"Michel Van den Bergh\">Michel Van den Bergh</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 05, 2013&#160;» <a href=\"/Contempt_Factor\" title=\"Contempt Factor\">Contempt Factor</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=50173\">ELO rating and thinking time</a> by <a href=\"/index.php?title=Henk_van_den_Belt&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Henk van den Belt (page does not exist)\">Henk van den Belt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 22, 2013</li></ul>\n<p><b>2014</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=51973\">MadChess UCI_LimitStrength Algorithm</a> by <a href=\"/Erik_Madsen\" title=\"Erik Madsen\">Erik Madsen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 12, 2014&#160;» <a href=\"/MadChess\" title=\"MadChess\">MadChess</a>, <a href=\"/UCI\" title=\"UCI\">UCI</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=52021\">Playing strength development - increasing time control</a> by <a href=\"/Andreas_Strangm%C3%BCller\" title=\"Andreas Strangmüller\">Andreas Strangmüller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 17, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=53287\">How many Elo points change for a doubling of uP time?</a> by Jay Rodrequez, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 14, 2014 </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://chesscomputer.tumblr.com/post/98632536555/using-the-stockfish-position-evaluation-score-to/embed\">Using the Stockfish position evaluation score to predict victory probability</a> by unavoidablegrain, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Tumblr\">Tumblr</a>, September 28, 2014&#160;» <a href=\"/Pawn_Advantage,_Win_Percentage,_and_Elo\" title=\"Pawn Advantage, Win Percentage, and Elo\">Pawn Advantage, Win Percentage, and Elo</a>, <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=53891\">Elo estimation using quasi-Monte Carlo integration</a> by Branko Radovanovic, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 30, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=54571\">Questions regarding rating systems of humans and engines</a> by <a href=\"/index.php?title=Erik_Varend&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Erik Varend (page does not exist)\">Erik Varend</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 06, 2014</li></ul>\n<h2><span class=\"mw-headline\" id=\"2015_..._2\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Playing_Strength&amp;action=edit&amp;section=20\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=55011\">How to dumb down/weaken/humanize an engine algorithmically?</a> by <a href=\"/Dominik_Klein\" title=\"Dominik Klein\">Dominik Klein</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 18, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=57223\">computing elo of multiple chess engines</a> by <a href=\"/Alexandru_Mosoi\" title=\"Alexandru Mosoi\">Alexandru Mosoi</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 09, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=57482\">Name for elo without draws</a> by <a href=\"/Marcel_van_Kervinck\" title=\"Marcel van Kervinck\">Marcel van Kervinck</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 02, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=57696\">The future of chess and elo ratings</a> by <a href=\"/Larry_Kaufman\" title=\"Larry Kaufman\">Larry Kaufman</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 20, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=57969\">ELO error margin</a> by <a href=\"/Fabio_Gobbato\" title=\"Fabio Gobbato\">Fabio Gobbato</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 17, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=58067\">testing multiple versions &amp; elo calculation</a> by <a href=\"/Folkert_van_Heusden\" title=\"Folkert van Heusden\">Folkert van Heusden</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 27, 2015</li></ul>\n<p><b>2016</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=59332\">a direct comparison of FIDE and CCRL rating systems</a> by <a href=\"/index.php?title=Erik_Varend&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Erik Varend (page does not exist)\">Erik Varend</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 22, 2016&#160;» <a href=\"/FIDE\" title=\"FIDE\">FIDE</a>, <a href=\"/CCRL\" title=\"CCRL\">CCRL</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?p=661996\">Computer Chess Strength</a> by <a href=\"/John_Philip_Fishburn\" title=\"John Philip Fishburn\">John Fishburn</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 28, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?p=662580\">How much benefit from opening book?</a> by <a href=\"/John_Philip_Fishburn\" title=\"John Philip Fishburn\">John Fishburn</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 06, 2016&#160;» <a href=\"/Opening_Book\" title=\"Opening Book\">Opening Book</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=59470\">Computer chess progress over say the last 20 years?</a> by <a href=\"/Martin_Fierz\" title=\"Martin Fierz\">Martin Fierz</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 10, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=59497\">Computer chess progress over the last 20 years!</a> by <a href=\"/Martin_Fierz\" title=\"Martin Fierz\">Martin Fierz</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 13, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=59543\">Computer Chess Progress: Stockfish 7 vs Ruffian 1.0.5</a> by <a href=\"/Martin_Fierz\" title=\"Martin Fierz\">Martin Fierz</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 17, 2016&#160;» <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a>, <a href=\"/Ruffian\" title=\"Ruffian\">Ruffian</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=59982\">skill levels</a> by <a href=\"/Alexandru_Mosoi\" title=\"Alexandru Mosoi\">Alexandru Mosoi</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 28, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=60635\">Strategies for weaker play levels</a> by <a href=\"/Evert_Glebbeek\" title=\"Evert Glebbeek\">Evert Glebbeek</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 28, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61444\">ELO inflation ha ha ha</a> by <a href=\"/index.php?title=Henk_van_den_Belt&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Henk van den Belt (page does not exist)\">Henk van den Belt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 16, 2016&#160;»  <a href=\"/Delphil\" title=\"Delphil\">Delphil</a>, <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a>, <a href=\"/Match_Statistics\" title=\"Match Statistics\">Match Statistics</a>, <a href=\"/TCEC_Season_9\" title=\"TCEC Season 9\">TCEC Season 9</a> <sup id=\"cite_ref-19\" class=\"reference\"><a href=\"#cite_note-19\">&#91;19&#93;</a></sup></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61444&amp;start=17\">About expected scores and draw ratios</a> by <a href=\"/index.php?title=Jes%C3%BAs_Mu%C3%B1oz&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Jesús Muñoz (page does not exist)\">Jesús Muñoz</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 17, 2016</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61548\">Perfect play</a> by Patrik Karlsson, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 28, 2016 </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61784\">Doubling of time control</a> by <a href=\"/Andreas_Strangm%C3%BCller\" title=\"Andreas Strangmüller\">Andreas Strangmüller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 21, 2016&#160;» <a href=\"/Match_Statistics#DoublingTC\" title=\"Match Statistics\">Doubling TC</a>, <a href=\"/Depth#DiminishingReturns\" title=\"Depth\">Diminishing Returns</a>, <a class=\"mw-selflink selflink\">Playing Strength</a>, <a href=\"/Komodo\" title=\"Komodo\">Komodo</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=61935\">UCI protocol and engine strength</a> by <a href=\"/Fermin_Serrano\" title=\"Fermin Serrano\">Fermin Serrano</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 02, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=62146\">Stockfish 8 - Double time control vs. 2 threads</a> by <a href=\"/Andreas_Strangm%C3%BCller\" title=\"Andreas Strangmüller\">Andreas Strangmüller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>,  November 15, 2016&#160;» <a href=\"/Match_Statistics#DoublingTC\" title=\"Match Statistics\">Doubling TC</a>, <a href=\"/Depth#DiminishingReturns\" title=\"Depth\">Diminishing Returns</a>, <a class=\"mw-selflink selflink\">Playing Strength</a>, <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://rybkaforum.net/cgi-bin/rybkaforum/topic_show.pl?tid=31867\">L3 cache, RAM and other performance factors</a> by Nimzy, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Rybka Forum</a>, December 04, 2016&#160;» <a href=\"/Memory\" title=\"Memory\">Memory</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=62510\">Absolute ELO scale</a> by <a href=\"/Nicu_Ionita\" title=\"Nicu Ionita\">Nicu Ionita</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 17, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=62622\">Diminishing returns and hyperthreading</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 27, 2016&#160;» <a href=\"/Depth#DiminishingReturns\" title=\"Depth\">Diminishing Returns</a>, <a href=\"/Match_Statistics\" title=\"Match Statistics\">Match Statistics</a>, <a href=\"/Thread\" title=\"Thread\">Thread</a></li></ul>\n<p><b>2017</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=62868\">Progress in 30 years by four intervals of 7-8 years</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 19, 2017&#160;»  <a href=\"/Match_Statistics\" title=\"Match Statistics\">Match Statistics</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=62907\">Crafty Play By Elo ( Crafty v25.3)</a> by <a href=\"/Michael_Byrne\" title=\"Michael Byrne\">Michael B</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 23, 2017&#160;» <a href=\"/Crafty\" title=\"Crafty\">Crafty</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63652\">6-men Syzygy from HDD and USB 3.0</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 04, 2017&#160;» <a href=\"/Komodo\" title=\"Komodo\">Komodo</a>, <a href=\"/Syzygy_Bases\" title=\"Syzygy Bases\">Syzygy Bases</a>, <a href=\"/Memory#USB3\" title=\"Memory\">USB 3.0</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63687\">Scaling of engines from FGRL rating list</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 07, 2017&#160;» <a href=\"/FGRL\" title=\"FGRL\">FGRL</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63763\">Low impact of opening phase in engine play?</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 18, 2017&#160;» <a href=\"/Opening\" title=\"Opening\">Opening</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63813\">How to simulate a game outcome given Elo difference?</a> by <a href=\"/Nicu_Ionita\" title=\"Nicu Ionita\">Nicu Ionita</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 25, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63875\">Wilo rating properties from FGRL rating lists</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 01, 2017&#160;» <a href=\"/FGRL\" title=\"FGRL\">FGRL</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63886\">RAM speed and engine strength</a> by John Hartmann, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 03, 2017&#160;» <a href=\"/Memory#RAM\" title=\"Memory\">RAM</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63903\">Symmetric multiprocessing (SMP) scaling - SF8 and K10.4</a> by <a href=\"/Andreas_Strangm%C3%BCller\" title=\"Andreas Strangmüller\">Andreas Strangmüller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 05, 2017&#160;» <a href=\"/Lazy_SMP\" title=\"Lazy SMP\">Lazy SMP</a>, <a href=\"/Komodo\" title=\"Komodo\">Komodo</a>, <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63955\">Symmetric multiprocessing (SMP) scaling - K10.4 Contempt=0</a> by <a href=\"/Andreas_Strangm%C3%BCller\" title=\"Andreas Strangmüller\">Andreas Strangmüller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 11, 2017&#160;» <a href=\"/SMP\" title=\"SMP\">SMP</a>, <a href=\"/Komodo\" title=\"Komodo\">Komodo</a>, <a href=\"/Contempt_Factor\" title=\"Contempt Factor\">Contempt Factor</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63967\">Symmetric multiprocessing (SMP) scaling - SF8 Contempt=10</a> by <a href=\"/Andreas_Strangm%C3%BCller\" title=\"Andreas Strangmüller\">Andreas Strangmüller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 13, 2017&#160;» <a href=\"/SMP\" title=\"SMP\">SMP</a>, <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a>, <a href=\"/Contempt_Factor\" title=\"Contempt Factor\">Contempt Factor</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64041\">Another attempt at comparing Evals ELO-wise</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 22, 2017&#160;» <a href=\"/Evaluation\" title=\"Evaluation\">Evaluation</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64356\">Testing endgame strength</a> by <a href=\"/%C3%81lvaro_Begu%C3%A9\" title=\"Álvaro Begué\">Álvaro Begué</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 21, 2017&#160;» <a href=\"/Endgame\" title=\"Endgame\">Endgame</a>, <a href=\"/Engine_Testing\" title=\"Engine Testing\">Engine Testing</a>, <a href=\"/RuyDos\" title=\"RuyDos\">RuyDos</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=64512\">Measuring elo rating engine outside tournament</a> by <a href=\"/Yves_De_Billo%C3%ABz\" title=\"Yves De Billoëz\">Yves De Billoëz</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 04, 2017 </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64683\">Invariance with time control of rating schemes</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 22, 2017 <sup id=\"cite_ref-20\" class=\"reference\"><a href=\"#cite_note-20\">&#91;20&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64719\">Ways to avoid \"Draw Death\" in Computer Chess</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 25, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64824&amp;start=3\">ELO measurements</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 06, 2017&#160;» <a href=\"/Lazy_SMP\" title=\"Lazy SMP\">Lazy SMP</a>, <a href=\"/Parallel_Search\" title=\"Parallel Search\">Parallel Search</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.hiarcs.net/forums/viewtopic.php?t=8526\">an interesting study from Erik Varend</a> by scandien, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Hiarcs Forum</a>, August 13, 2017 <sup id=\"cite_ref-21\" class=\"reference\"><a href=\"#cite_note-21\">&#91;21&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65048\">Wall and Regression</a> by <a href=\"/Srdja_Matovic\" title=\"Srdja Matovic\">Srdja Matovic</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 31, 2017 <sup id=\"cite_ref-22\" class=\"reference\"><a href=\"#cite_note-22\">&#91;22&#93;</a></sup> <sup id=\"cite_ref-23\" class=\"reference\"><a href=\"#cite_note-23\">&#91;23&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65288\">Scaling from FGRL results with top 3 engines</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 26, 2017&#160;» <a href=\"/FGRL\" title=\"FGRL\">FGRL</a>, <a href=\"/Houdini\" title=\"Houdini\">Houdini</a>, <a href=\"/Komodo\" title=\"Komodo\">Komodo</a>, <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65772\">\"Intrinsic Chess Ratings\" by Regan, Haworth -- seq</a> by Kai Middleton, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 19, 2017 </li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65772&amp;start=2\">Re: \"Intrinsic Chess Ratings\" by Regan, Haworth --</a> by <a href=\"/Kenneth_W._Regan\" title=\"Kenneth W. Regan\">Kenneth Regan</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 20, 2017&#160;» <a href=\"/Jean-Marc_Alliot#WhoistheMaster\" title=\"Jean-Marc Alliot\">Who is the Master?</a></dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66000\">ELO progression measured by year</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schroder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 13, 2017</li></ul>\n<p><b>2018</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66298\">Is modern chess software lossless or lossy?</a> by Meni Rosenfeld, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 10, 2018&#160;» <a href=\"/Selectivity\" title=\"Selectivity\">Selectivity</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66775\">Feed bayeselo with pure game results without PGN</a> by <a href=\"/Sergei_Markoff\" title=\"Sergei Markoff\">Sergei S. Markoff</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 08, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66793\">Elo measurement of contempt in SF in self-play</a> by <a href=\"/Michel_Van_den_Bergh\" title=\"Michel Van den Bergh\">Michel Van den Bergh</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 10, 2018&#160;» <a href=\"/Contempt_Factor\" title=\"Contempt Factor\">Contempt</a>, <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66821\">Time control envelope in top engines could be improved?</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 13, 2018&#160;» <a href=\"/Time_Management\" title=\"Time Management\">Time Management</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66945\">LCZero: Progress and Scaling. Relation to CCRL Elo</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 28, 2018&#160;» <a href=\"/Leela_Chess_Zero\" title=\"Leela Chess Zero\">Leela Chess Zero</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66969\">Elostat Question</a> by <a href=\"/Michael_Sherwin\" title=\"Michael Sherwin\">Michael Sherwin</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 30, 2018</li></ul>\n<p><b>2019</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=70217\">Depth reduced but ELO increased</a> by <a href=\"/Tom_King\" title=\"Tom King\">Tom King</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 16, 2019&#160;» <a href=\"/Countermove_Heuristic\" title=\"Countermove Heuristic\">Countermove Heuristic</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=70388\">Elo World, a framework for benchmarking weak chess engines</a> by <a href=\"/R%C3%A9mi_Coulom\" title=\"Rémi Coulom\">Rémi Coulom</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 02, 2019</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=70440\">What engine breaks even with GMs in blitz?</a> by <a href=\"/Larry_Kaufman\" title=\"Larry Kaufman\">Larry Kaufman</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 07, 2019</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=71419\">best way to determine elos of a group</a> by <a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel Shawul</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 30, 2019</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=71639\">Dedicated Chess Machine Elo vs Human Elo, a least squares analysis</a> by JayRod, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 23, 2019&#160;» <a href=\"/Dedicated_Chess_Computers\" title=\"Dedicated Chess Computers\">Dedicated Chess Computers</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=72183\">Limiting nodes to reduce engine strength</a> by <a href=\"/Patrice_Duhamel\" title=\"Patrice Duhamel\">Patrice Duhamel</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 26, 2019</li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Playing_Strength&amp;action=edit&amp;section=21\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=74037\">Stockfish_dev is probably stronger than Sargon 1978 v1.00</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 29, 2020&#160;» <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a>, <a href=\"/Sargon\" title=\"Sargon\">Sargon</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.hiarcs.net/forums/viewtopic.php?t=10004\">Ply versus ELO</a> by Greg, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">HIARCS Forum</a>, May 30, 2020&#160;» <a href=\"/Diogo_R._Ferreira#Impact\" title=\"Diogo R. Ferreira\">Diogo R. Ferreira - Impact of the Search Depth ...</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=74319\">Throwing out draws to calculate Elo</a> by <a href=\"/Dann_Corbit\" title=\"Dann Corbit\">Dann Corbit</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 29, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=75205\">How many Elo points is a book?</a> by <a href=\"/Chris_Whittington\" title=\"Chris Whittington\">Chris Whittington</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 25, 2020&#160;» <a href=\"/Opening_Book\" title=\"Opening Book\">Opening Book</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://prodeo.actieforum.com/t123-controlled-randomness-of-evaluation-function\">Controlled randomness of evaluation function</a> by <a href=\"/Pawel_Koziol\" title=\"Pawel Koziol\">nescitus</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">ProDeo Forum</a>, December 06, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=76181\">Blunder option</a> by <a href=\"/Colin_Jenkins\" title=\"Colin Jenkins\">Colin Jenkins</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 29, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=76190\">Dispelling the Myth of NNUE with LazySMP: An Analysis</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 30, 2020&#160;» <a href=\"/NNUE\" title=\"NNUE\">NNUE</a>, <a href=\"/Lazy_SMP\" title=\"Lazy SMP\">Lazy SMP</a>, <a href=\"/Thread\" title=\"Thread\">Thread</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=76198\">Evaluation of moves from World Championship Games</a> by <a href=\"/Ferdinand_Mosca\" title=\"Ferdinand Mosca\">Ferdinand Mosca</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 31, 2020</li></ul>\n<p><b>2021</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=76261\">What K factor should be used if two players are in different K factor brackets?</a> by <a href=\"/Tam%C3%A1s_Kuzmics\" title=\"Tamás Kuzmics\">Tamás Kuzmics</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 09, 2021 <sup id=\"cite_ref-24\" class=\"reference\"><a href=\"#cite_note-24\">&#91;24&#93;</a></sup> <sup id=\"cite_ref-25\" class=\"reference\"><a href=\"#cite_note-25\">&#91;25&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=76382\">correspondence chess in the age of NNUE</a> by <a href=\"/Larry_Kaufman\" title=\"Larry Kaufman\">Larry Kaufman</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 21, 2021&#160;» <a href=\"/NNUE\" title=\"NNUE\">NNUE</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=77501\">Ares playing strength at various fixed depth levels</a> by <a href=\"/Charles_Roberson\" title=\"Charles Roberson\">Charles Roberson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 16, 2021&#160;» <a href=\"/Ares_US\" title=\"Ares US\">Ares</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=77544\">what is the rating of engines when you do not count draws?</a> by <a href=\"/Uri_Blass\" title=\"Uri Blass\">Uri Blass</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 23, 2021</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=77734\">How much ELO should I expect to gain from killer moves?</a> by Christian Dean, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 16, 2021&#160;» <a href=\"/Killer_Heuristic\" title=\"Killer Heuristic\">Killer Heuristic</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=78397\">Elo expected from LMR</a> by Christian Dean, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 11, 2021&#160;» <a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">Late Move Reductions</a></li></ul>\n<p><b>2022</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=79280\">How do you know you improved&#160;?</a> by Philippe Chevalier, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 03, 2022</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Playing_Strength&amp;action=edit&amp;section=22\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Chess_Player\">Chess Player</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Playing_Strength&amp;action=edit&amp;section=23\" title=\"Edit section: Chess Player\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Comparison_of_top_chess_players_throughout_history\">Comparison of top chess players throughout history from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Adolf_Anderssen#Playing_strength_and_style\">Adolf Anderssen - Playing strength and style from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Magnus_Carlsen#Rating\">Magnus Carlsen - Rating from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Garry_Kasparov#Chess_ratings_achievements\">Garry Kasparov Chess ratings achievements from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Fred_Reinfeld#Playing_strength\">Fred Reinfeld | Playing strength from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/J%C3%B3zsef_Sz%C3%A9n#Playing_strength\">József Szén | Playing strength from Wikipedia</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Chess_Engines\">Chess Engines</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Playing_Strength&amp;action=edit&amp;section=24\" title=\"Edit section: Chess Engines\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Chess_engine#Increasing_strength\">Chess engine - Increasing strength from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/ChessGenius#Playing_strength\">ChessGenius - Playing strength from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Chess_Tiger#Playing_strength\">Chess Tiger - Playing strength from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Komodo_%28chess%29#Playing_strength_and_style\">Komodo (chess) - Playing strength and style from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/MChess_Pro#Playing_strength\">MChess Pro - Playing strength from Wikipedia</a></li>\n<li> <span id=\"EnginesOverTime\"></span><a rel=\"nofollow\" class=\"external text\" href=\"https://youtu.be/wljgxS7tZVE\">The Strongest Computer Chess Engines Over Time from 1985 to 2019</a>, by <a href=\"/index.php?title=Chess.com&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Chess.com (page does not exist)\">Chess.com</a>, May 20, 2020 <sup id=\"cite_ref-26\" class=\"reference\"><a href=\"#cite_note-26\">&#91;26&#93;</a></sup>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/wljgxS7tZVE?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h2><span class=\"mw-headline\" id=\"Analysis\">Analysis</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Playing_Strength&amp;action=edit&amp;section=25\" title=\"Edit section: Analysis\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://en.chessbase.com/post/computers-choose-who-was-the-strongest-player-\">Computers choose: who was the strongest player?</a>, <a href=\"/ChessBase\" title=\"ChessBase\">ChessBase News</a>, October 30, 2006</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://en.chessbase.com/post/computer-analysis-of-world-champions\">Computer analysis of world champions</a> by <a href=\"/S%C3%B8ren_Riis\" title=\"Søren Riis\">Søren Riis</a>, <a href=\"/ChessBase\" title=\"ChessBase\">ChessBase News</a>, November 02, 2006 <sup id=\"cite_ref-27\" class=\"reference\"><a href=\"#cite_note-27\">&#91;27&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.chessanalysis.ee/chessanalysiseng.htm\">Chessanalysis homepage</a> by <a href=\"/index.php?title=Erik_Varend&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Erik Varend (page does not exist)\">Erik Varend</a>  <sup id=\"cite_ref-28\" class=\"reference\"><a href=\"#cite_note-28\">&#91;28&#93;</a></sup></li></ul>\n<h2><span class=\"mw-headline\" id=\"Rating_Systems\">Rating Systems</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Playing_Strength&amp;action=edit&amp;section=26\" title=\"Edit section: Rating Systems\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Chess_rating_systems\">Chess rating system from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Chessmetrics\">Chessmetrics from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Elo_rating_system\">Elo rating system from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://wismuth.com/elo/calculator.html\">Elo Win Probability Calculator</a> by <a href=\"/Mathematician#FLabelle\" title=\"Mathematician\">François Labelle</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://en.chessbase.com/post/arpad-elo-and-the-elo-rating-system\">Arpad Elo and the Elo Rating System</a> by <a href=\"/index.php?title=Dan_Ross&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Dan Ross (page does not exist)\">Dan Ross</a>, <a href=\"/ChessBase\" title=\"ChessBase\">ChessBase News</a>, December 16, 2007</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.kaggle.com/c/chess\">Chess ratings - Elo versus the Rest of the World</a> | <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Kaggle\">Kaggle</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://kirill-kryukov.com/chess/kcec/draw_rate.html\">Kirr's Chess Engine Comparison KCEC - Draw rate</a>&#160;» <a href=\"/KCEC\" title=\"KCEC\">KCEC</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.alliot.fr/CHESS/ficga.html.en\">Who is the Master?</a> by <a href=\"/Jean-Marc_Alliot\" title=\"Jean-Marc Alliot\">Jean-Marc Alliot</a>&#160;» <a href=\"/Jean-Marc_Alliot#WhoistheMaster\" title=\"Jean-Marc Alliot\">Who is the Master?</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://news.cnrs.fr/articles/how-should-chess-players-be-rated\">How Should Chess Players Be Rated?</a> by <a rel=\"nofollow\" class=\"external text\" href=\"https://news.cnrs.fr/authors/martin-koppe\">Martin Koppe</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://news.cnrs.fr/\">CNRS News</a>, April 25, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.chessbase.com/post/ranking-chess-players-according-to-the-quality-of-their-moves\">Ranking chess players according to the quality of their moves</a> by <a href=\"/Frederic_Friedel\" title=\"Frederic Friedel\">Frederic Friedel</a>, <a href=\"/ChessBase\" title=\"ChessBase\">ChessBase News</a>, April 27, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://rebel13.nl/misc/stats.html\">Rating List Stats</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schroder</a>&#160;» <a href=\"/CCRL\" title=\"CCRL\">CCRL</a>, <a href=\"/Match_Statistics\" title=\"Match Statistics\">Match Statistics</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Misc\">Misc</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Playing_Strength&amp;action=edit&amp;section=27\" title=\"Edit section: Misc\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Strength\">Strength from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Strength_of_schedule\">Strength of schedule from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wiktionary.org/wiki/go_from_strength_to_strength\">go from strength to strength - Wiktionary</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://de.wikipedia.org/wiki/Spielst%C3%A4rke\">Spielstärke | Wikipedia.de</a> (German)</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Sports_rating_system\">Sports rating system from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Performance_(disambiguation)\">Performance (disambiguation) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wiktionary.org/wiki/performance\">performance - Wiktionary</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://senseis.xmp.net/?PlayingStrengthAndGender\">Playing Strength and Gender at Sensei's Library</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Ranking\">Ranking from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wiktionary.org/wiki/regression\">regression - Wiktionary</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Skill\">Skill from Wikipedia</a></li>\n<li> <a href=\"/Category:Chicago\" title=\"Category:Chicago\">Chicago</a> - <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Feelin%27_Stronger_Every_Day\">Feelin' Stronger Every Day</a> (1973), <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/e-wHixgp2RE?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Playing_Strength&amp;action=edit&amp;section=28\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap mw-references-columns\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\">Photo by <a href=\"/Gerd_Isenberg\" title=\"Gerd Isenberg\">Gerd Isenberg</a>, September 18, 2016, detail of the <a rel=\"nofollow\" class=\"external text\" href=\"https://commons.wikimedia.org/wiki/Category:Flottmann-Tor\">Flottmann gate</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Art_Nouveau\">Art Nouveau</a> theme of <i>Dragon and Sun</i> designed by Carl Weinhold, art director of blacksmith and foundry <i>Füssmann und Fleeth</i>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Essen\">Essen</a>, exposed at the <a rel=\"nofollow\" class=\"external text\" href=\"https://de.wikipedia.org/wiki/Industrie-_und_Gewerbeausstellung_D%C3%BCsseldorf\">industrial and trade exhibition 1902</a> in <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/D%C3%BCsseldorf\">Düsseldorf</a>, and baught by <a rel=\"nofollow\" class=\"external text\" href=\"https://de.wikipedia.org/wiki/Otto_Heinrich_Flottmann\">Heinrich Flottmann</a> as gate for his <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Jackhammer\">jackhammer</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://de.wikipedia.org/wiki/Flottmann-Werke\">factory</a>, today adjacent to the exhibition and event space <a href=\"/Category:Flottmann\" title=\"Category:Flottmann\">Flottmann-Hallen</a> in <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Herne,_North_Rhine-Westphalia\">Herne</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/North_Rhine-Westphalia\">North Rhine-Westphalia</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Germany\">Germany</a>, and part of <a href=\"/Category:Industrial_Heritage_Trail\" title=\"Category:Industrial Heritage Trail\">The Industrial Heritage Trail</a> of the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Ruhr\">Ruhr area</a>, \"The dragon is a symbol of physical strength and intelligence with respect to the snake that symbolizes the tough, glowing wrought iron\" from <a rel=\"nofollow\" class=\"external text\" href=\"http://wiki.huen-un-perduen.de/index.php?title=Flottmann-Tor\">Flottmann-Tor – Hün un Perdün</a>, see also <a rel=\"nofollow\" class=\"external text\" href=\"http://wiki.huen-un-perduen.de/index.php?title=Datei:Flottmann04.jpg\">Image</a> by Gerd Biedermann</span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=46572\">A word for casual testers</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 25, 2012</span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Elo_rating_system#Mathematical_details\">Elo rating system - Mathematical details - Wikipedia</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://tests.stockfishchess.org/tests\">Stockfish Testing Framework</a></span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Comparison_of_top_chess_players_throughout_history\">Comparison of top chess players throughout history from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.anusha.com/elosbook.htm\">Elo's Book: The Rating of Chess Players</a> by <a href=\"/Sam_Sloan\" title=\"Sam Sloan\">Sam Sloan</a></span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://en.chessbase.com/post/computers-choose-who-was-the-strongest-player-\">Computers choose: who was the strongest player?</a>, <a href=\"/ChessBase\" title=\"ChessBase\">ChessBase News</a>, October 30, 2006</span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://en.chessbase.com/post/computer-analysis-of-world-champions\">Computer analysis of world champions</a> by <a href=\"/S%C3%B8ren_Riis\" title=\"Søren Riis\">Søren Riis</a>, <a href=\"/ChessBase\" title=\"ChessBase\">ChessBase News</a>, November 02, 2006</span>\n</li>\n<li id=\"cite_note-9\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-9\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Bayesian_inference\">Bayesian inference from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-10\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-10\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://blog.kaggle.com/2010/11/30/how-i-did-it-diogo-ferreira-on-4th-place-in-elo-chess-ratings-competition/\">How I did it: Diogo Ferreira on 4th place in Elo chess ratings competition | no free hunch</a></span>\n</li>\n<li id=\"cite_note-11\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-11\">↑</a></span> <span class=\"reference-text\"> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65772\">\"Intrinsic Chess Ratings\" by Regan, Haworth -- seq</a> by Kai Middleton, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 19, 2017</span>\n</li>\n<li id=\"cite_note-12\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-12\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=471004&amp;t=44180\">Re: EloStat, Bayeselo and Ordo</a> by <a href=\"/R%C3%A9mi_Coulom\" title=\"Rémi Coulom\">Rémi Coulom</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 25, 2012</span>\n</li>\n<li id=\"cite_note-13\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-13\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=72087&amp;start=3\">Re: Understanding and Pushing the Limits of the Elo Rating Algorithm</a> by <a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel Shawul</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 15, 2019</span>\n</li>\n<li id=\"cite_note-14\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-14\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.hiarcs.net/forums/viewtopic.php?t=10004\">Ply versus ELO</a> by Greg, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">HIARCS Forum</a>, May 30, 2020&#160;» <a href=\"/Diogo_R._Ferreira#Impact\" title=\"Diogo R. Ferreira\">Diogo R. Ferreira - Impact of the Search Depth ...</a></span>\n</li>\n<li id=\"cite_note-15\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-15\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=54571\">Questions regarding rating systems of humans and engines</a> by <a href=\"/index.php?title=Erik_Varend&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Erik Varend (page does not exist)\">Erik Varend</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 06, 2014</span>\n</li>\n<li id=\"cite_note-16\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-16\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=60721\">chess statistics scientific article</a> by Nuno Sousa, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 06, 2016</span>\n</li>\n<li id=\"cite_note-17\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-17\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://utsc.utoronto.ca/news-events/breaking-research/personal-bests-and-why-you-stop-after-achieving-them-u-t-scarborough-expert\">Personal bests – and why you stop after achieving them: U of T Scarborough expert | University of Toronto Scarborough - News and Events</a> by <a rel=\"nofollow\" class=\"external text\" href=\"https://everipedia.org/wiki/lang_en/nina-haikara\">Nina Haikara</a>, February 7, 2018</span>\n</li>\n<li id=\"cite_note-18\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-18\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=72087\">Understanding and Pushing the Limits of the Elo Rating Algorithm</a> by <a href=\"/Michel_Van_den_Bergh\" title=\"Michel Van den Bergh\">Michel Van den Bergh</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 15, 2019</span>\n</li>\n<li id=\"cite_note-19\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-19\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://tcec.chessdom.com/archive.php?se=9&amp;rapid&amp;ga=163\">Delphil 3.3b2 (2334) - Stockfish 030916 (3228), TCEC Season 9 - Rapid, Round 11</a>, September 16, 2016</span>\n</li>\n<li id=\"cite_note-20\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-20\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://hardy.uhasselt.be/Toga/normalized_elo.pdf\">Normalized Elo</a> (pdf) by <a href=\"/Michel_Van_den_Bergh\" title=\"Michel Van den Bergh\">Michel Van den Bergh</a></span>\n</li>\n<li id=\"cite_note-21\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-21\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.chessanalysis.ee/chessanalysiseng.htm\">Chessanalysis homepage</a> by <a href=\"/index.php?title=Erik_Varend&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Erik Varend (page does not exist)\">Erik Varend</a></span>\n</li>\n<li id=\"cite_note-22\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-22\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wiktionary.org/wiki/wall\">wall - Wiktionary</a></span>\n</li>\n<li id=\"cite_note-23\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-23\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wiktionary.org/wiki/regression\">regression - Wiktionary</a></span>\n</li>\n<li id=\"cite_note-24\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-24\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Elo_rating_system#Most_accurate_K-factor\">Most accurate K-factor - Elo rating system from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-25\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-25\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://ratings.fide.com/calculator_rtd.phtml\">FIDE Chess Rating calculators: Chess Rating change calculator</a></span>\n</li>\n<li id=\"cite_note-26\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-26\">↑</a></span> <span class=\"reference-text\">The primary data source is the <a href=\"/SSDF\" title=\"SSDF\">SSDF</a>, <a href=\"/Deep_Blue\" title=\"Deep Blue\">Deep Blue</a> Elo Performance: estimated by perf. against <a href=\"/Garry_Kasparov\" title=\"Garry Kasparov\">Kasparov</a>, <a href=\"/AlphaZero\" title=\"AlphaZero\">AlphaZero</a> Elo Performance: estimated by perf. against <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a>, <a href=\"/Leela_Chess_Zero\" title=\"Leela Chess Zero\">Leela Chess Zero</a> Elo Performance from <a rel=\"nofollow\" class=\"external text\" href=\"https://docs.google.com/spreadsheets/d/1XSJiCcQpCLv0fNwrUn7jXjdkZFU63YFEWpdXv6dSSg0/edit#gid=312836954\">LCZ rating list (CCRL estimate)</a></span>\n</li>\n<li id=\"cite_note-27\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-27\">↑</a></span> <span class=\"reference-text\"><a href=\"/Matej_Guid\" title=\"Matej Guid\">Matej Guid</a>, <a href=\"/Ivan_Bratko\" title=\"Ivan Bratko\">Ivan Bratko</a> (<b>2006</b>). <i>Computer Analysis of World Chess Champions</i>. <a href=\"/ICGA_Journal#29_2\" title=\"ICGA Journal\">ICGA Journal, Vol. 29, No. 2</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.ailab.si/matej/doc/Computer_Analysis_of_World_Chess_Champions.pdf\">pdf</a></span>\n</li>\n<li id=\"cite_note-28\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-28\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.hiarcs.net/forums/viewtopic.php?t=8526\">an interesting study from Erik Varend</a> by scandien, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Hiarcs Forum</a>, August 13, 2017</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Chess\" title=\"Chess\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301023916\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.077 seconds\nReal time usage: 0.081 seconds\nPreprocessor visited node count: 519/1000000\nPreprocessor generated node count: 1100/1000000\nPost‐expand include size: 54/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1574-0!canonical and timestamp 20260301023915 and revision id 26403\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Flottmann"
+      },
+      {
+        "sortkey": "",
+        "*": "Industrial_Heritage_Trail"
+      },
+      {
+        "sortkey": "",
+        "*": "Chicago"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "7th Computer Olympiad"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ACM"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ACM 1973"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Abdallah Saffidine"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Adam Hair"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 3"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 5"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 6"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Games 12"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Games 13"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Games 14"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Games 9"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Albert Bertilsson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alexander Szabo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alexandru Mosoi"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Algorithms"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "AlphaZero"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Andreas Strangmüller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Andrew Grant"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ares US"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aritz Pérez"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ashton Anderson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Automated Tuning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Barbara Szabo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Boris"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Branching Factor"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bruce Moreland"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Burton Wendroff"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CAPS"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCRL"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCT7"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CGW 2007"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CG 2000"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CG 2006"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CG 2008"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Carl Ebeling"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Carnegie Mellon University"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Charles Roberson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ChessBase"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Problems, Compositions and Studies"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Skill in Man and Machine"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chinese Dark Chess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chris Whittington"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Christopher Chabris"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chu-Hsuan Hsueh"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cognition"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Colin Jenkins"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Reports"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Contempt Factor"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Countermove Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Crafty"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Daisuke Takahashi"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Daniel Shawul"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dann Corbit"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Danny Kopec"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David Cahlander"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David E. Welsh"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dedicated Chess Computers"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Deep Blue"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Delphil"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth-First"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Diogo R. Ferreira"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dominik Klein"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Don Beal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Don Dailey"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ed Northam"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ed Schroder"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Edmund Moshammer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Edward de Grijs"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Endgame"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engine Rating Lists"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engine Similarity"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engine Testing"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Enrique Irazoqui"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Eric Hallsworth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Erik Madsen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ernst A. Heinz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evert Glebbeek"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "FGRL"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "FIDE"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fabio Gobbato"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Federico Andrés Corigliano"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ferdinand Mosca"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fermin Serrano"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Folkert van Heusden"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Frederic Friedel"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Frieder Schwenkel"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Garry Kasparov"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gerd Isenberg"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gianluigi Masciulli"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Glaurung"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Go"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gordon Goetsch"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Guy Haworth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Göran Grottling"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hans Berliner"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Harvard University"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Houdini"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hung-Hsuan Lin"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "I-Chen Wu"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA Journal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "IEEE"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iterative Deepening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ivan Bratko"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jack Good"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "James Gillogly"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jan Renze Steenhuisen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jean-Marc Alliot"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "John Philip Fishburn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jon Kleinberg"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jr-Chang Chen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "KCEC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kai Laskos"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kazunori Yamaguchi"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ken Thompson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kenneth W. Regan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Killer Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Knowledge"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Komodo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Larry Kaufman"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Late Move Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lazy SMP"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Leaf Node"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Learning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Leela Chess Zero"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "MadChess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Makoto Miwa"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marcel van Kervinck"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marco Costalba"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mark Levene"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Martin Fierz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Match Statistics"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Matej Guid"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mathematician"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Memory"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michael Byrne"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michael Sherwin"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michel Van den Bergh"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mike Watters"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Monroe Newborn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Murray Campbell"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "NNUE"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Nicu Ionita"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Node"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Olivier Teytaud"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Opening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Opening Book"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Opponent Model Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Parallel Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Patrice Duhamel"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Paul Rushton"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawel Koziol"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Advantage, Win Percentage, and Elo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Personal Computing"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter W. Frey"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter Österlund"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pondering"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Hyatt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rolf Tüschen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Root"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ruffian"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Russell Reagan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "RuyDos"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rybka"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rémi Coulom"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SMP"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SSDF"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sam Sloan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sargon"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Satoru Kawai"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SciSys Explorer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Score"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search Pathology"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search Tree"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search with Random Leaf Values"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Selective Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Selectivity"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sergei Markoff"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Shi-Jim Yen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Shogo Takeuchi"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Shredder"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Srdja Matovic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stefan Meyer-Kahlen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Steve Blincoe"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Steve Maughan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stockfish"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Syzygy Bases"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Søren Riis"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "TAAI 2018"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "TCEC Season 9"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Takeshi Ito"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tamal T. Biswas"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tamás Kuzmics"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tech"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Test-Positions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Thread"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Time Management"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tom King"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tomoyuki Kaneko"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tony Marsland"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tord Romstad"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Trevor Fenner"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tristan Cazenave"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tsan-sheng Hsu"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "UCI"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "University of Ljubljana"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Uri Blass"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Warren D. Smith"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Wen-Jie Tseng"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Yoshikuni Sato"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Yves De Billoëz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Álvaro Begué"
+      },
+      {
+        "ns": 0,
+        "*": "Erik Varend"
+      },
+      {
+        "ns": 0,
+        "*": "Gary L. Ratliff"
+      },
+      {
+        "ns": 0,
+        "*": "John Shaposka"
+      },
+      {
+        "ns": 0,
+        "*": "Luis Antunes"
+      },
+      {
+        "ns": 0,
+        "*": "Luis Moniz"
+      },
+      {
+        "ns": 0,
+        "*": "Carlos Azevedo"
+      },
+      {
+        "ns": 0,
+        "*": "Mark E. Glickman"
+      },
+      {
+        "ns": 0,
+        "*": "Dark Thought"
+      },
+      {
+        "ns": 0,
+        "*": "Giuseppe Di Fatta"
+      },
+      {
+        "ns": 0,
+        "*": "Bartłomiej Macieja"
+      },
+      {
+        "ns": 0,
+        "*": "Marie-Liesse Cauwet"
+      },
+      {
+        "ns": 0,
+        "*": "Hua-Min Liang"
+      },
+      {
+        "ns": 0,
+        "*": "Sendhil Mullainathan"
+      },
+      {
+        "ns": 0,
+        "*": "Takafumi Nakamichi"
+      },
+      {
+        "ns": 0,
+        "*": "Yuuto Kosaka"
+      },
+      {
+        "ns": 0,
+        "*": "Leszek Szczecinski"
+      },
+      {
+        "ns": 0,
+        "*": "Aymen Djebbi"
+      },
+      {
+        "ns": 0,
+        "*": "Alexander Schmidt"
+      },
+      {
+        "ns": 0,
+        "*": "Jesús Muñoz"
+      },
+      {
+        "ns": 0,
+        "*": "Henk van den Belt"
+      },
+      {
+        "ns": 0,
+        "*": "Chess.com"
+      },
+      {
+        "ns": 0,
+        "*": "Dan Ross"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Chicago"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Flottmann"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Industrial Heritage Trail"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Measuring",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Playing_Strength",
+        "byteoffset": 2693,
+        "anchor": "Measuring"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Strength",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Playing_Strength",
+        "byteoffset": 4328,
+        "anchor": "Strength"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Computer Analysis of Human Players",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Playing_Strength",
+        "byteoffset": 5386,
+        "anchor": "Computer_Analysis_of_Human_Players"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Playing_Strength",
+        "byteoffset": 5750,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "5",
+        "index": "5",
+        "fromtitle": "Playing_Strength",
+        "byteoffset": 6233,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1970 ...",
+        "number": "5.1",
+        "index": "6",
+        "fromtitle": "Playing_Strength",
+        "byteoffset": 6248,
+        "anchor": "1970_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1980 ...",
+        "number": "5.2",
+        "index": "7",
+        "fromtitle": "Playing_Strength",
+        "byteoffset": 8531,
+        "anchor": "1980_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1990 ...",
+        "number": "5.3",
+        "index": "8",
+        "fromtitle": "Playing_Strength",
+        "byteoffset": 11471,
+        "anchor": "1990_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "5.4",
+        "index": "9",
+        "fromtitle": "Playing_Strength",
+        "byteoffset": 13873,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2005 ...",
+        "number": "5.5",
+        "index": "10",
+        "fromtitle": "Playing_Strength",
+        "byteoffset": 15179,
+        "anchor": "2005_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "5.6",
+        "index": "11",
+        "fromtitle": "Playing_Strength",
+        "byteoffset": 18242,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "5.7",
+        "index": "12",
+        "fromtitle": "Playing_Strength",
+        "byteoffset": 22093,
+        "anchor": "2015_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Postings",
+        "number": "6",
+        "index": "13",
+        "fromtitle": "Playing_Strength",
+        "byteoffset": 25400,
+        "anchor": "Postings"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1982 ...",
+        "number": "6.1",
+        "index": "14",
+        "fromtitle": "Playing_Strength",
+        "byteoffset": 25412,
+        "anchor": "1982_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1990 ...",
+        "number": "6.2",
+        "index": "15",
+        "fromtitle": "Playing_Strength",
+        "byteoffset": 25690,
+        "anchor": "1990_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1995 ...",
+        "number": "6.3",
+        "index": "16",
+        "fromtitle": "Playing_Strength",
+        "byteoffset": 26478,
+        "anchor": "1995_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "6.4",
+        "index": "17",
+        "fromtitle": "Playing_Strength",
+        "byteoffset": 27759,
+        "anchor": "2000_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2005 ...",
+        "number": "6.5",
+        "index": "18",
+        "fromtitle": "Playing_Strength",
+        "byteoffset": 28419,
+        "anchor": "2005_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "6.6",
+        "index": "19",
+        "fromtitle": "Playing_Strength",
+        "byteoffset": 30828,
+        "anchor": "2010_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "6.7",
+        "index": "20",
+        "fromtitle": "Playing_Strength",
+        "byteoffset": 35956,
+        "anchor": "2015_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "6.8",
+        "index": "21",
+        "fromtitle": "Playing_Strength",
+        "byteoffset": 46265,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "7",
+        "index": "22",
+        "fromtitle": "Playing_Strength",
+        "byteoffset": 49160,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Chess Player",
+        "number": "7.1",
+        "index": "23",
+        "fromtitle": "Playing_Strength",
+        "byteoffset": 49177,
+        "anchor": "Chess_Player"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Chess Engines",
+        "number": "7.2",
+        "index": "24",
+        "fromtitle": "Playing_Strength",
+        "byteoffset": 49942,
+        "anchor": "Chess_Engines"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Analysis",
+        "number": "7.3",
+        "index": "25",
+        "fromtitle": "Playing_Strength",
+        "byteoffset": 51236,
+        "anchor": "Analysis"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Rating Systems",
+        "number": "7.4",
+        "index": "26",
+        "fromtitle": "Playing_Strength",
+        "byteoffset": 52105,
+        "anchor": "Rating_Systems"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Misc",
+        "number": "7.5",
+        "index": "27",
+        "fromtitle": "Playing_Strength",
+        "byteoffset": 53608,
+        "anchor": "Misc"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "8",
+        "index": "28",
+        "fromtitle": "Playing_Strength",
+        "byteoffset": 54805,
+        "anchor": "References"
+      }
+    ]
+  }
+}

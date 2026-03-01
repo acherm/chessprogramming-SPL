@@ -1,0 +1,521 @@
+{
+  "parse": {
+    "title": "Chess Position",
+    "pageid": 1240,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Chess\" title=\"Chess\">Chess</a> * Position</b> \n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:282px;\"><a href=\"http://www.slu.edu/sluma-home/past-exhibitions/2009/duchamp\"><img alt=\"\" src=\"/images/6/6d/DuchampGlassBoard.jpg\" width=\"280\" height=\"279\" class=\"thumbimage\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:DuchampGlassBoard.jpg\" class=\"internal\" title=\"Enlarge\"></a></div><a href=\"/Category:Marcel_Duchamp\" title=\"Category:Marcel Duchamp\">Marcel Duchamp</a> <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup></div></div></div> \n<p>The <b>Chess Position</b> describes how <a href=\"/Pieces\" title=\"Pieces\">pieces</a> are placed on the <a href=\"/Chessboard\" title=\"Chessboard\">chessboard</a>, as printed as chess diagram, image or photograph from a <a href=\"/Chess_Game\" title=\"Chess Game\">game of chess</a>. In 1996 <a href=\"/Shirish_Chinchalkar\" title=\"Shirish Chinchalkar\">Shirish Chinchalkar</a> determined 10<span style=\"vertical-align: super; font-size: 90%;\">46</span> as upper bound for the number of reachable chess positions <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>. The <a href=\"/Encoding_Moves#MoveIndex\" title=\"Encoding Moves\">maximum number of moves</a> in any reachable chess position is 218 <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup><sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup>.\n</p><p>Of course, the information of any arbitrary chess position which occurs inside the game of chess, might be determined from a certain initial starting position and a <a href=\"/Move_List\" title=\"Move List\">sequence of moves</a> (half-moves), which leads to this position. Anyway, an efficient data structure for a chess position, which is <a href=\"/Incremental_Updates\" title=\"Incremental Updates\">incrementally updated</a> during game play and <a href=\"/Search\" title=\"Search\">search</a> is essential for a chess playing program. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Specifying_a_Chess_Position\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Specifying a Chess Position</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Summary\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Summary</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Positions_inside_the_Search\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Positions inside the Search</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Positions\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Positions</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#Notations\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Notations</span></a></li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#Flipping_and_Mirroring\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Flipping and Mirroring</span></a></li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#See_Also\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">See Also</span></a></li>\n<li class=\"toclevel-1 tocsection-8\"><a href=\"#Publications\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">Publications</span></a></li>\n<li class=\"toclevel-1 tocsection-9\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">9</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#1980_...\"><span class=\"tocnumber\">9.1</span> <span class=\"toctext\">1980 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#1990_...\"><span class=\"tocnumber\">9.2</span> <span class=\"toctext\">1990 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-12\"><a href=\"#2000_...\"><span class=\"tocnumber\">9.3</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-13\"><a href=\"#2010_...\"><span class=\"tocnumber\">9.4</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-14\"><a href=\"#2015_...\"><span class=\"tocnumber\">9.5</span> <span class=\"toctext\">2015 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-15\"><a href=\"#2020_...\"><span class=\"tocnumber\">9.6</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-16\"><a href=\"#External_Links\"><span class=\"tocnumber\">10</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-17\"><a href=\"#References\"><span class=\"tocnumber\">11</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Specifying_a_Chess_Position\">Specifying a Chess Position</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Chess_Position&amp;action=edit&amp;section=1\" title=\"Edit section: Specifying a Chess Position\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Except the determination of three fold <a href=\"/Repetitions\" title=\"Repetitions\">repetitions</a>, which requires the whole move record, at least from the last <a href=\"/Irreversible_Moves\" title=\"Irreversible Moves\">irreversible move</a> (half-move) played, the chess position should keep track of various informations related to the position also for efficiency reasons. Another issue is to make chess positions persistent with a maximum of information required, but without the whole game history, as specified by the <a href=\"/Forsyth-Edwards_Notation\" title=\"Forsyth-Edwards Notation\">Forsyth-Edwards Notation</a> or <a href=\"/Extended_Position_Description\" title=\"Extended Position Description\">Extended Position Description</a>.\n</p><p>Beside piece placement, as considered by the <a href=\"/Board_Representation\" title=\"Board Representation\">board representation</a>, the <a href=\"/Side_to_move\" title=\"Side to move\">side to move</a> is essential, which might take only one <a href=\"/Bit\" title=\"Bit\">bit</a> inside an appropriate data structure for a chess position. Additionally, the <a href=\"/Castling\" title=\"Castling\">Castling</a> ability for both sides, as reflected by the <a href=\"/Castling_Rights\" title=\"Castling Rights\">castling rights</a> and a possible <a href=\"/En_passant\" title=\"En passant\">en passant</a> target square (or <a href=\"/Files\" title=\"Files\">file</a>) is needed to further completely specify the position, as well as the <a href=\"/Halfmove_Clock\" title=\"Halfmove Clock\">halfmove clock</a> to cover the <a href=\"/Fifty-move_Rule\" title=\"Fifty-move Rule\">fifty-move rule</a>.\n</p>\n<h1><span class=\"mw-headline\" id=\"Summary\">Summary</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Chess_Position&amp;action=edit&amp;section=2\" title=\"Edit section: Summary\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>A chess positions consists of\n</p>\n<ul><li> <a href=\"/Pieces\" title=\"Pieces\">Piece</a> placement on the <a href=\"/Chessboard\" title=\"Chessboard\">Chessboard</a> as considered by the <a href=\"/Board_Representation\" title=\"Board Representation\">Board Representation</a></li>\n<li> <a href=\"/Side_to_move\" title=\"Side to move\">Side to move</a></li>\n<li> <a href=\"/Castling_Rights\" title=\"Castling Rights\">Castling Rights</a></li>\n<li> <a href=\"/En_passant\" title=\"En passant\">En passant</a> target square</li>\n<li> <a href=\"/Halfmove_Clock\" title=\"Halfmove Clock\">Halfmove Clock</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Positions_inside_the_Search\">Positions inside the Search</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Chess_Position&amp;action=edit&amp;section=3\" title=\"Edit section: Positions inside the Search\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>In the context of Search, a position is the <a href=\"/Node\" title=\"Node\">node</a> inside a <a href=\"/Search_Tree\" title=\"Search Tree\">search tree</a>. To completely determine the position with respect to <a href=\"/Repetitions\" title=\"Repetitions\">repetitions</a>, one additionally needs a <a href=\"/Move_List\" title=\"Move List\">move list</a> or any other appropriate data structure, to keep up to 100 reversible half-moves, likely associated with <a href=\"/Zobrist_Hashing\" title=\"Zobrist Hashing\">Zobrist keys</a> of the intermediate positions. \n</p>\n<ul><li> <a href=\"/Incremental_Updates\" title=\"Incremental Updates\">Incremental Updates</a></li>\n<li> <a href=\"/Copy-Make\" title=\"Copy-Make\">Copy-Make</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Positions\">Positions</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Chess_Position&amp;action=edit&amp;section=4\" title=\"Edit section: Positions\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Initial_Position\" title=\"Initial Position\">Initial Position</a></li>\n<li> <a href=\"/Test-Positions\" title=\"Test-Positions\">Test-Positions</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Notations\">Notations</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Chess_Position&amp;action=edit&amp;section=5\" title=\"Edit section: Notations\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Extended_Position_Description\" title=\"Extended Position Description\">Extended Position Description</a> (EPD)</li>\n<li> <a href=\"/Forsyth-Edwards_Notation\" title=\"Forsyth-Edwards Notation\">Forsyth-Edwards Notation</a> (FEN)</li>\n<li> <a href=\"/index.php?title=Forsyth-Edwards_Expanded_Notation&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Forsyth-Edwards Expanded Notation (page does not exist)\">Forsyth-Edwards Expanded Notation</a> (FEEN)</li></ul>\n<h1><span class=\"mw-headline\" id=\"Flipping_and_Mirroring\">Flipping and Mirroring</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Chess_Position&amp;action=edit&amp;section=6\" title=\"Edit section: Flipping and Mirroring\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Color_Flipping\" title=\"Color Flipping\">Color Flipping</a></li>\n<li> <a href=\"/Diagonal_Mirroring\" title=\"Diagonal Mirroring\">Diagonal Mirroring</a></li>\n<li> <a href=\"/Horizontal_Mirroring\" title=\"Horizontal Mirroring\">Horizontal Mirroring</a></li>\n<li> <a href=\"/Vertical_Flipping\" title=\"Vertical Flipping\">Vertical Flipping</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"See_Also\">See Also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Chess_Position&amp;action=edit&amp;section=7\" title=\"Edit section: See Also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Board_Representation\" title=\"Board Representation\">Board Representation</a></li>\n<li> <a href=\"/Chess_Game\" title=\"Chess Game\">Chess Game</a></li>\n<li> <a href=\"/Chess#Maxima\" title=\"Chess\">Chess Maxima</a></li>\n<li> <a href=\"/Chessboard\" title=\"Chessboard\">Chessboard</a></li>\n<li> <a href=\"/Graphics_Programming\" title=\"Graphics Programming\">Graphics Programming</a></li>\n<li> <a href=\"/Moves\" title=\"Moves\">Moves</a></li>\n<li> <a href=\"/Node\" title=\"Node\">Node</a></li>\n<li> <a href=\"/Pieces\" title=\"Pieces\">Pieces</a></li></ul>\n<dl><dd> <a href=\"/Piece_Recognition\" title=\"Piece Recognition\">Piece Recognition</a></dd></dl>\n<ul><li> <a href=\"/Retrograde_Analysis\" title=\"Retrograde Analysis\">Retrograde Analysis</a></li>\n<li> <a href=\"/Transposition\" title=\"Transposition\">Transposition</a></li>\n<li> <a href=\"/User_Interface\" title=\"User Interface\">User Interface</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Chess_Position&amp;action=edit&amp;section=8\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/J%C3%BCrg_Nievergelt\" title=\"Jürg Nievergelt\">Jürg Nievergelt</a> (<b>1977</b>). <i>Information content of chess positions.</i> ACM SIGART Newsletter 62, pp. 13-14. Reprinted as: <i>Information content of chess positions: Implications for game-specific knowledge of chess players</i>, pp. 283-289. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.doc.ic.ac.uk/~shm/MI/mi12.html\">Machine Intelligence 12</a> (eds. <a href=\"/Jean_Hayes_Michie\" title=\"Jean Hayes Michie\">Jean Hayes Michie</a>, <a href=\"/Donald_Michie\" title=\"Donald Michie\">Donald Michie</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.ioc.ee/~tyugu/\">E. Tyugu</a>). Clarendon Press, Oxford, 1991. ISBN 0-19-853823-5.</li>\n<li> <a href=\"/Bernhard_Balkenhol\" title=\"Bernhard Balkenhol\">Bernhard Balkenhol</a> (<b>1994</b>). <i>Data Compression in Encoding Chess Positions.</i> <a href=\"/ICGA_Journal#17_3\" title=\"ICGA Journal\">ICCA Journal, Vol. 17, No. 3</a>,  <a rel=\"nofollow\" class=\"external text\" href=\"http://www.balkenhol.net/papers/icca94.ps.gz\">zipped ps</a></li>\n<li> <a href=\"/Shirish_Chinchalkar\" title=\"Shirish Chinchalkar\">Shirish Chinchalkar</a> (<b>1996</b>). <i>An Upper Bound for the Number of Reachable Positions</i>. <a href=\"/ICGA_Journal#19_3\" title=\"ICGA Journal\">ICCA Journal, Vol. 19, No. 3</a></li>\n<li> <a href=\"/Alex_de_Voogt\" title=\"Alex de Voogt\">Alex de Voogt</a> (<b>2002</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://psycnet.apa.org/index.cfm?fa=buy.optionToBuy&amp;id=2003-03501-005\">Reproducing board game positions: Western Chess and African Bao</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.verlag-hanshuber.com/zeitschriften/journal.php?abbrev=sjp&amp;show=editorial\">Swiss Journal of Psychology</a>, Vol 61, No. 4</li>\n<li> <a href=\"/Manuel_Crist%C3%B3bal_L%C3%B3pez-Michelone\" title=\"Manuel Cristóbal López-Michelone\">Manuel Cristóbal López-Michelone</a>, <a href=\"/Jorge_Luis_Ortega-Arjona\" title=\"Jorge Luis Ortega-Arjona\">Jorge Luis Ortega-Arjona</a> (<b>2020</b>). <i>A description language for chess</i>. <a href=\"/ICGA_Journal#42_1\" title=\"ICGA Journal\">ICGA Journal, Vol. 42, No. 1</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Chess_Position&amp;action=edit&amp;section=9\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1980_...\">1980 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Chess_Position&amp;action=edit&amp;section=10\" title=\"Edit section: 1980 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://quux.org:70/Archives/usenet-a-news/NET.chess/82.01.05_sri-unix.426_net.chess.txt\">sri-unix.426: compact representation of a position</a> by <a href=\"/index.php?title=Bill_Vaughan&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Bill Vaughan (page does not exist)\">Bill Vaughan</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://quux.org:70/Archives/usenet-a-news/NET.chess\">net.chess</a> January 5, 1982 </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://quux.org:70/Archives/usenet-a-news/NET.chess/82.01.05_duke.1553_net.chess.txt\">Re: sri-unix.426: compact representation of a position</a> by <a href=\"/Tom_Truscott\" title=\"Tom Truscott\">Tom Truscott</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://quux.org:70/Archives/usenet-a-news/NET.chess\">net.chess</a>, January 5, 1982</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://quux.org:70/Archives/usenet-a-news/NET.chess/82.01.07_duke.1593_net.chess.txt\">Re: sri-unix.444: compact representation of chess positions</a> by  <a href=\"/Tom_Truscott\" title=\"Tom Truscott\">Tom Truscott</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://quux.org:70/Archives/usenet-a-news/NET.chess\">net.chess</a>, January 7, 1982&#160;» <a href=\"/Zobrist_Hashing\" title=\"Zobrist Hashing\">Zobrist Hashing</a> <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup></li></ul>\n<h2><span class=\"mw-headline\" id=\"1990_...\">1990 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Chess_Position&amp;action=edit&amp;section=11\" title=\"Edit section: 1990 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess/pyM6LfZPbvY/DO2V0y4BezIJ\">entropy of chess positions</a> by <a href=\"/John_Tromp\" title=\"John Tromp\">John Tromp</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgc</a>, April 15, 1991</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/c15c92ded7ed6400/\">estimated number of chesspositions</a> by <a href=\"/Vincent_Diepeveen\" title=\"Vincent Diepeveen\">Vincent Diepeveen</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, October 27, 1995</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=69647\">number of moves in position</a> by <a href=\"/Leonid_Liberman\" title=\"Leonid Liberman\">Leonid</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 19, 1999</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=69704\">Re: number of moves in position</a> by <a href=\"/Leonid_Liberman\" title=\"Leonid Liberman\">Leonid</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 21, 1999</dd></dl>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Chess_Position&amp;action=edit&amp;section=12\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=106847\">Min # of bits needed to store a chess position</a> by <a href=\"/James_Robertson\" title=\"James Robertson\">James Robertson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 20, 2000</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://mathforum.org/kb/message.jspa?messageID=364071\">Minimum bits to encode a chess position</a> by Ken Payson, <a rel=\"nofollow\" class=\"external text\" href=\"http://mathforum.org/\">The Math Forum @ Drexel University</a>, February 8, 2002</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=323898\">Making positions in eps</a> by <a href=\"/Jan_Renze_Steenhuisen\" title=\"Jan Renze Steenhuisen\">Renze Steenhuisen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 27, 2003&#160;» <a href=\"/Forsyth-Edwards_Notation#FEN2EPS\" title=\"Forsyth-Edwards Notation\">Fen2eps</a> </li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Chess_Position&amp;action=edit&amp;section=13\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48952\">allowing invalid positions</a> by Eric Langedijk, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 13, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=50832\">Counting endgame positions</a> by <a href=\"/Kirill_Kryukov\" title=\"Kirill Kryukov\">Kirill Kryukov</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 08, 2014 <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=51744\">Total possible chess positions?</a> by <a href=\"/Matthew_R._Brades\" title=\"Matthew R. Brades\">Matthew R. Brades</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 26, 2014 &#160;» <a href=\"/Chess#Maxima\" title=\"Chess\">Chess Maxima</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=52214\">Position validity</a> by <a href=\"/Russell_Reagan\" title=\"Russell Reagan\">Russell Reagan</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 04, 2014</li></ul>\n<h2><span class=\"mw-headline\" id=\"2015_...\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Chess_Position&amp;action=edit&amp;section=14\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=57065\">Binary FEN</a> by <a href=\"/index.php?title=J._Wesley_Cleveland&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"J. Wesley Cleveland (page does not exist)\">J. Wesley Cleveland</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 24, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61792\">Max moves in a position</a> by <a href=\"/Laurie_Tunnicliffe\" title=\"Laurie Tunnicliffe\">Laurie Tunnicliffe</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 22, 2016&#160;» <a href=\"/Chess#Maxima\" title=\"Chess\">Chess Maxima</a>, <a href=\"/Move_List\" title=\"Move List\">Move List</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Chess_Position&amp;action=edit&amp;section=15\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=73614\">Canonical Position Representation</a> by Dmitry Shechtman, <a href=\"/CCC\" title=\"CCC\">CCC</a>,  April 10, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=77685\">On the number of chess positions</a> by <a href=\"/John_Tromp\" title=\"John Tromp\">John Tromp</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 09, 2021</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=77685&amp;start=34\">Re: On the number of chess positions</a> by <a href=\"/John_Tromp\" title=\"John Tromp\">John Tromp</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 02, 2022</dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=77685&amp;start=42\">Re: On the number of chess positions</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 03, 2022&#160;» <a href=\"/Retrograde_Analysis\" title=\"Retrograde Analysis\">Retrograde Analysis</a></dd></dl>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Chess_Position&amp;action=edit&amp;section=16\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/tromp/ChessPositionRanking\">GitHub - tromp/ChessPositionRanking: Software suite for ranking chess positions and accurately estimating the number of legal chess positions</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://stackoverflow.com/questions/1831386/programmer-puzzle-encoding-a-chess-board-state-throughout-a-game\">Puzzle: Encoding a chess board state throughout a game</a> from <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Stack_Overflow\">Stack Overflow</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.chesspositiontrainer.com/index.php/en/\">Chess Position Trainer</a> by Stefan Renzewitz and Gregory Prentice</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://kirill-kryukov.com/chess/nulp/\">NULP in chess endgames</a> by <a href=\"/Kirill_Kryukov\" title=\"Kirill Kryukov\">Kirill Kryukov</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Chess_Position&amp;action=edit&amp;section=17\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\">Photo by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Arnold_T._Rosenberg\">Arnold T. Rosenberg</a>, <a href=\"/Category:Marcel_Duchamp\" title=\"Category:Marcel Duchamp\">Marcel Duchamp</a> playing chess on a sheet of Glass, 1958, see <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Francis_Naumann\">Francis M. Naumann</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://www.slu.edu/arts-and-sciences/fine-and-performing-arts/faculty/bailey-bradley.php\">Bradley Bailey</a> (<b>2009</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.francisnaumann.com/Chess%20Book/\">Marcel Duchamp: The Art of Chess</a></i></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.slu.edu/sluma-home/past-exhibitions/2009/duchamp\">Marcel Duchamp: Chess Master</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.slu.edu/sluma-home\">Saint Louis University Museum of Art</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Saint_Louis_University\">Saint Louis University&#160;: SLU</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a href=\"/Shirish_Chinchalkar\" title=\"Shirish Chinchalkar\">Shirish Chinchalkar</a> (<b>1996</b>). <i>An Upper Bound for the Number of Reachable Positions</i>. <a href=\"/ICGA_Journal#19_3\" title=\"ICGA Journal\">ICCA Journal, Vol. 19, No. 3</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=424966\">Subject: Maximum Number of Legal Moves</a> by <a href=\"/Andrew_Shapira\" title=\"Andrew Shapira\">Andrew Shapira</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 08, 2005</span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://lichess.org/@/Tobs40/blog/why-a-position-cant-have-more-than-218-moves/a5xdxeqs\">Why a position can't have more than 218 moves.</a> by Tobs40, <a href=\"/index.php?title=Lichess&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Lichess (page does not exist)\">Lichess</a>, May 7, 2024</span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/a0a82ffbb59b7ced\">Re: Hashing function for board positions</a> post 4 by <a href=\"/James_Gillogly\" title=\"James Gillogly\">Jim Gillogly</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, May 12, 1997</span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://kirill-kryukov.com/chess/nulp/\">NULP  in chess endgames</a> by <a href=\"/Kirill_Kryukov\" title=\"Kirill Kryukov\">Kirill Kryukov</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Chess\" title=\"Chess\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301032539\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.030 seconds\nReal time usage: 0.032 seconds\nPreprocessor visited node count: 169/1000000\nPreprocessor generated node count: 316/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1240-0!canonical and timestamp 20260301032539 and revision id 27397\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Marcel_Duchamp"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alex de Voogt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Andrew Shapira"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bernhard Balkenhol"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bit"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Board Representation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Castling"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Castling Rights"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Game"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chessboard"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Color Flipping"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Copy-Make"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Diagonal Mirroring"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Donald Michie"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "En passant"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Encoding Moves"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Extended Position Description"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fifty-move Rule"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Files"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Forsyth-Edwards Notation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Graphics Programming"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Halfmove Clock"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Horizontal Mirroring"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA Journal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Incremental Updates"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Initial Position"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Irreversible Moves"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "James Gillogly"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "James Robertson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jan Renze Steenhuisen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jean Hayes Michie"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "John Tromp"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jorge Luis Ortega-Arjona"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jürg Nievergelt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kirill Kryukov"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Laurie Tunnicliffe"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Leonid Liberman"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Manuel Cristóbal López-Michelone"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Matthew R. Brades"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move List"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Moves"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Node"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter Österlund"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Piece Recognition"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pieces"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Repetitions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Retrograde Analysis"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Russell Reagan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search Tree"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Shirish Chinchalkar"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Side to move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Test-Positions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tom Truscott"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "User Interface"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vertical Flipping"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vincent Diepeveen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Zobrist Hashing"
+      },
+      {
+        "ns": 0,
+        "*": "Lichess"
+      },
+      {
+        "ns": 0,
+        "*": "Forsyth-Edwards Expanded Notation"
+      },
+      {
+        "ns": 0,
+        "*": "Bill Vaughan"
+      },
+      {
+        "ns": 0,
+        "*": "J. Wesley Cleveland"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Marcel Duchamp"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Specifying a Chess Position",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Chess_Position",
+        "byteoffset": 2302,
+        "anchor": "Specifying_a_Chess_Position"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Summary",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Chess_Position",
+        "byteoffset": 3430,
+        "anchor": "Summary"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Positions inside the Search",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Chess_Position",
+        "byteoffset": 3662,
+        "anchor": "Positions_inside_the_Search"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Positions",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Chess_Position",
+        "byteoffset": 4133,
+        "anchor": "Positions"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Notations",
+        "number": "5",
+        "index": "5",
+        "fromtitle": "Chess_Position",
+        "byteoffset": 4190,
+        "anchor": "Notations"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Flipping and Mirroring",
+        "number": "6",
+        "index": "6",
+        "fromtitle": "Chess_Position",
+        "byteoffset": 4329,
+        "anchor": "Flipping_and_Mirroring"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See Also",
+        "number": "7",
+        "index": "7",
+        "fromtitle": "Chess_Position",
+        "byteoffset": 4452,
+        "anchor": "See_Also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "8",
+        "index": "8",
+        "fromtitle": "Chess_Position",
+        "byteoffset": 4711,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "9",
+        "index": "9",
+        "fromtitle": "Chess_Position",
+        "byteoffset": 6007,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1980 ...",
+        "number": "9.1",
+        "index": "10",
+        "fromtitle": "Chess_Position",
+        "byteoffset": 6021,
+        "anchor": "1980_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1990 ...",
+        "number": "9.2",
+        "index": "11",
+        "fromtitle": "Chess_Position",
+        "byteoffset": 7032,
+        "anchor": "1990_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "9.3",
+        "index": "12",
+        "fromtitle": "Chess_Position",
+        "byteoffset": 7700,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "9.4",
+        "index": "13",
+        "fromtitle": "Chess_Position",
+        "byteoffset": 8248,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "9.5",
+        "index": "14",
+        "fromtitle": "Chess_Position",
+        "byteoffset": 8916,
+        "anchor": "2015_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "9.6",
+        "index": "15",
+        "fromtitle": "Chess_Position",
+        "byteoffset": 9229,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "10",
+        "index": "16",
+        "fromtitle": "Chess_Position",
+        "byteoffset": 9857,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "11",
+        "index": "17",
+        "fromtitle": "Chess_Position",
+        "byteoffset": 10509,
+        "anchor": "References"
+      }
+    ]
+  }
+}

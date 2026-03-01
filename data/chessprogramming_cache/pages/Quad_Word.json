@@ -1,0 +1,48 @@
+{
+  "title": "Quad Word",
+  "url": "https://www.chessprogramming.org/Quad_Word",
+  "source_type": "api",
+  "retrieved_at": "2026-03-01T08:54:47.029874+00:00",
+  "content_hash": "b827c689a8a3ed2a4b055ab521011a15ca1289ba5efaadd0dc87aadf7466bd6e",
+  "text": "Home * Programming * Data * Quad Word According to Intel's definition of a x86 16-bit Word , a Quad Word refers a 64-bit word. Contents 1 long long or long 2 Bitboards 3 Ranges 4 Alignment 5 Endianness 5.1 Litte-endian Layout 5.2 Big-endian Layout 6 See also 7 External Links long long or long [ edit ] Microsoft 64-bit C -compiler long is still 32-bit Double Word , while 64-bit GCC uses 64-bit Quad Words as longs. Other compiler require \"long long\" for 64-bit types. typedef unsigned long QWORD; typedef unsigned long long QWORD; Bitboards [ edit ] Quad words are used as bitboard datatype: typedef QWORD U64; typedef QWORD Bitboard; Ranges [ edit ] language type min max C , C++ unsigned long long 0 18,446,744,073,709,551,615 hexadecimal 0x0000000000000000 0xFFFFFFFFFFFFFFFF C , C++ , Java long long -9,223,372,036,854,775,808 9,223,372,036,854,775,807 hexadecimal 0x8000000000000000 0x7FFFFFFFFFFFFFFF Alignment [ edit ] Quad Words stored in memory should be stored at byte addresses divisible by eight. Otherwise at runtime it will cause a miss-alignment exception on some processors, or a huge penalty on others. Endianness [ edit ] Main article: Endianness . Litte-endian Layout [ edit ] The little-endian memory layout, as typical for Intel cpus. For instance the quad word integer 0x0102030405060708 Address Byte Significance 0x0000 0x08 LS Byte 0x0001 0x07 0x0002 0x06 0x0003 0x05 0x0004 0x04 0x0005 0x03 0x0006 0x02 0x0008 0x01 MS Byte Big-endian Layout [ edit ] The big-endian memory layout, as typical for Motorola cpus. For instance the quad word integer 0x0102030405060708 Address Byte Significance 0x0000 0x01 MS Byte 0x0001 0x02 0x0002 0x03 0x0003 0x04 0x0004 0x05 0x0005 0x06 0x0006 0x07 0x0007 0x08 LS Byte See also [ edit ] Byte Word Double Word Bitboards External Links [ edit ] Dword, Qword, and Oword from Wikipedia Byte from Wikipedia Endianness from Wikipedia Understanding Big and Little Endian Byte Order IEN 137 - DAV's Endian FAQ - On Holy Wars and a Plea for Peace by Danny Cohen , U S C/I S I , April 1, 1980 Up one Level",
+  "headings": [
+    "Contents",
+    "long long or long[edit]",
+    "Bitboards[edit]",
+    "Ranges[edit]",
+    "Alignment[edit]",
+    "Endianness[edit]",
+    "Litte-endian Layout[edit]",
+    "Big-endian Layout[edit]",
+    "See also[edit]",
+    "External Links[edit]"
+  ],
+  "links": [
+    "Big-endian",
+    "Bitboards",
+    "Byte",
+    "C",
+    "Cpp",
+    "Data",
+    "Double Word",
+    "Endianness",
+    "Free Software Foundation",
+    "Intel",
+    "Java",
+    "Little-endian",
+    "Main Page",
+    "Motorola",
+    "Programming",
+    "Word",
+    "X86",
+    "index.php"
+  ],
+  "bold_terms": [
+    "Home * Programming * Data * Quad Word",
+    "Quad Word",
+    "Up one Level"
+  ],
+  "categories": [],
+  "page_type": "technique",
+  "raw_payload_path": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/data/chessprogramming_cache/raw/Quad_Word.api.json"
+}

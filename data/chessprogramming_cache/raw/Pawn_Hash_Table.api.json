@@ -1,0 +1,389 @@
+{
+  "parse": {
+    "title": "Pawn Hash Table",
+    "pageid": 1555,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Evaluation\" title=\"Evaluation\">Evaluation</a> * <a href=\"/Pawn_Structure\" title=\"Pawn Structure\">Pawn Structure</a> * Pawn Hash Table</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:194px;\"><a href=\"http://www.elke-rehder.de/Chess_Woodcuts.htm\"><img alt=\"\" src=\"/images/e/e1/Elke_Rehder_Chess_Schach_Woodcut_Pawns_King_Bauer_Koenig.jpg\" width=\"192\" height=\"260\" class=\"thumbimage\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Elke_Rehder_Chess_Schach_Woodcut_Pawns_King_Bauer_Koenig.jpg\" class=\"internal\" title=\"Enlarge\"></a></div>Pawns threaten the King <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p>A <b>Pawn Hash Table</b> is often used inside a chess programs to <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Cache\">cache</a> purely <a href=\"/Pawn\" title=\"Pawn\">pawn</a> related <a href=\"/Pawn_Pattern_and_Properties\" title=\"Pawn Pattern and Properties\">pattern</a> and <a href=\"/Pawn_Structure\" title=\"Pawn Structure\">evaluation</a> stuff. Compared to the <a href=\"/Transposition_Table\" title=\"Transposition Table\">main transposition table</a>, since the <a href=\"/Pawn_Structure\" title=\"Pawn Structure\">pawn structure</a> inside the <a href=\"/Search\" title=\"Search\">search</a> changes rarely or transpose, the number of cached entries required might be quite low (a few K) to get a sufficient hit rate above 95% or even 99% for most positions, specially if the pawn structure is settled or relatively fixed after the <a href=\"/Opening\" title=\"Opening\">opening</a>. On the other hand, most programmers store not only pure aggregated pawn evaluation scores, but other computation expensive pawn structure stuff which is used in second pass <a href=\"/Evaluation\" title=\"Evaluation\">evaluation</a> considering <a href=\"/Pieces\" title=\"Pieces\">pieces</a> and <a href=\"/King\" title=\"King\">king</a>. Terms for various <a href=\"/Game_Phases\" title=\"Game Phases\">game phases</a> and king origins for all possible wings/center per side are often calculated <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Speculative_execution\">speculatively</a>, i.e. pawn shield or pawn storm stuff later used by <a href=\"/King_Safety\" title=\"King Safety\">king safety</a>.\n</p><p>While the content of the pawn hash table entry varies a lot between different chess programs and their implementation, it is not uncommon that one entry exceeds 1/2 K-Byte. Some programs store sets or <a href=\"/Bitboards\" title=\"Bitboards\">bitboards</a> of strong pawns (<a href=\"/Passed_Pawn\" title=\"Passed Pawn\">passers</a>, <a href=\"/Candidate_Passed_Pawn\" title=\"Candidate Passed Pawn\">candidates</a>), square of most advanced passer, different kind of <a href=\"/Weak_Pawns\" title=\"Weak Pawns\">weak pawn sets</a> and whatever else. Despite, some programs cache pawn-king stuff separately which requires king squares included inside the index calculation as well table entry for verifications. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Pawn_Hash_Index\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Pawn Hash Index</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#See_also\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#1999\"><span class=\"tocnumber\">3.1</span> <span class=\"toctext\">1999</span></a></li>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#2000_...\"><span class=\"tocnumber\">3.2</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-6\"><a href=\"#2005_...\"><span class=\"tocnumber\">3.3</span> <span class=\"toctext\">2005 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#2010_...\"><span class=\"tocnumber\">3.4</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#2015_...\"><span class=\"tocnumber\">3.5</span> <span class=\"toctext\">2015 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-9\"><a href=\"#External_Links\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-10\"><a href=\"#References\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Pawn_Hash_Index\">Pawn Hash Index</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pawn_Hash_Table&amp;action=edit&amp;section=1\" title=\"Edit section: Pawn Hash Index\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Most simple, common and recommend is to keep an <a href=\"/Incremental_Updates\" title=\"Incremental Updates\">incremental updated</a>, dedicated <a href=\"/Zobrist_Hashing\" title=\"Zobrist Hashing\">Zobrist</a>- or <a href=\"/BCH_Hashing\" title=\"BCH Hashing\">BCH-keys</a> similar to the <a href=\"/Transposition_Table\" title=\"Transposition Table\">main transposition table</a>, initialized from all squares occupied by pawns only, <a href=\"/Side_to_move\" title=\"Side to move\">side to move</a> does not matter. The update of that key is therefor only necessary for the relative rare pawn moves or captures with pawns as aggressor or victim. The hash table index is computed by key modulo number of entries, which might be a cheap and-instruction from the key for power of two sized tables.\n</p><p>Alternatively, considering hits from the <a href=\"/Transposition_Table\" title=\"Transposition Table\">transposition table</a>, or a dedicated <a href=\"/Evaluation_Hash_Table\" title=\"Evaluation Hash Table\">evaluation hash table</a>, one may use a fast <a href=\"/Hash_Table\" title=\"Hash Table\">hash function</a> to compute an index from the white and black pawn bitboards on the fly, i.e. either a modulo or a multiplication and shift à la <a href=\"/Magic_Bitboards\" title=\"Magic Bitboards\">magic bitboards</a> by the difference of the disjoint pawn sets <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup> . To verify correct entries while probing, one needs either to store (a part) of the dedicated Zobrist/BCH key, or for 100% correctness 2*48 bits from the pawn occupancy bitboards. This value could be further compressed with the expense of more calculation overhead by means of n-like men:\n</p>\n<div class=\"floatnone\"><a href=\"/File:PawnHashFormla.jpg\" class=\"image\"><img alt=\"PawnHashFormla.jpg\" src=\"/images/2/21/PawnHashFormla.jpg\" width=\"446\" height=\"69\" style=\"vertical-align: text-bottom\" class=\"thumbborder\" /></a></div>\n<p>This can be further reduced by mirroring the board, considering symmetric positions or detecting illegal positions. \n</p>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pawn_Hash_Table&amp;action=edit&amp;section=2\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Evaluation_Hash_Table\" title=\"Evaluation Hash Table\">Evaluation Hash Table</a></li>\n<li> <a href=\"/Hash_Table\" title=\"Hash Table\">Hash Table</a></li>\n<li> <a href=\"/Material_Hash_Table\" title=\"Material Hash Table\">Material Hash Table</a></li>\n<li> <a href=\"/Material_Tables\" title=\"Material Tables\">Material Tables</a></li>\n<li> <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Table</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pawn_Hash_Table&amp;action=edit&amp;section=3\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1999\">1999</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pawn_Hash_Table&amp;action=edit&amp;section=4\" title=\"Edit section: 1999\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=61063\">Q: pawn hash?</a> by <a href=\"/Scott_Gasch\" title=\"Scott Gasch\">Scott Gasch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 20, 1999</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=68872\">regular hash key &amp; pawn hash key together - good idea?</a> by <a href=\"/Tom_Kerrigan\" title=\"Tom Kerrigan\">Tom Kerrigan</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 16, 1999</li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pawn_Hash_Table&amp;action=edit&amp;section=5\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=129406\">A question about pawn hash tables</a> by <a href=\"/Andreas_Herrmann\" title=\"Andreas Herrmann\">Andreas Herrmann</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 13, 2000</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=200037\">A few hashing questions</a> by <a href=\"/Severi_Salminen\" title=\"Severi Salminen\">Severi Salminen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 02, 2001</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=200496\">Pawn Hash Collisions in Crafty</a> by <a href=\"/David_Rasmussen\" title=\"David Rasmussen\">David Rasmussen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 05, 2001</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=200800\">Crafty's 32-bit pawn hash collision figures?</a> by <a href=\"/Severi_Salminen\" title=\"Severi Salminen\">Severi Salminen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 06, 2001</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=237159\">Pawn hash table: need some helps?</a> by <a href=\"/Pham_Hong_Nguyen\" title=\"Pham Hong Nguyen\">Pham Hong Nguyen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 23, 2002</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=266544\">Ultra small pawn hash efficiency</a> by <a href=\"/Vladimir_Medvedev\" title=\"Vladimir Medvedev\">Vladimir Medvedev</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 21, 2002</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=288402\">programmers: pawn hash tables</a> by Joel, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 08, 2003</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=309379\">pawn hash tables</a> by Joshua Lee, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 01, 2003</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=314386\">The key of pawn hash tables is based on what exactly?</a> by <a href=\"/Uri_Blass\" title=\"Uri Blass\">Uri Blass</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 06, 2003</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=315478\">Pawn hashing without Zobrist keys</a> by <a href=\"/Gerd_Isenberg\" title=\"Gerd Isenberg\">Gerd Isenberg</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 12, 2003</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=354696\">Pawn Hash Question</a> by <a href=\"/Dan_Honeycutt\" title=\"Dan Honeycutt\">Dan Honeycutt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 15, 2004</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/cfe3b4da78ee890b/928457251da6ff40\">Which pawn positions go into a pawn hash table?</a> by pd42, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, May 26, 2004</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=373656\">pawn hash</a> by <a href=\"/Tor_Lattimore\" title=\"Tor Lattimore\">Tor Lattimore</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 03, 2004</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=389201\">Initialization of pawn hash table</a> by <a href=\"/Zach_Wegner\" title=\"Zach Wegner\">Zach Wegner</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 26, 2004</li></ul>\n<h2><span class=\"mw-headline\" id=\"2005_...\">2005 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pawn_Hash_Table&amp;action=edit&amp;section=6\" title=\"Edit section: 2005 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=13673\">About pawn hash tables</a> by <a href=\"/Uri_Blass\" title=\"Uri Blass\">Uri Blass</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 10, 2007</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=15540\">An interesting bug in Hamsters</a> by <a href=\"/Alessandro_Scotti\" title=\"Alessandro Scotti\">Alessandro Scotti</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 02, 2007&#160;» <a href=\"/Hamsters\" title=\"Hamsters\">Hamsters</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pawn_Hash_Table&amp;action=edit&amp;section=7\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=32509\">Pawn Hash</a> by <a href=\"/Philippe_Gailhac\" title=\"Philippe Gailhac\">Philippe Gailhac</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 10, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=33334\">Pawn Hash</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 18, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=40470\">Possible pawn hash speed optimization?</a> by <a href=\"/John_Merlino\" title=\"John Merlino\">John Merlino</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 19, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=44369\">Is there a reasonable number of pawn hash entries?</a> by <a href=\"/Fermin_Serrano\" title=\"Fermin Serrano\">Fermin Serrano</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 10, 2012</li></ul>\n<h2><span class=\"mw-headline\" id=\"2015_...\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pawn_Hash_Table&amp;action=edit&amp;section=8\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=59126\">pawn hash and ep</a> by <a href=\"/index.php?title=J._Wesley_Cleveland&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"J. Wesley Cleveland (page does not exist)\">J. Wesley Cleveland</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 01, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=59154\">Buckets for pawn hash?</a> by <a href=\"/index.php?title=J._Wesley_Cleveland&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"J. Wesley Cleveland (page does not exist)\">J. Wesley Cleveland</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 04, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=59319\">pawn hash and eval tuning</a> by <a href=\"/index.php?title=J._Wesley_Cleveland&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"J. Wesley Cleveland (page does not exist)\">J. Wesley Cleveland</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 21, 2016&#160;» <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">Automated Tuning</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=59566\">hash eval, hash pawn or twice&#160;?</a> by <a href=\"/Daniel_Anulliero\" title=\"Daniel Anulliero\">Daniel Anulliero</a>, March 19, 2016&#160;» <a href=\"/Evaluation_Hash_Table\" title=\"Evaluation Hash Table\">Evaluation Hash Table</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61621\">Pawn hash</a> by <a href=\"/Karlo_Balla\" title=\"Karlo Balla\">Karlo Balla</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 06, 2016 </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=62160&amp;start=10\">pawn hash</a> by <a href=\"/Volker_Annuss\" title=\"Volker Annuss\">Volker Annuss</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 18, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=71190\">A pre-calculated pawn hash table&#160;?</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 05, 2019</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=72195\">Pawn hash table, a little disappointment</a> by <a href=\"/Vivien_Clauzon\" title=\"Vivien Clauzon\">Vivien Clauzon</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 28, 2019</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pawn_Hash_Table&amp;action=edit&amp;section=9\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Transposition_table#Related_techniques\">Transposition table - Related techniques, from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cse.buffalo.edu/~regan/chess/computer/anomalies/DF10anomalies.htm\">Chess Engine Anomalies, evidently caused by hash-table collisions and effects of multithreading</a> by <a href=\"/Kenneth_W._Regan\" title=\"Kenneth W. Regan\">Kenneth W. Regan</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pawn_Hash_Table&amp;action=edit&amp;section=10\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.elke-rehder.de/Chess_Woodcuts.htm\">Chess Woodcuts Graphic Arts Woodcut Art</a> by <a href=\"/Arts#Rehder\" title=\"Arts\">Elke Rehder</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=315478\">Pawn hashing without Zobrist keys</a> by <a href=\"/Gerd_Isenberg\" title=\"Gerd Isenberg\">Gerd Isenberg</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 12, 2003</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Pawn_Structure\" title=\"Pawn Structure\">Up one level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260228093742\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.022 seconds\nReal time usage: 0.025 seconds\nPreprocessor visited node count: 71/1000000\nPreprocessor generated node count: 126/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1555-0!canonical and timestamp 20260228093742 and revision id 25073\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Elke_Rehder"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alessandro Scotti"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Andreas Herrmann"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Arts"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Automated Tuning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "BCH Hashing"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Candidate Passed Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dan Honeycutt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Daniel Anulliero"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David Rasmussen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ed Schroder"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation Hash Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fermin Serrano"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Game Phases"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gerd Isenberg"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hamsters"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Harm Geert Muller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hash Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Incremental Updates"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "John Merlino"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Karlo Balla"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kenneth W. Regan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "King"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "King Safety"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Magic Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Material Hash Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Material Tables"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Opening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Passed Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Pattern and Properties"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Structure"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pham Hong Nguyen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Philippe Gailhac"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pieces"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Scott Gasch"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Severi Salminen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Side to move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tom Kerrigan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tor Lattimore"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Uri Blass"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vivien Clauzon"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vladimir Medvedev"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Volker Annuss"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Weak Pawns"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Zach Wegner"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Zobrist Hashing"
+      },
+      {
+        "ns": 0,
+        "*": "J. Wesley Cleveland"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Pawn Hash Index",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Pawn_Hash_Table",
+        "byteoffset": 2085,
+        "anchor": "Pawn_Hash_Index"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Pawn_Hash_Table",
+        "byteoffset": 3720,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Pawn_Hash_Table",
+        "byteoffset": 3852,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1999",
+        "number": "3.1",
+        "index": "4",
+        "fromtitle": "Pawn_Hash_Table",
+        "byteoffset": 3867,
+        "anchor": "1999"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "3.2",
+        "index": "5",
+        "fromtitle": "Pawn_Hash_Table",
+        "byteoffset": 4139,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2005 ...",
+        "number": "3.3",
+        "index": "6",
+        "fromtitle": "Pawn_Hash_Table",
+        "byteoffset": 6056,
+        "anchor": "2005_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "3.4",
+        "index": "7",
+        "fromtitle": "Pawn_Hash_Table",
+        "byteoffset": 6343,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "3.5",
+        "index": "8",
+        "fromtitle": "Pawn_Hash_Table",
+        "byteoffset": 6901,
+        "anchor": "2015_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "4",
+        "index": "9",
+        "fromtitle": "Pawn_Hash_Table",
+        "byteoffset": 8040,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "5",
+        "index": "10",
+        "fromtitle": "Pawn_Hash_Table",
+        "byteoffset": 8390,
+        "anchor": "References"
+      }
+    ]
+  }
+}
