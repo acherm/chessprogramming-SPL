@@ -3,13 +3,13 @@
 ## Metrics
 - pages_discovered: 600
 - engines_discovered: 103
-- features_total: 163
-- features_traced: 163
+- features_total: 173
+- features_traced: 173
 - trace_coverage_percent: 100.0
-- matrix_rows: 16686
-- matrix_supported: 783
-- matrix_unsupported_explicit: 959
-- matrix_unknown: 14944
+- matrix_rows: 17716
+- matrix_supported: 343
+- matrix_unsupported_explicit: 456
+- matrix_unknown: 16917
 
 ## Warnings
 - Unable to fetch page 'Category:Chess Engines' from API or HTML
@@ -96,4 +96,5 @@
 - Unable to fetch page 'Stephen Tavener' from API or HTML
 - Unable to fetch page 'TAAI 2013' from API or HTML
 - Unable to fetch page 'Tai-Ning Yang' from API or HTML
-- Detected duplicate trace ids: ['tr_00ee4364fab0', 'tr_ccd8041b0ab9']
+- Removed 15 non-feature or out-of-scope candidates after filtering (e.g., Aspiration Windows, Endgame Tablebases, Evaluation, History Heuristic, Iterative Deepening, Killer Heuristic, King Safety, Move Generation)
+- Detected duplicate trace ids: ['tr_4c8a43b4afc7', 'tr_a1169a7cdb2c', 'tr_a7ce973cf5ea', 'tr_c33dcf8fb33e', 'tr_d09c535576ae']

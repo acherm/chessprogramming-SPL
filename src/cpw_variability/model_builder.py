@@ -6,7 +6,13 @@ from datetime import datetime, timezone
 from .config import DEFAULT_TARGET_FEATURES, GROUP_SPECS
 from .discovery import extract_non_engine_pages
 from .evidence import build_trace, extract_snippet
-from .feature_miner import canonicalize_candidates, mine_feature_candidates, synthesize_leaf_features
+from .feature_miner import (
+    augment_with_core_features,
+    canonicalize_candidates,
+    filter_noise_features,
+    mine_feature_candidates,
+    synthesize_leaf_features,
+)
 from .models import FeatureNode, PageDocument, TraceRecord
 from .taxonomy_seed import ROOT_FEATURE_ID, seed_feature_nodes
 
@@ -124,6 +130,14 @@ def build_feature_model(
     candidates = mine_feature_candidates(non_engine_pages)
     canonical = canonicalize_candidates(candidates)
     leaf_nodes, leaf_traces = synthesize_leaf_features(canonical, target_count=target_features)
+    leaf_nodes, leaf_traces, core_warnings = augment_with_core_features(leaf_nodes, leaf_traces, non_engine_pages)
+    warnings.extend(core_warnings)
+    leaf_nodes, leaf_traces, removed_noise = filter_noise_features(leaf_nodes, leaf_traces)
+    if removed_noise:
+        sample = ", ".join(removed_noise[:8])
+        warnings.append(
+            f"Removed {len(removed_noise)} non-feature or out-of-scope candidates after filtering (e.g., {sample})"
+        )
 
     features = seeded + leaf_nodes
     traces = _seed_traces(features, non_engine_pages) + leaf_traces
