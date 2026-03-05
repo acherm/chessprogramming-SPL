@@ -1937,6 +1937,23 @@ static ENGINE_MAYBE_UNUSED int move_to_int(const EngineMove *move) {
     return (int)encode_move16(move);
 }
 
+static void move_to_front(EngineMoveList *list, const EngineMove *move) {
+    int i;
+    if (list == NULL || move == NULL) {
+        return;
+    }
+    for (i = 0; i < list->count; ++i) {
+        if (move_equals(&list->moves[i], move)) {
+            if (i > 0) {
+                EngineMove tmp = list->moves[0];
+                list->moves[0] = list->moves[i];
+                list->moves[i] = tmp;
+            }
+            return;
+        }
+    }
+}
+
 static void order_moves(EngineState *state, EngineMoveList *list, int ply, const EngineMove *hash_move) {
     (void)ply;
 
@@ -2048,8 +2065,10 @@ static void tt_store(uint64_t key, int depth, int score, int flag, const EngineM
 }
 
 static int quiescence(EngineState *state, int alpha, int beta, int ply, int qdepth) {
+    bool side_in_check;
     int stand_pat;
     EngineMoveList list;
+    int legal_moves = 0;
     int i;
 
     if (state->stop) {
@@ -2068,19 +2087,24 @@ static int quiescence(EngineState *state, int alpha, int beta, int ply, int qdep
     }
 #endif
 
-    stand_pat = evaluate_position(state);
-    if (stand_pat >= beta) {
-        return beta;
-    }
-    if (stand_pat > alpha) {
-        alpha = stand_pat;
+    side_in_check = in_check(state, state->side_to_move);
+    if (side_in_check) {
+        stand_pat = -MATE + ply;
+    } else {
+        stand_pat = evaluate_position(state);
+        if (stand_pat >= beta) {
+            return beta;
+        }
+        if (stand_pat > alpha) {
+            alpha = stand_pat;
+        }
     }
 
     if (qdepth >= QUIESCENCE_MAX_DEPTH) {
         return alpha;
     }
 
-    generate_moves(state, &list, true);
+    generate_moves(state, &list, side_in_check ? false : true);
     order_moves(state, &list, ply, NULL);
 
     for (i = 0; i < list.count; ++i) {
@@ -2089,7 +2113,7 @@ static int quiescence(EngineState *state, int alpha, int beta, int ply, int qdep
         int score;
 
 #if CFG_DELTA_PRUNING
-        {
+        if (!side_in_check) {
             int target = state->board[move.to];
             int gain = target == EMPTY ? 0 : PIECE_VALUE[piece_abs(target)];
             if (stand_pat + gain + 80 < alpha) {
@@ -2117,6 +2141,7 @@ static int quiescence(EngineState *state, int alpha, int beta, int ply, int qdep
                 continue;
             }
 
+            legal_moves += 1;
             state->nodes += 1;
             score = -quiescence(state, -beta, -alpha, ply + 1, qdepth + 1);
 
@@ -2143,6 +2168,10 @@ static int quiescence(EngineState *state, int alpha, int beta, int ply, int qdep
         }
     }
 
+    if (side_in_check && legal_moves == 0) {
+        return -MATE + ply;
+    }
+
     return alpha;
 }
 
@@ -2161,6 +2190,10 @@ static int search(EngineState *state, int depth, int alpha, int beta, int ply, b
     if (state->stop) {
         return evaluate_position(state);
     }
+
+#if !CFG_NULL_MOVE_PRUNING
+    (void)allow_null;
+#endif
 
 #if CFG_FIFTY_MOVE_RULE
     if (state->halfmove_clock >= 100) {
@@ -2355,6 +2388,8 @@ static int search(EngineState *state, int depth, int alpha, int beta, int ply, b
 #endif
         tt_store(key, depth, best_score, flag, &best_move);
     }
+#else
+    (void)alpha_orig;
 #endif
 
     return best_score;
@@ -2425,6 +2460,31 @@ static bool find_move_in_list(const EngineMoveList *list, const EngineMove *need
     return false;
 }
 
+static bool find_move_with_promotion_fallback(const EngineMoveList *list, const EngineMove *needle, EngineMove *matched) {
+    int i;
+
+    if (find_move_in_list(list, needle, matched)) {
+        return true;
+    }
+
+    if (needle->promotion == 0) {
+        return false;
+    }
+
+    for (i = 0; i < list->count; ++i) {
+        const EngineMove *candidate = &list->moves[i];
+        if (candidate->from == needle->from && candidate->to == needle->to && (candidate->flags & FLAG_PROMOTION) != 0) {
+            if (matched != NULL) {
+                *matched = *candidate;
+                matched->promotion = needle->promotion;
+            }
+            return true;
+        }
+    }
+
+    return false;
+}
+
 void engine_init(EngineState *state) {
     if (state == NULL) {
         return;
@@ -2492,7 +2552,7 @@ int engine_apply_move_uci(EngineState *state, const char *move_uci) {
     }
 
     generate_moves(state, &legal, false);
-    if (!find_move_in_list(&legal, &parsed, &actual)) {
+    if (!find_move_with_promotion_fallback(&legal, &parsed, &actual)) {
         return -1;
     }
 
@@ -2604,7 +2664,7 @@ EngineSearchResult engine_search(EngineState *state, int max_depth, int movetime
     if (max_depth <= 0) {
         max_depth = state->max_depth_hint;
     }
-    if (movetime_ms <= 0) {
+    if (movetime_ms == 0) {
 #if CFG_TIME_MANAGEMENT
         movetime_ms = state->movetime_ms > 0 ? state->movetime_ms : 150;
 #else
@@ -2614,7 +2674,11 @@ EngineSearchResult engine_search(EngineState *state, int max_depth, int movetime
 
     state->nodes = 0;
     state->stop = false;
-    state->deadline_ms = now_ms() + movetime_ms;
+    if (movetime_ms < 0) {
+        state->deadline_ms = 0;
+    } else {
+        state->deadline_ms = now_ms() + movetime_ms;
+    }
 
 #if CFG_OPENING_BOOK
     if (state->plies_from_start <= 1) {
@@ -2747,6 +2811,7 @@ EngineSearchResult engine_search(EngineState *state, int max_depth, int movetime
             best_move = local_move;
             result.depth = depth;
             result.has_move = true;
+            move_to_front(&root_moves, &local_move);
             alpha = local_best > alpha ? local_best : alpha;
             beta = local_best < beta ? local_best : beta;
         }
@@ -2811,13 +2876,13 @@ void engine_print_compiled_features(FILE *out) {
         return;
     }
 
-    fprintf(out, "id name CPW-PL-Engine (%s)\\n", PL_VARIANT_NAME);
-    fprintf(out, "id author Codex\\n");
-    fprintf(out, "option name Ponder type check default false\\n");
+    fprintf(out, "id name CPW-PL-Engine (%s)\n", PL_VARIANT_NAME);
+    fprintf(out, "id author Codex\n");
+    fprintf(out, "option name Ponder type check default false\n");
 
     for (i = 0; i < PL_SELECTED_OPTION_COUNT; ++i) {
-        fprintf(out, "info string feature[%d]=%s\\n", i + 1, PL_SELECTED_OPTION_NAMES[i]);
+        fprintf(out, "info string feature[%d]=%s\n", i + 1, PL_SELECTED_OPTION_NAMES[i]);
     }
 
-    fprintf(out, "info string repr=real_movegen_search_eval\\n");
+    fprintf(out, "info string repr=real_movegen_search_eval\n");
 }

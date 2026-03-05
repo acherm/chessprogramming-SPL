@@ -20,23 +20,48 @@ static void trim_newline(char *line) {
     }
 }
 
-static int parse_movetime(const char *line) {
-    const char *token = strstr(line, " movetime ");
-    if (token != NULL) {
-        int value = atoi(token + 10);
-        return value > 0 ? value : 150;
+static bool parse_go_value(const char *line, const char *name, int *out_value) {
+    char pattern[32];
+    const char *token;
+
+    if (line == NULL || name == NULL || out_value == NULL) {
+        return false;
     }
 
-    token = strstr(line, " wtime ");
-    if (token != NULL) {
-        int wtime = atoi(token + 7);
-        int winc = 0;
-        const char *inc = strstr(line, " winc ");
-        if (inc != NULL) {
-            winc = atoi(inc + 6);
-        }
-        if (wtime > 0) {
-            int allocation = wtime / 30 + winc / 2;
+    snprintf(pattern, sizeof(pattern), " %s ", name);
+    token = strstr(line, pattern);
+    if (token == NULL) {
+        return false;
+    }
+    *out_value = atoi(token + strlen(pattern));
+    return true;
+}
+
+static int parse_movetime(const char *line, int side_to_move, bool has_depth) {
+    int movetime = 0;
+    int wtime = 0;
+    int btime = 0;
+    int winc = 0;
+    int binc = 0;
+    bool has_wtime;
+    bool has_btime;
+    bool has_winc;
+    bool has_binc;
+
+    if (parse_go_value(line, "movetime", &movetime) && movetime > 0) {
+        return movetime;
+    }
+
+    has_wtime = parse_go_value(line, "wtime", &wtime);
+    has_btime = parse_go_value(line, "btime", &btime);
+    has_winc = parse_go_value(line, "winc", &winc);
+    has_binc = parse_go_value(line, "binc", &binc);
+
+    if (has_wtime || has_btime) {
+        int side_time = side_to_move == 0 ? (has_wtime ? wtime : 0) : (has_btime ? btime : 0);
+        int side_inc = side_to_move == 0 ? (has_winc ? winc : 0) : (has_binc ? binc : 0);
+        if (side_time > 0) {
+            int allocation = side_time / 30 + side_inc / 2;
             if (allocation < 20) {
                 allocation = 20;
             }
@@ -44,6 +69,10 @@ static int parse_movetime(const char *line) {
         }
     }
 
+    /* In depth-only mode, disable time cutoffs and search the full requested depth. */
+    if (has_depth) {
+        return -1;
+    }
     return 150;
 }
 
@@ -93,7 +122,10 @@ static void handle_position(EngineState *state, char *args) {
     moves += 7;
     token = strtok(moves, " ");
     while (token != NULL) {
-        engine_apply_move_uci(state, token);
+        if (engine_apply_move_uci(state, token) != 0) {
+            printf("info string warning failed_to_apply_move %s\n", token);
+            fflush(stdout);
+        }
         token = strtok(NULL, " ");
     }
 }
@@ -124,16 +156,16 @@ static void handle_legalmoves(EngineState *state) {
         return;
     }
     if (engine_generate_legal_moves(state, &list) < 0) {
-        printf("info string legalmoves error\\n");
+        printf("info string legalmoves error\n");
         fflush(stdout);
         return;
     }
 
-    printf("info string legalmoves count %d\\n", list.count);
+    printf("info string legalmoves count %d\n", list.count);
     for (i = 0; i < list.count; ++i) {
         char uci[6];
         engine_move_to_uci(&list.moves[i], uci);
-        printf("info string legalmove %s\\n", uci);
+        printf("info string legalmove %s\n", uci);
     }
     fflush(stdout);
 }
@@ -147,7 +179,7 @@ static void handle_perft(EngineState *state, const char *args) {
         return;
     }
     if (args == NULL) {
-        printf("info string perft error invalid arguments\\n");
+        printf("info string perft error invalid arguments\n");
         fflush(stdout);
         return;
     }
@@ -162,13 +194,13 @@ static void handle_perft(EngineState *state, const char *args) {
         args += 1;
     }
     if (sscanf(args, "%d%n", &depth, &parsed) != 1 || depth < 0) {
-        printf("info string perft error expected: perft <depth>\\n");
+        printf("info string perft error expected: perft <depth>\n");
         fflush(stdout);
         return;
     }
 
     nodes = engine_perft(state, depth);
-    printf("info string perft depth %d nodes %llu\\n", depth, (unsigned long long)nodes);
+    printf("info string perft depth %d nodes %llu\n", depth, (unsigned long long)nodes);
     fflush(stdout);
 }
 
@@ -184,18 +216,18 @@ int uci_loop(void) {
         if (strcmp(line, "uci") == 0) {
 #if CFG_UCI
             engine_print_compiled_features(stdout);
-            printf("uciok\\n");
+            printf("uciok\n");
             fflush(stdout);
 #else
-            printf("info string UCI feature disabled in this variant\\n");
-            printf("uciok\\n");
+            printf("info string UCI feature disabled in this variant\n");
+            printf("uciok\n");
             fflush(stdout);
 #endif
             continue;
         }
 
         if (strcmp(line, "isready") == 0) {
-            printf("readyok\\n");
+            printf("readyok\n");
             fflush(stdout);
             continue;
         }
@@ -228,15 +260,18 @@ int uci_loop(void) {
         if (strncmp(line, "go", 2) == 0) {
             EngineSearchResult result;
             char bestmove[6] = "0000";
-            int movetime = parse_movetime(line);
             int depth = state.max_depth_hint;
+            int movetime;
+            bool has_depth = false;
             const char *dtoken = strstr(line, " depth ");
             if (dtoken != NULL) {
                 int parsed = atoi(dtoken + 7);
                 if (parsed > 0) {
                     depth = parsed;
+                    has_depth = true;
                 }
             }
+            movetime = parse_movetime(line, state.side_to_move, has_depth);
             if (state.pondering_enabled) {
 #if CFG_PONDERING
                 depth += 1;
@@ -246,12 +281,12 @@ int uci_loop(void) {
             if (result.has_move) {
                 engine_move_to_uci(&result.best_move, bestmove);
             }
-            printf("info depth %d score cp %d nodes %llu pv %s\\n",
+            printf("info depth %d score cp %d nodes %llu pv %s\n",
                    result.depth,
                    result.score_cp,
                    (unsigned long long)result.nodes,
                    bestmove);
-            printf("bestmove %s\\n", bestmove);
+            printf("bestmove %s\n", bestmove);
             fflush(stdout);
             continue;
         }
@@ -259,7 +294,7 @@ int uci_loop(void) {
         if (strcmp(line, "d") == 0 || strcmp(line, "debug") == 0) {
             char summary[256];
             engine_variant_summary(summary, sizeof(summary));
-            printf("info string %s\\n", summary);
+            printf("info string %s\n", summary);
             fflush(stdout);
             continue;
         }
