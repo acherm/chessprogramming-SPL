@@ -1,0 +1,51 @@
+{
+  "title": "Material Hash Table",
+  "url": "https://www.chessprogramming.org/Material_Hash_Table",
+  "source_type": "api",
+  "retrieved_at": "2026-03-01T15:21:05.175059+00:00",
+  "content_hash": "809a5068378a37fd8dbfafc66041eb9bc72cb2b4809a97b78904cdf39a62839d",
+  "text": "Home * Evaluation * Material * Material Hash Table A Material Hash Table is used to cache once calculated material values for certain material constellations, considering not only the dot-product of the piece values, but material imbalance and even insufficient material . Of course, one has to take care the effort of hashing is not more expensive than the full calculation, assuming incremental update only for captures or promotions . Another pragmatical approach with todays computers and memory sizes is to use precomputed material tables . Contents 1 Chess 4.5 2 See also 3 Forum Posts 4 External Links 5 References Chess 4.5 [ edit ] The Material Hash Table was first described by David Slate and Larry Atkin as used in Chess 4.5 [1] . Chess had following fairly complicated function of only the number of each type of piece on the board, to modify the material difference by a \"trade down\" bonus that encourages the winning side to trade pieces but no pawns: and with MD as material difference computed by adding the standard values {100, 325, 350, 500, 900} of each piece and subtracting the total of the side with the least material from the side with the most, the winning side. PA is the number of pawns of the winning side, MT is the total material on the board. The hash function must have three desired characteristics. First, it should be obviously faster than the function it is replacing. Second, it should distribute the positions that are likely occur in a single search, and third, it should be symmetric with respect to Black and White. Chess 4.5 had a material signature word, containing five nibble counters per piece type for each side, interpreted as 20-bit number each and also stored inside the hash entry to verify material signature when probing. The hash function used is the sum of the white side and black side, exclusive ored with the absolute value of their difference, folded over by further exclusive or to get a 7-bit number, the hash. See also [ edit ] Evaluation Hash Table Hash Table Interior Node Recognizer Material Tables Pawn Hash Table Transposition Table Forum Posts [ edit ] Accessing Material Imbalance Information? by Steve Maughan , CCC , December 19, 2013 External Links [ edit ] Xiaoji Chen's Design Weblog » HashTable: An Algorithm for Material Reuse References [ edit ] ↑ David Slate , Larry Atkin ( 1977 ). CHESS 4.5 - The Northwestern University Chess Program. Chess Skill in Man and Machine (ed. Peter W. Frey ), pp. 82-118. Springer-Verlag, New York, N.Y. 2nd ed. 1983. ISBN 0-387-90815-3. Reprinted ( 1988 ) in Computer Chess Compendium Up one level",
+  "headings": [
+    "Contents",
+    "Chess 4.5[edit]",
+    "See also[edit]",
+    "Forum Posts[edit]",
+    "External Links[edit]",
+    "References[edit]"
+  ],
+  "links": [
+    "CCC",
+    "Captures",
+    "Chess (Program)",
+    "Chess Skill in Man and Machine",
+    "Computer Chess Compendium",
+    "David Slate",
+    "Evaluation",
+    "Evaluation Hash Table",
+    "Hash Table",
+    "Incremental Updates",
+    "Interior Node Recognizer",
+    "Larry Atkin",
+    "Main Page",
+    "Material",
+    "Material Tables",
+    "Nibble",
+    "Pawn Hash Table",
+    "Peter W. Frey",
+    "Point Value",
+    "Promotions",
+    "Steve Maughan",
+    "Transposition Table",
+    "index.php"
+  ],
+  "bold_terms": [
+    "Home * Evaluation * Material * Material Hash Table",
+    "Material Hash Table",
+    "1977",
+    "1988",
+    "Up one level"
+  ],
+  "categories": [],
+  "page_type": "technique",
+  "raw_payload_path": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/data/chessprogramming_cache/raw/Material_Hash_Table.api.json"
+}

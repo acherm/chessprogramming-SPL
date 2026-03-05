@@ -1,0 +1,314 @@
+{
+  "parse": {
+    "title": "On an empty Board",
+    "pageid": 1110,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Board_Representation\" title=\"Board Representation\">Board Representation</a> * <a href=\"/Bitboards\" title=\"Bitboards\">Bitboards</a> * <a href=\"/Sliding_Piece_Attacks\" title=\"Sliding Piece Attacks\">Sliding Piece Attacks</a> * On an empty Board</b>\n</p><p><b>Single sliding piece attacks</b> on the <b>otherwise empty board</b> or their disjoint subsets on lines or <a href=\"/Rays\" title=\"Rays\">rays</a> are that simple than none sliding pieces. We simply use pre-calculated tables for each <a href=\"/Pieces\" title=\"Pieces\">piece-type</a>, line or ray, indexed by square-index. To initialize those tables, one may use a <a href=\"/Kogge-Stone_Algorithm#Fillonanemptyboard\" title=\"Kogge-Stone Algorithm\">fill approach</a> with single populated from-sets, if availably anyway since used elsewhere. While the proposed line-routines here are quite small and cheap, incremental update during an initialization loop has some merits.\n</p><p>The various ray-,line- and piece sets are foundation of further attack calculation considering blocking pieces, for instance to mask the <a href=\"/Occupancy\" title=\"Occupancy\">occupancy</a> of relevant rays. Of course the piece attacks are union-sets of the disjoint line attacks, while the line attacks are unions of the disjoint ray attacks.\n</p><p><span id=\"RayAttacks\"></span>\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Ray_Attacks\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Ray Attacks</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-2\"><a href=\"#Rays_by_Line\"><span class=\"tocnumber\">1.1</span> <span class=\"toctext\">Rays by Line</span></a></li>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#Positive_Rays\"><span class=\"tocnumber\">1.2</span> <span class=\"toctext\">Positive Rays</span></a>\n<ul>\n<li class=\"toclevel-3 tocsection-4\"><a href=\"#By_Lookup\"><span class=\"tocnumber\">1.2.1</span> <span class=\"toctext\">By Lookup</span></a></li>\n<li class=\"toclevel-3 tocsection-5\"><a href=\"#Initialization\"><span class=\"tocnumber\">1.2.2</span> <span class=\"toctext\">Initialization</span></a></li>\n<li class=\"toclevel-3 tocsection-6\"><a href=\"#By_Calculation\"><span class=\"tocnumber\">1.2.3</span> <span class=\"toctext\">By Calculation</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#Negative_Rays\"><span class=\"tocnumber\">1.3</span> <span class=\"toctext\">Negative Rays</span></a>\n<ul>\n<li class=\"toclevel-3 tocsection-8\"><a href=\"#By_Lookup_2\"><span class=\"tocnumber\">1.3.1</span> <span class=\"toctext\">By Lookup</span></a></li>\n<li class=\"toclevel-3 tocsection-9\"><a href=\"#Initialization_2\"><span class=\"tocnumber\">1.3.2</span> <span class=\"toctext\">Initialization</span></a></li>\n<li class=\"toclevel-3 tocsection-10\"><a href=\"#By_Calculation_2\"><span class=\"tocnumber\">1.3.3</span> <span class=\"toctext\">By Calculation</span></a></li>\n</ul>\n</li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-11\"><a href=\"#Line_Attacks\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Line Attacks</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-12\"><a href=\"#By_Lookup_3\"><span class=\"tocnumber\">2.1</span> <span class=\"toctext\">By Lookup</span></a></li>\n<li class=\"toclevel-2 tocsection-13\"><a href=\"#By_Calculation_3\"><span class=\"tocnumber\">2.2</span> <span class=\"toctext\">By Calculation</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-14\"><a href=\"#Piece_Attacks\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Piece Attacks</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-15\"><a href=\"#By_Lookup_4\"><span class=\"tocnumber\">3.1</span> <span class=\"toctext\">By Lookup</span></a></li>\n<li class=\"toclevel-2 tocsection-16\"><a href=\"#By_Calculation_4\"><span class=\"tocnumber\">3.2</span> <span class=\"toctext\">By Calculation</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-17\"><a href=\"#See_also\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-18\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Forum Posts</span></a></li>\n<li class=\"toclevel-1 tocsection-19\"><a href=\"#References\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Ray_Attacks\">Ray Attacks</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=On_an_empty_Board&amp;action=edit&amp;section=1\" title=\"Edit section: Ray Attacks\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<pre>\n  northwest    north   northeast\n  noWe         nort         noEa\n          +7    +8    +9\n              \\  |  /\n  west    -1 &lt;-  0 -&gt; +1    east\n              /  |  \\\n          -9    -8    -7\n  soWe         sout         soEa\n  southwest    south   southeast\n</pre>\n<p><span id=\"SplitRaysFromLine\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Rays_by_Line\">Rays by Line</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=On_an_empty_Board&amp;action=edit&amp;section=2\" title=\"Edit section: Rays by Line\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Ray-Attacks may be conducted from Line-Attacks by intersection with \"positive\" and \"negative\" squares:\n</p>\n<pre>\n positiveRay[sq] = lineAttacks[sq] &amp; (0 - 2*singleBit[sq]);\n negativeRay[sq] = lineAttacks[sq] &amp; (singleBit[sq] - 1);\n</pre>\n<p>or with shifts instead of lookups\n</p>\n<pre>\n positiveRay[sq] = lineAttacks[sq] &amp; (C64(-2) &lt;&lt; sq);\n negativeRay[sq] = lineAttacks[sq] &amp; ((C64(1) &lt;&lt; sq) - 1);\n</pre>\n<p><span id=\"PositiveRays\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Positive_Rays\">Positive Rays</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=On_an_empty_Board&amp;action=edit&amp;section=3\" title=\"Edit section: Positive Rays\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p><i>Remember <a href=\"/Square_Mapping_Considerations\" title=\"Square Mapping Considerations\">Square Mapping Considerations</a>.</i>\n</p>\n<h3><span class=\"mw-headline\" id=\"By_Lookup\">By Lookup</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=On_an_empty_Board&amp;action=edit&amp;section=4\" title=\"Edit section: By Lookup\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<pre>\nEast (+1)           Nort (+8)            NoEa (+9)           NoWe (+7)\n. . . . . . . .     . . . 1 . . . .      . . . . . . . 1     . . . . . . . .\n. . . . . . . .     . . . 1 . . . .      . . . . . . 1 .     1 . . . . . . .\n. . . . . . . .     . . . 1 . . . .      . . . . . 1 . .     . 1 . . . . . .\n. . . . . . . .     . . . 1 . . . .      . . . . 1 . . .     . . 1 . . . . .\n. . . R 1 1 1 1     . . . R . . . .      . . . B . . . .     . . . B . . . .\n. . . . . . . .     . . . . . . . .      . . . . . . . .     . . . . . . . .\n. . . . . . . .     . . . . . . . .      . . . . . . . .     . . . . . . . .\n. . . . . . . .     . . . . . . . .      . . . . . . . .     . . . . . . . .\n</pre>\n<h3><span class=\"mw-headline\" id=\"Initialization\">Initialization</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=On_an_empty_Board&amp;action=edit&amp;section=5\" title=\"Edit section: Initialization\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p>North attacks are simple to initialize inside a loop, starting from a1, shifting left:\n</p>\n<pre>\nU64 nort = C64(0x0101010101010100);\nfor (int sq=0; sq &lt; 64; sq++, nort &lt;&lt;= 1)\n   rayAttacks[sq][Nort] = nort;\n\n</pre>\n<p>Similar, but tad trickier for <a href=\"/Ranks\" title=\"Ranks\">ranks</a> and <a href=\"/Diagonals\" title=\"Diagonals\">diagonals</a>, due to the wraps. For instance the north-east <a href=\"/Direction\" title=\"Direction\">direction</a>:\n</p>\n<pre>\nU64 noea = C64(0x8040201008040200);\nfor (int f=0; f &lt; 8; f++, noea = eastOne(noea) {\n   U64 ne = noea;\n   for (int r8 = 0; r8 &lt; 8*8; r8 += 8, ne &lt;&lt;= 8)\n      rayAttacks[r8+f][NoEa] = ne;\n}\n</pre>\n<h3><span class=\"mw-headline\" id=\"By_Calculation\">By Calculation</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=On_an_empty_Board&amp;action=edit&amp;section=6\" title=\"Edit section: By Calculation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p>Orthogonal positive rays are quite cheap to calculate on the fly. For diagonal rays split the lines as <a href=\"/On_an_empty_Board#SplitRaysFromLine\" title=\"On an empty Board\">mentioned</a>.\n</p>\n<pre>\nU64 eastMaskEx(int sq) {\n   const U64 one = 1;\n   return 2*( (one &lt;&lt; (sq|7)) - (one &lt;&lt; sq) );\n}\n\nU64 nortMaskEx(int sq) {\n   return C64(0x0101010101010100) &lt;&lt; sq;\n}\n</pre>\n<p><span id=\"NegativeRays\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Negative_Rays\">Negative Rays</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=On_an_empty_Board&amp;action=edit&amp;section=7\" title=\"Edit section: Negative Rays\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Remember <a href=\"/Square_Mapping_Considerations\" title=\"Square Mapping Considerations\">Square Mapping Considerations</a>.\n</p>\n<h3><span class=\"mw-headline\" id=\"By_Lookup_2\">By Lookup</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=On_an_empty_Board&amp;action=edit&amp;section=8\" title=\"Edit section: By Lookup\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<pre>\nWest (-1)           Sout (-8)            SoWe (-9)           SoEa (-7)\n. . . . . . . .     . . . . . . . .      . . . . . . . .     . . . . . . . .\n. . . . . . . .     . . . . . . . .      . . . . . . . .     . . . . . . . .\n. . . . . . . .     . . . . . . . .      . . . . . . . .     . . . . . . . .\n. . . . . . . .     . . . . . . . .      . . . . . . . .     . . . . . . . .\n1 1 1 R . . . .     . . . R . . . .      . . . B . . . .     . . . B . . . .\n. . . . . . . .     . . . 1 . . . .      . . 1 . . . . .     . . . . 1 . . .\n. . . . . . . .     . . . 1 . . . .      . 1 . . . . . .     . . . . . 1 . .\n. . . . . . . .     . . . 1 . . . .      1 . . . . . . .     . . . . . . 1 .\n</pre>\n<h3><span class=\"mw-headline\" id=\"Initialization_2\">Initialization</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=On_an_empty_Board&amp;action=edit&amp;section=9\" title=\"Edit section: Initialization\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p>South attacks are simple to initialize inside a loop, starting from h8, shifting right:\n</p>\n<pre>\nU64 sout = C64(0x0080808080808080);\nfor (int sq=63; sq &gt;= 0; sq--, sout &gt;&gt;= 1)\n   rayAttacks[sq][Sout] = sout;\n</pre>\n<p>Similar, but tad trickier for <a href=\"/Ranks\" title=\"Ranks\">ranks</a> and <a href=\"/Diagonals\" title=\"Diagonals\">diagonals</a>, due to the wraps.\n</p>\n<h3><span class=\"mw-headline\" id=\"By_Calculation_2\">By Calculation</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=On_an_empty_Board&amp;action=edit&amp;section=10\" title=\"Edit section: By Calculation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p>Orthogonal negative rays are quite cheap to calculate on the fly. For diagonal rays split the lines as <a href=\"/On_an_empty_Board#SplitRaysFromLine\" title=\"On an empty Board\">mentioned</a>.\n</p>\n<pre>\nU64 westMaskEx(int sq) {\n   const U64 one = 1;\n   return (one &lt;&lt; sq) - (one &lt;&lt; (sq&amp;56));\n}\n\nU64 soutMaskEx(int sq) {\n   return C64(0x0080808080808080) &gt;&gt; (sq ^ 63);\n}\n</pre>\n<p><span id=\"LineAttacks\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Line_Attacks\">Line Attacks</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=On_an_empty_Board&amp;action=edit&amp;section=11\" title=\"Edit section: Line Attacks\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<pre>\n RankAttacks[sq]         = EastAttacks[sq] | WestAttacks[sq];\n FileAttacks[sq]         = NortAttacks[sq] | SoutAttacks[sq];\n DiagonalAttacks[sq]     = NoEaAttacks[sq] | SoWeAttacks[sq];\n AntiDiagonalAttacks[sq] = NoWeAttacks[sq] | SoEaAttacks[sq];\n</pre>\n<h3><span class=\"mw-headline\" id=\"By_Lookup_3\">By Lookup</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=On_an_empty_Board&amp;action=edit&amp;section=12\" title=\"Edit section: By Lookup\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<pre>\nRank                File                 Diagonal            Anti-Diagonal\n. . . . . . . .     . . . 1 . . . .      . . . . . . . 1     . . . . . . . .\n. . . . . . . .     . . . 1 . . . .      . . . . . . 1 .     1 . . . . . . .\n. . . . . . . .     . . . 1 . . . .      . . . . . 1 . .     . 1 . . . . . .\n. . . . . . . .     . . . 1 . . . .      . . . . 1 . . .     . . 1 . . . . .\n1 1 1 R 1 1 1 1     . . . R . . . .      . . . B . . . .     . . . B . . . .\n. . . . . . . .     . . . 1 . . . .      . . 1 . . . . .     . . . . 1 . . .\n. . . . . . . .     . . . 1 . . . .      . 1 . . . . . .     . . . . . 1 . .\n. . . . . . . .     . . . 1 . . . .      1 . . . . . . .     . . . . . . 1 .\n</pre>\n<h3><span class=\"mw-headline\" id=\"By_Calculation_3\">By Calculation</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=On_an_empty_Board&amp;action=edit&amp;section=13\" title=\"Edit section: By Calculation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p>To calculate line masks for <a href=\"/Ranks\" title=\"Ranks\">ranks</a>, <a href=\"/Files\" title=\"Files\">files</a>, <a href=\"/Diagonals\" title=\"Diagonals\">diagonals</a> and <a href=\"/Anti-Diagonals\" title=\"Anti-Diagonals\">antidiagonals</a> on the fly:\n</p>\n<pre>\nU64 rankMask(int sq) {return  C64(0xff) &lt;&lt; (sq &amp; 56);}\n\nU64 fileMask(int sq) {return C64(0x0101010101010101) &lt;&lt; (sq &amp; 7);}\n\nU64 diagonalMask(int sq) {\n   const U64 maindia = C64(0x8040201008040201);\n   int diag =8*(sq &amp; 7) - (sq &amp; 56);\n   int nort = -diag &amp; ( diag &gt;&gt; 31);\n   int sout =  diag &amp; (-diag &gt;&gt; 31);\n   return (maindia &gt;&gt; sout) &lt;&lt; nort;\n}\n\nU64 antiDiagMask(int sq) {\n   const U64 maindia = C64(0x0102040810204080);\n   int diag =56- 8*(sq&amp;7) - (sq&amp;56);\n   int nort = -diag &amp; ( diag &gt;&gt; 31);\n   int sout =  diag &amp; (-diag &gt;&gt; 31);\n   return (maindia &gt;&gt; sout) &lt;&lt; nort;\n}\n</pre>\n<p>The <a href=\"/General_Setwise_Operations#GeneralizedShift\" title=\"General Setwise Operations\">generalized shift</a> version for <a href=\"/Diagonals\" title=\"Diagonals\">diagonals</a> and <a href=\"/Anti-Diagonals\" title=\"Anti-Diagonals\">antidiagonals</a> as introduced by <a href=\"/Thomas_Jahn\" title=\"Thomas Jahn\">Thomas Jahn</a> <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup> produces shorter and faster code on modern <a href=\"/X86-64\" title=\"X86-64\">x86-64</a> processors due to <a href=\"/BMI2\" title=\"BMI2\">BMI2</a> shift instructions not affecting the flags <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>:\n</p>\n<pre>\nU64 diagonalMask(int sq) {\n   const U64( maindia = C64(0x8040201008040201);\n   int diag  = (sq&amp;7) - (sq&gt;&gt;3);\n   return diag &gt;= 0&#160;? maindia &gt;&gt; diag*8&#160;: maindia &lt;&lt; -diag*8;\n}\n\nU64 antiDiagMask(int sq) {\n   const U64( maindia = C64(0x0102040810204080);\n   int diag  = 7 - (sq&amp;7) - (sq&gt;&gt;3);\n   return diag &gt;= 0&#160;? maindia &gt;&gt; diag*8&#160;: maindia &lt;&lt; -diag*8;\n}\n</pre>\n<p>Excluding the square bit:\n</p>\n<pre>\nU64 rankMaskEx    (int sq) {return (C64(1) &lt;&lt; sq) ^ rankMask(sq);}\nU64 fileMaskEx    (int sq) {return (C64(1) &lt;&lt; sq) ^ fileMask(sq);}\nU64 diagonalMaskEx(int sq) {return (C64(1) &lt;&lt; sq) ^ diagonalMask(sq);}\nU64 antiDiagMaskEx(int sq) {return (C64(1) &lt;&lt; sq) ^ antiDiagMask(sq);}\n</pre>\n<p><span id=\"PieceAttacks\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Piece_Attacks\">Piece Attacks</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=On_an_empty_Board&amp;action=edit&amp;section=14\" title=\"Edit section: Piece Attacks\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<pre>\nRookAttacks[sq]   = RankAttacks[sq]     | FileAttacks[sq];\nBishopAttacks[sq] = DiagonalAttacks[sq] | AntiDiagonalAttacks[sq];\nQueenAttacks[sq]  = RookAttacks[sq] | BishopAttacks[sq];\n</pre>\n<h3><span class=\"mw-headline\" id=\"By_Lookup_4\">By Lookup</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=On_an_empty_Board&amp;action=edit&amp;section=15\" title=\"Edit section: By Lookup\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<pre>\n                                   Queen\n                               . . . 1 . . . 1\n                               1 . . 1 . . 1 .\n                               . 1 . 1 . 1 . .\n               Rook            . . 1 1 1 . . .         Bishop\n           . . . 1 . . . .     1 1 1 Q 1 1 1 1     . . . . . . . 1\n           . . . 1 . . . .     . . 1 1 1 . . .     1 . . . . . 1 .\n           . . . 1 . . . .     . 1 . 1 . 1 . .     . 1 . . . 1 . .\n           . . . 1 . . . .     1 . . 1 . . 1 .     . . 1 . 1 . . .\n           1 1 1 R 1 1 1 1                         . . . B . . . .\n           . . . 1 . . . .                         . . 1 . 1 . . .\n           . . . 1 . . . .                         . 1 . . . 1 . .\n           . . . 1 . . . .                         1 . . . . . 1 .\n</pre>\n<h3><span class=\"mw-headline\" id=\"By_Calculation_4\">By Calculation</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=On_an_empty_Board&amp;action=edit&amp;section=16\" title=\"Edit section: By Calculation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<pre>\nU64 rookMask    (int sq) {return rankMask(sq)     | fileMask(sq);}\nU64 bishopMask  (int sq) {return diagonalMask(sq) | antiDiagMask(sq);}\n\n\nU64 rookMaskEx  (int sq) {return rankMask(sq)     ^ fileMask(sq);}\nU64 bishopMaskEx(int sq) {return diagonalMask(sq) ^ antiDiagMask(sq);}\n\nU64 queenMask   (int sq) {return rookMask(sq)     | bishopMask(sq);}\nU64 queenMaskEx (int sq) {return rookMask(sq)     ^ bishopMask(sq);}\n</pre>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=On_an_empty_Board&amp;action=edit&amp;section=17\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Blockers_and_Beyond\" title=\"Blockers and Beyond\">Blockers and Beyond</a></li>\n<li> <a href=\"/Kogge-Stone_Algorithm#Fillonanemptyboard\" title=\"Kogge-Stone Algorithm\">Fill on an empty Board</a> with <a href=\"/Kogge-Stone_Algorithm\" title=\"Kogge-Stone Algorithm\">Kogge-Stone Algorithm</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=On_an_empty_Board&amp;action=edit&amp;section=18\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=79140\">[Question] Efficiently generate ray masks?</a> by <a href=\"/index.php?title=Daniel_Infuehr&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Daniel Infuehr (page does not exist)\">Daniel Infuehr</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 16, 2022</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=79140&amp;start=10\">Re:  [Question]  Efficiently generate ray masks?</a> by <a href=\"/Thomas_Jahn\" title=\"Thomas Jahn\">Thomas Jahn</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 17, 2022</dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=On_an_empty_Board&amp;action=edit&amp;section=19\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=79140&amp;start=10\">Re:  [Question]  Efficiently generate ray masks?</a> by <a href=\"/Thomas_Jahn\" title=\"Thomas Jahn\">Thomas Jahn</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 17, 2022</span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.felixcloutier.com/x86/sarx:shlx:shrx\">SARX/SHLX/SHRX — Shift Without Affecting Flags</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Sliding_Piece_Attacks\" title=\"Sliding Piece Attacks\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301054645\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.011 seconds\nReal time usage: 0.012 seconds\nPreprocessor visited node count: 296/1000000\nPreprocessor generated node count: 594/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 3/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1110-0!canonical and timestamp 20260301054645 and revision id 26201\n -->\n"
+    },
+    "categories": [],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "On an empty Board"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Anti-Diagonals"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "BMI2"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Blockers and Beyond"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Board Representation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Diagonals"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Direction"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Files"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "General Setwise Operations"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kogge-Stone Algorithm"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Occupancy"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pieces"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ranks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rays"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sliding Piece Attacks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Square Mapping Considerations"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Thomas Jahn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "X86-64"
+      },
+      {
+        "ns": 0,
+        "*": "Daniel Infuehr"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Ray Attacks",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "On_an_empty_Board",
+        "byteoffset": 1041,
+        "anchor": "Ray_Attacks"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Rays by Line",
+        "number": "1.1",
+        "index": "2",
+        "fromtitle": "On_an_empty_Board",
+        "byteoffset": 1365,
+        "anchor": "Rays_by_Line"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Positive Rays",
+        "number": "1.2",
+        "index": "3",
+        "fromtitle": "On_an_empty_Board",
+        "byteoffset": 1810,
+        "anchor": "Positive_Rays"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "By Lookup",
+        "number": "1.2.1",
+        "index": "4",
+        "fromtitle": "On_an_empty_Board",
+        "byteoffset": 1877,
+        "anchor": "By_Lookup"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Initialization",
+        "number": "1.2.2",
+        "index": "5",
+        "fromtitle": "On_an_empty_Board",
+        "byteoffset": 2594,
+        "anchor": "Initialization"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "By Calculation",
+        "number": "1.2.3",
+        "index": "6",
+        "fromtitle": "On_an_empty_Board",
+        "byteoffset": 3159,
+        "anchor": "By_Calculation"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Negative Rays",
+        "number": "1.3",
+        "index": "7",
+        "fromtitle": "On_an_empty_Board",
+        "byteoffset": 3545,
+        "anchor": "Negative_Rays"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "By Lookup",
+        "number": "1.3.1",
+        "index": "8",
+        "fromtitle": "On_an_empty_Board",
+        "byteoffset": 3608,
+        "anchor": "By_Lookup_2"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Initialization",
+        "number": "1.3.2",
+        "index": "9",
+        "fromtitle": "On_an_empty_Board",
+        "byteoffset": 4325,
+        "anchor": "Initialization_2"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "By Calculation",
+        "number": "1.3.3",
+        "index": "10",
+        "fromtitle": "On_an_empty_Board",
+        "byteoffset": 4637,
+        "anchor": "By_Calculation_2"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Line Attacks",
+        "number": "2",
+        "index": "11",
+        "fromtitle": "On_an_empty_Board",
+        "byteoffset": 5024,
+        "anchor": "Line_Attacks"
+      },
+      {
+        "toclevel": 2,
+        "level": "3",
+        "line": "By Lookup",
+        "number": "2.1",
+        "index": "12",
+        "fromtitle": "On_an_empty_Board",
+        "byteoffset": 5301,
+        "anchor": "By_Lookup_3"
+      },
+      {
+        "toclevel": 2,
+        "level": "3",
+        "line": "By Calculation",
+        "number": "2.2",
+        "index": "13",
+        "fromtitle": "On_an_empty_Board",
+        "byteoffset": 6022,
+        "anchor": "By_Calculation_3"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Piece Attacks",
+        "number": "3",
+        "index": "14",
+        "fromtitle": "On_an_empty_Board",
+        "byteoffset": 8081,
+        "anchor": "Piece_Attacks"
+      },
+      {
+        "toclevel": 2,
+        "level": "3",
+        "line": "By Lookup",
+        "number": "3.1",
+        "index": "15",
+        "fromtitle": "On_an_empty_Board",
+        "byteoffset": 8294,
+        "anchor": "By_Lookup_4"
+      },
+      {
+        "toclevel": 2,
+        "level": "3",
+        "line": "By Calculation",
+        "number": "3.2",
+        "index": "16",
+        "fromtitle": "On_an_empty_Board",
+        "byteoffset": 9104,
+        "anchor": "By_Calculation_4"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "4",
+        "index": "17",
+        "fromtitle": "On_an_empty_Board",
+        "byteoffset": 9556,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "5",
+        "index": "18",
+        "fromtitle": "On_an_empty_Board",
+        "byteoffset": 9696,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "6",
+        "index": "19",
+        "fromtitle": "On_an_empty_Board",
+        "byteoffset": 10067,
+        "anchor": "References"
+      }
+    ]
+  }
+}

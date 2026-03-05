@@ -1,0 +1,573 @@
+{
+  "parse": {
+    "title": "Vector Attacks",
+    "pageid": 110,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Board_Representation\" title=\"Board Representation\">Board Representation</a> * <a href=\"/Mailbox\" title=\"Mailbox\">Mailbox</a> * Vector Attacks</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"/File:Position_vector.svg\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Position_vector.svg/330px-Position_vector.svg.png\" width=\"300\" height=\"252\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Position_vector.svg/500px-Position_vector.svg.png 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Position_vector.svg/960px-Position_vector.svg.png 2x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Position_vector.svg\" class=\"internal\" title=\"Enlarge\"></a></div>Position Vector <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div>\n<p><b>Vector Attacks</b> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>,\n</p><p>the application of <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Euclidean_vector\">vectors</a> in the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Chebyshev_distance\">Chebyshev</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Vector_space\">vector space</a> of a <a href=\"/Chessboard\" title=\"Chessboard\">chessboard</a> to the problem of chess <a href=\"/Attacks\" title=\"Attacks\">attacks</a>, including <a href=\"/Static_Exchange_Evaluation\" title=\"Static Exchange Evaluation\">static exchange evaluation (SEE)</a>, and testing whether <a href=\"/Moves\" title=\"Moves\">moves</a> are <a href=\"/Pseudo-Legal_Move\" title=\"Pseudo-Legal Move\">pseudo-legal</a>.\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Displacement_and_Position_Vectors\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Displacement and Position Vectors</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Vector_Boards\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Vector Boards</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Vector_as_Index\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Vector as Index</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Superimposed_Lookup\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Superimposed Lookup</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#Ray_Vectors\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Ray Vectors</span></a></li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#Increment_Vectors\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Increment Vectors</span></a></li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#New_Architecture\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">New Architecture</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#Source-Destination\"><span class=\"tocnumber\">7.1</span> <span class=\"toctext\">Source-Destination</span></a></li>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#Destination-Source\"><span class=\"tocnumber\">7.2</span> <span class=\"toctext\">Destination-Source</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-10\"><a href=\"#Implementations\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">Implementations</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#0x88\"><span class=\"tocnumber\">8.1</span> <span class=\"toctext\">0x88</span></a>\n<ul>\n<li class=\"toclevel-3 tocsection-12\"><a href=\"#Layout\"><span class=\"tocnumber\">8.1.1</span> <span class=\"toctext\">Layout</span></a></li>\n<li class=\"toclevel-3 tocsection-13\"><a href=\"#Coordinate_Transformation\"><span class=\"tocnumber\">8.1.2</span> <span class=\"toctext\">Coordinate Transformation</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-2 tocsection-14\"><a href=\"#15x12\"><span class=\"tocnumber\">8.2</span> <span class=\"toctext\">15x12</span></a>\n<ul>\n<li class=\"toclevel-3 tocsection-15\"><a href=\"#Layout_2\"><span class=\"tocnumber\">8.2.1</span> <span class=\"toctext\">Layout</span></a></li>\n<li class=\"toclevel-3 tocsection-16\"><a href=\"#Coordinate_Transformation_2\"><span class=\"tocnumber\">8.2.2</span> <span class=\"toctext\">Coordinate Transformation</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-2 tocsection-17\"><a href=\"#16x12\"><span class=\"tocnumber\">8.3</span> <span class=\"toctext\">16x12</span></a>\n<ul>\n<li class=\"toclevel-3 tocsection-18\"><a href=\"#Layout_3\"><span class=\"tocnumber\">8.3.1</span> <span class=\"toctext\">Layout</span></a></li>\n<li class=\"toclevel-3 tocsection-19\"><a href=\"#Coordinate_Transformation_3\"><span class=\"tocnumber\">8.3.2</span> <span class=\"toctext\">Coordinate Transformation</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-2 tocsection-20\"><a href=\"#Conclusion\"><span class=\"tocnumber\">8.4</span> <span class=\"toctext\">Conclusion</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-21\"><a href=\"#See_also\"><span class=\"tocnumber\">9</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-22\"><a href=\"#Publications\"><span class=\"tocnumber\">10</span> <span class=\"toctext\">Publications</span></a></li>\n<li class=\"toclevel-1 tocsection-23\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">11</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-24\"><a href=\"#2000_...\"><span class=\"tocnumber\">11.1</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-25\"><a href=\"#2010_...\"><span class=\"tocnumber\">11.2</span> <span class=\"toctext\">2010 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-26\"><a href=\"#External_Links\"><span class=\"tocnumber\">12</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-27\"><a href=\"#References\"><span class=\"tocnumber\">13</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Displacement_and_Position_Vectors\">Displacement and Position Vectors</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Vector_Attacks&amp;action=edit&amp;section=1\" title=\"Edit section: Displacement and Position Vectors\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>A <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Displacement_%28vector%29\">displacement vector</a> is a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Tuple\">tuple</a> of <a href=\"/Ranks\" title=\"Ranks\">rank</a>- and <a href=\"/Files\" title=\"Files\">file</a>-difference of two <a href=\"/Squares\" title=\"Squares\">squares</a>, for instance <a href=\"/Origin_Square\" title=\"Origin Square\">from</a> and <a href=\"/Target_Square\" title=\"Target Square\">to square</a> of a <a href=\"/Moves\" title=\"Moves\">move</a>.\n</p>\n<div class=\"floatnone\"><a href=\"/File:Vector_Attacks_1.jpg\" class=\"image\"><img alt=\"Vector Attacks 1.jpg\" src=\"/images/d/d0/Vector_Attacks_1.jpg\" width=\"501\" height=\"63\" style=\"vertical-align: text-bottom\" class=\"thumbborder\" /></a></div>\n<p>The <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Position_%28vector%29\">position vector</a> of square A is the displacement to an arbitrary reference origin O.\n</p>\n<div class=\"floatnone\"><a href=\"/File:Vector_Attacks_2.jpg\" class=\"image\"><img alt=\"Vector Attacks 2.jpg\" src=\"/images/8/82/Vector_Attacks_2.jpg\" width=\"245\" height=\"52\" style=\"vertical-align: text-bottom\" class=\"thumbborder\" /></a></div>\n<h1><span class=\"mw-headline\" id=\"Vector_Boards\">Vector Boards</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Vector_Attacks&amp;action=edit&amp;section=2\" title=\"Edit section: Vector Boards\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Vector board arrays with a one-dimensional, scalar index, require the difference of any two mailbox square indices preserve their rank- and file-difference and therefore their <a href=\"/Direction\" title=\"Direction\">direction</a> and <a href=\"/Distance\" title=\"Distance\">distance</a> relationship, which implies using the number of file differences as array dimension - which is <b>15</b> rather than 8 for the number of files. Therefore, the 8x8 mailbox needs at least 7 padded columns (files) of a 15xNROWS (or 16xNROWS) vector array:\n</p>\n<div class=\"floatnone\"><a href=\"/File:Vector_Attacks_3.jpg\" class=\"image\"><img alt=\"Vector Attacks 3.jpg\" src=\"/images/b/b6/Vector_Attacks_3.jpg\" width=\"515\" height=\"35\" style=\"vertical-align: text-bottom\" class=\"thumbborder\" /></a></div>\n<p>or\n</p>\n<div class=\"floatnone\"><a href=\"/File:Vector_Attacks_4.jpg\" class=\"image\"><img alt=\"Vector Attacks 4.jpg\" src=\"/images/5/52/Vector_Attacks_4.jpg\" width=\"515\" height=\"38\" style=\"vertical-align: text-bottom\" class=\"thumbborder\" /></a></div>\n<h1><span class=\"mw-headline\" id=\"Vector_as_Index\">Vector as Index</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Vector_Attacks&amp;action=edit&amp;section=3\" title=\"Edit section: Vector as Index\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Represented as such a square difference, displacement vectors can be used to index 225 (15x15) or 240 (16x15) sized lookup tables for stuff dependent on square relations, that is <a href=\"/Distance#15x15\" title=\"Distance\">Chebyshev distance</a>, <a href=\"/Manhattan-Distance\" title=\"Manhattan-Distance\">Manhattan-distance</a>, boolean <a href=\"/Rays\" title=\"Rays\">ray properties</a> and most importantly, <a href=\"#IncrementVectors\">increment vectors</a> along a ray, or in the world of <a href=\"/Bitboards\" title=\"Bitboards\">bitboards</a>, <a href=\"/Square_Attacked_By#By0x88Difference\" title=\"Square Attacked By\">rotated in-between</a> sets. Thus, the up to fourfold board size of the vector boards, largely pays off, since pure 8x8 coordinates would require two-dimensional <a href=\"/Butterfly_Boards\" title=\"Butterfly Boards\">butterfly tables</a> of size 4096 indexed by two square indices for the same purpose. To keep indices positive, an offset of 112 respective 119 (120) is added.\n</p>\n<h1><span class=\"mw-headline\" id=\"Superimposed_Lookup\"><span id=\"Superimposition\"></span>Superimposed Lookup</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Vector_Attacks&amp;action=edit&amp;section=4\" title=\"Edit section: Superimposed Lookup\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>8x8 tables inside 15x15 tables were already proposed by <a href=\"/Mikhail_Botvinnik\" title=\"Mikhail Botvinnik\">Mikhail Botvinnik</a> as used in <a href=\"/Pioneer\" title=\"Pioneer\">Pioneer</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>. The table below demonstrates the vector enumeration from a square (here c2) on a 8x8 board, superimposed on the 15x15 array in such a way that the from square (c2) coincides with the central square of the 15x15 array, which is the origin, tail, or base of all displacement vectors.\n</p>\n<pre>\n     ╔════╤════╤════╤════╤════╤════╤════╤════╤════╤════╤════╤════╤════╤════╤════╗\n 210 ║  98| 99 | 100| 101| 102| 103| 104| 105| 106| 107| 108| 109| 110| 111| 112║\n     ╟────┼────┼────┼────┼────╔════╤════╤════╤════╤════╤════╤════╤════╗────┼────╢\n 195 ║  83|  84|  85|  86|  87║  88|  89|  90|  91|  92|  93|  94|  95║  96|  97║\n     ╟────┼────┼────┼────┼────╟────┼────┼────┼────┼────┼────┼────┼────╢────┼────╢\n 180 ║  68|  69|  70|  71|  72║  73|  74|  75|  76|  77|  78|  79|  80║  81|  82║\n     ╟────┼────┼────┼────┼────╟────┼────┼────┼────┼────┼────┼────┼────╢────┼────╢\n 165 ║  53|  54|  55|  56|  57║  58|  59|  60|  61|  62|  63|  64|  65║  66|  67║\n     ╟────┼────┼────┼────┼────╟────┼────┼────┼────┼────┼────┼────┼────╢────┼────╢\n 150 ║  38|  39|  40|  41|  42║  42|  44|  45|  46|  47|  48|  49|  50║  51|  52║\n     ╟────┼────┼────┼────┼────╟────┼────┼────┼────┼────┼────┼────┼────╢────┼────╢\n 135 ║  23|  24|  25|  26|  27║  28|  29|  30|  31|  32|  33|  34|  35║  36|  37║\n     ╟────┼────┼────┼────┼────╟────┼────┼────┼────┼────┼────┼────┼────╢────┼────╢\n 120 ║   8|   9|  10|  11|  12║  13|  14|  15|  16|  17|  18|  19|  20║  21|  22║\n     ╟────┼────┼────┼────┼────╟────┼────╔════╗────┼────┼────┼────┼────╢────┼────╢\n 105 ║  -7|  -6|  -5|  -4|  -3║  -2|  -1║   0║   1|   2|   3|   4|   5║   6|   7║\n     ╟────┼────┼────┼────┼────╟────┼────╚════╝────┼────┼────┼────┼────╢────┼────╢\n  90 ║ -22| -21| -20| -19| -18║ -17| -16| -15| -14| -13| -12| -11| -10║  -9|  -8║\n     ╟────┼────┼────┼────┼────╚════╧════╧════╧════╧════╧════╧════╧════╝────┼────╢\n  75 ║ -37| -36| -35| -34| -33| -32| -31| -30| -29| -28| -27| -26| -25| -24| -23║\n     ╟────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────╢\n  60 ║ -52| -51| -50| -49| -48| -47| -46| -45| -44| -43| -42| -41| -40| -39| -38║\n     ╟────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────╢\n  45 ║ -67| -66| -65| -64| -63| -62| -61| -60| -59| -58| -57| -56| -55| -54| -53║\n     ╟────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────╢\n  30 ║ -82| -81| -80| -79| -78| -77| -76| -75| -74| -73| -72| -71| -70| -66| -68║\n     ╟────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────╢\n  15 ║ -97| -96| -95| -94| -93| -92| -91| -90| -89| -88| -87| -86| -85| -84| -83║\n     ╟────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────╢\n   0 ║-112|-111|-110|-109|-108|-107|-106|-105|-104|-103|-102|-101|-100| -99| -98║\n     ╚════╧════╧════╧════╧════╧════╧════╧════╧════╧════╧════╧════╧════╧════╧════╝\n        0    1    2    3    4    5    6    7    8    9    10   11   12   13   14\n</pre>\n<h1><span class=\"mw-headline\" id=\"Ray_Vectors\"><span id=\"RayVectors\"></span>Ray Vectors</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Vector_Attacks&amp;action=edit&amp;section=5\" title=\"Edit section: Ray Vectors\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><a href=\"/Rays\" title=\"Rays\">Ray</a> vectors are <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Unit_vector\">unit vectors</a> to <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Moore_neighborhood\">eight neighboring</a> squares, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Scalar_multiplication\">scaled</a> by <a href=\"/Distance#15x15\" title=\"Distance\">Chebyshev distance</a>. In the domain of <a href=\"/Sliding_Pieces\" title=\"Sliding Pieces\">sliding piece</a> attacks, unit vectors act as <a href=\"#IncrementVectors\">increment vectors</a> if none zero, to determine squares in-between are empty, and a <a href=\"/Target_Square\" title=\"Target Square\">target square</a> is attacked by a sliding piece on its <a href=\"/Origin_Square\" title=\"Origin Square\">origin</a>. Following table demonstrates the <a href=\"/Queen\" title=\"Queen\">queen</a> unit or increment vectors, superimposed on the 15x15 array in such a way that the queen square (here c2) coincides with the central square of the 15x15 array.\n</p>\n<pre>\nchar rayUnitVectorQueen[15*15];\n\n     ╔════╤════╤════╤════╤════╤════╤════╤════╤════╤════╤════╤════╤════╤════╤════╗\n 210 ║  14|    |    |    |    |    |    |  15|    |    |    |    |    |    |  16║\n     ╟────┼────┼────┼────┼────╔════╤════╤════╤════╤════╤════╤════╤════╗────┼────╢\n 195 ║    |  14|    |    |    ║    |    |  15|    |    |    |    |    ║  16|    ║\n     ╟────┼────┼────┼────┼────╟────┼────┼────┼────┼────┼────┼────┼────╢────┼────╢\n 180 ║    |    |  14|    |    ║    |    |  15|    |    |    |    |  16║    |    ║\n     ╟────┼────┼────┼────┼────╟────┼────┼────┼────┼────┼────┼────┼────╢────┼────╢\n 165 ║    |    |    |  14|    ║    |    |  15|    |    |    |  16|    ║    |    ║\n     ╟────┼────┼────┼────┼────╟────┼────┼────┼────┼────┼────┼────┼────╢────┼────╢\n 150 ║    |    |    |    |  14║    |    |  15|    |    |  16|    |    ║    |    ║\n     ╟────┼────┼────┼────┼────╟────┼────┼────┼────┼────┼────┼────┼────╢────┼────╢\n 135 ║    |    |    |    |    ║  14|    |  15|    |  16|    |    |    ║    |    ║\n     ╟────┼────┼────┼────┼────╟────┼────┼────┼────┼────┼────┼────┼────╢────┼────╢\n 120 ║    |    |    |    |    ║    |  14|  15|  16|    |    |    |    ║    |    ║\n     ╟────┼────┼────┼────┼────╟────┼────╔════╗────┼────┼────┼────┼────╢────┼────╢\n 105 ║  -1|  -1|  -1|  -1|  -1║  -1|  -1║  Q ║   1|   1|   1|   1|   1║   1|   1║\n     ╟────┼────┼────┼────┼────╟────┼────╚════╝────┼────┼────┼────┼────╢────┼────╢\n  90 ║    |    |    |    |    ║    | -16| -15| -14|    |    |    |    ║    |    ║\n     ╟────┼────┼────┼────┼────╚════╧════╧════╧════╧════╧════╧════╧════╝────┼────╢\n  75 ║    |    |    |    |    | -16|    | -15|    | -14|    |    |    |    |    ║\n     ╟────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────╢\n  60 ║    |    |    |    | -16|    |    | -15|    |    | -14|    |    |    |    ║\n     ╟────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────╢\n  45 ║    |    |    | -16|    |    |    | -15|    |    |    | -14|    |    |    ║\n     ╟────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────╢\n  30 ║    |    | -16|    |    |    |    | -15|    |    |    |    | -14|    |    ║\n     ╟────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────╢\n  15 ║    | -16|    |    |    |    |    | -15|    |    |    |    |    | -14|    ║\n     ╟────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────╢\n   0 ║ -16|    |    |    |    |    |    | -15|    |    |    |    |    |    | -14║\n     ╚════╧════╧════╧════╧════╧════╧════╧════╧════╧════╧════╧════╧════╧════╧════╝\n        0    1    2    3    4    5    6    7    8    9    10   11   12   13   14\n</pre>\n<h1><span class=\"mw-headline\" id=\"Increment_Vectors\"><span id=\"IncrementVectors\"></span>Increment Vectors</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Vector_Attacks&amp;action=edit&amp;section=6\" title=\"Edit section: Increment Vectors\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>During offset <a href=\"/Move_Generation\" title=\"Move Generation\">move generation</a>, each piece applies a specific displacement or <b>increment vector</b> (offset) for each move direction, added to the position vector of the <a href=\"/Origin_Square\" title=\"Origin Square\">origin square</a> to determine the next potential <a href=\"/Target_Square\" title=\"Target Square\">move target</a> in that direction, <a href=\"/Sliding_Pieces\" title=\"Sliding Pieces\">sliding pieces</a> continuing in the same direction as long the targets are empty. Due to the additional padded files and possibly ranks, off the board test are as simple as the <a href=\"/10x12_Board\" title=\"10x12 Board\">10x12 board</a> with surrounding files and ranks containing off the board codes as <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Sentinel_value\">sentinel values</a>. The <a href=\"/0x88\" title=\"0x88\">0x88</a> approach, a special 16x8 implementation of Vector Attacks, already indicates outside squares by its upper <a href=\"/Nibble\" title=\"Nibble\">nibble</a> bits masked by 0x88.\n</p><p>One may argue, the 0x88 test is cheaper for off the board tests, because it does not need to lookup if the 0x88 test is true. On the other hand, for most cases, if false, it needs a lookup anyway, to perform a second test whether the square is empty, or occupied by an own or opponent piece <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup> <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup>.\n</p>\n<h1><span class=\"mw-headline\" id=\"New_Architecture\"><span id=\"NewArchitecture\"></span>New Architecture</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Vector_Attacks&amp;action=edit&amp;section=7\" title=\"Edit section: New Architecture\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Vector Attacks based on a 15x12 board were topic of <a href=\"/Fritz_Reul\" title=\"Fritz Reul\">Fritz Reul's</a> Ph.D. thesis <i>New Architectures in Computer Chess</i>, code samples given from Reul's <a href=\"/Loop_(Program)#32bit\" title=\"Loop (Program)\">Loop Leiden</a> engine <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup>.\n</p>\n<h2><span class=\"mw-headline\" id=\"Source-Destination\">Source-Destination</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Vector_Attacks&amp;action=edit&amp;section=8\" title=\"Edit section: Source-Destination\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>In conjunction with <a href=\"/Pieces#DisjointPieceFlags\" title=\"Pieces\">disjoint piece flags</a> and <a href=\"/Piece-Lists\" title=\"Piece-Lists\">piece-lists</a>, Vector Attacks allow efficient <a href=\"/Move_Generation\" title=\"Move Generation\">move generation</a> of <a href=\"/Sliding_Pieces\" title=\"Sliding Pieces\">sliding pieces</a>, even for <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">quiescence search</a> with a leading blocker loop:\n</p>\n<pre>\nincrement = rayVector[direction];\nfor (tosq = fromsq + increment; board[tosq] == EMPTY; tosq += increment);\nif ( isOpponentPiece (board[tosq]) )\n{\n  /* generate capture */\n}\n</pre>\n<h2><span class=\"mw-headline\" id=\"Destination-Source\">Destination-Source</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Vector_Attacks&amp;action=edit&amp;section=9\" title=\"Edit section: Destination-Source\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>A destination-source blocker loop, to test whether a sliding piece on a from square attacks a target square, uses the reversed ray direction in order to dispense with additional conditions:\n</p>\n<pre>\nincrement = rayUnitVectorQueen[15*15/2 + fromsq - tosq];\nif ( increment ) {\n  for (sq = tosq + increment; board[sq] == EMPTY; sq += increment);\n  if ( sq == fromsq ) {\n    /* a queen on fromsq attacks tosq */\n  }\n}\n</pre>\n<h1><span class=\"mw-headline\" id=\"Implementations\">Implementations</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Vector_Attacks&amp;action=edit&amp;section=10\" title=\"Edit section: Implementations\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"0x88\">0x88</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Vector_Attacks&amp;action=edit&amp;section=11\" title=\"Edit section: 0x88\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p><i>see main article <a href=\"/0x88\" title=\"0x88\">0x88</a></i>\n</p><p>The <a href=\"/0x88\" title=\"0x88\">0x88</a> or 16x8 board uses <a href=\"/Nibble\" title=\"Nibble\">nibbles</a> for both rank and file coordinates inside a <a href=\"/Byte\" title=\"Byte\">byte</a>, and utilizes the redundant upper bit to indicate invalid squares outside the board, usually then not used as index.\n</p>\n<h3><span class=\"mw-headline\" id=\"Layout\">Layout</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Vector_Attacks&amp;action=edit&amp;section=12\" title=\"Edit section: Layout\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<pre>\n--------XXXXXXXX\n--------XXXXXXXX\n--------XXXXXXXX\n--------XXXXXXXX\n--------XXXXXXXX\n--------XXXXXXXX\n--------XXXXXXXX\n--------XXXXXXXX\n</pre>\n<h3><span class=\"mw-headline\" id=\"Coordinate_Transformation\">Coordinate Transformation</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Vector_Attacks&amp;action=edit&amp;section=13\" title=\"Edit section: Coordinate Transformation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p>16x8 square coordinate by file and rank and vice versa:\n</p>\n<pre>\nsq0x88 = 16 * rank07 + file07;\nfile07 = sq0x88 &amp; 7;\nrank07 = sq0x88 &gt;&gt; 4; // sq0x88 / 16\n</pre>\n<p>0x88 index by a 0..63 square index needs to add the three upper rank bits:\n</p>\n<pre>\nsq0x88 = sq + (sq &amp; ~7);\n</pre>\n<h2><span class=\"mw-headline\" id=\"15x12\">15x12</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Vector_Attacks&amp;action=edit&amp;section=14\" title=\"Edit section: 15x12\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>The odd number of files makes the <a href=\"/Color_of_a_Square\" title=\"Color of a Square\">square color</a> only dependent from the least significant index bit. Usually the seven surrounding border files are divided 4:3 (Offset 34) or 3:4 (Offset 33). One may also use 15x15 for a symmetric treatment of files and ranks as proposed by <a href=\"/Fritz_Reul\" title=\"Fritz Reul\">Fritz Reul</a> <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup> .\n</p>\n<h3><span class=\"mw-headline\" id=\"Layout_2\">Layout</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Vector_Attacks&amp;action=edit&amp;section=15\" title=\"Edit section: Layout\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<pre>\nXXXXXXXXXXXXXXX\nXXXXXXXXXXXXXXX\nXXXX--------XXX\nXXXX--------XXX\nXXXX--------XXX\nXXXX--------XXX\nXXXX--------XXX\nXXXX--------XXX\nXXXX--------XXX\nXXXX--------XXX\nXXXXXXXXXXXXXXX\nXXXXXXXXXXXXXXX\n</pre>\n<h3><span class=\"mw-headline\" id=\"Coordinate_Transformation_2\">Coordinate Transformation</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Vector_Attacks&amp;action=edit&amp;section=16\" title=\"Edit section: Coordinate Transformation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p>Coordinate transformation is usually not needed while generating moves, since <a href=\"/Piece-Lists\" title=\"Piece-Lists\">piece-lists</a>, increments and move coordinates are only based on 15x12 coordinates. Anyway, for the sake of completeness valid 15x12 square transformation to file and rank indices and vice versa might be done quite efficiently without any <a href=\"/X86\" title=\"X86\">x86</a> div and mul instructions, but load effective address (lea) - otherwise simple lookup tables may used to convert coordinates:\n</p>\n<pre>\nsq15x12 = 15 * rank07 + file07 + 34;\nrank07  = ((sq15x12 - 34) * 9) &gt;&gt; 7;  // div by reciprocal mul\nfile07  =   sq15x12 - 34  - 15 * rank07; //&#160;% 15\n</pre>\n<h2><span class=\"mw-headline\" id=\"16x12\">16x12</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Vector_Attacks&amp;action=edit&amp;section=17\" title=\"Edit section: 16x12\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Usually the eight surrounding border files are divided 4:4, so the offset of the upper left square is 36. For a symmetric treatment of files and ranks, 16x16 is also quite common <sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup> .\n</p>\n<h3><span class=\"mw-headline\" id=\"Layout_3\">Layout</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Vector_Attacks&amp;action=edit&amp;section=18\" title=\"Edit section: Layout\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<pre>\nXXXXXXXXXXXXXXXX\nXXXXXXXXXXXXXXXX\nXXXX--------XXXX\nXXXX--------XXXX\nXXXX--------XXXX\nXXXX--------XXXX\nXXXX--------XXXX\nXXXX--------XXXX\nXXXX--------XXXX\nXXXX--------XXXX\nXXXXXXXXXXXXXXXX\nXXXXXXXXXXXXXXXX\n</pre>\n<h3><span class=\"mw-headline\" id=\"Coordinate_Transformation_3\">Coordinate Transformation</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Vector_Attacks&amp;action=edit&amp;section=19\" title=\"Edit section: Coordinate Transformation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p>16x12 square coordinate by file and rank and vice versa:\n</p>\n<pre>\nsq16x12 = 16 * rank07 + file07 + 36;\nrank07  = (sq16x12 - 36) &gt;&gt; 4; // div 16\nfile07  = (sq16x12 - 36) &amp;  7;  //&#160;% 8\n</pre>\n<p>16x12 square index by a 0..63 square index needs to add the three upper rank bits plus offset:\n</p>\n<pre>\nsq16x12 = sq8x8 + (sq8x8 &amp; ~7) + 36;\n</pre>\n<p>Convert 16x12 square index to 0..63 square index:\n</p>\n<pre>\nfile8x8 = (sq16x12 &amp; 0xf) - 4\nrank8x8 = ((sq16x12 &gt;&gt; 4) - 2\nsq8x8 = (((sq16x12 &gt;&gt; 4) - 2) &lt;&lt; 3) + (sq16x12 &amp; 0xf) - 4;\n</pre>\n<h2><span class=\"mw-headline\" id=\"Conclusion\">Conclusion</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Vector_Attacks&amp;action=edit&amp;section=20\" title=\"Edit section: Conclusion\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>A combination of 0x88 and <a href=\"/10x12_Board\" title=\"10x12 Board\">10x12 Board</a> with surrounded ranks, that is 16x12 or even 16x16 for a symmetric treatment of files and ranks (or 15x12, 15x15) seems slightly more efficient than pure 0x88 aka 16x8, making the \"off the board\" index condition almost redundant, since it can be combined with the coding of the guard or sentinal squares <sup id=\"cite_ref-9\" class=\"reference\"><a href=\"#cite_note-9\">&#91;9&#93;</a></sup> <sup id=\"cite_ref-10\" class=\"reference\"><a href=\"#cite_note-10\">&#91;10&#93;</a></sup> <sup id=\"cite_ref-11\" class=\"reference\"><a href=\"#cite_note-11\">&#91;11&#93;</a></sup> <sup id=\"cite_ref-12\" class=\"reference\"><a href=\"#cite_note-12\">&#91;12&#93;</a></sup> .\n</p>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Vector_Attacks&amp;action=edit&amp;section=21\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/0x88\" title=\"0x88\">0x88</a></li>\n<li> <a href=\"/Square_Attacked_By#By0x88Difference\" title=\"Square Attacked By\">0x88 meets Bitboards</a></li>\n<li> <a href=\"/10x12_Board\" title=\"10x12 Board\">10x12 Board</a></li>\n<li> <a href=\"/8x8_Board\" title=\"8x8 Board\">8x8 Board</a></li>\n<li> <a href=\"/Distance\" title=\"Distance\">Distance</a></li>\n<li> <a href=\"/Direction\" title=\"Direction\">Direction</a></li>\n<li> <a href=\"/Intersection_Squares\" title=\"Intersection Squares\">Intersection Squares</a> as application of 0x88 coordinates</li>\n<li> <a href=\"/Sliding_Piece_Attacks\" title=\"Sliding Piece Attacks\">Sliding Piece Attacks</a> with <a href=\"/Bitboards\" title=\"Bitboards\">Bitboards</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Vector_Attacks&amp;action=edit&amp;section=22\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Mikhail_Botvinnik\" title=\"Mikhail Botvinnik\">Mikhail Botvinnik</a> (<b>1968</b>). <i>Algoritm igry v shakhmaty</i>. (The algorithm of chess)</li>\n<li> <a href=\"/Mikhail_Botvinnik\" title=\"Mikhail Botvinnik\">Mikhail Botvinnik</a> (<b>1970</b>). <i>Computers, Chess and Long-Range Planning</i>. Springer</li>\n<li> <a href=\"/Paul_Wiereyn\" title=\"Paul Wiereyn\">Paul Wiereyn</a> (<b>1985</b>). <i>Inventive Problem Solving</i>. <a href=\"/ICGA_Journal#8_4\" title=\"ICGA Journal\">ICCA Journal, Vol. 8, No. 4</a></li>\n<li> <a href=\"/Boris_Stilman\" title=\"Boris Stilman\">Boris Stilman</a> (<b>1994</b>). <i>A Linguistic Geometry of the Chess Model</i>. <a href=\"/Advances_in_Computer_Chess_7\" title=\"Advances in Computer Chess 7\">Advances in Computer Chess 7</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.stilman-strategies.com/bstilman/boris_papers/Jour94_CHESS7.pdf\">pdf draft</a></li>\n<li> <a href=\"/Fritz_Reul\" title=\"Fritz Reul\">Fritz Reul</a> (<b>2009</b>). <i>New Architectures in Computer Chess</i>. Ph.D. Thesis, <i>Chapter 2 Non-Bitboard Architectures</i></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Vector_Attacks&amp;action=edit&amp;section=23\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Vector_Attacks&amp;action=edit&amp;section=24\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=114311\">Question:1.hashtable 2.board 3.C</a> by <a href=\"/Teerapong_Tovirat\" title=\"Teerapong Tovirat\">Teerapong Tovirat</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 13, 2000</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=114377\">Re: Question:1.hashtable 2.board 3.C</a> by <a href=\"/Christophe_Th%C3%A9ron\" title=\"Christophe Théron\">Christophe Théron</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 13, 2000</dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=114385\">Re: Question:1.hashtable 2.board 3.C</a> by <a href=\"/Eugene_Nalimov\" title=\"Eugene Nalimov\">Eugene Nalimov</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 13, 2000</dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=114438\">0x88 is not so smart</a> by <a href=\"/Christophe_Th%C3%A9ron\" title=\"Christophe Théron\">Christophe Théron</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 13, 2000&#160;» <a href=\"/0x88\" title=\"0x88\">0x88</a></dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=178465\">Fastest Conversion from 0x88 board to 8x8 board representation</a> by <a href=\"/Artem_Petakov\" title=\"Artem Petakov\">Artem Pyatakov</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 06, 2001</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=2407&amp;p=11195#p11109\">Re: Fruit's Board Representation?</a> by <a href=\"/Fabien_Letouzey\" title=\"Fabien Letouzey\">Fabien Letouzey</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, April 28, 2005&#160;» <a href=\"/Fruit\" title=\"Fruit\">Fruit</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Vector_Attacks&amp;action=edit&amp;section=25\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=31776\">GetSmallestAttacker() in 16x12 board representation</a> by metax, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 17, 2010&#160;» <a href=\"/Static_Exchange_Evaluation\" title=\"Static Exchange Evaluation\">Static Exchange Evaluation</a>, <a href=\"/Piece-Lists\" title=\"Piece-Lists\">Piece-Lists</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=62279\">Recommended board representation for a rookie</a> by <a href=\"/index.php?title=Fred_Hamilton&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Fred Hamilton (page does not exist)\">Fred Hamilton</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 26, 2016</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=62279&amp;start=6\">Re: Recommended board representation for a rookie</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 26, 2016</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=62657\">What're advantages of board 16x12?</a> by <a href=\"/Pham_Hong_Nguyen\" title=\"Pham Hong Nguyen\">Nguyen Pham</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 30, 2016</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Vector_Attacks&amp;action=edit&amp;section=26\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Vector_%28mathematics_and_physics%29\">Vector (mathematics and physics) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Euclidean_vector\">Euclidean vector from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Position_%28vector%29\">Position (vector) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Displacement_%28vector%29\">Displacement (vector) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Linear_algebra\">Linear algebra from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Vector_space\">Vector space from Wikipedia</a></li>\n<li> <a href=\"/Category:Dave_Pike\" title=\"Category:Dave Pike\">The Dave Pike Set</a> - Attack Of The Green Misers, <a rel=\"nofollow\" class=\"external text\" href=\"https://www.discogs.com/de/Dave-Pike-Set-Infra-Red/master/91659\">Infra-Red</a> (1970), <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> lineup: <a href=\"/Category:Dave_Pike\" title=\"Category:Dave Pike\">Dave Pike</a>, <a href=\"/Category:Volker_Kriegel\" title=\"Category:Volker Kriegel\">Volker Kriegel</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://de.wikipedia.org/wiki/Hans_Rettenbacher\">Hans Rettenbacher</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://de.wikipedia.org/wiki/Peter_Baumeister\">Peter Baumeister</a></dd>\n<dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/EhCHoTrslhE?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Vector_Attacks&amp;action=edit&amp;section=27\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap mw-references-columns\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\">A vector in the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Cartesian_coordinate_system\">Cartesian plane</a>, showing the position of a point A with coordinates (2,3), <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Euclidean_vector\">Euclidean vector from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=2407&amp;p=11195#p11109\">Re: Fruit's Board Representation?</a> by <a href=\"/Fabien_Letouzey\" title=\"Fabien Letouzey\">Fabien Letouzey</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, April 28, 2005</span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a href=\"/Boris_Stilman\" title=\"Boris Stilman\">Boris Stilman</a> (<b>1994</b>). <i>A Linguistic Geometry of the Chess Model</i>. <a href=\"/Advances_in_Computer_Chess_7\" title=\"Advances in Computer Chess 7\">Advances in Computer Chess 7</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.stilman-strategies.com/bstilman/boris_papers/Jour94_CHESS7.pdf\">pdf draft</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=114377\">Re: Question:1.hashtable 2.board 3.C</a> by <a href=\"/Christophe_Th%C3%A9ron\" title=\"Christophe Théron\">Christophe Théron</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 13, 2000</span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=114438\">0x88 is not so smart</a> by <a href=\"/Christophe_Th%C3%A9ron\" title=\"Christophe Théron\">Christophe Théron</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 13, 2000</span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a href=\"/Fritz_Reul\" title=\"Fritz Reul\">Fritz Reul</a> (<b>2009</b>). <i>New Architectures in Computer Chess</i>. Ph.D. Thesis, <i>Chapter 2 Non-Bitboard Architectures</i></span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a href=\"/Fritz_Reul\" title=\"Fritz Reul\">Fritz Reul</a> (<b>2009</b>). <i>New Architectures in Computer Chess</i>. Ph.D. Thesis, <i>Chapter 2 Non-Bitboard Architectures</i></span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=2407&amp;p=11195#p11109\">Re: Fruit's Board Representation?</a> by <a href=\"/Fabien_Letouzey\" title=\"Fabien Letouzey\">Fabien Letouzey</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, April 28, 2005</span>\n</li>\n<li id=\"cite_note-9\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-9\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=114377\">Re: Question:1.hashtable 2.board 3.C</a> by <a href=\"/Christophe_Th%C3%A9ron\" title=\"Christophe Théron\">Christophe Théron</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">CCC</a>, June 13, 2000</span>\n</li>\n<li id=\"cite_note-10\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-10\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=2407&amp;p=11195#p11109\">Re: Fruit's Board Representation?</a> by <a href=\"/Fabien_Letouzey\" title=\"Fabien Letouzey\">Fabien Letouzey</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, April 28, 2005</span>\n</li>\n<li id=\"cite_note-11\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-11\">↑</a></span> <span class=\"reference-text\"><a href=\"/Fritz_Reul\" title=\"Fritz Reul\">Fritz Reul</a> (<b>2009</b>). <i>New Architectures in Computer Chess</i>. Ph.D. Thesis, 2.2.1 <i>Computer Chessboard Representation</i></span>\n</li>\n<li id=\"cite_note-12\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-12\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=62279&amp;start=6\">Re: Recommended board representation for a rookie</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 26, 2016</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Mailbox\" title=\"Mailbox\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301074130\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.092 seconds\nReal time usage: 0.642 seconds\nPreprocessor visited node count: 405/1000000\nPreprocessor generated node count: 814/1000000\nPost‐expand include size: 27/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:110-0!canonical and timestamp 20260301074130 and revision id 23025\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Dave_Pike"
+      },
+      {
+        "sortkey": "",
+        "*": "Volker_Kriegel"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Board Representation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mailbox"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "0x88"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "10x12 Board"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "8x8 Board"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 7"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Artem Petakov"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Attacks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Boris Stilman"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Butterfly Boards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Byte"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chessboard"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Christophe Théron"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Color of a Square"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Direction"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Distance"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Eugene Nalimov"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fabien Letouzey"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Files"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fritz Reul"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fruit"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Harm Geert Muller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA Journal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Intersection Squares"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Loop (Program)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Manhattan-Distance"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mikhail Botvinnik"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Generation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Moves"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Nibble"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Origin Square"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Paul Wiereyn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pham Hong Nguyen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Piece-Lists"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pieces"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pioneer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pseudo-Legal Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Queen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiescence Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ranks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rays"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sliding Piece Attacks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sliding Pieces"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Square Attacked By"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Squares"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Static Exchange Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Target Square"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Teerapong Tovirat"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "X86"
+      },
+      {
+        "ns": 0,
+        "*": "Fred Hamilton"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Dave Pike"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Volker Kriegel"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Displacement and Position Vectors",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Vector_Attacks",
+        "byteoffset": 1040,
+        "anchor": "Displacement_and_Position_Vectors"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Vector Boards",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Vector_Attacks",
+        "byteoffset": 1626,
+        "anchor": "Vector_Boards"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Vector as Index",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Vector_Attacks",
+        "byteoffset": 2234,
+        "anchor": "Vector_as_Index"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Superimposed Lookup",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Vector_Attacks",
+        "byteoffset": 3041,
+        "anchor": "Superimposed_Lookup"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Ray Vectors",
+        "number": "5",
+        "index": "5",
+        "fromtitle": "Vector_Attacks",
+        "byteoffset": 6328,
+        "anchor": "Ray_Vectors"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Increment Vectors",
+        "number": "6",
+        "index": "6",
+        "fromtitle": "Vector_Attacks",
+        "byteoffset": 9794,
+        "anchor": "Increment_Vectors"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "New Architecture",
+        "number": "7",
+        "index": "7",
+        "fromtitle": "Vector_Attacks",
+        "byteoffset": 11235,
+        "anchor": "New_Architecture"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Source-Destination",
+        "number": "7.1",
+        "index": "8",
+        "fromtitle": "Vector_Attacks",
+        "byteoffset": 11636,
+        "anchor": "Source-Destination"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Destination-Source",
+        "number": "7.2",
+        "index": "9",
+        "fromtitle": "Vector_Attacks",
+        "byteoffset": 12134,
+        "anchor": "Destination-Source"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Implementations",
+        "number": "8",
+        "index": "10",
+        "fromtitle": "Vector_Attacks",
+        "byteoffset": 12576,
+        "anchor": "Implementations"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "0x88",
+        "number": "8.1",
+        "index": "11",
+        "fromtitle": "Vector_Attacks",
+        "byteoffset": 12595,
+        "anchor": "0x88"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Layout",
+        "number": "8.1.1",
+        "index": "12",
+        "fromtitle": "Vector_Attacks",
+        "byteoffset": 12863,
+        "anchor": "Layout"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Coordinate Transformation",
+        "number": "8.1.2",
+        "index": "13",
+        "fromtitle": "Vector_Attacks",
+        "byteoffset": 13027,
+        "anchor": "Coordinate_Transformation"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "15x12",
+        "number": "8.2",
+        "index": "14",
+        "fromtitle": "Vector_Attacks",
+        "byteoffset": 13332,
+        "anchor": "15x12"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Layout",
+        "number": "8.2.1",
+        "index": "15",
+        "fromtitle": "Vector_Attacks",
+        "byteoffset": 13793,
+        "anchor": "Layout_2"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Coordinate Transformation",
+        "number": "8.2.2",
+        "index": "16",
+        "fromtitle": "Vector_Attacks",
+        "byteoffset": 14012,
+        "anchor": "Coordinate_Transformation_2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "16x12",
+        "number": "8.3",
+        "index": "17",
+        "fromtitle": "Vector_Attacks",
+        "byteoffset": 14672,
+        "anchor": "16x12"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Layout",
+        "number": "8.3.1",
+        "index": "18",
+        "fromtitle": "Vector_Attacks",
+        "byteoffset": 15066,
+        "anchor": "Layout_3"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Coordinate Transformation",
+        "number": "8.3.2",
+        "index": "19",
+        "fromtitle": "Vector_Attacks",
+        "byteoffset": 15298,
+        "anchor": "Coordinate_Transformation_3"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Conclusion",
+        "number": "8.4",
+        "index": "20",
+        "fromtitle": "Vector_Attacks",
+        "byteoffset": 15848,
+        "anchor": "Conclusion"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "9",
+        "index": "21",
+        "fromtitle": "Vector_Attacks",
+        "byteoffset": 16901,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "10",
+        "index": "22",
+        "fromtitle": "Vector_Attacks",
+        "byteoffset": 17162,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "11",
+        "index": "23",
+        "fromtitle": "Vector_Attacks",
+        "byteoffset": 17806,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "11.1",
+        "index": "24",
+        "fromtitle": "Vector_Attacks",
+        "byteoffset": 17821,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "11.2",
+        "index": "25",
+        "fromtitle": "Vector_Attacks",
+        "byteoffset": 18754,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "12",
+        "index": "26",
+        "fromtitle": "Vector_Attacks",
+        "byteoffset": 19444,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "13",
+        "index": "27",
+        "fromtitle": "Vector_Attacks",
+        "byteoffset": 20527,
+        "anchor": "References"
+      }
+    ]
+  }
+}

@@ -26,8 +26,14 @@ def test_model_build_and_featureide_export(tmp_path, sample_pages):
 
     from cpw_variability.exporters import export_feature_model_json, export_featureide_xml
 
-    export_feature_model_json(paths.feature_model_json_path, result.features, result.traces, result.meta)
-    export_featureide_xml(paths.feature_model_featureide_path, result.features)
+    export_feature_model_json(
+        paths.feature_model_json_path,
+        result.features,
+        result.traces,
+        result.constraints,
+        result.meta,
+    )
+    export_featureide_xml(paths.feature_model_featureide_path, result.features, result.constraints)
 
     assert paths.feature_model_json_path.exists()
     assert paths.feature_model_featureide_path.exists()
@@ -36,9 +42,10 @@ def test_model_build_and_featureide_export(tmp_path, sample_pages):
     root = tree.getroot()
     assert root.tag == "featureModel"
 
-    features, traces, _ = load_feature_model_json(paths.feature_model_json_path)
+    features, traces, constraints, _ = load_feature_model_json(paths.feature_model_json_path)
     traced_feature_ids = {trace.feature_id for trace in traces}
     assert all(feature.id in traced_feature_ids for feature in features)
+    assert isinstance(constraints, list)
 
 
 def test_matrix_expected_statuses(tmp_path, sample_pages):

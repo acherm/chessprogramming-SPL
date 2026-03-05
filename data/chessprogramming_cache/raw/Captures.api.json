@@ -1,0 +1,268 @@
+{
+  "parse": {
+    "title": "Captures",
+    "pageid": 1151,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Chess\" title=\"Chess\">Chess</a> * <a href=\"/Moves\" title=\"Moves\">Moves</a> * Captures</b>\n</p><p><b>Captures</b> are <a href=\"/Tactical_Moves\" title=\"Tactical Moves\">tactical moves</a> changing <a href=\"/Material#Balance\" title=\"Material\">material balance</a> where an opponent <a href=\"/Pieces\" title=\"Pieces\">piece</a> is removed from the <a href=\"/Chessboard\" title=\"Chessboard\">board</a> as part of the completion of the move. This is either done by moving a piece to a <a href=\"/Squares\" title=\"Squares\">square</a>, which is <a href=\"/Occupancy\" title=\"Occupancy\">occupied</a> by the opponent captured piece - or as a special case of <a href=\"/Pawn\" title=\"Pawn\">pawn</a> takes pawn, <a href=\"/En_passant\" title=\"En passant\">en passant</a>.\n</p><p>Winning captures are those with least valuable aggressor of most valuable victim, where even a recapture would win <a href=\"/Material\" title=\"Material\">material</a>, and captures of pieces <a href=\"/En_prise\" title=\"En prise\">en prise</a>, that is the union of undefended (<a href=\"/Hanging_Piece\" title=\"Hanging Piece\">hanging</a>) pieces, as well as pieces defended inadequately. A <a href=\"/Static_Exchange_Evaluation\" title=\"Static Exchange Evaluation\">static exchange evaluation</a> might be applied to determine a victim is <i>en prise</i> or not. Equal captures are exchanges of equal valued pieces. Winning, as well as equal captures are subject of <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">quiescence search</a>. Some programs <a href=\"/Capture_Extensions\" title=\"Capture Extensions\">extend captures</a> or <a href=\"/Recapture_Extensions\" title=\"Recapture Extensions\">recaptures</a> under certain conditions, i.e. material becomes close to the root score again.\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Capture_Generation\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Capture Generation</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Six_times_Take_Five\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Six times Take Five</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#See_also\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Forum Posts</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#External_Links\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">External Links</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Capture_Generation\">Capture Generation</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Captures&amp;action=edit&amp;section=1\" title=\"Edit section: Capture Generation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>With <a href=\"/Mailbox\" title=\"Mailbox\">mailbox</a> like square centric <a href=\"/Board_Representation\" title=\"Board Representation\">board representations</a>, capture <a href=\"/Move_Generation\" title=\"Move Generation\">generation</a> requires a so called <a href=\"/Vector_Attacks#NewArchitecture\" title=\"Vector Attacks\">blocker loop</a>, while <a href=\"/Bitboards\" title=\"Bitboards\">bitboards</a> rely on attack generation and <a href=\"/General_Setwise_Operations#Intersection\" title=\"General Setwise Operations\">intersection</a> with the set of opponent pieces.\n</p>\n<h1><span class=\"mw-headline\" id=\"Six_times_Take_Five\">Six times Take Five</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Captures&amp;action=edit&amp;section=2\" title=\"Edit section: Six times Take Five\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<table class=\"wikitable\">\n\n<tr>\n<th> Capture\n</th>\n<th> Best case\n</th>\n<th> Worst case\n</th></tr>\n<tr>\n<td colspan=\"3\"> capturing with the pawn\n</td></tr>\n<tr>\n<td>  pxQ\n</td>\n<td>  winning queen\n</td>\n<td>  pawn for queen\n</td></tr>\n<tr>\n<td>  pxR\n</td>\n<td>  winning rook\n</td>\n<td>  pawn for rook\n</td></tr>\n<tr>\n<td>  pxB\n</td>\n<td>  winning bishop\n</td>\n<td>  pawn for bishop\n</td></tr>\n<tr>\n<td>  pxN\n</td>\n<td>  winning knight\n</td>\n<td>  pawn for knight\n</td></tr>\n<tr>\n<td>  pxP\n</td>\n<td>  winning pawn\n</td>\n<td>  exchanging pawns\n</td></tr>\n<tr>\n<td colspan=\"3\"> capturing with the knight\n</td></tr>\n<tr>\n<td>  nxQ\n</td>\n<td>  winning queen\n</td>\n<td>  knight for queen\n</td></tr>\n<tr>\n<td>  nxR\n</td>\n<td>  winning rook\n</td>\n<td>  winning the exchange\n</td></tr>\n<tr>\n<td>  nxB\n</td>\n<td>  winning bishop\n</td>\n<td>  exchanging minors\n</td></tr>\n<tr>\n<td>  nxN\n</td>\n<td>  winning knight\n</td>\n<td>  exchanging minors\n</td></tr>\n<tr>\n<td>  nxP\n</td>\n<td>  winning pawn\n</td>\n<td>  losing knight for pawn\n</td></tr>\n<tr>\n<td colspan=\"3\"> capturing with the bishop\n</td></tr>\n<tr>\n<td>  bxQ\n</td>\n<td>  winning queen\n</td>\n<td>  bishop for queen\n</td></tr>\n<tr>\n<td>  bxR\n</td>\n<td>  winning rook\n</td>\n<td>  winning the exchange\n</td></tr>\n<tr>\n<td>  bxB\n</td>\n<td>  winning bishop\n</td>\n<td>  exchanging minors\n</td></tr>\n<tr>\n<td>  bxN\n</td>\n<td>  winning knight\n</td>\n<td>  exchanging minors\n</td></tr>\n<tr>\n<td>  bxP\n</td>\n<td>  winning pawn\n</td>\n<td>  losing bishop for pawn\n</td></tr>\n<tr>\n<td colspan=\"3\"> capturing with the rook\n</td></tr>\n<tr>\n<td>  rxQ\n</td>\n<td>  winning queen\n</td>\n<td>  rook for queen\n</td></tr>\n<tr>\n<td>  rxR\n</td>\n<td>  winning rook\n</td>\n<td>  exchanging rooks\n</td></tr>\n<tr>\n<td>  rxB\n</td>\n<td>  winning bishop\n</td>\n<td>  losing exchange\n</td></tr>\n<tr>\n<td>  rxN\n</td>\n<td>  winning knight\n</td>\n<td>  losing exchange\n</td></tr>\n<tr>\n<td>  rxP\n</td>\n<td>  winning pawn\n</td>\n<td>  losing rook for pawn\n</td></tr>\n<tr>\n<td colspan=\"3\"> capturing with the queen\n</td></tr>\n<tr>\n<td>  qxQ\n</td>\n<td>  winning queen\n</td>\n<td>  exchanging queens\n</td></tr>\n<tr>\n<td>  qxR\n</td>\n<td>  winning rook\n</td>\n<td>  losing queen for rook\n</td></tr>\n<tr>\n<td>  qxB\n</td>\n<td>  winning bishop\n</td>\n<td>  losing queen for bishop\n</td></tr>\n<tr>\n<td>  qxN\n</td>\n<td>  winning knight\n</td>\n<td>  losing queen for knight\n</td></tr>\n<tr>\n<td>  qxP\n</td>\n<td>  winning pawn\n</td>\n<td>  losing queen for pawn\n</td></tr>\n<tr>\n<td colspan=\"3\"> capturing with the king, always winning captures\n</td></tr>\n<tr>\n<td>  kxQ\n</td>\n<td>  winning queen\n</td>\n<td>\n</td></tr>\n<tr>\n<td>  kxR\n</td>\n<td>  winning rook\n</td>\n<td>\n</td></tr>\n<tr>\n<td>  kxB\n</td>\n<td>  winning bishop\n</td>\n<td>\n</td></tr>\n<tr>\n<td>  kxN\n</td>\n<td>  winning knight\n</td>\n<td>\n</td></tr>\n<tr>\n<td>  kxP\n</td>\n<td>  winning pawn\n</td>\n<td>\n</td></tr></table>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Captures&amp;action=edit&amp;section=3\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Algebraic_Chess_Notation#Captures\" title=\"Algebraic Chess Notation\">Algebraic Chess Notation - Captures</a></li>\n<li> <a href=\"/Capture_Extensions\" title=\"Capture Extensions\">Capture Extensions</a></li>\n<li> <a href=\"/Capture_(program)\" title=\"Capture (program)\">Capture (program)</a> by <a href=\"/Sylvain_Renard\" title=\"Sylvain Renard\">Sylvain Renard</a></li>\n<li> <a href=\"/Material\" title=\"Material\">Material</a></li>\n<li> <a href=\"/MVV-LVA\" title=\"MVV-LVA\">MVV-LVA</a></li>\n<li> <a href=\"/Promotions\" title=\"Promotions\">Promotions</a></li>\n<li> <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">Quiescence Search</a></li>\n<li> <a href=\"/Recapture_Extensions\" title=\"Recapture Extensions\">Recapture Extensions</a></li>\n<li> <a href=\"/Static_Exchange_Evaluation\" title=\"Static Exchange Evaluation\">Static Exchange Evaluation</a></li>\n<li> <a href=\"/Tactical_Moves\" title=\"Tactical Moves\">Tactical Moves</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Captures&amp;action=edit&amp;section=4\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=275173\">a question about the definition of winning capture in Rebel(diagrams)</a> by <a href=\"/Uri_Blass\" title=\"Uri Blass\">Uri Blass</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 05, 2003</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=40100\">Reducing/Pruning Bad Captures (SEE &lt; 0)</a> by <a href=\"/Edsel_Apostol\" title=\"Edsel Apostol\">Edsel Apostol</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 19, 2011&#160;» <a href=\"/Pruning\" title=\"Pruning\">Pruning</a>, <a href=\"/Reductions\" title=\"Reductions\">Reductions</a>, <a href=\"/Static_Exchange_Evaluation\" title=\"Static Exchange Evaluation\">SEE</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=5&amp;t=2238\">Perft and Captures</a> by <a href=\"/Christian_Daley\" title=\"Christian Daley\">CDaley11</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">OpenChess Forum</a>, January 24, 2013&#160;» <a href=\"/Perft\" title=\"Perft\">Perft</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61021\">Sorting Captures</a> by <a href=\"/index.php?title=David_Cimbalista&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"David Cimbalista (page does not exist)\">David Cimbalista</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 03, 2016&#160;» <a href=\"/Move_Ordering\" title=\"Move Ordering\">Move Ordering</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65084\">Ordering Capture Moves</a> by <a href=\"/index.php?title=Jason_Fernandez&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Jason Fernandez (page does not exist)\">Jason Fernandez</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 06, 2017&#160;» <a href=\"/Move_Ordering#Captures\" title=\"Move Ordering\">Move Ordering - Captures</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Captures&amp;action=edit&amp;section=5\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Capture\">Capture (disambiguation) from Wikipedia</a> </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Dave_Brubeck\">Dave Brubeck Quartet</a> - <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Take_Five\">Take Five</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.davebrubeckjazz.com/Recordings/Detail/Dave-Brubeck,-Newport-Jazz-Festival/00277\">Newport Jazz Festival, 1979</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> feat.: <a href=\"/Category:Jerry_Bergonzi\" title=\"Category:Jerry Bergonzi\">Jerry Bergonzi</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Chris_Brubeck\">Chris Brubeck</a> and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Randy_Jones_(drummer)\">Randy Jones</a></dd>\n<dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/zY20zgG_hQ8?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<p><b><a href=\"/Moves\" title=\"Moves\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301070640\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.008 seconds\nReal time usage: 0.008 seconds\nPreprocessor visited node count: 22/1000000\nPreprocessor generated node count: 56/1000000\nPost‐expand include size: 26/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1151-0!canonical and timestamp 20260301070640 and revision id 20108\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Jerry_Bergonzi"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Algebraic Chess Notation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Board Representation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Capture (program)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Capture Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chessboard"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Christian Daley"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Edsel Apostol"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "En passant"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "En prise"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "General Setwise Operations"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hanging Piece"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "MVV-LVA"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mailbox"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Material"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Generation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Ordering"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Moves"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Occupancy"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Perft"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pieces"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Promotions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiescence Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Recapture Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Squares"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Static Exchange Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sylvain Renard"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tactical Moves"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Uri Blass"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vector Attacks"
+      },
+      {
+        "ns": 0,
+        "*": "David Cimbalista"
+      },
+      {
+        "ns": 0,
+        "*": "Jason Fernandez"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Jerry Bergonzi"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Capture Generation",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Captures",
+        "byteoffset": 1215,
+        "anchor": "Capture_Generation"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Six times Take Five",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Captures",
+        "byteoffset": 1590,
+        "anchor": "Six_times_Take_Five"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Captures",
+        "byteoffset": 3440,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Captures",
+        "byteoffset": 3750,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "5",
+        "index": "5",
+        "fromtitle": "Captures",
+        "byteoffset": 4650,
+        "anchor": "External_Links"
+      }
+    ]
+  }
+}

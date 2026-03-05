@@ -1,0 +1,165 @@
+{
+  "parse": {
+    "title": "Anti-Diagonals",
+    "pageid": 1228,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Chess\" title=\"Chess\">Chess</a> * Anti-Diagonals</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:283px;\"><a href=\"/Bibob\" title=\"Bibob\"><img alt=\"\" src=\"/images/8/88/Antidia.JPG\" width=\"281\" height=\"272\" class=\"thumbimage\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Antidia.JPG\" class=\"internal\" title=\"Enlarge\"></a></div>Main Anti-Diagonal <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>Anti-Diagonals</b> are the diagonals from south-east to north-west on a chess board, the main anti-diagonal is h1\\a8. There are 15 anti-diagonals, with line-length from 1 to 8. An Anti-Diagonal is monochrome, all their <a href=\"/Squares\" title=\"Squares\">squares</a> are either white or black. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Square_Mapping_Notes\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Square Mapping Notes</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Square_Difference\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Square Difference</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Enumeration\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Enumeration</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Alternative_Enumeration\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Alternative Enumeration</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#Two_Squares_on_a_Anti-Diagonal\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Two Squares on a Anti-Diagonal</span></a></li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#See_also\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#External_Links\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-8\"><a href=\"#References\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Square_Mapping_Notes\">Square Mapping Notes</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Anti-Diagonals&amp;action=edit&amp;section=1\" title=\"Edit section: Square Mapping Notes\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>A <a href=\"/Flipping_Mirroring_and_Rotating#Rotationby90degreesClockwise\" title=\"Flipping Mirroring and Rotating\">90 degree rotation</a> of the <a href=\"/Chessboard\" title=\"Chessboard\">Chessboard</a>, as well as <a href=\"/Flipping_Mirroring_and_Rotating#FlipVertically\" title=\"Flipping Mirroring and Rotating\">flipping vertically</a> (reversed <a href=\"/Ranks\" title=\"Ranks\">ranks</a>) or (exclusive) <a href=\"/Flipping_Mirroring_and_Rotating#MirrorHorizontally\" title=\"Flipping Mirroring and Rotating\">mirroring horizontally</a> (reversed <a href=\"/Files\" title=\"Files\">files</a>), change the roles of <a href=\"/Diagonals\" title=\"Diagonals\">diagonals</a> and anti-diagonals. However, we define the main diagonal on the chess board from a1/h8 and the main anti-diagonal from h1\\a8. Whether the square difference of neighbored squares on a diagonal or anti-diagonal is either 7 or 9, depends on the square mapping. We further rely on <a href=\"/Square_Mapping_Considerations#LittleEndianRankFileMapping\" title=\"Square Mapping Considerations\">little-endian rank-file mapping</a>.\n</p>\n<h1><span class=\"mw-headline\" id=\"Square_Difference\">Square Difference</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Anti-Diagonals&amp;action=edit&amp;section=2\" title=\"Edit section: Square Difference\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Within a 0..63 square index range and the mentioned <a href=\"/Square_Mapping_Considerations#LittleEndianRankFileMapping\" title=\"Square Mapping Considerations\">square mapping</a> (a1 = 0), the difference of two neighbored squares (if any) on an anti-diagonal is <b>seven</b>.\n</p>\n<h1><span class=\"mw-headline\" id=\"Enumeration\">Enumeration</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Anti-Diagonals&amp;action=edit&amp;section=3\" title=\"Edit section: Enumeration\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>If we follow an anti-diagonal from south-east (h1) to north-west (a8) step by step, we increment the rank, but decrement the file, which yields in same sum. Thus, adding <a href=\"/Ranks\" title=\"Ranks\">rank</a> and <a href=\"/Files\" title=\"Files\">file</a> indices enumerates all Anti-Diagonals.\n</p>\n<ul><li> Square a1 (file- and rank index 0) is therefor anti-diagonal with index 0 and length 1.</li>\n<li> The main anti-diagonal h1\\a8 with index 7 and length 8.</li>\n<li> Square h8 is the 15th anti-diagonal with index 14 and length 1.</li>\n<li> All even indices are the anti-diagonals with dark <a href=\"/Squares\" title=\"Squares\">squares</a></li></ul>\n<p><b>rank + file</b>\n</p>\n<table class=\"wikitable\">\n\n<tr>\n<th> r/f\n</th>\n<th> 0\n</th>\n<th> 1\n</th>\n<th> 2\n</th>\n<th> 3\n</th>\n<th> 4\n</th>\n<th> 5\n</th>\n<th> 6\n</th>\n<th> 7\n</th></tr>\n<tr>\n<th> 7\n</th>\n<th> 7\n</th>\n<td style=\"text-align:right;\"> 8\n</td>\n<td style=\"text-align:right;\"> 9\n</td>\n<td style=\"text-align:right;\"> 10\n</td>\n<td style=\"text-align:right;\"> 11\n</td>\n<td style=\"text-align:right;\"> 12\n</td>\n<td style=\"text-align:right;\"> 13\n</td>\n<td style=\"text-align:right;\"> 14\n</td></tr>\n<tr>\n<th> 6\n</th>\n<td style=\"text-align:right;\"> 6\n</td>\n<th> 7\n</th>\n<td style=\"text-align:right;\"> 8\n</td>\n<td style=\"text-align:right;\"> 9\n</td>\n<td style=\"text-align:right;\"> 10\n</td>\n<td style=\"text-align:right;\"> 11\n</td>\n<td style=\"text-align:right;\"> 12\n</td>\n<td style=\"text-align:right;\"> 13\n</td></tr>\n<tr>\n<th> 5\n</th>\n<td style=\"text-align:right;\"> 5\n</td>\n<td style=\"text-align:right;\"> 6\n</td>\n<th> 7\n</th>\n<td style=\"text-align:right;\"> 8\n</td>\n<td style=\"text-align:right;\"> 9\n</td>\n<td style=\"text-align:right;\"> 10\n</td>\n<td style=\"text-align:right;\"> 11\n</td>\n<td style=\"text-align:right;\"> 12\n</td></tr>\n<tr>\n<th> 4\n</th>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 5\n</td>\n<td style=\"text-align:right;\"> 6\n</td>\n<th> 7\n</th>\n<td style=\"text-align:right;\"> 8\n</td>\n<td style=\"text-align:right;\"> 9\n</td>\n<td style=\"text-align:right;\"> 10\n</td>\n<td style=\"text-align:right;\"> 11\n</td></tr>\n<tr>\n<th> 3\n</th>\n<td style=\"text-align:right;\"> 3\n</td>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 5\n</td>\n<td style=\"text-align:right;\"> 6\n</td>\n<th> 7\n</th>\n<td style=\"text-align:right;\"> 8\n</td>\n<td style=\"text-align:right;\"> 9\n</td>\n<td style=\"text-align:right;\"> 10\n</td></tr>\n<tr>\n<th> 2\n</th>\n<td style=\"text-align:right;\"> 2\n</td>\n<td style=\"text-align:right;\"> 3\n</td>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 5\n</td>\n<td style=\"text-align:right;\"> 6\n</td>\n<th> 7\n</th>\n<td style=\"text-align:right;\"> 8\n</td>\n<td style=\"text-align:right;\"> 9\n</td></tr>\n<tr>\n<th> 1\n</th>\n<td style=\"text-align:right;\"> 1\n</td>\n<td style=\"text-align:right;\"> 2\n</td>\n<td style=\"text-align:right;\"> 3\n</td>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 5\n</td>\n<td style=\"text-align:right;\"> 6\n</td>\n<th> 7\n</th>\n<td style=\"text-align:right;\"> 8\n</td></tr>\n<tr>\n<th> 0\n</th>\n<td style=\"text-align:right;\"> 0\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<td style=\"text-align:right;\"> 2\n</td>\n<td style=\"text-align:right;\"> 3\n</td>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 5\n</td>\n<td style=\"text-align:right;\"> 6\n</td>\n<th> 7\n</th></tr></table>\n<h1><span class=\"mw-headline\" id=\"Alternative_Enumeration\">Alternative Enumeration</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Anti-Diagonals&amp;action=edit&amp;section=4\" title=\"Edit section: Alternative Enumeration\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Some alternative enumeration of anti-diagonals to make the main-diagonal index 0, by xoring the sum with 7 (which complements the lower three bits of the sum). This yields in a 0..15 range with 8 as gap or <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Nexus\">Nexus</a> in the center of the range:\n</p><p><b>(rank + file) ^ 7</b>\n</p>\n<table class=\"wikitable\">\n\n<tr>\n<th> r/f\n</th>\n<th> 0\n</th>\n<th> 1\n</th>\n<th> 2\n</th>\n<th> 3\n</th>\n<th> 4\n</th>\n<th> 5\n</th>\n<th> 6\n</th>\n<th> 7\n</th></tr>\n<tr>\n<th> 7\n</th>\n<th> 0\n</th>\n<td style=\"text-align:right;\"> 15\n</td>\n<td style=\"text-align:right;\"> 14\n</td>\n<td style=\"text-align:right;\"> 13\n</td>\n<td style=\"text-align:right;\"> 12\n</td>\n<td style=\"text-align:right;\"> 11\n</td>\n<td style=\"text-align:right;\"> 10\n</td>\n<td style=\"text-align:right;\"> 9\n</td></tr>\n<tr>\n<th> 6\n</th>\n<td style=\"text-align:right;\"> 1\n</td>\n<th> 0\n</th>\n<td style=\"text-align:right;\"> 15\n</td>\n<td style=\"text-align:right;\"> 14\n</td>\n<td style=\"text-align:right;\"> 13\n</td>\n<td style=\"text-align:right;\"> 12\n</td>\n<td style=\"text-align:right;\"> 11\n</td>\n<td style=\"text-align:right;\"> 10\n</td></tr>\n<tr>\n<th> 5\n</th>\n<td style=\"text-align:right;\"> 2\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<th> 0\n</th>\n<td style=\"text-align:right;\"> 15\n</td>\n<td style=\"text-align:right;\"> 14\n</td>\n<td style=\"text-align:right;\"> 13\n</td>\n<td style=\"text-align:right;\"> 12\n</td>\n<td style=\"text-align:right;\"> 11\n</td></tr>\n<tr>\n<th> 4\n</th>\n<td style=\"text-align:right;\"> 3\n</td>\n<td style=\"text-align:right;\"> 2\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<th> 0\n</th>\n<td style=\"text-align:right;\"> 15\n</td>\n<td style=\"text-align:right;\"> 14\n</td>\n<td style=\"text-align:right;\"> 13\n</td>\n<td style=\"text-align:right;\"> 12\n</td></tr>\n<tr>\n<th> 3\n</th>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 3\n</td>\n<td style=\"text-align:right;\"> 2\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<th> 0\n</th>\n<td style=\"text-align:right;\"> 15\n</td>\n<td style=\"text-align:right;\"> 14\n</td>\n<td style=\"text-align:right;\"> 13\n</td></tr>\n<tr>\n<th> 2\n</th>\n<td style=\"text-align:right;\"> 5\n</td>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 3\n</td>\n<td style=\"text-align:right;\"> 2\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<th> 0\n</th>\n<td style=\"text-align:right;\"> 15\n</td>\n<td style=\"text-align:right;\"> 14\n</td></tr>\n<tr>\n<th> 1\n</th>\n<td style=\"text-align:right;\"> 6\n</td>\n<td style=\"text-align:right;\"> 5\n</td>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 3\n</td>\n<td style=\"text-align:right;\"> 2\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<th> 0\n</th>\n<td style=\"text-align:right;\"> 15\n</td></tr>\n<tr>\n<th> 0\n</th>\n<td style=\"text-align:right;\"> 7\n</td>\n<td style=\"text-align:right;\"> 6\n</td>\n<td style=\"text-align:right;\"> 5\n</td>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 3\n</td>\n<td style=\"text-align:right;\"> 2\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<th> 0\n</th></tr></table>\n<p><span id=\"TwoSquares\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Two_Squares_on_a_Anti-Diagonal\">Two Squares on a Anti-Diagonal</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Anti-Diagonals&amp;action=edit&amp;section=5\" title=\"Edit section: Two Squares on a Anti-Diagonal\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Two <a href=\"/Squares\" title=\"Squares\">Squares</a> are on the same Anti-Diagonal, if sum of file  and rank distance is zero\n</p>\n<pre>\nbool squaresOnSameAntiDiagonal(int sq1, int sq2) {\n  return ((sq2 - sq1) &amp; 7) + ((sq2&gt;&gt;3) - (sq1&gt;&gt;3)) == 0;\n}\n</pre>\n<p>The <a href=\"/Diagonals#TwoSquares\" title=\"Diagonals\">alternative approach</a>, to test whether the square difference is divisible by 7, would take extra conditions, since the outer squares of the main-diagonal (63-0) would wrongly classified otherwise <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>\n</p>\n<ul><li> <a href=\"/Diagonals#TwoSquares\" title=\"Diagonals\">Two Squares on a Diagonal</a></li>\n<li> <a href=\"/Files#TwoSquares\" title=\"Files\">Two Squares on a File</a></li>\n<li> <a href=\"/Ranks#TwoSquares\" title=\"Ranks\">Two Squares on a Rank</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Anti-Diagonals&amp;action=edit&amp;section=6\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Diagonals\" title=\"Diagonals\">Diagonals</a></li>\n<li> <a href=\"/Ranks\" title=\"Ranks\">Ranks</a></li>\n<li> <a href=\"/Files\" title=\"Files\">Files</a></li>\n<li> <a href=\"/Squares\" title=\"Squares\">Squares</a></li>\n<li> <a href=\"/Intersection_Squares\" title=\"Intersection Squares\">Intersection Squares</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Anti-Diagonals&amp;action=edit&amp;section=7\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Anti-diagonal_matrix\">Anti-diagonal matrix from Wikipedia</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Anti-Diagonals&amp;action=edit&amp;section=8\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a href=\"/Bibob\" title=\"Bibob\">Bibob</a> image by <a href=\"/Gerd_Isenberg\" title=\"Gerd Isenberg\">Gerd Isenberg</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://talkchess.com/forum3/viewtopic.php?f=7&amp;t=74821\">An undetected bug for 10 years</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 18, 2020</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Chess\" title=\"Chess\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301000928\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.017 seconds\nReal time usage: 0.018 seconds\nPreprocessor visited node count: 73/1000000\nPreprocessor generated node count: 140/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1228-0!canonical and timestamp 20260301000928 and revision id 20824\n -->\n"
+    },
+    "categories": [],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bibob"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chessboard"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Diagonals"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Files"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Flipping Mirroring and Rotating"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gerd Isenberg"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Intersection Squares"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Oliver Brausch"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ranks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Square Mapping Considerations"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Squares"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Square Mapping Notes",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Anti-Diagonals",
+        "byteoffset": 438,
+        "anchor": "Square_Mapping_Notes"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Square Difference",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Anti-Diagonals",
+        "byteoffset": 1196,
+        "anchor": "Square_Difference"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Enumeration",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Anti-Diagonals",
+        "byteoffset": 1443,
+        "anchor": "Enumeration"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Alternative Enumeration",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Anti-Diagonals",
+        "byteoffset": 3991,
+        "anchor": "Alternative_Enumeration"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Two Squares on a Anti-Diagonal",
+        "number": "5",
+        "index": "5",
+        "fromtitle": "Anti-Diagonals",
+        "byteoffset": 6347,
+        "anchor": "Two_Squares_on_a_Anti-Diagonal"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "6",
+        "index": "6",
+        "fromtitle": "Anti-Diagonals",
+        "byteoffset": 7107,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "7",
+        "index": "7",
+        "fromtitle": "Anti-Diagonals",
+        "byteoffset": 7201,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "8",
+        "index": "8",
+        "fromtitle": "Anti-Diagonals",
+        "byteoffset": 7310,
+        "anchor": "References"
+      }
+    ]
+  }
+}

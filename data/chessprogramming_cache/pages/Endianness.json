@@ -1,0 +1,51 @@
+{
+  "title": "Endianness",
+  "url": "https://www.chessprogramming.org/Endianness",
+  "source_type": "api",
+  "retrieved_at": "2026-03-01T15:24:16.514206+00:00",
+  "content_hash": "10a2b9b7df5eb0de4de558be9810018371d1b339225370014576054978bcd586",
+  "text": "Home * Programming * Data * Endianness Little- and Big-endian [1] Endianness is about the order to concatenate sub-items to composite items with respect to reading and writing, or related, storing or transmitting such items, also referred to as NUXI problem . The related term big-endian (as opposed to little-endian ) comes from Jonathan Swift's satirical novel Gulliver’s Travels , where tensions are described in Lilliput and Blefuscu : whereas royal edict in Lilliput requires cracking open one's soft-boiled egg at the small end, inhabitants of the rival kingdom of Blefuscu crack theirs at the big end [2] . Contents 1 Digits in Numbers 2 Numbers in Dates 3 Bytes in Words 4 Chessboard Endianness 4.1 Files versus Ranks 4.2 Rank-Endianness 4.3 File-Endianness 5 See also 6 External Links 7 References Digits in Numbers [ edit ] With endianness, we have to consider how we usually write text (letters of a word, word of a sentence) and numbers (left to right LTR, right to left RTL, top to bottom TTB, bottom to top BTT). Assuming textflow is from left-to-right (LTR) and Hindu-Arabic numeral system , we write numbers (decimal, as well as binary, octal and hexadecimal) big-endian wise (\"big end first\") - that is, we write (or transmit) from most significant to least significant digit from left (first) to right (last). Numbers in Dates [ edit ] That was about the endianness of digits in numbers, e.g. 1234 versus 4321. Assume we have three numbers representing a date, the year (two or four digits, yy or yyyy), the month of that year (1..12, mm) and the day of the month (1..31, dd). How do we concatenate the three sub-items? With respect to the significance of the sub-items, we would use big-endian as well, the biggest item left (first), thus yyyy-mm-dd. Anyway, Calendar dates are written quite differently in various countries and cultures, also with various separators. Little-endian , dd-mm-yyyy common to the vast majority of the world's countries Middle-endian mm-dd-yyyy as used in the United States and a few other countries , likely more desciptive with name of the month. Big-endian yyyy-mm-dd as defined by ISO 8601 One of the advantages of using the ISO 8601 big-endian standard date format is that when dates in this format are ordered by a standard collation by leading characters first, they are also in date order. Bytes in Words [ edit ] How to store bytes of a word (or double- and quadword) in memory (also called byte-order or byte-sex), where each byte has a unique address, was an disputed issue in the history of computers and micro-processors, especially Intel (little-endian) versus Motorola (big-endian). The byte-order is also the primary meaning of endianness. Big-endian associates the \"first\" (lower) address with the most significant byte (as we write the most significant digit first). Little-endian stores the least significant (or lower) byte at the lower byte-address of a word. While there are some advantages and disadvantages, endianness is a matter of convention and customization. Still other architectures, generically called middle-endian or mixed-endian, may have a more complicated ordering; PDP-11 , for instance, stored some 32-bit words, counting from the most significant, as: 2nd byte first, then 1st, then 4th, and finally 3rd. As a useful side-effect for computerchess from that war of endianness [3] - almost every common processor has instructions to reverse the byte order of a word, a doubleword or a quadword inside a register, and there are applications to take advantage of that for a kind of reversed arithmetic, most notable as used inside the Hyperbola Quintessence . If we like to access the i-th byte of a quadword (e.g. a Bitboard ), the following code is not endian-independent: U64 *p64 = ...; BYTE *pbyte = (BYTE*) p64; BYTE byte = *(pbyte+i-1); // pbyte[i-1] i = 1..8 Endian-independent code would look like this: U64 *p64 = ...; U64 quadword = *p64; // p64[0] BYTE byte = (BYTE)(quadword >> (8*(i-1))); // i = 1..8 Chessboard Endianness [ edit ] The common notation to label Squares on the Chessboard is to write the file-coordinate at the big-end (left) and the rank-coordinate at the little-end, e.g. \"a3\" or \"f7\". Since both sets of labels use distinct sets of characters, the order doesn't matter that much, so even \"3a\" or \"7f\" would be sufficient, but not common. However, that is no longer the case if we enumerate bot items from one to eight, or more commonly for zero-based indices, from zero to seven as two octal-digits. Then we have to define the endianness of the square coordinates. Files versus Ranks [ edit ] While this is still arbitrary and a matter of convention, more common is to have the file-coordinate at the little-end, nominated as Least Significant File (LSF) Mapping with following relations: squareIndex = 8*rankIndex + fileIndex rankIndex = squareIndex div 8 fileIndex = squareIndex mod 8 Rank-Endianness [ edit ] Is the first rank the little-end or the big-end of the board? It don't cares, but it has to be defined and considered thoroughly the chess program's internal Board Representation . Likely the first rank is considered as little-end, since one is less eight - despite there is no arithmetical significance in the sense of numbers. But one may also argue Rank-Endianness depends on the White's or Black's point of view, and own base-rank is the perspective big-end. While one mapping is as good as the other - with the same little-endian argument to order the bytes like their addresses, we define first rank with index 0 as little-endian rank-mapping, as used in in most of our code snippets, specially in Bitboards . Big-endian rank-mapping is defined as index zero maps the eighth rank. The Forsyth-Edwards Notation starts left with the big-end rank8 and may therefor considered big-endian. The advantage of big-endian ranks in LSF (Least Significant File) is, if printing a board rank by rank from top to bottom, the printed board appears in the typical and natural 2D bird's eye perspective of the white player. File-Endianness [ edit ] Is the A-File or the H-File the little-end of the board? Having the big-end left seems more natural, due to White's bird's eye perspective, having the A-File left, as well as the big-end digit in numbers. On the other hand, 'a' is less than 'h' in most character codes, and indeed we most often use little-endian file-mapping with the A-File addressed by index zero and the H-file addressed by index seven. See also [ edit ] Big-endian Little-endian Square Mapping Considerations Flipping Mirroring and Rotating External Links [ edit ] Endianness from Wikipedia IEN 137 - DAV's Endian FAQ - On Holy Wars and a Plea for Peace by Danny Cohen , USC/ISI , April 1, 1980 Writing endian-independent code in C Don't let endianness \"byte\" you by Harsha Adiga, IBM Developer , April 24, 2007 References [ edit ] ↑ Discovering System Endianess from Software Development Blog , April 27, 2009 ↑ Gulliver's Travels (Part I, Chapter IV) on Wikisource ↑ IEN 137 - DAV's Endian FAQ - On Holy Wars and a Plea for Peace by Danny Cohen , USC/ISI , April 1, 1980 Up one Level",
+  "headings": [
+    "Contents",
+    "Digits in Numbers[edit]",
+    "Numbers in Dates[edit]",
+    "Bytes in Words[edit]",
+    "Chessboard Endianness[edit]",
+    "Files versus Ranks[edit]",
+    "Rank-Endianness[edit]",
+    "File-Endianness[edit]",
+    "See also[edit]",
+    "External Links[edit]",
+    "References[edit]"
+  ],
+  "links": [
+    "Big-endian",
+    "Bitboards",
+    "Board Representation",
+    "Byte",
+    "Chessboard",
+    "Data",
+    "Flipping Mirroring and Rotating",
+    "Forsyth-Edwards Notation",
+    "Hyperbola Quintessence",
+    "Intel",
+    "Little-endian",
+    "Main Page",
+    "Memory",
+    "Motorola",
+    "PDP-11",
+    "Programming",
+    "Square Mapping Considerations",
+    "Squares",
+    "Word",
+    "index.php"
+  ],
+  "bold_terms": [
+    "Home * Programming * Data * Endianness",
+    "Endianness",
+    "Up one Level"
+  ],
+  "categories": [],
+  "page_type": "technique",
+  "raw_payload_path": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/data/chessprogramming_cache/raw/Endianness.api.json"
+}

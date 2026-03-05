@@ -1,0 +1,228 @@
+{
+  "parse": {
+    "title": "Minimax (program)",
+    "pageid": 105,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Engines\" title=\"Engines\">Engines</a> * Minimax</b>\n</p><p><b>Minimax</b>,<br />\na didactic <a href=\"/Category:Open_Source\" title=\"Category:Open Source\">open source chess program</a> written in <a href=\"/Basic\" title=\"Basic\">QuickBASIC</a> by <a href=\"/Dieter_Steinwender\" title=\"Dieter Steinwender\">Dieter Steinwender</a> and <a href=\"/Chrilly_Donninger\" title=\"Chrilly Donninger\">Chrilly Donninger</a>, which appeared 1995 in Steinwender's and <a href=\"/Frederic_Friedel\" title=\"Frederic Friedel\">Friedel's</a> German book <i>Schach am PC</i> <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup>. The program is apparently based on Donninger's 1994 <a href=\"/C\" title=\"C\">C</a> program with the same name , and a program published by Steinwender in <a href=\"/Computerschach_und_Spiele\" title=\"Computerschach und Spiele\">Computerschach und Spiele</a> 1984 <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>. Minimax features a <a href=\"/Mailbox\" title=\"Mailbox\">Mailbox</a> board representation with offset <a href=\"/Move_Generation\" title=\"Move Generation\">move generation</a>, <a href=\"/Aspiration_Windows\" title=\"Aspiration Windows\">aspiration</a> <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">alpha-beta</a> search within an <a href=\"/Iterative_Deepening\" title=\"Iterative Deepening\">iterative deepening</a> framework. Minimax has been converted to a <a href=\"/WinBoard\" title=\"WinBoard\">WinBoard</a> chess engine by <a href=\"/Thomas_McBurney\" title=\"Thomas McBurney\">Thomas McBurney</a> in 2003 <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>. <a href=\"/Martin_Bauer\" title=\"Martin Bauer\">Martin Bauer</a> ported Minimax to <a href=\"/Delphi\" title=\"Delphi\">Delphi</a> and further applied enhancements for the <a href=\"/UCI\" title=\"UCI\">UCI</a> compliant <a href=\"/DelphiMax\" title=\"DelphiMax\">DelphiMax</a> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>.\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Mailbox\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Mailbox</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#See_also\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Forum Posts</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#External_Links\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#References\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Mailbox\">Mailbox</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Minimax_(program)&amp;action=edit&amp;section=1\" title=\"Edit section: Mailbox\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><a href=\"/Initial_Position\" title=\"Initial Position\">Initial Position</a> in <a href=\"/Basic\" title=\"Basic\">Basic</a>\n</p>\n<pre>\nCONST BrettDim% = 119  ' Dimension des erweiterten Schachbrettes\n\nDIM SHARED Grundstellung(BrettDim%) AS INTEGER\n\nFOR i% = 0 TO BrettDim%\n   READ Grundstellung(i%)\nNEXT i%\n\nDATA 100,100,100,100,100,100,100,100,100,100\nDATA 100,100,100,100,100,100,100,100,100,100\nDATA 100, 2 , 4 , 3 , 5 , 6 , 3 , 4 , 2 ,100\nDATA 100, 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 ,100\nDATA 100, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ,100\nDATA 100, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ,100\nDATA 100, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ,100\nDATA 100, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ,100\nDATA 100,-1 ,-1 ,-1 ,-1 ,-1 ,-1 ,-1 ,-1 ,100\nDATA 100,-2 ,-4 ,-3 ,-5 ,-6 ,-3 ,-4 ,-2 ,100\nDATA 100,100,100,100,100,100,100,100,100,100\nDATA 100,100,100,100,100,100,100,100,100,100\n</pre>\n<p>and the same <a href=\"/Mailbox\" title=\"Mailbox\">Mailbox</a> in <a href=\"/C\" title=\"C\">C</a> <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup>:\n</p>\n<pre>\n#define BRETT_DIM    120  /* Dimension des erweiterten Schachbrettes  */\n\n/**\n*** Figuren. Schema: _\n**/\n#define S_K   -6          /* Kennung fuer Schwarze Figuren */\n#define S_D   -5\n#define S_S   -4\n#define S_L   -3\n#define S_T   -2\n#define S_B   -1\n#define LEER   0          /* Leeres Feld */\n#define W_B    1          /* Kennung fuer weisse Figuren */\n#define W_T    2\n#define W_L    3\n#define W_S    4\n#define W_D    5\n#define W_K    6\n#define RAND 100          /* Umrandung des Schachprogrammes */\n\n/**\n*** Grundstellung auf 10x12 Brett\n**/\nconst int GrundStellung[BRETT_DIM] =  {\nRAND,RAND,RAND,RAND,RAND,RAND,RAND,RAND,RAND,RAND,\nRAND,RAND,RAND,RAND,RAND,RAND,RAND,RAND,RAND,RAND,\nRAND,W_T, W_S ,W_L ,W_D ,W_K ,W_L ,W_S ,W_T, RAND,\nRAND,W_B, W_B ,W_B ,W_B ,W_B ,W_B ,W_B ,W_B, RAND,\nRAND,LEER,LEER,LEER,LEER,LEER,LEER,LEER,LEER,RAND,\nRAND,LEER,LEER,LEER,LEER,LEER,LEER,LEER,LEER,RAND,\nRAND,LEER,LEER,LEER,LEER,LEER,LEER,LEER,LEER,RAND,\nRAND,LEER,LEER,LEER,LEER,LEER,LEER,LEER,LEER,RAND,\nRAND,S_B ,S_B ,S_B ,S_B ,S_B ,S_B ,S_B ,S_B, RAND,\nRAND,S_T, S_S ,S_L ,S_D ,S_K ,S_L ,S_S ,S_T, RAND,\nRAND,RAND,RAND,RAND,RAND,RAND,RAND,RAND,RAND,RAND,\nRAND,RAND,RAND,RAND,RAND,RAND,RAND,RAND,RAND,RAND};\n</pre>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Minimax_(program)&amp;action=edit&amp;section=2\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Betsabe\" title=\"Betsabe\">Betsabe</a></li>\n<li> <a href=\"/DelphiMax\" title=\"DelphiMax\">DelphiMax</a></li>\n<li> <a href=\"/Kanguruh\" title=\"Kanguruh\">Kanguruh</a></li>\n<li> <a href=\"/Minimax\" title=\"Minimax\">Minimax</a></li>\n<li> <a href=\"/Nimzo\" title=\"Nimzo\">Nimzo</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Minimax_(program)&amp;action=edit&amp;section=3\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=286619\">Re: Another qBASIC Chess program -Dieter Steinwender (in english+comment</a> by Tony Worsman, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 24, 2003 (Mimimax Source)</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?t=43795&amp;p=167285\">WBEC-Ridderkerk new results</a> by <a href=\"/Leo_Dijksman\" title=\"Leo Dijksman\">Leo Dijksman</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, August 14, 2003</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.schachfeld.de/f202/minimax-derivate-9732/\">MiniMAX und seine Derivate</a> by lovo, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.schachfeld.de/\">Schachfeld.de</a>, June 24, 2009 (German)</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://jbfilesarchive.com/phpBB3/viewtopic.php?t=1575\">Just MiniMAX Didactic Chess Program</a> by CirothUngol, <a rel=\"nofollow\" class=\"external text\" href=\"http://jbfilesarchive.com/phpBB3/index.php\">Just BASIC Files Archive</a>, November 22, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=75426\">Another XBoard engine derived from Minimax Basic</a> by <a href=\"/Roland_Chastain\" title=\"Roland Chastain\">Roland Chastain</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 18, 2020</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Minimax_(program)&amp;action=edit&amp;section=4\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://web.archive.org/web/20160313043530/http://home.pacific.net.au/~tommyinoz/minimax.html\">Minimax in BASIC</a> converted to <a href=\"/WinBoard\" title=\"WinBoard\">WinBoard</a> by <a href=\"/Thomas_McBurney\" title=\"Thomas McBurney\">Thomas McBurney</a> (<a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wayback_Machine\">Wayback Machine</a>, March 2016)</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://web.archive.org/web/20160307143139if_/http://bauer-schweitzer.de/index.html?minimax/index_minimax.html\">Bauer &amp; Schweitzer - Webdesign, Software, Shareware, Freeware, EDV - MiniMAX and DelphiMax</a> (German, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wayback_Machine\">Wayback Machine</a>, March 2016)</li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Minimax_(program)&amp;action=edit&amp;section=5\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a href=\"/Dieter_Steinwender\" title=\"Dieter Steinwender\">Dieter Steinwender</a>, <a href=\"/Frederic_Friedel\" title=\"Frederic Friedel\">Frederic Friedel</a> (<b>1995</b>). <i>Schach am PC, Bits und Bytes im königlichen Spiel</i>. Markt und Technik Buch 1995, ISBN: 978-3-87791-522-6 (German)</span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.stmintz.com/ccc/index.php?id=286508\">qBASIC Chess program - from 1984 by Dieter Steinwender</a> by <a href=\"/Michael_Byrne\" title=\"Michael Byrne\">Mike Byrne</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 23, 2003</span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://web.archive.org/web/20160313043530/http://home.pacific.net.au/~tommyinoz/minimax.html\">Minimax in BASIC</a> converted to <a href=\"/WinBoard\" title=\"WinBoard\">WinBoard</a> by <a href=\"/Thomas_McBurney\" title=\"Thomas McBurney\">Thomas McBurney</a> (<a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wayback_Machine\">Wayback Machine</a>, March 2016)</span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://web.archive.org/web/20160307143139if_/http://bauer-schweitzer.de/index.html?minimax/index_minimax.html\">Bauer &amp; Schweitzer - Webdesign, Software, Shareware, Freeware, EDV - MiniMAX and DelphiMax</a> (German, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wayback_Machine\">Wayback Machine</a>, March 2016)</span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\">minimax - c-source, see <a rel=\"nofollow\" class=\"external text\" href=\"http://www.schachfeld.de/f202/minimax-derivate-9732/\">MiniMAX und seine Derivate</a> by lovo, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.schachfeld.de/\">Schachfeld.de</a>, June 24, 2009 (German)</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Engines\" title=\"Engines\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301095338\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.012 seconds\nReal time usage: 0.013 seconds\nPreprocessor visited node count: 111/1000000\nPreprocessor generated node count: 242/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:105-0!canonical and timestamp 20260301095338 and revision id 21841\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Open_Source"
+      },
+      {
+        "sortkey": "",
+        "*": "Basic"
+      },
+      {
+        "sortkey": "",
+        "*": "Didactic"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engines"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Basic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha-Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aspiration Windows"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Betsabe"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "C"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chrilly Donninger"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computerschach und Spiele"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Delphi"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "DelphiMax"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dieter Steinwender"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Frederic Friedel"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Initial Position"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iterative Deepening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kanguruh"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Leo Dijksman"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mailbox"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Martin Bauer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michael Byrne"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Minimax"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Generation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Nimzo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Roland Chastain"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Thomas McBurney"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "UCI"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "WinBoard"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Open Source"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Mailbox",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Minimax_(program)",
+        "byteoffset": 1841,
+        "anchor": "Mailbox"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Minimax_(program)",
+        "byteoffset": 4054,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Minimax_(program)",
+        "byteoffset": 4137,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Minimax_(program)",
+        "byteoffset": 5033,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "5",
+        "index": "5",
+        "fromtitle": "Minimax_(program)",
+        "byteoffset": 5583,
+        "anchor": "References"
+      }
+    ]
+  }
+}

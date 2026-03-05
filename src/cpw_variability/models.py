@@ -6,6 +6,9 @@ from typing import Any, Literal
 
 FeatureKind = Literal["mandatory", "optional", "or", "xor"]
 SupportStatus = Literal["SUPPORTED", "UNSUPPORTED_EXPLICIT", "UNKNOWN"]
+VariationRole = Literal["root", "group", "option", "binding"]
+VariabilityStage = Literal["compile_time", "runtime", "mixed", "none"]
+ConstraintKind = Literal["requires", "excludes"]
 
 
 @dataclass
@@ -16,6 +19,11 @@ class FeatureNode:
     kind: FeatureKind = "optional"
     description: str = ""
     aliases: list[str] = field(default_factory=list)
+    variation_role: VariationRole = "option"
+    variability_stage: VariabilityStage = "compile_time"
+    configurable: bool = True
+    compile_flag: str = ""
+    runtime_flag: str = ""
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -30,6 +38,19 @@ class TraceRecord:
     snippet: str
     confidence: float
     rule_id: str
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass
+class ConstraintRule:
+    id: str
+    kind: ConstraintKind
+    left_feature_id: str
+    right_feature_id: str
+    rationale: str = ""
+    source: str = "catalog"
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)

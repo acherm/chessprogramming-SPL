@@ -1,0 +1,806 @@
+{
+  "parse": {
+    "title": "Endgame",
+    "pageid": 1532,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Evaluation\" title=\"Evaluation\">Evaluation</a> * <a href=\"/Game_Phases\" title=\"Game Phases\">Game Phases</a> * Endgame</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:283px;\"><a href=\"https://www.dorotheatanning.org/life-and-work/view/229/\"><img alt=\"\" src=\"/images/2/2b/TanningEndGame.jpg\" width=\"281\" height=\"281\" class=\"thumbimage\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:TanningEndGame.jpg\" class=\"internal\" title=\"Enlarge\"></a></div><a href=\"/Category:Dorothea_Tanning\" title=\"Category:Dorothea Tanning\">Dorothea Tanning</a> - End Game, 1944 <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p>In the <b>Endgame</b> chess programs usually have quite a lot of difficulties. Even the most simple endgames often just lead to a mate after 10 to 15 plys or more, which is far beyond the horizon for engines without the specific endgame knowledge. There are some concepts that a chess programmer should implement to overcome the most basic problems. Usually chess engines activate this special Endgame knowledge as soon as the material on board reaches a certain lower-bound. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Transposition_Tables\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Transposition Tables</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Evaluation\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Evaluation</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Special_Knowledge\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Special Knowledge</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#King_and_Pawns\"><span class=\"tocnumber\">3.1</span> <span class=\"toctext\">King and Pawns</span></a></li>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#Pieces\"><span class=\"tocnumber\">3.2</span> <span class=\"toctext\">Pieces</span></a></li>\n<li class=\"toclevel-2 tocsection-6\"><a href=\"#Endgame_Tablebases\"><span class=\"tocnumber\">3.3</span> <span class=\"toctext\">Endgame Tablebases</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#See_also\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-8\"><a href=\"#Publications\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Publications</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#1960_...\"><span class=\"tocnumber\">5.1</span> <span class=\"toctext\">1960 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#1970_...\"><span class=\"tocnumber\">5.2</span> <span class=\"toctext\">1970 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#1980_...\"><span class=\"tocnumber\">5.3</span> <span class=\"toctext\">1980 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-12\"><a href=\"#1990_...\"><span class=\"tocnumber\">5.4</span> <span class=\"toctext\">1990 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-13\"><a href=\"#1995_...\"><span class=\"tocnumber\">5.5</span> <span class=\"toctext\">1995 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-14\"><a href=\"#2000_...\"><span class=\"tocnumber\">5.6</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-15\"><a href=\"#2005_...\"><span class=\"tocnumber\">5.7</span> <span class=\"toctext\">2005 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-16\"><a href=\"#2010_...\"><span class=\"tocnumber\">5.8</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-17\"><a href=\"#2015_...\"><span class=\"tocnumber\">5.9</span> <span class=\"toctext\">2015 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-18\"><a href=\"#2020_...\"><span class=\"tocnumber\">5.10</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-19\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-20\"><a href=\"#2000_..._2\"><span class=\"tocnumber\">6.1</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-21\"><a href=\"#2010_..._2\"><span class=\"tocnumber\">6.2</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-22\"><a href=\"#2020_..._2\"><span class=\"tocnumber\">6.3</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-23\"><a href=\"#External_Links\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-24\"><a href=\"#References\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Transposition_Tables\">Transposition Tables</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Endgame&amp;action=edit&amp;section=1\" title=\"Edit section: Transposition Tables\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Nowhere else are the <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Hash Tables</a> more efficient than in Endgames. They are invaluable.\n</p>\n<h1><span class=\"mw-headline\" id=\"Evaluation\">Evaluation</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Endgame&amp;action=edit&amp;section=2\" title=\"Edit section: Evaluation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>When doing a positional evaluation, in the endgame, the chess engines should change some parameters. So for example in the <a href=\"/Middlegame\" title=\"Middlegame\">middlegame</a>, if the opponent's <a href=\"/King\" title=\"King\">king</a> is trapped in the center, it should be evaluated much better for the program than the opponent's king, safely standing at the border. In the <b>endgame</b> however, its the other way round. A king on the edge or even in the corner has not so many squares to escape to and is more beneficial for the other player. Furthermore, if you only have one <a href=\"/Bishop\" title=\"Bishop\">bishop</a>, it might be good to evaluate the opponent's king being forced to go to the corner with the <a href=\"/Color\" title=\"Color\">color</a> of the bishop a higher bonus, than for the other corner. In addition Pawn promotion is a very important aim in most endgames. The chess engines should consider that by evaluating the strength of <a href=\"/Passed_Pawn\" title=\"Passed Pawn\">passed pawns</a>.\n</p>\n<h1><span class=\"mw-headline\" id=\"Special_Knowledge\">Special Knowledge</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Endgame&amp;action=edit&amp;section=3\" title=\"Edit section: Special Knowledge\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Some endgames are extensively covered by theory, and for that reason one can supply a vast number of heuristics for playing them. Typical examples include:\n</p>\n<ul><li> <a href=\"/Blockage_Detection\" title=\"Blockage Detection\">Blockage Detection</a></li>\n<li> <a href=\"/Draw_Evaluation\" title=\"Draw Evaluation\">Draw Evaluation</a></li>\n<li> <a href=\"/Mop-up_Evaluation\" title=\"Mop-up Evaluation\">Mop-up Evaluation</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"King_and_Pawns\">King and Pawns</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Endgame&amp;action=edit&amp;section=4\" title=\"Edit section: King and Pawns\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Corresponding_Squares\" title=\"Corresponding Squares\">Corresponding Squares</a></li>\n<li> <a href=\"/King_Centralization\" title=\"King Centralization\">King Centralization</a></li>\n<li> <a href=\"/King_Pawn_Tropism\" title=\"King Pawn Tropism\">King Pawn Tropism</a></li>\n<li> <a href=\"/KPK\" title=\"KPK\">KPK</a></li>\n<li> <a href=\"/Pawn_Endgame\" title=\"Pawn Endgame\">Pawn Endgame</a></li>\n<li> <a href=\"/Rule_of_the_Square\" title=\"Rule of the Square\">Rule of the Square</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Pieces\">Pieces</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Endgame&amp;action=edit&amp;section=5\" title=\"Edit section: Pieces\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Bishops_of_Opposite_Colors\" title=\"Bishops of Opposite Colors\">Bishops of Opposite Colors</a> </li>\n<li> <a href=\"/Wrong_Color_Bishop_and_Rook_Pawn\" title=\"Wrong Color Bishop and Rook Pawn\">Wrong Color Bishop and Rook Pawn</a></li>\n<li> <a href=\"/Bishop_versus_Knight\" title=\"Bishop versus Knight\">Bishop versus Knight</a></li>\n<li> <a href=\"/KBNK_Endgame\" title=\"KBNK Endgame\">KBNK Endgame</a></li>\n<li> <a href=\"/KRK\" title=\"KRK\">KRK</a></li>\n<li> <a href=\"/Rook_Endgame\" title=\"Rook Endgame\">Rook Endgame</a></li>\n<li> <a href=\"/index.php?title=Queen_Endgame&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Queen Endgame (page does not exist)\">Queen Endgame</a></li>\n<li> <a href=\"/Queen_versus_Pawn\" title=\"Queen versus Pawn\">Queen versus Pawn</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Endgame_Tablebases\">Endgame Tablebases</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Endgame&amp;action=edit&amp;section=6\" title=\"Edit section: Endgame Tablebases\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p><i>see main article <a href=\"/Endgame_Tablebases\" title=\"Endgame Tablebases\">Endgame Tablebases</a>.</i>\n</p><p>Currently many engines support the usage of <a href=\"/Endgame_Tablebases\" title=\"Endgame Tablebases\">Endgame Tablebases</a>, precalculated databases that hold for every possible position in a certain endgame, whether it is drawn or how many moves are left for a side to win/lose assuming perfect play. With the help of those, chess engines can simply lookup, if it is advisable to do a certain exchange or not, as well as how to finish some of the more tricky endgames. The advantage of Endgame Tablebases is the ability to determine the definite outcome of a certain position, but on the other side, Tablebases are very space consuming and the disk-access tends to be slow.\n</p>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Endgame&amp;action=edit&amp;section=7\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Endgame_Tablebases\" title=\"Endgame Tablebases\">Endgame Tablebases</a></li>\n<li> <a href=\"/Opening\" title=\"Opening\">Opening</a></li>\n<li> <a href=\"/Middlegame\" title=\"Middlegame\">Middlegame</a></li>\n<li> <a href=\"/Retrograde_Analysis\" title=\"Retrograde Analysis\">Retrograde Analysis</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Endgame&amp;action=edit&amp;section=8\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1960_...\">1960 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Endgame&amp;action=edit&amp;section=9\" title=\"Edit section: 1960 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Barbara_Liskov\" title=\"Barbara Liskov\">Barbara J. Huberman</a> (<b>1968</b>). <i>A Program to Play Chess End Games</i>. Technical Report no. CS-106, Ph.D. thesis. <a href=\"/Stanford_University\" title=\"Stanford University\">Stanford University</a>, Computer Science Department</li></ul>\n<h2><span class=\"mw-headline\" id=\"1970_...\">1970 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Endgame&amp;action=edit&amp;section=10\" title=\"Edit section: 1970 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/index.php?title=Coen_Zuidema&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Coen Zuidema (page does not exist)\">Coen Zuidema</a> (<b>1974</b>). <i>Chess: How to Program the Exceptions?</i> Technical Report IW21/74, Department of Informatics, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Centrum_Wiskunde_%26_Informatica\">Mathematical Center Amdsterdam</a>. <a rel=\"nofollow\" class=\"external text\" href=\"http://oai.cwi.nl/oai/asset/9480/9480A.pdf\">pdf</a></li>\n<li> <a href=\"/index.php?title=Pericles_Negri&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Pericles Negri (page does not exist)\">Pericles Negri</a> (<b>1977</b>). <i>Inductive Learning in a Hierarchical Model for Representing Knowledge in Chess End Games</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.mli.gmu.edu/papers/69-78/77-2.pdf\">pdf</a></li>\n<li> <a href=\"/Ryszard_Michalski\" title=\"Ryszard Michalski\">Ryszard Michalski</a>, <a href=\"/index.php?title=Pericles_Negri&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Pericles Negri (page does not exist)\">Pericles Negri</a> (<b>1977</b>). <i>An experiment on inductive learning in chess endgames</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.doc.ic.ac.uk/~shm/MI/mi8.html\">Machine Intelligence 8</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.mli.gmu.edu/papers/69-78/77-1.pdf\">pdf</a></li>\n<li> <a href=\"/Kenneth_W._Church\" title=\"Kenneth W. Church\">Kenneth W. Church</a> (<b>1978</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://dl.acm.org/citation.cfm?id=67030\">Co-ordinate Squares: A Solution to Many Chess Pawn Endgames</a></i>. B.Sc. thesis, <a href=\"/Massachusetts_Institute_of_Technology\" title=\"Massachusetts Institute of Technology\">Massachusetts Institute of Technology</a>, reprinted 1988 in <a href=\"/Computer_Chess_Compendium\" title=\"Computer Chess Compendium\">Computer Chess Compendium</a>&#160;» <a href=\"/Corresponding_Squares\" title=\"Corresponding Squares\">Corresponding Squares</a></li>\n<li> <a href=\"/Ivan_Bratko\" title=\"Ivan Bratko\">Ivan Bratko</a>, <a href=\"/Tim_Niblett\" title=\"Tim Niblett\">Tim Niblett</a> (<b>1979</b>). <i>Conjectures and Refutations in a Framework for Chess Endgames</i>. in Expert Systems in the Micro-Electronic Age (<a href=\"/Donald_Michie\" title=\"Donald Michie\">Donald Michie</a>, ed.), Edinburgh: Edinburgh University Press, 1979.</li></ul>\n<h2><span class=\"mw-headline\" id=\"1980_...\">1980 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Endgame&amp;action=edit&amp;section=11\" title=\"Edit section: 1980 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Danny_Kopec\" title=\"Danny Kopec\">Danny Kopec</a>, <a href=\"/Tim_Niblett\" title=\"Tim Niblett\">Tim Niblett</a> (<b>1980</b>). <i>How Hard is the Play of the King-Rook-King-Knight Ending?</i> <a href=\"/Advances_in_Computer_Chess_2\" title=\"Advances in Computer Chess 2\">Advances in Computer Chess 2</a></li>\n<li> <a href=\"/John_F._White\" title=\"John F. White\">John F. White</a> (<b>1981</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://yourcomputeronline.wordpress.com/2010/12/27/chess-end-game/\">Chess-End-Game</a></i>. <a href=\"/Your_Computer\" title=\"Your Computer\">Your Computer</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://yourcomputeronline.wordpress.com/2010/12/10/december-1981-%E2%80%93-contents-and-editorial/\">December 1981</a></li>\n<li> <a href=\"/Alen_Shapiro\" title=\"Alen Shapiro\">Alen Shapiro</a>, <a href=\"/Tim_Niblett\" title=\"Tim Niblett\">Tim Niblett</a> (<b>1982</b>). <i>Automatic Induction of Classification Rules for Chess End game.</i> <a href=\"/Advances_in_Computer_Chess_3\" title=\"Advances in Computer Chess 3\">Advances in Computer Chess 3</a></li>\n<li> <a href=\"/Ross_Quinlan\" title=\"Ross Quinlan\">Ross Quinlan</a> (<b>1982</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.researchgate.net/publication/292173657_SEMI-AUTONOMOUS_ACQUISITION_OF_PATTERN-BASED_KNOWLEDGE\">Semi-Autonomous Acquisition of Pattern-Based Knowledge</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://archive.org/details/introductoryread0000mich\">Introductory Readings in Expert Systems</a></li>\n<li> <a href=\"/Ross_Quinlan\" title=\"Ross Quinlan\">Ross Quinlan</a> (<b>1983</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://link.springer.com/chapter/10.1007/978-3-662-12405-5_15\">Learning Efficient Classification Procedures and Their Application to Chess End Games</a></i>. in <a rel=\"nofollow\" class=\"external text\" href=\"https://link.springer.com/book/10.1007%2F978-3-662-12405-5\">Machine Learning: An Artificial Intelligence Approach</a></li>\n<li> <a href=\"/index.php?title=Denis_Verhoef&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Denis Verhoef (page does not exist)\">Denis Verhoef</a>, <a href=\"/index.php?title=Jacco_H._Wesselius&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Jacco H. Wesselius (page does not exist)\">Jacco H. Wesselius</a> (<b>1987</b>). <i>Two-ply KRKN: Safely overtaking Quinlan</i>. <a href=\"/ICGA_Journal#10_4\" title=\"ICGA Journal\">ICCA Journal, Vol. 10, No. 4</a></li>\n<li> <a href=\"/Lars_Rasmussen\" title=\"Lars Rasmussen\">Lars Rasmussen</a> (<b>1987</b>). <i>Correcting grandmasters' Analyses in Elementary Endgames</i>. <a href=\"/ICGA_Journal#10_4\" title=\"ICGA Journal\">ICCA Journal, Vol. 10, No. 4</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1990_...\">1990 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Endgame&amp;action=edit&amp;section=12\" title=\"Edit section: 1990 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Lars_Rasmussen\" title=\"Lars Rasmussen\">Lars Rasmussen</a> (<b>1992</b>). <i>Queen versus Rook and Pawn</i>. <a href=\"/ICGA_Journal#15_2\" title=\"ICGA Journal\">ICCA Journal, Vol. 15, No. 2</a></li>\n<li> <a href=\"/Wilhelm_Barth\" title=\"Wilhelm Barth\">Wilhelm Barth</a>, <a href=\"/index.php?title=Stephan_Barth&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Stephan Barth (page does not exist)\">Stephan Barth</a> (<b>1992</b>). <i>Validating a Range of Endgame Programs</i>. <a href=\"/ICGA_Journal#15_3\" title=\"ICGA Journal\">ICCA Journal, Vol. 15, No. 3</a></li>\n<li> <a href=\"/Jean-Christophe_Weill\" title=\"Jean-Christophe Weill\">Jean-Christophe Weill</a> (<b>1994</b>). <i>How Hard is the Correct Coding of an Easy Endgame?</i> <a href=\"/Advances_in_Computer_Chess_7\" title=\"Advances in Computer Chess 7\">Advances in Computer Chess 7</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.recherche.enac.fr/%7Eweill/publications/acc7.ps.gz\">zipped ps</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1995_...\">1995 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Endgame&amp;action=edit&amp;section=13\" title=\"Edit section: 1995 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Lewis_Stiller\" title=\"Lewis Stiller\">Lewis Stiller</a> (<b>1996</b>). <i>Multilinear Algebra and Chess Endgames</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://library.msri.org/books/Book29/index.html\">Games of No Chance</a> edited by <a href=\"/Richard_J._Nowakowski\" title=\"Richard J. Nowakowski\">Richard J. Nowakowski</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.msri.org/publications/books/Book29/files/stiller.pdf\">pdf</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Roberto_Cifuentes\">Roberto Cifuentes</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.newinchess.com/De_Zeeuw__Maarten-ip-185.html\">Maarten De Zeeuw</a>, <a href=\"/Jan_van_Reek\" title=\"Jan van Reek\">Jan van Reek</a> (<b>1997</b>). <i>Secrets of Chess Endings</i>. <a href=\"/ICGA_Journal#20_4\" title=\"ICGA Journal\">ICCA Journal, Vol. 20, No. 4</a></li>\n<li> <a href=\"/Kevin_Coplan\" title=\"Kevin Coplan\">Kevin Coplan</a> (<b>1998</b>). <i>Synthesis of Chess and Chess-like Endgames by Recursive Optimisation</i>. <a href=\"/ICGA_Journal#21_3\" title=\"ICGA Journal\">ICCA Journal, Vol. 21, No. 3</a></li>\n<li> <a href=\"/Noam_Elkies\" title=\"Noam Elkies\">Noam D. Elkies</a> (<b>1999</b>). <i>On numbers and endgames: Combinatorial game theory in chess endgames</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://arxiv.org/PS_cache/math/pdf/9905/9905198v1.pdf\">pdf</a>, differs only in trivial stylistic details from the (<b>1996</b>) version published in <a rel=\"nofollow\" class=\"external text\" href=\"http://library.msri.org/books/Book29/index.html\">Games of No Chance</a> edited by <a href=\"/Richard_J._Nowakowski\" title=\"Richard J. Nowakowski\">Richard J. Nowakowski</a></li>\n<li> <a href=\"/index.php?title=Philip_G._K._Reiser&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Philip G. K. Reiser (page does not exist)\">Philip G. K. Reiser</a>, <a href=\"/index.php?title=Patricia_J._Riddle&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Patricia J. Riddle (page does not exist)\">Patricia J. Riddle</a> (<b>1999</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/chapter/10.1007%2F3-540-48873-1_19\">Evolving Logic Programs to Classify Chess-Endgame Positions</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/book/10.1007%2F3-540-48873-1\">Simulated Evolution and Learning</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Canberra\">Canberra</a>, Australia. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.springer.com/series/1244\">Lecture Notes in Artificial Intelligence</a>, No. 1585, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Springer_Science%2BBusiness_Media\">Springer</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://stancomb.co.uk/Papers/seal98.pdf\">pdf</a>&#160;» <a href=\"/Learning\" title=\"Learning\">Learning</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Endgame&amp;action=edit&amp;section=14\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Matthias_L%C3%BCscher\" title=\"Matthias Lüscher\">Matthias Lüscher</a>  (<b>2000</b>). <i>Automatic Generation of an Evaluation Function for Chess Endgames</i>. <a href=\"/ETH_Zurich\" title=\"ETH Zurich\">ETH Zurich</a> Supervisors: <a href=\"/Thomas_Lincke\" title=\"Thomas Lincke\">Thomas Lincke</a> and <a href=\"/Christoph_Wirth\" title=\"Christoph Wirth\">Christoph Wirth</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.datacomm.ch/m.luescher/evaluation_function_en.pdf\">pdf</a>&#160;» <a href=\"/Neural_Networks\" title=\"Neural Networks\">Neural Networks</a></li>\n<li> <a href=\"/Kevin_Coplan\" title=\"Kevin Coplan\">Kevin Coplan</a> (<b>2001</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://ilk.uvt.nl/icga/journal/contents/content24-1.htm#SYNTHESIS%20OF%20CHESS\">Synthesis of Chess and Chess-like Endgames: A Proof of Correctness</a></i>. <a href=\"/ICGA_Journal#24_1\" title=\"ICGA Journal\">ICCA Journal, Vol. 24, No. 1</a></li>\n<li> <a href=\"/Kevin_Coplan\" title=\"Kevin Coplan\">Kevin Coplan</a> (<b>2001</b>). <i>Synthesis of Chess-like Endgames: Towards a Proof of Correctness</i>. <a href=\"/Advances_in_Computer_Games_9\" title=\"Advances in Computer Games 9\">Advances in Computer Games 9</a></li>\n<li> <a href=\"/Fabian_M%C3%A4ser\" title=\"Fabian Mäser\">Fabian Mäser</a> (<b>2002</b>). <i>Global Threats in Combinatorial Games: A Computation Model with Applications to Chess Endgames</i>. in <a href=\"/Richard_J._Nowakowski\" title=\"Richard J. Nowakowski\">Richard J. Nowakowski</a> (ed) (<b>2002</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://library.msri.org/books/Book42/\">More Games of No Chance</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Cambridge_University_Press\">Cambridge University Press</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://library.msri.org/books/Book42/files/maeser.pdf\">pdf</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2005_...\">2005 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Endgame&amp;action=edit&amp;section=15\" title=\"Edit section: 2005 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/index.php?title=Ami_Hauptman&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Ami Hauptman (page does not exist)\">Ami Hauptman</a>, <a href=\"/index.php?title=Moshe_Sipper&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Moshe Sipper (page does not exist)\">Moshe Sipper</a> (<b>2005</b>). <i>GP-EndChess: Using Genetic Programming to Evolve Chess Endgame Players</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/conf/eurogp/eurogp2005.html#HauptmanS05\">EuroGP 2005</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.bgu.ac.il/~sipper/papabs/eurogpchess-final.pdf\">pdf</a></li>\n<li> <a href=\"/Eli_David\" title=\"Eli David\">Omid David</a>, <a href=\"/Ariel_Felner\" title=\"Ariel Felner\">Ariel Felner</a>, <a href=\"/Nathan_S._Netanyahu\" title=\"Nathan S. Netanyahu\">Nathan S. Netanyahu</a> (<b>2006</b>). <i>Blockage Detection in Pawn Endgames</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Lecture_Notes_in_Computer_Science\">LNCS</a> 3846, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Springer_Science%2BBusiness_Media\">Springer</a></li>\n<li> <a href=\"/index.php?title=Ami_Hauptman&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Ami Hauptman (page does not exist)\">Ami Hauptman</a>, <a href=\"/index.php?title=Moshe_Sipper&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Moshe Sipper (page does not exist)\">Moshe Sipper</a> (<b>2007</b>). <i>Emergence of Complex Strategies in the Evolution of Chess Endgame Players</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/journals/advcs/advcs10.html#HauptmanS07\">Advances in Complex Systems 10</a></li>\n<li> <a href=\"/John_Nunn\" title=\"John Nunn\">John Nunn</a> (<b>2009</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.newinchess.com/Understanding_Chess_Endgames-p-1843.html\">Understanding Chess Endgames</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Gambit_Publications\">Gambit</a> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup></li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Endgame&amp;action=edit&amp;section=16\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/John_Nunn\" title=\"John Nunn\">John Nunn</a> (<b>2010</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.newinchess.com/Nunn_s_Chess_Endings__Volume_1-p-5025.html\">Nunn's Chess Endings, volume 1</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Gambit_Publications\">Gambit</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup></li>\n<li> <a href=\"/John_Nunn\" title=\"John Nunn\">John Nunn</a> (<b>2010</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.newinchess.com/Nunn_s_Chess_Endings__Volume_2-p-5053.html\">Nunn's Chess Endings, volume 2</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Gambit_Publications\">Gambit</a></li>\n<li> <a href=\"/John_Nunn\" title=\"John Nunn\">John Nunn</a> (<b>2013</b>). <i>Discoveries in R+2P vs. R+P Endings</i>. <a href=\"/ICGA_Journal#36_3\" title=\"ICGA Journal\">ICGA Journal, Vol. 36, No. 3</a>&#160;» <a href=\"/Lomonosov_Tablebases\" title=\"Lomonosov Tablebases\">Lomonosov Tablebases</a></li>\n<li> <a href=\"/Karsten_M%C3%BCller\" title=\"Karsten Müller\">Karsten Müller</a>, <a href=\"/Guy_Haworth\" title=\"Guy Haworth\">Guy Haworth</a> (<b>2013</b>). <i>Rook vs. Bishop</i>. <a href=\"/ICGA_Journal#36_4\" title=\"ICGA Journal\">ICGA Journal, Vol. 36, No. 4</a></li>\n<li> <a href=\"/Matej_Guid\" title=\"Matej Guid\">Matej Guid</a>, <a href=\"/Martin_Mo%C5%BEina\" title=\"Martin Možina\">Martin Možina</a>, <a href=\"/index.php?title=Ciril_Bohak&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Ciril Bohak (page does not exist)\">Ciril Bohak</a>, <a href=\"/Aleksander_Sadikov\" title=\"Aleksander Sadikov\">Aleksander Sadikov</a>, <a href=\"/Ivan_Bratko\" title=\"Ivan Bratko\">Ivan Bratko</a> (<b>2013</b>). <i>Building an Intelligent Tutoring System for Chess Endgames</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://dblp.uni-trier.de/db/conf/csedu/csedu2013.html#GuidMBSB13\">CSEDU 2013</a></li>\n<li> <a href=\"/Guy_Haworth\" title=\"Guy Haworth\">Guy Haworth</a> (<b>2014</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://centaur.reading.ac.uk/34268/\">Chess Endgame Records (dataset)</a></i>. </li></ul>\n<h2><span class=\"mw-headline\" id=\"2015_...\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Endgame&amp;action=edit&amp;section=17\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/index.php?title=Michael_Hartisch&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Michael Hartisch (page does not exist)\">Michael Hartisch</a>, <a href=\"/Ingo_Alth%C3%B6fer\" title=\"Ingo Althöfer\">Ingo Althöfer</a> (<b>2015</b>). <i>Optimal Robot Play in Certain Chess Endgame Situations</i>. <a href=\"/ICGA_Journal#38_3\" title=\"ICGA Journal\">ICGA Journal, Vol. 38, No. 3</a></li>\n<li> <a href=\"/index.php?title=Efstratios_Grivas&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Efstratios Grivas (page does not exist)\">Efstratios Grivas</a> (<b>2017</b>). <i>The Modern Endgame Manual</i>. <a href=\"/ICGA_Journal#39_2\" title=\"ICGA Journal\">ICGA Journal, Vol. 39, No. 2</a></li>\n<li> <a href=\"/Karsten_M%C3%BCller\" title=\"Karsten Müller\">Karsten Müller</a> (<b>2017</b>). <i>Tablebases, Fermat, Knights and Knightmares</i>. <a href=\"/ICGA_Journal#39_2\" title=\"ICGA Journal\">ICGA Journal, Vol. 39, No. 2</a></li>\n<li> <a href=\"/Guy_Haworth\" title=\"Guy Haworth\">Guy Haworth</a> (<b>2017</b>). <i>Understanding Rook Endgames</i>. <a href=\"/ICGA_Journal#39_2\" title=\"ICGA Journal\">ICGA Journal, Vol. 39, No. 2</a></li>\n<li> <a href=\"/Karsten_M%C3%BCller\" title=\"Karsten Müller\">Karsten Müller</a>, <a href=\"/Guy_Haworth\" title=\"Guy Haworth\">Guy Haworth</a> (<b>2018</b>). <i>Chess Endgame News: The World Chess Championship, 2018</i>. <a href=\"/ICGA_Journal#40_4\" title=\"ICGA Journal\">ICGA Journal, Vol. 40, No. 4</a> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup></li>\n<li> <a href=\"/Karsten_M%C3%BCller\" title=\"Karsten Müller\">Karsten Müller</a>, <a href=\"/Guy_Haworth\" title=\"Guy Haworth\">Guy Haworth</a> (<b>2019</b>). <i>FinalGen revisited: new discoveries</i>. <a href=\"/ICGA_Journal#41_1\" title=\"ICGA Journal\">ICGA Journal, Vol. 41, No. 1</a>&#160;» <a href=\"/FinalGen\" title=\"FinalGen\">FinalGen</a></li>\n<li> <a href=\"/Guy_Haworth\" title=\"Guy Haworth\">Guy Haworth</a> (<b>2019</b>). <i>Chess endgame news: Understanding minor piece endgames </i>. <a href=\"/ICGA_Journal#41_2\" title=\"ICGA Journal\">ICGA Journal, Vol. 41, No. 2</a></li>\n<li> <a href=\"/Guy_Haworth\" title=\"Guy Haworth\">Guy Haworth</a> (<b>2019</b>). <i>Chess endgame news: an endgame challenge for neural nets</i>. <a href=\"/ICGA_Journal#41_3\" title=\"ICGA Journal\">ICGA Journal, Vol. 41, No. 3</a>&#160;» <a href=\"/Neural_Networks\" title=\"Neural Networks\">Neural Networks</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Endgame&amp;action=edit&amp;section=18\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Guy_Haworth\" title=\"Guy Haworth\">Guy Haworth</a> (<b>2020</b>). <i>CEN: Understanding Rook vs Minor Piece Endgames</i>. <a href=\"/ICGA_Journal#42_1\" title=\"ICGA Journal\">ICGA Journal, Vol. 42, No. 1</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Mark_Dvoretsky\">Mark Dvoretsky</a> (<b>2020</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.newinchess.com/dvoretsky-s-endgame-manual-6270\">Dvoretsky's Endgame Manual 5th Edition</a></i>. revised by <a href=\"/Karsten_M%C3%BCller\" title=\"Karsten Müller\">Karsten Müller</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Hanon_Russell\">Russell Enterprises</a></li>\n<li> <a href=\"/Guy_Haworth\" title=\"Guy Haworth\">Guy Haworth</a> (<b>2021</b>). <i>Dvoretsky’s Endgame Manual, Edition 5: The bible evolves</i>. <a href=\"/ICGA_Journal#43_1\" title=\"ICGA Journal\">ICGA Journal, Vol. 43, No. 1</a></li>\n<li> <a href=\"/Dave_Gomboc\" title=\"Dave Gomboc\">Dave Gomboc</a>, <a href=\"/index.php?title=Christian_R._Shelton&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Christian R. Shelton (page does not exist)\">Christian R. Shelton</a> (<b>2021</b>). <i>Chess endgame compression via logic minimization</i>. <a href=\"/Advances_in_Computer_Games_17\" title=\"Advances in Computer Games 17\">Advances in Computer Games 17</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Endgame&amp;action=edit&amp;section=19\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"2000_..._2\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Endgame&amp;action=edit&amp;section=20\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=198870\">Endgame evaluation</a> by <a href=\"/Benny_Antonsson\" title=\"Benny Antonsson\">Benny Antonsson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 25, 2001</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=348493\">Piece Values in the Endgame</a> by <a href=\"/Guy_Haworth\" title=\"Guy Haworth\">Guy Haworth</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 11, 2004&#160;» <a href=\"/Point_Value\" title=\"Point Value\">Point Value</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=358108\">transition to endgame</a> by <a href=\"/Eric_Oldre\" title=\"Eric Oldre\">Eric Oldre</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 02, 2004</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=359113\">Improving the endgame of my engine</a> by <a href=\"/Albert_Bertilsson\" title=\"Albert Bertilsson\">Albert Bertilsson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 08, 2004&#160;» <a href=\"/Sharper\" title=\"Sharper\">Sharper</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=19296\">Definition of \"endgame\"?</a> by <a href=\"/Jouni_Uski\" title=\"Jouni Uski\">Jouni Uski</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 30, 2008</li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_..._2\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Endgame&amp;action=edit&amp;section=21\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=40629\">End-game evaluation</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">H.G.Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 04, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=47173\">Start EndGame - A matter of fine tuning&#160;???</a> by <a href=\"/Louren%C3%A7o_Araujo_de_Oliveira_Junior\" title=\"Lourenço Araujo de Oliveira Junior\">Lourenço Araujo de Oliveira Junior</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 09, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=51672\">End Game Heuristics</a> by <a href=\"/Laurie_Tunnicliffe\" title=\"Laurie Tunnicliffe\">Laurie Tunnicliffe</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 20, 2014 </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=62153\">Define end game</a> by <a href=\"/Laurie_Tunnicliffe\" title=\"Laurie Tunnicliffe\">Laurie Tunnicliffe</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 16, 2016&#160;» <a href=\"/Tapered_Eval\" title=\"Tapered Eval\">Tapered Eval</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64356\">Testing endgame strength</a> by <a href=\"/%C3%81lvaro_Begu%C3%A9\" title=\"Álvaro Begué\">Álvaro Begué</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 21, 2017&#160;» <a href=\"/Engine_Testing\" title=\"Engine Testing\">Engine Testing</a>, <a href=\"/RuyDos\" title=\"RuyDos\">RuyDos</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/fishcooking/znU1a7aZ2XI/yJDFtOQnAwAJ\">mg vs eg eval</a> by <a href=\"/Joost_VandeVondele\" title=\"Joost VandeVondele\">Joost VandeVondele</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">FishCooking</a>, October 06, 2019&#160;» <a href=\"/Middlegame\" title=\"Middlegame\">Middlegame</a>, <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_..._2\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Endgame&amp;action=edit&amp;section=22\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=73012\">Endgame woes</a> by <a href=\"/Tom_King\" title=\"Tom King\">Tom King</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 07, 2020&#160;» <a href=\"/Draw_Evaluation\" title=\"Draw Evaluation\">Draw Evaluation</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=73713\">Allowing null move pruning in the endgame</a> by Steven Griffin, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 20, 2020&#160;» <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">Null Move Pruning</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=76521\">Endgame recognition</a> by <a href=\"/Niels_Abildskov\" title=\"Niels Abildskov\">Niels Abildskov</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 07, 2021</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Endgame&amp;action=edit&amp;section=23\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Chess_endgame\">Chess endgame from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pawnless_chess_endgame\">Pawnless chess endgame from Wikipedia</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Endgame&amp;action=edit&amp;section=24\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a href=\"/Category:Dorothea_Tanning\" title=\"Category:Dorothea Tanning\">Dorothea Tanning</a> - End Game, 1944, from <a rel=\"nofollow\" class=\"external text\" href=\"http://www.artnet.com/magazineus/reviews/davis/davis11-1-05.asp\">artnet Magazine - We Are Duchampians by Ben Davis</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://www.dorotheatanning.org/life-and-work/view/229/\">Endgame | Dorothea Tanning</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.chessbase.com/post/nunn-on-understanding-che-endgames\">Nunn on Understanding Chess Endgames</a>, <a href=\"/ChessBase\" title=\"ChessBase\">ChessBase News</a>, September 13, 2009</span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.chessbase.com/post/nunn-s-che-endings-volume-one\">Nunn’s Chess Endings Volume One</a>, <a href=\"/ChessBase\" title=\"ChessBase\">ChessBase News</a>, May 28, 2010</span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/World_Chess_Championship_2018\">World Chess Championship 2018 from Wikipedia</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Game_Phases\" title=\"Game Phases\">Up one level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301153655\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.030 seconds\nReal time usage: 0.033 seconds\nPreprocessor visited node count: 155/1000000\nPreprocessor generated node count: 246/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1532-0!canonical and timestamp 20260301153655 and revision id 26055\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Dorothea_Tanning"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 2"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 3"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 7"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Games 17"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Games 9"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Albert Bertilsson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aleksander Sadikov"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alen Shapiro"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ariel Felner"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Barbara Liskov"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Benny Antonsson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bishop"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bishop versus Knight"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bishops of Opposite Colors"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Blockage Detection"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ChessBase"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Christoph Wirth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Color"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Compendium"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Corresponding Squares"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Danny Kopec"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dave Gomboc"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Donald Michie"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Draw Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ETH Zurich"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Eli David"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Endgame Tablebases"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engine Testing"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Eric Oldre"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fabian Mäser"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "FinalGen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Game Phases"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Guy Haworth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Harm Geert Muller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA Journal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ingo Althöfer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ivan Bratko"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jan van Reek"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jean-Christophe Weill"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "John F. White"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "John Nunn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Joost VandeVondele"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jouni Uski"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "KBNK Endgame"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "KPK"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "KRK"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Karsten Müller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kenneth W. Church"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kevin Coplan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "King"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "King Centralization"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "King Pawn Tropism"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lars Rasmussen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Laurie Tunnicliffe"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Learning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lewis Stiller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lomonosov Tablebases"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lourenço Araujo de Oliveira Junior"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Martin Možina"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Massachusetts Institute of Technology"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Matej Guid"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Matthias Lüscher"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Middlegame"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mop-up Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Nathan S. Netanyahu"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Neural Networks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Niels Abildskov"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Noam Elkies"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Opening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Passed Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Endgame"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Point Value"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Queen versus Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Retrograde Analysis"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Richard J. Nowakowski"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rook Endgame"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ross Quinlan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rule of the Square"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "RuyDos"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ryszard Michalski"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sharper"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stanford University"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stockfish"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tapered Eval"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Thomas Lincke"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tim Niblett"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tom King"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Wilhelm Barth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Wrong Color Bishop and Rook Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Your Computer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Álvaro Begué"
+      },
+      {
+        "ns": 0,
+        "*": "Queen Endgame"
+      },
+      {
+        "ns": 0,
+        "*": "Coen Zuidema"
+      },
+      {
+        "ns": 0,
+        "*": "Pericles Negri"
+      },
+      {
+        "ns": 0,
+        "*": "Denis Verhoef"
+      },
+      {
+        "ns": 0,
+        "*": "Jacco H. Wesselius"
+      },
+      {
+        "ns": 0,
+        "*": "Stephan Barth"
+      },
+      {
+        "ns": 0,
+        "*": "Philip G. K. Reiser"
+      },
+      {
+        "ns": 0,
+        "*": "Patricia J. Riddle"
+      },
+      {
+        "ns": 0,
+        "*": "Ami Hauptman"
+      },
+      {
+        "ns": 0,
+        "*": "Moshe Sipper"
+      },
+      {
+        "ns": 0,
+        "*": "Ciril Bohak"
+      },
+      {
+        "ns": 0,
+        "*": "Michael Hartisch"
+      },
+      {
+        "ns": 0,
+        "*": "Efstratios Grivas"
+      },
+      {
+        "ns": 0,
+        "*": "Christian R. Shelton"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Dorothea Tanning"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Transposition Tables",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Endgame",
+        "byteoffset": 1009,
+        "anchor": "Transposition_Tables"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Evaluation",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Endgame",
+        "byteoffset": 1159,
+        "anchor": "Evaluation"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Special Knowledge",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Endgame",
+        "byteoffset": 2053,
+        "anchor": "Special_Knowledge"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "King and Pawns",
+        "number": "3.1",
+        "index": "4",
+        "fromtitle": "Endgame",
+        "byteoffset": 2302,
+        "anchor": "King_and_Pawns"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Pieces",
+        "number": "3.2",
+        "index": "5",
+        "fromtitle": "Endgame",
+        "byteoffset": 2455,
+        "anchor": "Pieces"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Endgame Tablebases",
+        "number": "3.3",
+        "index": "6",
+        "fromtitle": "Endgame",
+        "byteoffset": 2660,
+        "anchor": "Endgame_Tablebases"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "4",
+        "index": "7",
+        "fromtitle": "Endgame",
+        "byteoffset": 3349,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "5",
+        "index": "8",
+        "fromtitle": "Endgame",
+        "byteoffset": 3444,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1960 ...",
+        "number": "5.1",
+        "index": "9",
+        "fromtitle": "Endgame",
+        "byteoffset": 3460,
+        "anchor": "1960_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1970 ...",
+        "number": "5.2",
+        "index": "10",
+        "fromtitle": "Endgame",
+        "byteoffset": 3664,
+        "anchor": "1970_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1980 ...",
+        "number": "5.3",
+        "index": "11",
+        "fromtitle": "Endgame",
+        "byteoffset": 4878,
+        "anchor": "1980_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1990 ...",
+        "number": "5.4",
+        "index": "12",
+        "fromtitle": "Endgame",
+        "byteoffset": 6349,
+        "anchor": "1990_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1995 ...",
+        "number": "5.5",
+        "index": "13",
+        "fromtitle": "Endgame",
+        "byteoffset": 6834,
+        "anchor": "1995_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "5.6",
+        "index": "14",
+        "fromtitle": "Endgame",
+        "byteoffset": 8460,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2005 ...",
+        "number": "5.7",
+        "index": "15",
+        "fromtitle": "Endgame",
+        "byteoffset": 9513,
+        "anchor": "2005_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "5.8",
+        "index": "16",
+        "fromtitle": "Endgame",
+        "byteoffset": 10698,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "5.9",
+        "index": "17",
+        "fromtitle": "Endgame",
+        "byteoffset": 11884,
+        "anchor": "2015_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "5.10",
+        "index": "18",
+        "fromtitle": "Endgame",
+        "byteoffset": 13186,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "6",
+        "index": "19",
+        "fromtitle": "Endgame",
+        "byteoffset": 13907,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "6.1",
+        "index": "20",
+        "fromtitle": "Endgame",
+        "byteoffset": 13922,
+        "anchor": "2000_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "6.2",
+        "index": "21",
+        "fromtitle": "Endgame",
+        "byteoffset": 14597,
+        "anchor": "2010_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "6.3",
+        "index": "22",
+        "fromtitle": "Endgame",
+        "byteoffset": 15557,
+        "anchor": "2020_..._2"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "7",
+        "index": "23",
+        "fromtitle": "Endgame",
+        "byteoffset": 16016,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "8",
+        "index": "24",
+        "fromtitle": "Endgame",
+        "byteoffset": 16207,
+        "anchor": "References"
+      }
+    ]
+  }
+}

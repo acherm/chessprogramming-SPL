@@ -1,0 +1,309 @@
+{
+  "parse": {
+    "title": "Intersection Squares",
+    "pageid": 1230,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Chess\" title=\"Chess\">Chess</a> * <a href=\"/Squares\" title=\"Squares\">Squares</a> * Intersection Squares</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"http://www.mcescher.com/Gallery/back-bmp/LW377.jpg\"><img alt=\"\" src=\"/images/thumb/7/77/Two_Intersecting_Planes.jpg/300px-Two_Intersecting_Planes.jpg\" width=\"300\" height=\"227\" class=\"thumbimage\" srcset=\"/images/7/77/Two_Intersecting_Planes.jpg 1.5x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Two_Intersecting_Planes.jpg\" class=\"internal\" title=\"Enlarge\"></a></div><a href=\"/Category:M._C._Escher\" title=\"Category:M. C. Escher\">M. C. Escher</a> - Two Intersecting Planes, 1952 <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>Intersection squares</b> are the result of the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Line-line_intersection\">intersection of two lines</a> from two different squares with two disjoint directions, either <a href=\"/Ranks\" title=\"Ranks\">rank</a>, <a href=\"/Files\" title=\"Files\">file</a>, <a href=\"/Diagonals\" title=\"Diagonals\">diagonal</a> or <a href=\"/Anti-Diagonals\" title=\"Anti-Diagonals\">anti-diagonal</a>, in total 2*(3+2+1) = 12 possible combinations. Those lines (may) have up to one square, where both lines intersect - a square where two appropriate sliding pieces were able to move to in one step (assuming no obstructions).\n</p><p>In the set-wise world of <a href=\"/Bitboards\" title=\"Bitboards\">bitboards</a> one usually relies on <a href=\"/General_Setwise_Operations#Intersection\" title=\"General Setwise Operations\">set-wise intersection</a> of <a href=\"/Sliding_Piece_Attacks\" title=\"Sliding Piece Attacks\">sliding piece attacks</a>, but square-centric <a href=\"/Board_Representation\" title=\"Board Representation\">board representations</a> may either use two-dimensional lookup tables, or rely on some algebra based on discrete <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Linear_equation\">linear equations</a> and pure register computation. Programs may use these routines as a precondition whether an intersection point exist, for instance to determine a square where a sliding piece may check the opponent king. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Rank_and_File\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Rank and File</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Empty_Intersection_with_0x88_Math\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Empty Intersection with 0x88 Math</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Rank_and_Diagonal\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Rank and Diagonal</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#0x88_Math\"><span class=\"tocnumber\">3.1</span> <span class=\"toctext\">0x88 Math</span></a></li>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#C-Source\"><span class=\"tocnumber\">3.2</span> <span class=\"toctext\">C-Source</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#File_and_Diagonal\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">File and Diagonal</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#0x88_Math_2\"><span class=\"tocnumber\">4.1</span> <span class=\"toctext\">0x88 Math</span></a></li>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#C-Source_2\"><span class=\"tocnumber\">4.2</span> <span class=\"toctext\">C-Source</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-9\"><a href=\"#Rank_and_Anti-Diagonal\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Rank and Anti-Diagonal</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#0x88_Math_3\"><span class=\"tocnumber\">5.1</span> <span class=\"toctext\">0x88 Math</span></a></li>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#C-Source_3\"><span class=\"tocnumber\">5.2</span> <span class=\"toctext\">C-Source</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-12\"><a href=\"#File_and_Anti-Diagonal\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">File and Anti-Diagonal</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-13\"><a href=\"#0x88_Math_4\"><span class=\"tocnumber\">6.1</span> <span class=\"toctext\">0x88 Math</span></a></li>\n<li class=\"toclevel-2 tocsection-14\"><a href=\"#C-Source_4\"><span class=\"tocnumber\">6.2</span> <span class=\"toctext\">C-Source</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-15\"><a href=\"#Diagonal_and_Anti-Diagonal\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">Diagonal and Anti-Diagonal</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-16\"><a href=\"#0x88_Math_5\"><span class=\"tocnumber\">7.1</span> <span class=\"toctext\">0x88 Math</span></a></li>\n<li class=\"toclevel-2 tocsection-17\"><a href=\"#C-Source_5\"><span class=\"tocnumber\">7.2</span> <span class=\"toctext\">C-Source</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-18\"><a href=\"#See_also\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-19\"><a href=\"#External_Links\"><span class=\"tocnumber\">9</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-20\"><a href=\"#References\"><span class=\"tocnumber\">10</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Rank_and_File\">Rank and File</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Intersection_Squares&amp;action=edit&amp;section=1\" title=\"Edit section: Rank and File\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>or vice versa File and Rank\n</p><p>Two squares a and b have always two orthogonal intersection squares s1 and s2. \n</p>\n<pre>\n. | . . . | . .\n--1-------b----\n. | . . . | . .\n. | . . . | . .\n. | . . . | . .\n. | . . . | . .\n--a-------2----\n. | . . . | . .\n</pre>\n<pre>\ns1&#160;:= 8*rankIndex(b) + fileIndex(a);\ns2&#160;:= 8*rankIndex(a) + fileIndex(b);\n</pre>\n<p>or\n</p>\n<pre>\ns1&#160;:= (b &amp; 56) + (a &amp; 7);\ns2&#160;:= (a &amp; 56) + (b &amp; 7);\n</pre>\n<h1><span class=\"mw-headline\" id=\"Empty_Intersection_with_0x88_Math\">Empty Intersection with 0x88 Math</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Intersection_Squares&amp;action=edit&amp;section=2\" title=\"Edit section: Empty Intersection with 0x88 Math\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>If diagonals or anti-diagonals are involved, the intersection square may off the board. Beside that, the intersection of a diagonal with an anti-diagonal becomes empty, if both lines are of different <a href=\"/Color_of_a_Square\" title=\"Color of a Square\">square color</a>. Considering <a href=\"/0x88\" title=\"0x88\">0x88</a>-square coordinates for the calculation, covers off the board intersection, and the different color issues en passant. Following <a href=\"/C\" title=\"C\">C</a>-routines work branchless, and return -1 if no intersection is possible by oring with following {0,-1} integer expression relying on arithmetical shift right:\n</p>\n<pre>\n -(s88 &amp; 0x88) &gt;&gt; (sizeof(int)-1)\n</pre>\n<p>Feel free to use branches instead in a broader scope, since one need to branch on valid intersecion square anyway.\n</p>\n<h1><span class=\"mw-headline\" id=\"Rank_and_Diagonal\">Rank and Diagonal</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Intersection_Squares&amp;action=edit&amp;section=3\" title=\"Edit section: Rank and Diagonal\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>or vice versa Diagonal and Rank\n</p>\n<pre>\n. . . . . . / .\n. . . . . b . .\n. . . . / . . .\n. . . / . . . .\n. . / . . . . .\n. / . . . . . .\ns-----a--------\n. . . . . . . .\n</pre>\n<p>with\n</p>\n<pre>diagonalIndex&#160;:= rankIndex - fileIndex;\n</pre>\n<table class=\"wikitable\">\n\n<tr>\n<th> r/f\n</th>\n<th> 0\n</th>\n<th> 1\n</th>\n<th> 2\n</th>\n<th> 3\n</th>\n<th> 4\n</th>\n<th> 5\n</th>\n<th> 6\n</th>\n<th> 7\n</th></tr>\n<tr>\n<th> 7\n</th>\n<td style=\"text-align:right;\"> 7\n</td>\n<td style=\"text-align:right;\"> 6\n</td>\n<td style=\"text-align:right;\"> 5\n</td>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 3\n</td>\n<td style=\"text-align:right;\"> 2\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<th> 0\n</th></tr>\n<tr>\n<th> 6\n</th>\n<td style=\"text-align:right;\"> 6\n</td>\n<td style=\"text-align:right;\"> 5\n</td>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 3\n</td>\n<td style=\"text-align:right;\"> 2\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<th> 0\n</th>\n<td style=\"text-align:right;\"> -1\n</td></tr>\n<tr>\n<th> 5\n</th>\n<td style=\"text-align:right;\"> 5\n</td>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 3\n</td>\n<td style=\"text-align:right;\"> 2\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<th> 0\n</th>\n<td style=\"text-align:right;\"> -1\n</td>\n<td style=\"text-align:right;\"> -2\n</td></tr>\n<tr>\n<th> 4\n</th>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 3\n</td>\n<td style=\"text-align:right;\"> 2\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<th> 0\n</th>\n<td style=\"text-align:right;\"> -1\n</td>\n<td style=\"text-align:right;\"> -2\n</td>\n<td style=\"text-align:right;\"> -3\n</td></tr>\n<tr>\n<th> 3\n</th>\n<td style=\"text-align:right;\"> 3\n</td>\n<td style=\"text-align:right;\"> 2\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<th> 0\n</th>\n<td style=\"text-align:right;\"> -1\n</td>\n<td style=\"text-align:right;\"> -2\n</td>\n<td style=\"text-align:right;\"> -3\n</td>\n<td style=\"text-align:right;\"> -4\n</td></tr>\n<tr>\n<th> 2\n</th>\n<td style=\"text-align:right;\"> 2\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<th> 0\n</th>\n<td style=\"text-align:right;\"> -1\n</td>\n<td style=\"text-align:right;\"> -2\n</td>\n<td style=\"text-align:right;\"> -3\n</td>\n<td style=\"text-align:right;\"> -4\n</td>\n<td style=\"text-align:right;\"> -5\n</td></tr>\n<tr>\n<th> 1\n</th>\n<td style=\"text-align:right;\"> 1\n</td>\n<th> 0\n</th>\n<td style=\"text-align:right;\"> -1\n</td>\n<td style=\"text-align:right;\"> -2\n</td>\n<td style=\"text-align:right;\"> -3\n</td>\n<td style=\"text-align:right;\"> -4\n</td>\n<td style=\"text-align:right;\"> -5\n</td>\n<td style=\"text-align:right;\"> -6\n</td></tr>\n<tr>\n<th> 0\n</th>\n<th> 0\n</th>\n<td style=\"text-align:right;\"> -1\n</td>\n<td style=\"text-align:right;\"> -2\n</td>\n<td style=\"text-align:right;\"> -3\n</td>\n<td style=\"text-align:right;\"> -4\n</td>\n<td style=\"text-align:right;\"> -5\n</td>\n<td style=\"text-align:right;\"> -6\n</td>\n<td style=\"text-align:right;\"> -7\n</td></tr></table>\n<h2><span class=\"mw-headline\" id=\"0x88_Math\">0x88 Math</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Intersection_Squares&amp;action=edit&amp;section=4\" title=\"Edit section: 0x88 Math\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<pre>\nrankIndex(s)&#160;:= rankIndex(a);\nfileIndex(s)&#160;:= rankIndex(s) - diagonalIndex(s);\nfileIndex(s)&#160;:= rankIndex(a) - rankIndex(b) + fileIndex(b);\n</pre>\n<p>Because the intersection of any rank with any diagonal may off the board, we rely on 0x88 math for a quick test:\n</p>\n<pre>\ns88&#160;:= 16*rankIndex(s) + fileIndex(s);\ns88&#160;:= 16*rankIndex(a) + (rankIndex(a) - rankIndex(b) + fileIndex(b));\ns88&#160;:= 17*rankIndex(a) -  rankIndex(b) + fileIndex(b);\nif ( s88 &amp; 0x88)\n   intersection off board;\nelse\n   sq&#160;:= ((sq88 &gt;&gt; 1) &amp; 56) + (sq88 &amp; 7);\n</pre>\n<h2><span class=\"mw-headline\" id=\"C-Source\">C-Source</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Intersection_Squares&amp;action=edit&amp;section=5\" title=\"Edit section: C-Source\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<pre>\n/****************************************\n * return: intersection square (if any)\n *          of rank of square a\n *          with diagonal of square b\n *         -1 if no intersection exists\n ****************************************/\nint intersectRankDia(int a, int b) {\n   int s88 = 17*(a&gt;&gt;3) - (b &gt;&gt; 3) + (b &amp; 7);\n   return (((s88 &gt;&gt; 1) &amp; 56) + (s88 &amp; 7)) | ( -(s88 &amp; 0x88) &gt;&gt; 31);\n}\n</pre>\n<h1><span class=\"mw-headline\" id=\"File_and_Diagonal\">File and Diagonal</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Intersection_Squares&amp;action=edit&amp;section=6\" title=\"Edit section: File and Diagonal\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>or vice versa Diagonal and File\n</p>\n<pre>\n. . . | . . / .\n. . . | . b . .\n. . . | / . . .\n. . . s . . . .\n. . / | . . . .\n. / . | . . . .\n/ . . a . . . .\n. . . | . . . .\n</pre>\n<p>with\n</p>\n<pre>diagonalIndex&#160;:= rankIndex - fileIndex;\n</pre>\n<table class=\"wikitable\">\n\n<tr>\n<th> r/f\n</th>\n<th> 0\n</th>\n<th> 1\n</th>\n<th> 2\n</th>\n<th> 3\n</th>\n<th> 4\n</th>\n<th> 5\n</th>\n<th> 6\n</th>\n<th> 7\n</th></tr>\n<tr>\n<th> 7\n</th>\n<td style=\"text-align:right;\"> 7\n</td>\n<td style=\"text-align:right;\"> 6\n</td>\n<td style=\"text-align:right;\"> 5\n</td>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 3\n</td>\n<td style=\"text-align:right;\"> 2\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<th> 0\n</th></tr>\n<tr>\n<th> 6\n</th>\n<td style=\"text-align:right;\"> 6\n</td>\n<td style=\"text-align:right;\"> 5\n</td>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 3\n</td>\n<td style=\"text-align:right;\"> 2\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<th> 0\n</th>\n<td style=\"text-align:right;\"> -1\n</td></tr>\n<tr>\n<th> 5\n</th>\n<td style=\"text-align:right;\"> 5\n</td>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 3\n</td>\n<td style=\"text-align:right;\"> 2\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<th> 0\n</th>\n<td style=\"text-align:right;\"> -1\n</td>\n<td style=\"text-align:right;\"> -2\n</td></tr>\n<tr>\n<th> 4\n</th>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 3\n</td>\n<td style=\"text-align:right;\"> 2\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<th> 0\n</th>\n<td style=\"text-align:right;\"> -1\n</td>\n<td style=\"text-align:right;\"> -2\n</td>\n<td style=\"text-align:right;\"> -3\n</td></tr>\n<tr>\n<th> 3\n</th>\n<td style=\"text-align:right;\"> 3\n</td>\n<td style=\"text-align:right;\"> 2\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<th> 0\n</th>\n<td style=\"text-align:right;\"> -1\n</td>\n<td style=\"text-align:right;\"> -2\n</td>\n<td style=\"text-align:right;\"> -3\n</td>\n<td style=\"text-align:right;\"> -4\n</td></tr>\n<tr>\n<th> 2\n</th>\n<td style=\"text-align:right;\"> 2\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<th> 0\n</th>\n<td style=\"text-align:right;\"> -1\n</td>\n<td style=\"text-align:right;\"> -2\n</td>\n<td style=\"text-align:right;\"> -3\n</td>\n<td style=\"text-align:right;\"> -4\n</td>\n<td style=\"text-align:right;\"> -5\n</td></tr>\n<tr>\n<th> 1\n</th>\n<td style=\"text-align:right;\"> 1\n</td>\n<th> 0\n</th>\n<td style=\"text-align:right;\"> -1\n</td>\n<td style=\"text-align:right;\"> -2\n</td>\n<td style=\"text-align:right;\"> -3\n</td>\n<td style=\"text-align:right;\"> -4\n</td>\n<td style=\"text-align:right;\"> -5\n</td>\n<td style=\"text-align:right;\"> -6\n</td></tr>\n<tr>\n<th> 0\n</th>\n<th> 0\n</th>\n<td style=\"text-align:right;\"> -1\n</td>\n<td style=\"text-align:right;\"> -2\n</td>\n<td style=\"text-align:right;\"> -3\n</td>\n<td style=\"text-align:right;\"> -4\n</td>\n<td style=\"text-align:right;\"> -5\n</td>\n<td style=\"text-align:right;\"> -6\n</td>\n<td style=\"text-align:right;\"> -7\n</td></tr></table>\n<h2><span class=\"mw-headline\" id=\"0x88_Math_2\">0x88 Math</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Intersection_Squares&amp;action=edit&amp;section=7\" title=\"Edit section: 0x88 Math\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<pre>\nfileIndex(s)&#160;:= fileIndex(a);\nrankIndex(s)&#160;:= fileIndex(s) + diagonalIndex(s);\nrankIndex(s)&#160;:= fileIndex(a) + rankIndex(b) - fileIndex(b);\n</pre>\n<p>Because the intersection of any file with any diagonal may off the board, we rely on 0x88 math for a quick test:\n</p>\n<pre>\ns88&#160;:= 16*rankIndex(s) + fileIndex(s);\ns88&#160;:= 16*(fileIndex(a) + rankIndex(b) - fileIndex(b)) + fileIndex(a);\ns88&#160;:= 17*fileIndex(a) + 16*rankIndex(b) - 16*fileIndex(b);\nif ( s88 &amp; 0x88)\n   intersection off board;\nelse\n   sq&#160;:= ((sq88 &gt;&gt; 1) &amp; 56) + (sq88 &amp; 7);\n</pre>\n<h2><span class=\"mw-headline\" id=\"C-Source_2\">C-Source</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Intersection_Squares&amp;action=edit&amp;section=8\" title=\"Edit section: C-Source\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<pre>\n/****************************************\n * return: intersection square (if any)\n *          of file of square a\n *          with diagonal of square b\n *         -1 if no intersection exists\n ****************************************/\nint intersectFileDia(int a, int b) {\n   int s88 = 17*(a &amp; 7) + 2*(b &amp; 56) - 16*(b &amp; 7);\n   return (((s88 &gt;&gt; 1) &amp; 56) + (s88 &amp; 7)) | ( -(s88 &amp; 0x88) &gt;&gt; 31);\n}\n</pre>\n<h1><span class=\"mw-headline\" id=\"Rank_and_Anti-Diagonal\">Rank and Anti-Diagonal</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Intersection_Squares&amp;action=edit&amp;section=9\" title=\"Edit section: Rank and Anti-Diagonal\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>or vice versa Anti-Diagonal and Rank\n</p>\n<pre>\n. . . . . . . .\n. . . . . . . .\n\\ . . . . . . .\n. b . . . . . .\n. . \\ . . . . .\n. . . \\ . . . .\n------a-s------\n. . . . . \\ . .\n</pre>\n<p>with\n</p>\n<pre>antidiagIndex&#160;:= rankIndex + fileIndex;\n</pre>\n<table class=\"wikitable\">\n\n<tr>\n<th> r/f\n</th>\n<th> 0\n</th>\n<th> 1\n</th>\n<th> 2\n</th>\n<th> 3\n</th>\n<th> 4\n</th>\n<th> 5\n</th>\n<th> 6\n</th>\n<th> 7\n</th></tr>\n<tr>\n<th> 7\n</th>\n<th> 7\n</th>\n<td style=\"text-align:right;\"> 8\n</td>\n<td style=\"text-align:right;\"> 9\n</td>\n<td style=\"text-align:right;\"> 10\n</td>\n<td style=\"text-align:right;\"> 11\n</td>\n<td style=\"text-align:right;\"> 12\n</td>\n<td style=\"text-align:right;\"> 13\n</td>\n<td style=\"text-align:right;\"> 14\n</td></tr>\n<tr>\n<th> 6\n</th>\n<td style=\"text-align:right;\"> 6\n</td>\n<th> 7\n</th>\n<td style=\"text-align:right;\"> 8\n</td>\n<td style=\"text-align:right;\"> 9\n</td>\n<td style=\"text-align:right;\"> 10\n</td>\n<td style=\"text-align:right;\"> 11\n</td>\n<td style=\"text-align:right;\"> 12\n</td>\n<td style=\"text-align:right;\"> 13\n</td></tr>\n<tr>\n<th> 5\n</th>\n<td style=\"text-align:right;\"> 5\n</td>\n<td style=\"text-align:right;\"> 6\n</td>\n<th> 7\n</th>\n<td style=\"text-align:right;\"> 8\n</td>\n<td style=\"text-align:right;\"> 9\n</td>\n<td style=\"text-align:right;\"> 10\n</td>\n<td style=\"text-align:right;\"> 11\n</td>\n<td style=\"text-align:right;\"> 12\n</td></tr>\n<tr>\n<th> 4\n</th>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 5\n</td>\n<td style=\"text-align:right;\"> 6\n</td>\n<th> 7\n</th>\n<td style=\"text-align:right;\"> 8\n</td>\n<td style=\"text-align:right;\"> 9\n</td>\n<td style=\"text-align:right;\"> 10\n</td>\n<td style=\"text-align:right;\"> 11\n</td></tr>\n<tr>\n<th> 3\n</th>\n<td style=\"text-align:right;\"> 3\n</td>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 5\n</td>\n<td style=\"text-align:right;\"> 6\n</td>\n<th> 7\n</th>\n<td style=\"text-align:right;\"> 8\n</td>\n<td style=\"text-align:right;\"> 9\n</td>\n<td style=\"text-align:right;\"> 10\n</td></tr>\n<tr>\n<th> 2\n</th>\n<td style=\"text-align:right;\"> 2\n</td>\n<td style=\"text-align:right;\"> 3\n</td>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 5\n</td>\n<td style=\"text-align:right;\"> 6\n</td>\n<th> 7\n</th>\n<td style=\"text-align:right;\"> 8\n</td>\n<td style=\"text-align:right;\"> 9\n</td></tr>\n<tr>\n<th> 1\n</th>\n<td style=\"text-align:right;\"> 1\n</td>\n<td style=\"text-align:right;\"> 2\n</td>\n<td style=\"text-align:right;\"> 3\n</td>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 5\n</td>\n<td style=\"text-align:right;\"> 6\n</td>\n<th> 7\n</th>\n<td style=\"text-align:right;\"> 8\n</td></tr>\n<tr>\n<th> 0\n</th>\n<td style=\"text-align:right;\"> 0\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<td style=\"text-align:right;\"> 2\n</td>\n<td style=\"text-align:right;\"> 3\n</td>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 5\n</td>\n<td style=\"text-align:right;\"> 6\n</td>\n<th> 7\n</th></tr></table>\n<h2><span class=\"mw-headline\" id=\"0x88_Math_3\">0x88 Math</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Intersection_Squares&amp;action=edit&amp;section=10\" title=\"Edit section: 0x88 Math\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<pre>\nrankIndex(s)&#160;:= rankIndex(a);\nfileIndex(s)&#160;:= antidiagIndex(s) - rankIndex(s);\nfileIndex(s)&#160;:= rankIndex(a) -  rankIndex(b) + fileIndex(b);\n</pre>\n<p>Because the intersection of any rank with any anti-diagonal may off the board, we rely on 0x88 math for a quick test:\n</p>\n<pre>\ns88&#160;:= 16*rankIndex(s) + fileIndex(s);\ns88&#160;:= 16*rankIndex(a) + rankIndex(a) -  rankIndex(b) + fileIndex(b);\ns88&#160;:= 17*rankIndex(a) - rankIndex(b) + fileIndex(b);\nif ( s88 &amp; 0x88)\n   intersection off board;\nelse\n   sq&#160;:= ((sq88 &gt;&gt; 1) &amp; 56) + (sq88 &amp; 7);\n</pre>\n<h2><span class=\"mw-headline\" id=\"C-Source_3\">C-Source</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Intersection_Squares&amp;action=edit&amp;section=11\" title=\"Edit section: C-Source\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<pre>\n/****************************************\n * return: intersection square (if any)\n *          of rank of square a\n *          with anti-diagonal of square b\n *         -1 if no intersection exists\n ****************************************/\nint intersectRankAnt(int a, int b) {\n   int s88 = 17*(a &gt;&gt; 3) - (b &gt;&gt; 3) + (b &amp; 7);\n   return (((s88 &gt;&gt; 1) &amp; 56) + (s88 &amp; 7)) | ( -(s88 &amp; 0x88) &gt;&gt; 31);\n}\n</pre>\n<h1><span class=\"mw-headline\" id=\"File_and_Anti-Diagonal\">File and Anti-Diagonal</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Intersection_Squares&amp;action=edit&amp;section=12\" title=\"Edit section: File and Anti-Diagonal\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>or vice versa Anti-Diagonal and File\n</p>\n<pre>\n. . . | . . . .\n. . . | . . . .\n\\ . . | . . . .\n. b . | . . . .\n. . \\ | . . . .\n. . . s . . . .\n. . . a \\ . . .\n. . . | . \\ . .\n</pre>\n<p>with\n</p>\n<pre>antidiagIndex&#160;:= rankIndex + fileIndex;\n</pre>\n<table class=\"wikitable\">\n\n<tr>\n<th> r/f\n</th>\n<th> 0\n</th>\n<th> 1\n</th>\n<th> 2\n</th>\n<th> 3\n</th>\n<th> 4\n</th>\n<th> 5\n</th>\n<th> 6\n</th>\n<th> 7\n</th></tr>\n<tr>\n<th> 7\n</th>\n<th> 7\n</th>\n<td style=\"text-align:right;\"> 8\n</td>\n<td style=\"text-align:right;\"> 9\n</td>\n<td style=\"text-align:right;\"> 10\n</td>\n<td style=\"text-align:right;\"> 11\n</td>\n<td style=\"text-align:right;\"> 12\n</td>\n<td style=\"text-align:right;\"> 13\n</td>\n<td style=\"text-align:right;\"> 14\n</td></tr>\n<tr>\n<th> 6\n</th>\n<td style=\"text-align:right;\"> 6\n</td>\n<th> 7\n</th>\n<td style=\"text-align:right;\"> 8\n</td>\n<td style=\"text-align:right;\"> 9\n</td>\n<td style=\"text-align:right;\"> 10\n</td>\n<td style=\"text-align:right;\"> 11\n</td>\n<td style=\"text-align:right;\"> 12\n</td>\n<td style=\"text-align:right;\"> 13\n</td></tr>\n<tr>\n<th> 5\n</th>\n<td style=\"text-align:right;\"> 5\n</td>\n<td style=\"text-align:right;\"> 6\n</td>\n<th> 7\n</th>\n<td style=\"text-align:right;\"> 8\n</td>\n<td style=\"text-align:right;\"> 9\n</td>\n<td style=\"text-align:right;\"> 10\n</td>\n<td style=\"text-align:right;\"> 11\n</td>\n<td style=\"text-align:right;\"> 12\n</td></tr>\n<tr>\n<th> 4\n</th>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 5\n</td>\n<td style=\"text-align:right;\"> 6\n</td>\n<th> 7\n</th>\n<td style=\"text-align:right;\"> 8\n</td>\n<td style=\"text-align:right;\"> 9\n</td>\n<td style=\"text-align:right;\"> 10\n</td>\n<td style=\"text-align:right;\"> 11\n</td></tr>\n<tr>\n<th> 3\n</th>\n<td style=\"text-align:right;\"> 3\n</td>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 5\n</td>\n<td style=\"text-align:right;\"> 6\n</td>\n<th> 7\n</th>\n<td style=\"text-align:right;\"> 8\n</td>\n<td style=\"text-align:right;\"> 9\n</td>\n<td style=\"text-align:right;\"> 10\n</td></tr>\n<tr>\n<th> 2\n</th>\n<td style=\"text-align:right;\"> 2\n</td>\n<td style=\"text-align:right;\"> 3\n</td>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 5\n</td>\n<td style=\"text-align:right;\"> 6\n</td>\n<th> 7\n</th>\n<td style=\"text-align:right;\"> 8\n</td>\n<td style=\"text-align:right;\"> 9\n</td></tr>\n<tr>\n<th> 1\n</th>\n<td style=\"text-align:right;\"> 1\n</td>\n<td style=\"text-align:right;\"> 2\n</td>\n<td style=\"text-align:right;\"> 3\n</td>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 5\n</td>\n<td style=\"text-align:right;\"> 6\n</td>\n<th> 7\n</th>\n<td style=\"text-align:right;\"> 8\n</td></tr>\n<tr>\n<th> 0\n</th>\n<td style=\"text-align:right;\"> 0\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<td style=\"text-align:right;\"> 2\n</td>\n<td style=\"text-align:right;\"> 3\n</td>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 5\n</td>\n<td style=\"text-align:right;\"> 6\n</td>\n<th> 7\n</th></tr></table>\n<h2><span class=\"mw-headline\" id=\"0x88_Math_4\">0x88 Math</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Intersection_Squares&amp;action=edit&amp;section=13\" title=\"Edit section: 0x88 Math\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<pre>\nfileIndex(s)&#160;:= fileIndex(a);\nrankIndex(s)&#160;:= antidiagIndex(s) - fileIndex(s);\nrankIndex(s)&#160;:= rankIndex(b) + fileIndex(b) - fileIndex(a);\n</pre>\n<p>Because the intersection of any rank with any anti-diagonal may off the board, we rely on 0x88 math for a quick test:\n</p>\n<pre>\ns88&#160;:= 16*rankIndex(s) + fileIndex(s);\ns88&#160;:= 16*(rankIndex(b) + fileIndex(b) - fileIndex(a)) + fileIndex(a);\ns88&#160;:= 16*rankIndex(b) + 16*fileIndex(b) - 15*fileIndex(a);\nif ( s88 &amp; 0x88)\n   intersection off board;\nelse\n   sq&#160;:= ((sq88 &gt;&gt; 1) &amp; 56) + (sq88 &amp; 7);\n</pre>\n<h2><span class=\"mw-headline\" id=\"C-Source_4\">C-Source</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Intersection_Squares&amp;action=edit&amp;section=14\" title=\"Edit section: C-Source\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<pre>\n/****************************************\n * return: intersection square (if any)\n *          of file of square a\n *          with anti-diagonal of square b\n *         -1 if no intersection exists\n ****************************************/\nint intersectFileAnt(int a, int b) {\n   int s88 = 2*(b &amp; 56) + 16*(b &amp; 7) - 15*(a &amp; 7);\n   return (((s88 &gt;&gt; 1) &amp; 56) + (s88 &amp; 7)) | ( -(s88 &amp; 0x88) &gt;&gt; 31);\n}\n</pre>\n<h1><span class=\"mw-headline\" id=\"Diagonal_and_Anti-Diagonal\">Diagonal and Anti-Diagonal</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Intersection_Squares&amp;action=edit&amp;section=15\" title=\"Edit section: Diagonal and Anti-Diagonal\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>or vice versa Anti-Diagonal and Diagonal\n</p>\n<pre>\n. . . . . . . .\n. . . . . . . /\n\\ . . . . . / .\n. b . . . / . .\n. . \\ . / . . .\n. . . s . . . .\n. . a . \\ . . .\n. / . . . \\ . .\n</pre>\n<p>with\n</p>\n<pre>diagonalIndex&#160;:= rankIndex - fileIndex;\n</pre>\n<table class=\"wikitable\">\n\n<tr>\n<th> r/f\n</th>\n<th> 0\n</th>\n<th> 1\n</th>\n<th> 2\n</th>\n<th> 3\n</th>\n<th> 4\n</th>\n<th> 5\n</th>\n<th> 6\n</th>\n<th> 7\n</th></tr>\n<tr>\n<th> 7\n</th>\n<td style=\"text-align:right;\"> 7\n</td>\n<td style=\"text-align:right;\"> 6\n</td>\n<td style=\"text-align:right;\"> 5\n</td>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 3\n</td>\n<td style=\"text-align:right;\"> 2\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<th> 0\n</th></tr>\n<tr>\n<th> 6\n</th>\n<td style=\"text-align:right;\"> 6\n</td>\n<td style=\"text-align:right;\"> 5\n</td>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 3\n</td>\n<td style=\"text-align:right;\"> 2\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<th> 0\n</th>\n<td style=\"text-align:right;\"> -1\n</td></tr>\n<tr>\n<th> 5\n</th>\n<td style=\"text-align:right;\"> 5\n</td>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 3\n</td>\n<td style=\"text-align:right;\"> 2\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<th> 0\n</th>\n<td style=\"text-align:right;\"> -1\n</td>\n<td style=\"text-align:right;\"> -2\n</td></tr>\n<tr>\n<th> 4\n</th>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 3\n</td>\n<td style=\"text-align:right;\"> 2\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<th> 0\n</th>\n<td style=\"text-align:right;\"> -1\n</td>\n<td style=\"text-align:right;\"> -2\n</td>\n<td style=\"text-align:right;\"> -3\n</td></tr>\n<tr>\n<th> 3\n</th>\n<td style=\"text-align:right;\"> 3\n</td>\n<td style=\"text-align:right;\"> 2\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<th> 0\n</th>\n<td style=\"text-align:right;\"> -1\n</td>\n<td style=\"text-align:right;\"> -2\n</td>\n<td style=\"text-align:right;\"> -3\n</td>\n<td style=\"text-align:right;\"> -4\n</td></tr>\n<tr>\n<th> 2\n</th>\n<td style=\"text-align:right;\"> 2\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<th> 0\n</th>\n<td style=\"text-align:right;\"> -1\n</td>\n<td style=\"text-align:right;\"> -2\n</td>\n<td style=\"text-align:right;\"> -3\n</td>\n<td style=\"text-align:right;\"> -4\n</td>\n<td style=\"text-align:right;\"> -5\n</td></tr>\n<tr>\n<th> 1\n</th>\n<td style=\"text-align:right;\"> 1\n</td>\n<th> 0\n</th>\n<td style=\"text-align:right;\"> -1\n</td>\n<td style=\"text-align:right;\"> -2\n</td>\n<td style=\"text-align:right;\"> -3\n</td>\n<td style=\"text-align:right;\"> -4\n</td>\n<td style=\"text-align:right;\"> -5\n</td>\n<td style=\"text-align:right;\"> -6\n</td></tr>\n<tr>\n<th> 0\n</th>\n<th> 0\n</th>\n<td style=\"text-align:right;\"> -1\n</td>\n<td style=\"text-align:right;\"> -2\n</td>\n<td style=\"text-align:right;\"> -3\n</td>\n<td style=\"text-align:right;\"> -4\n</td>\n<td style=\"text-align:right;\"> -5\n</td>\n<td style=\"text-align:right;\"> -6\n</td>\n<td style=\"text-align:right;\"> -7\n</td></tr></table>\n<p>and\n</p>\n<pre>antidiagIndex&#160;:= rankIndex + fileIndex;\n</pre>\n<table class=\"wikitable\">\n\n<tr>\n<th> r/f\n</th>\n<th> 0\n</th>\n<th> 1\n</th>\n<th> 2\n</th>\n<th> 3\n</th>\n<th> 4\n</th>\n<th> 5\n</th>\n<th> 6\n</th>\n<th> 7\n</th></tr>\n<tr>\n<th> 7\n</th>\n<th> 7\n</th>\n<td style=\"text-align:right;\"> 8\n</td>\n<td style=\"text-align:right;\"> 9\n</td>\n<td style=\"text-align:right;\"> 10\n</td>\n<td style=\"text-align:right;\"> 11\n</td>\n<td style=\"text-align:right;\"> 12\n</td>\n<td style=\"text-align:right;\"> 13\n</td>\n<td style=\"text-align:right;\"> 14\n</td></tr>\n<tr>\n<th> 6\n</th>\n<td style=\"text-align:right;\"> 6\n</td>\n<th> 7\n</th>\n<td style=\"text-align:right;\"> 8\n</td>\n<td style=\"text-align:right;\"> 9\n</td>\n<td style=\"text-align:right;\"> 10\n</td>\n<td style=\"text-align:right;\"> 11\n</td>\n<td style=\"text-align:right;\"> 12\n</td>\n<td style=\"text-align:right;\"> 13\n</td></tr>\n<tr>\n<th> 5\n</th>\n<td style=\"text-align:right;\"> 5\n</td>\n<td style=\"text-align:right;\"> 6\n</td>\n<th> 7\n</th>\n<td style=\"text-align:right;\"> 8\n</td>\n<td style=\"text-align:right;\"> 9\n</td>\n<td style=\"text-align:right;\"> 10\n</td>\n<td style=\"text-align:right;\"> 11\n</td>\n<td style=\"text-align:right;\"> 12\n</td></tr>\n<tr>\n<th> 4\n</th>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 5\n</td>\n<td style=\"text-align:right;\"> 6\n</td>\n<th> 7\n</th>\n<td style=\"text-align:right;\"> 8\n</td>\n<td style=\"text-align:right;\"> 9\n</td>\n<td style=\"text-align:right;\"> 10\n</td>\n<td style=\"text-align:right;\"> 11\n</td></tr>\n<tr>\n<th> 3\n</th>\n<td style=\"text-align:right;\"> 3\n</td>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 5\n</td>\n<td style=\"text-align:right;\"> 6\n</td>\n<th> 7\n</th>\n<td style=\"text-align:right;\"> 8\n</td>\n<td style=\"text-align:right;\"> 9\n</td>\n<td style=\"text-align:right;\"> 10\n</td></tr>\n<tr>\n<th> 2\n</th>\n<td style=\"text-align:right;\"> 2\n</td>\n<td style=\"text-align:right;\"> 3\n</td>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 5\n</td>\n<td style=\"text-align:right;\"> 6\n</td>\n<th> 7\n</th>\n<td style=\"text-align:right;\"> 8\n</td>\n<td style=\"text-align:right;\"> 9\n</td></tr>\n<tr>\n<th> 1\n</th>\n<td style=\"text-align:right;\"> 1\n</td>\n<td style=\"text-align:right;\"> 2\n</td>\n<td style=\"text-align:right;\"> 3\n</td>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 5\n</td>\n<td style=\"text-align:right;\"> 6\n</td>\n<th> 7\n</th>\n<td style=\"text-align:right;\"> 8\n</td></tr>\n<tr>\n<th> 0\n</th>\n<td style=\"text-align:right;\"> 0\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<td style=\"text-align:right;\"> 2\n</td>\n<td style=\"text-align:right;\"> 3\n</td>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 5\n</td>\n<td style=\"text-align:right;\"> 6\n</td>\n<th> 7\n</th></tr></table>\n<h2><span class=\"mw-headline\" id=\"0x88_Math_5\">0x88 Math</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Intersection_Squares&amp;action=edit&amp;section=16\" title=\"Edit section: 0x88 Math\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>For same file and rank of intersection-point s:\n</p>\n<pre>\nrankIndex(s) - diagonalIndex(a) ==  antidiagIndex(b) - rankIndex(s);\nfileIndex(s) + diagonalIndex(a) ==  antidiagIndex(b) - fileIndex(s);\n</pre>\n<p>and therefor\n</p>\n<pre>\n2*rankIndex(s) == antidiagIndex(b) + diagonalIndex(a);\n2*fileIndex(s) == antidiagIndex(b) - diagonalIndex(a);\n</pre>\n<p>Because the intersection of any rank with any anti-diagonal may off the board, we rely on 0x88 math for a quick test:\n</p>\n<pre>\ns88   = 16*rankIndex(s) + fileIndex(s);\n</pre>\n<p>equation times two:\n</p>\n<pre>\ns88x2 = 16*2*rankIndex(s) + 2*fileIndex(s);\ns88x2 = 16*(antidiagIndex(b) + diagonalIndex(a)) + (antidiagIndex(b) - diagonalIndex(a) );\ns88x2 = 17*antidiagIndex(b) + 15*diagonalIndex(a);\nif ( s88x2 &amp; 0x111)\n   intersection off board or empty;\nelse\n   sq&#160;:= ((sq882 &gt;&gt; 2) &amp; 56) + ((sq88&gt;&gt;1) &amp; 7);\n</pre>\n<p>Additionally, s88x2 becomes odd if a and b have different <a href=\"/Color_of_a_Square\" title=\"Color of a Square\">square colors</a>, if s88x2 &amp; 0x110 is true, the square is off the board. In both cases there is no intersection square, which can be combined by one test with 0x111. If AND 0x111 is false, we convert 0x88 coordinates to ordinary square coordinates, which might be done \"speculative\".\n</p>\n<h2><span class=\"mw-headline\" id=\"C-Source_5\">C-Source</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Intersection_Squares&amp;action=edit&amp;section=17\" title=\"Edit section: C-Source\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<pre>\n/****************************************\n * return: intersection square (if any)\n *          of diagonal of square a\n *          with antidiagonal of square b\n *         -1 if no intersection exists\n ****************************************/\nint intersectDiaAnt(int a, int b) {\n   int s88x2 = 17*((b&gt;&gt;3) + (b &amp; 7)) + 15*((a&gt;&gt;3) - (a &amp; 7));\n   return (((s88x2&gt;&gt;2)&amp;56) + ((s88x2&gt;&gt;1)&amp;7)) | ( -(s88x2&amp;0x0111) &gt;&gt; 31);\n}\n</pre>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Intersection_Squares&amp;action=edit&amp;section=18\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Checks_and_Pinned_Pieces_(Bitboards)\" title=\"Checks and Pinned Pieces (Bitboards)\">Checks and Pinned Pieces (Bitboards)</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Intersection_Squares&amp;action=edit&amp;section=19\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://mathworld.wolfram.com/Line-LineIntersection.html\">Line-Line Intersection</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://mathworld.wolfram.com/\">Wolfram MathWorld</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Line-line_intersection\">Line-line intersection from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Line_%28geometry%29\">Line (geometry) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Linear_equation\">Linear equations from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Crossroads_%28culture%29\">Crossroads (culture) from Wikipedia</a></li>\n<li> <a href=\"/Category:Sun_Ra\" title=\"Category:Sun Ra\">Sun Ra</a>  - Where Pathways Meet, from <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Lanquidity\">Lanquidity</a> (1978), <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/L5vRHbQoTlc?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Intersection_Squares&amp;action=edit&amp;section=20\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.mcescher.com/Gallery/gallery-back.htm\">Picture gallery \"Back in Holland 1941 - 1954\"</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://www.mcescher.com/\">The Official M.C. Escher Website</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Squares\" title=\"Squares\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301080159\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.030 seconds\nReal time usage: 0.032 seconds\nPreprocessor visited node count: 336/1000000\nPreprocessor generated node count: 686/1000000\nPost‐expand include size: 27/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1230-0!canonical and timestamp 20260301080159 and revision id 6111\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "M._C._Escher"
+      },
+      {
+        "sortkey": "",
+        "*": "Sun_Ra"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "0x88"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Anti-Diagonals"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Board Representation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "C"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Checks and Pinned Pieces (Bitboards)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Color of a Square"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Diagonals"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Files"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "General Setwise Operations"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ranks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sliding Piece Attacks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Squares"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:M. C. Escher"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Sun Ra"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Rank and File",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Intersection_Squares",
+        "byteoffset": 1561,
+        "anchor": "Rank_and_File"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Empty Intersection with 0x88 Math",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Intersection_Squares",
+        "byteoffset": 1985,
+        "anchor": "Empty_Intersection_with_0x88_Math"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Rank and Diagonal",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Intersection_Squares",
+        "byteoffset": 2734,
+        "anchor": "Rank_and_Diagonal"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "0x88 Math",
+        "number": "3.1",
+        "index": "4",
+        "fromtitle": "Intersection_Squares",
+        "byteoffset": 4948,
+        "anchor": "0x88_Math"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "C-Source",
+        "number": "3.2",
+        "index": "5",
+        "fromtitle": "Intersection_Squares",
+        "byteoffset": 5497,
+        "anchor": "C-Source"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "File and Diagonal",
+        "number": "4",
+        "index": "6",
+        "fromtitle": "Intersection_Squares",
+        "byteoffset": 5912,
+        "anchor": "File_and_Diagonal"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "0x88 Math",
+        "number": "4.1",
+        "index": "7",
+        "fromtitle": "Intersection_Squares",
+        "byteoffset": 8125,
+        "anchor": "0x88_Math_2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "C-Source",
+        "number": "4.2",
+        "index": "8",
+        "fromtitle": "Intersection_Squares",
+        "byteoffset": 8679,
+        "anchor": "C-Source_2"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Rank and Anti-Diagonal",
+        "number": "5",
+        "index": "9",
+        "fromtitle": "Intersection_Squares",
+        "byteoffset": 9100,
+        "anchor": "Rank_and_Anti-Diagonal"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "0x88 Math",
+        "number": "5.1",
+        "index": "10",
+        "fromtitle": "Intersection_Squares",
+        "byteoffset": 11342,
+        "anchor": "0x88_Math_3"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "C-Source",
+        "number": "5.2",
+        "index": "11",
+        "fromtitle": "Intersection_Squares",
+        "byteoffset": 11895,
+        "anchor": "C-Source_3"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "File and Anti-Diagonal",
+        "number": "6",
+        "index": "12",
+        "fromtitle": "Intersection_Squares",
+        "byteoffset": 12317,
+        "anchor": "File_and_Anti-Diagonal"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "0x88 Math",
+        "number": "6.1",
+        "index": "13",
+        "fromtitle": "Intersection_Squares",
+        "byteoffset": 14559,
+        "anchor": "0x88_Math_4"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "C-Source",
+        "number": "6.2",
+        "index": "14",
+        "fromtitle": "Intersection_Squares",
+        "byteoffset": 15118,
+        "anchor": "C-Source_4"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Diagonal and Anti-Diagonal",
+        "number": "7",
+        "index": "15",
+        "fromtitle": "Intersection_Squares",
+        "byteoffset": 15544,
+        "anchor": "Diagonal_and_Anti-Diagonal"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "0x88 Math",
+        "number": "7.1",
+        "index": "16",
+        "fromtitle": "Intersection_Squares",
+        "byteoffset": 19813,
+        "anchor": "0x88_Math_5"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "C-Source",
+        "number": "7.2",
+        "index": "17",
+        "fromtitle": "Intersection_Squares",
+        "byteoffset": 21023,
+        "anchor": "C-Source_5"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "8",
+        "index": "18",
+        "fromtitle": "Intersection_Squares",
+        "byteoffset": 21466,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "9",
+        "index": "19",
+        "fromtitle": "Intersection_Squares",
+        "byteoffset": 21522,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "10",
+        "index": "20",
+        "fromtitle": "Intersection_Squares",
+        "byteoffset": 22296,
+        "anchor": "References"
+      }
+    ]
+  }
+}

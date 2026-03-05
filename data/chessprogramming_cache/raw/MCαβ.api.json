@@ -1,0 +1,312 @@
+{
+  "parse": {
+    "title": "MCαβ",
+    "pageid": 2100,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Search\" title=\"Search\">Search</a> * MCαβ</b>\n</p><p><b>Monte-Carlo Alpha-Beta</b>, <b>(MCαβ)</b><br />\nis a <a href=\"/Best-First\" title=\"Best-First\">Best-First search</a> algorithm based on <a href=\"/Monte-Carlo_Tree_Search\" title=\"Monte-Carlo Tree Search\">Monte-Carlo Tree Search</a> and a shallow <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">alpha-beta</a> <a href=\"/Depth-First\" title=\"Depth-First\">depth-first-search</a>. It is used in <a href=\"/Lines_of_Action\" title=\"Lines of Action\">Lines of Action</a> and in conjunction with <a href=\"/UCT\" title=\"UCT\">UCT</a> (Upper Confidence bounds applied to Trees) also in Chess. It is similar to the the <a href=\"/Best-First_Minimax_Search\" title=\"Best-First Minimax Search\">Best-first minimax search</a> proposed by <a href=\"/Richard_Korf\" title=\"Richard Korf\">Richard Korf</a> and <a href=\"/Max_Chickering\" title=\"Max Chickering\">Max Chickering</a> <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup>, one distinction between the two might be that MCTS uses usually win/draw/loss scores and Best-First a score from a heuristic <a href=\"/Evaluation\" title=\"Evaluation\">evaluation</a> function.\n<span id=\"Four_Phases\"></span>\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Four_Phases\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Four Phases</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#See_also\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Publications\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Publications</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Forum Posts</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#External_Links\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#References\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Four_Phases\">Four Phases</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MC%CE%B1%CE%B2&amp;action=edit&amp;section=1\" title=\"Edit section: Four Phases\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>MCαβ can be divided into four strategic phases, repeated as long as there is time left:<span id=\"Four_Phases\"></span>\n</p>\n<ol><li> In the Selection phase the tree is traversed from the <a href=\"/Root\" title=\"Root\">root node</a> until it selects a <a href=\"/Leaf_Node\" title=\"Leaf Node\">leaf node</a> that is not added to the tree yet</li>\n<li> The Expansion strategy adds the leaf node to the tree</li>\n<li> The Playout phase performs a shallow alpha-beta search</li>\n<li> The Backpropagation strategy propagates the results through the tree</li></ol>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MC%CE%B1%CE%B2&amp;action=edit&amp;section=2\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">Alpha-Beta</a></li>\n<li> <a href=\"/Best-First_Minimax_Search\" title=\"Best-First Minimax Search\">Best-First Minimax Search</a></li>\n<li> <a href=\"/Minimax\" title=\"Minimax\">Minimax</a></li>\n<li> <a href=\"/Monte-Carlo_Tree_Search\" title=\"Monte-Carlo Tree Search\">Monte-Carlo Tree Search</a></li>\n<li> <a href=\"/SSS*_and_Dual*#SSStarandDualStarAsMT\" title=\"SSS* and Dual*\">MT-SSS*</a></li>\n<li> <a href=\"/Rocinante\" title=\"Rocinante\">Rocinante</a></li>\n<li> <a href=\"/Bojun_Huang#Rollout\" title=\"Bojun Huang\">Rollout Paradigm</a></li></ul>\n<p><span id=\"Publications\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MC%CE%B1%CE%B2&amp;action=edit&amp;section=3\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Richard_Korf\" title=\"Richard Korf\">Richard Korf</a>, <a href=\"/Max_Chickering\" title=\"Max Chickering\">Max Chickering</a> (<b>1996</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.microsoft.com/en-us/research/publication/best-first-minimax-search/\">Best-First Minimax Search</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_(journal)\">Artificial Intelligence</a>, Vol. 84, No 1-2</li>\n<li> <a href=\"/index.php?title=Pim_Nijssen&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Pim Nijssen (page does not exist)\">Pim Nijssen</a>, <a href=\"/Mark_Winands\" title=\"Mark Winands\">Mark Winands</a> (<b>2011</b>). <i>Playout Search for Monte-Carlo Tree Search in Multi-Player Games</i>. <a href=\"/Advances_in_Computer_Games_13\" title=\"Advances in Computer Games 13\">Advances in Computer Games 13</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://www.conftool.net/acg13/index.php/Nijssen-Playout_Search_for_Monte-Carlo_Tree_Search_in_Multi-Player_Games-113.pdf?page=downloadPaper&amp;filename=Nijssen-Playout_Search_for_Monte-Carlo_Tree_Search_in_Multi-Player_Games-113.pdf&amp;form_id=113&amp;form_version=final\">pdf</a></li>\n<li> <a href=\"/Cameron_Browne\" title=\"Cameron Browne\">Cameron Browne</a>, <a href=\"/index.php?title=Edward_Powley&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Edward Powley (page does not exist)\">Edward Powley</a>, <a href=\"/index.php?title=Daniel_Whitehouse&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Daniel Whitehouse (page does not exist)\">Daniel Whitehouse</a>, <a href=\"/Simon_Lucas\" title=\"Simon Lucas\">Simon Lucas</a>, <a href=\"/index.php?title=Peter_Cowling&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Peter Cowling (page does not exist)\">Peter Cowling</a>, <a href=\"/index.php?title=Philipp_Rohlfshagen&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Philipp Rohlfshagen (page does not exist)\">Philipp Rohlfshagen</a>, <a href=\"/index.php?title=Stephen_Tavener&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Stephen Tavener (page does not exist)\">Stephen Tavener</a>, <a href=\"/index.php?title=Diego_Perez&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Diego Perez (page does not exist)\">Diego Perez</a>, <a href=\"/index.php?title=Spyridon_Samothrakis&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Spyridon Samothrakis (page does not exist)\">Spyridon Samothrakis</a>, <a href=\"/index.php?title=Simon_Colton&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Simon Colton (page does not exist)\">Simon Colton</a> (<b>2012</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://ieeexplore.ieee.org/document/6145622\">A Survey of Monte Carlo Tree Search Methods</a></i>. <a href=\"/IEEE#TOCIAIGAMES\" title=\"IEEE\">IEEE Transactions on Computational Intelligence and AI in Games</a>, Vol. 4, No. 1, <a rel=\"nofollow\" class=\"external text\" href=\"http://ccg.doc.gold.ac.uk/ccg_old/papers/browne_tciaig12_1.pdf\">pdf</a></li>\n<li> <a href=\"/Hendrik_Baier\" title=\"Hendrik Baier\">Hendrik Baier</a>, <a href=\"/Mark_Winands\" title=\"Mark Winands\">Mark Winands</a> (<b>2013</b>). <i>Monte-Carlo Tree Search and minimax hybrids</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://dblp.uni-trier.de/db/conf/cig/cig2013.html#BaierW13\">CIG 2013</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://dke.maastrichtuniversity.nl/m.winands/documents/paper%2049.pdf\">pdf</a></li>\n<li> <a href=\"/Hendrik_Baier\" title=\"Hendrik Baier\">Hendrik Baier</a>, <a href=\"/Mark_Winands\" title=\"Mark Winands\">Mark Winands</a> (<b>2014</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/chapter/10.1007%2F978-3-319-14923-3_4\">Monte-Carlo Tree Search and Minimax Hybrids with Heuristic Evaluation Functions</a></i>. <a href=\"/index.php?title=ECAI_CGW_2014&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"ECAI CGW 2014 (page does not exist)\">ECAI CGW 2014</a></li>\n<li> <a href=\"/Bojun_Huang\" title=\"Bojun Huang\">Bojun Huang</a> (<b>2015</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.semanticscholar.org/paper/Pruning-Game-Tree-by-Rollouts-Huang/a38b358745067f71a9c780db117ae2471e693d63\">Pruning Game Tree by Rollouts</a></i>. <a href=\"/AAAI\" title=\"AAAI\">AAAI</a>&#160;» <a href=\"/Monte-Carlo_Tree_Search\" title=\"Monte-Carlo Tree Search\">MCTS</a>, <a href=\"/SSS*_and_Dual*#SSStarandDualStarAsMT\" title=\"SSS* and Dual*\">MT-SSS*</a>, <a href=\"/Bojun_Huang#Rollout\" title=\"Bojun Huang\">Rollout Paradigm</a> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup></li>\n<li> <a href=\"/Hendrik_Baier\" title=\"Hendrik Baier\">Hendrik Baier</a> (<b>2017</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://link.springer.com/chapter/10.1007/978-3-319-57969-6_5\">A Rollout-Based Search Algorithm Unifying MCTS and Alpha-Beta</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://link.springer.com/book/10.1007%2F978-3-319-57969-6\">Computer Games</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MC%CE%B1%CE%B2&amp;action=edit&amp;section=4\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=41730\">MCTS without random playout?</a> by <a href=\"/Antonio_Torrecillas\" title=\"Antonio Torrecillas\">Antonio Torrecillas</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 01, 2012&#160;» <a href=\"/B*\" title=\"B*\">B*</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://talkchess.com/forum/viewtopic.php?t=44165\">Help with Best-First Select-Formula </a> by <a href=\"/Srdja_Matovic\" title=\"Srdja Matovic\">Srdja Matovic</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 23, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66280&amp;start=67\">Re: Announcing lczero</a> by <a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel Shawul</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 21, 2018&#160;» <a href=\"/Leela_Chess_Zero\" title=\"Leela Chess Zero\">Leela Chess Zero</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66414\">Alpha-Beta as a rollouts algorithm</a> by <a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel Shawul</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 25, 2018&#160;»  <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">Alpha-Beta</a>, <a href=\"/Monte-Carlo_Tree_Search\" title=\"Monte-Carlo Tree Search\">Monte-Carlo Tree Search</a>, <a href=\"/Scorpio\" title=\"Scorpio\">Scorpio</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MC%CE%B1%CE%B2&amp;action=edit&amp;section=5\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Category:Larry_Coryell\" title=\"Category:Larry Coryell\">Larry Coryell</a> &amp; <a href=\"/Category:The_Eleventh_House\" title=\"Category:The Eleventh House\">The Eleventh House</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Oslo\">Oslo</a> 1975, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> feat. <a rel=\"nofollow\" class=\"external text\" href=\"https://de.wikipedia.org/wiki/Mike_Lawrence\">Mike Lawrence</a>, <a href=\"/Category:Alphonse_Mouzon\" title=\"Category:Alphonse Mouzon\">Alphonse Mouzon</a>, <a href=\"/Category:John_Lee\" title=\"Category:John Lee\">John Lee</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://www.discogs.com/artist/138771-Mike-Mandel\">Mike Mandel</a></dd>\n<dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/Z9dYOoLqwmE?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MC%CE%B1%CE%B2&amp;action=edit&amp;section=6\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a href=\"/Richard_Korf\" title=\"Richard Korf\">Richard Korf</a>, <a href=\"/Max_Chickering\" title=\"Max Chickering\">Max Chickering</a> (<b>1996</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.microsoft.com/en-us/research/publication/best-first-minimax-search/\">Best-First Minimax Search</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_(journal)\">Artificial Intelligence</a>, Vol. 84, No 1-2</span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66280&amp;start=67\">Re: Announcing lczero</a> by <a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel Shawul</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 21, 2018&#160;» <a href=\"/Leela_Chess_Zero\" title=\"Leela Chess Zero\">Leela Chess Zero</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Search\" title=\"Search\">Up one level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260228222225\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.011 seconds\nReal time usage: 0.012 seconds\nPreprocessor visited node count: 63/1000000\nPreprocessor generated node count: 148/1000000\nPost‐expand include size: 26/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:2100-0!canonical and timestamp 20260228222225 and revision id 26521\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Larry_Coryell"
+      },
+      {
+        "sortkey": "",
+        "*": "John_Lee"
+      },
+      {
+        "sortkey": "",
+        "*": "Alphonse_Mouzon"
+      },
+      {
+        "sortkey": "",
+        "*": "The_Eleventh_House"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "AAAI"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Games 13"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha-Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Antonio Torrecillas"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "B*"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Best-First"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Best-First Minimax Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bojun Huang"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cameron Browne"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Daniel Shawul"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth-First"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hendrik Baier"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "IEEE"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Leaf Node"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Leela Chess Zero"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lines of Action"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mark Winands"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Max Chickering"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Minimax"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Monte-Carlo Tree Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Richard Korf"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rocinante"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Root"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SSS* and Dual*"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Scorpio"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Simon Lucas"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Srdja Matovic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "UCT"
+      },
+      {
+        "ns": 0,
+        "*": "Pim Nijssen"
+      },
+      {
+        "ns": 0,
+        "*": "Edward Powley"
+      },
+      {
+        "ns": 0,
+        "*": "Daniel Whitehouse"
+      },
+      {
+        "ns": 0,
+        "*": "Peter Cowling"
+      },
+      {
+        "ns": 0,
+        "*": "Philipp Rohlfshagen"
+      },
+      {
+        "ns": 0,
+        "*": "Stephen Tavener"
+      },
+      {
+        "ns": 0,
+        "*": "Diego Perez"
+      },
+      {
+        "ns": 0,
+        "*": "Spyridon Samothrakis"
+      },
+      {
+        "ns": 0,
+        "*": "Simon Colton"
+      },
+      {
+        "ns": 0,
+        "*": "ECAI CGW 2014"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Alphonse Mouzon"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:John Lee"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Larry Coryell"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:The Eleventh House"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Four Phases",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "MCαβ",
+        "byteoffset": 976,
+        "anchor": "Four_Phases"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "MCαβ",
+        "byteoffset": 1446,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "MCαβ",
+        "byteoffset": 1693,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "MCαβ",
+        "byteoffset": 4090,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "5",
+        "index": "5",
+        "fromtitle": "MCαβ",
+        "byteoffset": 4749,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "6",
+        "index": "6",
+        "fromtitle": "MCαβ",
+        "byteoffset": 5266,
+        "anchor": "References"
+      }
+    ]
+  }
+}

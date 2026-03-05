@@ -1,192 +1,371 @@
 <?xml version='1.0' encoding='utf-8'?>
 <featureModel>
   <struct>
-    <and name="ChessEngineVariability">
-      <and name="BoardRepresentation">
-        <feature name="0x88" />
-        <feature name="10x12 Board" />
-        <feature name="Bitboard Serialization" />
-        <feature name="Bitboards" />
-        <feature name="Copy-Make" />
-        <feature name="Mailbox" />
-        <feature name="Make Move" />
-        <feature name="Rotated Bitboards" />
-        <feature name="Unmake Move" />
-      </and>
-      <and name="Endgame">
-        <feature name="Edwards' Tablebases" />
-        <feature name="Gaviota" />
-        <feature name="KBNK Endgame" />
-        <feature name="Réti Endgame Study" />
-      </and>
-      <and name="Evaluation">
-        <feature name="Asymmetric Evaluation" />
-        <feature name="Basic Evaluation Features" />
-        <feature name="Chess Evaluation" />
-        <feature name="Dependent on Pawn Structure" />
-        <feature name="Evaluation Discontinuity" />
-        <feature name="Evaluation Features" />
-        <feature name="Evaluation Function" />
-        <feature name="Evaluation Hash Table" />
-        <feature name="Evaluation of Pieces" />
-        <feature name="Evaluation Overlap" />
-        <feature name="Evaluation Patterns" />
-        <feature name="Evaluation Philosophy" />
-        <feature name="Lazy Evaluation" />
-        <feature name="Mobility" />
-        <feature name="Neural Network Evaluation" />
-        <feature name="Neural Networks" />
-        <feature name="NNUE" />
-        <feature name="PeSTO's Evaluation Function" />
-        <feature name="Piece-Square Tables" />
-        <feature name="Simplified Evaluation Function" />
-        <feature name="Static Exchange Evaluation" />
-      </and>
-      <and name="MoveGeneration">
-        <feature name="8Q in Bitboards" />
-        <feature name="Backward Pawns (Bitboards)" />
-        <feature name="Best Magics so far" />
-        <feature name="Bit-Twiddling related to Bitboards" />
-        <feature name="Bitboard Basics" />
-        <feature name="Bitboard Board-Definition" />
-        <feature name="Bitboard Infrastructure" />
-        <feature name="Bitboard Trials" />
-        <feature name="Bitboard-History" />
-        <feature name="Candidates (Bitboards)" />
-        <feature name="Captures" />
-        <feature name="Checks and Pinned Pieces (Bitboards)" />
-        <feature name="Chunk Move Generation" />
-        <feature name="Congruent Modulo Bitboards" />
-        <feature name="Defining Bitboards" />
-        <feature name="Duo Trio Quart (Bitboards)" />
-        <feature name="Empty Bitboards" />
-        <feature name="General Bitboard Techniques" />
-        <feature name="Isolated Pawns (Bitboards)" />
-        <feature name="Kindergarten Bitboards" />
-        <feature name="Legal Move" />
-        <feature name="Legal Move Generation" />
-        <feature name="Looking for Magics" />
-        <feature name="Magic Bitboards" />
-        <feature name="Move Generation Issues" />
-        <feature name="Move Ordering" />
-        <feature name="Moves and Captures" />
-        <feature name="Open Pawns (Bitboards)" />
-        <feature name="Passed Pawns (Bitboards)" />
-        <feature name="Pawn Attacks (Bitboards)" />
-        <feature name="Pawn Levers (Bitboards)" />
-        <feature name="Pawn Pushes (Bitboards)" />
-        <feature name="Pawn Rams (Bitboards)" />
-        <feature name="Pseudo-Legal Move Generation" />
-        <feature name="Quad-Bitboards" />
-        <feature name="Reverse Bitboards" />
-        <feature name="Table-driven Move Generation" />
-        <feature name="Un-Move Generation" />
-        <feature name="X-ray Attacks (Bitboards)" />
-      </and>
-      <and name="Opening">
-        <feature name="Opening Book" />
-        <feature name="PolyGlot" />
-      </and>
-      <and name="Parallelism">
-        <feature name="ABDADA" />
-        <feature name="Lazy SMP" />
-        <feature name="Parallel Computing" />
-        <feature name="Parallel Prefix Adds" />
-        <feature name="Parallel Prefix Algorithms" />
-        <feature name="Parallel Search" />
-        <feature name="Transactions on Parallel and Distributed Systems" />
-        <feature name="YBWC" />
-      </and>
-      <and name="Protocol">
-        <feature name="Chess Engine Communication Protocol" />
-        <feature name="EPD" />
-        <feature name="FEN" />
-        <feature name="UCI" />
-        <feature name="XBoard" />
-      </and>
-      <and name="PruningReductions">
-        <feature name="AEL-Pruning" />
-        <feature name="Delta Pruning" />
-        <feature name="Depth Reduction R" />
-        <feature name="Futility Pruning" />
-        <feature name="History Leaf Pruning" />
-        <feature name="Late Move Pruning" />
-        <feature name="Late Move Reductions" />
-        <feature name="Mate Distance Pruning" />
-        <feature name="Multi-Cut" />
-        <feature name="Null Move Pruning" />
-        <feature name="ProbCut" />
-        <feature name="Pruning" />
-        <feature name="Razoring" />
-        <feature name="Reverse Futility Pruning" />
-      </and>
-      <and name="Search">
-        <feature name="A Comment on `Conspiracy-Number Search" />
-        <feature name="Alpha-Beta" />
-        <feature name="Alpha-Beta Conspiracy Search" />
-        <feature name="Alpha-Beta Enhancements" />
-        <feature name="Alpha-Beta goes Best-First" />
-        <feature name="Alpha-Beta Tree" />
-        <feature name="Best-First Search" />
-        <feature name="Depth-First Search" />
-        <feature name="Draw Evaluation" />
-        <feature name="Factor of Mobility" />
-        <feature name="Iterative Search" />
-        <feature name="Lambda-Search" />
-        <feature name="Maximum Search Depth" />
-        <feature name="Microsoft Academic Search" />
-        <feature name="Minimal Alpha-Beta Tree" />
-        <feature name="Minimal Search Trees" />
-        <feature name="Monte Carlo Tree Search" />
-        <feature name="Monte-Carlo Tree Search" />
-        <feature name="MTD(f)" />
-        <feature name="Negamax" />
-        <feature name="Negamax Framework" />
-        <feature name="NegaScout" />
-        <feature name="Null Move" />
-        <feature name="Opponent Model Search" />
-        <feature name="Principal Variation Search" />
-        <feature name="Proof-Number Search" />
-        <feature name="Pseudo-Legal Move" />
-        <feature name="Quiescence Search" />
-        <feature name="Scout" />
-        <feature name="Scout and Friends" />
-        <feature name="Search Algorithms" />
-        <feature name="Search Pathology" />
-        <feature name="Search Space" />
-        <feature name="Search Statistics" />
-        <feature name="Search Tree" />
-        <feature name="Selective Search" />
-        <feature name="UCT" />
-      </and>
-      <and name="TimeManagement">
-        <feature name="Anti-Clockwise" />
-        <feature name="By 90 degrees Anti-Clockwise" />
-        <feature name="By 90 degrees Clockwise" />
-        <feature name="Doubling Time Control" />
-        <feature name="Pondering" />
-      </and>
-      <and name="TranspositionTable">
-        <feature name="Hash Move" />
-        <feature name="Hash Table" />
-        <feature name="Pawn Hash Index" />
-        <feature name="Pawn Hash Table" />
-        <feature name="Texel" />
-        <feature name="Transposition" />
-        <feature name="Zobrist Hashing" />
-      </and>
-      <and name="Tuning">
-        <feature name="CLOP" />
-        <feature name="Eval tuning in Deep Thought" />
-        <feature name="Find parameter values such that E" />
-        <feature name="Optimization" />
-        <feature name="Parameter" />
-        <feature name="SPRT" />
-        <feature name="SPSA" />
-        <feature name="Stockfish's Tuning Method" />
-        <feature name="Texel's Tuning Method" />
-      </and>
+    <and name="ChessEngineProductLine">
+      <alt name="BoardRepresentation">
+        <and name="0x88">
+          <feature name="CompileFlag CFG_0X88" mandatory="true" />
+        </and>
+        <and name="10x12 Board">
+          <feature name="CompileFlag CFG_10X12_BOARD" mandatory="true" />
+        </and>
+        <and name="Bitboards">
+          <feature name="CompileFlag CFG_BITBOARDS" mandatory="true" />
+        </and>
+        <and name="Copy-Make">
+          <feature name="CompileFlag CFG_COPY_MAKE" mandatory="true" />
+        </and>
+        <and name="Mailbox">
+          <feature name="CompileFlag CFG_MAILBOX" mandatory="true" />
+        </and>
+        <and name="Make Move">
+          <feature name="CompileFlag CFG_MAKE_MOVE" mandatory="true" />
+        </and>
+        <and name="Piece Lists">
+          <feature name="CompileFlag CFG_PIECE_LISTS" mandatory="true" />
+        </and>
+        <and name="Unmake Move">
+          <feature name="CompileFlag CFG_UNMAKE_MOVE" mandatory="true" />
+        </and>
+      </alt>
+      <feature name="Endgame" />
+      <alt name="Evaluation">
+        <and name="Evaluation">
+          <feature name="CompileFlag CFG_EVALUATION" mandatory="true" />
+        </and>
+        <and name="King Safety">
+          <feature name="CompileFlag CFG_KING_SAFETY" mandatory="true" />
+        </and>
+        <and name="Mobility">
+          <feature name="CompileFlag CFG_MOBILITY" mandatory="true" />
+        </and>
+        <and name="Pawn Structure">
+          <feature name="CompileFlag CFG_PAWN_STRUCTURE" mandatory="true" />
+        </and>
+        <and name="Piece-Square Tables">
+          <feature name="CompileFlag CFG_PIECE_SQUARE_TABLES" mandatory="true" />
+        </and>
+        <and name="Static Exchange Evaluation">
+          <feature name="CompileFlag CFG_STATIC_EXCHANGE_EVALUATION" mandatory="true" />
+        </and>
+        <and name="Tapered Eval">
+          <feature name="CompileFlag CFG_TAPERED_EVAL" mandatory="true" />
+        </and>
+      </alt>
+      <or name="MoveGeneration">
+        <and name="Castling">
+          <feature name="CompileFlag CFG_CASTLING" mandatory="true" />
+        </and>
+        <and name="En Passant">
+          <feature name="CompileFlag CFG_EN_PASSANT" mandatory="true" />
+        </and>
+        <and name="Legal Move Generation">
+          <feature name="CompileFlag CFG_LEGAL_MOVE_GENERATION" mandatory="true" />
+        </and>
+        <and name="Magic Bitboards">
+          <feature name="CompileFlag CFG_MAGIC_BITBOARDS" mandatory="true" />
+        </and>
+        <and name="Move Generation">
+          <feature name="CompileFlag CFG_MOVE_GENERATION" mandatory="true" />
+        </and>
+        <and name="Move Ordering">
+          <feature name="CompileFlag CFG_MOVE_ORDERING" mandatory="true" />
+        </and>
+        <and name="Pseudo-Legal Move Generation">
+          <feature name="CompileFlag CFG_PSEUDO_LEGAL_MOVE_GENERATION" mandatory="true" />
+        </and>
+      </or>
+      <or name="Opening">
+        <and name="Opening Book">
+          <feature name="CompileFlag CFG_OPENING_BOOK" mandatory="true" />
+        </and>
+      </or>
+      <feature name="Parallelism" />
+      <or name="Protocol">
+        <and name="FEN">
+          <feature name="CompileFlag CFG_FEN" mandatory="true" />
+        </and>
+        <and name="UCI">
+          <feature name="CompileFlag CFG_UCI" mandatory="true" />
+        </and>
+      </or>
+      <or name="PruningReductions">
+        <and name="Delta Pruning">
+          <feature name="CompileFlag CFG_DELTA_PRUNING" mandatory="true" />
+        </and>
+        <and name="Futility Pruning">
+          <feature name="CompileFlag CFG_FUTILITY_PRUNING" mandatory="true" />
+        </and>
+        <and name="Late Move Reductions">
+          <feature name="CompileFlag CFG_LATE_MOVE_REDUCTIONS" mandatory="true" />
+        </and>
+        <and name="Null Move Pruning">
+          <feature name="CompileFlag CFG_NULL_MOVE_PRUNING" mandatory="true" />
+        </and>
+        <and name="Razoring">
+          <feature name="CompileFlag CFG_RAZORING" mandatory="true" />
+        </and>
+      </or>
+      <or name="Search">
+        <and name="Alpha-Beta">
+          <feature name="CompileFlag CFG_ALPHA_BETA" mandatory="true" />
+        </and>
+        <and name="Aspiration Windows">
+          <feature name="CompileFlag CFG_ASPIRATION_WINDOWS" mandatory="true" />
+        </and>
+        <and name="Fifty-Move Rule">
+          <feature name="CompileFlag CFG_FIFTY_MOVE_RULE" mandatory="true" />
+        </and>
+        <and name="History Heuristic">
+          <feature name="CompileFlag CFG_HISTORY_HEURISTIC" mandatory="true" />
+        </and>
+        <and name="Iterative Deepening">
+          <feature name="CompileFlag CFG_ITERATIVE_DEEPENING" mandatory="true" />
+        </and>
+        <and name="Killer Heuristic">
+          <feature name="CompileFlag CFG_KILLER_HEURISTIC" mandatory="true" />
+        </and>
+        <and name="Negamax">
+          <feature name="CompileFlag CFG_NEGAMAX" mandatory="true" />
+        </and>
+        <and name="Principal Variation Search">
+          <feature name="CompileFlag CFG_PRINCIPAL_VARIATION_SEARCH" mandatory="true" />
+        </and>
+        <and name="Quiescence Search">
+          <feature name="CompileFlag CFG_QUIESCENCE_SEARCH" mandatory="true" />
+        </and>
+        <and name="Threefold Repetition">
+          <feature name="CompileFlag CFG_THREEFOLD_REPETITION" mandatory="true" />
+        </and>
+      </or>
+      <or name="TimeManagement">
+        <and name="Pondering">
+          <feature name="CompileFlag CFG_PONDERING" mandatory="true" />
+          <feature name="RuntimeFlag --pondering" />
+        </and>
+        <and name="Time Management">
+          <feature name="CompileFlag CFG_TIME_MANAGEMENT" mandatory="true" />
+          <feature name="RuntimeFlag --time-management" />
+        </and>
+      </or>
+      <or name="TranspositionTable">
+        <and name="Hash Move">
+          <feature name="CompileFlag CFG_HASH_MOVE" mandatory="true" />
+        </and>
+        <and name="Pawn Hash Table">
+          <feature name="CompileFlag CFG_PAWN_HASH_TABLE" mandatory="true" />
+        </and>
+        <and name="Replacement Schemes">
+          <feature name="CompileFlag CFG_REPLACEMENT_SCHEMES" mandatory="true" />
+        </and>
+        <and name="Transposition Table">
+          <feature name="CompileFlag CFG_TRANSPOSITION_TABLE" mandatory="true" />
+        </and>
+        <and name="Zobrist Hashing">
+          <feature name="CompileFlag CFG_ZOBRIST_HASHING" mandatory="true" />
+        </and>
+      </or>
+      <feature name="Tuning" />
     </and>
   </struct>
-  <constraints />
+  <constraints>
+    <rule>
+      <imp>
+        <var>Magic Bitboards</var>
+        <var>Bitboards</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Legal Move Generation</var>
+        <var>Move Generation</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Pseudo-Legal Move Generation</var>
+        <var>Move Generation</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Copy-Make</var>
+        <var>Make Move</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Unmake Move</var>
+        <var>Make Move</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Castling</var>
+        <var>Legal Move Generation</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>En Passant</var>
+        <var>Legal Move Generation</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Alpha-Beta</var>
+        <var>Make Move</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Alpha-Beta</var>
+        <var>Unmake Move</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Alpha-Beta</var>
+        <var>Castling</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Alpha-Beta</var>
+        <var>En Passant</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Alpha-Beta</var>
+        <var>Threefold Repetition</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Alpha-Beta</var>
+        <var>Fifty-Move Rule</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Negamax</var>
+        <var>Make Move</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Negamax</var>
+        <var>Unmake Move</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Quiescence Search</var>
+        <var>Make Move</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Quiescence Search</var>
+        <var>Unmake Move</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Hash Move</var>
+        <var>Transposition Table</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Pawn Hash Table</var>
+        <var>Zobrist Hashing</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Principal Variation Search</var>
+        <var>Alpha-Beta</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Aspiration Windows</var>
+        <var>Alpha-Beta</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Null Move Pruning</var>
+        <var>Alpha-Beta</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Late Move Reductions</var>
+        <var>Alpha-Beta</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Futility Pruning</var>
+        <var>Alpha-Beta</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Delta Pruning</var>
+        <var>Quiescence Search</var>
+      </imp>
+    </rule>
+    <rule>
+      <not>
+        <and>
+          <var>Bitboards</var>
+          <var>Mailbox</var>
+        </and>
+      </not>
+    </rule>
+    <rule>
+      <not>
+        <and>
+          <var>Bitboards</var>
+          <var>0x88</var>
+        </and>
+      </not>
+    </rule>
+    <rule>
+      <not>
+        <and>
+          <var>Bitboards</var>
+          <var>10x12 Board</var>
+        </and>
+      </not>
+    </rule>
+    <rule>
+      <not>
+        <and>
+          <var>Mailbox</var>
+          <var>0x88</var>
+        </and>
+      </not>
+    </rule>
+    <rule>
+      <not>
+        <and>
+          <var>Mailbox</var>
+          <var>10x12 Board</var>
+        </and>
+      </not>
+    </rule>
+    <rule>
+      <not>
+        <and>
+          <var>0x88</var>
+          <var>10x12 Board</var>
+        </and>
+      </not>
+    </rule>
+  </constraints>
 </featureModel>

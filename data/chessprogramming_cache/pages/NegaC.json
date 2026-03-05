@@ -1,0 +1,60 @@
+{
+  "title": "NegaC*",
+  "url": "https://www.chessprogramming.org/NegaC*",
+  "source_type": "api",
+  "retrieved_at": "2026-03-01T15:09:24.571807+00:00",
+  "content_hash": "fa1dff8cd1d75d3e3fc50d0f9465f3e71c6e7c167973532f648ee1416c895eaa",
+  "text": "Home * Search * NegaC * Christopher Conte , Bisected Half Skull [1] C * and NegaC *, an idea to turn a Depth-First to a Best-First search, like MTD(f) to utilize null window searches of a fail-soft Alpha-Beta routine, and to use the bounds that are returned in a bisection scheme. This yields in the C * algorithm, already proposed by Kevin Coplan in 1981 [2] and NegaC *, a Negamax implementation of C *, introduced by Jean-Christophe Weill in 1991 [3] . Contents 1 NegaC* Pseudo Code 2 See also 3 Publications 4 Forum Posts 5 References NegaC* Pseudo Code [ edit ] int negaCStar (int min, int max, int depth) { int score = min; while (min != max) { alpha = (min + max) / 2; score = failSoftAlphaBeta (alpha, alpha + 1, depth); if ( score > alpha) min = score; else max = score; } return score; } See also [ edit ] Alpha-Beta Fail-Soft MTD(f) Negamax NegaScout Null Window Principal Variation Search Scout SSS* and Dual* as MT Publications [ edit ] Kevin Coplan ( 1982 ). A Special-Purpose Machine for an Improved Search Algorithm for Deep Chess Combinations . Advances in Computer Chess 3 Kevin Coplan ( 1984 ). The experimental and theoretical validation of a new search algorithm with a note on the automatic generation of causal explanations . Ph.D. thesis, University of Edinburgh , pdf Wolfgang Nagl ( 1989 ). Best-Move Proving: A Fast Game Tree Searching Program . Heuristic Programming in AI 1 Jean-Christophe Weill ( 1991 ). Experiments With the NegaC* Search - An Alternative for Othello Endgame Search. Heuristic Programming in AI 2 Jean-Christophe Weill ( 1992 ). The NegaC* Search. ICCA Journal, Vol. 15, No. 1 Forum Posts [ edit ] Re: Interesting ideas by Dann Corbit , CCC , September 09, 2015 References [ edit ] ↑ Bisected Half Skull - Bronce from The Sculpture of Christopher Conte ↑ Kevin Coplan ( 1982 ). A special-purpose machine for an improved search algorithm for deep chess combinations. Advances in Computer Chess 3 ↑ Jean-Christophe Weill ( 1991 ). Experiments With the NegaC* Search - An Alternative for Othello Endgame Search. Heuristic Programming in AI 2 , zipped postscript and pdf from CiteSeerX Up one level",
+  "headings": [
+    "Contents",
+    "NegaC* Pseudo Code[edit]",
+    "See also[edit]",
+    "Publications[edit]",
+    "Forum Posts[edit]",
+    "References[edit]"
+  ],
+  "links": [
+    "1st Computer Olympiad",
+    "2nd Computer Olympiad",
+    "Advances in Computer Chess 3",
+    "Alpha-Beta",
+    "Best-First",
+    "Bound",
+    "CCC",
+    "Category:Christopher Conte",
+    "Dann Corbit",
+    "Depth-First",
+    "Fail-Soft",
+    "ICGA Journal",
+    "Jean-Christophe Weill",
+    "Kevin Coplan",
+    "MTD(f)",
+    "Main Page",
+    "NegaScout",
+    "Negamax",
+    "Null Window",
+    "Principal Variation Search",
+    "SSS* and Dual*",
+    "Scout",
+    "Search",
+    "University of Edinburgh",
+    "Wolfgang Nagl",
+    "index.php"
+  ],
+  "bold_terms": [
+    "Home * Search * NegaC",
+    "C",
+    "NegaC",
+    "1982",
+    "1984",
+    "1989",
+    "1991",
+    "1992",
+    "Up one level"
+  ],
+  "categories": [
+    "Christopher_Conte"
+  ],
+  "page_type": "technique",
+  "raw_payload_path": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/data/chessprogramming_cache/raw/NegaC.api.json"
+}

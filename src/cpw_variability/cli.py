@@ -46,7 +46,7 @@ def _seed_titles(seed: str) -> list[str]:
 
 def run_fetch(
     paths,
-    seed: str = "main",
+    seed: str = "implementation",
     mode: str = "snapshot",
     max_pages: int = DEFAULT_MAX_DISCOVERY_PAGES,
     allow_network: bool = True,
@@ -106,8 +106,14 @@ def run_build_model(paths, depth: int = 3, target_features: int = DEFAULT_TARGET
     pages = _load_pages(paths)
     result = build_feature_model(pages, depth=depth, target_features=target_features)
 
-    export_feature_model_json(paths.feature_model_json_path, result.features, result.traces, result.meta)
-    export_featureide_xml(paths.feature_model_featureide_path, result.features)
+    export_feature_model_json(
+        paths.feature_model_json_path,
+        result.features,
+        result.traces,
+        result.constraints,
+        result.meta,
+    )
+    export_featureide_xml(paths.feature_model_featureide_path, result.features, result.constraints)
     export_feature_traces_csv(paths.feature_traces_csv_path, result.traces)
     return result
 
@@ -117,7 +123,7 @@ def run_build_matrix(paths, all_engines: bool = True, all_features: bool = True)
         raise PipelineError("Current implementation requires --all-engines and --all-features")
 
     pages = _load_pages(paths)
-    features, _, _ = load_feature_model_json(paths.feature_model_json_path)
+    features, _, _, _ = load_feature_model_json(paths.feature_model_json_path)
 
     engine_pages = extract_engine_pages(pages)
     matrix = build_engine_feature_matrix(engine_pages, features)
@@ -140,7 +146,7 @@ def run_build_matrix(paths, all_engines: bool = True, all_features: bool = True)
 
 def run_all(
     paths,
-    seed: str = "main",
+    seed: str = "implementation",
     mode: str = "snapshot",
     max_pages: int = DEFAULT_MAX_DISCOVERY_PAGES,
     depth: int = 3,
@@ -172,8 +178,14 @@ def run_all(
     )
 
     model_result = build_feature_model(pages, depth=depth, target_features=target_features)
-    export_feature_model_json(paths.feature_model_json_path, model_result.features, model_result.traces, model_result.meta)
-    export_featureide_xml(paths.feature_model_featureide_path, model_result.features)
+    export_feature_model_json(
+        paths.feature_model_json_path,
+        model_result.features,
+        model_result.traces,
+        model_result.constraints,
+        model_result.meta,
+    )
+    export_featureide_xml(paths.feature_model_featureide_path, model_result.features, model_result.constraints)
     export_feature_traces_csv(paths.feature_traces_csv_path, model_result.traces)
 
     matrix_result = build_engine_feature_matrix(extract_engine_pages(pages), model_result.features)
@@ -192,6 +204,10 @@ def run_all(
 
     traced_feature_ids = {trace.feature_id for trace in model_result.traces}
     traced_features = sum(1 for feature in model_result.features if feature.id in traced_feature_ids)
+    option_features = [feature for feature in model_result.features if feature.variation_role == "option" and feature.configurable]
+    compile_time_options = sum(1 for feature in option_features if feature.variability_stage == "compile_time")
+    runtime_options = sum(1 for feature in option_features if feature.variability_stage == "runtime")
+    mixed_options = sum(1 for feature in option_features if feature.variability_stage == "mixed")
 
     status_counts = {"SUPPORTED": 0, "UNSUPPORTED_EXPLICIT": 0, "UNKNOWN": 0}
     for status in matrix_result.statuses:
@@ -201,6 +217,11 @@ def run_all(
         "pages_discovered": len(pages),
         "engines_discovered": len(extract_engine_pages(pages)),
         "features_total": len(model_result.features),
+        "constraints_total": len(model_result.constraints),
+        "features_options_configurable": len(option_features),
+        "options_compile_time": compile_time_options,
+        "options_runtime": runtime_options,
+        "options_mixed": mixed_options,
         "features_traced": traced_features,
         "trace_coverage_percent": round((traced_features / max(1, len(model_result.features))) * 100.0, 2),
         "matrix_rows": len(matrix_result.statuses),
@@ -224,7 +245,7 @@ def _build_parser() -> argparse.ArgumentParser:
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     fetch_cmd = subparsers.add_parser("fetch", help="Fetch and cache CPW snapshot")
-    fetch_cmd.add_argument("--seed", default="main")
+    fetch_cmd.add_argument("--seed", default="implementation")
     fetch_cmd.add_argument("--mode", default="snapshot")
     fetch_cmd.add_argument("--max-pages", type=int, default=DEFAULT_MAX_DISCOVERY_PAGES)
     fetch_cmd.add_argument("--offline", action="store_true", help="Disable network requests")
@@ -246,7 +267,7 @@ def _build_parser() -> argparse.ArgumentParser:
     matrix_cmd.add_argument("--all-features", action="store_true", default=True, help="Include all modeled features")
 
     run_all_cmd = subparsers.add_parser("run-all", help="Run full pipeline")
-    run_all_cmd.add_argument("--seed", default="main")
+    run_all_cmd.add_argument("--seed", default="implementation")
     run_all_cmd.add_argument("--mode", default="snapshot")
     run_all_cmd.add_argument("--max-pages", type=int, default=DEFAULT_MAX_DISCOVERY_PAGES)
     run_all_cmd.add_argument("--depth", type=int, default=3)

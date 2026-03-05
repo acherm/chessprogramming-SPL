@@ -1,0 +1,614 @@
+{
+  "parse": {
+    "title": "Texel",
+    "pageid": 3943,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Engines\" title=\"Engines\">Engines</a> * Texel</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"/File:Beach_Texel_Netherlands.jpg\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Beach_Texel_Netherlands.jpg/330px-Beach_Texel_Netherlands.jpg\" width=\"300\" height=\"225\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Beach_Texel_Netherlands.jpg/500px-Beach_Texel_Netherlands.jpg 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Beach_Texel_Netherlands.jpg/960px-Beach_Texel_Netherlands.jpg 2x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Beach_Texel_Netherlands.jpg\" class=\"internal\" title=\"Enlarge\"></a></div>Texel dunes and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Eierland_Lighthouse\">Eierland Lighthouse</a> <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>Texel</b>,<br />\t\na free <a href=\"/UCI\" title=\"UCI\">UCI</a> compliant <a href=\"/Category:Open_Source\" title=\"Category:Open Source\">open source chess engine</a> under the <a href=\"/Free_Software_Foundation#GPL\" title=\"Free Software Foundation\">GNU General Public License</a> developed by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>. Texel, first released in March 2012, was basically a <a href=\"/Cpp\" title=\"Cpp\">C++11</a> port of Peter's <a href=\"/Java\" title=\"Java\">Java</a> engine <a href=\"/CuckooChess\" title=\"CuckooChess\">CuckooChess</a>, the name change inspired by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/HMS_Cuckoo_%281806%29\">HMS Cuckoo</a>, which was wrecked on April 04, 1810 on the Haak Sands off the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Texel\">Texel</a> at <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Callantsoog\">Callantsoog</a>. \n</p><p>Texel applies many of the standard methods for computer chess programs, such as <a href=\"/Iterative_Deepening\" title=\"Iterative Deepening\">iterative deepening</a>, <a href=\"/NegaScout\" title=\"NegaScout\">negascout</a>, <a href=\"/Aspiration_Windows\" title=\"Aspiration Windows\">aspiration windows</a>, <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">quiescence search</a> with <a href=\"/Static_Exchange_Evaluation\" title=\"Static Exchange Evaluation\">SEE</a> pruning and <a href=\"/MVV-LVA\" title=\"MVV-LVA\">MVV/LVA</a> move ordering, <a href=\"/Transposition_Table\" title=\"Transposition Table\">hash table</a>, <a href=\"/History_Heuristic\" title=\"History Heuristic\">history heuristic</a>, <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">recursive null moves</a>, <a href=\"/Futility_Pruning\" title=\"Futility Pruning\">futility pruning</a>, <a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">late move reductions</a>, <a href=\"/Opening_Book\" title=\"Opening Book\">opening book</a> and <a href=\"/Magic_Bitboards\" title=\"Magic Bitboards\">magic bitboards</a>. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Version_History\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Version History</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-2\"><a href=\"#Texel_1.00\"><span class=\"tocnumber\">1.1</span> <span class=\"toctext\">Texel 1.00</span></a></li>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#Texel_1.01\"><span class=\"tocnumber\">1.2</span> <span class=\"toctext\">Texel 1.01</span></a></li>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#Texel_1.02\"><span class=\"tocnumber\">1.3</span> <span class=\"toctext\">Texel 1.02</span></a></li>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#Texel_1.03\"><span class=\"tocnumber\">1.4</span> <span class=\"toctext\">Texel 1.03</span></a></li>\n<li class=\"toclevel-2 tocsection-6\"><a href=\"#Texel_1.04\"><span class=\"tocnumber\">1.5</span> <span class=\"toctext\">Texel 1.04</span></a></li>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#Texel_1.05\"><span class=\"tocnumber\">1.6</span> <span class=\"toctext\">Texel 1.05</span></a></li>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#Texel_1.06\"><span class=\"tocnumber\">1.7</span> <span class=\"toctext\">Texel 1.06</span></a></li>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#Texel_1.07\"><span class=\"tocnumber\">1.8</span> <span class=\"toctext\">Texel 1.07</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-10\"><a href=\"#See_also\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-11\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-12\"><a href=\"#2012_...\"><span class=\"tocnumber\">3.1</span> <span class=\"toctext\">2012 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-13\"><a href=\"#2015_...\"><span class=\"tocnumber\">3.2</span> <span class=\"toctext\">2015 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-14\"><a href=\"#2020_...\"><span class=\"tocnumber\">3.3</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-15\"><a href=\"#External_Links\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">External Links</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-16\"><a href=\"#Chess_Engine\"><span class=\"tocnumber\">4.1</span> <span class=\"toctext\">Chess Engine</span></a></li>\n<li class=\"toclevel-2 tocsection-17\"><a href=\"#Texel\"><span class=\"tocnumber\">4.2</span> <span class=\"toctext\">Texel</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-18\"><a href=\"#References\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Version_History\">Version History</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Texel&amp;action=edit&amp;section=1\" title=\"Edit section: Version History\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Texel_1.00\">Texel 1.00</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Texel&amp;action=edit&amp;section=2\" title=\"Edit section: Texel 1.00\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Changes of unreleased Texel 1.00 compared to the development version of <a href=\"/CuckooChess\" title=\"CuckooChess\">CuckooChess</a>: \n</p>\n<ul><li> Ported from <a href=\"/Java\" title=\"Java\">Java</a> to <a href=\"/Cpp\" title=\"Cpp\">C++</a>. About twice as fast as a result)</li>\n<li> Added evaluation term to avoid walking into wrong corner in KRKB endings </li>\n<li> Implemented <a href=\"/Reverse_Futility_Pruning\" title=\"Reverse Futility Pruning\">reverse futility pruning</a> </li>\n<li> Implemented <a href=\"/Futility_Pruning#MoveCountBasedPruning\" title=\"Futility Pruning\">late move pruning</a></li></ul>\n<p><span id=\"1.01\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Texel_1.01\">Texel 1.01</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Texel&amp;action=edit&amp;section=3\" title=\"Edit section: Texel 1.01\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>First released version in March 2012 <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup> addressing following topics:\n</p>\n<ul><li> Replaced cuckoo hashing with a more cache-friendly alternative</li>\n<li> Implemented <a href=\"/Pawn_Race\" title=\"Pawn Race\">passed pawn race</a> evaluation </li>\n<li> Increased <a href=\"/Passed_Pawn\" title=\"Passed Pawn\">passed pawn</a> bonus for pawns on rank 6 and 7</li></ul>\n<p><span id=\"1.02\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Texel_1.02\">Texel 1.02</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Texel&amp;action=edit&amp;section=4\" title=\"Edit section: Texel 1.02\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Texel <b>1.02</b>, released in June 2013 <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>, had a number of mostly small changes, new evaluation features, and speed ups, such as only one check in <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">quiescence search</a>, cache line aligned entries of the <a href=\"/Transposition_Table\" title=\"Transposition Table\">transposition table</a>, cache-optimized <a href=\"/Magic_Bitboards\" title=\"Magic Bitboards\">magic bitboard</a> constants, support for <a href=\"/SSE4#SSE4.2\" title=\"SSE4\">SSE4.2</a> <a href=\"/Population_Count\" title=\"Population Count\">PopCount</a>, and reduced <a href=\"/Aspiration_Windows\" title=\"Aspiration Windows\">aspiration windows</a> with gradually widening after <a href=\"/Fail-High\" title=\"Fail-High\">fail-high</a>/<a href=\"/Fail-Low\" title=\"Fail-Low\">low</a> at the <a href=\"/Root\" title=\"Root\">root</a>.\n<span id=\"1.03\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Texel_1.03\">Texel 1.03</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Texel&amp;action=edit&amp;section=5\" title=\"Edit section: Texel 1.03\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Texel <b>1.03</b>, released in January 2014, was a huge improvement of about 100 Elo over Texel 1.02 using one core <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>, mostly due to <a href=\"/Texel%27s_Tuning_Method\" title=\"Texel&#39;s Tuning Method\">automated tuning</a> of <a href=\"/Evaluation\" title=\"Evaluation\">evaluation</a> parameters <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup>. Further, beside other tweaks, Texel 1.03 incorporates a unique <a href=\"/Recursion\" title=\"Recursion\">recursive</a> <a href=\"/Parallel_Search\" title=\"Parallel Search\">parallel search</a> using <a href=\"/Thread\" title=\"Thread\">threads</a>, combining the power of <a href=\"/Dynamic_Tree_Splitting\" title=\"Dynamic Tree Splitting\">DTS</a> with the simplicity of <a href=\"/ABDADA\" title=\"ABDADA\">ABDADA</a> <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup>, and further applies <a href=\"/Null_Move_Pruning#ZugzwangVerification\" title=\"Null Move Pruning\">null move verification</a> and more aggressive <a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">LMR</a>, but no longer uses the <a href=\"/Botvinnik-Markoff_Extension\" title=\"Botvinnik-Markoff Extension\">Botvinnik-Markoff extension</a>.\n<span id=\"1.04\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Texel_1.04\">Texel 1.04</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Texel&amp;action=edit&amp;section=6\" title=\"Edit section: Texel 1.04\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Texel <b>1.04</b> in May 2014 is about 70 elo stronger than Texel 1.03 on Peter's  Linux computer at very fast time controls, using one core. Almost all changes are improvements in the evaluation function <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup>.\n<span id=\"1.05\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Texel_1.05\">Texel 1.05</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Texel&amp;action=edit&amp;section=7\" title=\"Edit section: Texel 1.05\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:255px;\"><a href=\"https://play.google.com/store/apps/details?id=org.petero.texelchessengine&amp;hl=en\"><img alt=\"\" src=\"/images/2/2d/Texel105.jpg\" width=\"253\" height=\"450\" class=\"thumbimage\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Texel105.jpg\" class=\"internal\" title=\"Enlarge\"></a></div>Texel 1.05 for <a href=\"/Android\" title=\"Android\">Android</a> <sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup></div></div></div> \n<p>Texel <b>1.05</b>, released in January 2015, is about 57 elo stronger than Texel 1.04 on Peter's Linux computer at very fast time controls. The most notable changes are support for <a href=\"/Gaviota_Tablebases\" title=\"Gaviota Tablebases\">Gaviota</a> and <a href=\"/Syzygy_Bases\" title=\"Syzygy Bases\">Syzygy tablebases</a> <sup id=\"cite_ref-9\" class=\"reference\"><a href=\"#cite_note-9\">&#91;9&#93;</a></sup>, <a href=\"/Singular_Extensions\" title=\"Singular Extensions\">singular extensions</a> , detection of 16 pawn <a href=\"/Fortress\" title=\"Fortress\">fortress positions</a>. and support for <a href=\"/Thread\" title=\"Thread\">multi-threaded</a> search on <a href=\"/Android\" title=\"Android\">Android</a> devices. Further improvements are due to more aggressive <a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">LMR</a> ,  disabling of <a href=\"/Futility_Pruning#MoveCountBasedPruning\" title=\"Futility Pruning\">LMP</a> in  <a href=\"/Node_Types#PV\" title=\"Node Types\">PV nodes</a> <sup id=\"cite_ref-10\" class=\"reference\"><a href=\"#cite_note-10\">&#91;10&#93;</a></sup>, <a href=\"/Check_Extensions\" title=\"Check Extensions\">check extensions</a> for negative <a href=\"/Static_Exchange_Evaluation\" title=\"Static Exchange Evaluation\">SEE</a> moves only if the remaining depth is small, and <a href=\"/Connectivity\" title=\"Connectivity\">bonus for pieces protected by pawns</a> <sup id=\"cite_ref-11\" class=\"reference\"><a href=\"#cite_note-11\">&#91;11&#93;</a></sup>.\n<span id=\"1.06\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Texel_1.06\">Texel 1.06</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Texel&amp;action=edit&amp;section=8\" title=\"Edit section: Texel 1.06\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Texel 1.06 was released in July 2016, and supports <a href=\"/PolyGlot\" title=\"PolyGlot\">polyglot</a> <a href=\"/Opening_Book\" title=\"Opening Book\">opening books</a>, and comes with many <a href=\"/Search\" title=\"Search\">search</a> and <a href=\"/Evaluation\" title=\"Evaluation\">evaluation</a> improvements, beside others, more aggressive <a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">LMR</a> and <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">null move pruning</a>, maximum number of search <a href=\"/Thread\" title=\"Thread\">threads</a> up to 512, support for <a href=\"/Windows\" title=\"Windows\">Windows</a> <a href=\"/NUMA\" title=\"NUMA\">NUMA</a> systems having more than 64 cores, a small (512KB) per-thread <a href=\"/Evaluation_Hash_Table\" title=\"Evaluation Hash Table\">evaluation hash table</a>, and a 4-way <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Set-associative#Associativity\">set associative</a> <a href=\"/Transposition_Table\" title=\"Transposition Table\">transposition table</a>. Texel 1.06 is around 40-50 elo stronger than Texel 1.05 in self play at very fast time controls <sup id=\"cite_ref-12\" class=\"reference\"><a href=\"#cite_note-12\">&#91;12&#93;</a></sup>.\n<span id=\"1.07\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Texel_1.07\">Texel 1.07</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Texel&amp;action=edit&amp;section=9\" title=\"Edit section: Texel 1.07\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>On September 30, 2017, Texel 1.07 came with  a new <a href=\"/Parallel_Search\" title=\"Parallel Search\">parallel search</a> based on <a href=\"/Lazy_SMP\" title=\"Lazy SMP\">Lazy SMP</a> <sup id=\"cite_ref-13\" class=\"reference\"><a href=\"#cite_note-13\">&#91;13&#93;</a></sup> and <a href=\"/ABDADA\" title=\"ABDADA\">ABDADA</a> <sup id=\"cite_ref-14\" class=\"reference\"><a href=\"#cite_note-14\">&#91;14&#93;</a></sup> able to use <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Computer_cluster\">computer clusters</a>, and further supports <a href=\"/Memory#HugePages\" title=\"Memory\">large pages</a> in <a href=\"/Windows\" title=\"Windows\">Windows</a> <sup id=\"cite_ref-15\" class=\"reference\"><a href=\"#cite_note-15\">&#91;15&#93;</a></sup>.\n</p>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Texel&amp;action=edit&amp;section=10\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/CuckooChess\" title=\"CuckooChess\">CuckooChess</a></li>\n<li> <a href=\"/Category:Geography\" title=\"Category:Geography\">Geography</a></li>\n<li> <a href=\"/Lazy_SMP#LazyCluster\" title=\"Lazy SMP\">Lazy SMP - Lazy Cluster</a></li>\n<li> <a href=\"/Category:Mammal\" title=\"Category:Mammal\">Mammal</a></li>\n<li> <a href=\"/Texel%27s_Tuning_Method\" title=\"Texel&#39;s Tuning Method\">Texel's Tuning Method</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Texel&amp;action=edit&amp;section=11\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"2012_...\">2012 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Texel&amp;action=edit&amp;section=12\" title=\"Edit section: 2012 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=42999\">New chess engine: Texel</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 24, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=43134\">Elo versus speed</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 02, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=44167\">Texel recipe to fix TT draws scores</a> by <a href=\"/Marco_Costalba\" title=\"Marco Costalba\">Marco Costalba</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 23, 2012&#160;» <a href=\"/Path-Dependency\" title=\"Path-Dependency\">Path-Dependency</a>, <a href=\"/Fifty-move_Rule\" title=\"Fifty-move Rule\">Fifty-move Rule</a></li></ul>\n<p><b>2013</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48228\">Texel 1.02</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 08, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48272\">Texel 1.02: First Impressions</a> by <a href=\"/index.php?title=Michael_Scheidl&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Michael Scheidl (page does not exist)\">Mike Scheidl</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 14, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48752\">Recursive DTS-like search algorithm</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 24, 2013&#160;» <a href=\"/Parallel_Search\" title=\"Parallel Search\">Parallel Search</a>, <a href=\"/Recursion\" title=\"Recursion\">Recursion</a></li></ul>\n<p><b>2014</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=50964\">Texel 1.03</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 19, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=50984\">Texel 1.03 gives good initial impression</a> by <a href=\"/index.php?title=Michael_Scheidl&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Michael Scheidl (page does not exist)\">Mike Scheidl</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 21, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=555522&amp;t=50823\">The texel evaluation function optimization algorithm</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 31, 2014&#160;» <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">Automated Tuning</a>, <a href=\"/Texel%27s_Tuning_Method\" title=\"Texel&#39;s Tuning Method\">Texel's Tuning Method</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=52470\">Texel 1.04</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 29, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=54761\">LMP in PV nodes</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 27, 2014&#160;»  <a href=\"/Futility_Pruning#MoveCountBasedPruning\" title=\"Futility Pruning\">Move Count Based Pruning</a> (LMP), <a href=\"/Node_Types#PV\" title=\"Node Types\">PV-Node</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2015_...\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Texel&amp;action=edit&amp;section=13\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=55058\">Texel 1.05</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 24, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=56372\">History heuristic and fixed depth search</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 16, 2015&#160;» <a href=\"/History_Heuristic\" title=\"History Heuristic\">History Heuristic</a>, <a href=\"/Late_Move_Reduction_Test_Results\" title=\"Late Move Reduction Test Results\">Late Move Reduction Test Results</a></li></ul>\n<p><b>2016</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=60774\">Texel 1.06</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 10, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=60833\">How texel probes endgame tablebases</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 16, 2016&#160;» <a href=\"/Gaviota_Tablebases\" title=\"Gaviota Tablebases\">Gaviota Tablebases</a>, <a href=\"/Syzygy_Bases\" title=\"Syzygy Bases\">Syzygy Bases</a></li></ul>\n<p><b>2017</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63582\">NUMA Texel version</a> by <a href=\"/Dann_Corbit\" title=\"Dann Corbit\">Dann Corbit</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 29, 2017&#160;» <a href=\"/NUMA\" title=\"NUMA\">NUMA</a> </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64096&amp;start=12\">Re: Is AlphaGo approach unsuitable to chess?</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 31, 2017&#160;» <a href=\"/index.php?title=AlphaGo&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"AlphaGo (page does not exist)\">AlphaGo</a>, <a href=\"/Deep_Learning\" title=\"Deep Learning\">Deep Learning</a>, <a href=\"/Giraffe\" title=\"Giraffe\">Giraffe</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64824\">Lazy SMP and \"lazy cluster\" experiments</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 06, 2017&#160;» <a href=\"/Lazy_SMP#LazyCluster\" title=\"Lazy SMP\">Lazy SMP - Lazy Cluster</a></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64824&amp;start=43\">Approximate ABDADA</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 23, 2017&#160;» <a href=\"/ABDADA\" title=\"ABDADA\">ABDADA</a></dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65339\">Texel 1.07</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 30, 2017</li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Texel&amp;action=edit&amp;section=14\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=78913&amp;start=1\">Re: Fast reverse move generation</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 18, 2021&#160;» <a href=\"/Move_Generation#Reverse\" title=\"Move Generation\">Un-Move Generation</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Texel&amp;action=edit&amp;section=15\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Chess_Engine\">Chess Engine</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Texel&amp;action=edit&amp;section=16\" title=\"Edit section: Chess Engine\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://hem.bredband.net/petero2b/javachess/index.html\">CuckooChess - A Java Chess Program - Texel: C++11 port</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://play.google.com/store/apps/details?id=org.petero.texelchessengine&amp;hl=en\">Texel Chess Engine - Android Apps on Google Play</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://kirr.homeunix.org/chess/engines/Jim%20Ablett/TEXEL/\">Index of /chess/engines/Jim Ablett/TEXEL</a> by <a href=\"/Jim_Ablett\" title=\"Jim Ablett\">Jim Ablett</a>, hosted by <a href=\"/Kirill_Kryukov\" title=\"Kirill Kryukov\">Kirill Kryukov</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.computerchess.org.uk/ccrl/404/cgi/compare_engines.cgi?family=Texel&amp;print=Rating+list&amp;print=Results+table&amp;print=LOS+table&amp;print=Ponder+hit+table&amp;print=Eval+difference+table&amp;print=Comopp+gamenum+table&amp;print=Overlap+table&amp;print=Score+with+common+opponents\">Texel</a> in <a href=\"/CCRL\" title=\"CCRL\">CCRL 40/4</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Texel\">Texel</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Texel&amp;action=edit&amp;section=17\" title=\"Edit section: Texel\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Texel\">Texel from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://nl.wikipedia.org/wiki/Texel\">Texel - Wikipedia.nl</a> (Dutch)</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Texel_%28disambiguation%29\">Texel (disambiguation) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Texel_%28sheep%29\">Texel (sheep) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Texel_%28graphics%29\">Texel (graphics) from Wikipedia</a></li>\n<li> <a href=\"/Category:Focus\" title=\"Category:Focus\">Focus</a> - Texel <a rel=\"nofollow\" class=\"external text\" href=\"https://nl.wikipedia.org/wiki/Sarasani_(Texel)\">Sarasani Festival</a> 1971, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/qZzJNWgY58I?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Texel&amp;action=edit&amp;section=18\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap mw-references-columns\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/File:Beach_Texel_Netherlands.jpg\">Beach on the island of Texel</a> by <a rel=\"nofollow\" class=\"external text\" href=\"http://commons.wikimedia.org/wiki/User:Jpda\">Jean-Pierre Dagneaux</a>, October 13, 2013, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Texel\">Texel from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=42999\">New chess engine: Texel</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 24, 2012</span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48228\">Texel 1.02</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 08, 2013</span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=50964\">Texel 1.03</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 19, 2014</span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=555522&amp;t=50823\">The texel evaluation function optimization algorithm</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 31, 2014</span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48752\">Recursive DTS-like search algorithm</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 24, 2013</span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=52470\">Texel 1.04</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 29, 2014</span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://play.google.com/store/apps/details?id=org.petero.texelchessengine&amp;hl=en\">Texel Chess Engine - Android Apps on Google Play</a></span>\n</li>\n<li id=\"cite_note-9\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-9\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=60833\">How texel probes endgame tablebases</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 16, 2016</span>\n</li>\n<li id=\"cite_note-10\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-10\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=54761\">LMP in PV nodes</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 27, 2014</span>\n</li>\n<li id=\"cite_note-11\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-11\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=55058\">Texel 1.05</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 24, 2015</span>\n</li>\n<li id=\"cite_note-12\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-12\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=60774\">Texel 1.06</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 10, 2016</span>\n</li>\n<li id=\"cite_note-13\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-13\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=726656&amp;t=64824\">Lazy SMP and \"lazy cluster\" experiments</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 06, 2017</span>\n</li>\n<li id=\"cite_note-14\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-14\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=728817&amp;t=64824\">Approximate ABDADA</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 23, 2017</span>\n</li>\n<li id=\"cite_note-15\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-15\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65339\">Texel 1.07</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 30, 2017</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Engines\" title=\"Engines\">Up one level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301134023\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.096 seconds\nReal time usage: 0.635 seconds\nPreprocessor visited node count: 297/1000000\nPreprocessor generated node count: 620/1000000\nPost‐expand include size: 27/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:3943-0!canonical and timestamp 20260301134022 and revision id 26146\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Open_Source"
+      },
+      {
+        "sortkey": "",
+        "*": "GPL"
+      },
+      {
+        "sortkey": "",
+        "*": "UCI"
+      },
+      {
+        "sortkey": "",
+        "*": "X86"
+      },
+      {
+        "sortkey": "",
+        "*": "X64"
+      },
+      {
+        "sortkey": "",
+        "*": "PC"
+      },
+      {
+        "sortkey": "",
+        "missing": "",
+        "*": "ARM"
+      },
+      {
+        "sortkey": "",
+        "*": "Pi"
+      },
+      {
+        "sortkey": "",
+        "*": "Android"
+      },
+      {
+        "sortkey": "",
+        "*": "Linux"
+      },
+      {
+        "sortkey": "",
+        "*": "Windows"
+      },
+      {
+        "sortkey": "",
+        "*": "Mac"
+      },
+      {
+        "sortkey": "",
+        "*": "Geography"
+      },
+      {
+        "sortkey": "",
+        "*": "Mammal"
+      },
+      {
+        "sortkey": "",
+        "*": "Focus"
+      },
+      {
+        "sortkey": "",
+        "*": "Lighthouse"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ABDADA"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Android"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aspiration Windows"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Automated Tuning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Botvinnik-Markoff Extension"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCRL"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Check Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Connectivity"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cpp"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CuckooChess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dann Corbit"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Deep Learning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dynamic Tree Splitting"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engines"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation Hash Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fail-High"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fail-Low"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fifty-move Rule"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fortress"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Free Software Foundation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Futility Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gaviota Tablebases"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Giraffe"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "History Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iterative Deepening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Java"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jim Ablett"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kirill Kryukov"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Late Move Reduction Test Results"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Late Move Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lazy SMP"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "MVV-LVA"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Magic Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marco Costalba"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Memory"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Generation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "NUMA"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "NegaScout"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Node Types"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Opening Book"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Parallel Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Passed Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Path-Dependency"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Race"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter Österlund"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "PolyGlot"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Population Count"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiescence Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Recursion"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Reverse Futility Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Root"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SSE4"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Singular Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Static Exchange Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Syzygy Bases"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Texel's Tuning Method"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Thread"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "UCI"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Windows"
+      },
+      {
+        "ns": 0,
+        "*": "Michael Scheidl"
+      },
+      {
+        "ns": 0,
+        "*": "AlphaGo"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Focus"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Geography"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Mammal"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Open Source"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Version History",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Texel",
+        "byteoffset": 1626,
+        "anchor": "Version_History"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Texel 1.00",
+        "number": "1.1",
+        "index": "2",
+        "fromtitle": "Texel",
+        "byteoffset": 1644,
+        "anchor": "Texel_1.00"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Texel 1.01",
+        "number": "1.2",
+        "index": "3",
+        "fromtitle": "Texel",
+        "byteoffset": 2065,
+        "anchor": "Texel_1.01"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Texel 1.02",
+        "number": "1.3",
+        "index": "4",
+        "fromtitle": "Texel",
+        "byteoffset": 2502,
+        "anchor": "Texel_1.02"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Texel 1.03",
+        "number": "1.4",
+        "index": "5",
+        "fromtitle": "Texel",
+        "byteoffset": 3205,
+        "anchor": "Texel_1.03"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Texel 1.04",
+        "number": "1.5",
+        "index": "6",
+        "fromtitle": "Texel",
+        "byteoffset": 4390,
+        "anchor": "Texel_1.04"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Texel 1.05",
+        "number": "1.6",
+        "index": "7",
+        "fromtitle": "Texel",
+        "byteoffset": 4757,
+        "anchor": "Texel_1.05"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Texel 1.06",
+        "number": "1.7",
+        "index": "8",
+        "fromtitle": "Texel",
+        "byteoffset": 6287,
+        "anchor": "Texel_1.06"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Texel 1.07",
+        "number": "1.8",
+        "index": "9",
+        "fromtitle": "Texel",
+        "byteoffset": 7173,
+        "anchor": "Texel_1.07"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "2",
+        "index": "10",
+        "fromtitle": "Texel",
+        "byteoffset": 7929,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "3",
+        "index": "11",
+        "fromtitle": "Texel",
+        "byteoffset": 8104,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2012 ...",
+        "number": "3.1",
+        "index": "12",
+        "fromtitle": "Texel",
+        "byteoffset": 8118,
+        "anchor": "2012_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "3.2",
+        "index": "13",
+        "fromtitle": "Texel",
+        "byteoffset": 9884,
+        "anchor": "2015_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "3.3",
+        "index": "14",
+        "fromtitle": "Texel",
+        "byteoffset": 11340,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "4",
+        "index": "15",
+        "fromtitle": "Texel",
+        "byteoffset": 11558,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Chess Engine",
+        "number": "4.1",
+        "index": "16",
+        "fromtitle": "Texel",
+        "byteoffset": 11575,
+        "anchor": "Chess_Engine"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Texel",
+        "number": "4.2",
+        "index": "17",
+        "fromtitle": "Texel",
+        "byteoffset": 12286,
+        "anchor": "Texel"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "5",
+        "index": "18",
+        "fromtitle": "Texel",
+        "byteoffset": 12942,
+        "anchor": "References"
+      }
+    ]
+  }
+}

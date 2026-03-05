@@ -1,0 +1,458 @@
+{
+  "parse": {
+    "title": "KPK",
+    "pageid": 1559,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Evaluation\" title=\"Evaluation\">Evaluation</a> * <a href=\"/Game_Phases\" title=\"Game Phases\">Game Phases</a> * <a href=\"/Endgame\" title=\"Endgame\">Endgame</a> * <a href=\"/Pawn_Endgame\" title=\"Pawn Endgame\">Pawn Endgame</a> * KPK</b>\n</p><p>A very common pattern in chess games is to be up exactly one <a href=\"/Pawn\" title=\"Pawn\">pawn</a> and then try to trade down to a won KP vs K endgame. So this is a very fundamental ending that good chess programs should understand.\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Bitbase\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Bitbase</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Perfect_Heuristics\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Perfect Heuristics</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Imperfect_Heuristics\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Imperfect Heuristics</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#KPK_is_drawn\"><span class=\"tocnumber\">3.1</span> <span class=\"toctext\">KPK is drawn</span></a></li>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#KPK_is_won\"><span class=\"tocnumber\">3.2</span> <span class=\"toctext\">KPK is won</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#See_also\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#Selected_Publications\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Selected Publications</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#1970_...\"><span class=\"tocnumber\">5.1</span> <span class=\"toctext\">1970 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#1980_...\"><span class=\"tocnumber\">5.2</span> <span class=\"toctext\">1980 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#1990_...\"><span class=\"tocnumber\">5.3</span> <span class=\"toctext\">1990 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-11\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-12\"><a href=\"#2005_...\"><span class=\"tocnumber\">6.1</span> <span class=\"toctext\">2005 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-13\"><a href=\"#2010_...\"><span class=\"tocnumber\">6.2</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-14\"><a href=\"#2015_...\"><span class=\"tocnumber\">6.3</span> <span class=\"toctext\">2015 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-15\"><a href=\"#2020_...\"><span class=\"tocnumber\">6.4</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-16\"><a href=\"#External_Links\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-17\"><a href=\"#References\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Bitbase\">Bitbase</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=KPK&amp;action=edit&amp;section=1\" title=\"Edit section: Bitbase\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Since only 3 pieces are involved, it can be handled easily by a 12 KByte per side, pre-calculated <a href=\"/Endgame_Bitbases\" title=\"Endgame Bitbases\">bit table</a> that returns the status of this ending from any of the 64*64*4*6 = 98304 distinct configurations for the pawn on one wing. It is always a win or <a href=\"/Draw\" title=\"Draw\">draw</a> for the side with the pawn. Boolean win or not information requires some distance heuristics though to ensure progress.\n</p>\n<h1><span class=\"mw-headline\" id=\"Perfect_Heuristics\">Perfect Heuristics</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=KPK&amp;action=edit&amp;section=2\" title=\"Edit section: Perfect Heuristics\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>This ending can also be determined perfectly with a set of heuristics <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup>.\n</p>\n<h1><span class=\"mw-headline\" id=\"Imperfect_Heuristics\">Imperfect Heuristics</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=KPK&amp;action=edit&amp;section=3\" title=\"Edit section: Imperfect Heuristics\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>There is also an imperfect solution that yields reasonably good results - using <a href=\"/Interior_Node_Recognizer\" title=\"Interior Node Recognizer\">interior node recognizers</a> detecting positions that are obviously won or drawn, but leaving \"unclear\" positions to evaluation and/or further <a href=\"/Search\" title=\"Search\">search</a>. An example of such a set of heuristics is given below:\n</p>\n<h2><span class=\"mw-headline\" id=\"KPK_is_drawn\">KPK is drawn</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=KPK&amp;action=edit&amp;section=4\" title=\"Edit section: KPK is drawn\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> In the case that the pawn can be immediately captured, might be delegated to the <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">quiescence search</a></li>\n<li> Defending king stands directly in front of the pawn, the other king - directly behind it, weaker side to move</li>\n<li> Defending king as above, the other king diagonally behind the pawn, stronger side to move</li>\n<li> Kings stand in the vertical <a href=\"/Opposition\" title=\"Opposition\">opposition</a> and the pawn is on the right/left side of the king of the stronger side, which is about to move</li>\n<li> In the above position the stronger side moves a pawn, giving check</li>\n<li> Assuming the squares are numbered 0..63, H1 being 0, the following code marks positions as drawn:</li></ul>\n<pre>\n// a feeble attempt at using corresponding squares\nif ( isPiece(WHITE,KING, pawn_sq-7) || isPiece(WHITE,KING, pawn_sq-8) || isPiece(WHITE,KING, pawn_sq-9) ) {\n   if ( isPiece(BLACK,KING, pawn_sq+15) || isPiece(BLACK,KING, pawn_sq+16) || isPiece(BLACK,KING, pawn_sq+17) ) {\n     if (to_move == WHITE &amp;&amp; ROW(blackKingLoc)&#160;!= ROW_8 ) return DRAW;\n   }\n}\n</pre>\n<p>Please note that the code <b>must</b> exclude positions where the defending king is on the last rank. Additionally there are drawn rook pawn cases where the defender prevents the king on the pawn's <a href=\"/Pawn_Spans\" title=\"Pawn Spans\">frontspan</a> from leaving the rook file.\n</p>\n<h2><span class=\"mw-headline\" id=\"KPK_is_won\">KPK is won</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=KPK&amp;action=edit&amp;section=5\" title=\"Edit section: KPK is won\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> Stronger king defends <b>all</b> <a href=\"/Stop_Square\" title=\"Stop Square\">stop</a> and <a href=\"/Pawn_Spans#StopandDistantStop\" title=\"Pawn Spans\">telestop(s)</a>, including the <a href=\"/Promotion_Square\" title=\"Promotion Square\">promotion square</a> up to three squares. With defender to move, one has to consider whether the pawn can be captured, since defended stop square does not necessarily imply the pawn is defended as well. Additionally, there is a <a href=\"/Stalemate\" title=\"Stalemate\">stalemate</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Key_square#An_exception\">exception</a> with the knight pawn.</li>\n<li> Defending king is (leaves after moving) outside the <a href=\"/Rule_of_the_Square#TheSquareofthePawn\" title=\"Rule of the Square\">square of the pawn</a> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup></li></ul>\n<dl><dd> if the own king blocks the <a href=\"/Pawn_Spans\" title=\"Pawn Spans\">frontspan</a>, it is still won. However the defending king may further reach the \"square of the pawn\" due to the extra <a href=\"/Tempo\" title=\"Tempo\">tempo</a> and one needs to apply some more rules to avoid knowledge holes in that cases.</dd></dl>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=KPK&amp;action=edit&amp;section=6\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Endgame_Tablebases\" title=\"Endgame Tablebases\">Endgame Tablebases</a></li>\n<li> <a href=\"/Retrograde_Analysis\" title=\"Retrograde Analysis\">Retrograde Analysis</a></li>\n<li> <a href=\"/Unstoppable_Passer\" title=\"Unstoppable Passer\">Unstoppable Passer</a></li></ul>\n<p><span id=\"SelectedPublications\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Selected_Publications\">Selected Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=KPK&amp;action=edit&amp;section=7\" title=\"Edit section: Selected Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1970_...\">1970 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=KPK&amp;action=edit&amp;section=8\" title=\"Edit section: 1970 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Soei_Tan\" title=\"Soei Tan\">Soei Tan</a> (<b>1972</b>). <i>Representation of knowledge for very simple pawn endings in chess</i>. Report MIP-R-98; School of Artificial Intelligence, <a href=\"/University_of_Edinburgh\" title=\"University of Edinburgh\">University of Edinburgh</a></li>\n<li> <a href=\"/Max_Bramer\" title=\"Max Bramer\">Max Bramer</a> (<b>1977</b>) <i>KPK: using effective distance.</i> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Open_University\">Open University</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Milton_Keynes\">Milton Keynes</a></li>\n<li> <a href=\"/Max_Bramer\" title=\"Max Bramer\">Max Bramer</a> (<b>1977</b>). <i>KPK: Some Quantitative Data.</i> Technical Report, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Open_University\">Open University</a>, Faculty of Mathematics.</li>\n<li> <a href=\"/Mike_Clarke\" title=\"Mike Clarke\">Mike Clarke</a> (<b>1977</b>). <i>A quantitative study of KPK</i>. <a href=\"/Advances_in_Computer_Chess_1\" title=\"Advances in Computer Chess 1\">Advances in Computer Chess 1</a>, pp. 108-118</li>\n<li> <a href=\"/index.php?title=Pericles_Negri&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Pericles Negri (page does not exist)\">Pericles Negri</a> (<b>1977</b>). <i>Inductive Learning in a Hierarchical Model for Representing Knowledge in Chess End Games</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.mli.gmu.edu/papers/69-78/77-2.pdf\">pdf</a></li>\n<li> <a href=\"/Ryszard_Michalski\" title=\"Ryszard Michalski\">Ryszard Michalski</a>, <a href=\"/index.php?title=Pericles_Negri&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Pericles Negri (page does not exist)\">Pericles Negri</a> (<b>1977</b>). <i>An experiment on inductive learning in chess endgames</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.doc.ic.ac.uk/~shm/MI/mi8.html\">Machine Intelligence 8</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.mli.gmu.edu/papers/69-78/77-1.pdf\">pdf</a></li>\n<li> <a href=\"/Max_Bramer\" title=\"Max Bramer\">Max Bramer</a> (<b>1978</b>). <i>A Note on KPK.</i> Technical Report, the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Open_University\">Open University</a>: Faculty of Mathematics, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Milton_Keynes\">Milton Keynes</a>, England.</li></ul>\n<h2><span class=\"mw-headline\" id=\"1980_...\">1980 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=KPK&amp;action=edit&amp;section=9\" title=\"Edit section: 1980 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Don_Beal\" title=\"Don Beal\">Don Beal</a>, <a href=\"/Mike_Clarke\" title=\"Mike Clarke\">Mike Clarke</a> (<b>1980</b>). <i>The Construction of Economical and Correct Algorithms for King and Pawn against King</i>. <a href=\"/Advances_in_Computer_Chess_2\" title=\"Advances in Computer Chess 2\">Advances in Computer Chess 2</a></li>\n<li> <a href=\"/Max_Bramer\" title=\"Max Bramer\">Max Bramer</a> (<b>1980</b>). <i>An Optimal Algorithm for KPK using Pattern Knowledge.</i> <a href=\"/Advances_in_Computer_Chess_2\" title=\"Advances in Computer Chess 2\">Advances in Computer Chess 2</a></li>\n<li> <a href=\"/Alen_Shapiro\" title=\"Alen Shapiro\">Alen Shapiro</a>, <a href=\"/Tim_Niblett\" title=\"Tim Niblett\">Tim Niblett</a> (<b>1982</b>). <i>Automatic Induction of Classification Rules for Chess End game.</i> <a href=\"/Advances_in_Computer_Chess_3\" title=\"Advances in Computer Chess 3\">Advances in Computer Chess 3</a></li>\n<li> <a href=\"/David_Slate\" title=\"David Slate\">David Slate</a> (<b>1984</b>). <i>Interior-node Score Bounds in a Brute-force Chess Program.</i> <a href=\"/ICGA_Journal#7_4\" title=\"ICGA Journal\">ICCA Journal, Vol. 7, No. 4</a></li>\n<li> <a href=\"/Ard_van_Bergen\" title=\"Ard van Bergen\">Ard van Bergen</a> (<b>1985</b>). <i>An Ulti-Mate Look at the KPK Data Base</i>. <a href=\"/ICGA_Journal#8_4\" title=\"ICGA Journal\">ICCA Journal, Vol. 8, No. 4</a></li>\n<li> <a href=\"/Ard_van_Bergen\" title=\"Ard van Bergen\">Ard van Bergen</a>, <a href=\"/Theo_van_der_Storm\" title=\"Theo van der Storm\">Theo van der Storm</a> (<b>1986</b>). <i>The KPK Endgame: a Unit Correction</i>. <a href=\"/ICGA_Journal#9_1\" title=\"ICGA Journal\">ICCA Journal, Vol. 9, No. 1</a></li>\n<li> <a href=\"/Max_Bramer\" title=\"Max Bramer\">Max Bramer</a> (<b>1986</b>). <i>KPK Endgame Databases: a Response From the Source.</i> <a href=\"/ICGA_Journal#9_3\" title=\"ICGA Journal\">ICCA Journal, Vol. 9, No. 3</a></li>\n<li> <a href=\"/Hans_Zellner\" title=\"Hans Zellner\">Hans Zellner</a> (<b>1989</b>). <i>The KPK Database Revisited</i>. <a href=\"/ICGA_Journal#12_2\" title=\"ICGA Journal\">ICCA Journal, Vol. 12, No. 2</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1990_...\">1990 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=KPK&amp;action=edit&amp;section=10\" title=\"Edit section: 1990 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Guy_Haworth\" title=\"Guy Haworth\">Guy Haworth</a>, <a href=\"/Meel_Velliste\" title=\"Meel Velliste\">Meel Velliste</a> (<b>1998</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://centaur.reading.ac.uk/4569/\">Chess Endgames and Neural Networks</a></i>. <a href=\"/ICGA_Journal#21_4\" title=\"ICGA Journal\">ICCA Journal, Vol. 21, No. 4</a></li>\n<li> <a href=\"/Ulrich_Thiemonds\" title=\"Ulrich Thiemonds\">Ulrich Thiemonds</a> (<b>1999</b>). <i>Ein regelbasiertes Spielprogramm für Schachendspiele</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/University_of_Bonn\">University of Bonn</a>, Diplom thesis,  <a rel=\"nofollow\" class=\"external text\" href=\"https://www.idb.uni-bonn.de/publications/da/da_thiemonds_1999.pdf\">pdf</a> (German) </li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=KPK&amp;action=edit&amp;section=11\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"2005_...\">2005 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=KPK&amp;action=edit&amp;section=12\" title=\"Edit section: 2005 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=14578\">Is this rule safe (how has K&amp;Ps vs K&amp;Ps databases? ...)</a> by <a href=\"/Mark_Lefler\" title=\"Mark Lefler\">Mark Lefler</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 20, 2007&#160;» <a href=\"/Now\" title=\"Now\">Now</a>, <a href=\"/Pawn_Endgame\" title=\"Pawn Endgame\">Pawn Endgame</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=KPK&amp;action=edit&amp;section=13\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=46651\">KPK</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 30, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=46893\">KPK bitbase</a> by <a href=\"/index.php?title=Maarten_Bults&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Maarten Bults (page does not exist)\">Maarten Bults</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 16, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=47557\">How to implement KPK&#160;?</a> by <a href=\"/Rasjid_Chan\" title=\"Rasjid Chan\">Rasjid Chan</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 21, 2013 </li></ul>\n<h2><span class=\"mw-headline\" id=\"2015_...\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=KPK&amp;action=edit&amp;section=14\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=57517\">Yet another KPK endgame table generator: pfkpk</a> by <a href=\"/Marcel_van_Kervinck\" title=\"Marcel van Kervinck\">Marcel van Kervinck</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 05, 2015&#160;» <a href=\"/Endgame_Bitbases\" title=\"Endgame Bitbases\">Endgame Bitbases</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=59928\">Test position that requires KKP evaluation</a> by <a href=\"/Shawn_Chidester\" title=\"Shawn Chidester\">Shawn Chidester</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 22, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=60151\">kpk bitbase, worthless?</a> by <a href=\"/Alexandru_Mosoi\" title=\"Alexandru Mosoi\">Alexandru Mosoi</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 12, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=70815\">Eucalyptus - KPK Bitbases Generator</a> by <a href=\"/Toni_Helminen\" title=\"Toni Helminen\">Toni Helminen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 24, 2019</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=70942\">The Poor Man's KP Bitbase</a> by <a href=\"/Dennis_Sceviour\" title=\"Dennis Sceviour\">Dennis Sceviour</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 07, 2019</li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=KPK&amp;action=edit&amp;section=15\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=77499\">Syzygy bases from memory</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 16, 2021&#160;» <a href=\"/Syzygy_Bases\" title=\"Syzygy Bases\">Syzygy Bases</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=KPK&amp;action=edit&amp;section=16\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/King_and_pawn_versus_king_endgame\">King and pawn versus king endgame from Wikipedia</a></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Key_square\">Key square from Wikipedia</a></dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/kervinck/pfkpk\">kervinck/pfkpk · GitHub</a>&#160;» <a class=\"mw-selflink selflink\">KPK</a> <a href=\"/Endgame_Bitbases\" title=\"Endgame Bitbases\">Bitbase</a> by <a href=\"/Marcel_van_Kervinck\" title=\"Marcel van Kervinck\">Marcel van Kervinck</a> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=KPK&amp;action=edit&amp;section=17\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a href=\"/Max_Bramer\" title=\"Max Bramer\">Max Bramer</a> (<b>1977</b>) <i>KPK: using effective distance.</i> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Open_University\">Open University</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Milton_Keynes\">Milton Keynes</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a href=\"/King_Pattern#SetwiseRuleoftheSquare\" title=\"King Pattern\">Set-wise Rule of the Square</a> with <a href=\"/Bitboards\" title=\"Bitboards\">Bitboards</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/kervinck/pfkpk\">kervinck/pfkpk · GitHub</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=57517\">Yet another KPK endgame table generator: pfkpk</a> by <a href=\"/Marcel_van_Kervinck\" title=\"Marcel van Kervinck\">Marcel van Kervinck</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 05, 2015</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Pawn_Endgame\" title=\"Pawn Endgame\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301113211\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.014 seconds\nReal time usage: 0.015 seconds\nPreprocessor visited node count: 137/1000000\nPreprocessor generated node count: 240/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1559-0!canonical and timestamp 20260301113211 and revision id 25329\n -->\n"
+    },
+    "categories": [],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 1"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 2"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 3"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alen Shapiro"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alexandru Mosoi"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ard van Bergen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David Slate"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dennis Sceviour"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Don Beal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Draw"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ed Schroder"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Endgame"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Endgame Bitbases"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Endgame Tablebases"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Game Phases"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Guy Haworth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hans Zellner"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA Journal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Interior Node Recognizer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "King Pattern"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marcel van Kervinck"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mark Lefler"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Max Bramer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Meel Velliste"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mike Clarke"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Now"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Opposition"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Endgame"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Spans"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Promotion Square"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiescence Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rasjid Chan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Retrograde Analysis"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rule of the Square"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ryszard Michalski"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Shawn Chidester"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Soei Tan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stalemate"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stop Square"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Syzygy Bases"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tempo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Theo van der Storm"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tim Niblett"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Toni Helminen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ulrich Thiemonds"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "University of Edinburgh"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Unstoppable Passer"
+      },
+      {
+        "ns": 0,
+        "*": "Pericles Negri"
+      },
+      {
+        "ns": 0,
+        "*": "Maarten Bults"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Bitbase",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "KPK",
+        "byteoffset": 310,
+        "anchor": "Bitbase"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Perfect Heuristics",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "KPK",
+        "byteoffset": 730,
+        "anchor": "Perfect_Heuristics"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Imperfect Heuristics",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "KPK",
+        "byteoffset": 1023,
+        "anchor": "Imperfect_Heuristics"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "KPK is drawn",
+        "number": "3.1",
+        "index": "4",
+        "fromtitle": "KPK",
+        "byteoffset": 1371,
+        "anchor": "KPK_is_drawn"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "KPK is won",
+        "number": "3.2",
+        "index": "5",
+        "fromtitle": "KPK",
+        "byteoffset": 2652,
+        "anchor": "KPK_is_won"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "4",
+        "index": "6",
+        "fromtitle": "KPK",
+        "byteoffset": 3612,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Selected Publications",
+        "number": "5",
+        "index": "7",
+        "fromtitle": "KPK",
+        "byteoffset": 3739,
+        "anchor": "Selected_Publications"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1970 ...",
+        "number": "5.1",
+        "index": "8",
+        "fromtitle": "KPK",
+        "byteoffset": 3764,
+        "anchor": "1970_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1980 ...",
+        "number": "5.2",
+        "index": "9",
+        "fromtitle": "KPK",
+        "byteoffset": 5075,
+        "anchor": "1980_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1990 ...",
+        "number": "5.3",
+        "index": "10",
+        "fromtitle": "KPK",
+        "byteoffset": 6201,
+        "anchor": "1990_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "6",
+        "index": "11",
+        "fromtitle": "KPK",
+        "byteoffset": 6658,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2005 ...",
+        "number": "6.1",
+        "index": "12",
+        "fromtitle": "KPK",
+        "byteoffset": 6672,
+        "anchor": "2005_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "6.2",
+        "index": "13",
+        "fromtitle": "KPK",
+        "byteoffset": 6869,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "6.3",
+        "index": "14",
+        "fromtitle": "KPK",
+        "byteoffset": 7244,
+        "anchor": "2015_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "6.4",
+        "index": "15",
+        "fromtitle": "KPK",
+        "byteoffset": 8063,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "7",
+        "index": "16",
+        "fromtitle": "KPK",
+        "byteoffset": 8238,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "8",
+        "index": "17",
+        "fromtitle": "KPK",
+        "byteoffset": 8742,
+        "anchor": "References"
+      }
+    ]
+  }
+}

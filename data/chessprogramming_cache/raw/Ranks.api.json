@@ -1,0 +1,185 @@
+{
+  "parse": {
+    "title": "Ranks",
+    "pageid": 1188,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Chess\" title=\"Chess\">Chess</a> * Ranks</b>\n</p><p><b>Ranks</b> are the eight horizontal lines or rows of a <a href=\"/Chessboard\" title=\"Chessboard\">Chessboard</a>, labeled from '1' to '8'. Each rank contains eight horizontally arranged <a href=\"/Squares\" title=\"Squares\">Squares</a> of alternating white and black, or light and dark <a href=\"/Color\" title=\"Color\">Color</a>. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Back_Ranks\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Back Ranks</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Square_Mapping_Notes\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Square Mapping Notes</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Square_Difference\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Square Difference</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Enumeration\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Enumeration</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#Rank_from_Square\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Rank from Square</span></a></li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#Rank-Distance\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Rank-Distance</span></a></li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#Two_Squares_on_a_Rank\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">Two Squares on a Rank</span></a></li>\n<li class=\"toclevel-1 tocsection-8\"><a href=\"#See_also\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-9\"><a href=\"#References\"><span class=\"tocnumber\">9</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Back_Ranks\">Back Ranks</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Ranks&amp;action=edit&amp;section=1\" title=\"Edit section: Back Ranks\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>The First Rank is White's back rank, while the Eights Rank is Black's back rank.\n</p>\n<table class=\"fentt\" style=\"font-size:24pt\"><tr><td>&#160;</td><td class=\"cols\">abcdefgh</td><td>&#160;</td></tr><tr><td class=\"rows\">8<br/>7<br/>6<br/>5<br/>4<br/>3<br/>2<br/>1<br/></td><td class=\"board\" style=\"width: 8em;\"><div class=\"board\"><div class=\"sq\"><span class=\"parens\">    </span><br/>    <br/>    <br/>    <br/>    <br/>    <br/>    <br/><span class=\"parens\">    </span><br/></div><div class=\"pcbg\">        <br/>        <br/>        <br/>        <br/>        <br/>        <br/>        <br/>        <br/></div><div class=\"pcfg\">••••••••<br/>        <br/>        <br/>        <br/>        <br/>        <br/>        <br/>••••••••<br/></div></div></td><td class=\"rows\">8<br/>7<br/>6<br/>5<br/>4<br/>3<br/>2<br/>1<br/></td></tr><tr><td>&#160;</td><td class=\"cols\">abcdefgh</td><td>&#160;</td></tr></table>\n<h1><span class=\"mw-headline\" id=\"Square_Mapping_Notes\">Square Mapping Notes</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Ranks&amp;action=edit&amp;section=2\" title=\"Edit section: Square Mapping Notes\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Whether the square difference of neighbored squares on a rank or <a href=\"/Files\" title=\"Files\">file</a> is either 1 or 8, depends on the square mapping. We further rely on <a href=\"/Square_Mapping_Considerations#LittleEndianRankFileMapping\" title=\"Square Mapping Considerations\">little-endian rank-file mapping</a>, which keeps consecutive <a href=\"/Squares\" title=\"Squares\">squares</a> of a rank as neighbored elements in Memory (or register).\n</p>\n<h1><span class=\"mw-headline\" id=\"Square_Difference\">Square Difference</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Ranks&amp;action=edit&amp;section=3\" title=\"Edit section: Square Difference\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Within a 0..63 square index range and the mentioned <a href=\"/Square_Mapping_Considerations#LittleEndianRankFileMapping\" title=\"Square Mapping Considerations\">square mapping</a> (a1 = 0), the difference of two neighbored squares on a Rank is <b>one</b>.\n</p>\n<h1><span class=\"mw-headline\" id=\"Enumeration\">Enumeration</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Ranks&amp;action=edit&amp;section=4\" title=\"Edit section: Enumeration\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>As mentioned, on a <a href=\"/Chessboard\" title=\"Chessboard\">Chessboard</a> the eight ranks are labeled from '1' to '8'. To make them zero based indices as appropriate for <a href=\"/C\" title=\"C\">C</a>-like programming languages, we enumerate ranks from 0 to 7. <a href=\"/Little-endian\" title=\"Little-endian\">Little-endian</a> rank-mapping (as used here) assigns the first Rank to index zero. Three bits are required to enumerate from 0 to 7.\n</p><p>A <a href=\"/Little-endian\" title=\"Little-endian\">little-endian</a> rank-mapping enumeration in <a href=\"/Cpp\" title=\"Cpp\">C++</a> might look like this: \n</p>\n<pre>\nenum enumRank {\n  er1stRank = 0,\n  er2ndRank = 1,\n  er3rdRank = 2,\n  er4thRank = 3,\n  er5thRank = 4,\n  er6thRank = 5,\n  er7thRank = 6,\n  er8thRank = 7,\n};\n</pre>\n<h1><span class=\"mw-headline\" id=\"Rank_from_Square\">Rank from Square</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Ranks&amp;action=edit&amp;section=5\" title=\"Edit section: Rank from Square\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Rank-File mapping of squares keeps the rank index as the three upper bits of a six bit Square index.\n</p>\n<pre>\nrank = square &gt;&gt; 3; // div 8\n</pre>\n<p><span id=\"RankDistance\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Rank-Distance\">Rank-Distance</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Ranks&amp;action=edit&amp;section=6\" title=\"Edit section: Rank-Distance\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>The rank-distance is the <a href=\"/Avoiding_Branches#Abs\" title=\"Avoiding Branches\">absolute</a> difference between two ranks (their 0-7 indices). The maximum rank-distance is 7.\n</p>\n<pre>\nrankDistance = abs (rank1 - rank2);\nrankDistance = abs (rank2 - rank1);\n</pre>\n<p><span id=\"TwoSquares\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Two_Squares_on_a_Rank\">Two Squares on a Rank</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Ranks&amp;action=edit&amp;section=7\" title=\"Edit section: Two Squares on a Rank\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Two <a href=\"/Squares\" title=\"Squares\">Squares</a> are on the same Rank, if their Rank distance is zero. \n</p>\n<pre>\nbool squaresOnSameRank(int sq1, int sq2) {\n return ((sq2 &gt;&gt; 3) - (sq1 &gt;&gt; 3)) == 0;\n}\n</pre>\n<p>The <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Symmetric_difference\">Symmetric difference</a> aka xor is sufficent for the test of the rank bits as well <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup>\n</p>\n<pre>\nbool squaresOnSameRank(int sq1, int sq2) {\n return ((sq1 ^ sq2) &amp; 56) == 0;\n}\n</pre>\n<ul><li> <a href=\"/Files#TwoSquares\" title=\"Files\">Two Squares on a File</a></li>\n<li> <a href=\"/Diagonals#TwoSquares\" title=\"Diagonals\">Two Squares on a Diagonal</a></li>\n<li> <a href=\"/Anti-Diagonals#TwoSquares\" title=\"Anti-Diagonals\">Two Squares on a Anti-Diagonal</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Ranks&amp;action=edit&amp;section=8\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Files\" title=\"Files\">Files</a></li>\n<li> <a href=\"/Diagonals\" title=\"Diagonals\">Diagonals</a></li>\n<li> <a href=\"/Anti-Diagonals\" title=\"Anti-Diagonals\">Anti-Diagonals</a></li>\n<li> <a href=\"/Squares\" title=\"Squares\">Squares</a></li>\n<li> <a href=\"/Intersection_Squares\" title=\"Intersection Squares\">Intersection Squares</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Ranks&amp;action=edit&amp;section=9\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://talkchess.com/forum3/viewtopic.php?f=7&amp;t=74821\">An undetected bug for 10 years</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 18, 2020</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Chess\" title=\"Chess\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301151457\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.013 seconds\nReal time usage: 0.014 seconds\nPreprocessor visited node count: 109/1000000\nPreprocessor generated node count: 214/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1188-0!canonical and timestamp 20260301151457 and revision id 20815\n -->\n"
+    },
+    "categories": [],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Anti-Diagonals"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Avoiding Branches"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "C"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chessboard"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Color"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cpp"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Diagonals"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Files"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Intersection Squares"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Little-endian"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Oliver Brausch"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Square Mapping Considerations"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Squares"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Back Ranks",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Ranks",
+        "byteoffset": 265,
+        "anchor": "Back_Ranks"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Square Mapping Notes",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Ranks",
+        "byteoffset": 486,
+        "anchor": "Square_Mapping_Notes"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Square Difference",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Ranks",
+        "byteoffset": 856,
+        "anchor": "Square_Difference"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Enumeration",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Ranks",
+        "byteoffset": 1082,
+        "anchor": "Enumeration"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Rank from Square",
+        "number": "5",
+        "index": "5",
+        "fromtitle": "Ranks",
+        "byteoffset": 1693,
+        "anchor": "Rank_from_Square"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Rank-Distance",
+        "number": "6",
+        "index": "6",
+        "fromtitle": "Ranks",
+        "byteoffset": 1888,
+        "anchor": "Rank-Distance"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Two Squares on a Rank",
+        "number": "7",
+        "index": "7",
+        "fromtitle": "Ranks",
+        "byteoffset": 2161,
+        "anchor": "Two_Squares_on_a_Rank"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "8",
+        "index": "8",
+        "fromtitle": "Ranks",
+        "byteoffset": 2890,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "9",
+        "index": "9",
+        "fromtitle": "Ranks",
+        "byteoffset": 2993,
+        "anchor": "References"
+      }
+    ]
+  }
+}

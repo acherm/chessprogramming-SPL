@@ -1,0 +1,215 @@
+{
+  "parse": {
+    "title": "Best Move",
+    "pageid": 1126,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Chess\" title=\"Chess\">Chess</a> * <a href=\"/Moves\" title=\"Moves\">Moves</a> * Best Move</b>\n</p><p><i>The <b>Best Move</b> is a <a href=\"/Search\" title=\"Search\">Search</a> related issue.</i>\n</p><p>The <b>Best Move</b> in the context of <a href=\"/Search\" title=\"Search\">search algorithms</a> like <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">Alpha-Beta</a> or <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">Principal Variation Search</a>, is found at the <a href=\"/Root\" title=\"Root\">root</a> or any other confirmed <a href=\"/Node_Types#PV\" title=\"Node Types\">PV-node</a>. It is that move which gained  the maximum score, which is <a href=\"/Exact_Score\" title=\"Exact Score\">exact</a> since it exceeds <a href=\"/Alpha\" title=\"Alpha\">alpha</a> but is still below <a href=\"/Beta\" title=\"Beta\">beta</a> and therefor not good enough to refute opponent's previous move, which may become his best move and part of the <a href=\"/Principal_Variation\" title=\"Principal Variation\">principal variation</a> as well. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Best_so_far\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Best so far</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#TT-Entry\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">TT-Entry</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#PV-Table\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">PV-Table</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Cut-Node\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Cut-Node</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#All-Node\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">All-Node</span></a></li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#See_also\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">Forum Posts</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Best_so_far\">Best so far</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Best_Move&amp;action=edit&amp;section=1\" title=\"Edit section: Best so far\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>If an alpha increase occurs, the recently searched move is the best so far and needs to be stored on an explicit or implicit <a href=\"/Stack\" title=\"Stack\">stack</a>, which also might be the <a href=\"/Triangular_PV-Table\" title=\"Triangular PV-Table\">triangular PV-Table</a> if available.\n</p>\n<h1><span class=\"mw-headline\" id=\"TT-Entry\">TT-Entry</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Best_Move&amp;action=edit&amp;section=2\" title=\"Edit section: TT-Entry\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>After all remaining moves were searched at a PV-node, the best move found is stored inside the <a href=\"/Transposition_Table\" title=\"Transposition Table\">transposition table</a> together with its associated values and flags. \n</p>\n<h1><span class=\"mw-headline\" id=\"PV-Table\">PV-Table</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Best_Move&amp;action=edit&amp;section=3\" title=\"Edit section: PV-Table\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>If using a <a href=\"/Triangular_PV-Table\" title=\"Triangular PV-Table\">triangular PV-table</a> to <a href=\"/Principal_Variation#CollectionDuringSearch\" title=\"Principal Variation\">collect the principal variation</a>, one has to store the best move (so far) anyway - immediately after an alpha increase occurs, to append the PV of ply + 1, which would otherwise void while searching further. \n</p>\n<h1><span class=\"mw-headline\" id=\"Cut-Node\">Cut-Node</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Best_Move&amp;action=edit&amp;section=4\" title=\"Edit section: Cut-Node\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>At <a href=\"/Node_Types#CUT\" title=\"Node Types\">Cut-nodes</a>, if a move <a href=\"/Fail-High\" title=\"Fail-High\">fails high</a>, it is not necessarily the best move, but a <a href=\"/Refutation_Move\" title=\"Refutation Move\">refutation move</a>, good enough to refute opponents previous move. Since it is the best move found so far, in the context of transposition table, it is often flippant mentioned as best move as well.\n</p>\n<h1><span class=\"mw-headline\" id=\"All-Node\">All-Node</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Best_Move&amp;action=edit&amp;section=5\" title=\"Edit section: All-Node\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>At <a href=\"/Node_Types#ALL\" title=\"Node Types\">All-nodes</a> there is no best move found at all, despite all childs were considered if not pruned. While there is a maximum score in the arithmetical sense, all scores below or equal to <a href=\"/Alpha\" title=\"Alpha\">alpha</a> are <a href=\"/Upper_Bound\" title=\"Upper Bound\">upper bounds</a> and not comparable to determine a best move.\n</p>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Best_Move&amp;action=edit&amp;section=6\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Hash_Move\" title=\"Hash Move\">Hash Move</a></li>\n<li> <a href=\"/Killer_Move\" title=\"Killer Move\">Killer Move</a></li>\n<li> <a href=\"/PV-Move\" title=\"PV-Move\">PV-Move</a></li>\n<li> <a href=\"/Threat_Move\" title=\"Threat Move\">Threat Move</a> from <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">null move</a> refutations</li>\n<li> <a href=\"/Triangular_PV-Table\" title=\"Triangular PV-Table\">Triangular PV-Table</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Best_Move&amp;action=edit&amp;section=7\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61401\">Best move statistics</a> by <a href=\"/Matthew_Lai\" title=\"Matthew Lai\">Matthew Lai</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 12, 2016&#160;» <a href=\"/Search_Statistics\" title=\"Search Statistics\">Search Statistics</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63948\">Update Best Score and Best Move</a> by Tamás Kuzmics, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 10, 2017</li></ul>\n<p><b><a href=\"/Moves\" title=\"Moves\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301112632\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.005 seconds\nReal time usage: 0.005 seconds\nPreprocessor visited node count: 27/1000000\nPreprocessor generated node count: 32/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1126-0!canonical and timestamp 20260301112632 and revision id 1446\n -->\n"
+    },
+    "categories": [],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha-Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Exact Score"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fail-High"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hash Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Killer Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Matthew Lai"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Moves"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Node Types"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "PV-Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Refutation Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Root"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search Statistics"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stack"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Threat Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Triangular PV-Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Upper Bound"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Best so far",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Best_Move",
+        "byteoffset": 633,
+        "anchor": "Best_so_far"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "TT-Entry",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Best_Move",
+        "byteoffset": 872,
+        "anchor": "TT-Entry"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "PV-Table",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Best_Move",
+        "byteoffset": 1071,
+        "anchor": "PV-Table"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Cut-Node",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Best_Move",
+        "byteoffset": 1396,
+        "anchor": "Cut-Node"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "All-Node",
+        "number": "5",
+        "index": "5",
+        "fromtitle": "Best_Move",
+        "byteoffset": 1736,
+        "anchor": "All-Node"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "6",
+        "index": "6",
+        "fromtitle": "Best_Move",
+        "byteoffset": 2047,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "7",
+        "index": "7",
+        "fromtitle": "Best_Move",
+        "byteoffset": 2200,
+        "anchor": "Forum_Posts"
+      }
+    ]
+  }
+}

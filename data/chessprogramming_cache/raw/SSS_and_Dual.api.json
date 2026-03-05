@@ -1,0 +1,422 @@
+{
+  "parse": {
+    "title": "SSS* and Dual*",
+    "pageid": 1065,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Search\" title=\"Search\">Search</a> * SSS* and Dual</b>*\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:277px;\"><a href=\"http://www.mcescher.com/Gallery/back-bmp/LW359.jpg\"><img alt=\"\" src=\"/images/7/7b/EschersStars.jpg\" width=\"275\" height=\"333\" class=\"thumbimage\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:EschersStars.jpg\" class=\"internal\" title=\"Enlarge\"></a></div><a href=\"/Category:M._C._Escher\" title=\"Category:M. C. Escher\">M. C. Escher</a>, Stars, 1948 <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>SSS</b>*,<br />\na <a href=\"/Best-First\" title=\"Best-First\">best-first</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/State_space_search\">state space search</a> developed in 1977 by <a href=\"/George_Stockman\" title=\"George Stockman\">George C. Stockman</a> for the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Linguistics\">linguistic</a> analysis of waveforms <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup> . In a later paper, Stockman (<a href=\"/Timeline#1979\" title=\"Timeline\">1979</a>) <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup> showed how to use this algorithm to determine the minimax value of game trees. <b>SSS</b>* and it counterpart <b>Dual</b>* are non-directional algorithms for searching AND/OR graphs in a best-first manner similar to <a href=\"/index.php?title=A*&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"A* (page does not exist)\">A*</a>. They expand multiple paths of the search graph and retain global information about the search space, and search fewer nodes than <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">Alpha-Beta</a> in fixed-depth minimax tree search.\n</p><p>The algorithm was examined and improved by various researchers: <a href=\"/Igor_Roizen\" title=\"Igor Roizen\">Igor Roizen</a> and <a href=\"/Judea_Pearl\" title=\"Judea Pearl\">Judea Pearl</a> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>, <a href=\"/Toshihide_Ibaraki\" title=\"Toshihide Ibaraki\">Toshihide Ibaraki</a> <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup> , <a href=\"/Tony_Marsland\" title=\"Tony Marsland\">Tony Marsland</a> <i>et al.</i>, <a href=\"/Subir_Bhattacharya\" title=\"Subir Bhattacharya\">Subir Bhattacharya</a> and <a href=\"/Amitava_Bagchi\" title=\"Amitava Bagchi\">Amitava Bagchi</a>, <a href=\"/Alexander_Reinefeld\" title=\"Alexander Reinefeld\">Alexander Reinefeld</a>, <a href=\"/Aske_Plaat\" title=\"Aske Plaat\">Aske Plaat</a>, <a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a>, <a href=\"/Wim_Pijls\" title=\"Wim Pijls\">Wim Pijls</a> and <a href=\"/Arie_de_Bruin\" title=\"Arie de Bruin\">Arie de Bruin</a>. In 1988 <a href=\"/Burkhard_Monien\" title=\"Burkhard Monien\">Burkhard Monien</a> and <a href=\"/Oliver_Vornberger\" title=\"Oliver Vornberger\">Oliver Vornberger</a> compared parallel <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">Alpha-Beta</a> with parallel SSS* <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup> and in 1990, <a href=\"/Hans-Joachim_Kraas\" title=\"Hans-Joachim Kraas\">Hans-Joachim Kraas</a> wrote his Ph.D thesis about how to parallelize <b>SSS</b>* <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup> .\n</p><p>However, it turned out the algorithmic overhead was too big to pay off the saved nodes. <a href=\"/Aske_Plaat\" title=\"Aske Plaat\">Aske Plaat</a>, <a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a>, <a href=\"/Wim_Pijls\" title=\"Wim Pijls\">Wim Pijls</a> and <a href=\"/Arie_de_Bruin\" title=\"Arie de Bruin\">Arie de Bruin</a> pointed out, that <b>SSS</b>* can be reformulated as a sequence of <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">alpha-beta</a> <a href=\"/Null_Window\" title=\"Null Window\">null window</a> calls with a <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Table</a>. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#SSS.2A\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">SSS*</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-2\"><a href=\"#Pseudo_C-Code\"><span class=\"tocnumber\">1.1</span> <span class=\"toctext\">Pseudo C-Code</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Dual.2A\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Dual*</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#RecSSS.2A_and_RecDual.2A\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">RecSSS* and RecDual*</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#Pseudo_C-Code_2\"><span class=\"tocnumber\">3.1</span> <span class=\"toctext\">Pseudo C-Code</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#SSS.2A_and_Dual.2A_as_MT\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">SSS* and Dual* as MT</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#Pseudo_C-Code_3\"><span class=\"tocnumber\">4.1</span> <span class=\"toctext\">Pseudo C-Code</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-8\"><a href=\"#See_also\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-9\"><a href=\"#Publications\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Publications</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#1979\"><span class=\"tocnumber\">6.1</span> <span class=\"toctext\">1979</span></a></li>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#1980_...\"><span class=\"tocnumber\">6.2</span> <span class=\"toctext\">1980 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-12\"><a href=\"#1990_...\"><span class=\"tocnumber\">6.3</span> <span class=\"toctext\">1990 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-13\"><a href=\"#2000_...\"><span class=\"tocnumber\">6.4</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-14\"><a href=\"#2010_...\"><span class=\"tocnumber\">6.5</span> <span class=\"toctext\">2010 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-15\"><a href=\"#External_Links\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-16\"><a href=\"#References\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"SSS.2A\">SSS*</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=SSS*_and_Dual*&amp;action=edit&amp;section=1\" title=\"Edit section: SSS*\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><a href=\"/Aske_Plaat\" title=\"Aske Plaat\">Aske Plaat</a> et al. about <b>SSS</b>*:\n</p>\n<pre>In 1979 Stockman introduced SSS*, which looked like a radically different approach from Alpha-Beta for searching fixed-depth minimax trees. It builds a tree in a so-called best-first fashion by visiting the most promising nodes first. Alpha-Beta, in contrast, uses a depth-first, left-to-right traversal of the tree. Intuitively, it would seem that a best-first strategy should prevail over a rigidly ordered depth-first one. Stockman proved that SSS* dominated Alpha-Beta; it would never evaluate more leaf nodes than Alpha-Beta. Numerous simulations have shown that on average SSS* evaluates considerably fewer leaf nodes. Why, then, has the algorithm been shunned by practitioners?\n</pre>\n<p><a href=\"/Alexander_Reinefeld\" title=\"Alexander Reinefeld\">Alexander Reinefeld</a> has a good answer, and explanation of <b>SSS</b>* in his Lecture <sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup>:\n</p>\n<pre>SSS* maintains an OPEN list with descriptors of the active nodes. Descriptors are sorted in decreasing order of their merit (h values). A <b>descriptor (n, s, h)</b> consists of\n</pre>\n<ul><li> <code>a node identifier</code> <b>n</b></li>\n<li> <code>a status</code> <b>s</b>\n<ul><li> <code>LIVE: n is still unexpanded and h is an upper bound on the true value</code></li>\n<li> <code>SOLVED: h is the true value</code></li></ul></li>\n<li> <code>a merit</code> <b>h</b></li></ul>\n<pre><b>SSS*'s</b> two search phases:\n</pre>\n<ol><li> <code>Node Expansion Phase: Top down expansion of a MIN strategy.</code></li>\n<li> <code>Solution Phase: Bottom up search for the best MAX strategy.</code></li></ol>\n<h2><span class=\"mw-headline\" id=\"Pseudo_C-Code\">Pseudo C-Code</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=SSS*_and_Dual*&amp;action=edit&amp;section=2\" title=\"Edit section: Pseudo C-Code\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<pre>\nint SSS* (node n; int bound)\n{\n   push (n, LIVE, bound);\n   while ( true ) {\n      pop (node);\n      switch ( node.status ) {\n      case LIVE:\n          if (node == LEAF)\n             insert (node, SOLVED, min(eval(node),h));\n          if (node == MIN_NODE)\n             push (node.1, LIVE, h);\n          if (node == MAX_NODE)\n             for (j=w; j; j--)\n                push (node.j, LIVE, h);\n          break;\n      case SOLVED:\n          if (node == ROOT_NODE)\n             return (h);\n          if (node == MIN_NODE) {\n              purge (parent(node));\n              push (parent(node), SOLVED, h);\n          }\n          if (node == MAX_NODE) {\n             if (node has an unexamined brother)\n                push (brother(node), LIVE, h);\n             else\n                push (parent(node), SOLVED, h);\n          }\n          break;\n      }\n   }\n}\n</pre>\n<pre>SSS* is too complex and too slow!\n</pre>\n<ul><li> <code>In each step, the node with the maximum h-value is removed from OPEN.</code></li>\n<li> <code>Whenever an interior MAX-node gets SOLVED, all direct and indirect descendants must be purged from OPEN</code></li></ul>\n<p><code>These two steps alone take 90% of the CPU time!</code>\n</p><p><a href=\"/Aske_Plaat\" title=\"Aske Plaat\">Aske Plaat</a> et al. continue:\n</p>\n<pre>SSS*, as formulated by Stockman, has several problems. First, it takes considerable effort to understand how the algorithm works, and still more to understand its relation to Alpha-Beta. Second, SSS* maintains a data structure known as the OPEN list, similar to that found in single-agent search algorithms like A*. The size of this list grows exponentially with the depth of the search tree. This has led many authors to conclude that SSS* is effectively disqualified from being useful for real applications like game-playing programs. Third, the OPEN list must be kept in sorted order. Insert and (in particular) delete/purge operations on the OPEN list can dominate the execution time of any program using SSS*. Despite the promise of expanding fewer nodes, the disadvantages of SSS* have proven a significant deterrent in practice.\n</pre>\n<p>Quote by <a href=\"/Judea_Pearl\" title=\"Judea Pearl\">Judea Pearl</a> 1984 <sup id=\"cite_ref-9\" class=\"reference\"><a href=\"#cite_note-9\">&#91;9&#93;</a></sup>&#160;:\n</p>\n<pre>The meager improvement in the pruning power of SSS* is more than offset by the increased storage space and bookkeeping (e.g. sorting OPEN) that it requires. One can safely speculate therefore that <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">alphabeta</a> will continue to monopolize the practice of computerized game playing.\n</pre>\n<h1><span class=\"mw-headline\" id=\"Dual.2A\">Dual*</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=SSS*_and_Dual*&amp;action=edit&amp;section=3\" title=\"Edit section: Dual*\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><b>Dual</b>* is the dual counterpart of <b>SSS</b>* by <a href=\"/Tony_Marsland\" title=\"Tony Marsland\">Tony Marsland</a> <i>et al</i> <sup id=\"cite_ref-10\" class=\"reference\"><a href=\"#cite_note-10\">&#91;10&#93;</a></sup> . The dual version of <b>SSS</b>* can be created by inverting <b>SSS*’s</b> operations: use an ascendingly sorted list instead of descending, swap max and min operations, and start at -oo instead of +oo.\n</p><p><span id=\"RecSSS\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"RecSSS.2A_and_RecDual.2A\">RecSSS* and RecDual*</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=SSS*_and_Dual*&amp;action=edit&amp;section=4\" title=\"Edit section: RecSSS* and RecDual*\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>The development of <a href=\"/Recursion\" title=\"Recursion\">recursive</a> variants was driven by the need for a better understanding of <b>SSS</b>*'s node expansion process and by the demand for more efficient implementations. Two recursive variants were proposed 1990: <b>RecSSS</b>* <sup id=\"cite_ref-11\" class=\"reference\"><a href=\"#cite_note-11\">&#91;11&#93;</a></sup> by <a href=\"/Subir_Bhattacharya\" title=\"Subir Bhattacharya\">Subir Bhattacharya</a> and <a href=\"/Amitava_Bagchi\" title=\"Amitava Bagchi\">Amitava Bagchi</a> and <b>SSS-2</b> <sup id=\"cite_ref-12\" class=\"reference\"><a href=\"#cite_note-12\">&#91;12&#93;</a></sup> by <a href=\"/Wim_Pijls\" title=\"Wim Pijls\">Wim Pijls</a> and <a href=\"/Arie_de_Bruin\" title=\"Arie de Bruin\">Arie de Bruin</a>. In 1993 <a href=\"/Alexander_Reinefeld\" title=\"Alexander Reinefeld\">Alexander Reinefeld</a> improved <b>RecSSS</b>*, making it both faster and more space efficient, using an OPEN-<a href=\"/Array\" title=\"Array\">array</a> rather than dynamic list structures <sup id=\"cite_ref-13\" class=\"reference\"><a href=\"#cite_note-13\">&#91;13&#93;</a></sup> .\n</p>\n<h2><span class=\"mw-headline\" id=\"Pseudo_C-Code_2\">Pseudo C-Code</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=SSS*_and_Dual*&amp;action=edit&amp;section=5\" title=\"Edit section: Pseudo C-Code\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>based on <a href=\"/Alexander_Reinefeld\" title=\"Alexander Reinefeld\">Alexander Reinefeld's</a> <a href=\"/Pascal\" title=\"Pascal\">Pascal</a> pseudo code:\n</p>\n<pre>\nint RecSS*(nodeType n)\n{\n   if (n is leaf) {\n      s(n) = SOLVED;\n      return min (evaluate(n), h(n));                                            /* evaluate leaf */\n   }\n   if ( s(n) == UNEXPANDED ) {                                                  /* first descend? */\n      s(n) = LIVE;                                                                    /* expand n */\n      for (i = 1 to width)\n         if ( n.i is leaf )\n            insert (n.i, UNEXPANDED, h(n));                    /* insert sons (= MIN leaves) of n */\n         else\n            insert (n.i.1, UNEXPANDED, h(n));                       /* insert left grandsons of n */\n   }\n   g = highest h-valued grandson (or son) of n in OPEN;\n   while ( h(g) == h(n) &amp;&amp; status(g)&#160;!= SOLVED ) {\n      h(g) = RecSS*(g);                                                    /* get new upper bound */\n      if ( s(g) == SOLVED &amp;&amp; g has a right brother )\n          replace g by (brother(g), UNDEXPANDED, h(g));                      /* next brother of g */\n      g = highest h-valued grandson (or son) of n in OPEN; /*resolve ties in lexicographical order*/\n   }\n   if ( s(g) == SOLVED )\n      s(n) = SOLVED;\n   return h(g);\n}\n</pre>\n<pre>\nint main()\n{\n   insert (root, UNEXPANDED, oo);\n   do\n      h = RecSSS*(root);\n   while ( s(n)&#160;!= SOLVED );\n}\n</pre>\n<p><span id=\"SSStarandDualStarAsMT\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"SSS.2A_and_Dual.2A_as_MT\">SSS* and Dual* as MT</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=SSS*_and_Dual*&amp;action=edit&amp;section=6\" title=\"Edit section: SSS* and Dual* as MT\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><a href=\"/Aske_Plaat\" title=\"Aske Plaat\">Aske Plaat</a>, <a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a>, <a href=\"/Wim_Pijls\" title=\"Wim Pijls\">Wim Pijls</a> and <a href=\"/Arie_de_Bruin\" title=\"Arie de Bruin\">Arie de Bruin</a> proved with their Memory Test framework, that both <b>SSS</b>* and <b>Dual</b>* can be reformulated as a sequence of <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">alpha-beta</a> <a href=\"/Null_Window\" title=\"Null Window\">null window</a> calls with a <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Table</a> <sup id=\"cite_ref-14\" class=\"reference\"><a href=\"#cite_note-14\">&#91;14&#93;</a></sup>&#160;:\n</p>\n<h2><span class=\"mw-headline\" id=\"Pseudo_C-Code_3\">Pseudo C-Code</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=SSS*_and_Dual*&amp;action=edit&amp;section=7\" title=\"Edit section: Pseudo C-Code\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<pre>\nint MT-SSS*( n )\n{\n   g&#160;:= +oo;\n   do {\n      G&#160;:= g;\n      g&#160;:= Alpha-Beta(n, G-1, G );\n   } while (g&#160;!= G);\n   return g;\n}\n</pre>\n<pre>\nint MT-DUAL*(n)\n{\n   g&#160;:= -oo;\n   do {\n      G&#160;:= g;\n      g&#160;:= Alpha-Beta(n, G, G+1 );\n   } while (g&#160;!= G);\n   return g;\n}\n</pre>\n<p>At the <a href=\"/Advances_in_Computer_Chess_8\" title=\"Advances in Computer Chess 8\">8th Advances in Computer Chess</a> conference 1996, <b>SSS</b>* was finally declared \"dead\" by <a href=\"/Wim_Pijls\" title=\"Wim Pijls\">Wim Pijls</a> and <a href=\"/Arie_de_Bruin\" title=\"Arie de Bruin\">Arie de Bruin</a> <sup id=\"cite_ref-15\" class=\"reference\"><a href=\"#cite_note-15\">&#91;15&#93;</a></sup> <sup id=\"cite_ref-16\" class=\"reference\"><a href=\"#cite_note-16\">&#91;16&#93;</a></sup> .\n</p>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=SSS*_and_Dual*&amp;action=edit&amp;section=8\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/MTD(f)\" title=\"MTD(f)\">MTD(f)</a></li>\n<li> <a href=\"/NegaC*\" title=\"NegaC*\">NegaC*</a></li>\n<li> <a href=\"/NegaScout\" title=\"NegaScout\">NegaScout</a></li>\n<li> <a href=\"/Scout\" title=\"Scout\">Scout</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=SSS*_and_Dual*&amp;action=edit&amp;section=9\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1979\">1979</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=SSS*_and_Dual*&amp;action=edit&amp;section=10\" title=\"Edit section: 1979\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/George_Stockman\" title=\"George Stockman\">George Stockman</a> (<b>1979</b>). <i>A Minimax Algorithm Better than Alpha-Beta?</i> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_%28journal%29\">Artificial Intelligence</a>, Vol. 12, No. 2.</li></ul>\n<h2><span class=\"mw-headline\" id=\"1980_...\">1980 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=SSS*_and_Dual*&amp;action=edit&amp;section=11\" title=\"Edit section: 1980 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Igor_Roizen\" title=\"Igor Roizen\">Igor Roizen</a>, <a href=\"/Judea_Pearl\" title=\"Judea Pearl\">Judea Pearl</a> (<b>1983</b>). <i>A Minimax Algorithm Better than Alpha-Beta? Yes and No</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_%28journal%29\">Artificial Intelligence</a>, Vol. 21</li>\n<li> <a href=\"/Murray_Campbell\" title=\"Murray Campbell\">Murray Campbell</a>, <a href=\"/Tony_Marsland\" title=\"Tony Marsland\">Tony Marsland</a> (<b>1983</b>). <i>A Comparison of Minimax Tree Search Algorithms</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_%28journal%29\">Artificial Intelligence</a>, Vol. 20, No. 4, pp. 347-367. ISSN 0004-3702, <a rel=\"nofollow\" class=\"external text\" href=\"http://webdocs.cs.ualberta.ca/~tony/OldPapers/TR82-3.pdf\">pdf</a></li>\n<li> <a href=\"/index.php?title=Nanda_Srimani&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Nanda Srimani (page does not exist)\">Nanda Srimani</a> (<b>1985</b>). <i>A New Algorithm (PS*) for Searching Game Trees</i>. Master's thesis, <a href=\"/University_of_Alberta\" title=\"University of Alberta\">University of Alberta</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/pers/hd/l/Leifker:Daniel_B=.html\">Daniel B. Leifker</a>, <a href=\"/Laveen_Kanal\" title=\"Laveen Kanal\">Laveen N. Kanal</a> (<b>1985</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://dl.acm.org/citation.cfm?id=1623687\">A Hybrid SSS*/Alpha-Beta Algorithm for Parallel Search of Game Trees</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/conf/ijcai/ijcai85.html#LeifkerK85\">IJCAI'85</a></li>\n<li> <a href=\"/Toshihide_Ibaraki\" title=\"Toshihide Ibaraki\">Toshihide Ibaraki</a> (<b>1986</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.sciencedirect.com/science/article/abs/pii/0004370286900925\">Generalization of Alpha-Beta and SSS* Search Procedures</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_%28journal%29\">Artificial Intelligence</a>, Vol. 29</li>\n<li> <a href=\"/Tony_Marsland\" title=\"Tony Marsland\">Tony Marsland</a>, <a href=\"/index.php?title=Nanda_Srimani&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Nanda Srimani (page does not exist)\">Nanda Srimani</a> (<b>1986</b>). <i>Phased State Search</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/conf/fjcc/fjcc86.html#MarslandS86\">Fall Joint Computer Conference</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://webdocs.cs.ualberta.ca/~tony/OldPapers/fjcc.1986.pdf\">pdf</a></li>\n<li> <a href=\"/Tony_Marsland\" title=\"Tony Marsland\">Tony Marsland</a>, <a href=\"/Alexander_Reinefeld\" title=\"Alexander Reinefeld\">Alexander Reinefeld</a>, <a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a> (<b>1987</b>). Low Overhead Alternatives to SSS*. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_%28journal%29\">Artificial Intelligence</a>, Vol. 31, No. 2, pp. 185-199. ISSN 0004-3702.</li>\n<li> <a href=\"/Burkhard_Monien\" title=\"Burkhard Monien\">Burkhard Monien</a>, <a href=\"/Oliver_Vornberger\" title=\"Oliver Vornberger\">Oliver Vornberger</a> (<b>1988</b>). <i>Parallel Alpha-Beta versus Parallel SSS*</i>. Proc. of the IFIP WG 10.3 Working Conference on Distributed Processing, North Holland</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/pers/hd/k/Katoh:Yoshiroh\">Yoshiroh Katoh</a>, <a href=\"/Toshihide_Ibaraki\" title=\"Toshihide Ibaraki\">Toshihide Ibaraki</a> (<b>1988</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://onlinelibrary.wiley.com/doi/pdf/10.1002/scj.4690190710\">Game Solving Procedure SSS* is Unsurpassed</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://onlinelibrary.wiley.com/journal/1520684x\">Systems and Computers in Japan</a>, Vol. 19, No. 7</li></ul>\n<h2><span class=\"mw-headline\" id=\"1990_...\">1990 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=SSS*_and_Dual*&amp;action=edit&amp;section=12\" title=\"Edit section: 1990 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Subir_Bhattacharya\" title=\"Subir Bhattacharya\">Subir Bhattacharya</a>, <a href=\"/Amitava_Bagchi\" title=\"Amitava Bagchi\">Amitava Bagchi</a> (<b>1990</b>). <i>Unified Recursive Schemes for Search in Game Trees.</i> Technical Report WPS-144, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Indian_Institute_of_Management_Calcutta\">Indian Institute of Management, Calcutta</a></li>\n<li> <a href=\"/Hans-Joachim_Kraas\" title=\"Hans-Joachim Kraas\">Hans-Joachim Kraas</a> (<b>1990</b>).<i>Zur Parallelisierung des SSS*-Algorithmus</i>. Ph.D thesis, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Technical_University_of_Braunschweig\">TU Braunschweig</a> (German)</li>\n<li> <a href=\"/Wim_Pijls\" title=\"Wim Pijls\">Wim Pijls</a>, <a href=\"/Arie_de_Bruin\" title=\"Arie de Bruin\">Arie de Bruin</a> (<b>1990</b>). <i>Another View on the SSS* Algorithm.</i> International Symposium SIGAL '90</li>\n<li> <a href=\"/Claude_G._Diderich\" title=\"Claude G. Diderich\">Claude G. Diderich</a> (<b>1992</b>). <i>Evaluation des performance de l'algorithme SSS* avec phases de synchronisation sur une machine parallèle à mémoires distribées</i>. Technical report  LITH-99, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/%C3%89cole_Polytechnique_F%C3%A9d%C3%A9rale_de_Lausanne\">Swiss Federal Institute of Technology</a>, Computer Science Theory Laboratory, Lausanne, Switzerland (French)</li>\n<li> <a href=\"/Wim_Pijls\" title=\"Wim Pijls\">Wim Pijls</a>, <a href=\"/Arie_de_Bruin\" title=\"Arie de Bruin\">Arie de Bruin</a> (<b>1993</b>). <i>SSS*-like Algorithms in Constrained Memory.</i> <a href=\"/ICGA_Journal#16_1\" title=\"ICGA Journal\">ICCA Journal, Vol. 16, No. 1</a></li>\n<li> <a href=\"/Alexander_Reinefeld\" title=\"Alexander Reinefeld\">Alexander Reinefeld</a> (<b>1994</b>). <i>A Minimax Algorithm Faster than Alpha-Beta</i>. <a href=\"/Advances_in_Computer_Chess_7\" title=\"Advances in Computer Chess 7\">Advances in Computer Chess 7</a></li>\n<li> <a href=\"/Aske_Plaat\" title=\"Aske Plaat\">Aske Plaat</a>, <a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a>, <a href=\"/Wim_Pijls\" title=\"Wim Pijls\">Wim Pijls</a>, <a href=\"/Arie_de_Bruin\" title=\"Arie de Bruin\">Arie de Bruin</a> (<b>1994, 2014</b>). <i>SSS* = Alpha-Beta + TT</i>. TR-CS-94-17, <a href=\"/University_of_Alberta\" title=\"University of Alberta\">University of Alberta</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1404.1517\">arXiv:1404.1517</a></li>\n<li> <a href=\"/Alexander_Reinefeld\" title=\"Alexander Reinefeld\">Alexander Reinefeld</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/indices/a-tree/r/Ridinger:Peter.html\">Peter Ridinger</a> (<b>1994</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.sciencedirect.com/science/article/pii/0004370294900493\">Time-Efficient State Space Search</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_%28journal%29\">Artificial Intelligence</a>, Vol. 71, No. 2, <a rel=\"nofollow\" class=\"external text\" href=\"http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.42.1934\">CiteSeerX</a></li>\n<li> <a href=\"/Aske_Plaat\" title=\"Aske Plaat\">Aske Plaat</a>, <a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a>, <a href=\"/Wim_Pijls\" title=\"Wim Pijls\">Wim Pijls</a>, <a href=\"/Arie_de_Bruin\" title=\"Arie de Bruin\">Arie de Bruin</a> (<b>1996</b>). <i>An Algorithm Faster than NegaScout and SSS* in Practice</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.77.9111&amp;rep=rep1&amp;type=pdf\">pdf</a> from <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/CiteSeerX\">CiteSeerX</a>&#160;» <a href=\"/MTD(f)\" title=\"MTD(f)\">MTD(f)</a></li>\n<li> <a href=\"/Arie_de_Bruin\" title=\"Arie de Bruin\">Arie de Bruin</a>, <a href=\"/Wim_Pijls\" title=\"Wim Pijls\">Wim Pijls</a> (<b>1997</b>). <i>SSS†.</i> <a href=\"/Advances_in_Computer_Chess_8\" title=\"Advances in Computer Chess 8\">Advances in Computer Chess 8</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=SSS*_and_Dual*&amp;action=edit&amp;section=13\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Arie_de_Bruin\" title=\"Arie de Bruin\">Arie de Bruin</a>, <a href=\"/Wim_Pijls\" title=\"Wim Pijls\">Wim Pijls</a> (<b>2003</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://repub.eur.nl/pub/459\">Trends in game tree search</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Erasmus_University_Rotterdam\">Erasmus University, Rotterdam</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=SSS*_and_Dual*&amp;action=edit&amp;section=14\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Bojun_Huang\" title=\"Bojun Huang\">Bojun Huang</a> (<b>2015</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.semanticscholar.org/paper/Pruning-Game-Tree-by-Rollouts-Huang/a38b358745067f71a9c780db117ae2471e693d63\">Pruning Game Tree by Rollouts</a></i>. <a href=\"/AAAI\" title=\"AAAI\">AAAI</a>&#160;» <a href=\"/SSS*_and_Dual*#SSStarandDualStarAsMT\" title=\"SSS* and Dual*\">MT-SSS*</a>, <a href=\"/Monte-Carlo_Tree_Search\" title=\"Monte-Carlo Tree Search\">MCTS</a> <sup id=\"cite_ref-17\" class=\"reference\"><a href=\"#cite_note-17\">&#91;17&#93;</a></sup></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=SSS*_and_Dual*&amp;action=edit&amp;section=15\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/SSS*\">SSS* from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/State_space_search\">State space search from Wikipedia</a></li>\n<li> <a href=\"/Category:Aziza_Mustafa_Zadeh\" title=\"Category:Aziza Mustafa Zadeh\">Aziza Mustafa Zadeh</a> - Stars Dance, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Leverkusener_Jazztage\">Leverkusener Jazztage</a>, November 7, 2006, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/3sat\">3sat</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/sSLKj9ghovk?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=SSS*_and_Dual*&amp;action=edit&amp;section=16\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap mw-references-columns\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a href=\"/Category:M._C._Escher\" title=\"Category:M. C. Escher\">M. C. Escher</a>, Stars, 1948, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.mcescher.com/Gallery/gallery-back.htm\">Picture gallery \"Back in Holland 1941 - 1954\"</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://www.mcescher.com/\">The Official M.C. Escher Website</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a href=\"/George_Stockman\" title=\"George Stockman\">George Stockman</a>, <a href=\"/Laveen_Kanal\" title=\"Laveen Kanal\">Laveen Kanal</a> (<b>1983</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://ieeexplore.ieee.org/xpl/freeabs_all.jsp?isnumber=4767384&amp;arnumber=4767391&amp;count=16&amp;index=6\">Problem Reduction Representation for the Linguistic Analysis of Waveforms</a></i>. <a href=\"/IEEE#TPAMI\" title=\"IEEE\">IEEE Transactions  on Pattern Analysis and Machine Intelligence</a>, Vol. 5, No 3</span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a href=\"/George_Stockman\" title=\"George Stockman\">George Stockman</a> (<b>1979</b>). <i>A Minimax Algorithm Better than Alpha-Beta?</i> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_%28journal%29\">Artificial Intelligence</a>, Vol. 12, No. 2</span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a href=\"/Igor_Roizen\" title=\"Igor Roizen\">Igor Roizen</a>, <a href=\"/Judea_Pearl\" title=\"Judea Pearl\">Judea Pearl</a> (<b>1983</b>). <i>A Minimax Algorithm Better than Alpha-Beta? Yes and No</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_%28journal%29\">Artificial Intelligence</a>, Vol. 21</span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a href=\"/Toshihide_Ibaraki\" title=\"Toshihide Ibaraki\">Toshihide Ibaraki</a> (<b>1986</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.sciencedirect.com/science/article/abs/pii/0004370286900925\">Generalization of Alpha-Beta and SSS* Search Procedures</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_%28journal%29\">Artificial Intelligence</a>, Vol. 29</span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a href=\"/Burkhard_Monien\" title=\"Burkhard Monien\">Burkhard Monien</a>, <a href=\"/Oliver_Vornberger\" title=\"Oliver Vornberger\">Oliver Vornberger</a> (<b>1988</b>). <i>Parallel Alpha-Beta versus Parallel SSS*</i>. Proc. of the IFIP WG 10.3 Working Conference on Distributed Processing, North Holland</span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a href=\"/Hans-Joachim_Kraas\" title=\"Hans-Joachim Kraas\">Hans-Joachim Kraas</a> (<b>1990</b>). <i>Zur Parallelisierung des SSS*-Algorithmus</i>. Ph.D thesis, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Technical_University_of_Braunschweig\">TU Braunschweig</a> (German)</span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\"><a href=\"/Alexander_Reinefeld\" title=\"Alexander Reinefeld\">Alexander Reinefeld</a> (<b>2005</b>). <i>Die Entwicklung der Spielprogrammierung: Von John von Neumann bis zu den hochparallelen Schachmaschinen</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.hu-berlin.de/studium/ringvorlesung/ss05/slides/05-06-02.pdf\">slides as pdf</a>, Themen der Informatik im historischen Kontext Ringvorlesung an der <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Humboldt_University_of_Berlin\">HU Berlin</a>, 02.06.2005 (English paper, German title)</span>\n</li>\n<li id=\"cite_note-9\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-9\">↑</a></span> <span class=\"reference-text\"><a href=\"/Judea_Pearl\" title=\"Judea Pearl\">Judea Pearl</a> (<b>1984</b>). Heuristics: Intelligent Search Strategies for Computer Problem Solving. Addison-Wesley Publishers Co., Reading, MA. ISBN 0-201-05594-5.</span>\n</li>\n<li id=\"cite_note-10\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-10\">↑</a></span> <span class=\"reference-text\"><a href=\"/Tony_Marsland\" title=\"Tony Marsland\">Tony Marsland</a>, <a href=\"/Alexander_Reinefeld\" title=\"Alexander Reinefeld\">Alexander Reinefeld</a>, <a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a> (<b>1987</b>). Low Overhead Alternatives to SSS*. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_%28journal%29\">Artificial Intelligence</a>, Vol. 31, No. 2, pp. 185-199. ISSN 0004-3702.</span>\n</li>\n<li id=\"cite_note-11\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-11\">↑</a></span> <span class=\"reference-text\"><a href=\"/Subir_Bhattacharya\" title=\"Subir Bhattacharya\">Subir Bhattacharya</a>, <a href=\"/Amitava_Bagchi\" title=\"Amitava Bagchi\">Amitava Bagchi</a> (<b>1990</b>). <i>Unified Recursive Schemes for Search in Game Trees.</i> Technical Report WPS-144, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Indian_Institute_of_Management_Calcutta\">Indian Institute of Management, Calcutta</a></span>\n</li>\n<li id=\"cite_note-12\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-12\">↑</a></span> <span class=\"reference-text\"><a href=\"/Wim_Pijls\" title=\"Wim Pijls\">Wim Pijls</a>, <a href=\"/Arie_de_Bruin\" title=\"Arie de Bruin\">Arie de Bruin</a> (<b>1990</b>). <i>Another View on the SSS* Algorithm</i>. International Symposium SIGAL '90</span>\n</li>\n<li id=\"cite_note-13\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-13\">↑</a></span> <span class=\"reference-text\"><a href=\"/Alexander_Reinefeld\" title=\"Alexander Reinefeld\">Alexander Reinefeld</a> (<b>1994</b>). <i>A Minimax Algorithm Faster than Alpha-Beta</i>. <a href=\"/Advances_in_Computer_Chess_7\" title=\"Advances in Computer Chess 7\">Advances in Computer Chess 7</a></span>\n</li>\n<li id=\"cite_note-14\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-14\">↑</a></span> <span class=\"reference-text\"><a href=\"/Aske_Plaat\" title=\"Aske Plaat\">Aske Plaat</a>, <a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a>, <a href=\"/Wim_Pijls\" title=\"Wim Pijls\">Wim Pijls</a>, <a href=\"/Arie_de_Bruin\" title=\"Arie de Bruin\">Arie de Bruin</a> (<b>1994, 2014</b>). <i>SSS* = Alpha-Beta + TT</i>. TR-CS-94-17, <a href=\"/University_of_Alberta\" title=\"University of Alberta\">University of Alberta</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1404.1517\">arXiv:1404.1517</a></span>\n</li>\n<li id=\"cite_note-15\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-15\">↑</a></span> <span class=\"reference-text\"><a href=\"/Arie_de_Bruin\" title=\"Arie de Bruin\">Arie de Bruin</a>, <a href=\"/Wim_Pijls\" title=\"Wim Pijls\">Wim Pijls</a> (<b>1997</b>). <i>SSS†.</i> <a href=\"/Advances_in_Computer_Chess_8\" title=\"Advances in Computer Chess 8\">Advances in Computer Chess 8</a></span>\n</li>\n<li id=\"cite_note-16\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-16\">↑</a></span> <span class=\"reference-text\"><a href=\"/Aske_Plaat\" title=\"Aske Plaat\">Aske Plaat</a>, <a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a>, <a href=\"/Wim_Pijls\" title=\"Wim Pijls\">Wim Pijls</a>, <a href=\"/Arie_de_Bruin\" title=\"Arie de Bruin\">Arie de Bruin</a>(<b>1996</b>). <i>Best-First Fixed-Depth Minimax Algorithms.</i> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_%28journal%29\">Artificial Intelligence</a>, Vol. 87</span>\n</li>\n<li id=\"cite_note-17\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-17\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66280&amp;start=67\">Re: Announcing lczero</a> by <a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel Shawul</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 21, 2018&#160;» <a href=\"/Leela_Chess_Zero\" title=\"Leela Chess Zero\">Leela Chess Zero</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Search\" title=\"Search\">Up one level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301100331\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.036 seconds\nReal time usage: 0.038 seconds\nPreprocessor visited node count: 357/1000000\nPreprocessor generated node count: 766/1000000\nPost‐expand include size: 27/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1065-0!canonical and timestamp 20260301100331 and revision id 11215\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "M._C._Escher"
+      },
+      {
+        "sortkey": "",
+        "*": "Aziza_Mustafa_Zadeh"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SSS* and Dual*"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "AAAI"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 7"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 8"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alexander Reinefeld"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha-Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Amitava Bagchi"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Arie de Bruin"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Array"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aske Plaat"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Best-First"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bojun Huang"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Burkhard Monien"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Claude G. Diderich"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Daniel Shawul"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "George Stockman"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hans-Joachim Kraas"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA Journal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "IEEE"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Igor Roizen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jonathan Schaeffer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Judea Pearl"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Laveen Kanal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Leela Chess Zero"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "MTD(f)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Monte-Carlo Tree Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Murray Campbell"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "NegaC*"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "NegaScout"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Window"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Oliver Vornberger"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pascal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Recursion"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Scout"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Subir Bhattacharya"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Timeline"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tony Marsland"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Toshihide Ibaraki"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "University of Alberta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Wim Pijls"
+      },
+      {
+        "ns": 0,
+        "*": "A*"
+      },
+      {
+        "ns": 0,
+        "*": "Nanda Srimani"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Aziza Mustafa Zadeh"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:M. C. Escher"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "SSS*",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "SSS*_and_Dual*",
+        "byteoffset": 3436,
+        "anchor": "SSS.2A"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Pseudo C-Code",
+        "number": "1.1",
+        "index": "2",
+        "fromtitle": "SSS*_and_Dual*",
+        "byteoffset": 5297,
+        "anchor": "Pseudo_C-Code"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Dual*",
+        "number": "2",
+        "index": "3",
+        "fromtitle": "SSS*_and_Dual*",
+        "byteoffset": 7866,
+        "anchor": "Dual.2A"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "RecSSS* and RecDual*",
+        "number": "3",
+        "index": "4",
+        "fromtitle": "SSS*_and_Dual*",
+        "byteoffset": 8452,
+        "anchor": "RecSSS.2A_and_RecDual.2A"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Pseudo C-Code",
+        "number": "3.1",
+        "index": "5",
+        "fromtitle": "SSS*_and_Dual*",
+        "byteoffset": 9531,
+        "anchor": "Pseudo_C-Code_2"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "SSS* and Dual* as MT",
+        "number": "4",
+        "index": "6",
+        "fromtitle": "SSS*_and_Dual*",
+        "byteoffset": 10989,
+        "anchor": "SSS.2A_and_Dual.2A_as_MT"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Pseudo C-Code",
+        "number": "4.1",
+        "index": "7",
+        "fromtitle": "SSS*_and_Dual*",
+        "byteoffset": 11520,
+        "anchor": "Pseudo_C-Code_3"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "5",
+        "index": "8",
+        "fromtitle": "SSS*_and_Dual*",
+        "byteoffset": 12332,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "6",
+        "index": "9",
+        "fromtitle": "SSS*_and_Dual*",
+        "byteoffset": 12399,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1979",
+        "number": "6.1",
+        "index": "10",
+        "fromtitle": "SSS*_and_Dual*",
+        "byteoffset": 12414,
+        "anchor": "1979"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1980 ...",
+        "number": "6.2",
+        "index": "11",
+        "fromtitle": "SSS*_and_Dual*",
+        "byteoffset": 12618,
+        "anchor": "1980_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1990 ...",
+        "number": "6.3",
+        "index": "12",
+        "fromtitle": "SSS*_and_Dual*",
+        "byteoffset": 14929,
+        "anchor": "1990_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "6.4",
+        "index": "13",
+        "fromtitle": "SSS*_and_Dual*",
+        "byteoffset": 17218,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "6.5",
+        "index": "14",
+        "fromtitle": "SSS*_and_Dual*",
+        "byteoffset": 17434,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "7",
+        "index": "15",
+        "fromtitle": "SSS*_and_Dual*",
+        "byteoffset": 17894,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "8",
+        "index": "16",
+        "fromtitle": "SSS*_and_Dual*",
+        "byteoffset": 18407,
+        "anchor": "References"
+      }
+    ]
+  }
+}

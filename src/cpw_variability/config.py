@@ -7,7 +7,7 @@ from .models import Paths
 
 BASE_URL = "https://www.chessprogramming.org"
 DEFAULT_TIMEOUT_SECONDS = 12
-DEFAULT_MAX_DISCOVERY_PAGES = 600
+DEFAULT_MAX_DISCOVERY_PAGES = 1200
 DEFAULT_TARGET_FEATURES = 150
 DEFAULT_USER_AGENT = "cpw-var/0.1 (+cache-first; polite-crawl)"
 DEFAULT_MIN_REQUEST_INTERVAL_SECONDS = 1.5
@@ -23,7 +23,38 @@ SEED_TITLES: dict[str, list[str]] = {
         "Category:Search",
         "Category:Evaluation",
         "Category:Endgame",
-    ]
+    ],
+    "implementation": [
+        "Main_Page",
+        "Category:Chess_Engines",
+        "Category:Search",
+        "Category:Evaluation",
+        "Category:Move_Generation",
+        "Category:Board_Representation",
+        "Category:Endgame",
+        "Category:Opening",
+        "Category:Protocols",
+        "Category:Time_Management",
+        "Category:Parallel_Search",
+        "Category:Automated_Tuning",
+        "Alpha-Beta",
+        "Bitboards",
+        "0x88",
+        "Mailbox",
+        "Transposition_Table",
+        "Zobrist_Hashing",
+        "NNUE",
+        "Quiescence_Search",
+        "Null_Move_Pruning",
+        "Late_Move_Reductions",
+        "Magic_Bitboards",
+        "Endgame_Tablebases",
+        "Syzygy_Bases",
+        "UCI",
+        "XBoard",
+        "SPSA",
+        "SPRT",
+    ],
 }
 
 NEGATION_PATTERNS = [

@@ -10,10 +10,10 @@ try:
 except Exception:  # pragma: no cover - optional dependency fallback
     fuzz = None
 
-from .config import DEFAULT_TARGET_FEATURES, GROUP_SPECS
+from .config import DEFAULT_TARGET_FEATURES
 from .evidence import build_trace, extract_snippet
 from .models import FeatureNode, PageDocument, TraceRecord
-from .taxonomy_seed import canonical_synonym_map, group_keywords
+from .taxonomy_seed import IMPLEMENTATION_GROUP_SPECS, canonical_synonym_map, group_keywords
 
 STOPWORDS = {
     "chess",
@@ -170,7 +170,7 @@ GROUP_NAME_TERMS = {
     re.sub(r"\\s+", " ", re.sub(r"([a-z0-9])([A-Z])", r"\1 \2", group["name"]).replace("_", " "))
     .lower()
     .strip()
-    for group in GROUP_SPECS
+    for group in IMPLEMENTATION_GROUP_SPECS
 }
 
 ALLOWED_SINGLE_TOKEN_FEATURES = {
@@ -203,6 +203,9 @@ class CoreFeatureSpec:
     name: str
     group_id: str
     aliases: tuple[str, ...]
+    variability_stage: str = "compile_time"
+    compile_flag: str = ""
+    runtime_flag: str = ""
 
 
 CORE_FEATURE_SPECS = [
@@ -211,14 +214,14 @@ CORE_FEATURE_SPECS = [
     CoreFeatureSpec("Mailbox", "board_representation", ("mailbox", "mailbox board")),
     CoreFeatureSpec("10x12 Board", "board_representation", ("10x12 board", "10x12")),
     CoreFeatureSpec("Piece Lists", "board_representation", ("piece lists", "piece list")),
-    CoreFeatureSpec("Bitboard Serialization", "board_representation", ("bitboard serialization",)),
-    CoreFeatureSpec("Rotated Bitboards", "board_representation", ("rotated bitboards", "rotated bitboard")),
     CoreFeatureSpec("Copy-Make", "board_representation", ("copy make", "copy-make")),
     CoreFeatureSpec("Make Move", "board_representation", ("make move",)),
     CoreFeatureSpec("Unmake Move", "board_representation", ("unmake move",)),
     CoreFeatureSpec("Move Generation", "move_generation", ("move generation",)),
     CoreFeatureSpec("Pseudo-Legal Move Generation", "move_generation", ("pseudo legal", "pseudo-legal")),
     CoreFeatureSpec("Legal Move Generation", "move_generation", ("legal move generation",)),
+    CoreFeatureSpec("Castling", "move_generation", ("castling", "castling rights")),
+    CoreFeatureSpec("En Passant", "move_generation", ("en passant", "ep capture")),
     CoreFeatureSpec("Magic Bitboards", "move_generation", ("magic bitboards", "magic bitboard")),
     CoreFeatureSpec("Move Ordering", "move_generation", ("move ordering",)),
     CoreFeatureSpec("Alpha-Beta", "search", ("alpha-beta", "alpha beta", "alphabeta")),
@@ -226,53 +229,32 @@ CORE_FEATURE_SPECS = [
     CoreFeatureSpec("Principal Variation Search", "search", ("principal variation search", "pvs")),
     CoreFeatureSpec("Iterative Deepening", "search", ("iterative deepening",)),
     CoreFeatureSpec("Quiescence Search", "search", ("quiescence search",)),
+    CoreFeatureSpec("Threefold Repetition", "search", ("threefold repetition", "repetition draw")),
+    CoreFeatureSpec("Fifty-Move Rule", "search", ("fifty-move rule", "50-move rule")),
     CoreFeatureSpec("Aspiration Windows", "search", ("aspiration windows", "aspiration window")),
-    CoreFeatureSpec("NegaScout", "search", ("negascout", "scout")),
-    CoreFeatureSpec("MTD(f)", "search", ("mtd(f)", "mtdf")),
-    CoreFeatureSpec("Monte Carlo Tree Search", "search", ("monte carlo tree search", "mcts")),
-    CoreFeatureSpec("UCT", "search", ("uct", "upper confidence bound")),
     CoreFeatureSpec("Killer Heuristic", "search", ("killer heuristic",)),
     CoreFeatureSpec("History Heuristic", "search", ("history heuristic",)),
     CoreFeatureSpec("Evaluation", "evaluation", ("evaluation",)),
     CoreFeatureSpec("Piece-Square Tables", "evaluation", ("piece-square tables", "piece square tables")),
     CoreFeatureSpec("Tapered Eval", "evaluation", ("tapered eval", "tapered evaluation")),
-    CoreFeatureSpec("NNUE", "evaluation", ("nnue",)),
-    CoreFeatureSpec("Neural Network Evaluation", "evaluation", ("neural network", "neural evaluation")),
-    CoreFeatureSpec("Static Exchange Evaluation", "evaluation", ("static exchange evaluation", "see")),
+    CoreFeatureSpec("Static Exchange Evaluation", "evaluation", ("static exchange evaluation",)),
     CoreFeatureSpec("King Safety", "evaluation", ("king safety",)),
     CoreFeatureSpec("Pawn Structure", "evaluation", ("pawn structure",)),
     CoreFeatureSpec("Mobility", "evaluation", ("mobility",)),
-    CoreFeatureSpec("Transposition Table", "transposition_table", ("transposition table", "tt")),
+    CoreFeatureSpec("Transposition Table", "transposition_table", ("transposition table",)),
     CoreFeatureSpec("Zobrist Hashing", "transposition_table", ("zobrist", "zobrist hashing")),
     CoreFeatureSpec("Replacement Schemes", "transposition_table", ("replacement scheme", "replacement schemes")),
     CoreFeatureSpec("Pawn Hash Table", "transposition_table", ("pawn hash", "pawn hash table")),
     CoreFeatureSpec("Hash Move", "transposition_table", ("hash move",)),
-    CoreFeatureSpec("Time Management", "time_management", ("time management",)),
-    CoreFeatureSpec("Pondering", "time_management", ("ponder", "pondering")),
-    CoreFeatureSpec("Parallel Search", "parallelism", ("parallel search",)),
-    CoreFeatureSpec("Lazy SMP", "parallelism", ("lazy smp",)),
-    CoreFeatureSpec("YBWC", "parallelism", ("ybwc", "young brothers wait concept")),
-    CoreFeatureSpec("ABDADA", "parallelism", ("abdada",)),
-    CoreFeatureSpec("Endgame Tablebases", "endgame", ("endgame tablebases", "tablebases")),
-    CoreFeatureSpec("Syzygy Bases", "endgame", ("syzygy", "syzygy bases")),
-    CoreFeatureSpec("Gaviota", "endgame", ("gaviota",)),
+    CoreFeatureSpec("Time Management", "time_management", ("time management",), variability_stage="runtime"),
+    CoreFeatureSpec("Pondering", "time_management", ("pondering", "ponder"), variability_stage="runtime"),
     CoreFeatureSpec("Opening Book", "opening", ("opening book",)),
-    CoreFeatureSpec("Polyglot", "opening", ("polyglot",)),
     CoreFeatureSpec("UCI", "protocol", ("uci", "universal chess interface")),
-    CoreFeatureSpec("XBoard", "protocol", ("xboard", "cecp")),
     CoreFeatureSpec("FEN", "protocol", ("fen", "forsyth edwards notation")),
-    CoreFeatureSpec("EPD", "protocol", ("epd", "extended position description")),
-    CoreFeatureSpec("SPSA", "tuning", ("spsa",)),
-    CoreFeatureSpec("Texel's Tuning Method", "tuning", ("texel", "texel's tuning")),
-    CoreFeatureSpec("CLOP", "tuning", ("clop",)),
-    CoreFeatureSpec("SPRT", "tuning", ("sprt",)),
     CoreFeatureSpec("Null Move Pruning", "pruning_reductions", ("null move pruning", "null move")),
     CoreFeatureSpec("Late Move Reductions", "pruning_reductions", ("late move reductions", "lmr")),
-    CoreFeatureSpec("Late Move Pruning", "pruning_reductions", ("late move pruning", "lmp")),
     CoreFeatureSpec("Futility Pruning", "pruning_reductions", ("futility pruning", "futility")),
     CoreFeatureSpec("Razoring", "pruning_reductions", ("razoring",)),
-    CoreFeatureSpec("ProbCut", "pruning_reductions", ("probcut",)),
-    CoreFeatureSpec("Multi-Cut", "pruning_reductions", ("multi-cut", "multicut")),
     CoreFeatureSpec("Delta Pruning", "pruning_reductions", ("delta pruning",)),
 ]
 
@@ -768,19 +750,124 @@ def synthesize_leaf_features(
     return leaves, traces
 
 
+def _has_alias_match(alias_norm: str, text_norm: str) -> bool:
+    escaped = re.escape(alias_norm)
+    pattern = re.compile(rf"(?<![a-z0-9]){escaped}(?![a-z0-9])")
+    return bool(pattern.search(text_norm))
+
+
 def _find_page_evidence(pages: list[PageDocument], aliases: list[str]) -> tuple[PageDocument, str, str] | None:
-    alias_norms = [normalize_term(alias) for alias in aliases if normalize_term(alias)]
+    normalized_aliases: list[tuple[str, str]] = []
+    for alias in aliases:
+        alias_norm = normalize_term(alias)
+        if not alias_norm:
+            continue
+        normalized_aliases.append((alias, alias_norm))
+
     for page in pages:
         title_norm = normalize_term(page.title)
-        heading_blob = normalize_term(" ".join(page.headings[:20]))
+        heading_blob = normalize_term(" ".join(page.headings[:24]))
         text_norm = normalize_term(page.text)
-        for alias, alias_norm in zip(aliases, alias_norms):
-            if not alias_norm:
+        combined = f"{title_norm} {heading_blob} {text_norm}"
+
+        for alias, alias_norm in normalized_aliases:
+            if len(alias_norm) <= 2 and alias_norm not in {"0x88"}:
                 continue
-            if alias_norm in title_norm or alias_norm in heading_blob or alias_norm in text_norm:
+            if _has_alias_match(alias_norm, combined):
                 snippet = extract_snippet(page.text, alias)
                 return page, alias, snippet
+
     return None
+
+
+def _stage_from_spec(spec: CoreFeatureSpec) -> str:
+    return spec.variability_stage if spec.variability_stage in {"compile_time", "runtime", "mixed"} else "compile_time"
+
+
+def _compile_flag_for(spec: CoreFeatureSpec) -> str:
+    if spec.compile_flag:
+        return spec.compile_flag
+    return f"CFG_{slugify(spec.name).upper()}"
+
+
+def _runtime_flag_for(spec: CoreFeatureSpec) -> str:
+    if spec.runtime_flag:
+        return spec.runtime_flag
+    if _stage_from_spec(spec) in {"runtime", "mixed"}:
+        return f"--{slugify(spec.name).replace('_', '-')}"
+    return ""
+
+
+def mine_implementation_features(
+    pages: list[PageDocument],
+    target_count: int = DEFAULT_TARGET_FEATURES,
+) -> tuple[list[FeatureNode], list[TraceRecord], list[str]]:
+    leaves: list[FeatureNode] = []
+    traces: list[TraceRecord] = []
+    warnings: list[str] = []
+    used_ids: set[str] = set()
+    missing: list[str] = []
+
+    for spec in CORE_FEATURE_SPECS:
+        aliases = [spec.name, *spec.aliases]
+        match = _find_page_evidence(pages, aliases)
+        if match is None:
+            missing.append(spec.name)
+            continue
+
+        page, alias_used, snippet = match
+        feature_id_base = f"feat_{slugify(spec.name)}"
+        feature_id = feature_id_base
+        index = 2
+        while feature_id in used_ids:
+            feature_id = f"{feature_id_base}_{index}"
+            index += 1
+        used_ids.add(feature_id)
+
+        stage = _stage_from_spec(spec)
+        leaves.append(
+            FeatureNode(
+                id=feature_id,
+                name=spec.name,
+                parent_id=spec.group_id,
+                kind="optional",
+                description=snippet[:180],
+                aliases=[alias for alias in spec.aliases if normalize_term(alias) != normalize_term(spec.name)],
+                variation_role="option",
+                variability_stage=stage if stage in {"compile_time", "runtime", "mixed"} else "compile_time",
+                configurable=True,
+                compile_flag=_compile_flag_for(spec),
+                runtime_flag=_runtime_flag_for(spec),
+            )
+        )
+
+        traces.append(
+            build_trace(
+                feature_id=feature_id,
+                source_url=page.url,
+                source_title=page.title,
+                snippet=snippet,
+                rule_id="core_feature_match",
+                term=alias_used,
+            )
+        )
+
+    leaves.sort(key=lambda feature: (feature.parent_id or "", feature.name.lower()))
+    if target_count > 0 and len(leaves) > target_count:
+        kept_ids = {feature.id for feature in leaves[:target_count]}
+        leaves = leaves[:target_count]
+        traces = [trace for trace in traces if trace.feature_id in kept_ids]
+
+    if missing:
+        preview = ", ".join(sorted(missing)[:12])
+        warnings.append(
+            f"{len(missing)} catalog variability options were not evidenced in current cache (e.g., {preview})"
+        )
+
+    if not leaves:
+        warnings.append("No implementation-oriented feature options were mined from cache")
+
+    return leaves, traces, warnings
 
 
 def augment_with_core_features(

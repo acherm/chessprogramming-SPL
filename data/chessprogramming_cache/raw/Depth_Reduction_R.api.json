@@ -1,0 +1,189 @@
+{
+  "parse": {
+    "title": "Depth Reduction R",
+    "pageid": 1046,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Search\" title=\"Search\">Search</a> * Depth Reduction R</b>\n</p><p><b>R</b> is a common name for a constant or variable signifying <a href=\"/Depth\" title=\"Depth\">depth</a> reduction used in the <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">Null Move Pruning</a> <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup>, <a href=\"/Null_Move_Reductions\" title=\"Null Move Reductions\">Null Move Reductions</a> and independently in <a href=\"/Multi-Cut\" title=\"Multi-Cut\">Multi-Cut</a> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>. In many null move implementations it is either 2 or 3, the exact formula being <span style=\"background-color: rgb(199, 199, 199)\">depth - R - 1</span>.\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Variable_Reduction\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Variable Reduction</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#1997_...\"><span class=\"tocnumber\">2.1</span> <span class=\"toctext\">1997 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#2000_...\"><span class=\"tocnumber\">2.2</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#2010_...\"><span class=\"tocnumber\">2.3</span> <span class=\"toctext\">2010 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#References\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Variable_Reduction\">Variable Reduction</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Depth_Reduction_R&amp;action=edit&amp;section=1\" title=\"Edit section: Variable Reduction\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>When <b>R</b> becomes a variable, then we say that a program uses <a href=\"/Null_Move_Pruning#AdaptiveNullMovePruning\" title=\"Null Move Pruning\">adaptive null move pruning</a>, first described by <a href=\"/Ernst_A._Heinz\" title=\"Ernst A. Heinz\">Ernst A. Heinz</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>, using R=3 when normal search depth exceeds 6 plies and R=2 otherwise, while more recently most engines account increased search depth with greater reductions <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>. \n</p>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Depth_Reduction_R&amp;action=edit&amp;section=2\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1997_...\">1997 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Depth_Reduction_R&amp;action=edit&amp;section=3\" title=\"Edit section: 1997 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/JJTEBafyuYM/hRTys0ZxcUIJ\">Null move depth reductions</a> by <a href=\"/Tom_King\" title=\"Tom King\">Tom King</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, February 02, 1997</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=28772\">Null move reductions</a> by <a href=\"/Roberto_Waldteufel\" title=\"Roberto Waldteufel\">Roberto Waldteufel</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 04, 1998</li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Depth_Reduction_R&amp;action=edit&amp;section=4\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=183089\">Null move R=2 vs Null move R=2/3</a> by <a href=\"/Tom_King\" title=\"Tom King\">Tom King</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 09, 2001</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=239907\">Null-Move: Difference between R = 2 and R = 3 in action</a> by <a href=\"/Eli_David\" title=\"Eli David\">Omid David</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 11, 2002</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=313492&amp;t=31361\">Smooth scaling -- an explanation</a> by <a href=\"/Dann_Corbit\" title=\"Dann Corbit\">Dann Corbit</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 30, 2009</li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Depth_Reduction_R&amp;action=edit&amp;section=5\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=31436\">Figuring out the R factor</a> by <a href=\"/Michael_Sherwin\" title=\"Michael Sherwin\">Michael Sherwin</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 03, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=49558\">How much to reduce&#160;?</a> by <a href=\"/index.php?title=Henk_van_den_Belt&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Henk van den Belt (page does not exist)\">Henk van den Belt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 03, 2013&#160;» <a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">Late Move Reductions</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=60240\">Reductions</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 22, 2016&#160;» <a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">Late Move Reductions</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=60561\">Calculating R value for Null Move</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 23, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64927\">Rethinking r in null move</a> by <a href=\"/Michael_Sherwin\" title=\"Michael Sherwin\">Michael Sherwin</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 18, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65351\">Update on null move and LMR</a> by <a href=\"/Michael_Sherwin\" title=\"Michael Sherwin\">Michael Sherwin</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 01, 2017&#160;» <a href=\"/RomiChess\" title=\"RomiChess\">RomiChess</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Depth_Reduction_R&amp;action=edit&amp;section=6\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a href=\"/Chrilly_Donninger\" title=\"Chrilly Donninger\">Chrilly Donninger</a>. (<b>1993</b>). <i>Null Move and Deep Search: Selective-Search Heuristics for Obtuse Chess Programs.</i> <a href=\"/ICGA_Journal#16_3\" title=\"ICGA Journal\">ICCA Journal, Vol. 16, No. 3</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a href=\"/Yngvi_Bj%C3%B6rnsson\" title=\"Yngvi Björnsson\">Yngvi Björnsson</a>, <a href=\"/Tony_Marsland\" title=\"Tony Marsland\">Tony Marsland</a> (<b>2001</b>). <i>Multi-cut Alpha-Beta Pruning in Game Tree Search.</i> Theoretical Computer Science, Vol. 252</span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a href=\"/Ernst_A._Heinz\" title=\"Ernst A. Heinz\">Ernst A. Heinz</a>. (<b>1999</b>). <i>Adaptive null-move pruning</i>. <a href=\"/ICGA_Journal#22_3\" title=\"ICGA Journal\">ICCA Journal, Vol. 22, No 3</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64927\">Rethinking r in null move</a> by <a href=\"/Michael_Sherwin\" title=\"Michael Sherwin\">Michael Sherwin</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 18, 2017</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Search\" title=\"Search\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301152715\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.010 seconds\nReal time usage: 0.010 seconds\nPreprocessor visited node count: 84/1000000\nPreprocessor generated node count: 176/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1046-0!canonical and timestamp 20260301152715 and revision id 6368\n -->\n"
+    },
+    "categories": [],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Andrew Grant"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chrilly Donninger"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dann Corbit"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Eli David"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ernst A. Heinz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Harm Geert Muller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA Journal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Late Move Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michael Sherwin"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Multi-Cut"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Roberto Waldteufel"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "RomiChess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tom King"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tony Marsland"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Yngvi Björnsson"
+      },
+      {
+        "ns": 0,
+        "*": "Henk van den Belt"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Variable Reduction",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Depth_Reduction_R",
+        "byteoffset": 739,
+        "anchor": "Variable_Reduction"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Depth_Reduction_R",
+        "byteoffset": 1367,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1997 ...",
+        "number": "2.1",
+        "index": "3",
+        "fromtitle": "Depth_Reduction_R",
+        "byteoffset": 1381,
+        "anchor": "1997_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "2.2",
+        "index": "4",
+        "fromtitle": "Depth_Reduction_R",
+        "byteoffset": 1699,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "2.3",
+        "index": "5",
+        "fromtitle": "Depth_Reduction_R",
+        "byteoffset": 2164,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "3",
+        "index": "6",
+        "fromtitle": "Depth_Reduction_R",
+        "byteoffset": 3029,
+        "anchor": "References"
+      }
+    ]
+  }
+}

@@ -1,0 +1,405 @@
+{
+  "parse": {
+    "title": "Stash",
+    "pageid": 7494,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Engines\" title=\"Engines\">Engines</a> * Stash</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:222px;\"><a href=\"/File:Outside_Omphalos_at_Delphi.jpg\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/c/cb/Outside_Omphalos_at_Delphi.jpg\" width=\"220\" height=\"270\" class=\"thumbimage\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Outside_Omphalos_at_Delphi.jpg\" class=\"internal\" title=\"Enlarge\"></a></div>The  <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Omphalos_of_Delphi\">Omphalos stone</a> <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>Stash</b>, (Stash-bot)<br />\nan <a href=\"/UCI\" title=\"UCI\">UCI</a> compliant <a href=\"/Category:Open_Source\" title=\"Category:Open Source\">open source chess engine</a> by <a href=\"/Morgan_Houppin\" title=\"Morgan Houppin\">Morgan Houppin</a>, written in <a href=\"/C\" title=\"C\">C</a>, licensed under the <a href=\"/Free_Software_Foundation#GPL\" title=\"Free Software Foundation\">GPL v3</a> and first released on <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/GitLab\">GitLab</a> in February 2020 <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Features\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Features</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-2\"><a href=\"#Board_Representation\"><span class=\"tocnumber\">1.1</span> <span class=\"toctext\">Board Representation</span></a></li>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#Search\"><span class=\"tocnumber\">1.2</span> <span class=\"toctext\">Search</span></a></li>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#Evaluation\"><span class=\"tocnumber\">1.3</span> <span class=\"toctext\">Evaluation</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Forum Posts</span></a></li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#External_Links\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">External Links</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#Chess_Engine\"><span class=\"tocnumber\">3.1</span> <span class=\"toctext\">Chess Engine</span></a></li>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#Misc\"><span class=\"tocnumber\">3.2</span> <span class=\"toctext\">Misc</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-9\"><a href=\"#References\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Features\">Features</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Stash&amp;action=edit&amp;section=1\" title=\"Edit section: Features\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>\n</p>\n<h2><span class=\"mw-headline\" id=\"Board_Representation\"><a href=\"/Board_Representation\" title=\"Board Representation\">Board Representation</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Stash&amp;action=edit&amp;section=2\" title=\"Edit section: Board Representation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Bitboards\" title=\"Bitboards\">Bitboards</a></li>\n<li> <a href=\"/Magic_Bitboards\" title=\"Magic Bitboards\">Magic Bitboards</a></li>\n<li> <a href=\"/BMI2#PEXTBitboards\" title=\"BMI2\">PEXT Bitboards</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Search\"><a href=\"/Search\" title=\"Search\">Search</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Stash&amp;action=edit&amp;section=3\" title=\"Edit section: Search\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Iterative_Deepening\" title=\"Iterative Deepening\">Iterative Deepening</a></li>\n<li> <a href=\"/Aspiration_Windows\" title=\"Aspiration Windows\">Aspiration Windows</a></li>\n<li> <a href=\"/Lazy_SMP\" title=\"Lazy SMP\">Lazy SMP</a></li>\n<li> <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">Principal Variation Search</a></li>\n<li> <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Table</a>\n<ul><li> <a href=\"/Shared_Hash_Table\" title=\"Shared Hash Table\">Shared Hash Table</a></li>\n<li> <a href=\"/Zobrist_Hashing\" title=\"Zobrist Hashing\">Zobrist Hashing</a></li></ul></li>\n<li> <a href=\"/Move_Ordering\" title=\"Move Ordering\">Move Ordering</a>\n<ul><li> <a href=\"/Hash_Move\" title=\"Hash Move\">Hash Move</a></li>\n<li> <a href=\"/Promotions\" title=\"Promotions\">Promotions</a></li>\n<li> <a href=\"/MVV-LVA\" title=\"MVV-LVA\">MVV/LVA</a></li>\n<li> <a href=\"/Killer_Heuristic\" title=\"Killer Heuristic\">Killer Heuristic</a></li>\n<li> <a href=\"/History_Heuristic\" title=\"History Heuristic\">History Heuristic</a></li></ul></li>\n<li> <a href=\"/Selectivity\" title=\"Selectivity\">Selectivity</a>\n<ul><li> <a href=\"/Razoring\" title=\"Razoring\">Razoring</a></li>\n<li> <a href=\"/Futility_Pruning\" title=\"Futility Pruning\">Futility Pruning</a></li>\n<li> <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">Null Move Pruning</a></li>\n<li> <a href=\"/Null_Move_Pruning#ZugzwangVerification\" title=\"Null Move Pruning\">Zugzwang Verification</a></li>\n<li> <a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">Late Move Reductions</a></li>\n<li> <a href=\"/Futility_Pruning#MoveCountBasedPruning\" title=\"Futility Pruning\">Late Move Pruning</a> (v23.0)</li>\n<li> <a href=\"/Mate_Distance_Pruning\" title=\"Mate Distance Pruning\">Mate Distance Pruning</a></li>\n<li> <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">Quiescence Search</a></li></ul></li></ul>\n<h2><span class=\"mw-headline\" id=\"Evaluation\"><a href=\"/Evaluation\" title=\"Evaluation\">Evaluation</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Stash&amp;action=edit&amp;section=4\" title=\"Edit section: Evaluation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Tapered_Eval\" title=\"Tapered Eval\">Tapered Eval</a></li>\n<li> <a href=\"/Material\" title=\"Material\">Material</a>\n<ul><li> <a href=\"/Bishop_Pair\" title=\"Bishop Pair\">Bishop Pair</a></li>\n<li> <a href=\"/Draw_Evaluation\" title=\"Draw Evaluation\">Draw Evaluation</a></li></ul></li>\n<li> <a href=\"/Mobility\" title=\"Mobility\">Mobility</a>\n<ul><li> <a href=\"/Rook_on_Open_File\" title=\"Rook on Open File\">Rooks on (Semi) Open Files</a></li></ul></li>\n<li> <a href=\"/Pawn_Structure\" title=\"Pawn Structure\">Pawn Structure</a>\n<ul><li> <a href=\"/Pawn_Hash_Table\" title=\"Pawn Hash Table\">Pawn Hash Table</a></li>\n<li> <a href=\"/Backward_Pawn\" title=\"Backward Pawn\">Backward Pawn</a></li>\n<li> <a href=\"/Doubled_Pawn\" title=\"Doubled Pawn\">Doubled Pawn</a></li>\n<li> <a href=\"/Isolated_Pawn\" title=\"Isolated Pawn\">Isolated Pawn</a></li>\n<li> <a href=\"/Passed_Pawn\" title=\"Passed Pawn\">Passed Pawn</a></li></ul></li>\n<li> <a href=\"/King_Safety\" title=\"King Safety\">King Safety</a>\n<ul><li> <a href=\"/King_Safety#Attacking\" title=\"King Safety\">Attacking King Zone</a></li>\n<li> <a href=\"/Castling_Rights\" title=\"Castling Rights\">Castling Rights</a></li></ul></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Stash&amp;action=edit&amp;section=5\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=73092\">New engine: Stash</a> by <a href=\"/Morgan_Houppin\" title=\"Morgan Houppin\">Morgan Houppin</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 14, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=69693&amp;start=27\">Re: Linux friendly engines at all levels</a> by <a href=\"/Morgan_Houppin\" title=\"Morgan Houppin\">Morgan Houppin</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 11, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=75371\">INTERESTING Engines with Unique Styles (Unlike SF)</a> by <a href=\"/index.php?title=Brendan_J._Norman&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Brendan J. Norman (page does not exist)\">Brendan J. Norman</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 11, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://talkchess.com/forum3/viewtopic.php?f=2&amp;t=76927#p888045\">Re: Stash has lost 2 game because of NO EGTB</a> by <a href=\"/Morgan_Houppin\" title=\"Morgan Houppin\">Morgan Houppin</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 25, 2021</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=76209&amp;start=299\">Re: New engine releases &amp; news 2021</a> (Stash 30.0, <a href=\"/Bagatur\" title=\"Bagatur\">Bagatur</a> 2.2b) by <a href=\"/G%C3%BCnther_Simon\" title=\"Günther Simon\">Günther Simon</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 01, 2021</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=73092&amp;start=120\">Re: New engine: Stash</a> (Stash 31.0) by <a href=\"/Morgan_Houppin\" title=\"Morgan Houppin\">Morgan Houppin</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 28, 2021</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Stash&amp;action=edit&amp;section=6\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Chess_Engine\">Chess Engine</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Stash&amp;action=edit&amp;section=7\" title=\"Edit section: Chess Engine\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://gitlab.com/mhouppin/stash-bot\">Morgan Houppin / stash-bot · GitLab</a> </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/mhouppin/stash-bot\">GitHub - mhouppin/stash-bot: Mirror of my Gitlab chess engine project</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://ccrl.chessdom.com/ccrl/404/cgi/compare_engines.cgi?family=Stash&amp;print=Rating+list&amp;print=Results+table&amp;print=LOS+table&amp;print=Ponder+hit+table&amp;print=Eval+difference+table&amp;print=Comopp+gamenum+table&amp;print=Overlap+table&amp;print=Score+with+common+opponents\">Stash in CCRL Blitz</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Misc\">Misc</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Stash&amp;action=edit&amp;section=8\" title=\"Edit section: Misc\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wiktionary.org/wiki/stash\">stash - Wiktionary</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Stash\">Stash from Wikipedia</a></li>\n<li> <a href=\"/Category:Phish\" title=\"Category:Phish\">Phish</a> - <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Stash_(Phish_album)\">Stash</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Merriweather_Post_Pavilion\">Merriweather Post Pavilion</a> in <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Columbia,_Maryland\">Columbia, MD</a>, July 14, 2013, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video </li></ul>\n<dl><dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/79NAC9vNThU?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Stash&amp;action=edit&amp;section=9\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\">The <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Omphalos_of_Delphi\">omphalos stone</a> displayed outside at <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Delphi\">Delphi</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Greece\">Greece</a>, lower piece is a stash, <a rel=\"nofollow\" class=\"external text\" href=\"https://commons.wikimedia.org/wiki/File:Outside_Omphalos_at_Delphi.jpg\">Image</a> by <a rel=\"nofollow\" class=\"external text\" href=\"https://commons.wikimedia.org/wiki/User:Patar_knight\">Patar knight</a>, March 21, 2009, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wikimedia_Commons\">Wikimedia Commons</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=73092\">New engine: Stash</a> by <a href=\"/Morgan_Houppin\" title=\"Morgan Houppin\">Morgan Houppin</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 14, 2020</span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\">Features based on <a rel=\"nofollow\" class=\"external text\" href=\"https://gitlab.com/mhouppin/stash-bot/-/releases#v22.0\">Releases · Morgan Houppin / stash-bot · GitLab v22.0</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Engines\" title=\"Engines\">Up one level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301155442\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.072 seconds\nReal time usage: 0.645 seconds\nPreprocessor visited node count: 86/1000000\nPreprocessor generated node count: 186/1000000\nPost‐expand include size: 26/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:7494-0!canonical and timestamp 20260301155442 and revision id 25303\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Open_Source"
+      },
+      {
+        "sortkey": "",
+        "*": "GPL"
+      },
+      {
+        "sortkey": "",
+        "*": "UCI"
+      },
+      {
+        "sortkey": "",
+        "*": "PC"
+      },
+      {
+        "sortkey": "",
+        "*": "X86"
+      },
+      {
+        "sortkey": "",
+        "*": "X64"
+      },
+      {
+        "sortkey": "",
+        "*": "Linux"
+      },
+      {
+        "sortkey": "",
+        "*": "Windows"
+      },
+      {
+        "sortkey": "",
+        "*": "OpenBench"
+      },
+      {
+        "sortkey": "",
+        "*": "Phish"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aspiration Windows"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "BMI2"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Backward Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bagatur"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bishop Pair"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Board Representation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "C"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Castling Rights"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Doubled Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Draw Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engines"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Free Software Foundation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Futility Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Günther Simon"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hash Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "History Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Isolated Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iterative Deepening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Killer Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "King Safety"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Late Move Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lazy SMP"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "MVV-LVA"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Magic Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mate Distance Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Material"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mobility"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Morgan Houppin"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Ordering"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Passed Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Hash Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Structure"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Promotions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiescence Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Razoring"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rook on Open File"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Selectivity"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Shared Hash Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tapered Eval"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "UCI"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Zobrist Hashing"
+      },
+      {
+        "ns": 0,
+        "*": "Brendan J. Norman"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Open Source"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Phish"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Features",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Stash",
+        "byteoffset": 1066,
+        "anchor": "Features"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Board Representation",
+        "number": "1.1",
+        "index": "2",
+        "fromtitle": "Stash",
+        "byteoffset": 1216,
+        "anchor": "Board_Representation"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Search",
+        "number": "1.2",
+        "index": "3",
+        "fromtitle": "Stash",
+        "byteoffset": 1324,
+        "anchor": "Search"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Evaluation",
+        "number": "1.3",
+        "index": "4",
+        "fromtitle": "Stash",
+        "byteoffset": 1945,
+        "anchor": "Evaluation"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "2",
+        "index": "5",
+        "fromtitle": "Stash",
+        "byteoffset": 2324,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "3",
+        "index": "6",
+        "fromtitle": "Stash",
+        "byteoffset": 3289,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Chess Engine",
+        "number": "3.1",
+        "index": "7",
+        "fromtitle": "Stash",
+        "byteoffset": 3306,
+        "anchor": "Chess_Engine"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Misc",
+        "number": "3.2",
+        "index": "8",
+        "fromtitle": "Stash",
+        "byteoffset": 3795,
+        "anchor": "Misc"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "4",
+        "index": "9",
+        "fromtitle": "Stash",
+        "byteoffset": 4324,
+        "anchor": "References"
+      }
+    ]
+  }
+}

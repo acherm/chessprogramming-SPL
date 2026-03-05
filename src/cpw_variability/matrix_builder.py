@@ -74,7 +74,11 @@ def build_engine_feature_matrix(engine_pages: list[PageDocument], features: list
     warnings: list[str] = []
     engine_lookup: dict[str, str] = {}
 
-    considered_features = [feature for feature in features if feature.parent_id is not None]
+    considered_features = [
+        feature
+        for feature in features
+        if feature.parent_id is not None and feature.variation_role == "option" and feature.configurable
+    ]
 
     for engine in engine_pages:
         engine_id = engine_id_from_title(engine.title)

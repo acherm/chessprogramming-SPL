@@ -1,0 +1,570 @@
+{
+  "parse": {
+    "title": "Glaurung",
+    "pageid": 4507,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Engines\" title=\"Engines\">Engines</a> * Glaurung</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:222px;\"><a href=\"http://middle-earthencyclopedia.weebly.com/glaurung.html\"><img alt=\"\" src=\"/images/thumb/4/4f/Glaurung.jpg/220px-Glaurung.jpg\" width=\"220\" height=\"341\" class=\"thumbimage\" srcset=\"/images/4/4f/Glaurung.jpg 1.5x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Glaurung.jpg\" class=\"internal\" title=\"Enlarge\"></a></div><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Glaurung\">Glaurung</a> by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/John_Howe_%28illustrator%29\">John Howe</a> <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup></div></div></div> \n<p><b>Glaurung</b>,<br />\nan <a href=\"/UCI\" title=\"UCI\">UCI</a>-compatible <a href=\"/Category:Open_Source\" title=\"Category:Open Source\">open source</a> chess engine developed by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a> under the <a href=\"/Free_Software_Foundation#GPL\" title=\"Free Software Foundation\">GPL 3</a>. \nGlaurung is the forerunner of <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a> by <a href=\"/Marco_Costalba\" title=\"Marco Costalba\">Marco Costalba</a>, <a href=\"/Joona_Kiiski\" title=\"Joona Kiiski\">Joona Kiiski</a> and Tord Romstad.  \nFirst released in fall 2004, Glaurung is written in <a href=\"/C\" title=\"C\">C</a>, later versions completely in <a href=\"/Cpp\" title=\"Cpp\">C++</a>. \nIt is portable and able to run on <a href=\"/Windows\" title=\"Windows\">Windows</a>, <a href=\"/Linux\" title=\"Linux\">Linux</a>, <a href=\"/Mac_OS\" title=\"Mac OS\">Mac OS X</a> and mobile platforms. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Tournament_Play\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Tournament Play</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Description\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Description</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#Board_Representation\"><span class=\"tocnumber\">2.1</span> <span class=\"toctext\">Board Representation</span></a></li>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#Search\"><span class=\"tocnumber\">2.2</span> <span class=\"toctext\">Search</span></a></li>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#Evaluation\"><span class=\"tocnumber\">2.3</span> <span class=\"toctext\">Evaluation</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#Gaurung_GUI\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Gaurung GUI</span></a></li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#Play_Magnus\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Play Magnus</span></a></li>\n<li class=\"toclevel-1 tocsection-8\"><a href=\"#See_also\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-9\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#2004\"><span class=\"tocnumber\">6.1</span> <span class=\"toctext\">2004</span></a></li>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#2005_...\"><span class=\"tocnumber\">6.2</span> <span class=\"toctext\">2005 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-12\"><a href=\"#2010_...\"><span class=\"tocnumber\">6.3</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-13\"><a href=\"#2020_...\"><span class=\"tocnumber\">6.4</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-14\"><a href=\"#External_Links\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">External Links</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-15\"><a href=\"#Chess_Engine\"><span class=\"tocnumber\">7.1</span> <span class=\"toctext\">Chess Engine</span></a></li>\n<li class=\"toclevel-2 tocsection-16\"><a href=\"#Misc\"><span class=\"tocnumber\">7.2</span> <span class=\"toctext\">Misc</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-17\"><a href=\"#References\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Tournament_Play\">Tournament Play</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Glaurung&amp;action=edit&amp;section=1\" title=\"Edit section: Tournament Play\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><a href=\"/Chess960\" title=\"Chess960\">Chess960</a> compliant, Glaurung played two <a href=\"/Livingston_Chess960_Computer_World_Championship\" title=\"Livingston Chess960 Computer World Championship\">Livingston Chess960 Computer World Championships</a>, in <a href=\"/Chess960CWC_2005\" title=\"Chess960CWC 2005\">2005</a> where it became third, and the in <a href=\"/Chess960CWC_2006\" title=\"Chess960CWC 2006\">2006</a>. \nIt won two times the <a href=\"/Polish_Computer_Chess_Championship\" title=\"Polish Computer Chess Championship\">International Open Polish Computer Chess Championships</a>, in <a href=\"/IOPCCC_2007\" title=\"IOPCCC 2007\">2007</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup> and <a href=\"/IOPCCC_2008\" title=\"IOPCCC 2008\">2008</a>, and further played the <a href=\"/ICT_2007\" title=\"ICT 2007\">ICT 2007</a>, and the <a href=\"/CCT8\" title=\"CCT8\">CCT8</a>, <a href=\"/CCT10\" title=\"CCT10\">CCT10</a>, and <a href=\"/CCT11\" title=\"CCT11\">CCT11</a> online tournaments. \n</p>\n<h1><span class=\"mw-headline\" id=\"Description\">Description</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Glaurung&amp;action=edit&amp;section=2\" title=\"Edit section: Description\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Board_Representation\">Board Representation</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Glaurung&amp;action=edit&amp;section=3\" title=\"Edit section: Board Representation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Glaurung versions prior to <b>2.0</b> applied 16x16 <a href=\"/Vector_Attacks\" title=\"Vector Attacks\">Vector Attacks</a> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup> <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup>, combining the property of the <a href=\"/10x12_Board\" title=\"10x12 Board\">10x12 board</a> with its surrounding <a href=\"/Ranks\" title=\"Ranks\">ranks</a> and <a href=\"/Files\" title=\"Files\">files</a>, which ensure a <a href=\"/Knight\" title=\"Knight\">knight</a> can not jump off the board, with the property that a square difference uniquely maps a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Euclidean_vector\">vector</a> in the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Chebyshev_distance\">Chebyshev</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Vector_space\">vector space</a> of a <a href=\"/Chessboard\" title=\"Chessboard\">chessboard</a>. With the advent of <a href=\"/Magic_Bitboards\" title=\"Magic Bitboards\">Magic Bitboards</a>, Glaurung <b>2</b> was a complete rewrite <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup> utilizing <a href=\"/Bitboards\" title=\"Bitboards\">bitboards</a> as primary board representation.\n</p>\n<h2><span class=\"mw-headline\" id=\"Search\">Search</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Glaurung&amp;action=edit&amp;section=4\" title=\"Edit section: Search\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Glaurung is a <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">PVS</a> searcher <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup>, using advanced <a href=\"/Selectivity\" title=\"Selectivity\">selectivity</a>, and was beside <a href=\"/Fruit\" title=\"Fruit\">Fruit</a> the program which made <a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">LMR</a> popular <sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup> . Since early 2006 Glaurung 1.x supports <a href=\"/Parallel_Search\" title=\"Parallel Search\">SMP search</a>.\n</p>\n<h2><span class=\"mw-headline\" id=\"Evaluation\">Evaluation</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Glaurung&amp;action=edit&amp;section=5\" title=\"Edit section: Evaluation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Glaurung's <a href=\"/Evaluation\" title=\"Evaluation\">evaluation</a> is tellingly summarized by Tord's <a href=\"/Evaluation_Philosophy\" title=\"Evaluation Philosophy\">evaluation philosophy</a>, covering orthogonality, continuity, sense of progress and good worst case behavior <sup id=\"cite_ref-9\" class=\"reference\"><a href=\"#cite_note-9\">&#91;9&#93;</a></sup>. Glaurung applies a <a href=\"/Tapered_Eval\" title=\"Tapered Eval\">tapered evaluation</a> to make a smooth transition between the <a href=\"/Game_Phases\" title=\"Game Phases\">game phases</a>.\n<span id=\"GUI\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Gaurung_GUI\">Gaurung GUI</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Glaurung&amp;action=edit&amp;section=6\" title=\"Edit section: Gaurung GUI\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>In 2007, Tord released an own <a href=\"/UCI\" title=\"UCI\">UCI</a> compliant <a href=\"/GUI\" title=\"GUI\">GUI</a> for <a href=\"/Mac_OS\" title=\"Mac OS\">Mac OS X</a>, written in <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Objective-C\">Objective-C</a> using the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/GNUstep\">GNUstep</a> <sup id=\"cite_ref-10\" class=\"reference\"><a href=\"#cite_note-10\">&#91;10&#93;</a></sup> implementation of the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Cocoa_%28API%29\">Cocoa</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Widget_toolkit\">Widget toolkit</a> <sup id=\"cite_ref-11\" class=\"reference\"><a href=\"#cite_note-11\">&#91;11&#93;</a></sup>, later ported for the <a href=\"/index.php?title=IPhone&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"IPhone (page does not exist)\">iPhone</a>.\n</p>\n<h1><span class=\"mw-headline\" id=\"Play_Magnus\">Play Magnus</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Glaurung&amp;action=edit&amp;section=7\" title=\"Edit section: Play Magnus\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>In February 2014, a modified and tuned version of Glaurung became the chess engine of <a href=\"/index.php?title=Play_Magnus&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Play Magnus (page does not exist)\">Play Magnus</a> <sup id=\"cite_ref-12\" class=\"reference\"><a href=\"#cite_note-12\">&#91;12&#93;</a></sup>, a chess application for <a href=\"/index.php?title=IPhone&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"IPhone (page does not exist)\">iPhone</a> and <a href=\"/index.php?title=IPod&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"IPod (page does not exist)\">iPod Touch</a> by <i>Play Magnus AS</i>, an <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Oslo\">Oslo</a>, Norway-based company founded by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Magnus_Carlsen\">Magnus Carlsen</a> <sup id=\"cite_ref-13\" class=\"reference\"><a href=\"#cite_note-13\">&#91;13&#93;</a></sup>, who became <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/World_Chess_Championship\">World Chess Champion</a> in <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/World_Chess_Championship_2013\">November 2013</a>.\n</p>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Glaurung&amp;action=edit&amp;section=8\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Gothmog\" title=\"Gothmog\">Gothmog</a></li>\n<li> <a href=\"/index.php?title=Play_Magnus&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Play Magnus (page does not exist)\">Play Magnus</a></li>\n<li> <a href=\"/Smaug\" title=\"Smaug\">Smaug</a></li>\n<li> <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a></li>\n<li> <a href=\"/Viper\" title=\"Viper\">Viper</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Glaurung&amp;action=edit&amp;section=9\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"2004\">2004</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Glaurung&amp;action=edit&amp;section=10\" title=\"Edit section: 2004\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=171&amp;p=830&amp;#p830\">Re: Attack table</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, October 14, 2004</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=2&amp;t=310&amp;p=1040\">Glaurung 0.1.4 (off-topic)</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, October 18, 2004</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=818\">Glaurung 0.1.5 source code</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, November 30, 2004</li></ul>\n<h2><span class=\"mw-headline\" id=\"2005_...\">2005 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Glaurung&amp;action=edit&amp;section=11\" title=\"Edit section: 2005 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=2&amp;t=1430&amp;p=6625\">The mate score bug in Glaurung</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, January 24, 2005</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=2&amp;t=1461&amp;p=6732\">Glaurung 0.1.7</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, January 26, 2005</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=2&amp;t=1558&amp;p=7196\">Glaurung 0.2.0</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, February 05, 2005</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=410411\">Glaurung 0.2.1</a> by Brice BOISSEL, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 09, 2005</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=414948\">What's the difference between Glaurung and Gothmog?</a> by Paul Bedrey, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 01, 2005</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=2300&amp;p=10549\">Reductions and null move refutations</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, April 18, 2005&#160;» <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">Null Move Pruning</a>, <a href=\"/Reductions\" title=\"Reductions\">Reductions</a>, <a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">Late Move Reductions</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=436963\">Glaurung 0.2.5j FRC</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 16, 2005</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=441656\">Glaurung in Mainz: Part 1 (very long)</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 13, 2005</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=441746\">Glaurung in Mainz: Part 2 (even longer)</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 14, 2005&#160;» <a href=\"/Chess960CWC_2005\" title=\"Chess960CWC 2005\">Chess960CWC 2005</a></li></ul>\n<p><b>2006</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=482235\">Glaurung 1.0.2 - for the not so serious chess player</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 26, 2006</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=488055\">Glaurung SMP: Beta testers with dual Macs or Linux boxes wanted</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 20, 2006</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=488783\">Glaurung SMP: Now also for Windows!</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 23, 2006</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=490171\">Glaurung CCT8</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 27, 2006&#160;» <a href=\"/CCT8\" title=\"CCT8\">CCT8</a></li></ul>\n<p><b>2007</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=13597\">Glaurung 2-epsilon</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 06, 2007</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=13617\">Glaurung 2-epsilon: Another attempt</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 07, 2007</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=13687\">Glaurung 2 - epsilon/2</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 10, 2007</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=14352\">Glaurung 2 - epsilon/3</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 07, 2007</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=14438\">No mate threat extension in new Glaurung?</a> by <a href=\"/Uri_Blass\" title=\"Uri Blass\">Uri Blass</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 11, 2007</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=14678\">Glaurung 2-epsilon/5</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 25, 2007</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=14634\">Glaurung wrong mate scores</a> by <a href=\"/Uri_Blass\" title=\"Uri Blass\">Uri Blass</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 23, 2007</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=14815\">Glaurung is new Polish Champion</a> by <a href=\"/index.php?title=Werner_Sch%C3%BCle&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Werner Schüle (page does not exist)\">Werner Schüle</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 01, 2007&#160;» <a href=\"/IOPCCC_2007\" title=\"IOPCCC 2007\">IOPCCC 2007</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=14864\">Glaurung GUI for Mac OS X (and possibly Linux)</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 03, 2007&#160;» <a href=\"/Mac_OS\" title=\"Mac OS\">Mac OS</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=14926\">Glaurung: Lodz report and other news</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 08, 2007» <a href=\"/IOPCCC_2007\" title=\"IOPCCC 2007\">IOPCCC 2007</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=15051\">Glaurung Lodz 2007 (unofficial Windows distribution)</a> by <a href=\"/Denis_Mendoza\" title=\"Denis Mendoza\">Denis P. Mendoza</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 12, 2007</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=15396\">Going crazy over Glaurung...</a> by <a href=\"/Alessandro_Scotti\" title=\"Alessandro Scotti\">Alessandro Scotti</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 28, 2007</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=17984\">Macintosh Glaurung users: Please help</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 23, 2007&#160;» <a href=\"/Macintosh\" title=\"Macintosh\">Macintosh</a></li></ul>\n<p><b>2008</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=19316\">Toga/Glaurung/Strelka Prunings/Reductions</a> by <a href=\"/Edsel_Apostol\" title=\"Edsel Apostol\">Edsel Apostol</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 31, 2008&#160;» <a href=\"/Toga\" title=\"Toga\">Toga</a>, <a href=\"/Strelka\" title=\"Strelka\">Strelka</a>, <a href=\"/Pruning\" title=\"Pruning\">Pruning</a>, <a href=\"/Reductions\" title=\"Reductions\">Reductions</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=20116\">Glaurung for the iPod/iPhone</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 12, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=&amp;t=20484\">Re: Glaurung's loss against OliThink</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 02, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=20733\">Glaurung needs some testers</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 18, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=21132\">Glaurung 2.1</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 14, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=21208\">Glaurung Mac OS X: New GUI, now with adjustable strength.</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 18, 2008&#160;» <a href=\"/Playing_Strength\" title=\"Playing Strength\">Playing Strength</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=23210\">testing, again. Glaurung 2 change</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 23, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=23431\">Glaurung 2.1 under git</a> by <a href=\"/Marco_Costalba\" title=\"Marco Costalba\">Marco Costalba</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 01, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=25257\">Experimental Glaurung version</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 04, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=25531\">Glaurung 2.2</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 20, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=2&amp;t=49761\">Glaurung 2.2</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, December 20, 2008</li></ul>\n<p><b>2009</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=25778\">Now on the ICC: GLaurung for iPod Touch!</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 03, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=25931\">Beta testers wanted: Glaurung for the iPhone</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 10, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=49676&amp;p=189023#p189023\">Re: Patterns</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, January 30, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=26682\">It's ready! Glaurung 1.0 for the iPhone/iPod Touch</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 22, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?p=252279\">Kudos to Tord on Glaurung for iPhone</a> by <a href=\"/Stuart_Cracraft\" title=\"Stuart Cracraft\">Stuart Cracraft</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 28, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=26811\">Glaurung for the iPhone: Source code available</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 01, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=27219\">Possible Glaurung 2.2 bug</a> by <a href=\"/Gian-Carlo_Pascutto\" title=\"Gian-Carlo Pascutto\">Gian-Carlo Pascutto</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 27, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://wbec-ridderkerk.forumotion.com/wbec-ridderkerk-news-info-f1/stockfish-glaurung-t402.htm\">Re: Stockfish - Glaurung</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a> <a rel=\"nofollow\" class=\"external text\" href=\"http://wbec-ridderkerk.forumotion.com/forum.htm\">WBEC-Ridderkerk forum</a>, September 05, 2009</li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Glaurung&amp;action=edit&amp;section=12\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=35242\">Revolutionizing handheld chess: Glaurung 2 for the iPhone</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 02, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=35293\">Poll: Problems with iPhone Glaurung 2.0?</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 04, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=51408\">Play Magnus: official App with Chess Engine</a> by <a href=\"/Julien_Marcel\" title=\"Julien Marcel\">Julien Marcel</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 25, 2014</li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Glaurung&amp;action=edit&amp;section=13\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=77511\">PieceList in older versions of Glaurung Chess Engine</a> by shahil4242, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 19, 2021&#160;» <a href=\"/Piece-Lists\" title=\"Piece-Lists\">Piece-Lists</a></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=77511&amp;start=2\">Re: PieceList in older versions of Glaurung Chess Engine</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 19, 2021</dd></dl>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Glaurung&amp;action=edit&amp;section=14\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Chess_Engine\">Chess Engine</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Glaurung&amp;action=edit&amp;section=15\" title=\"Edit section: Chess Engine\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/phenri/glaurung\">GitHub - phenri/glaurung: Free UCI Chess engine created by Tord Romstad</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://kirr.homeunix.org/chess/engines/Jim%20Ablett/GLAURUNG/\">Index of /chess/engines/Jim Ablett/GLAURUNG</a> by <a href=\"/Jim_Ablett\" title=\"Jim Ablett\">Jim Ablett</a>, hosted by <a href=\"/Kirill_Kryukov\" title=\"Kirill Kryukov\">Kirill Kryukov</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://web.mit.edu/kenta/www/three/glaurung/\">Glaurung chess games</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.computerchess.org.uk/ccrl/4040/cgi/engine_details.cgi?match_length=30&amp;each_game=1&amp;print=Details&amp;each_game=1&amp;eng=Glaurung%202.2%2064-bit#Glaurung_2_2_64-bit\">Glaurung 2.2 64-bit</a> in <a href=\"/CCRL\" title=\"CCRL\">CCRL 40/40</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://web.archive.org/web/20100217040537/http://www.glaurungchess.com/\">Glaurung and Scatha</a> hosted by the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Internet_Archive\">Internet Archive</a> <sup id=\"cite_ref-14\" class=\"reference\"><a href=\"#cite_note-14\">&#91;14&#93;</a></sup></li></ul>\n<h2><span class=\"mw-headline\" id=\"Misc\">Misc</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Glaurung&amp;action=edit&amp;section=16\" title=\"Edit section: Misc\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Glaurung\">Glaurung (fictional character) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.tolkiengateway.net/wiki/Glaurung\">Glaurung - Tolkien Gateway</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://lotr.wikia.com/wiki/Glaurung\">Glaurung - Lord of the Rings Wiki</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://middle-earthencyclopedia.weebly.com/glaurung.html\">Glaurung - Middle-Earth Encyclopedia</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Glaurung&amp;action=edit&amp;section=17\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap mw-references-columns\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://middle-earthencyclopedia.weebly.com/glaurung.html\">Glaurung - Middle-Earth Encyclopedia</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\">Glaurung slain by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/T%C3%BArin_Turambar\">Túrin Turambar</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://lotr.wikia.com/wiki/Glaurung\">Glaurung - Lord of the Rings Wiki</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=14815\">Glaurung is new Polish Champion</a> by <a href=\"/index.php?title=Werner_Sch%C3%BCle&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Werner Schüle (page does not exist)\">Werner Schüle</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 01, 2007</span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=2407&amp;p=11081g#p11081\">Re: Fruit's Board Representation?</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, April 27, 2005</span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=265497&amp;t=27680\">Re: 0x88 engines</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 05, 2009</span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=13597\">Glaurung 2-epsilon</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 06, 2007</span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=415035\">Re: What's the difference between Glaurung and Gothmog?</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 02, 2005</span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.glaurungchess.com/lmr.html\">An Introduction to Late Move Reductions</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a></span>\n</li>\n<li id=\"cite_note-9\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-9\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=135133&amp;t=15504\">The Art of Evaluation</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 2, 2007</span>\n</li>\n<li id=\"cite_note-10\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-10\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://wiki.gnustep.org/index.php/Writing_portable_code\">Writing portable code - GNUstepWiki</a></span>\n</li>\n<li id=\"cite_note-11\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-11\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=14864\">Glaurung GUI for Mac OS X (and possibly Linux)</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 03, 2007</span>\n</li>\n<li id=\"cite_note-12\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-12\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=51408&amp;start=5\">Re: Play Magnus: official App with Chess Engine</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 26, 2014</span>\n</li>\n<li id=\"cite_note-13\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-13\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.playmagnus.com/\">Play Magnus</a></span>\n</li>\n<li id=\"cite_note-14\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-14\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=60118\">Glaurungchess site</a> by <a href=\"/G%C3%BCnther_Simon\" title=\"Günther Simon\">Günther Simon</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 10, 2016</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Engines\" title=\"Engines\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301075113\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.034 seconds\nReal time usage: 0.036 seconds\nPreprocessor visited node count: 268/1000000\nPreprocessor generated node count: 540/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:4507-0!canonical and timestamp 20260301075112 and revision id 25181\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "GPL"
+      },
+      {
+        "sortkey": "",
+        "*": "Open_Source"
+      },
+      {
+        "sortkey": "",
+        "*": "UCI"
+      },
+      {
+        "sortkey": "",
+        "*": "Mac"
+      },
+      {
+        "sortkey": "",
+        "*": "Dragon"
+      },
+      {
+        "sortkey": "",
+        "*": "Tolkien_Characters"
+      },
+      {
+        "sortkey": "",
+        "*": "Chess960"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "10x12 Board"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alessandro Scotti"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "C"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCRL"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCT10"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCT11"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCT8"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess960"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess960CWC 2005"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess960CWC 2006"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chessboard"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cpp"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Denis Mendoza"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Edsel Apostol"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engines"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation Philosophy"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Files"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Free Software Foundation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fruit"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "GUI"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Game Phases"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gian-Carlo Pascutto"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gothmog"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Günther Simon"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICT 2007"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "IOPCCC 2007"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "IOPCCC 2008"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jim Ablett"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Joona Kiiski"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Julien Marcel"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kirill Kryukov"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Knight"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Late Move Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Linux"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Livingston Chess960 Computer World Championship"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mac OS"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Macintosh"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Magic Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marco Costalba"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Parallel Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Piece-Lists"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Playing Strength"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Polish Computer Chess Championship"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ranks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Hyatt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Selectivity"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Smaug"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stockfish"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Strelka"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stuart Cracraft"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tapered Eval"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Toga"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tord Romstad"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "UCI"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Uri Blass"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vector Attacks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Viper"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Windows"
+      },
+      {
+        "ns": 0,
+        "*": "Werner Schüle"
+      },
+      {
+        "ns": 0,
+        "*": "IPhone"
+      },
+      {
+        "ns": 0,
+        "*": "Play Magnus"
+      },
+      {
+        "ns": 0,
+        "*": "IPod"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Open Source"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Tournament Play",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Glaurung",
+        "byteoffset": 1046,
+        "anchor": "Tournament_Play"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Description",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Glaurung",
+        "byteoffset": 1712,
+        "anchor": "Description"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Board Representation",
+        "number": "2.1",
+        "index": "3",
+        "fromtitle": "Glaurung",
+        "byteoffset": 1727,
+        "anchor": "Board_Representation"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Search",
+        "number": "2.2",
+        "index": "4",
+        "fromtitle": "Glaurung",
+        "byteoffset": 2904,
+        "anchor": "Search"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Evaluation",
+        "number": "2.3",
+        "index": "5",
+        "fromtitle": "Glaurung",
+        "byteoffset": 3451,
+        "anchor": "Evaluation"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Gaurung GUI",
+        "number": "3",
+        "index": "6",
+        "fromtitle": "Glaurung",
+        "byteoffset": 3979,
+        "anchor": "Gaurung_GUI"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Play Magnus",
+        "number": "4",
+        "index": "7",
+        "fromtitle": "Glaurung",
+        "byteoffset": 4634,
+        "anchor": "Play_Magnus"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "5",
+        "index": "8",
+        "fromtitle": "Glaurung",
+        "byteoffset": 5367,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "6",
+        "index": "9",
+        "fromtitle": "Glaurung",
+        "byteoffset": 5452,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2004",
+        "number": "6.1",
+        "index": "10",
+        "fromtitle": "Glaurung",
+        "byteoffset": 5467,
+        "anchor": "2004"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2005 ...",
+        "number": "6.2",
+        "index": "11",
+        "fromtitle": "Glaurung",
+        "byteoffset": 5994,
+        "anchor": "2005_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "6.3",
+        "index": "12",
+        "fromtitle": "Glaurung",
+        "byteoffset": 12770,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "6.4",
+        "index": "13",
+        "fromtitle": "Glaurung",
+        "byteoffset": 13235,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "7",
+        "index": "14",
+        "fromtitle": "Glaurung",
+        "byteoffset": 13591,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Chess Engine",
+        "number": "7.1",
+        "index": "15",
+        "fromtitle": "Glaurung",
+        "byteoffset": 13608,
+        "anchor": "Chess_Engine"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Misc",
+        "number": "7.2",
+        "index": "16",
+        "fromtitle": "Glaurung",
+        "byteoffset": 14483,
+        "anchor": "Misc"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "8",
+        "index": "17",
+        "fromtitle": "Glaurung",
+        "byteoffset": 14829,
+        "anchor": "References"
+      }
+    ]
+  }
+}

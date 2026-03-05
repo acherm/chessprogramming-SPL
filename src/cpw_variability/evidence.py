@@ -14,6 +14,7 @@ RULE_WEIGHTS: dict[str, float] = {
     "seed_keyword_match": 0.62,
     "seed_page_fallback": 0.45,
     "core_feature_match": 0.92,
+    "binding_inferred": 0.7,
     "engine_claim": 0.84,
     "engine_negation": 0.86,
 }

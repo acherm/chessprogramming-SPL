@@ -1,0 +1,333 @@
+{
+  "parse": {
+    "title": "CFish",
+    "pageid": 4103,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Engines\" title=\"Engines\">Engines</a> * <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a> * CFish</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"/File:Joachim_Beuckelaer_-_Vismarkt..JPG\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Joachim_Beuckelaer_-_Vismarkt..JPG/330px-Joachim_Beuckelaer_-_Vismarkt..JPG\" width=\"300\" height=\"210\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Joachim_Beuckelaer_-_Vismarkt..JPG/500px-Joachim_Beuckelaer_-_Vismarkt..JPG 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Joachim_Beuckelaer_-_Vismarkt..JPG/960px-Joachim_Beuckelaer_-_Vismarkt..JPG 2x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Joachim_Beuckelaer_-_Vismarkt..JPG\" class=\"internal\" title=\"Enlarge\"></a></div><a href=\"/Category:Joachim_Beuckelaer\" title=\"Category:Joachim Beuckelaer\">Joachim Beuckelaer</a> - Fish Market <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>CFish</b>,<br />\na <a href=\"/Stockfish#ports\" title=\"Stockfish\">port</a> of Stockfish written in plain <a href=\"/C\" title=\"C\">C</a> by <a href=\"/Ronald_de_Man\" title=\"Ronald de Man\">Ronald de Man</a>, first published on <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/GitHub\">GitHub</a> in July 2016. Possibly inspired by the <a href=\"/AsmFish\" title=\"AsmFish\">asmFish</a> project to speed up Stockfish using a programming language closer to the machine, the purpose of CFish is to explore possible optimization issues of C versus <a href=\"/Cpp\" title=\"Cpp\">C++</a> compilers <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#AVX2_Attacks\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">AVX2 Attacks</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#NNUE\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">NNUE</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#See_also\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#2016\"><span class=\"tocnumber\">4.1</span> <span class=\"toctext\">2016</span></a></li>\n<li class=\"toclevel-2 tocsection-6\"><a href=\"#2017_...\"><span class=\"tocnumber\">4.2</span> <span class=\"toctext\">2017 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#2020_...\"><span class=\"tocnumber\">4.3</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-8\"><a href=\"#External_Links\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-9\"><a href=\"#References\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"AVX2_Attacks\">AVX2 Attacks</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=CFish&amp;action=edit&amp;section=1\" title=\"Edit section: AVX2 Attacks\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Since May 2020, CFish contains experimental <a href=\"/AVX2\" title=\"AVX2\">AVX2</a>/<a href=\"/AVX-512\" title=\"AVX-512\">AVX-512</a> computational <a href=\"/Sliding_Piece_Attacks\" title=\"Sliding Piece Attacks\">sliding piece attack</a> code by Okuhara\nas memory saving alternative to <a href=\"/Magic_Bitboards\" title=\"Magic Bitboards\">Magic bitboards</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>. It applies a kind of  <a href=\"/Classical_Approach#Branchless\" title=\"Classical Approach\">branchless classical approach</a>.\nFor instance, the four <a href=\"/Classical_Approach#Positive_Rays\" title=\"Classical Approach\">positive rays</a> and <a href=\"/Classical_Approach#Negative_Rays\" title=\"Classical Approach\">negative rays</a> of a <a href=\"/Queen\" title=\"Queen\">queen</a> \nare processed as vector of 4 <a href=\"/Bitboards\" title=\"Bitboards\">bitboards</a> in one 256-bit ymm register each. Positive and negative rays were intersected with the vector of broadcast <a href=\"/Occupancy\" title=\"Occupancy\">occupancies</a>,\nto get the relevant blockers if any, <a href=\"/General_Setwise_Operations#TheLeastSignificantOneBitLS1B\" title=\"General Setwise Operations\">LS1B</a> for positive, and <a href=\"/General_Setwise_Operations#TheMostSignificantOneBitMS1B\" title=\"General Setwise Operations\">MS1B</a> for negative rays.\nWhile the positive rays were processed by <a href=\"/BMI1#BLSMSK\" title=\"BMI1\">BLSMSK</a> aka <code>((x-1) ^ x)</code> to clear the ray squares above the LS1B blockers, \nthe negative rays use a <a href=\"/Parallel_Prefix_Algorithms#Fill_Stuff\" title=\"Parallel Prefix Algorithms\">parallel prefix fill</a> with three vector right shifts and ors, to clear all ray bits below the MS1B blockers.\nThe eight ray attack sets were vertically and two times horizontally ored together for the final result.\nThe conditional compiled AVX-512 version takes advantage of the <a href=\"/AVX-512#VPLZCNT\" title=\"AVX-512\">_mm256_lzcnt_epi64</a> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup> and <a href=\"/AVX-512#VPTERNLOG\" title=\"AVX-512\">_mm256_ternarylogic_epi64</a> <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup> intrinsics.\nRook and bishop naturally suffer from less vector utilization, and combine some other well known techniques, i.e. the bishop attack getter processes only positive rays by swapping bytes. \n</p>\n<h1><span class=\"mw-headline\" id=\"NNUE\"><a href=\"/NNUE\" title=\"NNUE\">NNUE</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=CFish&amp;action=edit&amp;section=2\" title=\"Edit section: NNUE\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Since August 2020, CFish also provides the <a href=\"/NNUE\" title=\"NNUE\">NNUE</a> evaluation ported from its C++ base <a href=\"/Stockfish_NNUE\" title=\"Stockfish NNUE\">Stockfish NNUE</a> <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup>,\nfurther utilizing <a href=\"/SIMD_and_SWAR_Techniques\" title=\"SIMD and SWAR Techniques\">SIMD instructions</a>.\n</p>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=CFish&amp;action=edit&amp;section=3\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/AsmFish\" title=\"AsmFish\">asmFish</a></li>\n<li> <a href=\"/Fat_Titz\" title=\"Fat Titz\">Fat Titz</a></li>\n<li> <a href=\"/Portfish\" title=\"Portfish\">Portfish</a></li>\n<li> <a href=\"/Rustfish\" title=\"Rustfish\">Rustfish</a></li>\n<li> <a href=\"/Stockfish_NNUE\" title=\"Stockfish NNUE\">Stockfish NNUE</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=CFish&amp;action=edit&amp;section=4\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"2016\">2016</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=CFish&amp;action=edit&amp;section=5\" title=\"Edit section: 2016\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61280\">CFish</a> by <a href=\"/Dann_Corbit\" title=\"Dann Corbit\">Dann Corbit</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 31, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61346\">Cfish solves the dreaded URI hard problem</a> by <a href=\"/Dann_Corbit\" title=\"Dann Corbit\">Dann Corbit</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 05, 2016 </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61394\">cfish for the mac</a> by <a href=\"/Michael_Byrne\" title=\"Michael Byrne\">Michael B</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 11, 2016&#160;» <a href=\"/Macintosh\" title=\"Macintosh\">Macintosh</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61694\">New CFish Windows binary (from today's code)</a> by <a href=\"/Dann_Corbit\" title=\"Dann Corbit\">Dann Corbit</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 13, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61743\">Cfish for the Mac</a> by <a href=\"/Michael_Byrne\" title=\"Michael Byrne\">Michael B</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 17, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61975\">Cfish 8 for the MacOS</a> by <a href=\"/Michael_Byrne\" title=\"Michael Byrne\">Michael B</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 05, 2016</li></ul>\n<h2><span class=\"mw-headline\" id=\"2017_...\">2017 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=CFish&amp;action=edit&amp;section=6\" title=\"Edit section: 2017 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65710\">Cfish update -&gt; macOS exe's for download</a> by <a href=\"/Michael_Byrne\" title=\"Michael Byrne\">Michael B</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 13, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66347\">Cfish-54302a... Search of startpos to depth 50</a> by <a href=\"/Louis_Zulli\" title=\"Louis Zulli\">Louis Zulli</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 17, 2018&#160;» <a href=\"/Initial_Position\" title=\"Initial Position\">Initial Position</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66462\">Cfish 9 is OUT!</a> by <a href=\"/Louis_Zulli\" title=\"Louis Zulli\">Louis Zulli</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 31, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=70932\">Cfish, shiny and new...</a> by <a href=\"/Dann_Corbit\" title=\"Dann Corbit\">Dann Corbit</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 05, 2019</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=71027\">Some NUMA data for Stockfish-dev and Cfish-dev</a> by <a href=\"/Louis_Zulli\" title=\"Louis Zulli\">Louis Zulli</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 17, 2019&#160;» <a href=\"/NUMA\" title=\"NUMA\">NUMA</a>, <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=71311\">Bin book adapter?</a> by Ovyron, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 18, 2019&#160;» <a href=\"/PolyGlot\" title=\"PolyGlot\">PolyGlot</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=CFish&amp;action=edit&amp;section=7\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=74369\">Where to find CFish 11 Latest exe file</a> by Eric Hughes Santiago, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 05, 2020</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=74369&amp;start=6\">Re: Where to find CFish 11 Latest exe file</a> by <a href=\"/Ronald_de_Man\" title=\"Ronald de Man\">Ronald de Man</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 05, 2020</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=74402\">Cfish is back!</a> by <a href=\"/Louis_Zulli\" title=\"Louis Zulli\">Louis Zulli</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 07, 2020</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=74402&amp;start=10\">Re: Cfish is back!</a> by <a href=\"/Ronald_de_Man\" title=\"Ronald de Man\">Ronald de Man</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 07, 2020</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=75400\">Hacking around CFish NNUE</a> by <a href=\"/Maksim_Korzh\" title=\"Maksim Korzh\">Maksim Korzh</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 15, 2020&#160;» <a href=\"/NNUE\" title=\"NNUE\">NNUE</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=CFish&amp;action=edit&amp;section=8\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/syzygy1/Cfish\">GitHub - syzygy1/Cfish: C port of Stockfish</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/okuhara/Cfish\">GitHub - okuhara/Cfish: C port of Stockfish</a></li>\n<li> <a href=\"/Category:Fish_Go_Deep\" title=\"Category:Fish Go Deep\">Fish Go Deep</a> - The Jazz (2002), <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/biwGNuoaEyQ?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=CFish&amp;action=edit&amp;section=9\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://commons.wikimedia.org/wiki/File:Joachim_Beuckelaer_-_Vismarkt..JPG\">Fish Market</a> by <a href=\"/Category:Joachim_Beuckelaer\" title=\"Category:Joachim Beuckelaer\">Joachim Beuckelaer</a>, 16th century, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Bonnefantenmuseum\">Bonnefantenmuseum</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Maastricht\">Maastricht</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wikimedia_Commons\">Wikimedia Commons</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Cod\">Cod from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61280&amp;start=9\">Re: CFish</a> by <a href=\"/Louis_Zulli\" title=\"Louis Zulli\">Louis Zulli</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 01, 2016</span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/syzygy1/Cfish/blob/master/src/avx2-bitboard.h\">Cfish/avx2-bitboard.h at master · syzygy1/Cfish · GitHub</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://software.intel.com/sites/landingpage/IntrinsicsGuide/#text=_mm256_lzcnt_epi64&amp;expand=5560,5471,3497\">_mm256_lzcnt_epi64</a></span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://software.intel.com/sites/landingpage/IntrinsicsGuide/#text=_mm256_ternarylogic_epi64&amp;expand=5560,5471,3497,5873\">_mm256_ternarylogic_epi64</a></span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/syzygy1/Cfish/blob/master/src/nnue.c\">Cfish/nnue.c at master · syzygy1/Cfish · GitHub</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Stockfish\" title=\"Stockfish\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301074104\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.102 seconds\nReal time usage: 0.648 seconds\nPreprocessor visited node count: 128/1000000\nPreprocessor generated node count: 282/1000000\nPost‐expand include size: 26/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:4103-0!canonical and timestamp 20260301074103 and revision id 25941\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "GPL"
+      },
+      {
+        "sortkey": "",
+        "*": "Open_Source"
+      },
+      {
+        "sortkey": "",
+        "*": "Joachim_Beuckelaer"
+      },
+      {
+        "sortkey": "",
+        "*": "UCI"
+      },
+      {
+        "sortkey": "",
+        "*": "PC"
+      },
+      {
+        "sortkey": "",
+        "*": "X86"
+      },
+      {
+        "sortkey": "",
+        "*": "X64"
+      },
+      {
+        "sortkey": "",
+        "*": "Linux"
+      },
+      {
+        "sortkey": "",
+        "*": "Mac"
+      },
+      {
+        "sortkey": "",
+        "*": "Windows"
+      },
+      {
+        "sortkey": "",
+        "*": "NNUE"
+      },
+      {
+        "sortkey": "",
+        "*": "Fish"
+      },
+      {
+        "sortkey": "",
+        "*": "Fish_Go_Deep"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "AVX-512"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "AVX2"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "AsmFish"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "BMI1"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "C"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Classical Approach"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cpp"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dann Corbit"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engines"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fat Titz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "General Setwise Operations"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Initial Position"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Louis Zulli"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Macintosh"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Magic Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Maksim Korzh"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michael Byrne"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "NNUE"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "NUMA"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Occupancy"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Parallel Prefix Algorithms"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "PolyGlot"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Portfish"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Queen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ronald de Man"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rustfish"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SIMD and SWAR Techniques"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sliding Piece Attacks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stockfish"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stockfish NNUE"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Fish Go Deep"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Joachim Beuckelaer"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "AVX2 Attacks",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "CFish",
+        "byteoffset": 1149,
+        "anchor": "AVX2_Attacks"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "NNUE",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "CFish",
+        "byteoffset": 3219,
+        "anchor": "NNUE"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "CFish",
+        "byteoffset": 3522,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "CFish",
+        "byteoffset": 3615,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2016",
+        "number": "4.1",
+        "index": "5",
+        "fromtitle": "CFish",
+        "byteoffset": 3629,
+        "anchor": "2016"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2017 ...",
+        "number": "4.2",
+        "index": "6",
+        "fromtitle": "CFish",
+        "byteoffset": 4464,
+        "anchor": "2017_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "4.3",
+        "index": "7",
+        "fromtitle": "CFish",
+        "byteoffset": 5362,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "5",
+        "index": "8",
+        "fromtitle": "CFish",
+        "byteoffset": 6084,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "6",
+        "index": "9",
+        "fromtitle": "CFish",
+        "byteoffset": 6465,
+        "anchor": "References"
+      }
+    ]
+  }
+}

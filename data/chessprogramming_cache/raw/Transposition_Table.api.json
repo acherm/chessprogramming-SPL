@@ -1,0 +1,1802 @@
+{
+  "parse": {
+    "title": "Transposition Table",
+    "pageid": 954,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Search\" title=\"Search\">Search</a> * Transposition Table</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"https://en.wikipedia.org/wiki/The_Persistence_of_Memory\"><img alt=\"\" src=\"/images/thumb/d/dd/The_Persistence_of_Memory.jpg/300px-The_Persistence_of_Memory.jpg\" width=\"300\" height=\"221\" class=\"thumbimage\" srcset=\"/images/d/dd/The_Persistence_of_Memory.jpg 1.5x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:The_Persistence_of_Memory.jpg\" class=\"internal\" title=\"Enlarge\"></a></div><a href=\"/Category:Salvador_Dal%C3%AD\" title=\"Category:Salvador Dalí\">Salvador Dalí</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/The_Persistence_of_Memory\">The Persistence of Memory</a> 1931</div></div></div> \n<p>A <b>Transposition Table</b>,<br />\nfirst used in <a href=\"/Richard_Greenblatt\" title=\"Richard Greenblatt\">Greenblatt's</a> program <a href=\"/Mac_Hack#HashTable\" title=\"Mac Hack\">Mac Hack VI</a> <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>, is a database that stores results of previously performed searches. It is a way to greatly reduce the search space of a <a href=\"/Search_Tree\" title=\"Search Tree\">chess tree</a> with little negative impact. Chess programs, during their <a href=\"/Brute-Force\" title=\"Brute-Force\">brute-force</a> search, encounter the same <a href=\"/Chess_Position\" title=\"Chess Position\">positions</a> again and again, but from different sequences of <a href=\"/Moves\" title=\"Moves\">moves</a>, which is called a <a href=\"/Transposition\" title=\"Transposition\">transposition</a>. Transposition (and <a href=\"/Refutation_Table\" title=\"Refutation Table\">refutation</a>) tables are techniques derived from <a href=\"/Dynamic_Programming\" title=\"Dynamic Programming\">dynamic programming</a> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>, a term coined by <a href=\"/Richard_E._Bellman\" title=\"Richard E. Bellman\">Richard E. Bellman</a> in the 1950s, when programming meant planning and dynamic programming was conceived to optimally plan multistage processes <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup> . \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#How_it_works\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">How it works</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-2\"><a href=\"#Hash_functions\"><span class=\"tocnumber\">1.1</span> <span class=\"toctext\">Hash functions</span></a></li>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#Address_Calculation\"><span class=\"tocnumber\">1.2</span> <span class=\"toctext\">Address Calculation</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#What_Information_is_Stored\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">What Information is Stored</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#Table_Entry_Types\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Table Entry Types</span></a></li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#Using_the_Transposition_Table\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Using the Transposition Table</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#Transposition_Table_Cutoffs\"><span class=\"tocnumber\">4.1</span> <span class=\"toctext\">Transposition Table Cutoffs</span></a></li>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#Hash_Move\"><span class=\"tocnumber\">4.2</span> <span class=\"toctext\">Hash Move</span></a></li>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#Singular_Extensions\"><span class=\"tocnumber\">4.3</span> <span class=\"toctext\">Singular Extensions</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-10\"><a href=\"#Collisions\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Collisions</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#Cardinalities\"><span class=\"tocnumber\">5.1</span> <span class=\"toctext\">Cardinalities</span></a></li>\n<li class=\"toclevel-2 tocsection-12\"><a href=\"#Index_Collisions\"><span class=\"tocnumber\">5.2</span> <span class=\"toctext\">Index Collisions</span></a></li>\n<li class=\"toclevel-2 tocsection-13\"><a href=\"#Key_Collisions\"><span class=\"tocnumber\">5.3</span> <span class=\"toctext\">Key Collisions</span></a></li>\n<li class=\"toclevel-2 tocsection-14\"><a href=\"#Bits_Required\"><span class=\"tocnumber\">5.4</span> <span class=\"toctext\">Bits Required</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-15\"><a href=\"#Replacement_Strategies\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Replacement Strategies</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-16\"><a href=\"#Always_Replace\"><span class=\"tocnumber\">6.1</span> <span class=\"toctext\">Always Replace</span></a></li>\n<li class=\"toclevel-2 tocsection-17\"><a href=\"#Priority_by_Searched_Nodes_Count\"><span class=\"tocnumber\">6.2</span> <span class=\"toctext\">Priority by Searched Nodes Count</span></a></li>\n<li class=\"toclevel-2 tocsection-18\"><a href=\"#Priority_by_Move_Ordering_Position\"><span class=\"tocnumber\">6.3</span> <span class=\"toctext\">Priority by Move Ordering Position</span></a></li>\n<li class=\"toclevel-2 tocsection-19\"><a href=\"#Depth-Preferred\"><span class=\"tocnumber\">6.4</span> <span class=\"toctext\">Depth-Preferred</span></a></li>\n<li class=\"toclevel-2 tocsection-20\"><a href=\"#Two-tier_System\"><span class=\"tocnumber\">6.5</span> <span class=\"toctext\">Two-tier System</span></a></li>\n<li class=\"toclevel-2 tocsection-21\"><a href=\"#Bucket_Systems\"><span class=\"tocnumber\">6.6</span> <span class=\"toctext\">Bucket Systems</span></a></li>\n<li class=\"toclevel-2 tocsection-22\"><a href=\"#Aging\"><span class=\"tocnumber\">6.7</span> <span class=\"toctext\">Aging</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-23\"><a href=\"#TT_and_Parallel_Search\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">TT and Parallel Search</span></a></li>\n<li class=\"toclevel-1 tocsection-24\"><a href=\"#Further_Hash_Tables\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">Further Hash Tables</span></a></li>\n<li class=\"toclevel-1 tocsection-25\"><a href=\"#Maximizing_Transpositions\"><span class=\"tocnumber\">9</span> <span class=\"toctext\">Maximizing Transpositions</span></a></li>\n<li class=\"toclevel-1 tocsection-26\"><a href=\"#See_also\"><span class=\"tocnumber\">10</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-27\"><a href=\"#Publications\"><span class=\"tocnumber\">11</span> <span class=\"toctext\">Publications</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-28\"><a href=\"#1967_...\"><span class=\"tocnumber\">11.1</span> <span class=\"toctext\">1967 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-29\"><a href=\"#1970_...\"><span class=\"tocnumber\">11.2</span> <span class=\"toctext\">1970 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-30\"><a href=\"#1980_...\"><span class=\"tocnumber\">11.3</span> <span class=\"toctext\">1980 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-31\"><a href=\"#1990_...\"><span class=\"tocnumber\">11.4</span> <span class=\"toctext\">1990 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-32\"><a href=\"#2000_...\"><span class=\"tocnumber\">11.5</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-33\"><a href=\"#2010_...\"><span class=\"tocnumber\">11.6</span> <span class=\"toctext\">2010 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-34\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">12</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-35\"><a href=\"#1990_..._2\"><span class=\"tocnumber\">12.1</span> <span class=\"toctext\">1990 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-36\"><a href=\"#1995_...\"><span class=\"tocnumber\">12.2</span> <span class=\"toctext\">1995 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-37\"><a href=\"#2000_..._2\"><span class=\"tocnumber\">12.3</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-38\"><a href=\"#2005_...\"><span class=\"tocnumber\">12.4</span> <span class=\"toctext\">2005 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-39\"><a href=\"#2010_..._2\"><span class=\"tocnumber\">12.5</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-40\"><a href=\"#2015_...\"><span class=\"tocnumber\">12.6</span> <span class=\"toctext\">2015 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-41\"><a href=\"#2020_...\"><span class=\"tocnumber\">12.7</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-42\"><a href=\"#External_Links\"><span class=\"tocnumber\">13</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-43\"><a href=\"#References\"><span class=\"tocnumber\">14</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"How_it_works\">How it works</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=1\" title=\"Edit section: How it works\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>When the search encounters a <a href=\"/Transposition\" title=\"Transposition\">transposition</a>, it is beneficial to 'remember' what was determined the last time the position was examined, rather than redoing the entire search again. For this reason, chess programs have a transposition table, which is a large <a href=\"/Hash_Table\" title=\"Hash Table\">hash table</a> storing information about positions previously searched, how deeply they were searched, and what we concluded about them. Even if the <a href=\"/Depth\" title=\"Depth\">depth</a> (draft) of the related transposition table entry is not big enough, or does not contain the right bound for a cutoff, a <a href=\"/Best_Move\" title=\"Best Move\">best</a> (or good enough) move from a previous search can improve <a href=\"/Move_Ordering\" title=\"Move Ordering\">move ordering</a>, and save search time. This is especially true inside an <a href=\"/Iterative_Deepening\" title=\"Iterative Deepening\">iterative deepening</a> framework, where one gains valuable table hits from previous iterations.\n</p>\n<h2><span class=\"mw-headline\" id=\"Hash_functions\">Hash functions</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=2\" title=\"Edit section: Hash functions\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Hash_function\">Hash functions</a> convert chess positions into an almost unique, scalar signature, allowing fast index calculation as well as space-saving verification of stored positions.\n</p>\n<ul><li> <a href=\"/Zobrist_Hashing\" title=\"Zobrist Hashing\">Zobrist Hashing</a></li>\n<li> <a href=\"/BCH_Hashing\" title=\"BCH Hashing\">BCH Hashing</a></li></ul>\n<p>Both, the more common Zobrist hashing as well BCH hashing use fast hash functions, to provide hash keys or signatures as a kind of <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/G%C3%B6del_number\">Gödel number</a> of chess positions, today typically <a href=\"/Quad_Word\" title=\"Quad Word\">64-bit</a> wide. They are <a href=\"/Incremental_Updates\" title=\"Incremental Updates\">updated incrementally</a> during <a href=\"/Make_Move\" title=\"Make Move\">make</a> and <a href=\"/Unmake_Move\" title=\"Unmake Move\">unmake move</a> by either own-inverse <a href=\"/General_Setwise_Operations#ExclusiveOr\" title=\"General Setwise Operations\">exclusive or</a> or by addition versus subtraction.\n</p>\n<h2><span class=\"mw-headline\" id=\"Address_Calculation\">Address Calculation</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=3\" title=\"Edit section: Address Calculation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>The index is not based on the entire hash key because this is usually a 64-bit number, and with current hardware limitations, no hash table can be large enough to accommodate it. Therefore calculating the address or index requires a signature <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Modulo_operator\">modulo</a> a number of entries, for the power of two sized tables, the lower part of the hash key, masked by an 'and'-instruction accordantly.\n</p><p><span id=\"Entry\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"What_Information_is_Stored\">What Information is Stored</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=4\" title=\"Edit section: What Information is Stored\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Typically, the following information is stored as determined by the <a href=\"/Search\" title=\"Search\">search</a> <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup>&#160;:\n</p>\n<ul><li> <a href=\"/Zobrist_Hashing\" title=\"Zobrist Hashing\">Zobrist-</a> or <a href=\"/BCH_Hashing\" title=\"BCH Hashing\">BCH-key</a>, to see whether the position is the right one while probing</li>\n<li> <a href=\"/Best_Move\" title=\"Best Move\">Best-</a> or <a href=\"/Refutation_Move\" title=\"Refutation Move\">Refutation move</a></li>\n<li> <a href=\"/Depth\" title=\"Depth\">Depth</a> (draft)</li>\n<li> <a href=\"/Score\" title=\"Score\">Score</a>, <i>either with</i> <a href=\"/Integrated_Bounds_and_Values\" title=\"Integrated Bounds and Values\">Integrated Bound and Value</a> <i>or otherwise with</i></li>\n<li> <a href=\"/Node_Types\" title=\"Node Types\">Type of Node</a> <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup> </li></ul>\n<dl><dd> <a href=\"/Node_Types#PV\" title=\"Node Types\">PV-Node</a>, Score is <a href=\"/Exact_Score\" title=\"Exact Score\">Exact</a></dd>\n<dd> <a href=\"/Node_Types#ALL\" title=\"Node Types\">All-Node</a>, Score is <a href=\"/Upper_Bound\" title=\"Upper Bound\">Upper Bound</a></dd>\n<dd> <a href=\"/Node_Types#CUT\" title=\"Node Types\">Cut-Node</a>, Score is <a href=\"/Lower_Bound\" title=\"Lower Bound\">Lower Bound</a></dd></dl>\n<ul><li> <a href=\"/Transposition_Table#Aging\" title=\"Transposition Table\">Age</a> is used to determine when to overwrite entries from searching previous positions during the <a href=\"/Chess_Game\" title=\"Chess Game\">game of chess</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Table_Entry_Types\">Table Entry Types</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=5\" title=\"Edit section: Table Entry Types\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>In an <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">alpha-beta search</a>, we usually do not find the exact value of a position. But we are happy to know that the value is either too low or too high for us to be concerned with searching any further. If we have the exact value, of course, we store that in the transposition table. But if the value of our position is either high enough to set the lower bound, or low enough to set the upper bound, it is good to store that information also. So each entry in the transposition table is identified with the <a href=\"/Node_Types\" title=\"Node Types\">type of node</a>, often referred to as <a href=\"/Exact_Score\" title=\"Exact Score\">exact</a>, <a href=\"/Lower_Bound\" title=\"Lower Bound\">lower</a>- or <a href=\"/Upper_Bound\" title=\"Upper Bound\">upper bound</a>.\n</p><p><span id=\"Usage\">\n</p>\n<h1><span class=\"mw-headline\" id=\"Using_the_Transposition_Table\">Using the Transposition Table</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=6\" title=\"Edit section: Using the Transposition Table\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Transposition Tables are an integral part of an engine's search. It is used in both search heuristics and move ordering.\n</p>\n<h2><span class=\"mw-headline\" id=\"Transposition_Table_Cutoffs\">Transposition Table Cutoffs</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=7\" title=\"Edit section: Transposition Table Cutoffs\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Depth, value, and bound information can be used to produce cutoffs and reduce redudant computation. In more advanced engines transposition table cutoffs are not performed on <a href=\"/Node_Types#PV-Nodes\" title=\"Node Types\"> PV-Nodes</a>.\n</p><p>A cutoff can be performed when the depth of entry is greater (or equal) to the depth of the current node and one of the following criteria is satisfied:\n</p>\n<ul><li> The entry type is <a href=\"/Exact_Score\" title=\"Exact Score\"> EXACT</a></li>\n<li> The entry type is <a href=\"/Lower_Bound\" title=\"Lower Bound\"> LOWERBOUND</a> and greater than or equal to beta</li>\n<li> The entry type is <a href=\"/Upper_Bound\" title=\"Upper Bound\"> UPPERBOUND</a> and less than alpha</li></ul>\n<h2><span class=\"mw-headline\" id=\"Hash_Move\">Hash Move</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=8\" title=\"Edit section: Hash Move\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p><i>Main Article: <a href=\"/Hash_Move\" title=\"Hash Move\">Hash Move</a></i>\n</p><p>Best move/Refutation move information from the transposition table is the most important part of move ordering. They are first in order and can be searched before other moves are generated. When the hash move fails high, generating other moves is not necessary. In <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a>, 75% of cutoffs produced in a position with hash moves are caused by the hash move.\n</p>\n<h2><span class=\"mw-headline\" id=\"Singular_Extensions\">Singular Extensions</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=9\" title=\"Edit section: Singular Extensions\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p><a href=\"/Singular_Extensions#Restricted_SE\" title=\"Singular Extensions\">Restricted SE</a> is only attempted on a position where a TT entry exist, they entry has a valid TT move, the entry has a high enough depth, and the entry has exact or lowerbound bounds.\n</p><p><span id=\"Collisions\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Collisions\">Collisions</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=10\" title=\"Edit section: Collisions\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>The <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Surjection\">surjective</a> mapping from chess positions to a signature and an, even more, denser index range implies <b>collisions</b>, different positions share the same entries, for two different reasons, hopefully, rare ambiguous keys (type-1 errors), or regularly ambiguous indices (type-2 errors).\n</p>\n<h2><span class=\"mw-headline\" id=\"Cardinalities\">Cardinalities</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=11\" title=\"Edit section: Cardinalities\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>The typical cardinalities of positions and signatures inside the search reflect the likelihood of collisions:\n</p>\n<table class=\"wikitable\">\n\n<tr>\n<th> Cardinalities of positions and signatures\n</th>\n<th> #\n</th></tr>\n<tr>\n<td>  Upper bound for the number of reachable <a href=\"/Chess_Position\" title=\"Chess Position\">chess positions</a> <sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup>\n</td>\n<td style=\"text-align:right;\"> 1e46\n</td></tr>\n<tr>\n<td>  Different <a href=\"/Quad_Word\" title=\"Quad Word\">64 bit</a> keys\n</td>\n<td style=\"text-align:right;\"> 1.84e19\n</td></tr>\n<tr>\n<td>  Some number of distinct nodes searched per game,<br />assuming 100 moves times 1e8 nodes per move\n</td>\n<td style=\"text-align:right;\"> 1e10\n</td></tr>\n<tr>\n<td>  Different <a href=\"/Double_Word\" title=\"Double Word\">32 bit</a> keys\n</td>\n<td style=\"text-align:right;\"> 4.29e9\n</td></tr>\n<tr>\n<td>  Some arbitrary table size in the number of entries\n</td>\n<td style=\"text-align:right;\"> 1e8\n</td></tr></table>\n<p><span id=\"IndexCollisions\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Index_Collisions\">Index Collisions</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=12\" title=\"Edit section: Index Collisions\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Index collisions or type-2 errors <sup id=\"cite_ref-9\" class=\"reference\"><a href=\"#cite_note-9\">&#91;9&#93;</a></sup> <sup id=\"cite_ref-10\" class=\"reference\"><a href=\"#cite_note-10\">&#91;10&#93;</a></sup>, where different hash keys index same entries, happen regularly. They require detection, realized by storing the signature as part of the hash entry, to check whether a stored entry matches the position while probing. Especially with the power of two entry tables, many programmers choose to trade-off space for accuracy and only store that part of the hash key not already considered as an index, or even less.\n<span id=\"KeyCollisions\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Key_Collisions\">Key Collisions</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=13\" title=\"Edit section: Key Collisions\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Key collisions or type-1 errors are inherent in using signatures with far fewer bits than required to encode all reachable chess positions. A key collision occurs when two different positions map the same hash key or signature <sup id=\"cite_ref-11\" class=\"reference\"><a href=\"#cite_note-11\">&#91;11&#93;</a></sup> <sup id=\"cite_ref-12\" class=\"reference\"><a href=\"#cite_note-12\">&#91;12&#93;</a></sup>. When storing only a partial key, the chance of a collision greatly increases. To accept only hits where <a href=\"/Hash_Move\" title=\"Hash Move\">stored moves</a> are <a href=\"/Pseudo-Legal_Move\" title=\"Pseudo-Legal Move\">pseudo-legal</a> decreases the chance of type-1 errors. On his computer chess page <sup id=\"cite_ref-13\" class=\"reference\"><a href=\"#cite_note-13\">&#91;13&#93;</a></sup>, <a href=\"/Kenneth_W._Regan\" title=\"Kenneth W. Regan\">Ken Regan</a> broached on chess engine bugs, anomalies and hash collisions, and mentions a <a href=\"/Shredder\" title=\"Shredder\">Shredder 9.1</a> game where a key collision might have caused a strange move <sup id=\"cite_ref-14\" class=\"reference\"><a href=\"#cite_note-14\">&#91;14&#93;</a></sup> <sup id=\"cite_ref-15\" class=\"reference\"><a href=\"#cite_note-15\">&#91;15&#93;</a></sup>.\n<span id=\"bits\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Bits_Required\">Bits Required</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=14\" title=\"Edit section: Bits Required\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>During the <a href=\"/WCCC_1989\" title=\"WCCC 1989\">WCCC 1989</a> Workshop <a href=\"/WCCC_1989#Workshop\" title=\"WCCC 1989\">New Directions in Game-Tree Search</a>, <a href=\"/James_Gillogly\" title=\"James Gillogly\">James Gillogly</a>, author of <a href=\"/Tech\" title=\"Tech\">Tech</a>, discussed transposition table collisions <sup id=\"cite_ref-16\" class=\"reference\"><a href=\"#cite_note-16\">&#91;16&#93;</a></sup> . He produced the following table using the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Birthday_problem\">Birthday Paradox</a>, where the columns are the number of positions stored and the rows are the probability of collision. The entries are the number of bits of combined address and check hash required to reduce the probability of collision to the desired amount.\n</p>\n<table class=\"wikitable\">\n\n<tr>\n<th colspan=\"2\"> Number of Positions:\n</th>\n<th> 10<span style=\"font-size: 80%; vertical-align: super;\">5</span>\n</th>\n<th> 10<span style=\"font-size: 80%; vertical-align: super;\">6</span>\n</th>\n<th> 10<span style=\"font-size: 80%; vertical-align: super;\">7</span>\n</th>\n<th> 10<span style=\"font-size: 80%; vertical-align: super;\">8</span>\n</th>\n<th> 10<span style=\"font-size: 80%; vertical-align: super;\">9</span>\n</th>\n<th> 10<span style=\"font-size: 80%; vertical-align: super;\">10</span>\n</th></tr>\n<tr>\n<th rowspan=\"4\"> Collision<br />probability:\n</th>\n<td style=\"text-align:left;\"> .01\n</td>\n<td style=\"text-align:right;\"> 39\n</td>\n<td style=\"text-align:right;\"> 46\n</td>\n<td style=\"text-align:right;\"> 53\n</td>\n<td style=\"text-align:right;\"> 59\n</td>\n<td style=\"text-align:right;\"> 66\n</td>\n<td style=\"text-align:right;\"> 73\n</td></tr>\n<tr>\n<td style=\"text-align:left;\"> .001\n</td>\n<td style=\"text-align:right;\"> 43\n</td>\n<td style=\"text-align:right;\"> 49\n</td>\n<td style=\"text-align:right;\"> 56\n</td>\n<td style=\"text-align:right;\"> 63\n</td>\n<td style=\"text-align:right;\"> 69\n</td>\n<td style=\"text-align:right;\"> 76\n</td></tr>\n<tr>\n<td style=\"text-align:left;\"> .0001\n</td>\n<td style=\"text-align:right;\"> 46\n</td>\n<td style=\"text-align:right;\"> 53\n</td>\n<td style=\"text-align:right;\"> 59\n</td>\n<td style=\"text-align:right;\"> 66\n</td>\n<td style=\"text-align:right;\"> 73\n</td>\n<td style=\"text-align:right;\"> 79\n</td></tr>\n<tr>\n<td style=\"text-align:left;\"> .00001\n</td>\n<td style=\"text-align:right;\"> 49\n</td>\n<td style=\"text-align:right;\"> 56\n</td>\n<td style=\"text-align:right;\"> 63\n</td>\n<td style=\"text-align:right;\"> 69\n</td>\n<td style=\"text-align:right;\"> 76\n</td>\n<td style=\"text-align:right;\"> 83\n</td></tr></table>\n<p>During the discussion, <a href=\"/David_Slate\" title=\"David Slate\">David Slate</a> and <a href=\"/Ken_Thompson\" title=\"Ken Thompson\">Ken Thompson</a> pointed out that the Birthday Paradox does not apply to most programs, since the hash table will fill up and not all previous positions will be in the table; thus these figures must be regarded as an upper bound on the number of bits required for safety <sup id=\"cite_ref-17\" class=\"reference\"><a href=\"#cite_note-17\">&#91;17&#93;</a></sup>. The dangers of transposition table collisions were further studied by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a> and <a href=\"/Anthony_Cozzie\" title=\"Anthony Cozzie\">Anthony Cozzie</a> as published in their 2005 paper <i>Hash Collisions Effect</i> <sup id=\"cite_ref-18\" class=\"reference\"><a href=\"#cite_note-18\">&#91;18&#93;</a></sup>. They gave a surprising answer to the question “Is it really worth all the effort to absolutely minimize signature collisions?”, and concluded that 64-bit signatures are more than sufficient.\n</p><p><span id=\"ReplacementStrategies\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Replacement_Strategies\">Replacement Strategies</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=15\" title=\"Edit section: Replacement Strategies\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Because there are a limited number of entries in a transposition table, and because in modern chess programs, they can fill up very quickly, it is necessary to have a scheme by which the program can decide which entries would be most valuable to keep, i.e. a replacement scheme <sup id=\"cite_ref-19\" class=\"reference\"><a href=\"#cite_note-19\">&#91;19&#93;</a></sup> . Replacement schemes are used to solve an index collision when a program attempts to store a position in a table slot that already has a different entry in it. There are two opposing considerations to replacement schemes:\n</p>\n<ul><li> Entries that were searched to a high depth save more work per table hit than those searched to a low depth.</li>\n<li> Entries that are closer to the leaves of the tree are more likely to be searched multiple times, making the table hits of them higher. Also, entries that were searched recently are more likely to be searched again.</li>\n<li> Most well-performing replacement strategies use a mix of these considerations.</li></ul>\n<p><span id=\"AlwaysReplace\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Always_Replace\">Always Replace</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=16\" title=\"Edit section: Always Replace\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>This replacement strategy is very simple, placing all emphasis on the second consideration. Any old entries are replaced immediately when a new entry is stored <sup id=\"cite_ref-20\" class=\"reference\"><a href=\"#cite_note-20\">&#91;20&#93;</a></sup>.\n</p>\n<h2><span class=\"mw-headline\" id=\"Priority_by_Searched_Nodes_Count\">Priority by Searched Nodes Count</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=17\" title=\"Edit section: Priority by Searched Nodes Count\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>This replacement strategy uses the number of nodes searched spent to obtain an entry, as replacement priority.\n</p>\n<h2><span class=\"mw-headline\" id=\"Priority_by_Move_Ordering_Position\">Priority by Move Ordering Position</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=18\" title=\"Edit section: Priority by Move Ordering Position\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>This replacement strategy uses the position of entry move in <a href=\"/Move_Ordering\" title=\"Move Ordering\">move ordering</a> list as replacement priority. The main idea is that if the best move was not considered as a good cut-off candidate by the move-ordering algorithm, storing it in TT should provide better help for the search.\n<span id=\"DepthPreferred\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Depth-Preferred\">Depth-Preferred</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=19\" title=\"Edit section: Depth-Preferred\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>This replacement strategy puts all emphasis on the first consideration. The only criterion in deciding whether to overwrite an entry is whether the new entry has a higher depth than the old entry.\n<span id=\"TwoTier\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Two-tier_System\">Two-tier System</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=20\" title=\"Edit section: Two-tier System\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>This strategy, devised by <a href=\"/Ken_Thompson\" title=\"Ken Thompson\">Ken Thompson</a> and <a href=\"/Joe_Condon\" title=\"Joe Condon\">Joe Condon</a> <sup id=\"cite_ref-21\" class=\"reference\"><a href=\"#cite_note-21\">&#91;21&#93;</a></sup> , uses two tables, side by side. For each table slot, there is a depth-preferred and an always-replace entry <sup id=\"cite_ref-22\" class=\"reference\"><a href=\"#cite_note-22\">&#91;22&#93;</a></sup> .\n<span id=\"Bucket\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Bucket_Systems\">Bucket Systems</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=21\" title=\"Edit section: Bucket Systems\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>This family of strategies is similar to the two-tier system, but any number of tiers (known as \"buckets\") can be used (typically the number is based on the size of a cache line). The difference is that the buckets are not specific to one consideration, but rather the new entry overwrites the entry in the bucket with the lowest depth <sup id=\"cite_ref-23\" class=\"reference\"><a href=\"#cite_note-23\">&#91;23&#93;</a></sup> .\n<span id=\"Aging\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Aging\">Aging</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=22\" title=\"Edit section: Aging\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Aging considers searches for different chess positions during gameplay. While early implementations and programs relying on <a href=\"/Piece-Square_Tables#Preprocessing\" title=\"Piece-Square Tables\">root pre-processing</a> to guide search and <a href=\"/Evaluation\" title=\"Evaluation\">evaluation</a> were obligated to clear the hash table between root positions, most todays programs do not, profit from entries of previous searches. Nevertheless, to avoid persistence of old entries which may no longer occur from the current root, aging is used to likely replace those entries by new ones, even if their draft and flags would otherwise protect them. To implement aging, one often stores and compares the current <a href=\"/Halfmove_Clock\" title=\"Halfmove Clock\">halfmove clock</a> as age, likely modulo some power two constant, depending on how many bits are used to store it inside an entry <sup id=\"cite_ref-24\" class=\"reference\"><a href=\"#cite_note-24\">&#91;24&#93;</a></sup> <sup id=\"cite_ref-25\" class=\"reference\"><a href=\"#cite_note-25\">&#91;25&#93;</a></sup>.\n</p>\n<h1><span class=\"mw-headline\" id=\"TT_and_Parallel_Search\">TT and Parallel Search</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=23\" title=\"Edit section: TT and Parallel Search\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>A <a href=\"/Shared_Hash_Table\" title=\"Shared Hash Table\">global transposition table</a>, shared by multiple <a href=\"/Thread\" title=\"Thread\">threads</a> or <a href=\"/Process\" title=\"Process\">processes</a> is essential for effective <a href=\"/Parallel_Search\" title=\"Parallel Search\">parallel search</a> algorithms on modern multi-core CPUs, and might be accessed <a href=\"/Shared_Hash_Table#Lockless\" title=\"Shared Hash Table\">lock-less</a>, as proposed by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a> and <a href=\"/Tim_Mann\" title=\"Tim Mann\">Tim Mann</a> <sup id=\"cite_ref-26\" class=\"reference\"><a href=\"#cite_note-26\">&#91;26&#93;</a></sup> .\n</p>\n<h1><span class=\"mw-headline\" id=\"Further_Hash_Tables\">Further Hash Tables</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=24\" title=\"Edit section: Further Hash Tables\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Besides storing the best move and scores of the search trees, further <a href=\"/Hash_Table\" title=\"Hash Table\">hash tables</a> are often used to cache other features.\n</p>\n<ul><li> <a href=\"/Evaluation_Hash_Table\" title=\"Evaluation Hash Table\">Evaluation Hash Table</a></li>\n<li> <a href=\"/Material_Hash_Table\" title=\"Material Hash Table\">Material Hash Table</a></li>\n<li> <a href=\"/Pawn_Hash_Table\" title=\"Pawn Hash Table\">Pawn Hash Table</a></li>\n<li> <a href=\"/Principal_Variation#SeparateTT\" title=\"Principal Variation\">Separate TT for the PV</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Maximizing_Transpositions\">Maximizing Transpositions</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=25\" title=\"Edit section: Maximizing Transpositions\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Enhanced_Transposition_Cutoff\" title=\"Enhanced Transposition Cutoff\">Enhanced Transposition Cutoff</a></li>\n<li> <a href=\"/Repetitions\" title=\"Repetitions\">Repetitions</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=26\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/CPW-Engine_transposition\" title=\"CPW-Engine transposition\">CPW-Engine_transposition</a></li>\n<li> <a href=\"/Fifty-move_Rule\" title=\"Fifty-move Rule\">Fifty-move Rule</a></li>\n<li> <a href=\"/Graph_History_Interaction\" title=\"Graph History Interaction\">Graph History Interaction</a></li>\n<li> <a href=\"/Population_Count#HammingDistance\" title=\"Population Count\">Hamming Distance</a> <sup id=\"cite_ref-27\" class=\"reference\"><a href=\"#cite_note-27\">&#91;27&#93;</a></sup></li>\n<li> <a href=\"/Hash_Move\" title=\"Hash Move\">Hash Move</a></li>\n<li> <a href=\"/Hash_Table\" title=\"Hash Table\">Hash Table</a></li>\n<li> <a href=\"/Memory#HugePages\" title=\"Memory\">Huge Pages</a></li>\n<li> <a href=\"/Integrated_Bounds_and_Values\" title=\"Integrated Bounds and Values\">Integrated Bounds and Values</a></li>\n<li> <a href=\"/Interior_Node_Recognizer\" title=\"Interior Node Recognizer\">Interior Node Recognizer</a></li>\n<li> <a href=\"/Iterative_Deepening\" title=\"Iterative Deepening\">Iterative Deepening</a></li>\n<li> <a href=\"/Lasker-Reichhelm_Position\" title=\"Lasker-Reichhelm Position\">Lasker-Reichhelm Position</a> (Fine #70)</li>\n<li> <a href=\"/Move_Ordering\" title=\"Move Ordering\">Move Ordering</a></li>\n<li> <a href=\"/Path-Dependency\" title=\"Path-Dependency\">Path-Dependency</a></li>\n<li> <a href=\"/Persistent_Hash_Table\" title=\"Persistent Hash Table\">Persistent Hash Table</a></li>\n<li> <a href=\"/Refutation_Table\" title=\"Refutation Table\">Refutation Table</a></li>\n<li> <a href=\"/Repetitions\" title=\"Repetitions\">Repetitions</a></li>\n<li> <a href=\"/Search_Instability\" title=\"Search Instability\">Search Instability</a></li>\n<li> <a href=\"/Shared_Hash_Table\" title=\"Shared Hash Table\">Shared Hash Table</a></li>\n<li> <a href=\"/Transposition\" title=\"Transposition\">Transposition</a></li>\n<li> <a href=\"/Search_Statistics#TTStatistics\" title=\"Search Statistics\">TT Statistics</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=27\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1967_...\">1967 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=28\" title=\"Edit section: 1967 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Richard_Greenblatt\" title=\"Richard Greenblatt\">Richard Greenblatt</a>, <a href=\"/Donald_Eastlake\" title=\"Donald Eastlake\">Donald Eastlake</a>, <a href=\"/Stephen_D._Crocker\" title=\"Stephen D. Crocker\">Stephen D. Crocker</a> (<b>1967</b>). <i>The Greenblatt Chess Program</i>. Proceedings of the AfiPs Fall Joint Computer Conference, Vol. 31, pp. 801-810. Reprinted (<b>1988</b>) in <a href=\"/Computer_Chess_Compendium\" title=\"Computer Chess Compendium\">Computer Chess Compendium</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://archive.computerhistory.org/projects/chess/related_materials/text/2-4.Greenblatt_Chess_Program/The_Greenblatt_Chess_Program.Greenblatt_Eastlake_Crocker.1967.Fall_Joint_Computer_Conference.062303060.sm.pdf\">pdf</a> from <a href=\"/The_Computer_History_Museum\" title=\"The Computer History Museum\">The Computer History Museum</a> or as <a rel=\"nofollow\" class=\"external text\" href=\"http://dspace.mit.edu/handle/1721.1/6176\">pdf or ps</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://libraries.mit.edu/dspace-mit/\">DSpace</a> at <a href=\"/Massachusetts_Institute_of_Technology\" title=\"Massachusetts Institute of Technology\">MIT</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1970_...\">1970 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=29\" title=\"Edit section: 1970 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Albert_Zobrist\" title=\"Albert Zobrist\">Albert Zobrist</a> (<b>1970</b>). <i>A New Hashing Method with Application for Game Playing</i>. Technical Report #88, Computer Science Department, The University of Wisconsin, Madison, WI, USA. Reprinted (<b>1990</b>) in <a href=\"/ICGA_Journal#13_2\" title=\"ICGA Journal\">ICCA Journal, Vol. 13, No. 2.</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.wisc.edu/techreports/1970/TR88.pdf\">pdf</a></li>\n<li> <a href=\"/David_Slate\" title=\"David Slate\">David Slate</a>, <a href=\"/Larry_Atkin\" title=\"Larry Atkin\">Larry Atkin</a> (<b>1977</b>). <i>CHESS 4.5 - The Northwestern University Chess Program.</i> <a href=\"/Chess_Skill_in_Man_and_Machine\" title=\"Chess Skill in Man and Machine\">Chess Skill in Man and Machine</a> (ed. <a href=\"/Peter_W._Frey\" title=\"Peter W. Frey\">Peter W. Frey</a>), pp. 82-118. Springer-Verlag, New York, N.Y. 2nd ed. 1983. ISBN 0-387-90815-3. Reprinted (<b>1988</b>) in <a href=\"/Computer_Chess_Compendium\" title=\"Computer Chess Compendium\">Computer Chess Compendium</a>&#160;» <a href=\"/Chess_(Program)\" title=\"Chess (Program)\">Chess</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1980_...\">1980 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=30\" title=\"Edit section: 1980 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Harry_Nelson\" title=\"Harry Nelson\">Harry Nelson</a> (<b>1985</b>). <i>Hash Tables in Cray Blitz</i>. <a href=\"/ICGA_Journal#8_1\" title=\"ICGA Journal\">ICCA Journal, Vol. 8, No. 1</a></li>\n<li> <a href=\"/Tony_Warnock\" title=\"Tony Warnock\">Tony Warnock</a>, <a href=\"/Burton_Wendroff\" title=\"Burton Wendroff\">Burton Wendroff</a> (<b>1988</b>). <i>Search Tables in Computer Chess</i>. <a href=\"/ICGA_Journal#11_1\" title=\"ICGA Journal\">ICCA Journal, Vol. 11, No. 1</a></li>\n<li> <a href=\"/James_Gillogly\" title=\"James Gillogly\">James Gillogly</a> (<b>1989</b>). <i>Transposition Table Collisions</i>. <a href=\"/WCCC_1989#Workshop\" title=\"WCCC 1989\">Workshop on New Directions in Game-Tree Search</a></li>\n<li> <a href=\"/Harry_Nelson\" title=\"Harry Nelson\">Harry Nelson</a> (<b>1989</b>). <i>Some Observations about Hash Tables in Cray Blitz</i>. <a href=\"/WCCC_1989#Workshop\" title=\"WCCC 1989\">Workshop on New Directions in Game-Tree Search</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1990_...\">1990 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=31\" title=\"Edit section: 1990 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Dennis_Breuker\" title=\"Dennis Breuker\">Dennis Breuker</a>, <a href=\"/Jos_Uiterwijk\" title=\"Jos Uiterwijk\">Jos Uiterwijk</a>, <a href=\"/Jaap_van_den_Herik\" title=\"Jaap van den Herik\">Jaap van den Herik</a> (<b>1996</b>). <i>Replacement Schemes and Two-Level Tables</i>. <a href=\"/ICGA_Journal#19_3\" title=\"ICGA Journal\">ICCA Journal, Vol. 19, No. 3</a>.</li>\n<li> <a href=\"/Don_Beal\" title=\"Don Beal\">Don Beal</a>, <a href=\"/Martin_C._Smith\" title=\"Martin C. Smith\">Martin C. Smith</a> (<b>1996</b>). <i>Multiple Probes of Transposition Tables</i>. <a href=\"/ICGA_Journal#19_4\" title=\"ICGA Journal\">ICCA Journal, Vol. 19, No. 4</a></li>\n<li> <a href=\"/Dennis_Breuker\" title=\"Dennis Breuker\">Dennis Breuker</a>, <a href=\"/Jos_Uiterwijk\" title=\"Jos Uiterwijk\">Jos Uiterwijk</a>, <a href=\"/Jaap_van_den_Herik\" title=\"Jaap van den Herik\">Jaap van den Herik</a> (<b>1997</b>). <i>Information in Transposition Tables</i>. <a href=\"/Advances_in_Computer_Chess_8\" title=\"Advances in Computer Chess 8\">Advances in Computer Chess 8</a></li>\n<li> <a href=\"/Dennis_Breuker\" title=\"Dennis Breuker\">Dennis Breuker</a> (<b>1998</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.dennisbreuker.nl/thesis/\">Memory versus Search in Games</a></i>. Ph.D. Thesis, <a href=\"/Maastricht_University\" title=\"Maastricht University\">Universiteit Maastricht</a>, The Netherlands. ISBN 90-9012006-8.</li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=32\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/John_Romein\" title=\"John Romein\">John Romein</a>, <a href=\"/Henri_Bal\" title=\"Henri Bal\">Henri Bal</a>, <a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a>, <a href=\"/Aske_Plaat\" title=\"Aske Plaat\">Aske Plaat</a> (<b>2002</b>). <i>A Performance Analysis of Transposition-Table-Driven Scheduling in Distributed Search</i>. IEEE Transactions on Parallel and Distributed Systems, Vol. 13, No. 5, pp. 447–459. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.vu.nl/~bal/Papers/tds.pdf\">pdf</a>&#160;» <a href=\"/Parallel_Search\" title=\"Parallel Search\">Parallel Search</a> <sup id=\"cite_ref-28\" class=\"reference\"><a href=\"#cite_note-28\">&#91;28&#93;</a></sup> <sup id=\"cite_ref-29\" class=\"reference\"><a href=\"#cite_note-29\">&#91;29&#93;</a></sup></li>\n<li> <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/Tim_Mann\" title=\"Tim Mann\">Tim Mann</a> (<b>2002</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.craftychess.com/hyatt/hashing.html\">A lock-less transposition table implementation for parallel search chess engines</a></i>. <a href=\"/ICGA_Journal#25_1\" title=\"ICGA Journal\">ICGA Journal, Vol. 25, No. 1</a></li>\n<li> <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/Anthony_Cozzie\" title=\"Anthony Cozzie\">Anthony Cozzie</a> (<b>2005</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.craftychess.com/hyatt/collisions.html\">The Effect of Hash Signature Collisions in a Chess Program</a></i>. <a href=\"/ICGA_Journal#28_3\" title=\"ICGA Journal\">ICGA Journal, Vol. 28, No. 3</a></li>\n<li> <a href=\"/Borko_Bo%C5%A1kovi%C4%87\" title=\"Borko Bošković\">Borko Bošković</a>, <a href=\"/Sa%C5%A1o_Greiner\" title=\"Sašo Greiner\">Sašo Greiner</a>, <a href=\"/Janez_Brest\" title=\"Janez Brest\">Janez Brest</a>, <a href=\"/Viljem_%C5%BDumer\" title=\"Viljem Žumer\">Viljem Žumer</a> (<b>2005</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://ieeexplore.ieee.org/xpl/freeabs_all.jsp?arnumber=1491153\">The Representation of Chess Game</a></i>. Proceedings of the 27th International Conference on Information Technology Interfaces</li>\n<li> <a href=\"/Joel_Veness\" title=\"Joel Veness\">Joel Veness</a>, <a href=\"/Alan_Blair\" title=\"Alan Blair\">Alan Blair</a> (<b>2007</b>). <i>Effective Use of Transposition Tables in Stochastic Game Tree Search</i>. IEEE Symposium on Computational Intelligence and Games, <a rel=\"nofollow\" class=\"external text\" href=\"http://jveness.info/publications/cig2007%20-%20effective%20use%20of%20transposition%20tables%20in%20stochastic%20game%20tree%20search.pdf\">pdf</a></li>\n<li> <a href=\"/index.php?title=Rune_Rasmussen&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Rune Rasmussen (page does not exist)\">Rune Rasmussen</a>, <a href=\"/index.php?title=Fr%C3%A9d%C3%A9ric_Maire&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Frédéric Maire (page does not exist)\">Frédéric Maire</a>, <a href=\"/index.php?title=Ross_Hayward&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Ross Hayward (page does not exist)\">Ross Hayward</a> (<b>2007</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://eprints.qut.edu.au/12527/\">A Template Matching Table for Speeding-Up Game-Tree Searches for Hex</a></i>. 20th Australian Joint Conference on Artificial Intelligence&#160;» <a href=\"/Hex\" title=\"Hex\">Hex</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=33\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/index.php?title=Timothy_Furtak&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Timothy Furtak (page does not exist)\">Timothy Furtak</a>, <a href=\"/Michael_Buro\" title=\"Michael Buro\">Michael Buro</a> (<b>2011</b>). <i>Using Payoff-Similarity to Speed Up Search</i>. <a href=\"/Conferences#IJCAI2011\" title=\"Conferences\">IJCAI 2011</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://ijcai.org/papers11/Papers/IJCAI11-097.pdf\">pdf</a>&#160;» <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Skat_%28card_game%29\">Skat</a></li>\n<li> <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a> (<b>2014</b>). <i>A Solution to Short PVs Caused by Exact Hash Matches</i>. <a href=\"/ICGA_Journal#37_3\" title=\"ICGA Journal\">ICGA Journal, Vol. 37, No. 3</a>&#160;» <a href=\"/Principal_Variation#SeparateTT\" title=\"Principal Variation\">Separate TT for the PV</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=34\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1990_..._2\">1990 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=35\" title=\"Edit section: 1990 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.de/group/rec.games.chess/browse_thread/thread/87d436c2293f9138\">Hash tables - Clash!!! What happens next?</a> by <a href=\"/Valavan_Manohararajah\" title=\"Valavan Manohararajah\">Valavan Manohararajah</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rec.games.chess</a>, March 14, 1994</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess/browse_frm/thread/a9d5fb3e489196ed/68f9f93c938f3349\">Hash table question</a> by <a href=\"/John_Stanback\" title=\"John Stanback\">John Stanback</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rec.games.chess</a>, March 23, 1994</li></ul>\n<h2><span class=\"mw-headline\" id=\"1995_...\">1995 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=36\" title=\"Edit section: 1995 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/Taxgk4l-S90/ggkiWEVavYsJ\">hash mem in win-chess progs</a> by <a href=\"/Adrian_Millett\" title=\"Adrian Millett\">Pc Sol</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, September 28, 1995&#160;» <a href=\"/Windows\" title=\"Windows\">Windows</a></li></ul>\n<p><b>1996</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/34826d5ec57f0923\">Transposition table</a> by Matthew Bengtson, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, January 25, 1996</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/b9de346eb1e8300/\">Collision probability</a> by <a href=\"/Dennis_Breuker\" title=\"Dennis Breuker\">Dennis Breuker</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, April 15, 1996</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/p8GbiiLjp0o/81vZ3czsthIJ\">Alpha-Beta window in transposition tables?</a> by Marty Bochane, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, October 25, 1996 <sup id=\"cite_ref-30\" class=\"reference\"><a href=\"#cite_note-30\">&#91;30&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/259fbfd2b39b8ee4/80c64ba0f632fc31\">Re: Berliner vs. Botvinnik Some interesting points</a>, post 8 by <a href=\"/Bradley_Kuszmaul\" title=\"Bradley Kuszmaul\">Bradley C. Kuszmaul</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, November 06, 1996&#160;» Transposition Table in <a href=\"/Mac_Hack\" title=\"Mac Hack\">Mac Hack</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/77ec7b3a94555fb4/d8019f5c3716cd1a\">hash table fail high/fail low problem</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, November 26, 1996</li></ul>\n<p><b>1997</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/0sIKY_dfLUs/Qw9J1ECWeBoJ\">Hash functions for use with a transition table</a> by <a href=\"/Tim_Foden\" title=\"Tim Foden\">Tim Foden</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, March 5, 1997&#160;» <a class=\"mw-selflink selflink\">Transposition Table</a></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/0sIKY_dfLUs/aMlLOXkDJJsJ\">Re: Hash functions for use with a transition table</a> by <a href=\"/Ronald_de_Man\" title=\"Ronald de Man\">Ronald de Man</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, March 7, 1997&#160;» <a href=\"/BCH_Hashing\" title=\"BCH Hashing\">BCH Hashing</a></dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/1d601e208c97c395\">Handling of repetition (draw) in transposition table</a> by Bjarke Dahl Ebert, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, June 9, 1997&#160;» <a href=\"/Repetitions\" title=\"Repetitions\">Repetitions</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=10317\">double hash tables</a> by <a href=\"/Chris_Whittington\" title=\"Chris Whittington\">Chris Whittington</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 01, 1997</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=10471\">Hash collisions (was Re: Let's analyze move 36)</a> by <a href=\"/Daniel_Homan\" title=\"Daniel Homan\">Daniel Homan</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 08, 1997&#160;» <a href=\"#Collisions\">Collisions</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/S70uojQGHNU/vU-xEHCfFl0J\">Using values from transition tables</a> by <a href=\"/Tim_Foden\" title=\"Tim Foden\">Tim Foden</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, October 13, 1997</li></ul>\n<p><b>1998</b> \n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=13810\">Fast hash algorithm</a> by John Scalo, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 08, 1998</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=14053\">Fast hash key method - Revisited!</a> by John Scalo, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 14, 1998</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=14226\">Hash tables and data-cache, some programmer stuff...</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 17, 1998</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=19515\">Hash Table Size Versus Performance</a> by Steven Juchnowski, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 30, 1998</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=21654\">Selective deepening and Hashtables</a> by <a href=\"/Werner_Inmann\" title=\"Werner Inmann\">Werner Inmann</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 30, 1998</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=58\">Using too-shallow mate scores from the hash table</a> by <a href=\"/David_Eppstein\" title=\"David Eppstein\">David Eppstein</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 05, 1998&#160;» <a href=\"/Score#MateScores\" title=\"Score\">Mate Scores</a></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=21814\">Re: Using too-shallow mate scores from the hash table</a> by <a href=\"/David_Eppstein\" title=\"David Eppstein\">David Eppstein</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 06, 1998</dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=21838\">Re: Using too-shallow mate scores from the hash table</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 07, 1998</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=22816\">draw by repetition and hash tables</a> by <a href=\"/Werner_Inmann\" title=\"Werner Inmann\">Werner Inmann</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 24, 1998</li></ul>\n<p><b>1999</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=41612\">Hash Tables - Should one store EP, Castling rights etc?</a> by <a href=\"/Steve_Maughan\" title=\"Steve Maughan\">Steve Maughan</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 30, 1999&#160;» <a href=\"/Castling_Rights\" title=\"Castling Rights\">Castling Rights</a>, <a href=\"/En_passant\" title=\"En passant\">En passant</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=43613\">Hash collisions and a little maths</a> by <a href=\"/R%C3%A9mi_Coulom\" title=\"Rémi Coulom\">Rémi Coulom</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 18, 1999</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=43990\">Hash Collisions</a> by <a href=\"/index.php?title=KarinsDad&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"KarinsDad (page does not exist)\">KarinsDad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 21, 1999</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=72221\">Problem with draws by rep and hash table</a> by <a href=\"/James_Robertson\" title=\"James Robertson\">James Robertson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 07, 1999</li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_..._2\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=37\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=93686\">Can we use hash table at root?</a> by Tim, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 31, 2000&#160;» <a href=\"/Root\" title=\"Root\">Root</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/group/comp.lang.asm.x86/browse_frm/thread/ab55c5d57a3a1fd1\">Re: Atomic write of 64 bits</a> by <a href=\"/Frans_Morsch\" title=\"Frans Morsch\">Frans Morsch</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/group/comp.lang.asm.x86/topics\">comp.lang.asm.x86</a>, September 25, 2000&#160;» <a href=\"/MMX\" title=\"MMX\">MMX</a>, <a href=\"/Parallel_Search\" title=\"Parallel Search\">Parallel Search</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/e70ef78a6a17f225\">hashing function</a> by <a href=\"/Vladimir_Medvedev\" title=\"Vladimir Medvedev\">Vladimir R. Medvedev</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, October 17, 2000</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=143022\">Hash table efficiency</a> by <a href=\"/Miguel_A._Ballicora\" title=\"Miguel A. Ballicora\">Miguel A. Ballicora</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 05, 2000&#160;» <a href=\"/Gaviota\" title=\"Gaviota\">Gaviota</a>, <a href=\"/Search_Statistics\" title=\"Search Statistics\">Search Statistics</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=143234\">Why not store both a lower and an upper bound in a hashtable?</a> by <a href=\"/Leen_Ammeraal\" title=\"Leen Ammeraal\">Leen Ammeraal</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 06, 2000</li></ul>\n<p><b>2001</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=175221\">A fast hash -- assuming you are not planning to do incremental updates</a> by <a href=\"/Dann_Corbit\" title=\"Dann Corbit\">Dann Corbit</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 15, 2001</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=182927\">\"Don't trust draw score\" &lt;=Is it true?</a> by <a href=\"/Teerapong_Tovirat\" title=\"Teerapong Tovirat\">Teerapong Tovirat</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 08, 2001&#160;» <a href=\"/Repetitions\" title=\"Repetitions\">Repetitions</a>, <a href=\"/Path-Dependency\" title=\"Path-Dependency\">Path-Dependency</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=200366\">About random numbers and hashing</a> by <a href=\"/Severi_Salminen\" title=\"Severi Salminen\">Severi Salminen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 04, 2001</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=200622\">Re: About random numbers and hashing</a> by <a href=\"/Sven_Reichard\" title=\"Sven Reichard\">Sven Reichard</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 05, 2001</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=203516\">When to RecordHash()?</a> by <a href=\"/Sune_Fischer\" title=\"Sune Fischer\">Sune Fischer</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 25, 2001</li></ul>\n<p><b>2002</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=214125\">Non power of two hash table sizes</a> by <a href=\"/Alvaro_Cardoso\" title=\"Alvaro Cardoso\">Alvaro Jose Povoa Cardoso</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 18, 2002</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=214562\">Detecting Draws using a Small Hash Table?</a> by <a href=\"/Steve_Maughan\" title=\"Steve Maughan\">Steve Maughan</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 20, 2002</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=252097\">hash entry replacement schemes</a> by <a href=\"/Scott_Farrell\" title=\"Scott Farrell\">Scott Farrell</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 14, 2002</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=252598\">hash numbers requested: authors please read</a> by <a href=\"/James_Swafford\" title=\"James Swafford\">James Swafford</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 17, 2002</li></ul>\n<p><b>2003</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=291039\">How important is a big hash table? Measurements...</a> by <a href=\"/Tom_Kerrigan\" title=\"Tom Kerrigan\">Tom Kerrigan</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 29, 2003</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=306858\">Another memory latency test</a> by <a href=\"/Dieter_B%C3%BCr%C3%9Fner\" title=\"Dieter Bürßner\">Dieter Bürßner</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 17, 2003</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=308392\">Replacement shemes</a> by <a href=\"/Sune_Fischer\" title=\"Sune Fischer\">Sune Fischer</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 27, 2003</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/42c6f293450dba50/\">Is it necessary to include empty fields in the hash key of a position?</a> by Frank Hablizel, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, December 25, 2003</li></ul>\n<p><b>2004</b> \n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=339934\">I need your opinion about this hash entry structure</a> by <a href=\"/Federico_Andr%C3%A9s_Corigliano\" title=\"Federico Andrés Corigliano\">Federico Corigliano</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 02, 2004</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=344036\">Question about details of hashing (olithink)</a> by <a href=\"/Michel_Langeveld\" title=\"Michel Langeveld\">Michel Langeveld</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 22, 2004&#160;» <a href=\"/OliThink\" title=\"OliThink\">OliThink</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=354012\">Fruit - Question for Fabien</a> by <a href=\"/Dan_Honeycutt\" title=\"Dan Honeycutt\">Dan Honeycutt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 11, 2004&#160;» <a href=\"/Fruit\" title=\"Fruit\">Fruit</a>, <a href=\"/Node_Types\" title=\"Node Types\">Node Types</a>, <a href=\"/Principal_Variation\" title=\"Principal Variation\">Principal Variation</a>, <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">Principal Variation Search</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=358836\">Hashkey collisions (typical numbers)</a> by <a href=\"/Jan_Renze_Steenhuisen\" title=\"Jan Renze Steenhuisen\">Renze Steenhuisen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 07, 2004 &#160;» <a href=\"/Transposition_Table#Collisions\" title=\"Transposition Table\">Transposition Table - Collisions</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=378351\">A move to search 2nd... Keep in the trans table?</a> by <a href=\"/Eric_Oldre\" title=\"Eric Oldre\">Eric Oldre</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 21, 2004</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=379721\">Transposition table replacement</a> by <a href=\"/Eric_Oldre\" title=\"Eric Oldre\">Eric Oldre</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 29, 2004</li></ul>\n<h2><span class=\"mw-headline\" id=\"2005_...\">2005 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=38\" title=\"Edit section: 2005 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=1855\">Side effects of transposition tables</a> by <a href=\"/Alessandro_Scotti\" title=\"Alessandro Scotti\">Alessandro Scotti</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, March 04, 2005</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=432374\">Hashing double bounds</a> by <a href=\"/Rasjid_Chan\" title=\"Rasjid Chan\">Rasjid Chan</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 20, 2005</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=3405\">Mate scores in the hash table</a> by <a href=\"/index.php?title=Eduardo_Waghabi&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Eduardo Waghabi (page does not exist)\">Eduardo Waghabi</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, September 02, 2005&#160;» <a href=\"/Score#MateScores\" title=\"Score\">Mate Scores</a></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=3405#p17151\">Re: Mate scores in the hash table</a> by <a href=\"/Bruce_Moreland\" title=\"Bruce Moreland\">Bruce Moreland</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, September 04, 2005</dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=3405#p17152\">Re: Mate scores in the hash table</a> by <a href=\"/Josu%C3%A9_Forte\" title=\"Josué Forte\">Josué Forte</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, September 04, 2005</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?t=3838\">Hash table hit rate</a> by <a href=\"/index.php?title=Stef_Luijten&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Stef Luijten (page does not exist)\">Stef Luijten</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, November 16, 2005</li></ul>\n<p><b>2007</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=131367\">Transposition Tables</a> by Colin, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 15, 2007</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?start=0&amp;t=15505\">fail high handling with tranposition tables</a> by <a href=\"/Uri_Blass\" title=\"Uri Blass\">Uri Blass</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 01, 2007</li></ul>\n<p><b>2008</b> \n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=18854\">Problem with Transposition Table and Repitition-Draw</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 11, 2008&#160;» <a href=\"/Repetitions\" title=\"Repetitions\">Repetitions</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=19867\">Transposition Table and nps drop</a> by <a href=\"/Mathieu_Pag%C3%A9\" title=\"Mathieu Pagé\">Mathieu Pagé</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 27, 2008&#160;» <a href=\"/Nodes_per_Second\" title=\"Nodes per Second\">Nodes per Second</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://talkchess.com/forum/viewtopic.php?t=21343\">Semi-Path Dependent Hashing: a semi-useless idea</a> by <a href=\"/Zach_Wegner\" title=\"Zach Wegner\">Zach Wegner</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 24, 2008&#160;» <a href=\"/Path-Dependency\" title=\"Path-Dependency\">Path-Dependency</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=22274\">Is 64 bits enough as a hash length</a> by <a href=\"/Mathieu_Pag%C3%A9\" title=\"Mathieu Pagé\">Mathieu Pagé</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 10, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=23562\">31 bit hash values. How often will it fail?</a> by <a href=\"/Carey_Bloodworth\" title=\"Carey Bloodworth\">Carey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 07, 2008&#160;» <a href=\"/Transposition_Table#Collisions\" title=\"Transposition Table\">Transposition Table - Collisions</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=25599\">Adaptative LMR and TT</a> by <a href=\"/Fermin_Serrano\" title=\"Fermin Serrano\">Fermin Serrano</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 23, 2008&#160;» <a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">Late Move Reductions</a></li></ul>\n<p><b>2009</b> \n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=28119\">transposition table details</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 26, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=28652\">Transposition Table</a> by <a href=\"/Pablo_Vazquez\" title=\"Pablo Vazquez\">Pablo Vazquez</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 26, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=285407\">Cache pollution when reading/writing hash table</a> by <a href=\"/Marco_Costalba\" title=\"Marco Costalba\">Marco Costalba</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 09, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=305218\">Transposition table pruning</a> by <a href=\"/Luca_Hemmerich\" title=\"Luca Hemmerich\">Luca Hemmerich</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 25, 2009</li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_..._2\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=39\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=32396\">Correcting Evaluation with the hash table</a> by <a href=\"/Mark_Lefler\" title=\"Mark Lefler\">Mark Lefler</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 05, 2010&#160;» <a href=\"/Evaluation\" title=\"Evaluation\">Evaluation</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=32897\">TT hit/miss rates</a> by <a href=\"/Vlad_Stamate\" title=\"Vlad Stamate\">Vlad Stamate</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 25, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=33084\">Zero window TT entry</a> by <a href=\"/Vlad_Stamate\" title=\"Vlad Stamate\">Vlad Stamate</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 05, 2010&#160;» <a href=\"/Null_Window\" title=\"Null Window\">Null Window</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=33514\">Null-move pruning and the hash table</a> by <a href=\"/index.php?title=Robert_Purves&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Robert Purves (page does not exist)\">Robert Purves</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 28, 2010&#160;» <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">Null Move Pruning</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=34606\">Crafty Transpostion Table Question</a> by <a href=\"/index.php?title=Eric_Stock&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Eric Stock (page does not exist)\">Eric Stock</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 30, 2010&#160;» <a href=\"/Crafty\" title=\"Crafty\">Crafty</a>, <a href=\"/Shared_Hash_Table#Lockless\" title=\"Shared Hash Table\">Lockless Hashing</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=39481\">TT behavior</a> by <a href=\"/Karlo_Balla\" title=\"Karlo Balla\">Karlo Bala Jr.</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 25, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=36099\">working!</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 17, 2010&#160;» <a href=\"/Principal_Variation#SeparateTT\" title=\"Principal Variation\">Separate TT for the PV</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=36516\">Is a querying the hash tables such a huge bottleneck?</a> by <a href=\"/Oliver_Uwira\" title=\"Oliver Uwira\">Oliver Uwira</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 28, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=37016\">Puzzle with mate scores in TT</a> by <a href=\"/index.php?title=Robert_Purves&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Robert Purves (page does not exist)\">Robert Purves</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 10, 2010&#160;» <a href=\"/Score#MateScores\" title=\"Score\">Mate Scores</a></li></ul>\n<p><b>2011</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=38464\">Transposition Table: addressing slots</a> by <a href=\"/Michael_Hoffmann\" title=\"Michael Hoffmann\">Michael Hoffmann</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 18, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=38740\">Transposition Table updates in Stockfish</a> by <a href=\"/Onno_Garms\" title=\"Onno Garms\">Onno Garms</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 12, 2011&#160;» <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=39289\">Hashing the PV</a> by <a href=\"/index.php?title=Stef_Luijten&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Stef Luijten (page does not exist)\">Stef Luijten</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 06, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=39889\">Dual Bound TT</a> by <a href=\"/index.php?title=Jo%C3%A3o_Guerra&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"João Guerra (page does not exist)\">João Guerra</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 28, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=40062\">TT Key Collisions, Workarounds?</a> by <a href=\"/index.php?title=Clemens_Pruell&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Clemens Pruell (page does not exist)\">Clemens Pruell</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 16, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=40388\">Repetitions/50 moves and TT</a> by <a href=\"/Sergei_Markoff\" title=\"Sergei Markoff\">Sergei Markoff</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 13, 2011&#160;» <a href=\"/Fifty-move_Rule\" title=\"Fifty-move Rule\">Fifty-move Rule</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=40450\">Determining the age of TT buckets</a> by <a href=\"/Julien_Marcel\" title=\"Julien Marcel\">Julien Marcel</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, Sepember 18, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=40849\">Key collision handling</a> by <a href=\"/Jonatan_Pettersson\" title=\"Jonatan Pettersson\">Jonatan Pettersson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 21, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=41640\">Mate score in TT</a> by <a href=\"/Marco_Costalba\" title=\"Marco Costalba\">Marco Costalba</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 28, 2011&#160;» <a href=\"/Score#MateScores\" title=\"Score\">Mate Scores</a></li></ul>\n<p><b>2012</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=52138\">Question on TT</a> by <a href=\"/Giuseppe_Cannella\" title=\"Giuseppe Cannella\">Giuseppe Cannella</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, January 06, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=41917\">Stockfish hash implementation</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 10, 2012&#160;» <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=42833\">cache alignment of tt</a> by <a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel Shawul</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 11, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=43172\">Hash table division</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 05, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=43769\">TT question?</a> by <a href=\"/Fermin_Serrano\" title=\"Fermin Serrano\">Fermin Serrano</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 19, 2012&#160;» <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">Quiescence Search</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=52394\">hashtables</a> by <a href=\"/Daniel_Anulliero\" title=\"Daniel Anulliero\">Daniel Anulliero</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, May 22, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=44082\">how to measure frequency of hash collisions</a> by <a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel Shawul</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 16, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=44666\">TT avoid nullmove flag</a> by <a href=\"/Matthew_R._Brades\" title=\"Matthew R. Brades\">Matthew R. Brades</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 02, 2012&#160;» <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">Null Move Pruning</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=46269\">Transposition Table - Replacement and PV</a> by <a href=\"/index.php?title=Cheney_Nattress&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Cheney Nattress (page does not exist)\">Cheney Nattress</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 04, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=46346\">Speaking of the hash table</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 09, 2012</li></ul>\n<p><b>2013</b> \n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=47373\">Transposition table usage in quiescent search?</a> by <a href=\"/index.php?title=Jerry_Donald&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Jerry Donald (page does not exist)\">Jerry Donald</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 01, 2013&#160;» <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">Quiescence Search</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=47700\">Transposition driven scheduling</a> by <a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel Shawul</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 04, 2013 <sup id=\"cite_ref-31\" class=\"reference\"><a href=\"#cite_note-31\">&#91;31&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=47773\">The effect of larger hash size</a> by <a href=\"/index.php?title=Jacob_B%C3%B8rs_Lind&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Jacob Børs Lind (page does not exist)\">Jacob Børs Lind</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 13, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=47872\">Effect of the Hash Table size</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 28, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48315\">Hash cutoffs and analysis</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 17, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48479\">Hashing based on move lists</a> by <a href=\"/Matthew_R._Brades\" title=\"Matthew R. Brades\">Matthew R. Brades</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 30, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48735\">transposition tables</a> by <a href=\"/Folkert_van_Heusden\" title=\"Folkert van Heusden\">Folkert van Heusden</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 23, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=49362\">ep and castle rights hashing</a> by <a href=\"/index.php?title=Natale_Galioto&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Natale Galioto (page does not exist)\">Natale Galioto</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 15, 2013&#160;» <a href=\"/Castling_Rights\" title=\"Castling Rights\">Castling Rights</a>, <a href=\"/En_passant\" title=\"En passant\">En passant</a>, <a href=\"/Repetitions\" title=\"Repetitions\">Repetitions</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=50430\">Hash tables: one bound or two bounds?</a> by <a href=\"/Alberto_Sanjuan\" title=\"Alberto Sanjuan\">Alberto Sanjuan</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 11, 2013</li></ul>\n<p><b>2014</b> \n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=52169\">LMR &amp; TT interaction</a> by <a href=\"/index.php?title=Natale_Galioto&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Natale Galioto (page does not exist)\">Natale Galioto</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 29, 2014&#160;» <a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">Late Move Reductions</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=52226\">transposition and multithreading question</a> by <a href=\"/Marco_Belli\" title=\"Marco Belli\">Marco Belli</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 04, 2014&#160;» <a href=\"/Parallel_Search\" title=\"Parallel Search\">Parallel Search</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=5&amp;t=2703\">transposition table implementation help</a> by lazyguy123, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">OpenChess Forum</a>, August 09, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=53462\">Transposition table chaining and replacement strategy</a> by <a href=\"/index.php?title=Alex_Ferguson&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Alex Ferguson (page does not exist)\">Alex Ferguson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 28, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/fishcooking/6nNXAQQAXOE/FXs2chqDargJ\">Using the Transposition Table for long searches</a> by Theodr Elwurtz, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">FishCooking</a>, September 22, 2014&#160;» <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=53849\">Speculative prefetch</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 27, 2014&#160;» <a href=\"/Memory\" title=\"Memory\">Memory</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=53859\">Transposition Table Oddity</a> by <a href=\"/Thomas_Kolarik\" title=\"Thomas Kolarik\">Thomas Kolarik</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 28, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=53965\">Can someone explain what advantage there is to...</a> by Forrest Hoch, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 06, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=54063\">Cache over-writing and PV's</a> by Forrest Hoch, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 16, 2014&#160;» <a href=\"/Principal_Variation\" title=\"Principal Variation\">Principal Variation</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=54141\">Mate score from the transposition table</a> by <a href=\"/Evert_Glebbeek\" title=\"Evert Glebbeek\">Evert Glebbeek</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 25, 2014&#160;» <a href=\"/Score#MateScores\" title=\"Score\">Mate Scores</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=54666\">Two hash functions for distributed transposition table</a> by <a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel Shawul</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 16, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=54755\">Transposition table in Q-search</a> by <a href=\"/index.php?title=Alex_Ferguson&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Alex Ferguson (page does not exist)\">Alex Ferguson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 26, 2014&#160;» <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">Quiescence Search</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2015_...\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=40\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=54941\">Legality Check on TT move</a> by Jordan Bray, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 11, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=55501\">(iteration+depth) TT replacement policy</a> by <a href=\"/Aleks_Peshkov\" title=\"Aleks Peshkov\">Aleks Peshkov</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 27, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=55921\">Idea #9228: Clearing stale transtable entries</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>,  April 06, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=55965\">TTable questions</a> by <a href=\"/index.php?title=Henk_van_den_Belt&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Henk van den Belt (page does not exist)\">Henk van den Belt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 11, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=56044\">Fractional plies and transposition tables</a> by <a href=\"/Alexandru_Mosoi\" title=\"Alexandru Mosoi\">Alexandru Mosoi</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 18, 2015&#160;» <a href=\"/Depth#FractionalPlies\" title=\"Depth\">Depth - Fractional Plies</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=57235&amp;start=3\">Re: Worst advice</a> by <a href=\"/Alexandru_Mosoi\" title=\"Alexandru Mosoi\">Alexandru Mosoi</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 10, 2015 </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=57255\">most similar hashes of two positions</a> by <a href=\"/Alexandru_Mosoi\" title=\"Alexandru Mosoi\">Alexandru Mosoi</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 12, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=57348\">The cost of transposition table instrumentation</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 23, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=57634\">atomic TT</a> by lucasart, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 13, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=57603\">Transposition table test positons</a> by <a href=\"/Robert_Pope\" title=\"Robert Pope\">Robert Pope</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 11, 2015&#160;» <a href=\"/Test-Positions\" title=\"Test-Positions\">Test-Positions</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=57924\">Hash cache</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 12, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=5&amp;t=2913\">Perft and hash with legal move generator</a> by <a href=\"/index.php?title=Izak_Pretorius&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Izak Pretorius (page does not exist)\">Peterpan</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">OpenChess Forum</a>, November 12, 2015&#160;» <a href=\"/Perft\" title=\"Perft\">Perft</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=58727\">Transposition table utilizattion</a> by <a href=\"/Shawn_Chidester\" title=\"Shawn Chidester\">Shawn Chidester</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 29, 2015</li></ul>\n<p><b>2016</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=58890\">On-the fly hash key generation?</a> by <a href=\"/Evert_Glebbeek\" title=\"Evert Glebbeek\">Evert Glebbeek</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 12, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=59047\">Transposition Age Tutorial</a> by <a href=\"/Dennis_Sceviour\" title=\"Dennis Sceviour\">Dennis Sceviour</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 25, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=5&amp;t=2951\">TT Mate scores</a> by rgoomes, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">OpenChess Forum</a>, February 10, 2016&#160;» <a href=\"/Score#MateScores\" title=\"Score\">Mate Scores</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=59334\">Hashing question</a> by Kenneth Jones, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 23, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=5&amp;t=2961\">TT and Iterative Deepening</a> by kuket15, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">OpenChess Forum</a>, February 26, 2016&#160;» <a href=\"/Iterative_Deepening\" title=\"Iterative Deepening\">Iterative Deepening</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=59401\">Transposition table replacement strategies</a> by <a href=\"/Shawn_Chidester\" title=\"Shawn Chidester\">Shawn Chidester</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 01, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=59426\">about hashtable</a> by <a href=\"/Daniel_Anulliero\" title=\"Daniel Anulliero\">Daniel Anulliero</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 04, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://talkchess.com/forum/viewtopic.php?t=59740\">Hashing in Qsearch?</a> by <a href=\"/Martin_Fierz\" title=\"Martin Fierz\">Martin Fierz</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 03, 2016&#160;» <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">Quiescence Search</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=59856\">Shifting alpha/beta on hash hit</a> by <a href=\"/Martin_Fierz\" title=\"Martin Fierz\">Martin Fierz</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 14, 2016&#160;» <a href=\"/Search_Instability\" title=\"Search Instability\">Search Instability</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=59949\">What happens during a hash collision in say Stockfish ...</a> by Isaac Haïk Dunn, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 24, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=59960\">Hashtable aging</a> by <a href=\"/Martin_Fierz\" title=\"Martin Fierz\">Martin Fierz</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 25, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=60056\">Transposition Table replacement schemes</a> by Andrew Grant, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 05, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=60122\">lockless hashing</a> by Lucas Braesch, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 10, 2016&#160;» <a href=\"/Shared_Hash_Table\" title=\"Shared Hash Table\">Shared Hash Table</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=60243\">Suggestion for hash tables and analysis</a> by <a href=\"/index.php?title=J._Wesley_Cleveland&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"J. Wesley Cleveland (page does not exist)\">J. Wesley Cleveland</a>, May 22, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=60264\">Hashtable and 50 move rule draws</a> by <a href=\"/Stan_Arts\" title=\"Stan Arts\">Stan Arts</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 24, 2016&#160;» <a href=\"/Fifty-move_Rule\" title=\"Fifty-move Rule\">Fifty-move Rule</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=60589\">Transposition Table - Updating entries</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 24, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=5&amp;t=2991\">Transposition Table Usage</a> by theturk1234, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">OpenChess Forum</a>, July 12, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=5&amp;t=2995\">Aspiration window with TT question</a> by <a href=\"/index.php?title=Sander_Maassen_vd_Brink&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Sander Maassen vd Brink (page does not exist)\">sandermvdb</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">OpenChess Forum</a>, August 01, 2016&#160;» <a href=\"/Aspiration_Windows\" title=\"Aspiration Windows\">Aspiration Windows</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61015\">Storing both alpha and beta scores in TT</a> by <a href=\"/Thomas_Dybdahl_Ahle\" title=\"Thomas Dybdahl Ahle\">Thomas Dybdahl Ahle</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 02, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61051\">Using side to move as a separate bit in hash key</a> by <a href=\"/index.php?title=J._Wesley_Cleveland&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"J. Wesley Cleveland (page does not exist)\">J. Wesley Cleveland</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 06, 2016&#160;» <a href=\"/Side_to_move\" title=\"Side to move\">Side to move</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/forum/#!topic/fishcooking/Mh8SzJhxmHQ\">Question about TT</a> by stefano.c, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">FishCooking</a>, August 21, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61193\">transposition table pseudocode</a> by <a href=\"/Erin_Dame\" title=\"Erin Dame\">Erin Dame</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 22, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61384\">transposition tables and three-fold repetition</a> by <a href=\"/Erin_Dame\" title=\"Erin Dame\">Erin Dame</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 10, 2016&#160;» <a href=\"/Repetitions\" title=\"Repetitions\">Repetitions</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61543\">Transposition tables in Cray Blitz</a> by <a href=\"/Erin_Dame\" title=\"Erin Dame\">Erin Dame</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>,  September 26, 2016 <sup id=\"cite_ref-32\" class=\"reference\"><a href=\"#cite_note-32\">&#91;32&#93;</a></sup>&#160;» <a href=\"/Cray_Blitz\" title=\"Cray Blitz\">Cray Blitz</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61614\">Hash table transformation</a> by <a href=\"/Dann_Corbit\" title=\"Dann Corbit\">Dann Corbit</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 05, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=62391\">Modify hash probing code to pvs</a> by Fernando Tenorio, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 05, 2016</li></ul>\n<p><b>2017</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=62890\">What is wrong with doing Nulls &amp; ttcuts in a pv node&#160;?</a> by <a href=\"/index.php?title=Mahmoud_Uthman&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Mahmoud Uthman (page does not exist)\">Mahmoud Uthman</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 21, 2017&#160;» <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">Null Move Pruning</a>, <a href=\"/Node_Types#PV\" title=\"Node Types\">PV-Nodes</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63693\">Interesting hash-replacement scheme</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 08, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63726\">Problems with TT, sometimes makes blunder moves</a> by <a href=\"/index.php?title=Tony_Soares&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Tony Soares (page does not exist)\">Tony Soares</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 12, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=5&amp;t=3106\">TT Table replacement strategy</a> by kickstone, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">OpenChess Forum</a>, April 29, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64021\">Hash Tables Deep Blue</a> by Gustavo Mallada, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 18, 2017&#160;» <a href=\"/Deep_Blue\" title=\"Deep Blue\">Deep Blue</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64274\">Hash table</a> by <a href=\"/Daniel_Jos%C3%A9_Queralt%C3%B3\" title=\"Daniel José Queraltó\">Daniel José Queraltó</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 12, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64522\">Improving hash replacing schema for analysis mode</a> by <a href=\"/Daniel_Jos%C3%A9_Queralt%C3%B3\" title=\"Daniel José Queraltó\">Daniel José Queraltó</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 05, 2017&#160;» <a href=\"#ReplacementStrategies\">Replacement Strategy</a>, <a href=\"/Persistent_Hash_Table\" title=\"Persistent Hash Table\">Persistent Hash Table</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64564\">TT aging</a> by <a href=\"/Marco_Pampaloni\" title=\"Marco Pampaloni\">Marco Pampaloni</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 09, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64604\">Equidistributed draft</a> by <a href=\"/Alvaro_Cardoso\" title=\"Alvaro Cardoso\">Alvaro Cardoso</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 14, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64606\">2-level TT</a> by <a href=\"/Rein_Halbersma\" title=\"Rein Halbersma\">Rein Halbersma</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 14, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64688\">cutechess-cli: not restarting an engine because of tt</a> by <a href=\"/Folkert_van_Heusden\" title=\"Folkert van Heusden\">Folkert van Heusden</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 22, 2017&#160;» <a href=\"/Cutechess-cli\" title=\"Cutechess-cli\">Cutechess-cli</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65327\">Size of Transposition Table Entry</a> by <a href=\"/index.php?title=Jason_Fernandez&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Jason Fernandez (page does not exist)\">Jason Fernandez</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 29, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65526\">Transposition table and Fine#70</a> by <a href=\"/Vincent_Tang\" title=\"Vincent Tang\">Vincent Tang</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 23, 2017&#160;» <a href=\"/Lasker-Reichhelm_Position\" title=\"Lasker-Reichhelm Position\">Lasker-Reichhelm Position</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=65903\">TT in Qsearch</a> by <a href=\"/Laurie_Tunnicliffe\" title=\"Laurie Tunnicliffe\">Laurie Tunnicliffe</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>,  December 05, 2017&#160;» <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">Quiescence Search</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66135\">Transposition table based pruning idea</a> by <a href=\"/index.php?title=Jerry_Donald&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Jerry Donald (page does not exist)\">Jerry Donald</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 25, 2017&#160;» <a href=\"/Pruning\" title=\"Pruning\">Pruning</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66183\">hashing in chess4j</a> by <a href=\"/James_Swafford\" title=\"James Swafford\">James Swafford</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 30, 2017&#160;» <a href=\"/Chess4j\" title=\"Chess4j\">chess4j</a></li></ul>\n<p><b>2018</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66640\">Marcel Duchamp endgame \"splits\" engines / hash phenomenon</a> by <a href=\"/Kenneth_W._Regan\" title=\"Kenneth W. Regan\">Kenneth Regan</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 19, 2018&#160;» <a href=\"/Category:Marcel_Duchamp\" title=\"Category:Marcel Duchamp\">Marcel Duchamp</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=5&amp;t=3170\">Do You Track Hash Table Efficiency?</a> by OneMoreTime, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">OpenChess Forum</a>, April 07, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=67049\">Mate scores in TT (a new?... approach)</a> by Vince Sempronio, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 09, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=67078\">Yet another Mate scores in TT thread</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 12, 2018&#160;» <a href=\"/Checkmate\" title=\"Checkmate\">Checkmate</a>, <a href=\"/Score\" title=\"Score\">Score</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=67102\">Draw scores in TT</a> by <a href=\"/Srdja_Matovic\" title=\"Srdja Matovic\">Srdja Matovic</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 14, 2018&#160;» <a href=\"/Draw\" title=\"Draw\">Draw</a>, <a href=\"/Score#DrawScore\" title=\"Score\">Draw Score</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=67131\">Depth extensions and effect on transposition queries</a> by <a href=\"/index.php?title=Kenneth_Jones&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Kenneth Jones (page does not exist)\">Kenneth Jones</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 16, 2018&#160;» <a href=\"/Extensions\" title=\"Extensions\">Extensions</a>, <a href=\"/Check_Extensions\" title=\"Check Extensions\">Check Extensions</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=67387\">Not detected collisions in tt probing</a> by <a href=\"/Andreas_Matthies\" title=\"Andreas Matthies\">Andreas Matthies</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 09, 2018&#160;» <a href=\"#Collisions\">Collisions</a></li></ul>\n<p><b>2019</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=69629\">Playing transposition table moves in the Quiescence search</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 17, 2019&#160;» <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">Quiescence Search</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=70586\">Prefetch and Threading</a> by <a href=\"/Dennis_Sceviour\" title=\"Dennis Sceviour\">Dennis Sceviour</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 25, 2019&#160;» <a href=\"/Memory\" title=\"Memory\">Memory</a>, <a href=\"/Thread\" title=\"Thread\">Thread</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=67599\">Debugging a transposition table</a> by <a href=\"/Vincent_Tang\" title=\"Vincent Tang\">Vincent Tang</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 29, 2018&#160;» <a href=\"/Debugging\" title=\"Debugging\">Debugging</a>, <a href=\"/Lasker-Reichhelm_Position\" title=\"Lasker-Reichhelm Position\">Lasker-Reichhelm Position</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=70931\">Hash collision?</a> by <a href=\"/Tom_King\" title=\"Tom King\">Tom King</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 05, 2019</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=71994\">Looking for TT policy advice</a> by <a href=\"/Vivien_Clauzon\" title=\"Vivien Clauzon\">Vivien Clauzon</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 04, 2019&#160;» <a href=\"#ReplacementStrategies\">Replacement Strategy</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=72462\">Probing the transposition table at depth 0</a> by <a href=\"/index.php?title=Gonzalo_Arro&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Gonzalo Arro (page does not exist)\">Gonzalo Arro</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 29, 2019</li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=41\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=72932\">hash collisions</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 28, 2020&#160;» <a href=\"#KeyCollisions\">Key Collisions</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=72964\">Dense board representation as hash code</a> \tby koedem, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 01, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=73110\">Zobrist key independence</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 17, 2020&#160;» <a href=\"/Zobrist_Hashing\" title=\"Zobrist Hashing\">Zobrist Hashing</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=73126\">SIMD methods in TT probing and replacement</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 20, 2020&#160;» <a href=\"/SIMD_and_SWAR_Techniques\" title=\"SIMD and SWAR Techniques\">SIMD and SWAR Techniques</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=73202\">Measuring Hash Collisions (once again)</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 27, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=73232\">Hash size, hash fullness, strength</a> by <a href=\"/Vivien_Clauzon\" title=\"Vivien Clauzon\">Vivien Clauzon</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 29, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=73493\">Where to enter/read position into hash table in perft?</a> by <a href=\"/Marcel_Vanthoor\" title=\"Marcel Vanthoor\">Marcel Vanthoor</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 28, 2020&#160;» <a href=\"/Perft\" title=\"Perft\">Perft</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=73516\">Hash entry/bucket memory usage optimization</a> by <a href=\"/Marcel_Vanthoor\" title=\"Marcel Vanthoor\">Marcel Vanthoor</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 30, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=74081\">asymmetric evaluation and TT</a> by <a href=\"/Vivien_Clauzon\" title=\"Vivien Clauzon\">Vivien Clauzon</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 02, 2020&#160;» <a href=\"/Asymmetric_Evaluation\" title=\"Asymmetric Evaluation\">Asymmetric Evaluation</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=74411\">Correct way to store and extract mate scores</a> by Ian Mitchell, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 08, 2020&#160;» <a href=\"/Checkmate\" title=\"Checkmate\">Checkmate</a>, <a href=\"/Score\" title=\"Score\">Score</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=75549\">Principal Variation Search vs. Transposition Table</a> by <a href=\"/Marcel_Vanthoor\" title=\"Marcel Vanthoor\">Marcel Vanthoor</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 26, 2020&#160;» <a href=\"/Principal_Variation\" title=\"Principal Variation\">Principal Variation</a>, <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">Principal Variation Search</a></li></ul>\n<p><b>2021</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=76499\">Transposition table replacement scheme</a> by <a href=\"/Niels_Abildskov\" title=\"Niels Abildskov\">Niels Abildskov</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 05, 2021</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=76508\">Best practices for transposition tables</a> by Brian Adkins, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 06, 2021</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=76575\">TT: key collisions</a> by Brian Adkins, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 13, 2021&#160;» <a href=\"#KeyCollisions\">Key Collisions</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=76887\">Hash move ordering vs. Hash cuts: savings in number of nodes visited</a> by <a href=\"/Marcel_Vanthoor\" title=\"Marcel Vanthoor\">Marcel Vanthoor</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 16, 2021</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=77054\">PERFT transposition table funny?!</a> by <a href=\"/Martin_Bryant\" title=\"Martin Bryant\">Martin Bryant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 10, 2021&#160;» <a href=\"/Perft\" title=\"Perft\">Perft</a>, <a href=\"/Memory\" title=\"Memory\">Memory</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=77286\">For or against the transposition table probe in quiet search?</a> by <a href=\"/index.php?title=Eugene_Kotlov&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Eugene Kotlov (page does not exist)\">Eugene Kotlov</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 11, 2021&#160;» <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">Quiescence Search</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=77470\">Saving moves into the TT</a> by <a href=\"/Marcel_Vanthoor\" title=\"Marcel Vanthoor\">Marcel Vanthoor</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 11, 2021</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=77504\">Hash value composition</a> by <a href=\"/Yves_De_Billo%C3%ABz\" title=\"Yves De Billoëz\">Yves De Billoëz</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 17, 2021</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=77569\">When to clear the Transposition table?</a> by\t<a href=\"/Thomas_Jahn\" title=\"Thomas Jahn\">Thomas Jahn</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 28, 2021</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=78474\">About move ordering and TT hitrate</a> by Giovanni Maria Manduca, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 22, 2021&#160;» <a href=\"/Move_Ordering\" title=\"Move Ordering\">Move Ordering</a></li></ul>\n<p><b>2022</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=79647\">Transposition table based cutoffs</a> by Michal Witanowski, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 05, 2022</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=79720\">Consensus for TT: Buckets with Entries, or Entries with Buckets?</a> by <a href=\"/Marcel_Vanthoor\" title=\"Marcel Vanthoor\">Marcel Vanthoor</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 19, 2022</li></ul>\n<p><b>2023</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/viewtopic.php?t=82494\">Checking TT move for legality</a> by Aaron Li, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 20, 2023</li></ul>\n<p><b>2024</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/viewtopic.php?t=83222\">Help with transposition table</a> by E Boatwright, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 21, 2024</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/viewtopic.php?t=83549\">adding TT reduces NPS by allot</a> by Ravael Jansen, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 29, 2024</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/viewtopic.php?t=83695\">Hybride replacemment strategy worse than always-replace</a> by mathmoi, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 25, 2024</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=42\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://web.archive.org/web/20070809015843/www.seanet.com/%7Ebrucemo/topics/hashing.htm\">The Main Transposition Table</a> from <a href=\"/Bruce_Moreland\" title=\"Bruce Moreland\">Bruce Moreland's</a> <a rel=\"nofollow\" class=\"external text\" href=\"http://web.archive.org/web/20070607231311/www.brucemo.com/compchess/programming/index.htm\">Programming Topics</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Transposition_table\">Transposition table from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Zobrist_hashing\">Zobrist hashing from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/G%C3%B6del_numbering\">Gödel numbering from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cse.buffalo.edu/~regan/chess/computer/\">Computer Chess - Hash Collisions in Chess Engines, and What They May Mean...</a> by <a href=\"/Kenneth_W._Regan\" title=\"Kenneth W. Regan\">Kenneth W. Regan</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.jamesswafford.com/2017/12/30/hashing-in-chess4j/\">Hashing in chess4j</a> by <a href=\"/James_Swafford\" title=\"James Swafford\">James Swafford</a>, December 30, 2017» <a href=\"/Chess4j\" title=\"Chess4j\">chess4j</a></li>\n<li> <a href=\"/Category:Tal_Wilkenfeld\" title=\"Category:Tal Wilkenfeld\">Tal Wilkenfeld</a> - <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Transformation_%28Tal_Wilkenfeld_album%29\">Table For One</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/yu6zUwDv-o4?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition_Table&amp;action=edit&amp;section=43\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap mw-references-columns\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a href=\"/Richard_Greenblatt\" title=\"Richard Greenblatt\">Richard Greenblatt</a>, <a href=\"/Donald_Eastlake\" title=\"Donald Eastlake\">Donald Eastlake</a>, <a href=\"/Stephen_D._Crocker\" title=\"Stephen D. Crocker\">Stephen D. Crocker</a> (<b>1967</b>). <i>The Greenblatt Chess Program</i>. Proceedings of the AfiPs Fall Joint Computer Conference, Vol. 31, pp. 801-810. Reprinted (<b>1988</b>) in <a href=\"/Computer_Chess_Compendium\" title=\"Computer Chess Compendium\">Computer Chess Compendium</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://archive.computerhistory.org/projects/chess/related_materials/text/2-4.Greenblatt_Chess_Program/The_Greenblatt_Chess_Program.Greenblatt_Eastlake_Crocker.1967.Fall_Joint_Computer_Conference.062303060.sm.pdf\">pdf</a> from <a href=\"/The_Computer_History_Museum\" title=\"The Computer History Museum\">The Computer History Museum</a> or as <a rel=\"nofollow\" class=\"external text\" href=\"http://dspace.mit.edu/handle/1721.1/6176\">pdf or ps</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://libraries.mit.edu/dspace-mit/\">DSpace</a> at <a href=\"/Massachusetts_Institute_of_Technology\" title=\"Massachusetts Institute of Technology\">MIT</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a href=\"/Albert_Zobrist\" title=\"Albert Zobrist\">Albert Zobrist</a> (<b>1970</b>). <i>A New Hashing Method with Application for Game Playing</i>. Technical Report #88, Computer Science Department, The University of Wisconsin, Madison, WI, USA. Reprinted (<b>1990</b>) in <a href=\"/ICGA_Journal#13_2\" title=\"ICGA Journal\">ICCA Journal, Vol. 13, No. 2</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.wisc.edu/techreports/1970/TR88.pdf\">pdf</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/259fbfd2b39b8ee4/80c64ba0f632fc31\">Re: Berliner vs. Botvinnik Some interesting points</a>, post 8 by <a href=\"/Bradley_Kuszmaul\" title=\"Bradley Kuszmaul\">Bradley C. Kuszmaul</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, November 06, 1996&#160;» Transposition Table in <a href=\"/Mac_Hack\" title=\"Mac Hack\">Mac Hack</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Dynamic_programming#Algorithms_that_use_dynamic_programming\">Algorithms that use dynamic programming from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a href=\"/Mathematician#SDasgupta\" title=\"Mathematician\">Sanjoy Dasgupta</a>, <a href=\"/Mathematician#CHPapadimitriou\" title=\"Mathematician\">Christos H. Papadimitriou</a>, <a href=\"/Mathematician#UVVazirani\" title=\"Mathematician\">Umesh Vazirani</a> (<b>2006</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.berkeley.edu/%7Evazirani/algorithms.html\">Algorithms</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/McGraw-Hill\">McGraw-Hill</a>, ISBN: 978-0073523408, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.amazon.com/gp/product/0073523402?ie=UTF8&amp;tag=ebookdire-20&amp;link_code=as3&amp;camp=211189&amp;creative=373489&amp;creativeASIN=0073523402\">amazon</a>, Chapter 6, Dynamic programming</span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a href=\"/Dennis_Breuker\" title=\"Dennis Breuker\">Dennis Breuker</a>, <a href=\"/Jos_Uiterwijk\" title=\"Jos Uiterwijk\">Jos Uiterwijk</a>, <a href=\"/Jaap_van_den_Herik\" title=\"Jaap van den Herik\">Jaap van den Herik</a> (<b>1997</b>). <i>Information in Transposition Tables</i>. <a href=\"/Advances_in_Computer_Chess_8\" title=\"Advances in Computer Chess 8\">Advances in Computer Chess 8</a></span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a href=\"/MTD(f)\" title=\"MTD(f)\">MTD(f)</a>- and some <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">PVS</a>-implementations store distinct <a href=\"/Upper_Bound\" title=\"Upper Bound\">upper</a> and <a href=\"/Upper_Bound\" title=\"Upper Bound\">lower bound</a> scores, rather than one score with flags</span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\"><a href=\"/Shirish_Chinchalkar\" title=\"Shirish Chinchalkar\">Shirish Chinchalkar</a> (<b>1996</b>). <i>An Upper Bound for the Number of Reachable Positions</i>. <a href=\"/ICGA_Journal#19_3\" title=\"ICGA Journal\">ICCA Journal, Vol. 19, No. 3</a></span>\n</li>\n<li id=\"cite_note-9\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-9\">↑</a></span> <span class=\"reference-text\"><a href=\"/Albert_Zobrist\" title=\"Albert Zobrist\">Albert Zobrist</a> (<b>1970</b>). <i>A New Hashing Method with Application for Game Playing</i>. Technical Report #88, Computer Science Department, The University of Wisconsin, Madison, WI, USA. Reprinted (1990) in <a href=\"/ICGA_Journal#13_2\" title=\"ICGA Journal\">ICCA Journal, Vol. 13, No. 2</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.wisc.edu/techreports/1970/TR88.pdf\">pdf</a></span>\n</li>\n<li id=\"cite_note-10\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-10\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/b9de346eb1e8300/\">Collision probability</a> by <a href=\"/Dennis_Breuker\" title=\"Dennis Breuker\">Dennis Breuker</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, April 15, 1996</span>\n</li>\n<li id=\"cite_note-11\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-11\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=40062\">TT Key Collisions, Workarounds?</a> by <a href=\"/index.php?title=Clemens_Pruell&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Clemens Pruell (page does not exist)\">Clemens Pruell</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 16, 2011</span>\n</li>\n<li id=\"cite_note-12\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-12\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=44082\">how to measure frequency of hash collisions</a> by <a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel Shawul</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 16, 2012</span>\n</li>\n<li id=\"cite_note-13\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-13\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.cse.buffalo.edu/~regan/chess/computer/\">Computer Chess - Hash Collisions in Chess Engines, and What They May Mean...</a> by <a href=\"/Kenneth_W._Regan\" title=\"Kenneth W. Regan\">Kenneth W. Regan</a></span>\n</li>\n<li id=\"cite_note-14\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-14\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.chessgames.com/perl/chessgame?gid=1352348\">Pablo Lafuente vs Shredder (Computer) (2005)</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://www.chessgames.com/index.html\">chessgames.com</a></span>\n</li>\n<li id=\"cite_note-15\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-15\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.chessbase.com/newsdetail.asp?newsid=2525\">Current tournaments – Sanjin, Biel, Argentina, Israel</a>, <a href=\"/ChessBase\" title=\"ChessBase\">ChessBase News</a>, July 21, 2005</span>\n</li>\n<li id=\"cite_note-16\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-16\">↑</a></span> <span class=\"reference-text\"><a href=\"/James_Gillogly\" title=\"James Gillogly\">James Gillogly</a> (<b>1989</b>). <i>Transposition Table Collisions</i>. <a href=\"/WCCC_1989#Workshop\" title=\"WCCC 1989\">Workshop on New Directions in Game-Tree Search</a></span>\n</li>\n<li id=\"cite_note-17\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-17\">↑</a></span> <span class=\"reference-text\"><a href=\"/James_Gillogly\" title=\"James Gillogly\">James Gillogly</a> (<b>1989</b>). <i>New Directions in Game-Tree Search - First Workshop Session</i>. <a href=\"/ICGA_Journal#12_2\" title=\"ICGA Journal\">ICCA Journal, Vol. 12, No. 2</a></span>\n</li>\n<li id=\"cite_note-18\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-18\">↑</a></span> <span class=\"reference-text\"><a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/Anthony_Cozzie\" title=\"Anthony Cozzie\">Anthony Cozzie</a> (<b>2005</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.craftychess.com/hyatt/collisions.html\">The Effect of Hash Signature Collisions in a Chess Program</a></i>. <a href=\"/ICGA_Journal#28_3\" title=\"ICGA Journal\">ICGA Journal, Vol. 28, No. 3</a></span>\n</li>\n<li id=\"cite_note-19\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-19\">↑</a></span> <span class=\"reference-text\"><a href=\"/Dennis_Breuker\" title=\"Dennis Breuker\">Dennis Breuker</a>, <a href=\"/Jos_Uiterwijk\" title=\"Jos Uiterwijk\">Jos Uiterwijk</a>, <a href=\"/Jaap_van_den_Herik\" title=\"Jaap van den Herik\">Jaap van den Herik</a> (<b>1994</b>). <i>Replacement Schemes for Transposition Tables</i>. <a href=\"/ICGA_Journal#17_4\" title=\"ICGA Journal\">ICCA Journal, Vol. 17, No. 4</a></span>\n</li>\n<li id=\"cite_note-20\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-20\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=47373&amp;start=28\">Re: Transposition table usage in quiescent search?</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 06, 2013</span>\n</li>\n<li id=\"cite_note-21\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-21\">↑</a></span> <span class=\"reference-text\"><a href=\"/Joe_Condon\" title=\"Joe Condon\">Joe Condon</a>, <a href=\"/Ken_Thompson\" title=\"Ken Thompson\">Ken Thompson</a> (<b>1983</b>). <i>BELLE Chess Hardware</i>. <a href=\"/Advances_in_Computer_Chess_3\" title=\"Advances in Computer Chess 3\">Advances in Computer Chess 3</a></span>\n</li>\n<li id=\"cite_note-22\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-22\">↑</a></span> <span class=\"reference-text\"><a href=\"/Dennis_Breuker\" title=\"Dennis Breuker\">Dennis Breuker</a>, <a href=\"/Jos_Uiterwijk\" title=\"Jos Uiterwijk\">Jos Uiterwijk</a>, <a href=\"/Jaap_van_den_Herik\" title=\"Jaap van den Herik\">Jaap van den Herik</a> (<b>1996</b>). <i>Replacement Schemes and Two-Level Tables</i>. <a href=\"/ICGA_Journal#19_3\" title=\"ICGA Journal\">ICCA Journal, Vol. 19, No. 3</a></span>\n</li>\n<li id=\"cite_note-23\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-23\">↑</a></span> <span class=\"reference-text\"><a href=\"/Don_Beal\" title=\"Don Beal\">Don Beal</a>, <a href=\"/Martin_C._Smith\" title=\"Martin C. Smith\">Martin C. Smith</a> (<b>1996</b>). <i>Multiple Probes of Transposition Tables</i>. <a href=\"/ICGA_Journal#19_4\" title=\"ICGA Journal\">ICCA Journal, Vol. 19, No. 4</a></span>\n</li>\n<li id=\"cite_note-24\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-24\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=59047\">Transposition Age Tutorial</a> by <a href=\"/Dennis_Sceviour\" title=\"Dennis Sceviour\">Dennis Sceviour</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 25, 2016</span>\n</li>\n<li id=\"cite_note-25\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-25\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=59960\">Hashtable aging</a> by <a href=\"/Martin_Fierz\" title=\"Martin Fierz\">Martin Fierz</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 25, 2016</span>\n</li>\n<li id=\"cite_note-26\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-26\">↑</a></span> <span class=\"reference-text\"><a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a> and <a href=\"/Tim_Mann\" title=\"Tim Mann\">Tim Mann</a> (<b>2002</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.craftychess.com/hyatt/hashing.html\">A lock-less transposition table implementation for parallel search chess engines</a></i>. <a href=\"/ICGA_Journal#25_1\" title=\"ICGA Journal\">ICGA Journal, Vol. 25, No. 1</a></span>\n</li>\n<li id=\"cite_note-27\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-27\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=200622\">Re: About random numbers and hashing</a> by <a href=\"/Sven_Reichard\" title=\"Sven Reichard\">Sven Reichard</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 05, 2001</span>\n</li>\n<li id=\"cite_note-28\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-28\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Transposition-driven_scheduling\">Transposition-driven scheduling - Wikipedia</a></span>\n</li>\n<li id=\"cite_note-29\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-29\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=47700\">Transposition driven scheduling</a> by <a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel Shawul</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 04, 2013</span>\n</li>\n<li id=\"cite_note-30\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-30\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=55889&amp;start=8\">Re. Fail low after fail high</a> by <a href=\"/Marcel_van_Kervinck\" title=\"Marcel van Kervinck\">Marcel van Kervinck</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 05, 2015&#160;» <a href=\"/Fail-Low\" title=\"Fail-Low\">Fail-Low </a>, <a href=\"/Fail-High\" title=\"Fail-High\">Fail-High</a></span>\n</li>\n<li id=\"cite_note-31\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-31\">↑</a></span> <span class=\"reference-text\"><a href=\"/John_Romein\" title=\"John Romein\">John Romein</a>, <a href=\"/Henri_Bal\" title=\"Henri Bal\">Henri Bal</a>, <a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a>, <a href=\"/Aske_Plaat\" title=\"Aske Plaat\">Aske Plaat</a> (<b>2002</b>). <i>A Performance Analysis of Transposition-Table-Driven Scheduling in Distributed Search</i>. IEEE Transactions on Parallel and Distributed Systems, Vol. 13, No. 5, pp. 447–459. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.vu.nl/~bal/Papers/tds.pdf\">pdf</a></span>\n</li>\n<li id=\"cite_note-32\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-32\">↑</a></span> <span class=\"reference-text\"><a href=\"/David_E._Welsh\" title=\"David E. Welsh\">David E. Welsh</a>, <a href=\"/Boris_Baczynskyj\" title=\"Boris Baczynskyj\">Boris Baczynskyj</a> (<b>1985</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.amazon.com/Computer-Chess-II-David-Welsh/dp/0697099113\">Computer Chess II</a></i>. William C Brown Publications, ISBN-13: 978-0697099112</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Search\" title=\"Search\">Up one Level</a></b></span>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301032532\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.087 seconds\nReal time usage: 0.091 seconds\nPreprocessor visited node count: 646/1000000\nPreprocessor generated node count: 1286/1000000\nPost‐expand include size: 27/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:954-0!canonical and timestamp 20260301032532 and revision id 27124\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Salvador_Dalí"
+      },
+      {
+        "sortkey": "",
+        "*": "Marcel_Duchamp"
+      },
+      {
+        "sortkey": "",
+        "*": "Tal_Wilkenfeld"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Adrian Millett"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 3"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 8"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alan Blair"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Albert Zobrist"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alberto Sanjuan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aleks Peshkov"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alessandro Scotti"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alexandru Mosoi"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha-Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alvaro Cardoso"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Andreas Matthies"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Andrew Grant"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Anthony Cozzie"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aske Plaat"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aspiration Windows"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Asymmetric Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "BCH Hashing"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Best Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Boris Baczynskyj"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Borko Bošković"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bradley Kuszmaul"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bruce Moreland"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Brute-Force"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Burton Wendroff"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CPW-Engine transposition"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Carey Bloodworth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Castling Rights"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Check Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Checkmate"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess4j"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ChessBase"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess (Program)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Game"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Position"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Skill in Man and Machine"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chris Whittington"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Compendium"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Conferences"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Crafty"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cray Blitz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cutechess-cli"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dan Honeycutt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Daniel Anulliero"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Daniel Homan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Daniel José Queraltó"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Daniel Shawul"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dann Corbit"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David E. Welsh"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David Eppstein"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David Slate"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Debugging"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Deep Blue"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dennis Breuker"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dennis Sceviour"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dieter Bürßner"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Don Beal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Don Dailey"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Donald Eastlake"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Double Word"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Draw"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dynamic Programming"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ed Schroder"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "En passant"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Enhanced Transposition Cutoff"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Eric Oldre"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Erin Dame"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation Hash Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evert Glebbeek"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Exact Score"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fail-High"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fail-Low"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Federico Andrés Corigliano"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fermin Serrano"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fifty-move Rule"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Folkert van Heusden"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Frans Morsch"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fruit"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gaviota"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "General Setwise Operations"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Giuseppe Cannella"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Graph History Interaction"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Halfmove Clock"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Harm Geert Muller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Harry Nelson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hash Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hash Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Henri Bal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hex"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA Journal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Incremental Updates"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Integrated Bounds and Values"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Interior Node Recognizer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iterative Deepening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jaap van den Herik"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "James Gillogly"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "James Robertson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "James Swafford"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jan Renze Steenhuisen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Janez Brest"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Joe Condon"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Joel Veness"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "John Romein"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "John Stanback"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jon Dart"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jonatan Pettersson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jonathan Schaeffer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jos Uiterwijk"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Josué Forte"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Julien Marcel"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kai Laskos"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Karlo Balla"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ken Thompson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kenneth W. Regan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Larry Atkin"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lasker-Reichhelm Position"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Late Move Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Laurie Tunnicliffe"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Leen Ammeraal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lower Bound"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Luca Hemmerich"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "MMX"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "MTD(f)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Maastricht University"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mac Hack"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Make Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marcel Vanthoor"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marcel van Kervinck"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marco Belli"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marco Costalba"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marco Pampaloni"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mark Lefler"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Martin Bryant"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Martin C. Smith"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Martin Fierz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Massachusetts Institute of Technology"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Material Hash Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mathematician"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mathieu Pagé"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Matthew R. Brades"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Memory"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michael Buro"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michael Hoffmann"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michel Langeveld"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Miguel A. Ballicora"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Ordering"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Moves"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Niels Abildskov"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Node Types"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Nodes per Second"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Window"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "OliThink"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Oliver Brausch"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Oliver Uwira"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Onno Garms"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pablo Vazquez"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Parallel Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Path-Dependency"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Hash Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Perft"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Persistent Hash Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter W. Frey"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter Österlund"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Piece-Square Tables"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Population Count"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Process"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pseudo-Legal Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quad Word"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiescence Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rasjid Chan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Refutation Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Refutation Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rein Halbersma"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Repetitions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Richard E. Bellman"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Richard Greenblatt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Hyatt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Pope"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ronald de Man"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Root"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rémi Coulom"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SIMD and SWAR Techniques"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sašo Greiner"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Score"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Scott Farrell"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search Instability"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search Statistics"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search Tree"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sergei Markoff"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Severi Salminen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Shared Hash Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Shawn Chidester"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Shirish Chinchalkar"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Shredder"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Side to move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Singular Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Srdja Matovic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stan Arts"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stephen D. Crocker"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Steve Maughan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Steven Edwards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stockfish"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sune Fischer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sven Reichard"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tech"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Teerapong Tovirat"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Test-Positions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "The Computer History Museum"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Thomas Dybdahl Ahle"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Thomas Jahn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Thomas Kolarik"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Thread"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tim Foden"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tim Mann"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tom Kerrigan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tom King"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tony Warnock"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Unmake Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Upper Bound"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Uri Blass"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Valavan Manohararajah"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Viljem Žumer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vincent Tang"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vivien Clauzon"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vlad Stamate"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vladimir Medvedev"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "WCCC 1989"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Werner Inmann"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Windows"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Yves De Billoëz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Zach Wegner"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Zobrist Hashing"
+      },
+      {
+        "ns": 0,
+        "*": "Clemens Pruell"
+      },
+      {
+        "ns": 0,
+        "*": "Rune Rasmussen"
+      },
+      {
+        "ns": 0,
+        "*": "Frédéric Maire"
+      },
+      {
+        "ns": 0,
+        "*": "Ross Hayward"
+      },
+      {
+        "ns": 0,
+        "*": "Timothy Furtak"
+      },
+      {
+        "ns": 0,
+        "*": "KarinsDad"
+      },
+      {
+        "ns": 0,
+        "*": "Eduardo Waghabi"
+      },
+      {
+        "ns": 0,
+        "*": "Stef Luijten"
+      },
+      {
+        "ns": 0,
+        "*": "Robert Purves"
+      },
+      {
+        "ns": 0,
+        "*": "Eric Stock"
+      },
+      {
+        "ns": 0,
+        "*": "João Guerra"
+      },
+      {
+        "ns": 0,
+        "*": "Cheney Nattress"
+      },
+      {
+        "ns": 0,
+        "*": "Jerry Donald"
+      },
+      {
+        "ns": 0,
+        "*": "Jacob Børs Lind"
+      },
+      {
+        "ns": 0,
+        "*": "Natale Galioto"
+      },
+      {
+        "ns": 0,
+        "*": "Alex Ferguson"
+      },
+      {
+        "ns": 0,
+        "*": "Henk van den Belt"
+      },
+      {
+        "ns": 0,
+        "*": "Izak Pretorius"
+      },
+      {
+        "ns": 0,
+        "*": "J. Wesley Cleveland"
+      },
+      {
+        "ns": 0,
+        "*": "Sander Maassen vd Brink"
+      },
+      {
+        "ns": 0,
+        "*": "Mahmoud Uthman"
+      },
+      {
+        "ns": 0,
+        "*": "Tony Soares"
+      },
+      {
+        "ns": 0,
+        "*": "Jason Fernandez"
+      },
+      {
+        "ns": 0,
+        "*": "Kenneth Jones"
+      },
+      {
+        "ns": 0,
+        "*": "Gonzalo Arro"
+      },
+      {
+        "ns": 0,
+        "*": "Eugene Kotlov"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Marcel Duchamp"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Salvador Dalí"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Tal Wilkenfeld"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "How it works",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 3135,
+        "anchor": "How_it_works"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Hash functions",
+        "number": "1.1",
+        "index": "2",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 4006,
+        "anchor": "Hash_functions"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Address Calculation",
+        "number": "1.2",
+        "index": "3",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 4767,
+        "anchor": "Address_Calculation"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "What Information is Stored",
+        "number": "2",
+        "index": "4",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 5248,
+        "anchor": "What_Information_is_Stored"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Table Entry Types",
+        "number": "3",
+        "index": "5",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 6391,
+        "anchor": "Table_Entry_Types"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Using the Transposition Table",
+        "number": "4",
+        "index": "6",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 7079,
+        "anchor": "Using_the_Transposition_Table"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Transposition Table Cutoffs",
+        "number": "4.1",
+        "index": "7",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 7234,
+        "anchor": "Transposition_Table_Cutoffs"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Hash Move",
+        "number": "4.2",
+        "index": "8",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 7828,
+        "anchor": "Hash_Move"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Singular Extensions",
+        "number": "4.3",
+        "index": "9",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 8240,
+        "anchor": "Singular_Extensions"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Collisions",
+        "number": "5",
+        "index": "10",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 8518,
+        "anchor": "Collisions"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Cardinalities",
+        "number": "5.1",
+        "index": "11",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 8866,
+        "anchor": "Cardinalities"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Index Collisions",
+        "number": "5.2",
+        "index": "12",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 9782,
+        "anchor": "Index_Collisions"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Key Collisions",
+        "number": "5.3",
+        "index": "13",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 10808,
+        "anchor": "Key_Collisions"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Bits Required",
+        "number": "5.4",
+        "index": "14",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 12311,
+        "anchor": "Bits_Required"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Replacement Strategies",
+        "number": "6",
+        "index": "15",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 15595,
+        "anchor": "Replacement_Strategies"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Always Replace",
+        "number": "6.1",
+        "index": "16",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 16751,
+        "anchor": "Always_Replace"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Priority by Searched Nodes Count",
+        "number": "6.2",
+        "index": "17",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 17104,
+        "anchor": "Priority_by_Searched_Nodes_Count"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Priority by Move Ordering Position",
+        "number": "6.3",
+        "index": "18",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 17254,
+        "anchor": "Priority_by_Move_Ordering_Position"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Depth-Preferred",
+        "number": "6.4",
+        "index": "19",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 17629,
+        "anchor": "Depth-Preferred"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Two-tier System",
+        "number": "6.5",
+        "index": "20",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 17874,
+        "anchor": "Two-tier_System"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Bucket Systems",
+        "number": "6.6",
+        "index": "21",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 18395,
+        "anchor": "Bucket_Systems"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Aging",
+        "number": "6.7",
+        "index": "22",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 18932,
+        "anchor": "Aging"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "TT and Parallel Search",
+        "number": "7",
+        "index": "23",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 20002,
+        "anchor": "TT_and_Parallel_Search"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Further Hash Tables",
+        "number": "8",
+        "index": "24",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 20604,
+        "anchor": "Further_Hash_Tables"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Maximizing Transpositions",
+        "number": "9",
+        "index": "25",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 20901,
+        "anchor": "Maximizing_Transpositions"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "10",
+        "index": "26",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 20985,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "11",
+        "index": "27",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 21719,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1967 ...",
+        "number": "11.1",
+        "index": "28",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 21735,
+        "anchor": "1967_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1970 ...",
+        "number": "11.2",
+        "index": "29",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 22417,
+        "anchor": "1970_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1980 ...",
+        "number": "11.3",
+        "index": "30",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 23088,
+        "anchor": "1980_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1990 ...",
+        "number": "11.4",
+        "index": "31",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 23656,
+        "anchor": "1990_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "11.5",
+        "index": "32",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 24353,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "11.6",
+        "index": "33",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 26263,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "12",
+        "index": "34",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 26733,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1990 ...",
+        "number": "12.1",
+        "index": "35",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 26748,
+        "anchor": "1990_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1995 ...",
+        "number": "12.2",
+        "index": "36",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 27183,
+        "anchor": "1995_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "12.3",
+        "index": "37",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 31743,
+        "anchor": "2000_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2005 ...",
+        "number": "12.4",
+        "index": "38",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 35745,
+        "anchor": "2005_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "12.5",
+        "index": "39",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 38724,
+        "anchor": "2010_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "12.6",
+        "index": "40",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 46490,
+        "anchor": "2015_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "12.7",
+        "index": "41",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 57226,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "13",
+        "index": "42",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 61527,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "14",
+        "index": "43",
+        "fromtitle": "Transposition_Table",
+        "byteoffset": 62642,
+        "anchor": "References"
+      }
+    ]
+  }
+}

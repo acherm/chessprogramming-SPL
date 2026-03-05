@@ -1,0 +1,439 @@
+{
+  "parse": {
+    "title": "Orion",
+    "pageid": 7432,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Engines\" title=\"Engines\">Engines</a> * Orion</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:242px;\"><a href=\"/File:Orion_3008_huge.jpg\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Orion_3008_huge.jpg/250px-Orion_3008_huge.jpg\" width=\"240\" height=\"360\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Orion_3008_huge.jpg/500px-Orion_3008_huge.jpg 1.5x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Orion_3008_huge.jpg\" class=\"internal\" title=\"Enlarge\"></a></div>Orion Constellation <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>Orion</b>,<br />\nan <a href=\"/UCI\" title=\"UCI\">UCI</a> compliant chess engine by <a href=\"/index.php?title=David_Carteau&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"David Carteau (page does not exist)\">David Carteau</a>, written in <a href=\"/C\" title=\"C\">C</a> and first released in May 2014.\nIn August 2020, David Carteau published results using an own <a href=\"/AVX2\" title=\"AVX2\">AVX2</a> <a href=\"/NNUE\" title=\"NNUE\">NNUE</a> implementation, initially compatible with <a href=\"/Stockfish_NNUE\" title=\"Stockfish NNUE\">Stockfish NNUE</a> nets, \nwith a huge improvement in <a href=\"/Playing_Strength\" title=\"Playing Strength\">playing strength</a> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>. He has designed and trained his own NNUE-like approach published as <a href=\"/index.php?title=Cerebrum&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Cerebrum (page does not exist)\">Cerebrum</a> open source library on <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/GitHub\">GitHub</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>, first used within <b>Orion 0.8</b>, released in December 2020 <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Features\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Features</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-2\"><a href=\"#Board_Representation\"><span class=\"tocnumber\">1.1</span> <span class=\"toctext\">Board Representation</span></a></li>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#Search\"><span class=\"tocnumber\">1.2</span> <span class=\"toctext\">Search</span></a></li>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#Evaluation\"><span class=\"tocnumber\">1.3</span> <span class=\"toctext\">Evaluation</span></a></li>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#Misc\"><span class=\"tocnumber\">1.4</span> <span class=\"toctext\">Misc</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#2014_...\"><span class=\"tocnumber\">2.1</span> <span class=\"toctext\">2014 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#2020_...\"><span class=\"tocnumber\">2.2</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-9\"><a href=\"#External_Links\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">External Links</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#Chess_Engine\"><span class=\"tocnumber\">3.1</span> <span class=\"toctext\">Chess Engine</span></a></li>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#Misc_2\"><span class=\"tocnumber\">3.2</span> <span class=\"toctext\">Misc</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-12\"><a href=\"#References\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Features\">Features</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Orion&amp;action=edit&amp;section=1\" title=\"Edit section: Features\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup>\n</p>\n<h2><span class=\"mw-headline\" id=\"Board_Representation\"><a href=\"/Board_Representation\" title=\"Board Representation\">Board Representation</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Orion&amp;action=edit&amp;section=2\" title=\"Edit section: Board Representation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Bitboards\" title=\"Bitboards\">Bitboards</a></li>\n<li> <a href=\"/Magic_Bitboards#Plain\" title=\"Magic Bitboards\">Plain Magic Bitboards</a></li>\n<li> <a href=\"/BMI2#PEXTBitboards\" title=\"BMI2\">BMI2 - PEXT Bitboards</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Search\"><a href=\"/Search\" title=\"Search\">Search</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Orion&amp;action=edit&amp;section=3\" title=\"Edit section: Search\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Lazy_SMP\" title=\"Lazy SMP\">Lazy SMP</a> (0.9)</li>\n<li> <a href=\"/Iterative_Deepening\" title=\"Iterative Deepening\">Iterative Deepening</a></li>\n<li> <a href=\"/Aspiration_Windows\" title=\"Aspiration Windows\">Aspiration Windows</a></li>\n<li> <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">Alpha-Beta</a> </li>\n<li> <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">Principal Variation Search</a></li>\n<li> <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Table</a></li>\n<li> <a href=\"/Selectivity\" title=\"Selectivity\">Selectivity</a>\n<ul><li> <a href=\"/Null_Move_Pruning#AdaptiveNullMovePruning\" title=\"Null Move Pruning\">Adaptive Null Move Pruning</a></li>\n<li> <a href=\"/Reverse_Futility_Pruning\" title=\"Reverse Futility Pruning\">Static Null Move Pruning</a></li>\n<li> <a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">Late Move Reductions</a></li>\n<li> <a href=\"/Futility_Pruning\" title=\"Futility Pruning\">Futility Pruning</a></li>\n<li> <a href=\"/Razoring\" title=\"Razoring\">Razoring</a></li>\n<li> <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">Quiescence Search</a></li>\n<li> <a href=\"/Delta_Pruning\" title=\"Delta Pruning\">Delta Pruning</a></li>\n<li> <a href=\"/Static_Exchange_Evaluation\" title=\"Static Exchange Evaluation\">SEE Pruning</a></li></ul></li>\n<li> <a href=\"/Move_Ordering\" title=\"Move Ordering\">Move Ordering</a>\n<ul><li> <a href=\"/Hash_Move\" title=\"Hash Move\">Hash Move</a>, even <a href=\"/Quiet_Moves\" title=\"Quiet Moves\">Quiet Moves</a> in <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">Quiescence</a></li>\n<li> <a href=\"/Static_Exchange_Evaluation\" title=\"Static Exchange Evaluation\">Static Exchange Evaluation</a></li>\n<li> <a href=\"/History_Heuristic\" title=\"History Heuristic\">History Heuristic</a></li></ul></li></ul>\n<h2><span class=\"mw-headline\" id=\"Evaluation\"><a href=\"/Evaluation\" title=\"Evaluation\">Evaluation</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Orion&amp;action=edit&amp;section=4\" title=\"Edit section: Evaluation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/NNUE\" title=\"NNUE\">NNUE</a> (0.7.nnue)</li>\n<li> <a href=\"/NNUE\" title=\"NNUE\">NNUE</a>-like <a href=\"/index.php?title=Cerebrum&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Cerebrum (page does not exist)\">Cerebrum</a> (0.8)</li>\n<li> <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">Automated Tuning</a> by <a href=\"/Automated_Tuning#LinearRegression\" title=\"Automated Tuning\">Linear Regression</a> using <a href=\"/Python\" title=\"Python\">Python</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Scikit-learn\">scikit-learn</a> (0.6) <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup></li>\n<li> <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">Automated Tuning</a> by <a href=\"/Genetic_Programming#PBIL\" title=\"Genetic Programming\">PBIL</a> (pre 0.6)</li>\n<li> <a href=\"/Pawn_Structure\" title=\"Pawn Structure\">Pawn Structure</a>\n<ul><li> <a href=\"/Isolated_Pawn\" title=\"Isolated Pawn\">Isolated Pawns</a> etc ...</li>\n<li> <a href=\"/Passed_Pawn\" title=\"Passed Pawn\">Passed Pawns</a></li></ul></li>\n<li> <a href=\"/Mobility\" title=\"Mobility\">Mobility</a></li>\n<li> <a href=\"/Square_Control\" title=\"Square Control\">Square Control</a></li>\n<li> <a href=\"/Space\" title=\"Space\">Space</a></li>\n<li> <a href=\"/King_Safety\" title=\"King Safety\">King Safety</a></li>\n<li> <a href=\"/King_Safety#Attacking\" title=\"King Safety\">Attacking King Zone</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Misc\">Misc</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Orion&amp;action=edit&amp;section=5\" title=\"Edit section: Misc\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Syzygy_Bases\" title=\"Syzygy Bases\">Syzygy Bases</a> (removed in 0.8)</li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Orion&amp;action=edit&amp;section=6\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"2014_...\">2014 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Orion&amp;action=edit&amp;section=7\" title=\"Edit section: 2014 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=52414\">New free engine - Orion</a> by <a href=\"/Graham_Banks\" title=\"Graham Banks\">Graham Banks</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 24, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=59736\">New Orion release&#160;: v0.3&#160;!</a> by <a href=\"/index.php?title=David_Carteau&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"David Carteau (page does not exist)\">David Carteau</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 03, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=65455\">New Orion release&#160;: v0.4&#160;!</a> by <a href=\"/index.php?title=David_Carteau&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"David Carteau (page does not exist)\">David Carteau</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 15, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=67786\">New Orion release&#160;: v0.5&#160;!</a> by <a href=\"/index.php?title=David_Carteau&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"David Carteau (page does not exist)\">David Carteau</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 21, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=70887\">New Orion release&#160;: v0.6&#160;!</a> by <a href=\"/index.php?title=David_Carteau&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"David Carteau (page does not exist)\">David Carteau</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 01, 2019</li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Orion&amp;action=edit&amp;section=8\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=74365\">Orion 0.7 release</a> by <a href=\"/index.php?title=David_Carteau&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"David Carteau (page does not exist)\">David Carteau</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 04, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=74828\">Orion 0.7&#160;: NNUE experiment</a> by <a href=\"/index.php?title=David_Carteau&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"David Carteau (page does not exist)\">David Carteau</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 19, 2020 </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=75870&amp;start=19\">Re: You've trained a brilliant NN(UE) King-Piece Network. Now what?</a> by <a href=\"/index.php?title=David_Carteau&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"David Carteau (page does not exist)\">David Carteau</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 19, 2020&#160;» <a href=\"/NNUE\" title=\"NNUE\">NNUE</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=75953\">Orion 0.8 + The Cerebrum release</a> by <a href=\"/index.php?title=David_Carteau&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"David Carteau (page does not exist)\">David Carteau</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 01, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=79673\">Orion 0.9 release</a> by <a href=\"/index.php?title=David_Carteau&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"David Carteau (page does not exist)\">David Carteau</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 12, 2022</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Orion&amp;action=edit&amp;section=9\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Chess_Engine\">Chess Engine</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Orion&amp;action=edit&amp;section=10\" title=\"Edit section: Chess Engine\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://orionchess.pagesperso-orange.fr/\">Orion UCI chess engine</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/david-carteau/cerebrum\">GitHub - david-carteau/cerebrum: The Cerebrum library</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://de.wikipedia.org/wiki/Orion_(Schachprogramm)\">Orion (Schachprogramm) – Wikipedia.de</a> (German)</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://computerchess.org.uk/ccrl/404/cgi/compare_engines.cgi?family=Orion&amp;print=Rating+list&amp;print=Results+table&amp;print=LOS+table&amp;print=Ponder+hit+table&amp;print=Eval+difference+table&amp;print=Comopp+gamenum+table&amp;print=Overlap+table&amp;print=Score+with+common+opponents\">Orion</a> in <a href=\"/CCRL\" title=\"CCRL\">CCRL Blitz</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Misc_2\">Misc</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Orion&amp;action=edit&amp;section=11\" title=\"Edit section: Misc\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Orion\">Orion from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Orion_(mythology)\">Orion (mythology) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Orion_(constellation)\">Orion (constellation) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Orion_(comics)\">Orion (comics) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Orion_(sculpture)\">Orion (sculpture) from Wikipedia</a>&#160;» <a href=\"/University_of_Michigan\" title=\"University of Michigan\">University of Michigan</a></li>\n<li> <a href=\"/Category:Steps_Ahead\" title=\"Category:Steps Ahead\">Steps Ahead</a> - Orion, <a rel=\"nofollow\" class=\"external text\" href=\"https://www.discogs.com/de/Steps-Ahead-Yin-Yang/release/2727533\">Yin-Yang</a> (1992), <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> lineup: <a href=\"/Category:Mike_Mainieri\" title=\"Category:Mike Mainieri\">Mike Mainieri</a>, <a href=\"/Category:Steve_Smith\" title=\"Category:Steve Smith\">Steve Smith</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://www.discogs.com/de/artist/486643-Jeff-Andrews\">Jeff Andrews</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Bendik_Hofseth\">Bendik Hofseth</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Rachel_Z\">Rachel Z</a></dd>\n<dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/LtKlyGBVwoM?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Orion&amp;action=edit&amp;section=12\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://commons.wikimedia.org/wiki/File:Orion_3008_huge.jpg\">deep sky image</a> of the constellation <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Orion_(constellation)\">Orion</a> by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/User:Mouser\">Mouser</a>, December 14, 2004, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wikimedia_Commons\">Wikimedia Commons</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=74828\">Orion 0.7&#160;: NNUE experiment</a> by <a href=\"/index.php?title=David_Carteau&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"David Carteau (page does not exist)\">David Carteau</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 19, 2020</span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/david-carteau/cerebrum\">GitHub - david-carteau/cerebrum: The Cerebrum library</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=75953\">Orion 0.8 + The Cerebrum release</a> by <a href=\"/index.php?title=David_Carteau&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"David Carteau (page does not exist)\">David Carteau</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 01, 2020</span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\">based on <a rel=\"nofollow\" class=\"external text\" href=\"https://orionchess.pagesperso-orange.fr/\">Orion UCI chess engine</a></span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://scikit-learn.org/stable/modules/linear_model.html#ridge-regression-and-classification\">1.1. Linear Models — scikit-learn 0.23.2 documentation</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Engines\" title=\"Engines\">Up one level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260228231611\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.080 seconds\nReal time usage: 0.629 seconds\nPreprocessor visited node count: 140/1000000\nPreprocessor generated node count: 294/1000000\nPost‐expand include size: 26/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:7432-0!canonical and timestamp 20260228231611 and revision id 26447\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "UCI"
+      },
+      {
+        "sortkey": "",
+        "*": "PC"
+      },
+      {
+        "sortkey": "",
+        "*": "Windows"
+      },
+      {
+        "sortkey": "",
+        "*": "X64"
+      },
+      {
+        "sortkey": "",
+        "*": "NNUE"
+      },
+      {
+        "sortkey": "",
+        "*": "Astronomy"
+      },
+      {
+        "sortkey": "",
+        "*": "Mythology"
+      },
+      {
+        "sortkey": "",
+        "*": "Steps_Ahead"
+      },
+      {
+        "sortkey": "",
+        "*": "Mike_Mainieri"
+      },
+      {
+        "sortkey": "",
+        "*": "Steve_Smith"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "AVX2"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha-Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aspiration Windows"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Automated Tuning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "BMI2"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Board Representation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "C"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCRL"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Delta Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engines"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Futility Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Genetic Programming"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Graham Banks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hash Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "History Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Isolated Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iterative Deepening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "King Safety"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Late Move Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lazy SMP"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Magic Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mobility"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Ordering"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "NNUE"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Passed Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Structure"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Playing Strength"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Python"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiescence Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiet Moves"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Razoring"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Reverse Futility Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Selectivity"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Space"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Square Control"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Static Exchange Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stockfish NNUE"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Syzygy Bases"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "UCI"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "University of Michigan"
+      },
+      {
+        "ns": 0,
+        "*": "David Carteau"
+      },
+      {
+        "ns": 0,
+        "*": "Cerebrum"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Mike Mainieri"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Steps Ahead"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Steve Smith"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Features",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Orion",
+        "byteoffset": 1396,
+        "anchor": "Features"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Board Representation",
+        "number": "1.1",
+        "index": "2",
+        "fromtitle": "Orion",
+        "byteoffset": 1493,
+        "anchor": "Board_Representation"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Search",
+        "number": "1.2",
+        "index": "3",
+        "fromtitle": "Orion",
+        "byteoffset": 1635,
+        "anchor": "Search"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Evaluation",
+        "number": "1.3",
+        "index": "4",
+        "fromtitle": "Orion",
+        "byteoffset": 2264,
+        "anchor": "Evaluation"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Misc",
+        "number": "1.4",
+        "index": "5",
+        "fromtitle": "Orion",
+        "byteoffset": 2946,
+        "anchor": "Misc"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "2",
+        "index": "6",
+        "fromtitle": "Orion",
+        "byteoffset": 2992,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2014 ...",
+        "number": "2.1",
+        "index": "7",
+        "fromtitle": "Orion",
+        "byteoffset": 3006,
+        "anchor": "2014_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "2.2",
+        "index": "8",
+        "fromtitle": "Orion",
+        "byteoffset": 3688,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "3",
+        "index": "9",
+        "fromtitle": "Orion",
+        "byteoffset": 4435,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Chess Engine",
+        "number": "3.1",
+        "index": "10",
+        "fromtitle": "Orion",
+        "byteoffset": 4452,
+        "anchor": "Chess_Engine"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Misc",
+        "number": "3.2",
+        "index": "11",
+        "fromtitle": "Orion",
+        "byteoffset": 5034,
+        "anchor": "Misc_2"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "4",
+        "index": "12",
+        "fromtitle": "Orion",
+        "byteoffset": 6022,
+        "anchor": "References"
+      }
+    ]
+  }
+}

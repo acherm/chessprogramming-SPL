@@ -1,0 +1,139 @@
+{
+  "parse": {
+    "title": "Bob Jenkins",
+    "pageid": 5101,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/People\" title=\"People\">People</a> * Bob Jenkins</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:162px;\"><a href=\"http://burtleburtle.net/bob/\"><img alt=\"\" src=\"/images/thumb/7/74/Bob_jenkins_portrait.jpg/160px-Bob_jenkins_portrait.jpg\" width=\"160\" height=\"218\" class=\"thumbimage\" srcset=\"/images/7/74/Bob_jenkins_portrait.jpg 1.5x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Bob_jenkins_portrait.jpg\" class=\"internal\" title=\"Enlarge\"></a></div>Bob Jenkins <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>Robert John Jenkins Jr.</b>,<br />\nan American computer scientist, software developer, M.Sc. in CS from <a href=\"/Carnegie_Mellon_University\" title=\"Carnegie Mellon University\">Carnegie Mellon University</a>, and <a href=\"/Microsoft\" title=\"Microsoft\">Microsoft</a> and former <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Oracle_Corporation\">Oracle</a> employee. At Microsoft, he worked in the <i>Cosmos</i> team <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup> , and under <a href=\"/Andrew_Kadatch\" title=\"Andrew Kadatch\">Andrew Kadatch</a> on the <i>Cosmos</i> storage distributed <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/File_system\">file system</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup> , written by Andrew in <a href=\"/Cpp\" title=\"Cpp\">C++</a>, and on the <i>Scope</i> query language <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup> . He was Oracle's resident expert on <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Hash_function\">hash functions</a> <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup> , and he designed and published various <a href=\"/Pseudorandom_Number_Generator\" title=\"Pseudorandom Number Generator\">pseudorandom number generators</a> and hash functions for <a href=\"/Hash_Table\" title=\"Hash Table\">hash table lookup</a> <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup> , competing with <a href=\"/Paul_Hsieh\" title=\"Paul Hsieh\">Paul Hsieh</a> <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup> . \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#RKISS\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">RKISS</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Selected_Publications\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Selected Publications</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#External_Links\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#References\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"RKISS\">RKISS</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Bob_Jenkins&amp;action=edit&amp;section=1\" title=\"Edit section: RKISS\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><span id=\"RKISS\"></span>Bob Jenkins' small noncryptographic PRNG approach is suited for <a href=\"/Zobrist_Hashing\" title=\"Zobrist Hashing\">Zobrist Hashing</a>. <a href=\"/index.php?title=Heinz_van_Saanen&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Heinz van Saanen (page does not exist)\">Heinz van Saanen's</a> RKISS as used in <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a> since version 2.0 <sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup> <sup id=\"cite_ref-9\" class=\"reference\"><a href=\"#cite_note-9\">&#91;9&#93;</a></sup> uses almost the same code despite embedded it into a C++ class and initialization <sup id=\"cite_ref-10\" class=\"reference\"><a href=\"#cite_note-10\">&#91;10&#93;</a></sup>. Van Saanen admitted he took an obviously free and quite raw C-snippet from a random-related newsgroup long time ago. When turned this to a functional C++-class years later he could not find the initial source any longer, and gave credit to <a href=\"/Mathematician#GMarsaglia\" title=\"Mathematician\">George Marsaglia</a> as inventor of the RNG-Kiss-family <sup id=\"cite_ref-11\" class=\"reference\"><a href=\"#cite_note-11\">&#91;11&#93;</a></sup> <sup id=\"cite_ref-12\" class=\"reference\"><a href=\"#cite_note-12\">&#91;12&#93;</a></sup> <sup id=\"cite_ref-13\" class=\"reference\"><a href=\"#cite_note-13\">&#91;13&#93;</a></sup> <sup id=\"cite_ref-14\" class=\"reference\"><a href=\"#cite_note-14\">&#91;14&#93;</a></sup>. This is Bob's 64 bit code <sup id=\"cite_ref-15\" class=\"reference\"><a href=\"#cite_note-15\">&#91;15&#93;</a></sup>:\n</p>\n<pre>If you want to use 8-byte terms instead of 4-byte terms, the proper rotate amounts are (39,11) for the two-rotate version (yielding at least 13.3 bits of <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Avalanche_effect\">avalanche</a> after 5 rounds) or (7,13,37) for the three-rotate version (yielding 18.4 bits of avalanche after 5 rounds). I think I'd got with the three-rotate version, because the ideal is 32 bits of avalanche, and 13.3 isn't even half of that. \n</pre>\n<pre>\ntypedef unsigned long long u8;\ntypedef struct ranctx { u8 a; u8 b; u8 c; u8 d; } ranctx;\n\n#define rot(x,k) (((x)&lt;&lt;(k))|((x)&gt;&gt;(64-(k))))\nu8 ranval( ranctx *x ) {\n    u8 e = x-&gt;a - rot(x-&gt;b, 7);\n    x-&gt;a = x-&gt;b ^ rot(x-&gt;c, 13);\n    x-&gt;b = x-&gt;c + rot(x-&gt;d, 37);\n    x-&gt;c = x-&gt;d + e;\n    x-&gt;d = e + x-&gt;a;\n    return x-&gt;d;\n}\n\nvoid raninit( ranctx *x, u8 seed ) {\n    u8 i;\n    x-&gt;a = 0xf1ea5eed, x-&gt;b = x-&gt;c = x-&gt;d = seed;\n    for (i=0; i&lt;20; ++i) {\n        (void)ranval(x);\n    }\n}\n</pre>\n<h1><span class=\"mw-headline\" id=\"Selected_Publications\">Selected Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Bob_Jenkins&amp;action=edit&amp;section=2\" title=\"Edit section: Selected Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a class=\"mw-selflink selflink\">Bob Jenkins</a> (<b>1997</b>). <i>Hash functions</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Dr._Dobb%27s_Journal\">Dr. Dobb's Journal</a>, September 1997</li>\n<li> Ronnie Chaiken, <a class=\"mw-selflink selflink\">Bob Jenkins</a>, Per-Åke Larson, Bill Ramsey, Darren Shakib, Simon Weaver, Jingren Zhou (<b>2008</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://dl.acm.org/citation.cfm?id=1454166\">SCOPE: Easy and Efficient Parallel Processing of Massive Data Sets</a></i>. <a href=\"/Microsoft\" title=\"Microsoft\">Microsoft Corporation</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://www.goland.org/Scope-VLDB-final.pdf\">pdf</a></li>\n<li> <a href=\"/Andrew_Kadatch\" title=\"Andrew Kadatch\">Andrew Kadatch</a>, <a class=\"mw-selflink selflink\">Bob Jenkins</a> (<b>2010</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.researchgate.net/publication/268184499_Everything_we_know_about_CRC_but_afraid_to_forget\">Everything we know about CRC but afraid to forget</a></i>.  <sup id=\"cite_ref-16\" class=\"reference\"><a href=\"#cite_note-16\">&#91;16&#93;</a></sup> <sup id=\"cite_ref-17\" class=\"reference\"><a href=\"#cite_note-17\">&#91;17&#93;</a></sup></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Bob_Jenkins&amp;action=edit&amp;section=3\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Robert_John_Jenkins_Junior\">Robert John Jenkins Junior from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://burtleburtle.net/bob/\">Bob Jenkins' Web Site</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://burtleburtle.net/bob/rand/index.html\">Random Number Results</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://burtleburtle.net/bob/hash/index.html\">Hash Functions and Block Ciphers</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://burtleburtle.net/bob/hash/doobs.html\">A Hash Function for Hash Table Lookup</a> updated <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Dr._Dobb%27s_Journal\">Dr. Dobb's</a> article</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://burtleburtle.net/bob/hash/perfect.html\">Perfect Hashing</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Jenkins_hash_function\">Jenkins hash function from Wikipedia</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Bob_Jenkins&amp;action=edit&amp;section=4\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap mw-references-columns\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://burtleburtle.net/bob/\">Bob Jenkins' Web Site</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.goland.org/whatiscosmos/\">Stuff Yaron Finds Interesting - What is Microsoft's Cosmos service?</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://research.microsoft.com/en-us/projects/dryad/\">Dryad - Microsoft Research</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.linkedin.com/pub/ronnie-chaiken/26/571/143\">Ronnie Chaiken</a>, <a class=\"mw-selflink selflink\">Bob Jenkins</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://research.microsoft.com/en-us/people/palarson/\">Per-Åke Larson</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://portal.acm.org/author_page.cfm?id=81344496896&amp;coll=DL&amp;dl=ACM&amp;trk=0&amp;cfid=28619666&amp;cftoken=49088236\">Bill Ramsey</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.microsoft.com/presspass/exec/de/Shakib/default.mspx\">Darren Shakib</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.linkedin.com/in/simonjweaver\">Simon Weaver</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://research.microsoft.com/en-us/um/people/jrzhou/\">Jingren Zhou</a> (<b>2008</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://portal.acm.org/citation.cfm?id=1454166\">SCOPE: Easy and Efficient Parallel Processing of Massive Data Sets</a></i>. <a href=\"/Microsoft\" title=\"Microsoft\">Microsoft Corporation</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.goland.org/Scope-VLDB-final.pdf\">pdf</a></span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://burtleburtle.net/bob/other/resume3.html\">Resume for Bob Jenkins</a></span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://burtleburtle.net/bob/hash/evahash.html\">Hash Functions for Hash Table Lookup</a>, Robert J. Jenkins Jr., 1995-1997</span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.azillionmonkeys.com/qed/hash.html\">Hash functions</a> by <a href=\"/Paul_Hsieh\" title=\"Paul Hsieh\">Paul Hsieh</a></span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://blog.stockfishchess.com/\">Stockfish Blog - Stockfish 2.0</a></span>\n</li>\n<li id=\"cite_note-9\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-9\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=37406\">RKISS</a> by <a href=\"/Gerd_Isenberg\" title=\"Gerd Isenberg\">Gerd Isenberg</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 01, 2011</span>\n</li>\n<li id=\"cite_note-10\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-10\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?start=0&amp;t=38313\">RKISS copyright?</a> by Giorgio Medeot, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 07, 2011</span>\n</li>\n<li id=\"cite_note-11\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-11\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://compgroups.net/comp.lang.fortran/64-bit-kiss-rngs/601519\">64-bit KISS RNGs</a> by <a href=\"/Mathematician#GMarsaglia\" title=\"Mathematician\">George Marsaglia</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://compgroups.net/comp.lang.fortran/\">comp.lang.fortran | Computer Group</a>, February 28, 2009</span>\n</li>\n<li id=\"cite_note-12\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-12\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=398196&amp;t=38313\">Re: RKISS copyright?</a> by <a href=\"/Marco_Costalba\" title=\"Marco Costalba\">Marco Costalba</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 09, 2011</span>\n</li>\n<li id=\"cite_note-13\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-13\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.random.org/integers/?mode=advanced\">RANDOM.ORG - Integer Generator</a></span>\n</li>\n<li id=\"cite_note-14\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-14\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.stat.fsu.edu/pub/diehard/\">The Marsaglia Random Number CDROM including the Diehard Battery of Tests</a></span>\n</li>\n<li id=\"cite_note-15\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-15\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.burtleburtle.net/bob/rand/smallprng.html\">A small noncryptographic pseudorandom number generator - 64-bit variants</a> by <a class=\"mw-selflink selflink\">Bob Jenkins</a></span>\n</li>\n<li id=\"cite_note-16\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-16\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Cyclic_redundancy_check\">Cyclic redundancy check from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-17\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-17\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Mathematics_of_CRC\">Mathematics of CRC from Wikipedia</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/People\" title=\"People\">Up one level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301014126\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.026 seconds\nReal time usage: 0.027 seconds\nPreprocessor visited node count: 267/1000000\nPreprocessor generated node count: 604/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:5101-0!canonical and timestamp 20260301014126 and revision id 10291\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "Jenkins",
+        "*": "Programmer"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Andrew Kadatch"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Carnegie Mellon University"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cpp"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gerd Isenberg"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hash Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marco Costalba"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mathematician"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Microsoft"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Paul Hsieh"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "People"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pseudorandom Number Generator"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stockfish"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Zobrist Hashing"
+      },
+      {
+        "ns": 0,
+        "*": "Heinz van Saanen"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "RKISS",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Bob_Jenkins",
+        "byteoffset": 2228,
+        "anchor": "RKISS"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Selected Publications",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Bob_Jenkins",
+        "byteoffset": 4910,
+        "anchor": "Selected_Publications"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Bob_Jenkins",
+        "byteoffset": 5813,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Bob_Jenkins",
+        "byteoffset": 6466,
+        "anchor": "References"
+      }
+    ]
+  }
+}

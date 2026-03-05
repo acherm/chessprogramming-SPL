@@ -1,0 +1,400 @@
+{
+  "parse": {
+    "title": "Mediocre",
+    "pageid": 7270,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Engines\" title=\"Engines\">Engines</a> * Mediocre</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:102px;\"><a href=\"http://mediocrechess.blogspot.com/\"><img alt=\"\" src=\"/images/7/77/Mediocre.jpg\" width=\"100\" height=\"50\" class=\"thumbimage\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Mediocre.jpg\" class=\"internal\" title=\"Enlarge\"></a></div>Mediocre</div></div></div> \n<p><b>Mediocre</b>, (Mediocre Chess)<br />\nan <a href=\"/UCI\" title=\"UCI\">UCI</a> compliant chess engine by <a href=\"/Jonatan_Pettersson\" title=\"Jonatan Pettersson\">Jonatan Pettersson</a>, written entirely in <a href=\"/Java\" title=\"Java\">Java</a>. Mediocre is the result of a chess programming blog, which describes aspects of the engine in detail <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup>. Mediocre  played the <a href=\"/WCRCC_2007\" title=\"WCRCC 2007\">WCRCC 2007</a> and gained 7½ \tout of 14.\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Features\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Features</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-2\"><a href=\"#Board_Representation\"><span class=\"tocnumber\">1.1</span> <span class=\"toctext\">Board Representation</span></a></li>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#Search\"><span class=\"tocnumber\">1.2</span> <span class=\"toctext\">Search</span></a></li>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#Evaluation\"><span class=\"tocnumber\">1.3</span> <span class=\"toctext\">Evaluation</span></a></li>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#Misc\"><span class=\"tocnumber\">1.4</span> <span class=\"toctext\">Misc</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#2007_...\"><span class=\"tocnumber\">2.1</span> <span class=\"toctext\">2007 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#2010_...\"><span class=\"tocnumber\">2.2</span> <span class=\"toctext\">2010 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-9\"><a href=\"#External_Links\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">External Links</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#Chess_Engine\"><span class=\"tocnumber\">3.1</span> <span class=\"toctext\">Chess Engine</span></a></li>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#Misc_2\"><span class=\"tocnumber\">3.2</span> <span class=\"toctext\">Misc</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-12\"><a href=\"#References\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Features\">Features</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Mediocre&amp;action=edit&amp;section=1\" title=\"Edit section: Features\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>\n</p>\n<h2><span class=\"mw-headline\" id=\"Board_Representation\"><a href=\"/Board_Representation\" title=\"Board Representation\">Board Representation</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Mediocre&amp;action=edit&amp;section=2\" title=\"Edit section: Board Representation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/0x88\" title=\"0x88\">0x88</a></li>\n<li> <a href=\"/Attack_and_Defend_Maps\" title=\"Attack and Defend Maps\">Attack Tables</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Search\"><a href=\"/Search\" title=\"Search\">Search</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Mediocre&amp;action=edit&amp;section=3\" title=\"Edit section: Search\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Iterative_Deepening\" title=\"Iterative Deepening\">Iterative Deepening</a></li>\n<li> <a href=\"/Depth#FractionalPlies\" title=\"Depth\">Fractional Plies</a> </li>\n<li> <a href=\"/Aspiration_Windows\" title=\"Aspiration Windows\">Aspiration Windows</a></li>\n<li> <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">Principal Variation Search</a></li>\n<li> <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Table</a> \n<ul><li> <a href=\"/Zobrist_Hashing\" title=\"Zobrist Hashing\">Zobrist Hashing</a></li></ul></li>\n<li> <a href=\"/Selectivity\" title=\"Selectivity\">Selectivity</a>\n<ul><li> <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">Null Move Pruning</a></li>\n<li> <a href=\"/Futility_Pruning\" title=\"Futility Pruning\">Futility Pruning</a></li>\n<li> <a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">Late Move Reductions</a></li>\n<li> <a href=\"/Mate_Threat_Extensions\" title=\"Mate Threat Extensions\">Mate Threat Extensions</a></li>\n<li> <a href=\"/Passed_Pawn_Extensions\" title=\"Passed Pawn Extensions\">Passed Pawn Extensions</a></li></ul></li>\n<li> <a href=\"/Move_Ordering\" title=\"Move Ordering\">Move Ordering</a>\n<ul><li> <a href=\"/History_Heuristic\" title=\"History Heuristic\">History Heuristic</a></li>\n<li> <a href=\"/Killer_Heuristic\" title=\"Killer Heuristic\">Killer Heuristic</a></li>\n<li> <a href=\"/Internal_Iterative_Deepening\" title=\"Internal Iterative Deepening\">Internal Iterative Deepening</a></li>\n<li> <a href=\"/Static_Exchange_Evaluation\" title=\"Static Exchange Evaluation\">Static Exchange Evaluation</a></li></ul></li></ul>\n<h2><span class=\"mw-headline\" id=\"Evaluation\"><a href=\"/Evaluation\" title=\"Evaluation\">Evaluation</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Mediocre&amp;action=edit&amp;section=4\" title=\"Edit section: Evaluation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Evaluation_Hash_Table\" title=\"Evaluation Hash Table\">Evaluation Hash Table</a></li>\n<li> <a href=\"/Tapered_Eval\" title=\"Tapered Eval\">Tapered Eval</a></li>\n<li> <a href=\"/Piece-Square_Tables\" title=\"Piece-Square Tables\">Piece-Square Tables</a></li>\n<li> <a href=\"/Pawn_Structure\" title=\"Pawn Structure\">Pawn Structure</a></li>\n<li> <a href=\"/Pawn_Hash_Table\" title=\"Pawn Hash Table\">Pawn Hash Table</a></li>\n<li> <a href=\"/King_Safety#KingTropism\" title=\"King Safety\">King Tropism</a></li>\n<li> <a href=\"/Rook_on_Seventh\" title=\"Rook on Seventh\">Rook on Seventh</a></li>\n<li> <a href=\"/Outposts\" title=\"Outposts\">Knight Outposts</a></li>\n<li> <a href=\"/Hanging_Piece\" title=\"Hanging Piece\">Hanging Pieces</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Misc\">Misc</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Mediocre&amp;action=edit&amp;section=5\" title=\"Edit section: Misc\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Perft\" title=\"Perft\">Perft</a></li>\n<li> <a href=\"/PolyGlot\" title=\"PolyGlot\">PolyGlot</a> <a href=\"/Opening_Book\" title=\"Opening Book\">Opening Book</a></li>\n<li> <a href=\"/Pondering\" title=\"Pondering\">Pondering</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Mediocre&amp;action=edit&amp;section=6\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"2007_...\">2007 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Mediocre&amp;action=edit&amp;section=7\" title=\"Edit section: 2007 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=6&amp;t=12937\">Mediocre 0.31&#160;: 2127</a> by <a href=\"/Patrick_Buchmann\" title=\"Patrick Buchmann\">Patrick Buchmann</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 07, 2007</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=6&amp;t=13517\">Mediocre 0.32&#160;: 2146</a> by <a href=\"/Patrick_Buchmann\" title=\"Patrick Buchmann\">Patrick Buchmann</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 01, 2007</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=6&amp;t=13870\">Mediocre 0.33&#160;: 2184</a> by <a href=\"/Patrick_Buchmann\" title=\"Patrick Buchmann\">Patrick Buchmann</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 18, 2007</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=25326\">Mediocre has a new home</a> by <a href=\"/Jonatan_Pettersson\" title=\"Jonatan Pettersson\">Jonatan Pettersson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 09, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=6&amp;t=25630\">Mediocre 0.334&#160;: 2126</a> by <a href=\"/Patrick_Buchmann\" title=\"Patrick Buchmann\">Patrick Buchmann</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 25, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=6&amp;t=26201\">Mediocre 0.34&#160;: 2191</a> by <a href=\"/Patrick_Buchmann\" title=\"Patrick Buchmann\">Patrick Buchmann</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 24, 2009</li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Mediocre&amp;action=edit&amp;section=8\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=40671\">Blog back on track (Mediocre engine)</a> by <a href=\"/Jonatan_Pettersson\" title=\"Jonatan Pettersson\">Jonatan Pettersson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 07, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=41223\">Mediocre v0.4 released</a> by <a href=\"/Jonatan_Pettersson\" title=\"Jonatan Pettersson\">Jonatan Pettersson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 26, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=41257\">Mediocre Chess 0.4 for Fritzy (and not only)&#160;!</a> by Sylwy, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 29, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=6&amp;t=41394\">The progress of Mediocre Chess (of Mr.Jonatan Pettersson)</a> by Sylwy, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 09, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=44633\">Mediocre v0.5 released</a> by <a href=\"/Jonatan_Pettersson\" title=\"Jonatan Pettersson\">Jonatan Pettersson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 30, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=49262\">Mediocre 0.5 EXE?</a> by <a href=\"/Steve_Maughan\" title=\"Steve Maughan\">Steve Maughan</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 06, 2013</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Mediocre&amp;action=edit&amp;section=9\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Chess_Engine\">Chess Engine</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Mediocre&amp;action=edit&amp;section=10\" title=\"Edit section: Chess Engine\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <span id=\"Mediocrechessblog\"></span><a rel=\"nofollow\" class=\"external text\" href=\"http://mediocrechess.blogspot.com/\">Mediocre Chess Blog</a> </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://sourceforge.net/p/mediocrechess/wiki/Home/\">Mediocre on Souceforge</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://mediocrechess.sourceforge.net/\">Mediocre website</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://kirr.homeunix.org/chess/engines/Jim%20Ablett/MEDIOCRE%20CHESS/\">Index of /chess/engines/Jim Ablett/Mediocre Chess</a> by <a href=\"/Jim_Ablett\" title=\"Jim Ablett\">Jim Ablett</a>, hosted by <a href=\"/Kirill_Kryukov\" title=\"Kirill Kryukov\">Kirill Kryukov</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://ccrl.chessdom.com/ccrl/4040/cgi/compare_engines.cgi?family=Mediocre&amp;print=Rating+list&amp;print=Results+table&amp;print=LOS+table&amp;print=Ponder+hit+table&amp;print=Eval+difference+table&amp;print=Comopp+gamenum+table&amp;print=Overlap+table&amp;print=Score+with+common+opponents\">Mediocre</a> in <a href=\"/CCRL\" title=\"CCRL\">CCRL 40/15</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Misc_2\">Misc</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Mediocre&amp;action=edit&amp;section=11\" title=\"Edit section: Misc\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wiktionary.org/wiki/mediocre\">mediocre - Wiktionary</a></li>\n<li> <a href=\"/Category:Chick_Corea\" title=\"Category:Chick Corea\">Chick Corea</a> and Friends - Mediocre, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Remembering_Bud_Powell\">Remembering Bud Powell</a> (1997), <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> feat.: <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wallace_Roney\">Wallace Roney</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Joshua_Redman\">Joshua Redman</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Christian_McBride\">Christian McBride</a> and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Roy_Haynes\">Roy Haynes</a></dd>\n<dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/JBInBbrSCcw?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Mediocre&amp;action=edit&amp;section=12\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://mediocrechess.blogspot.com/\">Mediocre Chess Blog</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\">Features based on readme.txt of Mediocre v0.5</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Engines\" title=\"Engines\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301135950\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.016 seconds\nReal time usage: 0.017 seconds\nPreprocessor visited node count: 85/1000000\nPreprocessor generated node count: 168/1000000\nPost‐expand include size: 26/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:7270-0!canonical and timestamp 20260301135950 and revision id 20008\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "UCI"
+      },
+      {
+        "sortkey": "",
+        "*": "Java"
+      },
+      {
+        "sortkey": "",
+        "*": "Windows"
+      },
+      {
+        "sortkey": "",
+        "*": "X86"
+      },
+      {
+        "sortkey": "",
+        "*": "PC"
+      },
+      {
+        "sortkey": "",
+        "*": "Chick_Corea"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "0x88"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aspiration Windows"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Attack and Defend Maps"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Board Representation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCRL"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engines"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation Hash Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Futility Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hanging Piece"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "History Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Internal Iterative Deepening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iterative Deepening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Java"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jim Ablett"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jonatan Pettersson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Killer Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "King Safety"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kirill Kryukov"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Late Move Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mate Threat Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Ordering"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Opening Book"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Outposts"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Passed Pawn Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Patrick Buchmann"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Hash Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Structure"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Perft"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Piece-Square Tables"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "PolyGlot"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pondering"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rook on Seventh"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Selectivity"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Static Exchange Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Steve Maughan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tapered Eval"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "UCI"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "WCRCC 2007"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Zobrist Hashing"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Chick Corea"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Features",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Mediocre",
+        "byteoffset": 506,
+        "anchor": "Features"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Board Representation",
+        "number": "1.1",
+        "index": "2",
+        "fromtitle": "Mediocre",
+        "byteoffset": 575,
+        "anchor": "Board_Representation"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Search",
+        "number": "1.2",
+        "index": "3",
+        "fromtitle": "Mediocre",
+        "byteoffset": 658,
+        "anchor": "Search"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Evaluation",
+        "number": "1.3",
+        "index": "4",
+        "fromtitle": "Mediocre",
+        "byteoffset": 1147,
+        "anchor": "Evaluation"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Misc",
+        "number": "1.4",
+        "index": "5",
+        "fromtitle": "Mediocre",
+        "byteoffset": 1413,
+        "anchor": "Misc"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "2",
+        "index": "6",
+        "fromtitle": "Mediocre",
+        "byteoffset": 1483,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2007 ...",
+        "number": "2.1",
+        "index": "7",
+        "fromtitle": "Mediocre",
+        "byteoffset": 1497,
+        "anchor": "2007_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "2.2",
+        "index": "8",
+        "fromtitle": "Mediocre",
+        "byteoffset": 2312,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "3",
+        "index": "9",
+        "fromtitle": "Mediocre",
+        "byteoffset": 3185,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Chess Engine",
+        "number": "3.1",
+        "index": "10",
+        "fromtitle": "Mediocre",
+        "byteoffset": 3203,
+        "anchor": "Chess_Engine"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Misc",
+        "number": "3.2",
+        "index": "11",
+        "fromtitle": "Mediocre",
+        "byteoffset": 3922,
+        "anchor": "Misc_2"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "4",
+        "index": "12",
+        "fromtitle": "Mediocre",
+        "byteoffset": 4544,
+        "anchor": "References"
+      }
+    ]
+  }
+}

@@ -1,0 +1,1232 @@
+{
+  "parse": {
+    "title": "Move Ordering",
+    "pageid": 1011,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Search\" title=\"Search\">Search</a> * Move Ordering</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"/File:Four_Parts_MET_sf1991.402.9.jpg\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Four_Parts_MET_sf1991.402.9.jpg/330px-Four_Parts_MET_sf1991.402.9.jpg\" width=\"300\" height=\"380\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/5/5c/Four_Parts_MET_sf1991.402.9.jpg 1.5x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Four_Parts_MET_sf1991.402.9.jpg\" class=\"internal\" title=\"Enlarge\"></a></div><a href=\"/Category:Wassily_Kandinsky\" title=\"Category:Wassily Kandinsky\">Wassily Kandinsky</a> - Four Parts <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div>\n<p>For the <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">alpha-beta</a> algorithm to perform well, the <a href=\"/Best_Move\" title=\"Best Move\">best moves</a> need to be searched first. This is especially true for <a href=\"/Node_Types#PV\" title=\"Node Types\">PV-nodes</a> and expected <a href=\"/Node_Types#CUT\" title=\"Node Types\">Cut-nodes</a>. The goal is to become close to the minimal tree. On the other hand - at Cut-nodes - the best move is not always the cheapest refutation, see for instance <a href=\"/Enhanced_Transposition_Cutoff\" title=\"Enhanced Transposition Cutoff\">enhanced transposition cutoff</a>. <b>Most</b> important inside an <a href=\"/Iterative_Deepening\" title=\"Iterative Deepening\">iterative deepening</a> framework is to try the <a href=\"/Principal_Variation\" title=\"Principal Variation\">principal variation</a> of the previous <a href=\"/Iteration\" title=\"Iteration\">iteration</a> as the leftmost path for the next iteration, which might be applied by an explicit <a href=\"/Triangular_PV-Table\" title=\"Triangular PV-Table\">triangular PV-table</a> or implicit by the <a href=\"/Transposition_Table\" title=\"Transposition Table\">transposition table</a>.\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Standard_techniques\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Standard techniques</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-2\"><a href=\"#Captures\"><span class=\"tocnumber\">1.1</span> <span class=\"toctext\">Captures</span></a></li>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#Non-Captures\"><span class=\"tocnumber\">1.2</span> <span class=\"toctext\">Non-Captures</span></a></li>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#Less_common_techniques\"><span class=\"tocnumber\">1.3</span> <span class=\"toctext\">Less common techniques</span></a></li>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#Using_Neural_Networks\"><span class=\"tocnumber\">1.4</span> <span class=\"toctext\">Using Neural Networks</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#Typical_move_ordering\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Typical move ordering</span></a></li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#Node_Type_Considerations\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Node Type Considerations</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#PV-nodes\"><span class=\"tocnumber\">3.1</span> <span class=\"toctext\">PV-nodes</span></a></li>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#Cut-nodes\"><span class=\"tocnumber\">3.2</span> <span class=\"toctext\">Cut-nodes</span></a></li>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#All-nodes\"><span class=\"tocnumber\">3.3</span> <span class=\"toctext\">All-nodes</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-11\"><a href=\"#Depth_and_Ply_Considerations\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Depth and Ply Considerations</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-12\"><a href=\"#Root_Node_Considerations\"><span class=\"tocnumber\">4.1</span> <span class=\"toctext\">Root Node Considerations</span></a></li>\n<li class=\"toclevel-2 tocsection-13\"><a href=\"#Ordering_in_Quiescence\"><span class=\"tocnumber\">4.2</span> <span class=\"toctext\">Ordering in Quiescence</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-14\"><a href=\"#See_also\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-15\"><a href=\"#Publications\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Publications</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-16\"><a href=\"#1977_...\"><span class=\"tocnumber\">6.1</span> <span class=\"toctext\">1977 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-17\"><a href=\"#1980_...\"><span class=\"tocnumber\">6.2</span> <span class=\"toctext\">1980 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-18\"><a href=\"#1990_...\"><span class=\"tocnumber\">6.3</span> <span class=\"toctext\">1990 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-19\"><a href=\"#2000_...\"><span class=\"tocnumber\">6.4</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-20\"><a href=\"#2010_...\"><span class=\"tocnumber\">6.5</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-21\"><a href=\"#2020_...\"><span class=\"tocnumber\">6.6</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-22\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-23\"><a href=\"#1996_...\"><span class=\"tocnumber\">7.1</span> <span class=\"toctext\">1996 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-24\"><a href=\"#2000_..._2\"><span class=\"tocnumber\">7.2</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-25\"><a href=\"#2005_...\"><span class=\"tocnumber\">7.3</span> <span class=\"toctext\">2005 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-26\"><a href=\"#2010_..._2\"><span class=\"tocnumber\">7.4</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-27\"><a href=\"#2015_...\"><span class=\"tocnumber\">7.5</span> <span class=\"toctext\">2015 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-28\"><a href=\"#2020_..._2\"><span class=\"tocnumber\">7.6</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-29\"><a href=\"#External_Links\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-30\"><a href=\"#References\"><span class=\"tocnumber\">9</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Standard_techniques\">Standard techniques</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Move_Ordering&amp;action=edit&amp;section=1\" title=\"Edit section: Standard techniques\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Following techniques are common in finding a good first move\n</p>\n<ul><li> <a href=\"/PV-Move\" title=\"PV-Move\">PV-Move</a> from the <a href=\"/Principal_Variation\" title=\"Principal Variation\">principal variation</a> of the previous <a href=\"/Iteration\" title=\"Iteration\">Iteration</a></li>\n<li> <a href=\"/Hash_Move\" title=\"Hash Move\">Hash Move</a> - stored move from <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Table</a>, if available</li>\n<li> <a href=\"/Internal_Iterative_Deepening\" title=\"Internal Iterative Deepening\">Internal Iterative Deepening</a> - if no hash move is available, likely only at <a href=\"/Node_Types#PV\" title=\"Node Types\">PV-Nodes</a></li></ul>\n<p><span id=\"Captures\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Captures\">Captures</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Move_Ordering&amp;action=edit&amp;section=2\" title=\"Edit section: Captures\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>For <a href=\"/Captures\" title=\"Captures\">captures</a> (if any), a simple, but quite efficient heuristic is <b>(re)capturing</b> the <b>last</b> moved piece with the <b>least valuable attacker</b>. Otherwise following heuristics may used, concerning the order of captures:\n</p>\n<ul><li> <a href=\"/MVV-LVA\" title=\"MVV-LVA\">MVV-LVA</a> - Most Valuable Victim - Least Valuable Aggressor</li>\n<li> <a href=\"/Static_Exchange_Evaluation\" title=\"Static Exchange Evaluation\">Static Exchange Evaluation</a> abbreviated as <b>SEE</b></li></ul>\n<p><span id=\"NonCaptures\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Non-Captures\">Non-Captures</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Move_Ordering&amp;action=edit&amp;section=3\" title=\"Edit section: Non-Captures\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Killer_Heuristic\" title=\"Killer Heuristic\">Killer Heuristic</a> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup></li>\n<li> <a href=\"/History_Heuristic\" title=\"History Heuristic\">History Heuristic</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup></li>\n<li> <a href=\"/Relative_History_Heuristic\" title=\"Relative History Heuristic\">Relative History Heuristic</a> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup></li>\n<li> <a href=\"/Piece-Square_Tables\" title=\"Piece-Square Tables\">Dedicated Piece-Square Tables</a> only for move ordering <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup></li></ul>\n<h2><span class=\"mw-headline\" id=\"Less_common_techniques\">Less common techniques</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Move_Ordering&amp;action=edit&amp;section=4\" title=\"Edit section: Less common techniques\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>These techniques are well known theoretically for non-captures, but not all programmers use them:\n</p>\n<ul><li> <a href=\"/Mate_Killers\" title=\"Mate Killers\">Mate Killers</a></li>\n<li> <a href=\"/Countermove_Heuristic\" title=\"Countermove Heuristic\">Countermove Heuristic</a> <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup></li>\n<li> <a href=\"/Guard_Heuristic\" title=\"Guard Heuristic\">Guard Heuristic</a></li>\n<li> <a href=\"/Last_Best_Reply\" title=\"Last Best Reply\">Last Best Reply</a></li>\n<li> <a href=\"/Butterfly_Heuristic\" title=\"Butterfly Heuristic\">Butterfly Heuristic</a> <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup></li>\n<li> <a href=\"/Threat_Move\" title=\"Threat Move\">Threat Move</a> from <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">null move</a> refutations</li>\n<li> <a href=\"/Enhanced_Transposition_Cutoff\" title=\"Enhanced Transposition Cutoff\">Enhanced Transposition Cutoff</a> (ETC)</li>\n<li> <a href=\"/Refutation_Table\" title=\"Refutation Table\">Refutation Table</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Using_Neural_Networks\">Using Neural Networks</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Move_Ordering&amp;action=edit&amp;section=5\" title=\"Edit section: Using Neural Networks\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Move ordering (as well as <a href=\"/Time_Management\" title=\"Time Management\">Time Management</a>) is an interesting application of <a href=\"/Neural_Networks\" title=\"Neural Networks\">Neural Networks</a>, as introduced by <a href=\"/Kieran_Greer\" title=\"Kieran Greer\">Kieran Greer</a> et al. and <a href=\"/Levente_Kocsis\" title=\"Levente Kocsis\">Levente Kocsis</a> et al.\n</p>\n<ul><li> <a href=\"/Chessmaps_Heuristic\" title=\"Chessmaps Heuristic\">Chessmaps Heuristic</a> </li>\n<li> <a href=\"/Neural_MoveMap_Heuristic\" title=\"Neural MoveMap Heuristic\">Neural MoveMap Heuristic</a> <sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup> <sup id=\"cite_ref-9\" class=\"reference\"><a href=\"#cite_note-9\">&#91;9&#93;</a></sup></li></ul>\n<h1><span class=\"mw-headline\" id=\"Typical_move_ordering\">Typical move ordering</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Move_Ordering&amp;action=edit&amp;section=6\" title=\"Edit section: Typical move ordering\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>After <a href=\"/Move_Generation\" title=\"Move Generation\">move generation</a> with assigned move-scores, chess programs usually don't sort the whole <a href=\"/Move_List\" title=\"Move List\">move list</a>, but perform a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Selection_sort\">selection sort</a> each time a move is fetched. Exceptions are the <a href=\"/Root\" title=\"Root\">Root</a> and further <a href=\"/Node_Types#PV\" title=\"Node Types\">PV-Nodes</a> with some distance to the horizon, where one may apply additional effort to score and sort moves. For performance reasons, a lot of programs try to save the <a href=\"/Move_Generation\" title=\"Move Generation\">move generation</a> of captures or non-captures at expected <a href=\"/Node_Types#CUT\" title=\"Node Types\">Cut-Nodes</a>, but try the hash-move or killer first, if they are proved legal in this position.\n</p><p>A typical move ordering consists as follows:\n</p>\n<ol><li> <a href=\"/PV-Move\" title=\"PV-Move\">PV-move</a> of the <a href=\"/Principal_Variation\" title=\"Principal Variation\">principal variation</a> from the previous iteration of an <a href=\"/Iterative_Deepening\" title=\"Iterative Deepening\">iterative deepening</a> framework for the leftmost path, often implicitly done by 2.</li>\n<li> <a href=\"/Hash_Move\" title=\"Hash Move\">Hash move</a> from <a href=\"/Transposition_Table\" title=\"Transposition Table\">hash tables</a></li>\n<li> Winning captures/promotions</li>\n<li> Equal captures/promotions</li>\n<li> <a href=\"/Killer_Move\" title=\"Killer Move\">Killer moves</a> (non capture), often with <a href=\"/Mate_Killers\" title=\"Mate Killers\">mate killers</a> first</li>\n<li> Non-captures sorted by <a href=\"/History_Heuristic\" title=\"History Heuristic\">history heuristic</a> and that like</li>\n<li> Losing captures (* but see below</li></ol>\n<ul><li>) Depending on the implementation, the <a href=\"/Board_Representation\" title=\"Board Representation\">board representation</a>, whether and where <a href=\"/Static_Exchange_Evaluation\" title=\"Static Exchange Evaluation\">SEE</a> is used, the <a href=\"/Extensions\" title=\"Extensions\">extension</a> policy (<a href=\"/Recapture_Extensions\" title=\"Recapture Extensions\">recapture extensions</a>) and other stuff - many programmers favor losing captures before other none-captures - directly behind the killers. They are kind of forced, and one possibly has to deal with all kind of tactical motives and interactions, one may not consider in move ordering. Such as <a href=\"/Pin\" title=\"Pin\">pins</a>, <a href=\"/Battery\" title=\"Battery\">batteries</a>, <a href=\"/Discovered_Attack\" title=\"Discovered Attack\">discovered attacks</a> and <a href=\"/Overloading\" title=\"Overloading\">overloaded defenders</a>. Otherwise, obviously losing captures are likely refuted cheaply. But if a losing capture fails high for some reason, we have saved the effort to generate, and more importantly to search other non-captures at all.</li></ul>\n<h1><span class=\"mw-headline\" id=\"Node_Type_Considerations\">Node Type Considerations</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Move_Ordering&amp;action=edit&amp;section=7\" title=\"Edit section: Node Type Considerations\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Move ordering and scoring effort might be controlled by expected <a href=\"/Node_Types\" title=\"Node Types\">Node Types</a>. \n</p>\n<h2><span class=\"mw-headline\" id=\"PV-nodes\">PV-nodes</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Move_Ordering&amp;action=edit&amp;section=8\" title=\"Edit section: PV-nodes\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>At <a href=\"/Node_Types#PV\" title=\"Node Types\">PV-nodes</a> move ordering is very important, since the best alpha-increase as early as possible makes further search cheaper, due to narrower windows in <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">Alpha-Beta</a>, while in <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">PVS</a> later but better moves require re-searches of the <a href=\"/Null_Window\" title=\"Null Window\">null window</a> <a href=\"/Scout\" title=\"Scout\">scout</a>. \n</p>\n<h2><span class=\"mw-headline\" id=\"Cut-nodes\">Cut-nodes</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Move_Ordering&amp;action=edit&amp;section=9\" title=\"Edit section: Cut-nodes\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Move ordering is crucial at expected and confirmed <a href=\"/Node_Types#CUT\" title=\"Node Types\">Cut-nodes</a>, since it is important to <a href=\"/Fail-High\" title=\"Fail-High\">fail-high</a> as early as possible, as best with the first move, as in greater than 90% of all <a href=\"/Node_Types#CUT\" title=\"Node Types\">fail-high nodes</a>. However, in situations where multiple moves may cut, e.g. with huge <a href=\"/Material\" title=\"Material\">material</a> advantage, we like it as cheap as possible, but not necessarily a huge subtree with f.i. due to <a href=\"/Check_Extensions\" title=\"Check Extensions\">check extensions</a>. \n</p>\n<h2><span class=\"mw-headline\" id=\"All-nodes\">All-nodes</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Move_Ordering&amp;action=edit&amp;section=10\" title=\"Edit section: All-nodes\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>At confirmed <a href=\"/Node_Types#ALL\" title=\"Node Types\">ALL-nodes</a> with <a href=\"/Null_Window\" title=\"Null Window\">null windows</a>, move ordering didn't care that much. Since we don't know in advance (otherwise we wouldn't search at all), and expected All-nodes may become Cut-nodes, move ordering is an issue as well, but usually with less effort for late moves. \n</p>\n<h1><span class=\"mw-headline\" id=\"Depth_and_Ply_Considerations\">Depth and Ply Considerations</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Move_Ordering&amp;action=edit&amp;section=11\" title=\"Edit section: Depth and Ply Considerations\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Move ordering effort might be controlled by considering <a href=\"/Depth\" title=\"Depth\">draft</a> and/or <a href=\"/Ply\" title=\"Ply\">plies</a> from <a href=\"/Root\" title=\"Root\">root</a>. The closer the root, the farther the horizon, the more effort might be justified to score and sort moves.\n<span id=\"Root\"></span> \n</p>\n<h2><span class=\"mw-headline\" id=\"Root_Node_Considerations\">Root Node Considerations</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Move_Ordering&amp;action=edit&amp;section=12\" title=\"Edit section: Root Node Considerations\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Despite trying the best move and principal variation from previous iteration first, iterative deepening offers another ressource to order the remaining moves at the <a href=\"/Root\" title=\"Root\">root</a> - their subtree size which could be easily determined. As already mentioned by <a href=\"/Ingo_Alth%C3%B6fer\" title=\"Ingo Althöfer\">Ingo Althöfer</a> in an <a href=\"/ICGA_Journal#15_1\" title=\"ICGA Journal\">1992 ICCA Journal</a> correspondence <sup id=\"cite_ref-10\" class=\"reference\"><a href=\"#cite_note-10\">&#91;10&#93;</a></sup> inspired by <a href=\"/Jos_Uiterwijk\" title=\"Jos Uiterwijk\">Jos Uiterwijk's</a> <a href=\"/Countermove_Heuristic\" title=\"Countermove Heuristic\">Countermove Heuristic</a> article <sup id=\"cite_ref-11\" class=\"reference\"><a href=\"#cite_note-11\">&#91;11&#93;</a></sup>, based on the soundness of following rule of thumb,\n</p>\n<table class=\"wikitable\">\n\n<tr>\n<td>  <span style=\"font-size: 130%;\"><i>The longer it takes to refute a move, the higher is its chance to become best move in the next iteration</i></span>\n</td></tr></table>\n<p>the old idea is to use the search time or subtree size of the depth-n iteration to reorder the direct successors of the root before the depth-(n+1) iteration. Some programs use the <a href=\"/Evaluation\" title=\"Evaluation\">evaluation</a> to initially score the moves, to adjust them by their subtree size in subsequent iterations.\n</p><p>An <a href=\"/Ronald_de_Man#ScoringRootMoves\" title=\"Ronald de Man\">idea</a> to apply randomness and/or bonuses, i.e. developing bonus, or penalties to <a href=\"/Moves\" title=\"Moves\">move</a> <a href=\"/Score\" title=\"Score\">scores</a> at the <a href=\"/Root\" title=\"Root\">root</a> by an <a href=\"/Oracle\" title=\"Oracle\">oracle</a> approach, was proposed by <a href=\"/Ronald_de_Man\" title=\"Ronald de Man\">Ronald de Man</a> - without any changes in <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">alpha-beta search</a> or <a href=\"/Evaluation\" title=\"Evaluation\">leaf evaluation</a>, and without any problems with the <a href=\"/Transposition_Table\" title=\"Transposition Table\">transposition table</a> <sup id=\"cite_ref-12\" class=\"reference\"><a href=\"#cite_note-12\">&#91;12&#93;</a></sup> <sup id=\"cite_ref-13\" class=\"reference\"><a href=\"#cite_note-13\">&#91;13&#93;</a></sup>.\n</p>\n<h2><span class=\"mw-headline\" id=\"Ordering_in_Quiescence\">Ordering in Quiescence</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Move_Ordering&amp;action=edit&amp;section=13\" title=\"Edit section: Ordering in Quiescence\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>In the <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">quiescence search</a>, <a href=\"/Captures\" title=\"Captures\">captures</a> are often approximated, for speed. For example, PxQ need not have a <a href=\"/Static_Exchange_Evaluation\" title=\"Static Exchange Evaluation\">SEE</a> performed on it, since it is clearly a winning capture, where RxB might have the SEE done, to see if it is a winning or possibly losing capture if the bishop is protected.\n</p>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Move_Ordering&amp;action=edit&amp;section=14\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Fixafan\" title=\"Fixafan\">Fixafan</a></li>\n<li> <a href=\"/Move_Generation\" title=\"Move Generation\">Move Generation</a></li>\n<li> <a href=\"/Move_List\" title=\"Move List\">Move List</a></li>\n<li> <a href=\"/Node_Types\" title=\"Node Types\">Node Types</a></li></ul>\n<dl><dd> <a href=\"/Node_Types#LeafNodes\" title=\"Node Types\">Number of Leaf Nodes</a></dd></dl>\n<ul><li> <a href=\"/Odd-Even_Effect\" title=\"Odd-Even Effect\">Odd-Even Effect</a></li>\n<li> <a href=\"/Search_Explosion\" title=\"Search Explosion\">Search Explosion</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Move_Ordering&amp;action=edit&amp;section=15\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1977_...\">1977 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Move_Ordering&amp;action=edit&amp;section=16\" title=\"Edit section: 1977 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Selim_Akl\" title=\"Selim Akl\">Selim Akl</a>, <a href=\"/Monroe_Newborn\" title=\"Monroe Newborn\">Monroe Newborn</a> (<b>1977</b>). <i>The Principal Continuation and the Killer Heuristic</i>.1977 ACM Annual Conference Proceedings</li>\n<li> <a href=\"/Ozalp_Babaoglu\" title=\"Ozalp Babaoglu\">Ozalp Babaoglu</a> (<b>1977</b>). <i>Hardware implementation of the legal move generation and relative ordering functions for the game of chess</i>. Master's thesis, <a href=\"/University_of_California,_Berkeley\" title=\"University of California, Berkeley\">University of California, Berkeley</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1980_...\">1980 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Move_Ordering&amp;action=edit&amp;section=17\" title=\"Edit section: 1980 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a> (<b>1983</b>). <i>The History Heuristic</i>. <a href=\"/ICGA_Journal#6_3\" title=\"ICGA Journal\">ICCA Journal, Vol. 6, No. 3</a></li>\n<li> <a href=\"/Prakash_Bettadapur\" title=\"Prakash Bettadapur\">Prakash Bettadapur</a> (<b>1986</b>). <i>Influence of Ordering on Capture Search</i>. <a href=\"/ICGA_Journal#9_4\" title=\"ICGA Journal\">ICCA Journal, Vol. 9, No. 4</a></li>\n<li> <a href=\"/Dap_Hartmann\" title=\"Dap Hartmann\">Dap Hartmann</a> (<b>1988</b>). <i>Butterfly Boards</i>. <a href=\"/ICGA_Journal#11_23\" title=\"ICGA Journal\">ICCA Journal, Vol. 11, Nos. 2/3</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1990_...\">1990 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Move_Ordering&amp;action=edit&amp;section=18\" title=\"Edit section: 1990 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Dap_Hartmann\" title=\"Dap Hartmann\">Dap Hartmann</a>, <a href=\"/Peter_Kouwenhoven\" title=\"Peter Kouwenhoven\">Peter Kouwenhoven</a> (<b>1991</b>). <i>Sundry Computer Chess Topics</i>. <a href=\"/Advances_in_Computer_Chess_6\" title=\"Advances in Computer Chess 6\">Advances in Computer Chess 6</a></li>\n<li> <a href=\"/Jos_Uiterwijk\" title=\"Jos Uiterwijk\">Jos Uiterwijk</a> (<b>1992</b>). <i>The Countermove Heuristic</i>. <a href=\"/ICGA_Journal#15_1\" title=\"ICGA Journal\">ICCA Journal, Vol. 15, No. 1</a></li>\n<li> <a href=\"/Jos_Uiterwijk\" title=\"Jos Uiterwijk\">Jos Uiterwijk</a> (<b>1992</b>). <i>Memory Efficiency in some Heuristics</i>. <a href=\"/ICGA_Journal#15_2\" title=\"ICGA Journal\">ICCA Journal, Vol. 15, No. 2</a></li>\n<li> <a href=\"/Ingo_Alth%C3%B6fer\" title=\"Ingo Althöfer\">Ingo Althöfer</a> (<b>1992</b>). <i>Move Ordering by Time Ordering</i>. Correspondence, <a href=\"/ICGA_Journal#15_2\" title=\"ICGA Journal\">ICCA Journal, Vol. 15, No. 2</a></li>\n<li> <a href=\"/Eric_Th%C3%A9\" title=\"Eric Thé\">Eric Thé</a> (<b>1992</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://digitool.library.mcgill.ca/R/?func=dbin-jump-full&amp;object_id=56753&amp;local_base=GEN01-MCG02\">An analysis of move ordering on the efficiency of alpha-beta search</a></i>. Master's thesis, <a href=\"/McGill_University\" title=\"McGill University\">McGill University</a>, advisor <a href=\"/Monroe_Newborn\" title=\"Monroe Newborn\">Monroe Newborn</a>&#160;» <a href=\"/Fixafan\" title=\"Fixafan\">Fixafan</a></li>\n<li> <a href=\"/Yi-Fan_Ke\" title=\"Yi-Fan Ke\">Yi-Fan Ke</a>, <a href=\"/Tai-Ming_Parng\" title=\"Tai-Ming Parng\">Tai-Ming Parng</a> (<b>1993</b>). <i>The Guard Heuristic: Legal Move Ordering with Forward Game-Tree Pruning</i>. <a href=\"/ICGA_Journal#16-2\" title=\"ICGA Journal\">ICCA Journal, Vol. 16, No. 2</a></li>\n<li> <a href=\"/index.php?title=Mei-En_Chen&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Mei-En Chen (page does not exist)\">Mei-En Chen</a>, <a href=\"/index.php?title=Yo-Ping_Huang&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Yo-Ping Huang (page does not exist)\">Yo-Ping Huang</a> (<b>1995</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=527751\">Guard heuristic by dynamic fuzzy reasoning model for Chinese chess</a></i>. Proceedings of ISUMA-NAFIPS '95</li>\n<li> <a href=\"/Kieran_Greer\" title=\"Kieran Greer\">Kieran Greer</a>, <a href=\"/index.php?title=Piyush_Ojha&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Piyush Ojha (page does not exist)\">Piyush Ojha</a>, <a href=\"/index.php?title=David_A._Bell&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"David A. Bell (page does not exist)\">David A. Bell</a> (<b>1999</b>). <i>A Pattern-Oriented Approach to Move Ordering: the Chessmaps Heuristic</i>. <a href=\"/ICGA_Journal#22_1\" title=\"ICGA Journal\">ICCA Journal, Vol. 22, No. 1</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Move_Ordering&amp;action=edit&amp;section=19\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Kieran_Greer\" title=\"Kieran Greer\">Kieran Greer</a> (<b>2000</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.sciencedirect.com/science?_ob=ArticleURL&amp;_udi=B6TYF-40TY77M-3&amp;_user=10&amp;_rdoc=1&amp;_fmt=&amp;_orig=search&amp;_sort=d&amp;view=c&amp;_acct=C000050221&amp;_version=1&amp;_urlVersion=0&amp;_userid=10&amp;md5=7858eb0d6e100295c197661d1d454e26\">Computer chess move-ordering schemes using move influence</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_%28journal%29\">Artificial Intelligence</a>, Vol. 120, No. 2</li>\n<li>  <a href=\"/Levente_Kocsis\" title=\"Levente Kocsis\">Levente Kocsis</a>, <a href=\"/Jos_Uiterwijk\" title=\"Jos Uiterwijk\">Jos Uiterwijk</a>, <a href=\"/Jaap_van_den_Herik\" title=\"Jaap van den Herik\">Jaap van den Herik</a> (<b>2001</b>). <i>Move Ordering using Neural Networks</i>. IEA/AIE 2001, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Lecture_Notes_in_Computer_Science\">LNCS</a> 2070</li>\n<li> <a href=\"/Levente_Kocsis\" title=\"Levente Kocsis\">Levente Kocsis</a>, <a href=\"/Jos_Uiterwijk\" title=\"Jos Uiterwijk\">Jos Uiterwijk</a>, <a href=\"/Eric_Postma\" title=\"Eric Postma\">Eric Postma</a>, <a href=\"/Jaap_van_den_Herik\" title=\"Jaap van den Herik\">Jaap van den Herik</a> (<b>2002</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/chapter/10.1007/978-3-540-40031-8_11\">The Neural MoveMap Heuristic in Chess</a></i>. <a href=\"/CG_2002\" title=\"CG 2002\">CG 2002</a></li>\n<li> <a href=\"/index.php?title=Yoshinori_Higashiuchi&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Yoshinori Higashiuchi (page does not exist)\">Yoshinori Higashiuchi</a>, <a href=\"/Reijer_Grimbergen\" title=\"Reijer Grimbergen\">Reijer Grimbergen</a> (<b>2005</b>). <i>Enhancing Search Efficiency by Using Move Categorization Based on Game Progress in Amazons</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.100.3211&amp;rep=rep1&amp;type=pdf\">pdf</a></li>\n<li> <a href=\"/Mark_Winands\" title=\"Mark Winands\">Mark Winands</a>, <a href=\"/Erik_van_der_Werf\" title=\"Erik van der Werf\">Erik van der Werf</a>, <a href=\"/Jaap_van_den_Herik\" title=\"Jaap van den Herik\">Jaap van den Herik</a>, <a href=\"/Jos_Uiterwijk\" title=\"Jos Uiterwijk\">Jos Uiterwijk</a> (<b>2006</b>). <i>The Relative History Heuristic</i>. <a href=\"/CG_2004\" title=\"CG 2004\">CG 2004</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.personeel.unimaas.nl/m-winands/documents/relhis.pdf\">pdf</a></li>\n<li> <a href=\"/Jeff_Rollason\" title=\"Jeff Rollason\">Jeff Rollason</a> (<b>2006</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.aifactory.co.uk/newsletter/2005_04_plausibility_analysis.htm\">Driving search with Plausibility analysis: Looking at the right moves</a></i>. <a href=\"/AI_Factory\" title=\"AI Factory\">AI Factory</a>, Winter 2006</li>\n<li> <a href=\"/Jeff_Rollason\" title=\"Jeff Rollason\">Jeff Rollason</a> (<b>2007</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.aifactory.co.uk/newsletter/2007_01_neg_plausibility.htm\">Negative Plausibility</a></i>. <a href=\"/AI_Factory\" title=\"AI Factory\">AI Factory</a>, Spring 2007&#160;» <a href=\"/Relative_History_Heuristic\" title=\"Relative History Heuristic\">Relative History Heuristic</a></li>\n<li> <a href=\"/R%C3%A9mi_Coulom\" title=\"Rémi Coulom\">Rémi Coulom</a> (<b>2007</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://remi.coulom.free.fr/Amsterdam2007/\">Computing Elo Ratings of Move Patterns in the Game of Go</a></i>. <a href=\"/ICGA_Journal#30_4\" title=\"ICGA Journal\">ICGA Journal, Vol. 30, No. 4</a>, <a href=\"/CGW_2007\" title=\"CGW 2007\">CGW 2007</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://remi.coulom.free.fr/Amsterdam2007/icgaj.pdf\">pdf</a> <sup id=\"cite_ref-14\" class=\"reference\"><a href=\"#cite_note-14\">&#91;14&#93;</a></sup></li>\n<li> <a href=\"/index.php?title=Timothy_Furtak&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Timothy Furtak (page does not exist)\">Timothy Furtak</a>, <a href=\"/Michael_Buro\" title=\"Michael Buro\">Michael Buro</a> (<b>2009</b>). <i>Minimum Proof Graphs and Fastest-Cut-First Search Heuristics</i>. <a href=\"/Conferences#IJCAI2009\" title=\"Conferences\">IJCAI 2009</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://ijcai.org/papers09/Papers/IJCAI09-089.pdf\">pdf</a> <sup id=\"cite_ref-15\" class=\"reference\"><a href=\"#cite_note-15\">&#91;15&#93;</a></sup></li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Move_Ordering&amp;action=edit&amp;section=20\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/David_J._Wu\" title=\"David J. Wu\">David J. Wu</a> (<b>2011</b>). <i>Move Ranking and Evaluation in the Game of Arimaa</i>. B.Sc. thesis, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Harvard_College\">Harvard College</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Cambridge,_Massachusetts\">Cambridge, Massachusetts</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://arimaa.com/arimaa/papers/DavidWu/djwuthesis.pdf\">pdf</a>&#160;» <a href=\"/Arimaa\" title=\"Arimaa\">Arimaa</a></li>\n<li> <a href=\"/David_J._Wu\" title=\"David J. Wu\">David J. Wu</a> (<b>2015</b>). <i>Designing a Winning Arimaa Program</i>. <a href=\"/ICGA_Journal#38_1\" title=\"ICGA Journal\">ICGA Journal, Vol. 38, No. 1</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Move_Ordering&amp;action=edit&amp;section=21\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Toni_Helminen\" title=\"Toni Helminen\">Toni Helminen</a> (<b>2022</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/SamuraiDangyo/lazy-sorting-algorithm\">Lazy sorting algorithm</a></i>. <sup id=\"cite_ref-16\" class=\"reference\"><a href=\"#cite_note-16\">&#91;16&#93;</a></sup></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Move_Ordering&amp;action=edit&amp;section=22\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1996_...\">1996 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Move_Ordering&amp;action=edit&amp;section=23\" title=\"Edit section: 1996 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/7d8a4124ce6f81ac#\">Pawn Structure \"Holes\" and Move Ordering</a> by <a href=\"/index.php?title=Daniel_A._Thies&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Daniel A. Thies (page does not exist)\">Daniel A. Thies</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, February 12, 1996&#160;» <a href=\"/Pawn_Structure\" title=\"Pawn Structure\">Pawn Structure</a>, <a href=\"/Holes\" title=\"Holes\">Holes</a> </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/99eec6923b0481db\">computer chess \"oracle\" ideas...</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, April 1, 1997</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/msg/0df39371422a600c\">Re: computer chess \"oracle\" ideas...</a> by <a href=\"/Ronald_de_Man\" title=\"Ronald de Man\">Ronald de Man</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, April 3, 1997</dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/msg/ccc2546e26d92f88\">Re: computer chess \"oracle\" ideas...</a> by <a href=\"/Ronald_de_Man\" title=\"Ronald de Man\">Ronald de Man</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, April 7, 1997</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=48187\">Move ordering - How do I know if I have played this move already?</a> by <a href=\"/Steve_Maughan\" title=\"Steve Maughan\">Steve Maughan</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 06, 1999</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=67397\">Measure of moveorder quality</a> by <a href=\"/index.php?title=Ralf_Elvs%C3%A9n&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Ralf Elvsén (page does not exist)\">Ralf Elvsén</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 04, 1999</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=68825\">Move Ordering at the Root</a> by <a href=\"/Daniel_Homan\" title=\"Daniel Homan\">Daniel Homan</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 15, 1999</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=73278\">Fast way to sort moves in movelist&#160;?</a> by <a href=\"/Stefan_Plenkner\" title=\"Stefan Plenkner\">Stefan Plenkner</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 14, 1999</li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_..._2\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Move_Ordering&amp;action=edit&amp;section=24\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=108325\">Move ordering?</a> by <a href=\"/Severi_Salminen\" title=\"Severi Salminen\">Severi Salminen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 28, 2000</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=113174\">Better subject title: Move ordering</a> by <a href=\"/Tom_Kerrigan\" title=\"Tom Kerrigan\">Tom Kerrigan</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>. May 31, 2000</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=157570\">Move ordering ideas</a> by <a href=\"/Matt_McKnight\" title=\"Matt McKnight\">Matt McKnight</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 08, 2001</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=161474\">Dynamic move ordering for capture/promotions?</a> by <a href=\"/Scott_Gasch\" title=\"Scott Gasch\">Scott Gasch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 02, 2001</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=167401\">root search ordening</a> by <a href=\"/index.php?title=Jan_Willem_de_Kort&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Jan Willem de Kort (page does not exist)\">Jan Willem de Kort</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 02, 2001</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=168497\">Move ordering at root of search</a> by <a href=\"/Tom_King\" title=\"Tom King\">Tom King</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 07, 2001</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=343790\">A SIMD idea, eg. Piece/Gain of a capture target</a> by <a href=\"/Gerd_Isenberg\" title=\"Gerd Isenberg\">Gerd Isenberg</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 21, 2004&#160;» <a href=\"/SSE2\" title=\"SSE2\">SSE2</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=357188\">move ordering and node count</a> by <a href=\"/Martin_Fierz\" title=\"Martin Fierz\">Martin Fierz</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 29, 2004</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=358297\">Move ordering at root</a> by <a href=\"/Jan_Renze_Steenhuisen\" title=\"Jan Renze Steenhuisen\">Renze Steenhuisen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 04, 2004</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=379624\">Fail-high on first move stat (86%)</a> by Michael Henderson, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 29, 2004&#160;» <a href=\"/Fail-High\" title=\"Fail-High\">Fail-High</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2005_...\">2005 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Move_Ordering&amp;action=edit&amp;section=25\" title=\"Edit section: 2005 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?t=4384\">Move ordering at different (Knuth) node types</a> by <a href=\"/Tom_Likens\" title=\"Tom Likens\">Tom Likens</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, February 21, 2006&#160;» <a href=\"/Node_Types\" title=\"Node Types\">Node Types</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=4447\">move ordering statistic</a> by <a href=\"/Andrew_Shapira\" title=\"Andrew Shapira\">Andrew Shapira</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, March 03, 2006</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=12706\">SEE on non-capture moves in main search</a> by <a href=\"/Gary_Linscott\" title=\"Gary Linscott\">Gary</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 28, 2007&#160;» <a href=\"/Static_Exchange_Evaluation\" title=\"Static Exchange Evaluation\">Static Exchange Evaluation</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=15198\">caps-&gt;noncaps vs. goodcaps-&gt;noncaps-&gt;badcaps</a> by <a href=\"/James_Swafford\" title=\"James Swafford\">James Swafford</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 18, 2007</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=21119\">Move ordering: Delaying moves on the history phase</a> by <a href=\"/Miguel_A._Ballicora\" title=\"Miguel A. Ballicora\">Miguel A. Ballicora</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 13, 2008</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=188924\">Re: Move ordering: Delaying moves on the history phase</a> by <a href=\"/Lance_Perkins\" title=\"Lance Perkins\">Lance Perkins</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 14, 2008</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=24294\">Order of implementing things</a> by cyberfish, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 10, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=28873\">Negative Plausibility Move Ordering</a> by <a href=\"/Alessandro_Damiani\" title=\"Alessandro Damiani\">Alessandro Damiani</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 09, 2009 </li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_..._2\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Move_Ordering&amp;action=edit&amp;section=26\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=32611\">Move ordering help</a> by <a href=\"/Richard_Allbert\" title=\"Richard Allbert\">Richard Allbert</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 14, 2010&#160;» <a href=\"/Jabba\" title=\"Jabba\">Jabba</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=34655\">root move ordering</a> by <a href=\"/index.php?title=Edward_Yu&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Edward Yu (page does not exist)\">Edward Yu</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 02, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=5&amp;t=661\">Move ordering improvements</a> by Howard E, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Open Chess Programming Forum</a>, September 26, 2010</li></ul>\n<p><b>2011</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=38387\">out of check move ordering</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 12, 2011&#160;» <a href=\"/Check\" title=\"Check\">Check</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=38556\">The LBR move ordering heuristic</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 26, 2011&#160;» <a href=\"/Last_Best_Reply\" title=\"Last Best Reply\">Last Best Reply</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=38766\">Move ordering by PST</a> by <a href=\"/Onno_Garms\" title=\"Onno Garms\">Onno Garms</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 16, 2011&#160;» <a href=\"/Piece-Square_Tables\" title=\"Piece-Square Tables\">Piece-Square Tables</a>, <a href=\"/History_Heuristic\" title=\"History Heuristic\">History Heuristic</a>, <a href=\"/Onno\" title=\"Onno\">Onno</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=39338\">Move ordering question</a> by <a href=\"/index.php?title=Stef_Luijten&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Stef Luijten (page does not exist)\">Stef Luijten</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 11, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=39346\">Root node search in Stockfish</a> by <a href=\"/Onno_Garms\" title=\"Onno Garms\">Onno Garms</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 12, 2011&#160;» <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a>, <a href=\"/Root\" title=\"Root\">Root</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://macechess.blogspot.de/2011/08/improve-move-ordering-for-alpha-beta.html\">Improve Move Ordering for Alpha Beta</a> by <a href=\"/Thomas_Petzke\" title=\"Thomas Petzke\">Thomas Petzke</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://macechess.blogspot.de/\">mACE Chess</a>, August 11, 2011</li></ul>\n<p><b>2012</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://stackoverflow.com/questions/8906430/minimax-alpha-beta-pruning-move-ordering\">Minimax/ Alpha beta pruning Move Ordering?</a> by Felix, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Stack_Overflow\">Stack Overflow</a>, January 18, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=42567\">Move Ordering (Again&#160;:))</a> by <a href=\"/Richard_Allbert\" title=\"Richard Allbert\">Richard Allbert</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>,  February 22, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=44749\">Move ordering idea (old and new?)</a> by <a href=\"/Daniel_Homan\" title=\"Daniel Homan\">Daniel Homan</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 09, 2012&#160;» <a href=\"/Countermove_Heuristic\" title=\"Countermove Heuristic\">Countermove Heuristic</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=44745\">How effective is move ordering from TT?</a> by <a href=\"/Bill_Henry\" title=\"Bill Henry\">Bill Henry</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 09, 2012&#160;» <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Table</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=5&amp;t=2173\">Relationship between move ordering and pruning</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">OpenChess Forum</a>, December 17, 2012&#160;» <a href=\"/Pruning\" title=\"Pruning\">Pruning</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=46605\">Move Ordering?</a> by <a href=\"/Thomas_Kolarik\" title=\"Thomas Kolarik\">Thomas Kolarik</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 28, 2012 </li></ul>\n<p><b>2013</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=46886\">Killer and History: Increased Node Count</a> by <a href=\"/index.php?title=Cheney_Nattress&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Cheney Nattress (page does not exist)\">Cheney Nattress</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 15, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=47564\">Root move order (again)</a> by <a href=\"/Alberto_Sanjuan\" title=\"Alberto Sanjuan\">Alberto Sanjuan</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 21, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=47953\">History pruning / move ordering question</a> by <a href=\"/index.php?title=Jerry_Donald&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Jerry Donald (page does not exist)\">Jerry Donald</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 10, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48122\">Move ordering contest</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schroder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 26, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48230\">An idea for move ordering at the root</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 09, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48981\">MoveOrdering++</a> by <a href=\"/index.php?title=Henk_van_den_Belt&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Henk van den Belt (page does not exist)\">Henk van den Belt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 16, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=50339\">How do you get a \"Best first move\" near the leaves</a> by <a href=\"/index.php?title=Henk_van_den_Belt&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Henk van den Belt (page does not exist)\">Henk van den Belt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 05, 2013</li></ul>\n<p><b>2014</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=51992\">Idea of different history</a> by <a href=\"/Daniel_Jos%C3%A9_Queralt%C3%B3\" title=\"Daniel José Queraltó\">Daniel José Queraltó</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 14, 2014&#160;» <a href=\"/History_Heuristic\" title=\"History Heuristic\">History Heuristic</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=53317\">Effectiveness of killer moves</a> by <a href=\"/index.php?title=Alex_Ferguson&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Alex Ferguson (page does not exist)\">Alex Ferguson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 17, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=54241\">Solving a fail low situation at the root</a> by <a href=\"/Alberto_Sanjuan\" title=\"Alberto Sanjuan\">Alberto Sanjuan</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 03, 2014&#160;» <a href=\"/Aspiration_Windows\" title=\"Aspiration Windows\">Aspiration Windows</a>, <a href=\"/Fail-Low\" title=\"Fail-Low\">Fail-Low</a>, <a href=\"/Root\" title=\"Root\">Root</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2015_...\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Move_Ordering&amp;action=edit&amp;section=27\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=55919\">Idea #8430: Optimizing move ordering, very slowly</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>,  April 06, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=57228\">Move ordering for cheapest refutation</a> by <a href=\"/Matthew_Lai\" title=\"Matthew Lai\">Matthew Lai</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 09, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=57346\">Bonus for \"null move SEE\"</a> by <a href=\"/Matthew_Lai\" title=\"Matthew Lai\">Matthew Lai</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 23, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=57479\">Q: Move ordering, checks</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 02, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=58055\">Ordering of Root moves and search instability&#160;!</a> by <a href=\"/index.php?title=Mahmoud_Uthman&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Mahmoud Uthman (page does not exist)\">Mahmoud Uthman</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 26, 2015&#160;» <a href=\"/Search_Instability\" title=\"Search Instability\">Search Instability</a></li></ul>\n<p><b>2016</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61021\">Sorting Captures</a> by <a href=\"/index.php?title=David_Cimbalista&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"David Cimbalista (page does not exist)\">David Cimbalista</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 03, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61260\">New killer idea</a> by <a href=\"/Alexandru_Mosoi\" title=\"Alexandru Mosoi\">Alexandru Mosoi</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 28, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61262\">Starting with move ordering</a> by <a href=\"/index.php?title=Luis_Babboni&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Luis Babboni (page does not exist)\">Luis Babboni</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 28, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61401\">Best move statistics</a> by <a href=\"/Matthew_Lai\" title=\"Matthew Lai\">Matthew Lai</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 12, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61420\">Searching worse moves first</a> by <a href=\"/Matthew_Lai\" title=\"Matthew Lai\">Matthew Lai</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 14, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=62558\">move ordering especially ordering&amp;searching of root move</a> by <a href=\"/index.php?title=Mahmoud_Uthman&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Mahmoud Uthman (page does not exist)\">Mahmoud Uthman</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 21, 2016</li></ul>\n<p><b>2017</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=62827\">Move ordering&#160;?</a> by <a href=\"/index.php?title=Mahmoud_Uthman&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Mahmoud Uthman (page does not exist)\">Mahmoud Uthman</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 15, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63048\">Move ordering&#160;?</a> by <a href=\"/index.php?title=Mahmoud_Uthman&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Mahmoud Uthman (page does not exist)\">Mahmoud Uthman</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 04, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63275\">Sorting losing captures&#160;?</a> by <a href=\"/index.php?title=Mahmoud_Uthman&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Mahmoud Uthman (page does not exist)\">Mahmoud Uthman</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 25, 2017 </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63280\">Move ordering statistics</a> by <a href=\"/index.php?title=Sander_Maassen_vd_Brink&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Sander Maassen vd Brink (page does not exist)\">Sander Maassen vd Brink</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 26, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63502\">speed up or avoiding move sorting</a> by <a href=\"/Alexandru_Mosoi\" title=\"Alexandru Mosoi\">Alexandru Mosoi</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 19, 2017&#160;» <a href=\"/Zurichess\" title=\"Zurichess\">Zurichess</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63555\">Testing for Move Ordering Improvements</a> by <a href=\"/index.php?title=Cheney_Nattress&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Cheney Nattress (page does not exist)\">Cheney Nattress</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 25, 2017&#160;» <a href=\"/Engine_Testing\" title=\"Engine Testing\">Engine Testing</a>, <a href=\"/Search_Statistics\" title=\"Search Statistics\">Search Statistics</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63790\">Sorting algorithms</a> by <a href=\"/Fermin_Serrano\" title=\"Fermin Serrano\">Fermin Serrano</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 22, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64912\">What is causing this problem?</a> by <a href=\"/Michael_Sherwin\" title=\"Michael Sherwin\">Michael Sherwin</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 16, 2017&#160;» <a href=\"/RomiChess\" title=\"RomiChess\">RomiChess</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65084\">Ordering Capture Moves</a> by <a href=\"/index.php?title=Jason_Fernandez&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Jason Fernandez (page does not exist)\">Jason Fernandez</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 06, 2017&#160;» <a href=\"/Move_Ordering#Captures\" title=\"Move Ordering\">Move Ordering - Captures</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65189\">Marginal hash move</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 16, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65365\">Unordered moves phenomenon</a> by <a href=\"/Alvaro_Cardoso\" title=\"Alvaro Cardoso\">Alvaro Cardoso</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 03, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65675\">Move ordering</a> by <a href=\"/Matthew_R._Brades\" title=\"Matthew R. Brades\">Matthew R. Brades</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 09, 2017</li></ul>\n<p><b>2018</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66312\">Simple quiet move sorting</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 13, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66684\">[Discussion] - Measuring move ordering</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schroder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 24, 2018</li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_..._2\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Move_Ordering&amp;action=edit&amp;section=28\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=73088\">Idea in move ordering ...</a> by De Noose Daniel, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 14, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=73930\">sort every moves or pickNext</a> by <a href=\"/Vivien_Clauzon\" title=\"Vivien Clauzon\">Vivien Clauzon</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 14, 2020\t</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=74325\">Testing Move Order Quality</a> by Cheney, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 29, 2020 </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=74752\">Using piece-square table score for move ordering</a> by <a href=\"/Maksim_Korzh\" title=\"Maksim Korzh\">Maksim Korzh</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 11, 2020&#160;» <a href=\"/Piece-Square_Tables\" title=\"Piece-Square Tables\">Piece-Square Tables</a></li></ul>\n<p><b>2021</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=76491\">Sorting moves during move ordering</a> by <a href=\"/Niels_Abildskov\" title=\"Niels Abildskov\">Niels Abildskov</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 04, 2021</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=76887\">Hash move ordering vs. Hash cuts: savings in number of nodes visited</a> by <a href=\"/Marcel_Vanthoor\" title=\"Marcel Vanthoor\">Marcel Vanthoor</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 16, 2021&#160;» <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Table</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=76888\">Best move from previous iteration first: still needed with TT?</a> by <a href=\"/Marcel_Vanthoor\" title=\"Marcel Vanthoor\">Marcel Vanthoor</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 16, 2021&#160;» <a href=\"/Hash_Move\" title=\"Hash Move\">Hash Move</a>, <a href=\"/PV-Move\" title=\"PV-Move\">PV-Move</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=77152\">Move ordering heuristics for captures</a> by <a href=\"/Niels_Abildskov\" title=\"Niels Abildskov\">Niels Abildskov</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 23, 2021</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=77380\">Qsearch dynamic order besides MVV/LVA</a> by <a href=\"/Aleks_Peshkov\" title=\"Aleks Peshkov\">Aleks Peshkov</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 25, 2021&#160;» <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">Quiescence Search</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=77593\">PV-move ordering necessary if you have TT-move ordering?</a> by <a href=\"/Marcel_Vanthoor\" title=\"Marcel Vanthoor\">Marcel Vanthoor</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 01, 2021&#160;» <a href=\"/Hash_Move\" title=\"Hash Move\">Hash Move</a>, <a href=\"/PV-Move\" title=\"PV-Move\">PV-Move</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=78474\">About move ordering and TT hitrate</a> by Giovanni Maria Manduca, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 22, 2021&#160;» <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Table</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=78552\">Move ordering at the root</a> by Jonathan McDermid, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 30, 2021&#160;» <a href=\"/Root\" title=\"Root\">Root</a></li></ul>\n<p><b>2022</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=79077\">Move ordering using SEE</a> by Christian Dean, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 08, 2022&#160;» <a href=\"/Static_Exchange_Evaluation\" title=\"Static Exchange Evaluation\">SEE</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=79279\">Lazy sorting algorithm - Sorting on steroids</a> by <a href=\"/Toni_Helminen\" title=\"Toni Helminen\">JohnWoe</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 03, 2022 </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=79342\">Having trouble understanding advanced move ordering techniques</a> by Pedro Duran, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 10, 2022</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=79368\">Failure of trivial approach to neural network move ordering</a> by <a href=\"/Jost_Triller\" title=\"Jost Triller\">Jost Triller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 16, 2022&#160;» <a href=\"/Neural_Networks\" title=\"Neural Networks\">Neural Networks</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Move_Ordering&amp;action=edit&amp;section=29\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20120413083131/http://www.top-5000.nl/authors/rebel/chess840.htm#MOVE%20ORDERING\">Move Ordering in Rebel</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a> (<a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wayback_Machine\">Wayback Machine</a>)</li>\n<li> <a href=\"/Category:Hiromi_Uehara\" title=\"Category:Hiromi Uehara\">Hiromi Uehara</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cadoganhall.com/event/hiromi-the-trio-project/\">The Trio Project</a>, feat. <a href=\"/Category:Anthony_Jackson\" title=\"Category:Anthony Jackson\">Anthony Jackson</a> &amp; <a href=\"/Category:Simon_Phillips\" title=\"Category:Simon Phillips\">Simon Phillips</a> - Move, (2012), <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/1rxYw7Y45Eo?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Move_Ordering&amp;action=edit&amp;section=30\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap mw-references-columns\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a href=\"/Category:Wassily_Kandinsky\" title=\"Category:Wassily Kandinsky\">Wassily Kandinsky</a> - <a rel=\"nofollow\" class=\"external text\" href=\"https://commons.wikimedia.org/wiki/File:Four_Parts_MET_sf1991.402.9.jpg?uselang=en\">Four Parts</a>, 1932, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Metropolitan_Museum_of_Art\">Metropolitan Museum of Art</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a href=\"/Selim_Akl\" title=\"Selim Akl\">Selim Akl</a>, <a href=\"/Monroe_Newborn\" title=\"Monroe Newborn\">Monroe Newborn</a> (<b>1977</b>). <i>The Principal Continuation and the Killer Heuristic</i>.1977 ACM Annual Conference Proceedings</span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a> (<b>1983</b>). <i>The History Heuristic</i>. <a href=\"/ICGA_Journal#6_3\" title=\"ICGA Journal\">ICCA Journal, Vol. 6, No. 3</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a href=\"/Mark_Winands\" title=\"Mark Winands\">Mark Winands</a>, <a href=\"/Erik_van_der_Werf\" title=\"Erik van der Werf\">Erik van der Werf</a>, <a href=\"/Jaap_van_den_Herik\" title=\"Jaap van den Herik\">Jaap van den Herik</a>, <a href=\"/Jos_Uiterwijk\" title=\"Jos Uiterwijk\">Jos Uiterwijk</a> (<b>2006</b>). <i>The Relative History Heuristic</i>. <a href=\"/CG_2004\" title=\"CG 2004\">CG 2004</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.personeel.unimaas.nl/m-winands/documents/relhis.pdf\">pdf</a></span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"> <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20120413083131/http://www.top-5000.nl/authors/rebel/chess840.htm#MOVE%20ORDERING\">Move Ordering in Rebel</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a> (<a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wayback_Machine\">Wayback Machine</a>), also available as <a rel=\"nofollow\" class=\"external text\" href=\"http://members.home.nl/matador/Inside%20Rebel.pdf\">pdf</a></span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a href=\"/Jos_Uiterwijk\" title=\"Jos Uiterwijk\">Jos Uiterwijk</a> (<b>1992</b>). <i>The Countermove Heuristic</i>. <a href=\"/ICGA_Journal#15_1\" title=\"ICGA Journal\">ICCA Journal, Vol. 15, No. 1</a></span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a href=\"/Dap_Hartmann\" title=\"Dap Hartmann\">Dap Hartmann</a> (<b>1988</b>). <i>Butterfly Boards</i>. <a href=\"/ICGA_Journal#11_23\" title=\"ICGA Journal\">ICCA Journal, Vol. 11, Nos. 2/3</a></span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\"><a href=\"/Levente_Kocsis\" title=\"Levente Kocsis\">Levente Kocsis</a>, <a href=\"/Jos_Uiterwijk\" title=\"Jos Uiterwijk\">Jos Uiterwijk</a>, <a href=\"/Jaap_van_den_Herik\" title=\"Jaap van den Herik\">Jaap van den Herik</a> (<b>2001</b>). <i>Move Ordering using Neural Networks</i>. IEA/AIE 2001, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Lecture_Notes_in_Computer_Science\">LNCS</a> 2070</span>\n</li>\n<li id=\"cite_note-9\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-9\">↑</a></span> <span class=\"reference-text\"><a href=\"/Levente_Kocsis\" title=\"Levente Kocsis\">Levente Kocsis</a>, <a href=\"/Jos_Uiterwijk\" title=\"Jos Uiterwijk\">Jos Uiterwijk</a>, <a href=\"/Eric_Postma\" title=\"Eric Postma\">Eric Postma</a>, <a href=\"/Jaap_van_den_Herik\" title=\"Jaap van den Herik\">Jaap van den Herik</a> (<b>2002</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/chapter/10.1007/978-3-540-40031-8_11\">The Neural MoveMap Heuristic in Chess</a></i>. <a href=\"/CG_2002\" title=\"CG 2002\">CG 2002</a></span>\n</li>\n<li id=\"cite_note-10\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-10\">↑</a></span> <span class=\"reference-text\"><a href=\"/Ingo_Alth%C3%B6fer\" title=\"Ingo Althöfer\">Ingo Althöfer</a> (<b>1992</b>). <i>Move Ordering by Time Ordering</i>. Correspondence, <a href=\"/ICGA_Journal#15_2\" title=\"ICGA Journal\">ICCA Journal, Vol. 15, No. 2</a></span>\n</li>\n<li id=\"cite_note-11\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-11\">↑</a></span> <span class=\"reference-text\"><a href=\"/Jos_Uiterwijk\" title=\"Jos Uiterwijk\">Jos Uiterwijk</a> (<b>1992</b>). <i>The Countermove Heuristic</i>. <a href=\"/ICGA_Journal#15_1\" title=\"ICGA Journal\">ICCA Journal, Vol. 15, No. 1</a></span>\n</li>\n<li id=\"cite_note-12\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-12\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/AI3xadkLEIk/UUqnp9J3BaMJ\">Re: random play</a> by <a href=\"/Ronald_de_Man\" title=\"Ronald de Man\">Ronald de Man</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, November 28, 1996</span>\n</li>\n<li id=\"cite_note-13\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-13\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/me7GkjsEgds/iC_ZJm5UwswJ\">Re: computer chess \"oracle\" ideas...</a> by <a href=\"/Ronald_de_Man\" title=\"Ronald de Man\">Ronald de Man</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, April 7, 1997, see also <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=390268\">Re: mate threat extension/null move</a> by <a href=\"/Don_Beal\" title=\"Don Beal\">Don Beal</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 04, 2004&#160;» <a href=\"/Mate_Threat_Extensions\" title=\"Mate Threat Extensions\">Mate Threat Extensions</a>, <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">Null Move</a> and <a href=\"/Win_at_Chess\" title=\"Win at Chess\">WAC</a> booster</span>\n</li>\n<li id=\"cite_note-14\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-14\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Bradley%E2%80%93Terry_model\">Bradley–Terry model from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-15\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-15\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=57228&amp;start=6\">Re: Move ordering for cheapest refutation</a> by <a href=\"/Mikko_Aarnos\" title=\"Mikko Aarnos\">Mikko Aarnos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 10, 2015</span>\n</li>\n<li id=\"cite_note-16\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-16\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=79279\">Lazy sorting algorithm - Sorting on steroids</a> by <a href=\"/Toni_Helminen\" title=\"Toni Helminen\">JohnWoe</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 03, 2022 </span>\n</li>\n</ol></div>\n<p><b><a href=\"/Search\" title=\"Search\">Up one level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301085645\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.108 seconds\nReal time usage: 0.827 seconds\nPreprocessor visited node count: 365/1000000\nPreprocessor generated node count: 714/1000000\nPost‐expand include size: 27/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1011-0!canonical and timestamp 20260301085644 and revision id 26287\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Wassily_Kandinsky"
+      },
+      {
+        "sortkey": "",
+        "*": "Anthony_Jackson"
+      },
+      {
+        "sortkey": "",
+        "*": "Simon_Phillips"
+      },
+      {
+        "sortkey": "",
+        "*": "Hiromi_Uehara"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Ordering"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "AI Factory"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 6"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alberto Sanjuan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aleks Peshkov"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alessandro Damiani"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alexandru Mosoi"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha-Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alvaro Cardoso"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Andrew Grant"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Andrew Shapira"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Arimaa"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aspiration Windows"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Battery"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Best Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bill Henry"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Board Representation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Butterfly Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CGW 2007"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CG 2002"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CG 2004"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Captures"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Check"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Check Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chessmaps Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Conferences"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Countermove Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Daniel Homan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Daniel José Queraltó"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dap Hartmann"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David J. Wu"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Discovered Attack"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Don Beal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Don Dailey"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ed Schroder"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engine Testing"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Enhanced Transposition Cutoff"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Eric Postma"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Eric Thé"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Erik van der Werf"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fail-High"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fail-Low"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fermin Serrano"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fixafan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gary Linscott"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gerd Isenberg"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Guard Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Harm Geert Muller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hash Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "History Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Holes"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA Journal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ingo Althöfer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Internal Iterative Deepening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iteration"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iterative Deepening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jaap van den Herik"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jabba"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "James Swafford"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jan Renze Steenhuisen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jeff Rollason"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jonathan Schaeffer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jos Uiterwijk"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jost Triller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kieran Greer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Killer Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Killer Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lance Perkins"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Last Best Reply"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Levente Kocsis"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "MVV-LVA"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Maksim Korzh"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marcel Vanthoor"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mark Winands"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Martin Fierz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mate Killers"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mate Threat Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Material"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Matt McKnight"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Matthew Lai"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Matthew R. Brades"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "McGill University"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michael Buro"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michael Sherwin"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Miguel A. Ballicora"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mikko Aarnos"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Monroe Newborn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Generation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move List"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Moves"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Neural MoveMap Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Neural Networks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Niels Abildskov"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Node Types"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Window"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Odd-Even Effect"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Onno"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Onno Garms"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Oracle"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Overloading"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ozalp Babaoglu"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "PV-Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Structure"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter Kouwenhoven"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Piece-Square Tables"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pin"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ply"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Prakash Bettadapur"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiescence Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Recapture Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Refutation Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Reijer Grimbergen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Relative History Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Richard Allbert"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Hyatt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "RomiChess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ronald de Man"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Root"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rémi Coulom"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SSE2"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Score"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Scott Gasch"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Scout"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search Explosion"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search Instability"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search Statistics"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Selim Akl"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Severi Salminen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Static Exchange Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stefan Plenkner"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Steve Maughan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Steven Edwards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stockfish"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tai-Ming Parng"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Thomas Kolarik"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Thomas Petzke"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Threat Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Time Management"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tom Kerrigan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tom King"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tom Likens"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Toni Helminen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Triangular PV-Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "University of California, Berkeley"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vivien Clauzon"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Win at Chess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Yi-Fan Ke"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Zurichess"
+      },
+      {
+        "ns": 0,
+        "*": "Mei-En Chen"
+      },
+      {
+        "ns": 0,
+        "*": "Yo-Ping Huang"
+      },
+      {
+        "ns": 0,
+        "*": "Piyush Ojha"
+      },
+      {
+        "ns": 0,
+        "*": "David A. Bell"
+      },
+      {
+        "ns": 0,
+        "*": "Yoshinori Higashiuchi"
+      },
+      {
+        "ns": 0,
+        "*": "Timothy Furtak"
+      },
+      {
+        "ns": 0,
+        "*": "Daniel A. Thies"
+      },
+      {
+        "ns": 0,
+        "*": "Ralf Elvsén"
+      },
+      {
+        "ns": 0,
+        "*": "Jan Willem de Kort"
+      },
+      {
+        "ns": 0,
+        "*": "Edward Yu"
+      },
+      {
+        "ns": 0,
+        "*": "Stef Luijten"
+      },
+      {
+        "ns": 0,
+        "*": "Cheney Nattress"
+      },
+      {
+        "ns": 0,
+        "*": "Jerry Donald"
+      },
+      {
+        "ns": 0,
+        "*": "Henk van den Belt"
+      },
+      {
+        "ns": 0,
+        "*": "Alex Ferguson"
+      },
+      {
+        "ns": 0,
+        "*": "Mahmoud Uthman"
+      },
+      {
+        "ns": 0,
+        "*": "David Cimbalista"
+      },
+      {
+        "ns": 0,
+        "*": "Luis Babboni"
+      },
+      {
+        "ns": 0,
+        "*": "Sander Maassen vd Brink"
+      },
+      {
+        "ns": 0,
+        "*": "Jason Fernandez"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Anthony Jackson"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Hiromi Uehara"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Simon Phillips"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Wassily Kandinsky"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Standard techniques",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Move_Ordering",
+        "byteoffset": 1242,
+        "anchor": "Standard_techniques"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Captures",
+        "number": "1.1",
+        "index": "2",
+        "fromtitle": "Move_Ordering",
+        "byteoffset": 1633,
+        "anchor": "Captures"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Non-Captures",
+        "number": "1.2",
+        "index": "3",
+        "fromtitle": "Move_Ordering",
+        "byteoffset": 2041,
+        "anchor": "Non-Captures"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Less common techniques",
+        "number": "1.3",
+        "index": "4",
+        "fromtitle": "Move_Ordering",
+        "byteoffset": 3041,
+        "anchor": "Less_common_techniques"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Using Neural Networks",
+        "number": "1.4",
+        "index": "5",
+        "fromtitle": "Move_Ordering",
+        "byteoffset": 3661,
+        "anchor": "Using_Neural_Networks"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Typical move ordering",
+        "number": "2",
+        "index": "6",
+        "fromtitle": "Move_Ordering",
+        "byteoffset": 4360,
+        "anchor": "Typical_move_ordering"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Node Type Considerations",
+        "number": "3",
+        "index": "7",
+        "fromtitle": "Move_Ordering",
+        "byteoffset": 6466,
+        "anchor": "Node_Type_Considerations"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "PV-nodes",
+        "number": "3.1",
+        "index": "8",
+        "fromtitle": "Move_Ordering",
+        "byteoffset": 6576,
+        "anchor": "PV-nodes"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Cut-nodes",
+        "number": "3.2",
+        "index": "9",
+        "fromtitle": "Move_Ordering",
+        "byteoffset": 6917,
+        "anchor": "Cut-nodes"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "All-nodes",
+        "number": "3.3",
+        "index": "10",
+        "fromtitle": "Move_Ordering",
+        "byteoffset": 7405,
+        "anchor": "All-nodes"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Depth and Ply Considerations",
+        "number": "4",
+        "index": "11",
+        "fromtitle": "Move_Ordering",
+        "byteoffset": 7730,
+        "anchor": "Depth_and_Ply_Considerations"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Root Node Considerations",
+        "number": "4.1",
+        "index": "12",
+        "fromtitle": "Move_Ordering",
+        "byteoffset": 8005,
+        "anchor": "Root_Node_Considerations"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Ordering in Quiescence",
+        "number": "4.2",
+        "index": "13",
+        "fromtitle": "Move_Ordering",
+        "byteoffset": 10283,
+        "anchor": "Ordering_in_Quiescence"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "5",
+        "index": "14",
+        "fromtitle": "Move_Ordering",
+        "byteoffset": 10657,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "6",
+        "index": "15",
+        "fromtitle": "Move_Ordering",
+        "byteoffset": 10831,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1977 ...",
+        "number": "6.1",
+        "index": "16",
+        "fromtitle": "Move_Ordering",
+        "byteoffset": 10846,
+        "anchor": "1977_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1980 ...",
+        "number": "6.2",
+        "index": "17",
+        "fromtitle": "Move_Ordering",
+        "byteoffset": 11207,
+        "anchor": "1980_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1990 ...",
+        "number": "6.3",
+        "index": "18",
+        "fromtitle": "Move_Ordering",
+        "byteoffset": 11578,
+        "anchor": "1990_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "6.4",
+        "index": "19",
+        "fromtitle": "Move_Ordering",
+        "byteoffset": 12971,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "6.5",
+        "index": "20",
+        "fromtitle": "Move_Ordering",
+        "byteoffset": 15442,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "6.6",
+        "index": "21",
+        "fromtitle": "Move_Ordering",
+        "byteoffset": 15901,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "7",
+        "index": "22",
+        "fromtitle": "Move_Ordering",
+        "byteoffset": 16210,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1996 ...",
+        "number": "7.1",
+        "index": "23",
+        "fromtitle": "Move_Ordering",
+        "byteoffset": 16224,
+        "anchor": "1996_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "7.2",
+        "index": "24",
+        "fromtitle": "Move_Ordering",
+        "byteoffset": 17603,
+        "anchor": "2000_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2005 ...",
+        "number": "7.3",
+        "index": "25",
+        "fromtitle": "Move_Ordering",
+        "byteoffset": 18946,
+        "anchor": "2005_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "7.4",
+        "index": "26",
+        "fromtitle": "Move_Ordering",
+        "byteoffset": 20266,
+        "anchor": "2010_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "7.5",
+        "index": "27",
+        "fromtitle": "Move_Ordering",
+        "byteoffset": 24178,
+        "anchor": "2015_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "7.6",
+        "index": "28",
+        "fromtitle": "Move_Ordering",
+        "byteoffset": 27763,
+        "anchor": "2020_..._2"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "8",
+        "index": "29",
+        "fromtitle": "Move_Ordering",
+        "byteoffset": 30466,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "9",
+        "index": "30",
+        "fromtitle": "Move_Ordering",
+        "byteoffset": 31093,
+        "anchor": "References"
+      }
+    ]
+  }
+}

@@ -1,0 +1,447 @@
+{
+  "parse": {
+    "title": "Triangular PV-Table",
+    "pageid": 1356,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Programming\" title=\"Programming\">Programming</a> * <a href=\"/Data\" title=\"Data\">Data</a> * Triangular PV-Table</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:290px;\"><a href=\"http://www.elementsbylizzie.com/Furn_Tables.html\"><img alt=\"\" src=\"/images/1/12/Triangular_table.JPG\" width=\"288\" height=\"290\" class=\"thumbimage\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Triangular_table.JPG\" class=\"internal\" title=\"Enlarge\"></a></div>Triangular Table <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p>A <b>Triangular PV-Table</b> is an <a href=\"/Array\" title=\"Array\">array</a> of <a href=\"/Principal_Variation\" title=\"Principal Variation\">principal variations</a> indexed by <a href=\"/Ply\" title=\"Ply\">ply</a> (distance to <a href=\"/Root\" title=\"Root\">root</a>). It is employed to <a href=\"/Principal_Variation#CollectionDuringSearch\" title=\"Principal Variation\">collect the principal variation</a> of <a href=\"/Best_Move\" title=\"Best Move\">best moves</a> inside an <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">alpha-beta</a> or <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">principal variation search</a> - like the best score propagated up to the root. Inside an <a href=\"/Iterative_Deepening\" title=\"Iterative Deepening\">iterative deepening</a> framework, it is most important to play the principal variation first during the next iteration. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Layout\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Layout</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Implementations\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Implementations</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#One-Dimensional_Array\"><span class=\"tocnumber\">2.1</span> <span class=\"toctext\">One-Dimensional Array</span></a>\n<ul>\n<li class=\"toclevel-3 tocsection-4\"><a href=\"#Size\"><span class=\"tocnumber\">2.1.1</span> <span class=\"toctext\">Size</span></a></li>\n<li class=\"toclevel-3 tocsection-5\"><a href=\"#Index\"><span class=\"tocnumber\">2.1.2</span> <span class=\"toctext\">Index</span></a></li>\n<li class=\"toclevel-3 tocsection-6\"><a href=\"#Pseudo_Code\"><span class=\"tocnumber\">2.1.3</span> <span class=\"toctext\">Pseudo Code</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#Quadratic_PV-Table\"><span class=\"tocnumber\">2.2</span> <span class=\"toctext\">Quadratic PV-Table</span></a></li>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#Linked_List_on_the_Stack\"><span class=\"tocnumber\">2.3</span> <span class=\"toctext\">Linked List on the Stack</span></a></li>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#Pointer_Array\"><span class=\"tocnumber\">2.4</span> <span class=\"toctext\">Pointer Array</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-10\"><a href=\"#PV_in_PVS\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">PV in PVS</span></a></li>\n<li class=\"toclevel-1 tocsection-11\"><a href=\"#See_also\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-12\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-13\"><a href=\"#1998_...\"><span class=\"tocnumber\">5.1</span> <span class=\"toctext\">1998 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-14\"><a href=\"#2000_...\"><span class=\"tocnumber\">5.2</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-15\"><a href=\"#2005_...\"><span class=\"tocnumber\">5.3</span> <span class=\"toctext\">2005 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-16\"><a href=\"#2010_...\"><span class=\"tocnumber\">5.4</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-17\"><a href=\"#2015_...\"><span class=\"tocnumber\">5.5</span> <span class=\"toctext\">2015 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-18\"><a href=\"#2020_...\"><span class=\"tocnumber\">5.6</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-19\"><a href=\"#External_Links\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-20\"><a href=\"#References\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Layout\">Layout</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Triangular_PV-Table&amp;action=edit&amp;section=1\" title=\"Edit section: Layout\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Assuming a <a href=\"/Depth#MaxPly\" title=\"Depth\">maximum search depth</a> of N plies with pre-allocated <a href=\"/Stack\" title=\"Stack\">stacks</a>, the maximum possible PV-length decreases with increasing distance to root aka ply index during search, and actually needs one move less each ply deeper.\n</p>\n<pre>maxLengthPV(ply) = N - ply\n</pre>\n<p>Therefor the triangular structure.\n</p>\n<pre>\nply  maxLengthPV\n    +--------------------------------------------+\n0   |N                                           |\n    +------------------------------------------+-+\n1   |N-1                                       |\n    +----------------------------------------+-+\n2   |N-2                                     |\n    +--------------------------------------+-+\n3   |N-3                                   |\n    +------------------------------------+-+\n4   |N-4                                 |\n...                        /\nN-4 |4      |\n    +-----+-+\nN-3 |3    |\n    +---+-+\nN-2 |2  |\n    +-+-+\nN-1 |1|\n    +-+\n</pre>\n<h1><span class=\"mw-headline\" id=\"Implementations\">Implementations</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Triangular_PV-Table&amp;action=edit&amp;section=2\" title=\"Edit section: Implementations\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"One-Dimensional_Array\">One-Dimensional Array</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Triangular_PV-Table&amp;action=edit&amp;section=3\" title=\"Edit section: One-Dimensional Array\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<h3><span class=\"mw-headline\" id=\"Size\">Size</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Triangular_PV-Table&amp;action=edit&amp;section=4\" title=\"Edit section: Size\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p>The total size of the triangular array in moves can be calculated by the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Triangular_number\">Triangular number</a>:\n</p>\n<pre>size = 1+2+3+ ... +(N-1)+N = &#189; N(N+1)\n</pre>\n<h3><span class=\"mw-headline\" id=\"Index\">Index</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Triangular_PV-Table&amp;action=edit&amp;section=5\" title=\"Edit section: Index\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p>To calculate the index or offset of a PV into a one-dimensional move array by ply either requires storing incremental offsets\n</p>\n<pre>index(0) = 0 \nindex(ply+1) = index(ply) + N - ply \n</pre>\n<p>or variable multiplication from scratch:\n</p>\n<pre>index(ply) = &#189; ply (2N + 1 - ply )\n</pre>\n<p>This index calculation might as well be replaced by a redirection via a small pre-calculated lookup table with N entries of indices, pointers or references, similar to two-dimensional <a href=\"/Java\" title=\"Java\">Java</a> arrays as arrays of arrays with different size <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup> .\n</p>\n<h3><span class=\"mw-headline\" id=\"Pseudo_Code\">Pseudo Code</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Triangular_PV-Table&amp;action=edit&amp;section=6\" title=\"Edit section: Pseudo Code\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p>A didactic implementation of the Triangular PV-Table inside an <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">Alpha-Beta</a> routine. The routine <i>movcpy</i> copies up to <i>n</i> moves, but may terminate after copying a null move. To avoid the second condition, it is quite common to store the current length of the PV inside a PV structure.\n</p>\n<pre>\nMoveType pvArray[(N*N + N)/2];\n\nvoid movcpy (MoveType* pTarget, const MoveType* pSource, int n) {\n   while (n-- &amp;&amp; (*pTarget++ = *pSource++));\n}\n\nint AlphaBeta(int alpha, int beta, int depth, int ply, int pvIndex) {\n   ...\n   pvArray[pvIndex] = 0; // no pv yet\n   pvNextIndex = pvIndex + N - ply;\n   while ( move = getNextMove() ) {\n      make (move);\n      score = -AlphaBeta(-beta, -alpha, depth-1, ply+1, pvNextIndex);\n      unmake (move);\n      ...\n      if (score &gt; alpha) {\n         alpha = score;\n         pvArray[pvIndex] = move;\n         movcpy (pvArray + pvIndex + 1, pvArray + pvNextIndex, N - ply - 1);\n      }\n   }\n   ...\n</pre>\n<h2><span class=\"mw-headline\" id=\"Quadratic_PV-Table\">Quadratic PV-Table</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Triangular_PV-Table&amp;action=edit&amp;section=7\" title=\"Edit section: Quadratic PV-Table\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>To avoid the above index calculation, many programmers roughly double the table space for an homogeneous two-dimensional array with all PVs of maximum size N. This allows cheaper indexing due the multiplication by the constant N only, possibly replaced by cheap instructions, i.e. shift for N == 128 (power of two).\n<span id=\"LinkedListontheStack\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Linked_List_on_the_Stack\">Linked List on the Stack</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Triangular_PV-Table&amp;action=edit&amp;section=8\" title=\"Edit section: Linked List on the Stack\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>An option in <a href=\"/C\" title=\"C\">C</a> as well in <a href=\"/Java\" title=\"Java\">Java</a> is to reserve space for one PV on the <a href=\"/Stack\" title=\"Stack\">stack</a> as automatic variable inside the <a href=\"/Recursion\" title=\"Recursion\">recursive</a> search routine, and to pass a reference or pointer to the child nodes as <a href=\"/index.php?title=Principal_variation&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Principal variation (page does not exist)\">demonstrated</a> by <a href=\"/Bruce_Moreland\" title=\"Bruce Moreland\">Bruce Moreland</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup> . Inside <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">PVS</a>, these arrays are not needed in the <a href=\"/Principal_Variation_Search#ZWS\" title=\"Principal Variation Search\">zero window search</a> at all, and, <a href=\"/C\" title=\"C\">C99</a> conform <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Variable-length_array\">variable-length arrays</a> on <a href=\"/Array#Stack\" title=\"Array\">the stack</a> are the way to \"half\" the required stacksize for linked \"triangular\" PV-arrays.\n</p>\n<h2><span class=\"mw-headline\" id=\"Pointer_Array\">Pointer Array</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Triangular_PV-Table&amp;action=edit&amp;section=9\" title=\"Edit section: Pointer Array\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Another alternative is an array of N pointers to global, homogeneous PV-arrays with size N each. Instead of copying moves alá memcpy, one may swap pointers. While this sounds promising at the first glance, the copy costs are negligible since PV-Nodes and raising alpha are quite rare.\n<span id=\"PVinPVS\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"PV_in_PVS\">PV in PVS</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Triangular_PV-Table&amp;action=edit&amp;section=10\" title=\"Edit section: PV in PVS\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>As demonstrated by <a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel Shawul</a> with <a href=\"/TSCP\" title=\"TSCP\">TSCP</a> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup> , and explained by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a> <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup> , inside a <a href=\"/Search_Instability\" title=\"Search Instability\">perfectly stable</a> <a href=\"/NegaScout\" title=\"NegaScout\">NegaScout</a> aka <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">Principal Variation Search</a>, a <a href=\"/Fail-High\" title=\"Fail-High\">fail-high</a> at a <a href=\"/Node_Types#PV\" title=\"Node Types\">PV-node</a> compared to a <a href=\"/Null_Window\" title=\"Null Window\">null window</a> is always confirmed by the re-search with an <a href=\"/Exact_Score\" title=\"Exact Score\">exact score</a> improving <a href=\"/Alpha\" title=\"Alpha\">alpha</a> and will either become part of a new PV at the <a href=\"/Root\" title=\"Root\">root</a> or overwritten by a further improvement. Thus, under such conditions, there is no need to keep an array of <a href=\"/Principal_Variation\" title=\"Principal Variation\">principal variations</a>, but only one.\n</p>\n<pre>\nMoveType pvArray[N];\n</pre>\n<p>However, with a <a href=\"/Transposition_Table\" title=\"Transposition Table\">transposition table</a>, <a href=\"/Aspiration_Windows\" title=\"Aspiration Windows\">aspiration</a>, <a href=\"/Selectivity\" title=\"Selectivity\">selectivity</a> and that like, one cannot guarantee such stable behavior.\n</p>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Triangular_PV-Table&amp;action=edit&amp;section=11\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Best_Move\" title=\"Best Move\">Best Move</a></li>\n<li> <a href=\"/Hash_Move\" title=\"Hash Move\">Hash Move</a></li>\n<li> <a href=\"/Killer_Move\" title=\"Killer Move\">Killer Move</a></li>\n<li> <a href=\"/Principal_Variation\" title=\"Principal Variation\">Principal Variation</a></li>\n<li> <a href=\"/PV-Move\" title=\"PV-Move\">PV-Move</a></li>\n<li> <a href=\"/Refutation_Table\" title=\"Refutation Table\">Refutation Table</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Triangular_PV-Table&amp;action=edit&amp;section=12\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1998_...\">1998 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Triangular_PV-Table&amp;action=edit&amp;section=13\" title=\"Edit section: 1998 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=20265\">Storing the PV in a search routine</a> by <a href=\"/Scott_Gasch\" title=\"Scott Gasch\">Scott Gasch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 09, 1998</li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Triangular_PV-Table&amp;action=edit&amp;section=14\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=258053\">PV array</a> by Nagendra Singh Tomar, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 10, 2002</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=387179\">triangular pv vs. hash move pv</a> by <a href=\"/Stuart_Cracraft\" title=\"Stuart Cracraft\">Stuart Cracraft</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 11, 2004</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=388106\">Instability thing...</a> by <a href=\"/Sune_Fischer\" title=\"Sune Fischer\">Sune Fischer</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 18, 2004</li></ul>\n<h2><span class=\"mw-headline\" id=\"2005_...\">2005 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Triangular_PV-Table&amp;action=edit&amp;section=15\" title=\"Edit section: 2005 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=29730\">Extracting PV from TT</a> by Colin, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 12, 2009</li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Triangular_PV-Table&amp;action=edit&amp;section=16\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=5&amp;t=434\">Taken from CCC (Stockfish &amp; mainlines)</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Rebel</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">OpenChess Programming Forum</a>, July 12, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=35982\">Full Principal Variation Retrieval</a> by <a href=\"/index.php?title=Hieu_Nguyen&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Hieu Nguyen (page does not exist)\">Hieu Nguyen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 06, 2010 <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=44371\">restartable nodes and the tri-angular array</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 11, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=47573\">triangular pv</a> by <a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel Shawul</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 22, 2013</li></ul>\n<h2><span class=\"mw-headline\" id=\"2015_...\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Triangular_PV-Table&amp;action=edit&amp;section=17\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=55819\">Collecting Principal variation</a> by <a href=\"/Syed_Fahad\" title=\"Syed Fahad\">Syed Fahad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 29, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61796\">Collecting PVs of Qsearch&#160;?</a> by <a href=\"/index.php?title=Mahmoud_Uthman&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Mahmoud Uthman (page does not exist)\">Mahmoud Uthman</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 22, 2016&#160;» <a href=\"/Principal_Variation\" title=\"Principal Variation\">Principal Variation</a>, <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">Quiescence Search</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=5&amp;t=3072\">capturing PV in QSearch</a> by thevinenator, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">OpenChess Forum</a>, January 20, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64256\">Collecting PV in a PVS search&#160;?</a> by <a href=\"/index.php?title=Mahmoud_Uthman&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Mahmoud Uthman (page does not exist)\">Mahmoud Uthman</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 11, 2017&#160;» <a href=\"/Principal_Variation\" title=\"Principal Variation\">Principal Variation</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Triangular_PV-Table&amp;action=edit&amp;section=18\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=77431\">Confused About Triangular PV Table</a> by shahil4242, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 03, 2021</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Triangular_PV-Table&amp;action=edit&amp;section=19\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://web.archive.org/web/20040427013839/brucemo.com/compchess/programming/pv.htm\">Collecting the Principal Variation</a> from <a href=\"/Bruce_Moreland\" title=\"Bruce Moreland\">Bruce Moreland's</a> <a rel=\"nofollow\" class=\"external text\" href=\"http://web.archive.org/web/20040403211728/brucemo.com/compchess/programming/index.htm\">Programming Topics</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Sonny_Stitt\">Sonny Stitt</a> - <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/The_Champ_(Sonny_Stitt_album)\">The Eternal Triangle</a> <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> feat.: <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Joe_Newman_(trumpeter)\">Joe Newman</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Duke_Jordan\">Duke Jordan</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Sam_Jones_(musician)\">Sam Jones</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Roy_Brooks\">Roy Brooks</a></dd>\n<dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/cBbnBHdr1Eg?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Triangular_PV-Table&amp;action=edit&amp;section=20\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.elementsbylizzie.com/Furn_Tables.html\">Elements by Lizzie Furniture - Tables</a> by <a rel=\"nofollow\" class=\"external text\" href=\"http://www.elementsbylizzie.com/Home_Page.html\">Elizabeth Battaglia</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://leepoint.net/notes-java/data/arrays/arrays-2D-2.html\">Java: Two-dimensional arrays as arrays of arrays</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://web.archive.org/web/20040427013839/brucemo.com/compchess/programming/pv.htm\">Collecting the Principal Variation</a> from <a href=\"/Bruce_Moreland\" title=\"Bruce Moreland\">Bruce Moreland's</a> <a rel=\"nofollow\" class=\"external text\" href=\"http://web.archive.org/web/20040403211728/brucemo.com/compchess/programming/index.htm\">Programming Topics</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=47573&amp;start=4\">Re: triangular pv</a> by <a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel Shawul</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 22, 2013</span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=47573&amp;start=10\">Re: triangular pv</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 22, 2013</span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\">See also <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt's</a> <a href=\"/Principal_Variation#SeparateTT\" title=\"Principal Variation\">idea</a> from the <a href=\"/Principal_Variation\" title=\"Principal Variation\">principal variation page</a></span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/List_of_jazz_contrafacts\">List of jazz contrafacts from Wikipedia</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Data\" title=\"Data\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301060247\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.023 seconds\nReal time usage: 0.025 seconds\nPreprocessor visited node count: 215/1000000\nPreprocessor generated node count: 422/1000000\nPost‐expand include size: 27/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1356-0!canonical and timestamp 20260301060247 and revision id 27260\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Music"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha-Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Array"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aspiration Windows"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Best Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bruce Moreland"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "C"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Daniel Shawul"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Data"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ed Schroder"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Exact Score"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fail-High"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Harm Geert Muller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hash Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iterative Deepening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Java"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Killer Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "NegaScout"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Node Types"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Window"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "PV-Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ply"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Programming"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiescence Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Recursion"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Refutation Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Hyatt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Root"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Scott Gasch"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search Instability"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Selectivity"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stack"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stuart Cracraft"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sune Fischer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Syed Fahad"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "TSCP"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "*": "Principal variation"
+      },
+      {
+        "ns": 0,
+        "*": "Hieu Nguyen"
+      },
+      {
+        "ns": 0,
+        "*": "Mahmoud Uthman"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Layout",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Triangular_PV-Table",
+        "byteoffset": 946,
+        "anchor": "Layout"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Implementations",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Triangular_PV-Table",
+        "byteoffset": 1896,
+        "anchor": "Implementations"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "One-Dimensional Array",
+        "number": "2.1",
+        "index": "3",
+        "fromtitle": "Triangular_PV-Table",
+        "byteoffset": 1915,
+        "anchor": "One-Dimensional_Array"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Size",
+        "number": "2.1.1",
+        "index": "4",
+        "fromtitle": "Triangular_PV-Table",
+        "byteoffset": 1942,
+        "anchor": "Size"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Index",
+        "number": "2.1.2",
+        "index": "5",
+        "fromtitle": "Triangular_PV-Table",
+        "byteoffset": 2141,
+        "anchor": "Index"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Pseudo Code",
+        "number": "2.1.3",
+        "index": "6",
+        "fromtitle": "Triangular_PV-Table",
+        "byteoffset": 2781,
+        "anchor": "Pseudo_Code"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Quadratic PV-Table",
+        "number": "2.2",
+        "index": "7",
+        "fromtitle": "Triangular_PV-Table",
+        "byteoffset": 3741,
+        "anchor": "Quadratic_PV-Table"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Linked List on the Stack",
+        "number": "2.3",
+        "index": "8",
+        "fromtitle": "Triangular_PV-Table",
+        "byteoffset": 4121,
+        "anchor": "Linked_List_on_the_Stack"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Pointer Array",
+        "number": "2.4",
+        "index": "9",
+        "fromtitle": "Triangular_PV-Table",
+        "byteoffset": 5081,
+        "anchor": "Pointer_Array"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "PV in PVS",
+        "number": "3",
+        "index": "10",
+        "fromtitle": "Triangular_PV-Table",
+        "byteoffset": 5412,
+        "anchor": "PV_in_PVS"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "4",
+        "index": "11",
+        "fromtitle": "Triangular_PV-Table",
+        "byteoffset": 6544,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "5",
+        "index": "12",
+        "fromtitle": "Triangular_PV-Table",
+        "byteoffset": 6670,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1998 ...",
+        "number": "5.1",
+        "index": "13",
+        "fromtitle": "Triangular_PV-Table",
+        "byteoffset": 6685,
+        "anchor": "1998_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "5.2",
+        "index": "14",
+        "fromtitle": "Triangular_PV-Table",
+        "byteoffset": 6828,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2005 ...",
+        "number": "5.3",
+        "index": "15",
+        "fromtitle": "Triangular_PV-Table",
+        "byteoffset": 7211,
+        "anchor": "2005_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "5.4",
+        "index": "16",
+        "fromtitle": "Triangular_PV-Table",
+        "byteoffset": 7342,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "5.5",
+        "index": "17",
+        "fromtitle": "Triangular_PV-Table",
+        "byteoffset": 8101,
+        "anchor": "2015_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "5.6",
+        "index": "18",
+        "fromtitle": "Triangular_PV-Table",
+        "byteoffset": 8745,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "6",
+        "index": "19",
+        "fromtitle": "Triangular_PV-Table",
+        "byteoffset": 8894,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "7",
+        "index": "20",
+        "fromtitle": "Triangular_PV-Table",
+        "byteoffset": 9825,
+        "anchor": "References"
+      }
+    ]
+  }
+}

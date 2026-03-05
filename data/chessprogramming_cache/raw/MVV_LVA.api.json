@@ -1,0 +1,359 @@
+{
+  "parse": {
+    "title": "MVV-LVA",
+    "pageid": 1013,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Search\" title=\"Search\">Search</a> * <a href=\"/Move_Ordering\" title=\"Move Ordering\">Move Ordering</a> * MVV-LVA</b>\n</p><p><b>MVV-LVA</b> (<b>M</b>ost <b>V</b>aluable <b>V</b>ictim - <b>L</b>east <b>V</b>aluable <b>A</b>ggressor),<br />\nis a simple heuristic to <a href=\"/Move_Generation\" title=\"Move Generation\">generate</a> or sort <a href=\"/Captures\" title=\"Captures\">capture moves</a> in a reasonable order. Inside a so called find-victim cycle, one first look up the potential victim of all <a href=\"/Attacks\" title=\"Attacks\">attacked</a> opponent pieces, in the order of the most valuable first, thus <a href=\"/Queen\" title=\"Queen\">queen</a>, <a href=\"/Rook\" title=\"Rook\">rook</a>, <a href=\"/Bishop\" title=\"Bishop\">bishop</a>, <a href=\"/Knight\" title=\"Knight\">knight</a> and <a href=\"/Pawn\" title=\"Pawn\">pawn</a>. After the most valuable victim is found, the find-aggressor cycle loops over the potential aggressors that may capture the victim in inverse order, from pawn, knight, bishop, rook, queen to <a href=\"/King\" title=\"King\">king</a>. The heuristic is easy to implement and covers a lot of simple cases, such as PxR before BxP. It is used in various move generators build in hardware, such a <a href=\"/Belle#Hardware\" title=\"Belle\">Belle</a> and more recently in <a href=\"/FPGA\" title=\"FPGA\">FPGA</a> approaches such as <a href=\"/Brutus\" title=\"Brutus\">Brutus</a> and <a href=\"/MBChess\" title=\"MBChess\">MBChess</a> <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup>. However the heuristic may fail, if victims attacked by more valuable attackers are defended, in such cases most programs rely on <a href=\"/Attack_and_Defend_Maps\" title=\"Attack and Defend Maps\">attack tables</a>, set-wise <a href=\"/Pawn_Attacks_(Bitboards)#PawnAttacks\" title=\"Pawn Attacks (Bitboards)\">pawn attacks</a> (defends) on the fly to perform a <a href=\"/Static_Exchange_Evaluation\" title=\"Static Exchange Evaluation\">static exchange evaluation</a>.\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#See_also\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#1995_...\"><span class=\"tocnumber\">2.1</span> <span class=\"toctext\">1995 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#2000_...\"><span class=\"tocnumber\">2.2</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#2005_...\"><span class=\"tocnumber\">2.3</span> <span class=\"toctext\">2005 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-6\"><a href=\"#2010_...\"><span class=\"tocnumber\">2.4</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#2015_...\"><span class=\"tocnumber\">2.5</span> <span class=\"toctext\">2015 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-8\"><a href=\"#External_links\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">External links</span></a></li>\n<li class=\"toclevel-1 tocsection-9\"><a href=\"#References\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MVV-LVA&amp;action=edit&amp;section=1\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Belle#Hardware\" title=\"Belle\">Belle | Hardware Move Generation</a></li>\n<li> <a href=\"/Mater\" title=\"Mater\">Mater</a></li>\n<li> <a href=\"/Move_Generation\" title=\"Move Generation\">Move Generation</a></li>\n<li> <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">Quiescence Search</a></li>\n<li> <a href=\"/SEE_-_The_Swap_Algorithm\" title=\"SEE - The Swap Algorithm\">SEE - The Swap Algorithm</a> with <a href=\"/Bitboards\" title=\"Bitboards\">Bitboards</a></li>\n<li> <a href=\"/Static_Exchange_Evaluation\" title=\"Static Exchange Evaluation\">Static Exchange Evaluation</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MVV-LVA&amp;action=edit&amp;section=2\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1995_...\">1995 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MVV-LVA&amp;action=edit&amp;section=3\" title=\"Edit section: 1995 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/1fa5e36362f5dde4\">mvv/lva vs SEE capture ordering test results</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, August 10, 1995</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/645f44f84102e450\">MVV/LVA vs SEE move ordering - more test results</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, August 25, 1995</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/msg/1951744da404fc33\">Re: MVV/LVA vs SEE move ordering - more test results</a> by <a href=\"/Brian_Sheppard\" title=\"Brian Sheppard\">Brian Sheppard</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, August 27, 1995</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/5byhl_6Jmc8/D1QAR146VLIJ\">MVV/LVA and SEE - what do they mean?</a> by <a href=\"/Peter_Kappler\" title=\"Peter Kappler\">Peter Kappler</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, August 28, 1995</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=45655\">MVA/LVA sorting order</a> by <a href=\"/index.php?title=Jan_Willem_de_Kort&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Jan Willem de Kort (page does not exist)\">Jan Willem de Kort</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 12, 1999</li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MVV-LVA&amp;action=edit&amp;section=4\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=109588\">Fast BB move generation</a> by <a href=\"/Bas_Hamstra\" title=\"Bas Hamstra\">Bas Hamstra</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 08, 2000</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=141813\">MVV/LVA or SEE - liability?</a> by <a href=\"/Severi_Salminen\" title=\"Severi Salminen\">Severi Salminen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 29, 2000&#160;» <a href=\"/Static_Exchange_Evaluation\" title=\"Static Exchange Evaluation\">Static Exchange Evaluation</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=253151\">MVVLVA sorting does not help for move ordering</a> by <a href=\"/Scott_Farrell\" title=\"Scott Farrell\">Scott Farrell</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 21, 2002</li></ul>\n<h2><span class=\"mw-headline\" id=\"2005_...\">2005 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MVV-LVA&amp;action=edit&amp;section=5\" title=\"Edit section: 2005 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=22755\">Sorting captures</a> by <a href=\"/Pablo_Vazquez\" title=\"Pablo Vazquez\">Pablo Vazquez</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 02, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=23727\">Effect of MVV/LVA</a> by <a href=\"/Mathieu_Pag%C3%A9\" title=\"Mathieu Pagé\">Mathieu Pagé</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, Sepember 14, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=27254\">MVV/LVA. Or should it be LVV/MVA?</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 31, 2009</li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MVV-LVA&amp;action=edit&amp;section=6\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=395213\">LVA MVV with relative Pin</a> by <a href=\"/index.php?title=Clemens_Pruell&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Clemens Pruell (page does not exist)\">Clemens Pruell</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 16, 2011&#160;» <a href=\"/Pin\" title=\"Pin\">Pin</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48202\">MVV/LVA sorting</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 05, 2013</li></ul>\n<h2><span class=\"mw-headline\" id=\"2015_...\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MVV-LVA&amp;action=edit&amp;section=7\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=56114\">DarkThought sorts MVV/LVA without looking at any moves?</a> by Rob Williamson, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 25, 2015&#160;» <a href=\"/DarkThought\" title=\"DarkThought\">DarkThought</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=57813\">MVV/LVA</a> by <a href=\"/Folkert_van_Heusden\" title=\"Folkert van Heusden\">Folkert van Heusden</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 02, 2015 </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61021\">Sorting Captures</a> by <a href=\"/index.php?title=David_Cimbalista&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"David Cimbalista (page does not exist)\">David Cimbalista</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 03, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=5&amp;t=3058\">A smarter MVV/LVA</a> by thevinenator, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">OpenChess Forum</a>, December 28, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=67873\">MVV LVA</a> by <a href=\"/Vivien_Clauzon\" title=\"Vivien Clauzon\">Vivien Clauzon</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 01, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=70918\">is LVA as in MVV-LVA useless&#160;?</a> by <a href=\"/index.php?title=Mahmoud_Uthman&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Mahmoud Uthman (page does not exist)\">Mahmoud Uthman</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 04, 2019</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=70936\">correct way to score promotions using MVV-LVA</a> by <a href=\"/index.php?title=Mahmoud_Uthman&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Mahmoud Uthman (page does not exist)\">Mahmoud Uthman</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 06, 2019&#160;» <a href=\"/Promotions\" title=\"Promotions\">Promotions</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_links\">External links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MVV-LVA&amp;action=edit&amp;section=8\" title=\"Edit section: External links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://web.archive.org/web/20040427014440/brucemo.com/compchess/programming/quiescent.htm#MVVLVA\">MVV/LVA</a> from <a href=\"/Bruce_Moreland\" title=\"Bruce Moreland\">Bruce Moreland's</a> <a rel=\"nofollow\" class=\"external text\" href=\"http://web.archive.org/web/20040403211728/brucemo.com/compchess/programming/index.htm\">Programming Topics</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://home.hccnet.nl/h.g.muller/mvv.html\">Micro-Max 4: Quiescence Search</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a></li>\n<li> <a href=\"/Category:The_Dorf\" title=\"Category:The Dorf\">The Dorf</a> feat. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/F.M._Einheit\">FM Einheit</a> und <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Caspar_Br%C3%B6tzmann\">Caspar Brötzmann</a> - <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Home_(Caspar_Br%C3%B6tzmann_Massaker_album)\">Massaker</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.grammatikoff.de/\">Grammatikoff</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Duisburg\">Duisburg</a>, May 17, 2014, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/MJVohz5k5_U?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MVV-LVA&amp;action=edit&amp;section=9\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a href=\"/Marc_Boul%C3%A9\" title=\"Marc Boulé\">Marc Boulé</a> (<b>2002</b>). <i>An FPGA Move Generator for the Game of Chess</i>. Masters thesis, <a href=\"/McGill_University\" title=\"McGill University\">McGill University</a>, (Supervisor: <a href=\"/Zeljko_Zilic\" title=\"Zeljko Zilic\">Zeljko Zilic</a>, Co-Supervisor: <a href=\"/Monroe_Newborn\" title=\"Monroe Newborn\">Monty Newborn</a>), <a rel=\"nofollow\" class=\"external text\" href=\"http://www.iml.ece.mcgill.ca/%7Emboule/files/mbthesis02.pdf\">pdf</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Move_Ordering\" title=\"Move Ordering\">Up one level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260228174212\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.010 seconds\nReal time usage: 0.011 seconds\nPreprocessor visited node count: 58/1000000\nPreprocessor generated node count: 122/1000000\nPost‐expand include size: 26/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1013-0!canonical and timestamp 20260228174212 and revision id 15328\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "The_Dorf"
+      },
+      {
+        "sortkey": "",
+        "*": "Jan_Klare"
+      },
+      {
+        "sortkey": "",
+        "*": "Achim_Zepezauer"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Attack and Defend Maps"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Attacks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bas Hamstra"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Belle"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bishop"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Brian Sheppard"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bruce Moreland"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Brutus"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Captures"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "DarkThought"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "FPGA"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Folkert van Heusden"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Harm Geert Muller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "King"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Knight"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "MBChess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marc Boulé"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mater"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mathieu Pagé"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "McGill University"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Monroe Newborn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Generation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Ordering"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pablo Vazquez"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Attacks (Bitboards)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter Kappler"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pin"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Promotions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Queen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiescence Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Hyatt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rook"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SEE - The Swap Algorithm"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Scott Farrell"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Severi Salminen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Static Exchange Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vivien Clauzon"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Zeljko Zilic"
+      },
+      {
+        "ns": 0,
+        "*": "Jan Willem de Kort"
+      },
+      {
+        "ns": 0,
+        "*": "Clemens Pruell"
+      },
+      {
+        "ns": 0,
+        "*": "David Cimbalista"
+      },
+      {
+        "ns": 0,
+        "*": "Mahmoud Uthman"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:The Dorf"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "MVV-LVA",
+        "byteoffset": 1611,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "MVV-LVA",
+        "byteoffset": 1819,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1995 ...",
+        "number": "2.1",
+        "index": "3",
+        "fromtitle": "MVV-LVA",
+        "byteoffset": 1834,
+        "anchor": "1995_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "2.2",
+        "index": "4",
+        "fromtitle": "MVV-LVA",
+        "byteoffset": 2791,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2005 ...",
+        "number": "2.3",
+        "index": "5",
+        "fromtitle": "MVV-LVA",
+        "byteoffset": 3235,
+        "anchor": "2005_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "2.4",
+        "index": "6",
+        "fromtitle": "MVV-LVA",
+        "byteoffset": 3633,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "2.5",
+        "index": "7",
+        "fromtitle": "MVV-LVA",
+        "byteoffset": 3931,
+        "anchor": "2015_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External links",
+        "number": "3",
+        "index": "8",
+        "fromtitle": "MVV-LVA",
+        "byteoffset": 4940,
+        "anchor": "External_links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "4",
+        "index": "9",
+        "fromtitle": "MVV-LVA",
+        "byteoffset": 5825,
+        "anchor": "References"
+      }
+    ]
+  }
+}

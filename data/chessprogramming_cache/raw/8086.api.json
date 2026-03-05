@@ -1,0 +1,175 @@
+{
+  "parse": {
+    "title": "8086",
+    "pageid": 2073,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Hardware\" title=\"Hardware\">Hardware</a> * 8086</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"/File:Intel_8086_CPU_Die.JPG\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Intel_8086_CPU_Die.JPG/330px-Intel_8086_CPU_Die.JPG\" width=\"300\" height=\"292\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Intel_8086_CPU_Die.JPG/500px-Intel_8086_CPU_Die.JPG 1.5x, https://upload.wikimedia.org/wikipedia/commons/a/a8/Intel_8086_CPU_Die.JPG 2x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Intel_8086_CPU_Die.JPG\" class=\"internal\" title=\"Enlarge\"></a></div>Intel 8086 CPU Die Image <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div>\n<p><b>8086</b>,<br />\na <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/16-bit\">16-bit</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Microprocessor\">microprocessor</a> designed by <a href=\"/Intel\" title=\"Intel\">Intel</a> since 1976, released in 1978. Its principal architect was <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Stephen_P._Morse\">Stephen P. Morse</a>. Marketed as <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Source_code_compatibility\">source compatible</a>, the 8086 was designed so that <a href=\"/Assembly\" title=\"Assembly\">assembly language</a> for the 8-bit <a href=\"/8080\" title=\"8080\">8080</a> could be automatically converted into equivalent (sub-optimal) 8086 source code. The <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Intel_8088\">Intel 8088</a> variant had an 8-bit external <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Data_bus\">data bus</a> and was used in the original <a href=\"/IBM_PC\" title=\"IBM PC\">IBM PC</a>. 8086 was the forerunner of Intel's <a href=\"/X86\" title=\"X86\">x86</a> 32-bit architecture, starting with the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/80386\">80386</a> in 1985. \n</p><p>Despite the huge distribution of 8086/8088 based PCs, the 8086 was rarely found in <a href=\"/Dedicated_Chess_Computers\" title=\"Dedicated Chess Computers\">Dedicated Chess Computers</a>. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Registers\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Registers</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Segmentation\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Segmentation</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#Pointer\"><span class=\"tocnumber\">2.1</span> <span class=\"toctext\">Pointer</span></a></li>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#Memory_models\"><span class=\"tocnumber\">2.2</span> <span class=\"toctext\">Memory models</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#Publications\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Publications</span></a></li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#External_Links\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">External Links</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#Intel\"><span class=\"tocnumber\">4.1</span> <span class=\"toctext\">Intel</span></a></li>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#Clones\"><span class=\"tocnumber\">4.2</span> <span class=\"toctext\">Clones</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-9\"><a href=\"#References\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Registers\">Registers</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=8086&amp;action=edit&amp;section=1\" title=\"Edit section: Registers\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>The eight <a href=\"/8080\" title=\"8080\">8080</a> registers A, B, C, D, E, H, L, SP, with BC, DE and HL as possible 16 bit registers, were extended to eight (more or less general) 16-bit registers including the <a href=\"/Stack\" title=\"Stack\">stack pointer</a>. Four general purpose (GP) registers may treated as 16-bit <a href=\"/Word\" title=\"Word\">Word</a> as well as high and low <a href=\"/Byte\" title=\"Byte\">Byte</a>:\n</p>\n<table class=\"wikitable\">\n\n<tr>\n<th> 16 bit\n</th>\n<th> 8 high\n</th>\n<th> 8 low\n</th>\n<th> Purpose\n</th></tr>\n<tr>\n<td>  AX\n</td>\n<td>  AH\n</td>\n<td>  AL\n</td>\n<td>  GP, Accumulator\n</td></tr>\n<tr>\n<td>  BX\n</td>\n<td>  BH\n</td>\n<td>  BL\n</td>\n<td>  GP, Base, Index Register\n</td></tr>\n<tr>\n<td>  CX\n</td>\n<td>  CH\n</td>\n<td>  CL\n</td>\n<td>  GP, Counter, variable shift, rotate via CL\n</td></tr>\n<tr>\n<td>  DX\n</td>\n<td>  DH\n</td>\n<td>  DL\n</td>\n<td>  GP, high Accumulator mul/div\n</td></tr>\n<tr>\n<td>  SI\n</td>\n<td>  -\n</td>\n<td>  -\n</td>\n<td>  GP, Source Index\n</td></tr>\n<tr>\n<td>  DI\n</td>\n<td>  -\n</td>\n<td>  -\n</td>\n<td>  GP, Destination Index\n</td></tr>\n<tr>\n<td>  SP\n</td>\n<td>  -\n</td>\n<td>  -\n</td>\n<td>  <a href=\"/Stack\" title=\"Stack\">Stack Pointer</a>\n</td></tr>\n<tr>\n<td>  BP\n</td>\n<td>  -\n</td>\n<td>  -\n</td>\n<td>  GP, Base Pointer\n</td></tr>\n<tr>\n<td>  Segment Registers\n</td></tr>\n<tr>\n<td>  CS\n</td>\n<td>  -\n</td>\n<td>  -\n</td>\n<td>  Code Segment\n</td></tr>\n<tr>\n<td>  DS\n</td>\n<td>  -\n</td>\n<td>  -\n</td>\n<td>  Data Segment\n</td></tr>\n<tr>\n<td>  ES\n</td>\n<td>  -\n</td>\n<td>  -\n</td>\n<td>  Extra Segment\n</td></tr>\n<tr>\n<td>  SS\n</td>\n<td>  -\n</td>\n<td>  -\n</td>\n<td>  Stack Segment\n</td></tr></table>\n<h1><span class=\"mw-headline\" id=\"Segmentation\">Segmentation</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=8086&amp;action=edit&amp;section=2\" title=\"Edit section: Segmentation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>The 8086 was able to address one MByte of physical <a href=\"/Memory\" title=\"Memory\">memory</a> and its external <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Address_bus\">address bus</a> was 20 bit wide (the first 16 <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Multiplexed\">multiplexed</a> with the data bus). The <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Physical_address\">physical address</a> translation was done by shifting a segment register 4 bits left and adding an 16 bit offset. \n</p>\n<pre>effective or physical address&#160;:= 16 * segment + offset\n</pre>\n<p>As a result, each external address could be referred to by 2<span style=\"vertical-align: super;\">12</span> different segment:offset pairs. Considered complicated and cumbersome by many (chess) programmers, this scheme had the advantage in porting programs less than 64 kilobytes from 8-bit 8080 avoiding the need for <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Relocation_%28computer_science%29\">relocation</a>. \n</p>\n<h2><span class=\"mw-headline\" id=\"Pointer\">Pointer</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=8086&amp;action=edit&amp;section=3\" title=\"Edit section: Pointer\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Compilers for the 8086 supported two or even three types of pointers, <b>near</b>, <b>far</b> and <b>huge</b>. Near pointers were 16-bit offsets implicitly associated with the program's code and/or data/stack segment and could only used within parts of a program small enough to fit in one 64 kilobyte segment. Far pointers were 32-bit segment:offset pairs. Huge pointers, which were like far pointers except that pointer arithmetic on a huge pointer treated it as a linear 20-bit pointer, while pointer arithmetic on a far pointer wrapped around within its 16-bit offset without touching the segment part of the address.\n</p>\n<h2><span class=\"mw-headline\" id=\"Memory_models\">Memory models</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=8086&amp;action=edit&amp;section=4\" title=\"Edit section: Memory models\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>To avoid the need to specify near and far on pointers, data structures, and functions, compilers supported \"memory models\" which specified default pointer sizes. The <b>tiny</b> (max 64K), <b>small</b> (max 128K), <b>compact</b> (data &gt; 64K), <b>medium</b> (code &gt; 64K), <b>large</b> (code,data &gt; 64K), and <b>huge</b> (individual arrays &gt; 64K) models covered practical combinations of near, far, and huge pointers for code and data. The tiny model with code and data in a single segment, just as in most 8-bit based processors, could be used to build <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/COM_file\">.com-files</a>. Precompiled libraries often came in several versions compiled for different memory models <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup> .\n</p>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=8086&amp;action=edit&amp;section=5\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Steve_Ciarcia\">Steve Ciarcia</a> (<b>1979</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://archive.org/stream/byte-magazine-1979-11/1979_11_BYTE_04-11_Fun_and_Games#page/n15/mode/2up\">The Intel 8086</a></i>. <a href=\"/Byte_Magazine#BYTE411\" title=\"Byte Magazine\">BYTE, Vol. 4, No. 11</a>, pp. 14-24</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=8086&amp;action=edit&amp;section=6\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Intel\">Intel</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=8086&amp;action=edit&amp;section=7\" title=\"Edit section: Intel\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Intel_8086\">Intel 8086 from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Intel_8087\">Intel 8087 floating point coprocessor from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Intel_80186\">Intel 80186 from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cpu-world.com/CPUs/8086/\">Intel 8086 microprocessor family</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cpu-world.com/index.html\">CPU-World</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://datasheets.chipdb.org/Intel/x86/808x/datashts/8086/\">Index of /Intel/x86/808x/datashts/8086</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/X86_instruction_listings\">x86 instruction listings from Wikipedia</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Clones\">Clones</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=8086&amp;action=edit&amp;section=8\" title=\"Edit section: Clones\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/NEC_V20\">NEC V20 from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/K1810BM86\">K1810BM86</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=8086&amp;action=edit&amp;section=9\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\">Intel 8086 CPU Die Image by Pdesousa359, July 03, 2010, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Intel_8086\">Intel 8086 from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Intel_8086#Segmentation\">Intel 8086 - Segmentation from Wikipedia</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Hardware\" title=\"Hardware\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301084850\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.067 seconds\nReal time usage: 0.596 seconds\nPreprocessor visited node count: 68/1000000\nPreprocessor generated node count: 124/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:2073-0!canonical and timestamp 20260301084850 and revision id 5238\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Die"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "8080"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Assembly"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Byte"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Byte Magazine"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dedicated Chess Computers"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hardware"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "IBM PC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Intel"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Memory"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stack"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Word"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "X86"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Registers",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "8086",
+        "byteoffset": 1222,
+        "anchor": "Registers"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Segmentation",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "8086",
+        "byteoffset": 2201,
+        "anchor": "Segmentation"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Pointer",
+        "number": "2.1",
+        "index": "3",
+        "fromtitle": "8086",
+        "byteoffset": 3082,
+        "anchor": "Pointer"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Memory models",
+        "number": "2.2",
+        "index": "4",
+        "fromtitle": "8086",
+        "byteoffset": 3715,
+        "anchor": "Memory_models"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "3",
+        "index": "5",
+        "fromtitle": "8086",
+        "byteoffset": 4534,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "4",
+        "index": "6",
+        "fromtitle": "8086",
+        "byteoffset": 4806,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Intel",
+        "number": "4.1",
+        "index": "7",
+        "fromtitle": "8086",
+        "byteoffset": 4823,
+        "anchor": "Intel"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Clones",
+        "number": "4.2",
+        "index": "8",
+        "fromtitle": "8086",
+        "byteoffset": 5402,
+        "anchor": "Clones"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "5",
+        "index": "9",
+        "fromtitle": "8086",
+        "byteoffset": 5533,
+        "anchor": "References"
+      }
+    ]
+  }
+}

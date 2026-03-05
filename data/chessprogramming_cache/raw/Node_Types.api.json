@@ -1,0 +1,653 @@
+{
+  "parse": {
+    "title": "Node Types",
+    "pageid": 933,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Search\" title=\"Search\">Search</a> * <a href=\"/Node\" title=\"Node\">Node</a> * Node Types</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:322px;\"><a href=\"http://www.netlib.org/utk/lsi/pcwLSI/text/node351.html\"><img alt=\"\" src=\"/images/9/97/Img2725NodeTypes.gif\" width=\"320\" height=\"199\" class=\"thumbimage\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Img2725NodeTypes.gif\" class=\"internal\" title=\"Enlarge\"></a></div>Node Types <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>Node Types</b> are classifications of <a href=\"/Node\" title=\"Node\">nodes</a> as expected inside a <a href=\"/Search_Tree#MinimalGameTree\" title=\"Search Tree\">minimal alpha-beta tree</a>, or as determined by the search. These types were first formulated by <a href=\"/Donald_Knuth\" title=\"Donald Knuth\">Donald Knuth</a> and Ronald Moore when describing the <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">alpha-beta algorithm</a> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup> and further analyzed by <a href=\"/Judea_Pearl\" title=\"Judea Pearl\">Judea Pearl</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>. While Knuth used the terms Type 1, 2, and 3, <a href=\"/Tony_Marsland\" title=\"Tony Marsland\">Tony Marsland</a> and <a href=\"/Fred_Popowich\" title=\"Fred Popowich\">Fred Popowich</a> introduced the more descriptive terms <b>PV-</b>, <b>Cut-</b> and <b>All-nodes</b> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup> <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup>. \n</p><p>Node types as established by the search are stored inside the <a href=\"/Transposition_Table\" title=\"Transposition Table\">transposition table</a>, indicating whether the <a href=\"/Score\" title=\"Score\">score</a> is either <a href=\"/Exact_Score\" title=\"Exact Score\">exact</a>, <a href=\"/Lower_Bound\" title=\"Lower Bound\">lower</a> or <a href=\"/Upper_Bound\" title=\"Upper Bound\">upper bounded</a>. Expected node types, as determined by tree topology, probing the transposition table, or comparing scores of a <a href=\"/Evaluation\" title=\"Evaluation\">static evaluation</a> considering threats, or even a reduced search or <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">quiescence search</a>, with the <a href=\"/Bound\" title=\"Bound\">bounds</a>, may be considered by various (<a href=\"/Parallel_Search\" title=\"Parallel Search\">parallel</a>) search algorithms and in decisions concerning <a href=\"/Selectivity\" title=\"Selectivity\">selectivity</a>. \n</p><p><span id=\"PV\"></span>\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#PV-Nodes\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">PV-Nodes</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Cut-Nodes\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Cut-Nodes</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#All-Nodes\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">All-Nodes</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Node_Types_in_PVS\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Node Types in PVS</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#Onno\"><span class=\"tocnumber\">4.1</span> <span class=\"toctext\">Onno</span></a></li>\n<li class=\"toclevel-2 tocsection-6\"><a href=\"#Summary\"><span class=\"tocnumber\">4.2</span> <span class=\"toctext\">Summary</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#Number_of_Leaf_Nodes\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Number of Leaf Nodes</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#Formulas\"><span class=\"tocnumber\">5.1</span> <span class=\"toctext\">Formulas</span></a></li>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#Table\"><span class=\"tocnumber\">5.2</span> <span class=\"toctext\">Table</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-10\"><a href=\"#Quotes\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Quotes</span></a></li>\n<li class=\"toclevel-1 tocsection-11\"><a href=\"#See_also\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-12\"><a href=\"#Selected_Publications\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">Selected Publications</span></a></li>\n<li class=\"toclevel-1 tocsection-13\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">9</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-14\"><a href=\"#2000_...\"><span class=\"tocnumber\">9.1</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-15\"><a href=\"#2005_...\"><span class=\"tocnumber\">9.2</span> <span class=\"toctext\">2005 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-16\"><a href=\"#2010_...\"><span class=\"tocnumber\">9.3</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-17\"><a href=\"#2015_...\"><span class=\"tocnumber\">9.4</span> <span class=\"toctext\">2015 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-18\"><a href=\"#External_Links\"><span class=\"tocnumber\">10</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-19\"><a href=\"#References\"><span class=\"tocnumber\">11</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"PV-Nodes\">PV-Nodes</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Node_Types&amp;action=edit&amp;section=1\" title=\"Edit section: PV-Nodes\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>PV-nodes (Knuth's <b>Type 1</b>) are nodes that have a score that ends up being inside the <a href=\"/Window\" title=\"Window\">window</a>. So if the bounds passed are <span style=\"background-color: rgb(229, 229, 229)\">[a,b]</span>, with the score returned <span style=\"background-color: rgb(229, 229, 229)\">s, a&lt;s&lt;b</span>. These nodes have all moves searched, and the value returned is <a href=\"/Exact_Score\" title=\"Exact Score\">exact</a> (i.e., not a <a href=\"/Bound\" title=\"Bound\">bound</a>), which propagates up to the <a href=\"/Root\" title=\"Root\">root</a> along with a <a href=\"/Principal_Variation\" title=\"Principal Variation\">principal variation</a>.\n</p>\n<ul><li> <a href=\"/Root\" title=\"Root\">Root Node</a> and the <a href=\"/Leftmost_Node\" title=\"Leftmost Node\">Leftmost Nodes</a> are always PV-nodes</li>\n<li> In <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">Principal Variation Search</a>, PV-nodes usually satisfy <span style=\"background-color: rgb(229, 229, 229)\">beta-alpha&gt;1</span>, unless alpha is raised to that specific value</li>\n<li> All <a href=\"/Sibling_Node\" title=\"Sibling Node\">Siblings</a> of a PV-node are expected Cut-nodes</li></ul>\n<p><span id=\"CUT\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Cut-Nodes\">Cut-Nodes</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Node_Types&amp;action=edit&amp;section=2\" title=\"Edit section: Cut-Nodes\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Cut-nodes (Knuth's <b>Type 2</b>), otherwise known as <a href=\"/Fail-High\" title=\"Fail-High\">fail-high</a> nodes, are nodes in which a <a href=\"/Beta-Cutoff\" title=\"Beta-Cutoff\">beta-cutoff</a> was performed. So with <a href=\"/Bound\" title=\"Bound\">bounds</a> <span style=\"background-color: rgb(229, 229, 229)\">[a,b], s&gt;=b</span>. A minimum of one move at a Cut-node needs to be searched. The score returned is a <a href=\"/Lower_Bound\" title=\"Lower Bound\">lower bound</a> (might be greater) on the <a href=\"/Exact_Score\" title=\"Exact Score\">exact score</a> of the node\n</p>\n<ul><li> In <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">Principal Variation Search</a> Cut-nodes are searched with <a href=\"/Null_Window\" title=\"Null Window\">null windows</a></li>\n<li> The child of a Cut-node is an All-node</li>\n<li> The parent of a Cut-node is either a PV- or All-node</li>\n<li> The <a href=\"/Ply\" title=\"Ply\">ply</a> distance of a Cut-node to its PV-ancestor is odd</li></ul>\n<p><span id=\"ALL\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"All-Nodes\">All-Nodes</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Node_Types&amp;action=edit&amp;section=3\" title=\"Edit section: All-Nodes\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>All-nodes (Knuth's <b>Type 3</b>), otherwise known as <a href=\"/Fail-Low\" title=\"Fail-Low\">fail-low</a> nodes, are nodes in which no move's score exceeded alpha. With <a href=\"/Bound\" title=\"Bound\">bounds</a> <span style=\"background-color: rgb(229, 229, 229)\">[a,b], s&lt;=a</span>. Every move at an All-node is searched, and the score returned is an <a href=\"/Upper_Bound\" title=\"Upper Bound\">upper bound</a>, the <a href=\"/Exact_Score\" title=\"Exact Score\">exact score</a> might be less.\n</p>\n<ul><li> In <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">Principal Variation Search</a> All-nodes are searched with <a href=\"/Null_Window\" title=\"Null Window\">null windows</a></li>\n<li> The children of an All-node are Cut-nodes</li>\n<li> The parent of an All-node is a Cut-node</li>\n<li> The <a href=\"/Ply\" title=\"Ply\">ply</a> distance of an All-node to its PV-ancestor is even</li></ul>\n<h1><span class=\"mw-headline\" id=\"Node_Types_in_PVS\">Node Types in PVS</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Node_Types&amp;action=edit&amp;section=4\" title=\"Edit section: Node Types in PVS\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Onno\">Onno</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Node_Types&amp;action=edit&amp;section=5\" title=\"Edit section: Onno\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p><a href=\"/Onno\" title=\"Onno\">Onno</a> by <a href=\"/Onno_Garms\" title=\"Onno Garms\">Onno Garms</a> determines expected node types, beside other things, to perform <a href=\"/Internal_Iterative_Deepening\" title=\"Internal Iterative Deepening\">IID</a> not only at PV-nodes but also at expected Cut-nodes. Onno Garms gave the following rules <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup>\n</p>\n<ul><li> The root node is a PV-node</li>\n<li> The first child of a PV-node is a PV-node</li>\n<li> The further children are searched by a <a href=\"/Scout\" title=\"Scout\">scout search</a> as CUT-nodes</li>\n<li> <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">PVS</a> re-search is done as PV-node</li>\n<li> The first node of <a href=\"/Onno#Search\" title=\"Onno\">bad pruning</a> is a CUT-node</li>\n<li> The node after a <a href=\"/Null_Move\" title=\"Null Move\">null move</a> is a CUT-node</li>\n<li> The first node of <a href=\"/Null_Move_Pruning#ZugzwangVerification\" title=\"Null Move Pruning\">null move verification</a> is a CUT-node</li>\n<li> <a href=\"/Internal_Iterative_Deepening\" title=\"Internal Iterative Deepening\">Internal iterative deepening</a> does not change the node type</li>\n<li> The first child of a CUT-node is an ALL-node</li>\n<li> Further children of a CUT-node are CUT-nodes</li>\n<li> Children of ALL-nodes are CUT-nodes</li></ul>\n<h2><span class=\"mw-headline\" id=\"Summary\">Summary</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Node_Types&amp;action=edit&amp;section=6\" title=\"Edit section: Summary\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Following summary was given by <a href=\"/Pradu_Kannan\" title=\"Pradu Kannan\">Pradu Kannan</a> similar to Onno's definition as an attempt to predict the node type before searching the node by assuming reasonably good <a href=\"/Move_Ordering\" title=\"Move Ordering\">move ordering</a> on PV-nodes and Cut-nodes <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup>:\n</p>\n<ul><li> The root node is a PV-node</li>\n<li> The first child of a PV-node is a PV-node</li>\n<li> Children of PV-nodes that are searched with a zero-window <a href=\"/Scout\" title=\"Scout\">scout search</a> are Cut-nodes</li>\n<li> Children of PV-nodes that have to be re-searched because the scout search failed high, are PV-nodes</li>\n<li> The first child of a Cut-node, and other candidate cutoff moves (nullmove, killers, captures, checks, ...) is an All-node</li>\n<li> A Cut-node becomes an All-node once the first and all candidate cutoff moves are searched</li>\n<li> Children of All-nodes are Cut-nodes</li></ul>\n<p><span id=\"LeafNodes\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Number_of_Leaf_Nodes\">Number of Leaf Nodes</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Node_Types&amp;action=edit&amp;section=7\" title=\"Edit section: Number of Leaf Nodes\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Formulas\">Formulas</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Node_Types&amp;action=edit&amp;section=8\" title=\"Edit section: Formulas\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>As emphasized by <a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel Shawul</a> <sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup>, the formulas for the number of <a href=\"/Leaf_Node\" title=\"Leaf Node\">leaf nodes</a> of a certain Node type with uniform <a href=\"/Depth\" title=\"Depth\">depth</a> <b>n</b> and <a href=\"/Branching_Factor\" title=\"Branching Factor\">branching factor</a> <b>b</b>, using <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Floor_and_ceiling_functions\">floor and ceiling</a> of n/2 (cut the ceiling, all the floor) ...\n</p>\n<pre>PV  = 1\nCUT = b<span style=\"vertical-align: super;\">&#8968;n/2&#8969;</span> - 1\nALL = b<span style=\"vertical-align: super;\">&#8970;n/2&#8971;</span> - 1\n</pre>\n<p>... are already the subexpressions ...\n</p>\n<pre>L = PV + CUT + ALL \n</pre>\n<p>... in <a href=\"/Michael_Levin\" title=\"Michael Levin\">Levin's</a> famous formula demonstrating the <a href=\"/Odd-Even_Effect\" title=\"Odd-Even Effect\">odd-even effect</a> of <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">alpha-beta</a>\n</p>\n<pre>L = b<span style=\"vertical-align: super;\">&#8968;n/2&#8969;</span> + b<span style=\"vertical-align: super;\">&#8970;n/2&#8971;</span> - 1\n</pre>\n<p><span id=\"Table\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Table\">Table</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Node_Types&amp;action=edit&amp;section=9\" title=\"Edit section: Table\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Assuming a constant <a href=\"/Branching_Factor\" title=\"Branching Factor\">branching factor</a> of 40, this results in following number of leaves:\n</p>\n<table class=\"wikitable\">\n<caption> <a href=\"/Template:Number_of_Leaves\" title=\"Template:Number of Leaves\">number of leaves with depth n and b = 40</a>\n</caption>\n<tr>\n<th> depth\n</th>\n<th> worst case\n</th>\n<th> best case\n</th>\n<th> PV\n</th>\n<th> CUT\n</th>\n<th> ALL\n</th></tr>\n<tr>\n<th> n\n</th>\n<td style=\"text-align:center;\"> b<span style=\"vertical-align: super;\">n</span>\n</td>\n<td style=\"text-align:center;\"> b<span style=\"vertical-align: super;\">&#8968;n/2&#8969;</span> + b<span style=\"vertical-align: super;\">&#8970;n/2&#8971;</span>  - 1\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<td style=\"text-align:center;\"> b<span style=\"vertical-align: super;\">&#8968;n/2&#8969;</span> - 1\n</td>\n<td style=\"text-align:center;\"> b<span style=\"vertical-align: super;\">&#8970;n/2&#8971;</span> - 1\n</td></tr>\n<tr>\n<th> 0\n</th>\n<td style=\"text-align:right;\"> 1\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<td style=\"text-align:right;\"> 0\n</td>\n<td style=\"text-align:right;\"> 0\n</td></tr>\n<tr>\n<th>  1\n</th>\n<td style=\"text-align:right;\"> 40\n</td>\n<td style=\"text-align:right;\"> 40\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<td style=\"text-align:right;\"> 39\n</td>\n<td style=\"text-align:right;\"> 0\n</td></tr>\n<tr>\n<th> 2\n</th>\n<td style=\"text-align:right;\"> 1,600\n</td>\n<td style=\"text-align:right;\"> 79\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<td style=\"text-align:right;\"> 39\n</td>\n<td style=\"text-align:right;\"> 39\n</td></tr>\n<tr>\n<th>  3\n</th>\n<td style=\"text-align:right;\"> 64,000\n</td>\n<td style=\"text-align:right;\"> 1,639\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<td style=\"text-align:right;\"> 1,599\n</td>\n<td style=\"text-align:right;\"> 39\n</td></tr>\n<tr>\n<th>  4\n</th>\n<td style=\"text-align:right;\"> 2,560,000\n</td>\n<td style=\"text-align:right;\"> 3,199\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<td style=\"text-align:right;\"> 1,599\n</td>\n<td style=\"text-align:right;\"> 1,599\n</td></tr>\n<tr>\n<th>  5\n</th>\n<td style=\"text-align:right;\"> 102,400,000\n</td>\n<td style=\"text-align:right;\"> 65,569\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<td style=\"text-align:right;\"> 63,999\n</td>\n<td style=\"text-align:right;\"> 1,599\n</td></tr>\n<tr>\n<th>  6\n</th>\n<td style=\"text-align:right;\"> 4,096,000,000\n</td>\n<td style=\"text-align:right;\"> 127,999\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<td style=\"text-align:right;\"> 63,999\n</td>\n<td style=\"text-align:right;\"> 63,999\n</td></tr>\n<tr>\n<th>  7\n</th>\n<td style=\"text-align:right;\"> 163,840,000,000\n</td>\n<td style=\"text-align:right;\"> 2,623,999\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<td style=\"text-align:right;\"> 2,559,999\n</td>\n<td style=\"text-align:right;\">  63,999\n</td></tr>\n<tr>\n<th>  8\n</th>\n<td style=\"text-align:right;\"> 6,553,600,000,000\n</td>\n<td style=\"text-align:right;\"> 5,119,999\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<td style=\"text-align:right;\"> 2,559,999\n</td>\n<td style=\"text-align:right;\"> 2,559,999\n</td></tr></table>\n<h1><span class=\"mw-headline\" id=\"Quotes\">Quotes</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Node_Types&amp;action=edit&amp;section=10\" title=\"Edit section: Quotes\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a> on the distinction between <a href=\"/Node_Types#ALL\" title=\"Node Types\">ALL-</a> and <a href=\"/Node_Types#CUT\" title=\"Node Types\">CUT-nodes</a> <sup id=\"cite_ref-9\" class=\"reference\"><a href=\"#cite_note-9\">&#91;9&#93;</a></sup>:\n</p>\n<pre>In <a href=\"/Cray_Blitz\" title=\"Cray Blitz\">CB</a>, I used this extensively, because you never want to split at a CUT node, and want to prefer an ALL node. <a href=\"/Young_Brothers_Wait_Concept\" title=\"Young Brothers Wait Concept\">YBW</a> tries to recognize an ALL node by requiring that at least one move be searched before splitting, since &gt; 90% of CUT nodes are discovered on the first move searched. But waiting on that first move introduces some wait time, and if you knew it was an ALL node from the get-go, you could split before the first move is completed. That was the basic premise behind the iterated search and <a href=\"/Dynamic_Tree_Splitting\" title=\"Dynamic Tree Splitting\">DTS algorithm</a> in Cray Blitz ... \n</pre>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Node_Types&amp;action=edit&amp;section=11\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">Alpha-Beta</a></li>\n<li> <a href=\"/Stephen_F._Wheeler#Alpha-Beta_Benchmark\" title=\"Stephen F. Wheeler\">Alpha-Beta Benchmark</a> by <a href=\"/Stephen_F._Wheeler\" title=\"Stephen F. Wheeler\">Stephen F. Wheeler</a></li>\n<li> <a href=\"/Enhanced_Forward_Pruning\" title=\"Enhanced Forward Pruning\">Enhanced Forward Pruning</a></li>\n<li> <a href=\"/Internal_Iterative_Deepening\" title=\"Internal Iterative Deepening\">Internal Iterative Deepening</a></li>\n<li> <a href=\"/Move_Ordering\" title=\"Move Ordering\">Move Ordering</a></li>\n<li> <a href=\"/Odd-Even_Effect\" title=\"Odd-Even Effect\">Odd-Even Effect</a></li>\n<li> <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">Principal Variation Search</a></li>\n<li> <a href=\"/Young_Brothers_Wait_Concept\" title=\"Young Brothers Wait Concept\">Young Brothers Wait Concept</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Selected_Publications\">Selected Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Node_Types&amp;action=edit&amp;section=12\" title=\"Edit section: Selected Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li><a href=\"/Donald_Knuth\" title=\"Donald Knuth\">Donald Knuth</a>,  <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/pers/hd/m/Moore:Ronald_W=\">Ronald W. Moore</a> (<b>1975</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.scribd.com/doc/28194932/An-Analysis-of-Alpha-Beta-Pruning\">An analysis of alpha-beta pruning</a>.</i> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_%28journal%29\">Artificial Intelligence</a>, Vol. 6, No. 4, pp 293–326. Reprinted in <a href=\"/Donald_Knuth\" title=\"Donald Knuth\">Donald Knuth</a> (<b>2000</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www-cs-faculty.stanford.edu/~uno/aa.html\">Selected Papers on Analysis of Algorithms</a></i>.  <a rel=\"nofollow\" class=\"external text\" href=\"http://web.stanford.edu/group/cslipublications/cslipublications/site/CSIN.shtml\">CSLI lecture notes series</a> 102, ISBN 1-57586-212-3</li>\n<li> <a href=\"/Igor_Roizen\" title=\"Igor Roizen\">Igor Roizen</a> (<b>1981</b>). <i>On the Average Number of Terminal Nodes examined by Alpha-Beta</i>. Technical Report UCLA-ENG-CSL-8108, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/University_of_California,_Los_Angeles\">University of California at Los Angeles</a>, Cognitive Systems Laboratory </li>\n<li> <a href=\"/Judea_Pearl\" title=\"Judea Pearl\">Judea Pearl</a> (<b>1982</b>). <i>The Solution for the Branching Factor of the Alpha-Beta Pruning Algorithm and its Optimality</i>. <a href=\"/ACM#Communications\" title=\"ACM\">Communications of the ACM</a>, Vol. 25, No. 8, pp. 559-564</li>\n<li> <a href=\"/Tony_Marsland\" title=\"Tony Marsland\">Tony Marsland</a>, <a href=\"/Fred_Popowich\" title=\"Fred Popowich\">Fred Popowich</a> (<b>1985</b>). <i>Parallel Game-Tree Search.</i> <a href=\"/IEEE#TPAMI\" title=\"IEEE\">IEEE Transactions on Pattern Analysis and Machine Intelligence</a>, Vol. 7, No. 4, pp. 442-452. <a rel=\"nofollow\" class=\"external text\" href=\"http://webdocs.cs.ualberta.ca/~tony/OldPapers/parallel.pdf\">1984 pdf</a> (Draft)</li>\n<li> <a href=\"/Mark_Winands\" title=\"Mark Winands\">Mark Winands</a>, <a href=\"/Jaap_van_den_Herik\" title=\"Jaap van den Herik\">Jaap van den Herik</a>, <a href=\"/Jos_Uiterwijk\" title=\"Jos Uiterwijk\">Jos Uiterwijk</a>, <a href=\"/Erik_van_der_Werf\" title=\"Erik van der Werf\">Erik van der Werf</a> (<b>2003</b>). <i>Enhanced forward pruning.</i> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.personeel.unimaas.nl/m-winands/documents/Enhanced%20forward%20pruning.pdf\">pdf</a>&#160;» <a href=\"/Enhanced_Forward_Pruning\" title=\"Enhanced Forward Pruning\">Enhanced Forward Pruning</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Node_Types&amp;action=edit&amp;section=13\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Node_Types&amp;action=edit&amp;section=14\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=285939\">ALL node definition</a> by <a href=\"/Alvaro_Cardoso\" title=\"Alvaro Cardoso\">Alvaro Cardoso</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 21, 2003</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=354012\">Fruit - Question for Fabien</a> by <a href=\"/Dan_Honeycutt\" title=\"Dan Honeycutt\">Dan Honeycutt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 11, 2004&#160;» <a href=\"/Fruit\" title=\"Fruit\">Fruit</a>, <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Table</a>, <a href=\"/Principal_Variation\" title=\"Principal Variation\">Principal Variation</a>, <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">Principal Variation Search</a></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=354016\">Re: Fruit - Question for Fabien</a> by <a href=\"/Fabien_Letouzey\" title=\"Fabien Letouzey\">Fabien Letouzey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 11, 2004</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=171&amp;start=143\">Re: Attack table</a> by <a href=\"/Zach_Wegner\" title=\"Zach Wegner\">Zach Wegner</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, October 22, 2004&#160;» <a href=\"/Attack_and_Defend_Maps\" title=\"Attack and Defend Maps\">Attack and Defend Maps</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2005_...\">2005 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Node_Types&amp;action=edit&amp;section=15\" title=\"Edit section: 2005 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?t=4384\">Move ordering at different (Knuth) node types</a> by <a href=\"/Tom_Likens\" title=\"Tom Likens\">Tom Likens</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, February 21, 2006&#160;» <a href=\"/Move_Ordering\" title=\"Move Ordering\">Move Ordering</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=4710\">PV based decisions</a> by <a href=\"/Mark_Lefler\" title=\"Mark Lefler\">Mark Lefler</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, April 27, 2006</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=6392\">NMP on ALL nodes</a> by <a href=\"/Onno_Garms\" title=\"Onno Garms\">Onno Garms</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, April 15, 2007&#160;» <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">Null Move Pruning</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=6558\">Slight enhancement to PVS</a> by <a href=\"/Pradu_Kannan\" title=\"Pradu Kannan\">Pradu Kannan</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, June 10, 2007</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=24198\">Nodes type clarification</a> by <a href=\"/Mathieu_Pag%C3%A9\" title=\"Mathieu Pagé\">Mathieu Pagé</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 05, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=27122\">Different handling of ALL / CUT nodes</a> by <a href=\"/Gregory_Strong\" title=\"Gregory Strong\">Gregory Strong</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 22, 2009</li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Node_Types&amp;action=edit&amp;section=16\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=38317\">CUT\" vs \"ALL\" nodes</a> by <a href=\"/Larry_Kaufman\" title=\"Larry Kaufman\">Larry Kaufman</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 7, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=38408\">On internal iterative deepening</a> by <a href=\"/Onno_Garms\" title=\"Onno Garms\">Onno Garms</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 13, 2011&#160;» <a href=\"/Internal_Iterative_Deepening\" title=\"Internal Iterative Deepening\">Internal Iterative Deepening</a>, <a href=\"/Onno\" title=\"Onno\">Onno</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=43041\">When does a cut-node became an all-node?</a> by <a href=\"/Alcides_Schulz\" title=\"Alcides Schulz\">Alcides Schulz</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 27, 2012 </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=48137\">Question about PVS and nodes type</a> by <a href=\"/Patrice_Duhamel\" title=\"Patrice Duhamel\">Patrice Duhamel</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 28, 2013&#160;» <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">Principal Variation Search</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48205\">CUT/ALL nodes ratio</a> by <a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel Shawul</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 06, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48356\">LMR at CUT nodes can be arbitrarily bad!</a> by <a href=\"/Michel_Van_den_Bergh\" title=\"Michel Van den Bergh\">Michel Van den Bergh</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 20, 2013&#160;» <a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">Late Move Reductions</a>, <a href=\"/Python\" title=\"Python\">Python</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=50907\">Pruning in PV nodes</a> by <a href=\"/Sergei_Markoff\" title=\"Sergei Markoff\">Sergei S. Markoff</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 14, 2014&#160;» <a href=\"/Reductions\" title=\"Reductions\">Reductions</a>, <a href=\"/Root\" title=\"Root\">Root</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=51422\">Node Types and Thoughts On Their Application</a> by <a href=\"/index.php?title=Cheney_Nattress&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Cheney Nattress (page does not exist)\">Cheney Nattress</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 26, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=53049\">Null move pruning on PV nodes</a> by <a href=\"/Eric_Oldre\" title=\"Eric Oldre\">Eric Oldre</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 22, 2014&#160;» <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">Null Move Pruning</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=54761\">LMP in PV nodes</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 27, 2014&#160;» <a href=\"/Futility_Pruning#MoveCountBasedPruning\" title=\"Futility Pruning\">Move Count Based Pruning</a>, <a href=\"/Texel\" title=\"Texel\">Texel</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2015_...\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Node_Types&amp;action=edit&amp;section=17\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=59682\">Recognizing PV nodes</a> by <a href=\"/Martin_Fierz\" title=\"Martin Fierz\">Martin Fierz</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 29, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=62890\">What is wrong with doing Nulls &amp; ttcuts in a pv node&#160;?</a> by <a href=\"/index.php?title=Mahmoud_Uthman&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Mahmoud Uthman (page does not exist)\">Mahmoud Uthman</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 21, 2017&#160;» <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">Null Move Pruning</a>, <a href=\"/Node_Types#PV\" title=\"Node Types\">PV-Nodes</a>, <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Table</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65477\">cut nodes</a> by <a href=\"/Folkert_van_Heusden\" title=\"Folkert van Heusden\">Folkert van Heusden</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 18, 2017&#160;» <a href=\"#CUT\">Cut-Nodes</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=69510\">Pruning at PV nodes?</a> by <a href=\"/index.php?title=Mahmoud_Uthman&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Mahmoud Uthman (page does not exist)\">Mahmoud Uthman</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 06, 2019&#160;» <a href=\"/Pruning\" title=\"Pruning\">Pruning</a>, <a href=\"#PV\">PV-Nodes</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Node_Types&amp;action=edit&amp;section=18\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.netlib.org/utk/lsi/pcwLSI/text/node351.html\">Analysis of Alpha-Beta Pruning</a> from the <a rel=\"nofollow\" class=\"external text\" href=\"http://www.netlib.org/utk/lsi/pcwLSI/text/BOOK.html\">Parallel Computing Works</a> ebook</li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Node_Types&amp;action=edit&amp;section=19\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.netlib.org/utk/lsi/pcwLSI/text/node351.html\">Analysis of Alpha-Beta Pruning</a> from the <a rel=\"nofollow\" class=\"external text\" href=\"http://www.netlib.org/utk/lsi/pcwLSI/text/BOOK.html\">Parallel Computing Works</a> ebook</span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a href=\"/Donald_Knuth\" title=\"Donald Knuth\">Donald Knuth</a>,  <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/pers/hd/m/Moore:Ronald_W=\">Ronald W. Moore</a> (<b>1975</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.scribd.com/doc/28194932/An-Analysis-of-Alpha-Beta-Pruning\">An analysis of alpha-beta pruning</a>.</i> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_%28journal%29\">Artificial Intelligence</a>, Vol. 6, No. 4, pp 293–326. Reprinted in <a href=\"/Donald_Knuth\" title=\"Donald Knuth\">Donald Knuth</a> (<b>2000</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www-cs-faculty.stanford.edu/~uno/aa.html\">Selected Papers on Analysis of Algorithms</a></i>.  <a rel=\"nofollow\" class=\"external text\" href=\"http://web.stanford.edu/group/cslipublications/cslipublications/site/CSIN.shtml\">CSLI lecture notes series</a> 102, ISBN 1-57586-212-3</span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a href=\"/Judea_Pearl\" title=\"Judea Pearl\">Judea Pearl</a> (<b>1982</b>). <i>The Solution for the Branching Factor of the Alpha-Beta Pruning Algorithm and its Optimality</i>. <a href=\"/ACM#Communications\" title=\"ACM\">Communications of the ACM</a>, Vol. 25, No. 8, pp. 559-564</span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a href=\"/Mark_Winands\" title=\"Mark Winands\">Mark Winands</a>, <a href=\"/Jaap_van_den_Herik\" title=\"Jaap van den Herik\">Jaap van den Herik</a>, <a href=\"/Jos_Uiterwijk\" title=\"Jos Uiterwijk\">Jos Uiterwijk</a>, <a href=\"/Erik_van_der_Werf\" title=\"Erik van der Werf\">Erik van der Werf</a> (<b>2003</b>). <i>Enhanced forward pruning.</i> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.personeel.unimaas.nl/m-winands/documents/Enhanced%20forward%20pruning.pdf\">pdf</a></span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a href=\"/Tony_Marsland\" title=\"Tony Marsland\">Tony Marsland</a>, <a href=\"/Fred_Popowich\" title=\"Fred Popowich\">Fred Popowich</a> (<b>1985</b>). <i>Parallel Game-Tree Search.</i> <a href=\"/IEEE#TPAMI\" title=\"IEEE\">IEEE Transactions on Pattern Analysis and Machine Intelligence</a>, Vol. 7, No. 4, pp. 442-452. <a rel=\"nofollow\" class=\"external text\" href=\"http://webdocs.cs.ualberta.ca/~tony/OldPapers/parallel.pdf\">1984 pdf</a> (Draft)</span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=399511&amp;t=38408\">Re: On internal iterative deeping</a> by <a href=\"/Onno_Garms\" title=\"Onno Garms\">Onno Garms</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 17, 2011</span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=399059&amp;t=38408\">Re: On internal iterative deeping</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 15, 2011</span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48205\">CUT/ALL nodes ratio</a> by <a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel Shawul</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 06, 2013</span>\n</li>\n<li id=\"cite_note-9\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-9\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=398061&amp;t=38317\">Re: \"CUT\" vs \"ALL\" nodes</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>,  March 08, 2011</span>\n</li>\n</ol></div> \n<p><b><a href=\"/Node\" title=\"Node\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301104047\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.035 seconds\nReal time usage: 0.037 seconds\nPreprocessor visited node count: 228/1000000\nPreprocessor generated node count: 434/1000000\nPost‐expand include size: 2375/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    1.274      1 Template:Number_of_Leaves\n100.00%    1.274      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:933-0!canonical and timestamp 20260301104047 and revision id 27398\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Hyatt_Quotes"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Node Types"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ACM"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alcides Schulz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha-Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alvaro Cardoso"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Attack and Defend Maps"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Beta-Cutoff"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bound"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Branching Factor"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cray Blitz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dan Honeycutt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Daniel Shawul"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Don Dailey"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Donald Knuth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dynamic Tree Splitting"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Enhanced Forward Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Eric Oldre"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Erik van der Werf"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Exact Score"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fabien Letouzey"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fail-High"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fail-Low"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Folkert van Heusden"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fred Popowich"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fruit"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Futility Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gregory Strong"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "IEEE"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Igor Roizen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Internal Iterative Deepening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jaap van den Herik"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jos Uiterwijk"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Judea Pearl"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Larry Kaufman"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Late Move Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Leaf Node"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Leftmost Node"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lower Bound"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mark Lefler"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mark Winands"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Martin Fierz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mathieu Pagé"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michael Levin"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michel Van den Bergh"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Ordering"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Node"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Window"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Odd-Even Effect"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Onno"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Onno Garms"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Parallel Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Patrice Duhamel"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter Österlund"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ply"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pradu Kannan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Python"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiescence Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Hyatt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Root"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Score"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Scout"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search Tree"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Selectivity"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sergei Markoff"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sibling Node"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stephen F. Wheeler"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Texel"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tom Likens"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tony Marsland"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Upper Bound"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Window"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Young Brothers Wait Concept"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Zach Wegner"
+      },
+      {
+        "ns": 0,
+        "*": "Cheney Nattress"
+      },
+      {
+        "ns": 0,
+        "*": "Mahmoud Uthman"
+      },
+      {
+        "ns": 10,
+        "exists": "",
+        "*": "Template:Number of Leaves"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "PV-Nodes",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Node_Types",
+        "byteoffset": 2899,
+        "anchor": "PV-Nodes"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Cut-Nodes",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Node_Types",
+        "byteoffset": 3775,
+        "anchor": "Cut-Nodes"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "All-Nodes",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Node_Types",
+        "byteoffset": 4488,
+        "anchor": "All-Nodes"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Node Types in PVS",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Node_Types",
+        "byteoffset": 5120,
+        "anchor": "Node_Types_in_PVS"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Onno",
+        "number": "4.1",
+        "index": "5",
+        "fromtitle": "Node_Types",
+        "byteoffset": 5140,
+        "anchor": "Onno"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Summary",
+        "number": "4.2",
+        "index": "6",
+        "fromtitle": "Node_Types",
+        "byteoffset": 6199,
+        "anchor": "Summary"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Number of Leaf Nodes",
+        "number": "5",
+        "index": "7",
+        "fromtitle": "Node_Types",
+        "byteoffset": 7168,
+        "anchor": "Number_of_Leaf_Nodes"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Formulas",
+        "number": "5.1",
+        "index": "8",
+        "fromtitle": "Node_Types",
+        "byteoffset": 7191,
+        "anchor": "Formulas"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Table",
+        "number": "5.2",
+        "index": "9",
+        "fromtitle": "Node_Types",
+        "byteoffset": 8182,
+        "anchor": "Table"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Quotes",
+        "number": "6",
+        "index": "10",
+        "fromtitle": "Node_Types",
+        "byteoffset": 8324,
+        "anchor": "Quotes"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "7",
+        "index": "11",
+        "fromtitle": "Node_Types",
+        "byteoffset": 9209,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Selected Publications",
+        "number": "8",
+        "index": "12",
+        "fromtitle": "Node_Types",
+        "byteoffset": 9506,
+        "anchor": "Selected_Publications"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "9",
+        "index": "13",
+        "fromtitle": "Node_Types",
+        "byteoffset": 11160,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "9.1",
+        "index": "14",
+        "fromtitle": "Node_Types",
+        "byteoffset": 11174,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2005 ...",
+        "number": "9.2",
+        "index": "15",
+        "fromtitle": "Node_Types",
+        "byteoffset": 11858,
+        "anchor": "2005_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "9.3",
+        "index": "16",
+        "fromtitle": "Node_Types",
+        "byteoffset": 12852,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "9.4",
+        "index": "17",
+        "fromtitle": "Node_Types",
+        "byteoffset": 14478,
+        "anchor": "2015_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "10",
+        "index": "18",
+        "fromtitle": "Node_Types",
+        "byteoffset": 15159,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "11",
+        "index": "19",
+        "fromtitle": "Node_Types",
+        "byteoffset": 15361,
+        "anchor": "References"
+      }
+    ]
+  }
+}

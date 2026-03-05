@@ -6,7 +6,7 @@ from collections import defaultdict
 from pathlib import Path
 from xml.etree import ElementTree as ET
 
-from .models import EngineFeatureStatus, FeatureNode, PageDocument, TraceRecord
+from .models import ConstraintRule, EngineFeatureStatus, FeatureNode, PageDocument, TraceRecord
 
 
 def write_json(path: Path, payload: dict | list) -> None:
@@ -34,26 +34,30 @@ def export_feature_model_json(
     path: Path,
     features: list[FeatureNode],
     traces: list[TraceRecord],
+    constraints: list[ConstraintRule],
     meta: dict,
 ) -> None:
     payload = {
         "meta": meta,
         "features": [feature.to_dict() for feature in features],
         "traces": [trace.to_dict() for trace in traces],
+        "constraints": [constraint.to_dict() for constraint in constraints],
     }
     write_json(path, payload)
 
 
-def load_feature_model_json(path: Path) -> tuple[list[FeatureNode], list[TraceRecord], dict]:
+def load_feature_model_json(path: Path) -> tuple[list[FeatureNode], list[TraceRecord], list[ConstraintRule], dict]:
     payload = read_json(path)
     assert isinstance(payload, dict)
     raw_features = payload.get("features", [])
     raw_traces = payload.get("traces", [])
+    raw_constraints = payload.get("constraints", [])
     meta = payload.get("meta", {})
 
     features = [FeatureNode(**item) for item in raw_features]
     traces = [TraceRecord(**item) for item in raw_traces]
-    return features, traces, meta
+    constraints = [ConstraintRule(**item) for item in raw_constraints]
+    return features, traces, constraints, meta
 
 
 def export_feature_traces_csv(path: Path, traces: list[TraceRecord]) -> None:
@@ -119,13 +123,39 @@ def _create_featureide_node(
         ET.SubElement(parent_xml, "feature", attrs)
 
 
-def export_featureide_xml(path: Path, features: list[FeatureNode]) -> None:
+def _append_constraint_xml(
+    constraints_xml: ET.Element,
+    constraints: list[ConstraintRule],
+    id_map: dict[str, FeatureNode],
+) -> None:
+    for constraint in constraints:
+        left = id_map.get(constraint.left_feature_id)
+        right = id_map.get(constraint.right_feature_id)
+        if left is None or right is None:
+            continue
+
+        rule = ET.SubElement(constraints_xml, "rule")
+        if constraint.kind == "requires":
+            imp = ET.SubElement(rule, "imp")
+            ET.SubElement(imp, "var").text = left.name
+            ET.SubElement(imp, "var").text = right.name
+            continue
+
+        if constraint.kind == "excludes":
+            not_node = ET.SubElement(rule, "not")
+            and_node = ET.SubElement(not_node, "and")
+            ET.SubElement(and_node, "var").text = left.name
+            ET.SubElement(and_node, "var").text = right.name
+
+
+def export_featureide_xml(path: Path, features: list[FeatureNode], constraints: list[ConstraintRule]) -> None:
     id_map, children_map, root_feature = _feature_children(features)
 
     model = ET.Element("featureModel")
     struct = ET.SubElement(model, "struct")
     _create_featureide_node(struct, root_feature, children_map, id_map)
-    ET.SubElement(model, "constraints")
+    constraints_xml = ET.SubElement(model, "constraints")
+    _append_constraint_xml(constraints_xml, constraints, id_map)
 
     tree = ET.ElementTree(model)
     try:
@@ -143,7 +173,11 @@ def export_engine_feature_matrix_csv(
     features: list[FeatureNode],
     engine_lookup: dict[str, str],
 ) -> None:
-    feature_columns = [feature for feature in features if feature.parent_id is not None]
+    feature_columns = [
+        feature
+        for feature in features
+        if feature.parent_id is not None and feature.variation_role == "option" and feature.configurable
+    ]
     feature_order = [feature.id for feature in feature_columns]
     feature_header = [f"{feature.id}:{feature.name}" for feature in feature_columns]
 
@@ -168,7 +202,11 @@ def export_engine_feature_matrix_markdown(
     features: list[FeatureNode],
     engine_lookup: dict[str, str],
 ) -> None:
-    feature_columns = [feature for feature in features if feature.parent_id is not None]
+    feature_columns = [
+        feature
+        for feature in features
+        if feature.parent_id is not None and feature.variation_role == "option" and feature.configurable
+    ]
     feature_order = [feature.id for feature in feature_columns]
 
     matrix: dict[str, dict[str, str]] = defaultdict(dict)
