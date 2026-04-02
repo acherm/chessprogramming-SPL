@@ -34,6 +34,11 @@ typedef struct EngineSearchResult {
 
 typedef struct EngineState {
     int board[64];
+    int board_0x88[128];
+    int board_120[120];
+    uint64_t bb_pieces[12];
+    uint64_t bb_white_occ;
+    uint64_t bb_black_occ;
     int side_to_move; /* 0 white, 1 black */
     int castling_rights; /* bitmask: 1 WK, 2 WQ, 4 BK, 8 BQ */
     int en_passant_square; /* -1 if none, otherwise 0..63 */

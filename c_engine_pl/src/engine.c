@@ -1,4 +1,5 @@
-#include "engine.h"
+#include "engine_search_internal.h"
+#include "engine_backend_internal.h"
 
 #include <ctype.h>
 #include <limits.h>
@@ -37,9 +38,6 @@
 #define CASTLE_WHITE_Q 2
 #define CASTLE_BLACK_K 4
 #define CASTLE_BLACK_Q 8
-
-#define INF 30000
-#define MATE 29000
 
 #define TT_SIZE (1u << 18)
 #define TT_MASK (TT_SIZE - 1u)
@@ -140,17 +138,6 @@ static const int PST_KING_EG[64] = {
     -30, -30, 0, 0, 0, 0, -30, -30,
     -50, -30, -30, -30, -30, -30, -30, -50,
 };
-
-typedef struct Undo {
-    int captured;
-    int captured_square;
-    int moved_piece;
-    int castling_rights;
-    int en_passant_square;
-    int halfmove_clock;
-    int fullmove_number;
-    int history_count;
-} Undo;
 
 typedef struct TTEntry {
     uint64_t key;
@@ -383,6 +370,17 @@ static void clear_board(EngineState *state) {
     for (i = 0; i < 64; ++i) {
         state->board[i] = EMPTY;
     }
+    for (i = 0; i < 128; ++i) {
+        state->board_0x88[i] = EMPTY;
+    }
+    for (i = 0; i < 120; ++i) {
+        state->board_120[i] = EMPTY;
+    }
+    for (i = 0; i < 12; ++i) {
+        state->bb_pieces[i] = 0ULL;
+    }
+    state->bb_white_occ = 0ULL;
+    state->bb_black_occ = 0ULL;
     state->side_to_move = WHITE;
     state->castling_rights = 0;
     state->en_passant_square = -1;
@@ -564,6 +562,7 @@ static int parse_fen_board(EngineState *state, const char *fen) {
 
     state->halfmove_clock = hm_clock >= 0 ? hm_clock : 0;
     state->fullmove_number = fm_number > 0 ? fm_number : 1;
+    engine_sync_backend_state(state);
     return 0;
 }
 
@@ -598,116 +597,11 @@ static void move_list_push(EngineMoveList *list, EngineMove move) {
 }
 
 static int find_king_square(const EngineState *state, int side) {
-    int sq;
-    int king = side == WHITE ? WK : BK;
-    for (sq = 0; sq < 64; ++sq) {
-        if (state->board[sq] == king) {
-            return sq;
-        }
-    }
-    return -1;
+    return engine_backend_find_king_square(state, side);
 }
 
 static bool is_square_attacked(const EngineState *state, int sq, int attacker_side) {
-    int i;
-
-    if (!on_board64(sq)) {
-        return false;
-    }
-
-    if (attacker_side == WHITE) {
-        int p1 = sq - 9;
-        int p2 = sq - 7;
-        if (on_board64(p1) && file_of(p1) == file_of(sq) - 1 && state->board[p1] == WP) {
-            return true;
-        }
-        if (on_board64(p2) && file_of(p2) == file_of(sq) + 1 && state->board[p2] == WP) {
-            return true;
-        }
-    } else {
-        int p1 = sq + 9;
-        int p2 = sq + 7;
-        if (on_board64(p1) && file_of(p1) == file_of(sq) + 1 && state->board[p1] == BP) {
-            return true;
-        }
-        if (on_board64(p2) && file_of(p2) == file_of(sq) - 1 && state->board[p2] == BP) {
-            return true;
-        }
-    }
-
-    for (i = 0; i < 8; ++i) {
-        int nsq = sq + KNIGHT_OFFSETS[i];
-        if (!on_board64(nsq)) {
-            continue;
-        }
-        if (abs(file_of(nsq) - file_of(sq)) > 2) {
-            continue;
-        }
-        if (attacker_side == WHITE && state->board[nsq] == WN) {
-            return true;
-        }
-        if (attacker_side == BLACK && state->board[nsq] == BN) {
-            return true;
-        }
-    }
-
-    for (i = 0; i < 4; ++i) {
-        int delta = BISHOP_OFFSETS[i];
-        int nsq = sq + delta;
-        while (on_board64(nsq) && abs(file_of(nsq) - file_of(nsq - delta)) == 1) {
-            int piece = state->board[nsq];
-            if (piece != EMPTY) {
-                if (attacker_side == WHITE && (piece == WB || piece == WQ)) {
-                    return true;
-                }
-                if (attacker_side == BLACK && (piece == BB || piece == BQ)) {
-                    return true;
-                }
-                break;
-            }
-            nsq += delta;
-        }
-    }
-
-    for (i = 0; i < 4; ++i) {
-        int delta = ROOK_OFFSETS[i];
-        int nsq = sq + delta;
-        while (on_board64(nsq)) {
-            int piece;
-            if ((delta == 1 || delta == -1) && rank_of(nsq) != rank_of(nsq - delta)) {
-                break;
-            }
-            piece = state->board[nsq];
-            if (piece != EMPTY) {
-                if (attacker_side == WHITE && (piece == WR || piece == WQ)) {
-                    return true;
-                }
-                if (attacker_side == BLACK && (piece == BR || piece == BQ)) {
-                    return true;
-                }
-                break;
-            }
-            nsq += delta;
-        }
-    }
-
-    for (i = 0; i < 8; ++i) {
-        int nsq = sq + KING_OFFSETS[i];
-        if (!on_board64(nsq)) {
-            continue;
-        }
-        if (abs(file_of(nsq) - file_of(sq)) > 1) {
-            continue;
-        }
-        if (attacker_side == WHITE && state->board[nsq] == WK) {
-            return true;
-        }
-        if (attacker_side == BLACK && state->board[nsq] == BK) {
-            return true;
-        }
-    }
-
-    return false;
+    return engine_backend_is_square_attacked(state, sq, attacker_side);
 }
 
 static bool in_check(const EngineState *state, int side) {
@@ -889,6 +783,7 @@ static bool make_move(EngineState *state, const EngineMove *move, Undo *undo) {
     }
 
     state->side_to_move ^= 1;
+    engine_sync_backend_state(state);
     state->plies_from_start += 1;
     if (state->history_count < ENGINE_MAX_HISTORY) {
         state->position_history[state->history_count] = state_key(state);
@@ -947,6 +842,7 @@ static ENGINE_MAYBE_UNUSED void unmake_move(EngineState *state, const EngineMove
             state->board[59] = EMPTY;
         }
     }
+    engine_sync_backend_state(state);
 #endif
 }
 
@@ -1681,11 +1577,11 @@ static ENGINE_MAYBE_UNUSED void generate_moves_bitboards(const EngineState *stat
 
 static void generate_pseudo_moves(const EngineState *state, EngineMoveList *list, bool captures_only) {
 #if CFG_BITBOARDS
-    generate_moves_bitboards(state, list, captures_only);
+    engine_backend_generate_pseudo_moves(state, list, captures_only);
 #elif CFG_MAILBOX || CFG_10X12_BOARD
-    generate_moves_mailbox120(state, list, captures_only);
+    engine_backend_generate_pseudo_moves(state, list, captures_only);
 #elif CFG_0X88
-    generate_moves_0x88(state, list, captures_only);
+    engine_backend_generate_pseudo_moves(state, list, captures_only);
 #else
     generate_moves_scan(state, list, captures_only);
 #endif
@@ -2064,335 +1960,51 @@ static void tt_store(uint64_t key, int depth, int score, int flag, const EngineM
 #endif
 }
 
-static int quiescence(EngineState *state, int alpha, int beta, int ply, int qdepth) {
-    bool side_in_check;
-    int stand_pat;
-    EngineMoveList list;
-    int legal_moves = 0;
-    int i;
+static bool parse_move_uci(const char *text, EngineMove *out);
+static bool find_move_in_list(const EngineMoveList *list, const EngineMove *needle, EngineMove *matched);
 
-    if (state->stop) {
-        return alpha;
+static void record_beta_cutoff(EngineState *state, int ply, int depth, const EngineMove *move) {
+    if (state == NULL || move == NULL) {
+        return;
     }
-
-#if CFG_FIFTY_MOVE_RULE
-    if (state->halfmove_clock >= 100) {
-        return 0;
-    }
-#endif
-
-#if CFG_THREEFOLD_REPETITION
-    if (repetition_count(state) >= 2) {
-        return 0;
-    }
-#endif
-
-    side_in_check = in_check(state, state->side_to_move);
-    if (side_in_check) {
-        stand_pat = -MATE + ply;
-    } else {
-        stand_pat = evaluate_position(state);
-        if (stand_pat >= beta) {
-            return beta;
-        }
-        if (stand_pat > alpha) {
-            alpha = stand_pat;
-        }
-    }
-
-    if (qdepth >= QUIESCENCE_MAX_DEPTH) {
-        return alpha;
-    }
-
-    generate_moves(state, &list, side_in_check ? false : true);
-    order_moves(state, &list, ply, NULL);
-
-    for (i = 0; i < list.count; ++i) {
-        EngineMove move = list.moves[i];
-        Undo undo;
-        int score;
-
-#if CFG_DELTA_PRUNING
-        if (!side_in_check) {
-            int target = state->board[move.to];
-            int gain = target == EMPTY ? 0 : PIECE_VALUE[piece_abs(target)];
-            if (stand_pat + gain + 80 < alpha) {
-                continue;
-            }
-        }
-#endif
-
-        {
-#if CFG_COPY_MAKE || !CFG_UNMAKE_MOVE
-            EngineState snapshot = *state;
-#endif
-            uint64_t nodes_after;
-            bool stop_after;
-
-            if (!make_move(state, &move, &undo)) {
-                continue;
-            }
-            if (in_check(state, state->side_to_move ^ 1)) {
-#if CFG_COPY_MAKE || !CFG_UNMAKE_MOVE
-                *state = snapshot;
-#else
-                unmake_move(state, &move, &undo);
-#endif
-                continue;
-            }
-
-            legal_moves += 1;
-            state->nodes += 1;
-            score = -quiescence(state, -beta, -alpha, ply + 1, qdepth + 1);
-
-            nodes_after = state->nodes;
-            stop_after = state->stop;
-#if !(CFG_COPY_MAKE || !CFG_UNMAKE_MOVE)
-            (void)nodes_after;
-            (void)stop_after;
-#endif
-#if CFG_COPY_MAKE || !CFG_UNMAKE_MOVE
-            *state = snapshot;
-            state->nodes = nodes_after;
-            state->stop = stop_after;
-#else
-            unmake_move(state, &move, &undo);
-#endif
-        }
-
-        if (score >= beta) {
-            return beta;
-        }
-        if (score > alpha) {
-            alpha = score;
-        }
-    }
-
-    if (side_in_check && legal_moves == 0) {
-        return -MATE + ply;
-    }
-
-    return alpha;
-}
-
-static int search(EngineState *state, int depth, int alpha, int beta, int ply, bool allow_null) {
-    EngineMoveList list;
-    EngineMove best_move;
-    EngineMove hash_move;
-    int best_score = -INF;
-    int alpha_orig = alpha;
-    int legal_moves = 0;
-    int i;
-    int tt_score = 0;
-    uint64_t key;
-    bool has_hash_move = false;
-
-    if (state->stop) {
-        return evaluate_position(state);
-    }
-
-#if !CFG_NULL_MOVE_PRUNING
-    (void)allow_null;
-#endif
-
-#if CFG_FIFTY_MOVE_RULE
-    if (state->halfmove_clock >= 100) {
-        return 0;
-    }
-#endif
-
-#if CFG_THREEFOLD_REPETITION
-    if (repetition_count(state) >= 2) {
-        return 0;
-    }
-#endif
-
-    if ((state->nodes & 1023ULL) == 0ULL && state->deadline_ms > 0 && now_ms() >= state->deadline_ms) {
-        state->stop = true;
-        return evaluate_position(state);
-    }
-
-#if CFG_QUIESCENCE_SEARCH
-    if (depth <= 0) {
-        return quiescence(state, alpha, beta, ply, 0);
-    }
-#else
-    if (depth <= 0) {
-        return evaluate_position(state);
-    }
-#endif
-
-    key = state_key(state);
-#if CFG_HASH_MOVE
-    if (tt_probe(key, depth, alpha, beta, &tt_score, &hash_move)) {
-        return tt_score;
-    }
-    if (tt_probe(key, 0, -INF, INF, &tt_score, &hash_move)) {
-        has_hash_move = true;
-    }
-#else
-    if (tt_probe(key, depth, alpha, beta, &tt_score, &hash_move)) {
-        return tt_score;
-    }
-#endif
-
-#if CFG_RAZORING
-    if (depth == 1 && !in_check(state, state->side_to_move)) {
-        int eval = evaluate_position(state);
-        if (eval + 120 <= alpha) {
-            return quiescence(state, alpha, beta, ply, 0);
-        }
-    }
-#endif
-
-#if CFG_NULL_MOVE_PRUNING
-    if (allow_null && depth >= 3 && !in_check(state, state->side_to_move)) {
-        EngineState tmp = *state;
-        int score;
-        tmp.side_to_move ^= 1;
-        tmp.plies_from_start += 1;
-        score = -search(&tmp, depth - 1 - 2, -beta, -beta + 1, ply + 1, false);
-        if (score >= beta) {
-            return beta;
-        }
-    }
-#endif
-
-    generate_moves(state, &list, false);
-    order_moves(state, &list, ply, has_hash_move ? &hash_move : NULL);
-
-    memset(&best_move, 0, sizeof(best_move));
-
-    for (i = 0; i < list.count; ++i) {
-        EngineMove move = list.moves[i];
-        Undo undo;
-        int score;
-        int child_depth = depth - 1;
-
-#if CFG_FUTILITY_PRUNING
-        if (depth == 1 && !(move.flags & FLAG_CAPTURE)) {
-            int eval = evaluate_position(state);
-            if (eval + 90 <= alpha) {
-                continue;
-            }
-        }
-#endif
-
-#if CFG_LATE_MOVE_REDUCTIONS
-        if (depth >= 3 && i >= 4 && !(move.flags & FLAG_CAPTURE) && !in_check(state, state->side_to_move)) {
-            child_depth -= 1;
-        }
-#endif
-
-        {
-#if CFG_COPY_MAKE || !CFG_UNMAKE_MOVE
-            EngineState snapshot = *state;
-#endif
-            uint64_t nodes_after;
-            bool stop_after;
-
-            if (!make_move(state, &move, &undo)) {
-                continue;
-            }
-            if (in_check(state, state->side_to_move ^ 1)) {
-#if CFG_COPY_MAKE || !CFG_UNMAKE_MOVE
-                *state = snapshot;
-#else
-                unmake_move(state, &move, &undo);
-#endif
-                continue;
-            }
-
-            legal_moves += 1;
-            state->nodes += 1;
-
-#if CFG_PRINCIPAL_VARIATION_SEARCH
-            if (legal_moves == 1) {
-                score = -search(state, child_depth, -beta, -alpha, ply + 1, true);
-            } else {
-                score = -search(state, child_depth, -alpha - 1, -alpha, ply + 1, true);
-                if (score > alpha && score < beta) {
-                    score = -search(state, child_depth, -beta, -alpha, ply + 1, true);
-                }
-            }
-#else
-#if CFG_ALPHA_BETA
-            score = -search(state, child_depth, -beta, -alpha, ply + 1, true);
-#else
-            score = -search(state, child_depth, -INF, INF, ply + 1, true);
-#endif
-#endif
-
-            nodes_after = state->nodes;
-            stop_after = state->stop;
-#if !(CFG_COPY_MAKE || !CFG_UNMAKE_MOVE)
-            (void)nodes_after;
-            (void)stop_after;
-#endif
-#if CFG_COPY_MAKE || !CFG_UNMAKE_MOVE
-            *state = snapshot;
-            state->nodes = nodes_after;
-            state->stop = stop_after;
-#else
-            unmake_move(state, &move, &undo);
-#endif
-        }
-
-        if (state->stop) {
-            return alpha;
-        }
-
-        if (score > best_score) {
-            best_score = score;
-            best_move = move;
-        }
-
-#if CFG_ALPHA_BETA || CFG_PRINCIPAL_VARIATION_SEARCH
-        if (score > alpha) {
-            alpha = score;
-        }
-        if (alpha >= beta) {
 #if CFG_KILLER_HEURISTIC
-            if (!(move.flags & FLAG_CAPTURE) && ply < ENGINE_MAX_PLY) {
-                int code = move_to_int(&move);
-                g_killers[ply][1] = g_killers[ply][0];
-                g_killers[ply][0] = code;
-            }
+    if (!(move->flags & FLAG_CAPTURE) && ply < ENGINE_MAX_PLY) {
+        int code = move_to_int(move);
+        g_killers[ply][1] = g_killers[ply][0];
+        g_killers[ply][0] = code;
+    }
+#else
+    (void)ply;
 #endif
 #if CFG_HISTORY_HEURISTIC
-            if (!(move.flags & FLAG_CAPTURE)) {
-                g_history[state->side_to_move][move.from][move.to] += depth * depth;
-            }
-#endif
-            break;
-        }
-#endif
-    }
-
-    if (legal_moves == 0) {
-        if (in_check(state, state->side_to_move)) {
-            return -MATE + ply;
-        }
-        return 0;
-    }
-
-#if CFG_TRANSPOSITION_TABLE
-    {
-        int flag = 0;
-#if CFG_ALPHA_BETA || CFG_PRINCIPAL_VARIATION_SEARCH
-        if (best_score <= alpha_orig) {
-            flag = -1;
-        } else if (best_score >= beta) {
-            flag = 1;
-        }
-#endif
-        tt_store(key, depth, best_score, flag, &best_move);
+    if (!(move->flags & FLAG_CAPTURE)) {
+        g_history[state->side_to_move][move->from][move->to] += depth * depth;
     }
 #else
-    (void)alpha_orig;
+    (void)depth;
 #endif
+}
 
-    return best_score;
+static const EngineSearchOps SEARCH_OPS = {
+    .evaluate_position = evaluate_position,
+    .in_check = in_check,
+    .repetition_count = repetition_count,
+    .now_ms = now_ms,
+    .generate_moves = generate_moves,
+    .make_move = make_move,
+    .unmake_move = unmake_move,
+    .state_key = state_key,
+    .order_moves = order_moves,
+    .tt_probe = tt_probe,
+    .tt_store = tt_store,
+    .parse_move_uci = parse_move_uci,
+    .find_move_in_list = find_move_in_list,
+    .move_to_front = move_to_front,
+    .record_beta_cutoff = record_beta_cutoff,
+};
+
+const EngineSearchOps *engine_get_search_ops(void) {
+    return &SEARCH_OPS;
 }
 
 static bool parse_move_uci(const char *text, EngineMove *out) {
@@ -2645,229 +2257,12 @@ void engine_move_to_uci(const EngineMove *move, char out[6]) {
     }
 }
 
-EngineSearchResult engine_search(EngineState *state, int max_depth, int movetime_ms) {
-    EngineSearchResult result;
-    EngineMoveList root_moves;
-    EngineMove best_move;
-    int alpha = -INF;
-    int beta = INF;
-    int depth;
-    int best_score = -INF;
-
-    memset(&result, 0, sizeof(result));
-    memset(&best_move, 0, sizeof(best_move));
-
-    if (state == NULL) {
-        return result;
-    }
-
-    if (max_depth <= 0) {
-        max_depth = state->max_depth_hint;
-    }
-    if (movetime_ms == 0) {
-#if CFG_TIME_MANAGEMENT
-        movetime_ms = state->movetime_ms > 0 ? state->movetime_ms : 150;
-#else
-        movetime_ms = 200;
-#endif
-    }
-
-    state->nodes = 0;
-    state->stop = false;
-    if (movetime_ms < 0) {
-        state->deadline_ms = 0;
-    } else {
-        state->deadline_ms = now_ms() + movetime_ms;
-    }
-
-#if CFG_OPENING_BOOK
-    if (state->plies_from_start <= 1) {
-        EngineMove book;
-        EngineMoveList list;
-        if (state->side_to_move == WHITE) {
-            parse_move_uci("e2e4", &book);
-        } else {
-            parse_move_uci("e7e5", &book);
-        }
-        generate_moves(state, &list, false);
-        if (find_move_in_list(&list, &book, &best_move)) {
-            result.best_move = best_move;
-            result.score_cp = evaluate_position(state);
-            result.depth = 1;
-            result.nodes = 1;
-            result.has_move = true;
-            return result;
-        }
-    }
-#endif
-
-    generate_moves(state, &root_moves, false);
-    if (root_moves.count == 0) {
-        result.has_move = false;
-        result.score_cp = in_check(state, state->side_to_move) ? -MATE : 0;
-        return result;
-    }
-
-#if CFG_FIFTY_MOVE_RULE
-    if (state->halfmove_clock >= 100) {
-        result.best_move = root_moves.moves[0];
-        result.score_cp = 0;
-        result.depth = 0;
-        result.nodes = 0;
-        result.has_move = true;
-        return result;
-    }
-#endif
-
-#if CFG_THREEFOLD_REPETITION
-    if (repetition_count(state) >= 2) {
-        result.best_move = root_moves.moves[0];
-        result.score_cp = 0;
-        result.depth = 0;
-        result.nodes = 0;
-        result.has_move = true;
-        return result;
-    }
-#endif
-
-#if CFG_ITERATIVE_DEEPENING
-    for (depth = 1; depth <= max_depth; ++depth) {
-#else
-    depth = max_depth;
-    {
-#endif
-        int score;
-#if CFG_ASPIRATION_WINDOWS
-        int window = depth <= 2 ? INF : 40;
-        int local_alpha = depth <= 2 ? -INF : best_score - window;
-        int local_beta = depth <= 2 ? INF : best_score + window;
-#endif
-        int i;
-        int local_best = -INF;
-        EngineMove local_move = root_moves.moves[0];
-        EngineMove hash_move;
-        bool has_hash = false;
-
-#if CFG_HASH_MOVE
-        if (tt_probe(state_key(state), 0, -INF, INF, &score, &hash_move)) {
-            has_hash = true;
-        }
-#endif
-        order_moves(state, &root_moves, 0, has_hash ? &hash_move : NULL);
-
-        for (i = 0; i < root_moves.count; ++i) {
-            EngineMove mv = root_moves.moves[i];
-            Undo undo;
-            uint64_t nodes_after;
-            bool stop_after;
-#if CFG_COPY_MAKE || !CFG_UNMAKE_MOVE
-            EngineState snapshot = *state;
-#endif
-            if (!make_move(state, &mv, &undo)) {
-                continue;
-            }
-            if (in_check(state, state->side_to_move ^ 1)) {
-#if CFG_COPY_MAKE || !CFG_UNMAKE_MOVE
-                *state = snapshot;
-#else
-                unmake_move(state, &mv, &undo);
-#endif
-                continue;
-            }
-            state->nodes += 1;
-#if CFG_ASPIRATION_WINDOWS
-            score = -search(state, depth - 1, -local_beta, -local_alpha, 1, true);
-            if (score <= local_alpha || score >= local_beta) {
-                score = -search(state, depth - 1, -INF, INF, 1, true);
-            }
-#else
-            score = -search(state, depth - 1, -INF, INF, 1, true);
-#endif
-            nodes_after = state->nodes;
-            stop_after = state->stop;
-#if !(CFG_COPY_MAKE || !CFG_UNMAKE_MOVE)
-            (void)nodes_after;
-            (void)stop_after;
-#endif
-#if CFG_COPY_MAKE || !CFG_UNMAKE_MOVE
-            *state = snapshot;
-            state->nodes = nodes_after;
-            state->stop = stop_after;
-#else
-            unmake_move(state, &mv, &undo);
-#endif
-
-            if (state->stop) {
-                break;
-            }
-            if (score > local_best) {
-                local_best = score;
-                local_move = mv;
-            }
-        }
-
-        if (!state->stop) {
-            best_score = local_best;
-            best_move = local_move;
-            result.depth = depth;
-            result.has_move = true;
-            move_to_front(&root_moves, &local_move);
-            alpha = local_best > alpha ? local_best : alpha;
-            beta = local_best < beta ? local_best : beta;
-        }
-
-#if CFG_ITERATIVE_DEEPENING
-        if (state->stop) {
-            break;
-        }
-#endif
-#if CFG_ITERATIVE_DEEPENING
-    }
-#else
-    }
-#endif
-
-    if (!result.has_move) {
-        result.best_move = root_moves.moves[0];
-        result.has_move = true;
-    } else {
-        result.best_move = best_move;
-    }
-    result.score_cp = best_score;
-    result.nodes = state->nodes;
-
-    return result;
-}
-
 void engine_variant_summary(char *out, size_t out_size) {
-    const char *board;
-    const char *search_core;
-
     if (out == NULL || out_size == 0) {
         return;
     }
 
-#if CFG_BITBOARDS
-    board = "Bitboards";
-#elif CFG_0X88
-    board = "0x88";
-#elif CFG_MAILBOX
-    board = "Mailbox";
-#elif CFG_10X12_BOARD
-    board = "10x12";
-#else
-    board = "Default";
-#endif
-
-#if CFG_ALPHA_BETA
-    search_core = "AlphaBeta";
-#elif CFG_NEGAMAX
-    search_core = "Negamax";
-#else
-    search_core = "Search";
-#endif
-
-    snprintf(out, out_size, "variant=%s board=%s search=%s", PL_VARIANT_NAME, board, search_core);
+    snprintf(out, out_size, "variant=%s board=%s search=%s", PL_VARIANT_NAME, engine_board_backend_name(), engine_search_core_name());
 }
 
 void engine_print_compiled_features(FILE *out) {

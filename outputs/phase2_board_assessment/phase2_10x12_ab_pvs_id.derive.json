@@ -1,0 +1,38 @@
+rm -rf c_engine_pl/build
+cc -Ic_engine_pl/include -Ic_engine_pl/include/generated -std=c11 -O2 -Wall -Wextra -pedantic -c c_engine_pl/src/board_backend.c -o c_engine_pl/build/board_backend.o
+cc -Ic_engine_pl/include -Ic_engine_pl/include/generated -std=c11 -O2 -Wall -Wextra -pedantic -c c_engine_pl/src/engine.c -o c_engine_pl/build/engine.o
+cc -Ic_engine_pl/include -Ic_engine_pl/include/generated -std=c11 -O2 -Wall -Wextra -pedantic -c c_engine_pl/src/main.c -o c_engine_pl/build/main.o
+cc -Ic_engine_pl/include -Ic_engine_pl/include/generated -std=c11 -O2 -Wall -Wextra -pedantic -c c_engine_pl/src/search.c -o c_engine_pl/build/search.o
+cc -Ic_engine_pl/include -Ic_engine_pl/include/generated -std=c11 -O2 -Wall -Wextra -pedantic -c c_engine_pl/src/uci.c -o c_engine_pl/build/uci.o
+cc -std=c11 -O2 -Wall -Wextra -pedantic c_engine_pl/build/board_backend.o c_engine_pl/build/engine.o c_engine_pl/build/main.o c_engine_pl/build/search.o c_engine_pl/build/uci.o -o c_engine_pl/build/engine_pl 
+{
+  "variant": "phase2_10x12_ab_pvs_id",
+  "selected_count": 22,
+  "selected_features": [
+    "10x12 Board",
+    "Alpha-Beta",
+    "Castling",
+    "En Passant",
+    "Evaluation",
+    "FEN",
+    "Fifty-Move Rule",
+    "Hash Move",
+    "Iterative Deepening",
+    "Legal Move Generation",
+    "Make Move",
+    "Move Generation",
+    "Move Ordering",
+    "Negamax",
+    "Piece-Square Tables",
+    "Principal Variation Search",
+    "Quiescence Search",
+    "Threefold Repetition",
+    "Transposition Table",
+    "UCI",
+    "Unmake Move",
+    "Zobrist Hashing"
+  ],
+  "header": "c_engine_pl/include/generated/variant_config.h",
+  "manifest": "c_engine_pl/include/generated/variant_manifest.json"
+}
+Build: OK
