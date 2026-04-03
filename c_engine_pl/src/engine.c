@@ -1,5 +1,6 @@
 #include "engine_search_internal.h"
 #include "engine_backend_internal.h"
+#include "engine_eval_internal.h"
 
 #include <ctype.h>
 #include <limits.h>
@@ -42,9 +43,6 @@
 #define TT_SIZE (1u << 18)
 #define TT_MASK (TT_SIZE - 1u)
 
-#define PAWN_HASH_SIZE (1u << 14)
-#define PAWN_HASH_MASK (PAWN_HASH_SIZE - 1u)
-
 #define QUIESCENCE_MAX_DEPTH 8
 
 #define STARTPOS_FEN "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
@@ -55,89 +53,10 @@
 #define ENGINE_MAYBE_UNUSED
 #endif
 
-static const int PIECE_VALUE[7] = {0, 100, 320, 330, 500, 900, 0};
-
 static const int KNIGHT_OFFSETS[8] = {17, 15, 10, 6, -17, -15, -10, -6};
 static const int BISHOP_OFFSETS[4] = {9, 7, -9, -7};
 static const int ROOK_OFFSETS[4] = {8, -8, 1, -1};
 static const int KING_OFFSETS[8] = {8, -8, 1, -1, 9, 7, -9, -7};
-
-static const int PST_PAWN[64] = {
-    0, 0, 0, 0, 0, 0, 0, 0,
-    5, 10, 10, -20, -20, 10, 10, 5,
-    5, -5, -10, 0, 0, -10, -5, 5,
-    0, 0, 0, 20, 20, 0, 0, 0,
-    5, 5, 10, 25, 25, 10, 5, 5,
-    10, 10, 20, 30, 30, 20, 10, 10,
-    50, 50, 50, 50, 50, 50, 50, 50,
-    0, 0, 0, 0, 0, 0, 0, 0,
-};
-
-static const int PST_KNIGHT[64] = {
-    -50, -40, -30, -30, -30, -30, -40, -50,
-    -40, -20, 0, 0, 0, 0, -20, -40,
-    -30, 0, 10, 15, 15, 10, 0, -30,
-    -30, 5, 15, 20, 20, 15, 5, -30,
-    -30, 0, 15, 20, 20, 15, 0, -30,
-    -30, 5, 10, 15, 15, 10, 5, -30,
-    -40, -20, 0, 5, 5, 0, -20, -40,
-    -50, -40, -30, -30, -30, -30, -40, -50,
-};
-
-static const int PST_BISHOP[64] = {
-    -20, -10, -10, -10, -10, -10, -10, -20,
-    -10, 5, 0, 0, 0, 0, 5, -10,
-    -10, 10, 10, 10, 10, 10, 10, -10,
-    -10, 0, 10, 10, 10, 10, 0, -10,
-    -10, 5, 5, 10, 10, 5, 5, -10,
-    -10, 0, 5, 10, 10, 5, 0, -10,
-    -10, 0, 0, 0, 0, 0, 0, -10,
-    -20, -10, -10, -10, -10, -10, -10, -20,
-};
-
-static const int PST_ROOK[64] = {
-    0, 0, 5, 10, 10, 5, 0, 0,
-    -5, 0, 0, 0, 0, 0, 0, -5,
-    -5, 0, 0, 0, 0, 0, 0, -5,
-    -5, 0, 0, 0, 0, 0, 0, -5,
-    -5, 0, 0, 0, 0, 0, 0, -5,
-    -5, 0, 0, 0, 0, 0, 0, -5,
-    5, 10, 10, 10, 10, 10, 10, 5,
-    0, 0, 0, 0, 0, 0, 0, 0,
-};
-
-static const int PST_QUEEN[64] = {
-    -20, -10, -10, -5, -5, -10, -10, -20,
-    -10, 0, 0, 0, 0, 0, 0, -10,
-    -10, 0, 5, 5, 5, 5, 0, -10,
-    -5, 0, 5, 5, 5, 5, 0, -5,
-    0, 0, 5, 5, 5, 5, 0, -5,
-    -10, 5, 5, 5, 5, 5, 0, -10,
-    -10, 0, 5, 0, 0, 0, 0, -10,
-    -20, -10, -10, -5, -5, -10, -10, -20,
-};
-
-static const int PST_KING_MG[64] = {
-    -30, -40, -40, -50, -50, -40, -40, -30,
-    -30, -40, -40, -50, -50, -40, -40, -30,
-    -30, -40, -40, -50, -50, -40, -40, -30,
-    -30, -40, -40, -50, -50, -40, -40, -30,
-    -20, -30, -30, -40, -40, -30, -30, -20,
-    -10, -20, -20, -20, -20, -20, -20, -10,
-    20, 20, 0, 0, 0, 0, 20, 20,
-    20, 30, 10, 0, 0, 10, 30, 20,
-};
-
-static const int PST_KING_EG[64] = {
-    -50, -40, -30, -20, -20, -30, -40, -50,
-    -30, -20, -10, 0, 0, -10, -20, -30,
-    -30, -10, 20, 30, 30, 20, -10, -30,
-    -30, -10, 30, 40, 40, 30, -10, -30,
-    -30, -10, 30, 40, 40, 30, -10, -30,
-    -30, -10, 20, 30, 30, 20, -10, -30,
-    -30, -30, 0, 0, 0, 0, -30, -30,
-    -50, -30, -30, -30, -30, -30, -30, -50,
-};
 
 typedef struct TTEntry {
     uint64_t key;
@@ -147,25 +66,13 @@ typedef struct TTEntry {
     uint16_t move16;
 } TTEntry;
 
-typedef struct PawnHashEntry {
-    uint64_t key;
-    int score;
-} PawnHashEntry;
-
 static TTEntry g_tt[TT_SIZE];
-static PawnHashEntry g_pawn_hash[PAWN_HASH_SIZE];
 
 static uint64_t g_zobrist_piece[12][64];
 static uint64_t g_zobrist_side;
 static uint64_t g_zobrist_castling[16];
 static uint64_t g_zobrist_ep_file[8];
 static bool g_zobrist_ready = false;
-
-static int g_sq64_to_0x88[64];
-static int g_sq0x88_to_64[128];
-static int g_sq64_to_120[64];
-static int g_sq120_to_64[120];
-static bool g_maps_ready = false;
 
 static int g_killers[ENGINE_MAX_PLY][2];
 static int g_history[2][64][64];
@@ -190,12 +97,6 @@ static inline int rank_of(int sq) {
 
 static inline int file_of(int sq) {
     return sq % 8;
-}
-
-static inline int mirror_sq(int sq) {
-    int rank = rank_of(sq);
-    int file = file_of(sq);
-    return (7 - rank) * 8 + file;
 }
 
 static inline int square_from_coords(char file_ch, char rank_ch) {
@@ -229,33 +130,6 @@ static ENGINE_MAYBE_UNUSED int popcount64(uint64_t x) {
         n += 1;
     }
     return n;
-}
-
-static void init_square_maps(void) {
-    int sq;
-    if (g_maps_ready) {
-        return;
-    }
-
-    for (sq = 0; sq < 128; ++sq) {
-        g_sq0x88_to_64[sq] = -1;
-    }
-    for (sq = 0; sq < 120; ++sq) {
-        g_sq120_to_64[sq] = -1;
-    }
-
-    for (sq = 0; sq < 64; ++sq) {
-        int rank = rank_of(sq);
-        int file = file_of(sq);
-        int sq0x88 = (rank << 4) + file;
-        int sq120 = (rank + 2) * 10 + (file + 1);
-        g_sq64_to_0x88[sq] = sq0x88;
-        g_sq0x88_to_64[sq0x88] = sq;
-        g_sq64_to_120[sq] = sq120;
-        g_sq120_to_64[sq120] = sq;
-    }
-
-    g_maps_ready = true;
 }
 
 static void init_zobrist(void) {
@@ -314,7 +188,7 @@ static int piece_to_zobrist_index(int piece) {
     }
 }
 
-static uint64_t compute_zobrist(const EngineState *state) {
+static ENGINE_MAYBE_UNUSED uint64_t compute_zobrist(const EngineState *state) {
     uint64_t key = 0ULL;
     int sq;
 
@@ -353,7 +227,7 @@ static ENGINE_MAYBE_UNUSED uint64_t compute_fallback_hash(const EngineState *sta
     return x;
 }
 
-static uint64_t state_key(const EngineState *state) {
+uint64_t engine_state_key_internal(const EngineState *state) {
 #if CFG_ZOBRIST_HASHING
     return compute_zobrist(state);
 #else
@@ -577,7 +451,7 @@ static uint16_t encode_move16(const EngineMove *move) {
     return code;
 }
 
-static EngineMove decode_move16(uint16_t code) {
+static ENGINE_MAYBE_UNUSED EngineMove decode_move16(uint16_t code) {
     EngineMove move;
     memset(&move, 0, sizeof(move));
     move.from = (uint8_t)(code & 0x3f);
@@ -596,26 +470,26 @@ static void move_list_push(EngineMoveList *list, EngineMove move) {
     list->count += 1;
 }
 
-static int find_king_square(const EngineState *state, int side) {
+int engine_find_king_square_internal(const EngineState *state, int side) {
     return engine_backend_find_king_square(state, side);
 }
 
-static bool is_square_attacked(const EngineState *state, int sq, int attacker_side) {
+bool engine_is_square_attacked_internal(const EngineState *state, int sq, int attacker_side) {
     return engine_backend_is_square_attacked(state, sq, attacker_side);
 }
 
 static bool in_check(const EngineState *state, int side) {
-    int king_sq = find_king_square(state, side);
+    int king_sq = engine_find_king_square_internal(state, side);
     if (king_sq < 0) {
         return false;
     }
-    return is_square_attacked(state, king_sq, side ^ 1);
+    return engine_is_square_attacked_internal(state, king_sq, side ^ 1);
 }
 
 static int repetition_count(const EngineState *state) {
     int i;
     int count = 0;
-    uint64_t key = state_key(state);
+    uint64_t key = engine_state_key_internal(state);
     int limit = state->history_count - state->halfmove_clock - 1;
     int start = state->history_count - 3;
     if (limit < 0) {
@@ -786,14 +660,14 @@ static bool make_move(EngineState *state, const EngineMove *move, Undo *undo) {
     engine_sync_backend_state(state);
     state->plies_from_start += 1;
     if (state->history_count < ENGINE_MAX_HISTORY) {
-        state->position_history[state->history_count] = state_key(state);
+        state->position_history[state->history_count] = engine_state_key_internal(state);
         state->history_count += 1;
     } else {
         int i;
         for (i = 1; i < ENGINE_MAX_HISTORY; ++i) {
             state->position_history[i - 1] = state->position_history[i];
         }
-        state->position_history[ENGINE_MAX_HISTORY - 1] = state_key(state);
+        state->position_history[ENGINE_MAX_HISTORY - 1] = engine_state_key_internal(state);
         state->history_count = ENGINE_MAX_HISTORY;
     }
     return true;
@@ -846,7 +720,7 @@ static ENGINE_MAYBE_UNUSED void unmake_move(EngineState *state, const EngineMove
 #endif
 }
 
-static void generate_moves_scan(const EngineState *state, EngineMoveList *list, bool captures_only) {
+static ENGINE_MAYBE_UNUSED void generate_moves_scan(const EngineState *state, EngineMoveList *list, bool captures_only) {
     int squares[64];
     int square_count = 0;
     int sq;
@@ -1060,8 +934,8 @@ static void generate_moves_scan(const EngineState *state, EngineMoveList *list, 
                         state->board[5] == EMPTY &&
                         state->board[6] == EMPTY &&
                         state->board[7] == WR &&
-                        !is_square_attacked(state, 5, BLACK) &&
-                        !is_square_attacked(state, 6, BLACK)) {
+                        !engine_is_square_attacked_internal(state, 5, BLACK) &&
+                        !engine_is_square_attacked_internal(state, 6, BLACK)) {
                         EngineMove castle_ks;
                         memset(&castle_ks, 0, sizeof(castle_ks));
                         castle_ks.from = 4;
@@ -1074,8 +948,8 @@ static void generate_moves_scan(const EngineState *state, EngineMoveList *list, 
                         state->board[2] == EMPTY &&
                         state->board[3] == EMPTY &&
                         state->board[0] == WR &&
-                        !is_square_attacked(state, 3, BLACK) &&
-                        !is_square_attacked(state, 2, BLACK)) {
+                        !engine_is_square_attacked_internal(state, 3, BLACK) &&
+                        !engine_is_square_attacked_internal(state, 2, BLACK)) {
                         EngineMove castle_qs;
                         memset(&castle_qs, 0, sizeof(castle_qs));
                         castle_qs.from = 4;
@@ -1088,8 +962,8 @@ static void generate_moves_scan(const EngineState *state, EngineMoveList *list, 
                         state->board[61] == EMPTY &&
                         state->board[62] == EMPTY &&
                         state->board[63] == BR &&
-                        !is_square_attacked(state, 61, WHITE) &&
-                        !is_square_attacked(state, 62, WHITE)) {
+                        !engine_is_square_attacked_internal(state, 61, WHITE) &&
+                        !engine_is_square_attacked_internal(state, 62, WHITE)) {
                         EngineMove castle_ks;
                         memset(&castle_ks, 0, sizeof(castle_ks));
                         castle_ks.from = 60;
@@ -1102,8 +976,8 @@ static void generate_moves_scan(const EngineState *state, EngineMoveList *list, 
                         state->board[58] == EMPTY &&
                         state->board[59] == EMPTY &&
                         state->board[56] == BR &&
-                        !is_square_attacked(state, 59, WHITE) &&
-                        !is_square_attacked(state, 58, WHITE)) {
+                        !engine_is_square_attacked_internal(state, 59, WHITE) &&
+                        !engine_is_square_attacked_internal(state, 58, WHITE)) {
                         EngineMove castle_qs;
                         memset(&castle_qs, 0, sizeof(castle_qs));
                         castle_qs.from = 60;
@@ -1118,464 +992,7 @@ static void generate_moves_scan(const EngineState *state, EngineMoveList *list, 
     }
 }
 
-static void add_special_moves(const EngineState *state, EngineMoveList *list, bool captures_only) {
-    if (captures_only) {
-        return;
-    }
-
-#if CFG_EN_PASSANT
-    if (state->en_passant_square >= 0 && state->en_passant_square < 64) {
-        int ep = state->en_passant_square;
-        int side = state->side_to_move;
-        int from_a = side == WHITE ? ep - 9 : ep + 9;
-        int from_b = side == WHITE ? ep - 7 : ep + 7;
-        if (on_board64(from_a) && abs(file_of(from_a) - file_of(ep)) == 1 && state->board[from_a] == (side == WHITE ? WP : BP)) {
-            EngineMove mv;
-            memset(&mv, 0, sizeof(mv));
-            mv.from = (uint8_t)from_a;
-            mv.to = (uint8_t)ep;
-            mv.flags = FLAG_CAPTURE | FLAG_EN_PASSANT;
-            move_list_push(list, mv);
-        }
-        if (on_board64(from_b) && abs(file_of(from_b) - file_of(ep)) == 1 && state->board[from_b] == (side == WHITE ? WP : BP)) {
-            EngineMove mv;
-            memset(&mv, 0, sizeof(mv));
-            mv.from = (uint8_t)from_b;
-            mv.to = (uint8_t)ep;
-            mv.flags = FLAG_CAPTURE | FLAG_EN_PASSANT;
-            move_list_push(list, mv);
-        }
-    }
-#endif
-
-#if CFG_CASTLING
-    if (state->side_to_move == WHITE && state->board[4] == WK && !in_check(state, WHITE)) {
-        if ((state->castling_rights & CASTLE_WHITE_K) != 0 &&
-            state->board[5] == EMPTY &&
-            state->board[6] == EMPTY &&
-            state->board[7] == WR &&
-            !is_square_attacked(state, 5, BLACK) &&
-            !is_square_attacked(state, 6, BLACK)) {
-            EngineMove ks;
-            memset(&ks, 0, sizeof(ks));
-            ks.from = 4;
-            ks.to = 6;
-            ks.flags = FLAG_CASTLING;
-            move_list_push(list, ks);
-        }
-        if ((state->castling_rights & CASTLE_WHITE_Q) != 0 &&
-            state->board[1] == EMPTY &&
-            state->board[2] == EMPTY &&
-            state->board[3] == EMPTY &&
-            state->board[0] == WR &&
-            !is_square_attacked(state, 3, BLACK) &&
-            !is_square_attacked(state, 2, BLACK)) {
-            EngineMove qs;
-            memset(&qs, 0, sizeof(qs));
-            qs.from = 4;
-            qs.to = 2;
-            qs.flags = FLAG_CASTLING;
-            move_list_push(list, qs);
-        }
-    }
-    if (state->side_to_move == BLACK && state->board[60] == BK && !in_check(state, BLACK)) {
-        if ((state->castling_rights & CASTLE_BLACK_K) != 0 &&
-            state->board[61] == EMPTY &&
-            state->board[62] == EMPTY &&
-            state->board[63] == BR &&
-            !is_square_attacked(state, 61, WHITE) &&
-            !is_square_attacked(state, 62, WHITE)) {
-            EngineMove ks;
-            memset(&ks, 0, sizeof(ks));
-            ks.from = 60;
-            ks.to = 62;
-            ks.flags = FLAG_CASTLING;
-            move_list_push(list, ks);
-        }
-        if ((state->castling_rights & CASTLE_BLACK_Q) != 0 &&
-            state->board[57] == EMPTY &&
-            state->board[58] == EMPTY &&
-            state->board[59] == EMPTY &&
-            state->board[56] == BR &&
-            !is_square_attacked(state, 59, WHITE) &&
-            !is_square_attacked(state, 58, WHITE)) {
-            EngineMove qs;
-            memset(&qs, 0, sizeof(qs));
-            qs.from = 60;
-            qs.to = 58;
-            qs.flags = FLAG_CASTLING;
-            move_list_push(list, qs);
-        }
-    }
-#endif
-}
-
-static ENGINE_MAYBE_UNUSED void generate_moves_0x88(const EngineState *state, EngineMoveList *list, bool captures_only) {
-    int board88[128];
-    int sq;
-    for (sq = 0; sq < 128; ++sq) {
-        board88[sq] = EMPTY;
-    }
-    for (sq = 0; sq < 64; ++sq) {
-        board88[g_sq64_to_0x88[sq]] = state->board[sq];
-    }
-
-    list->count = 0;
-    for (sq = 0; sq < 128; ++sq) {
-        int piece;
-        if (sq & 0x88) {
-            continue;
-        }
-        piece = board88[sq];
-        if (piece == EMPTY || piece_side(piece) != state->side_to_move) {
-            continue;
-        }
-
-        if (piece_abs(piece) == WP) {
-            int dir = state->side_to_move == WHITE ? 16 : -16;
-            int cap1 = state->side_to_move == WHITE ? 15 : -17;
-            int cap2 = state->side_to_move == WHITE ? 17 : -15;
-            int to = sq + dir;
-            if (!captures_only && !(to & 0x88) && board88[to] == EMPTY) {
-                EngineMove mv;
-                int from64 = g_sq0x88_to_64[sq];
-                int to64 = g_sq0x88_to_64[to];
-                memset(&mv, 0, sizeof(mv));
-                mv.from = (uint8_t)from64;
-                mv.to = (uint8_t)to64;
-                if ((state->side_to_move == WHITE && rank_of(from64) == 6) ||
-                    (state->side_to_move == BLACK && rank_of(from64) == 1)) {
-                    mv.promotion = 4;
-                    mv.flags |= FLAG_PROMOTION;
-                }
-                move_list_push(list, mv);
-                if ((state->side_to_move == WHITE && rank_of(from64) == 1) ||
-                    (state->side_to_move == BLACK && rank_of(from64) == 6)) {
-                    int to2 = sq + dir + dir;
-                    if (!(to2 & 0x88) && board88[to2] == EMPTY) {
-                        EngineMove dm = mv;
-                        dm.to = (uint8_t)g_sq0x88_to_64[to2];
-                        dm.promotion = 0;
-                        dm.flags = FLAG_DOUBLE_PAWN;
-                        move_list_push(list, dm);
-                    }
-                }
-            }
-            if (!(sq + cap1 & 0x88)) {
-                int t = sq + cap1;
-                int target = board88[t];
-                if (target != EMPTY && piece_side(target) != state->side_to_move) {
-                    EngineMove mv;
-                    int from64 = g_sq0x88_to_64[sq];
-                    int to64 = g_sq0x88_to_64[t];
-                    memset(&mv, 0, sizeof(mv));
-                    mv.from = (uint8_t)from64;
-                    mv.to = (uint8_t)to64;
-                    mv.flags = FLAG_CAPTURE;
-                    if ((state->side_to_move == WHITE && rank_of(from64) == 6) ||
-                        (state->side_to_move == BLACK && rank_of(from64) == 1)) {
-                        mv.promotion = 4;
-                        mv.flags |= FLAG_PROMOTION;
-                    }
-                    move_list_push(list, mv);
-                }
-            }
-            if (!(sq + cap2 & 0x88)) {
-                int t = sq + cap2;
-                int target = board88[t];
-                if (target != EMPTY && piece_side(target) != state->side_to_move) {
-                    EngineMove mv;
-                    int from64 = g_sq0x88_to_64[sq];
-                    int to64 = g_sq0x88_to_64[t];
-                    memset(&mv, 0, sizeof(mv));
-                    mv.from = (uint8_t)from64;
-                    mv.to = (uint8_t)to64;
-                    mv.flags = FLAG_CAPTURE;
-                    if ((state->side_to_move == WHITE && rank_of(from64) == 6) ||
-                        (state->side_to_move == BLACK && rank_of(from64) == 1)) {
-                        mv.promotion = 4;
-                        mv.flags |= FLAG_PROMOTION;
-                    }
-                    move_list_push(list, mv);
-                }
-            }
-            continue;
-        }
-
-        if (piece_abs(piece) == WN || piece_abs(piece) == WK) {
-            const int *deltas = piece_abs(piece) == WN
-                                    ? (const int[]){33, 31, 18, 14, -33, -31, -18, -14}
-                                    : (const int[]){16, -16, 1, -1, 17, 15, -17, -15};
-            int count = piece_abs(piece) == WN ? 8 : 8;
-            int i;
-            for (i = 0; i < count; ++i) {
-                int to = sq + deltas[i];
-                int target;
-                if (to & 0x88) {
-                    continue;
-                }
-                target = board88[to];
-                if (target != EMPTY && piece_side(target) == state->side_to_move) {
-                    continue;
-                }
-                if (captures_only && target == EMPTY) {
-                    continue;
-                }
-                {
-                    EngineMove mv;
-                    memset(&mv, 0, sizeof(mv));
-                    mv.from = (uint8_t)g_sq0x88_to_64[sq];
-                    mv.to = (uint8_t)g_sq0x88_to_64[to];
-                    if (target != EMPTY) {
-                        mv.flags = FLAG_CAPTURE;
-                    }
-                    move_list_push(list, mv);
-                }
-            }
-            continue;
-        }
-
-        {
-            const int *deltas = NULL;
-            int count = 0;
-            int i;
-            if (piece_abs(piece) == WB) {
-                deltas = (const int[]){17, 15, -17, -15};
-                count = 4;
-            } else if (piece_abs(piece) == WR) {
-                deltas = (const int[]){16, -16, 1, -1};
-                count = 4;
-            } else if (piece_abs(piece) == WQ) {
-                deltas = (const int[]){17, 15, -17, -15, 16, -16, 1, -1};
-                count = 8;
-            }
-            if (deltas == NULL) {
-                continue;
-            }
-            for (i = 0; i < count; ++i) {
-                int d = deltas[i];
-                int to = sq + d;
-                while (!(to & 0x88)) {
-                    int target = board88[to];
-                    if (target == EMPTY) {
-                        if (!captures_only) {
-                            EngineMove mv;
-                            memset(&mv, 0, sizeof(mv));
-                            mv.from = (uint8_t)g_sq0x88_to_64[sq];
-                            mv.to = (uint8_t)g_sq0x88_to_64[to];
-                            move_list_push(list, mv);
-                        }
-                    } else {
-                        if (piece_side(target) != state->side_to_move) {
-                            EngineMove mv;
-                            memset(&mv, 0, sizeof(mv));
-                            mv.from = (uint8_t)g_sq0x88_to_64[sq];
-                            mv.to = (uint8_t)g_sq0x88_to_64[to];
-                            mv.flags = FLAG_CAPTURE;
-                            move_list_push(list, mv);
-                        }
-                        break;
-                    }
-                    to += d;
-                }
-            }
-        }
-    }
-
-    add_special_moves(state, list, captures_only);
-}
-
-static ENGINE_MAYBE_UNUSED void generate_moves_mailbox120(const EngineState *state, EngineMoveList *list, bool captures_only) {
-    int board120[120];
-    int sq;
-    for (sq = 0; sq < 120; ++sq) {
-        board120[sq] = 99;
-    }
-    for (sq = 0; sq < 64; ++sq) {
-        board120[g_sq64_to_120[sq]] = state->board[sq];
-    }
-
-    list->count = 0;
-    for (sq = 0; sq < 120; ++sq) {
-        int piece = board120[sq];
-        if (piece == 99 || piece == EMPTY || piece_side(piece) != state->side_to_move) {
-            continue;
-        }
-
-        if (piece_abs(piece) == WP) {
-            int dir = state->side_to_move == WHITE ? 10 : -10;
-            int cap1 = state->side_to_move == WHITE ? 9 : -11;
-            int cap2 = state->side_to_move == WHITE ? 11 : -9;
-            int to = sq + dir;
-            if (!captures_only && board120[to] == EMPTY) {
-                EngineMove mv;
-                int from64 = g_sq120_to_64[sq];
-                int to64 = g_sq120_to_64[to];
-                memset(&mv, 0, sizeof(mv));
-                mv.from = (uint8_t)from64;
-                mv.to = (uint8_t)to64;
-                if ((state->side_to_move == WHITE && rank_of(from64) == 6) ||
-                    (state->side_to_move == BLACK && rank_of(from64) == 1)) {
-                    mv.promotion = 4;
-                    mv.flags |= FLAG_PROMOTION;
-                }
-                move_list_push(list, mv);
-                if ((state->side_to_move == WHITE && rank_of(from64) == 1) ||
-                    (state->side_to_move == BLACK && rank_of(from64) == 6)) {
-                    int to2 = sq + dir + dir;
-                    if (board120[to2] == EMPTY) {
-                        EngineMove dm = mv;
-                        dm.to = (uint8_t)g_sq120_to_64[to2];
-                        dm.promotion = 0;
-                        dm.flags = FLAG_DOUBLE_PAWN;
-                        move_list_push(list, dm);
-                    }
-                }
-            }
-            if (board120[sq + cap1] != 99 && board120[sq + cap1] != EMPTY &&
-                piece_side(board120[sq + cap1]) != state->side_to_move) {
-                EngineMove mv;
-                int from64 = g_sq120_to_64[sq];
-                int to64 = g_sq120_to_64[sq + cap1];
-                memset(&mv, 0, sizeof(mv));
-                mv.from = (uint8_t)from64;
-                mv.to = (uint8_t)to64;
-                mv.flags = FLAG_CAPTURE;
-                if ((state->side_to_move == WHITE && rank_of(from64) == 6) ||
-                    (state->side_to_move == BLACK && rank_of(from64) == 1)) {
-                    mv.promotion = 4;
-                    mv.flags |= FLAG_PROMOTION;
-                }
-                move_list_push(list, mv);
-            }
-            if (board120[sq + cap2] != 99 && board120[sq + cap2] != EMPTY &&
-                piece_side(board120[sq + cap2]) != state->side_to_move) {
-                EngineMove mv;
-                int from64 = g_sq120_to_64[sq];
-                int to64 = g_sq120_to_64[sq + cap2];
-                memset(&mv, 0, sizeof(mv));
-                mv.from = (uint8_t)from64;
-                mv.to = (uint8_t)to64;
-                mv.flags = FLAG_CAPTURE;
-                if ((state->side_to_move == WHITE && rank_of(from64) == 6) ||
-                    (state->side_to_move == BLACK && rank_of(from64) == 1)) {
-                    mv.promotion = 4;
-                    mv.flags |= FLAG_PROMOTION;
-                }
-                move_list_push(list, mv);
-            }
-            continue;
-        }
-
-        if (piece_abs(piece) == WN || piece_abs(piece) == WK) {
-            const int *deltas = piece_abs(piece) == WN
-                                    ? (const int[]){21, 19, 12, 8, -21, -19, -12, -8}
-                                    : (const int[]){10, -10, 1, -1, 11, 9, -11, -9};
-            int i;
-            for (i = 0; i < 8; ++i) {
-                int to = sq + deltas[i];
-                int target = board120[to];
-                if (target == 99) {
-                    continue;
-                }
-                if (target != EMPTY && piece_side(target) == state->side_to_move) {
-                    continue;
-                }
-                if (captures_only && target == EMPTY) {
-                    continue;
-                }
-                {
-                    EngineMove mv;
-                    memset(&mv, 0, sizeof(mv));
-                    mv.from = (uint8_t)g_sq120_to_64[sq];
-                    mv.to = (uint8_t)g_sq120_to_64[to];
-                    if (target != EMPTY) {
-                        mv.flags = FLAG_CAPTURE;
-                    }
-                    move_list_push(list, mv);
-                }
-            }
-            continue;
-        }
-
-        {
-            const int *deltas = NULL;
-            int count = 0;
-            int i;
-            if (piece_abs(piece) == WB) {
-                deltas = (const int[]){11, 9, -11, -9};
-                count = 4;
-            } else if (piece_abs(piece) == WR) {
-                deltas = (const int[]){10, -10, 1, -1};
-                count = 4;
-            } else if (piece_abs(piece) == WQ) {
-                deltas = (const int[]){11, 9, -11, -9, 10, -10, 1, -1};
-                count = 8;
-            }
-            if (deltas == NULL) {
-                continue;
-            }
-            for (i = 0; i < count; ++i) {
-                int d = deltas[i];
-                int to = sq + d;
-                while (board120[to] != 99) {
-                    int target = board120[to];
-                    if (target == EMPTY) {
-                        if (!captures_only) {
-                            EngineMove mv;
-                            memset(&mv, 0, sizeof(mv));
-                            mv.from = (uint8_t)g_sq120_to_64[sq];
-                            mv.to = (uint8_t)g_sq120_to_64[to];
-                            move_list_push(list, mv);
-                        }
-                    } else {
-                        if (piece_side(target) != state->side_to_move) {
-                            EngineMove mv;
-                            memset(&mv, 0, sizeof(mv));
-                            mv.from = (uint8_t)g_sq120_to_64[sq];
-                            mv.to = (uint8_t)g_sq120_to_64[to];
-                            mv.flags = FLAG_CAPTURE;
-                            move_list_push(list, mv);
-                        }
-                        break;
-                    }
-                    to += d;
-                }
-            }
-        }
-    }
-
-    add_special_moves(state, list, captures_only);
-}
-
-static ENGINE_MAYBE_UNUSED void generate_moves_bitboards(const EngineState *state, EngineMoveList *list, bool captures_only) {
-    /* Bitboard path keeps real bitboard occupancy computations and uses scan fallback for full legality. */
-    uint64_t white_occ = 0ULL;
-    uint64_t black_occ = 0ULL;
-    uint64_t occ;
-    int sq;
-    for (sq = 0; sq < 64; ++sq) {
-        int piece = state->board[sq];
-        if (piece > 0) {
-            white_occ |= 1ULL << sq;
-        } else if (piece < 0) {
-            black_occ |= 1ULL << sq;
-        }
-    }
-    occ = white_occ | black_occ;
-
-#if CFG_MAGIC_BITBOARDS
-    /* Real effect: when enabled, occupancy derived once and reused by move generation. */
-    (void)occ;
-#endif
-#if !CFG_MAGIC_BITBOARDS
-    (void)occ;
-#endif
-
-    generate_moves_scan(state, list, captures_only);
-}
-
-static void generate_pseudo_moves(const EngineState *state, EngineMoveList *list, bool captures_only) {
+void engine_generate_pseudo_moves_internal(const EngineState *state, EngineMoveList *list, bool captures_only) {
 #if CFG_BITBOARDS
     engine_backend_generate_pseudo_moves(state, list, captures_only);
 #elif CFG_MAILBOX || CFG_10X12_BOARD
@@ -1594,7 +1011,7 @@ static void generate_legal_moves(const EngineState *state, EngineMoveList *list,
     int i;
 
     list->count = 0;
-    generate_pseudo_moves(state, &pseudo, captures_only);
+    engine_generate_pseudo_moves_internal(state, &pseudo, captures_only);
 
     for (i = 0; i < pseudo.count; ++i) {
         tmp = *state;
@@ -1617,216 +1034,10 @@ static void generate_moves(const EngineState *state, EngineMoveList *list, bool 
 #if CFG_LEGAL_MOVE_GENERATION
     generate_legal_moves(state, list, captures_only);
 #elif CFG_PSEUDO_LEGAL_MOVE_GENERATION
-    generate_pseudo_moves(state, list, captures_only);
+    engine_generate_pseudo_moves_internal(state, list, captures_only);
 #else
     generate_legal_moves(state, list, captures_only);
 #endif
-}
-
-static ENGINE_MAYBE_UNUSED int evaluate_pawn_structure(const EngineState *state) {
-    int file_counts_white[8] = {0};
-    int file_counts_black[8] = {0};
-    int sq;
-    int score = 0;
-
-    for (sq = 0; sq < 64; ++sq) {
-        if (state->board[sq] == WP) {
-            file_counts_white[file_of(sq)] += 1;
-        } else if (state->board[sq] == BP) {
-            file_counts_black[file_of(sq)] += 1;
-        }
-    }
-
-    for (sq = 0; sq < 8; ++sq) {
-        if (file_counts_white[sq] > 1) {
-            score -= 8 * (file_counts_white[sq] - 1);
-        }
-        if (file_counts_black[sq] > 1) {
-            score += 8 * (file_counts_black[sq] - 1);
-        }
-    }
-
-    return score;
-}
-
-static ENGINE_MAYBE_UNUSED int evaluate_mobility(EngineState *state) {
-    EngineMoveList list;
-    int score;
-
-    generate_pseudo_moves(state, &list, false);
-    score = list.count;
-
-    {
-        EngineState other = *state;
-        other.side_to_move ^= 1;
-        generate_pseudo_moves(&other, &list, false);
-        score -= list.count;
-    }
-
-    return score * 2;
-}
-
-static ENGINE_MAYBE_UNUSED int evaluate_king_safety(const EngineState *state) {
-    int wk = find_king_square(state, WHITE);
-    int bk = find_king_square(state, BLACK);
-    int score = 0;
-
-    if (wk >= 0) {
-        int attacks = 0;
-        int i;
-        for (i = 0; i < 8; ++i) {
-            int sq = wk + KING_OFFSETS[i];
-            if (!on_board64(sq) || abs(file_of(sq) - file_of(wk)) > 1) {
-                continue;
-            }
-            if (is_square_attacked(state, sq, BLACK)) {
-                attacks += 1;
-            }
-        }
-        score -= attacks * 6;
-    }
-
-    if (bk >= 0) {
-        int attacks = 0;
-        int i;
-        for (i = 0; i < 8; ++i) {
-            int sq = bk + KING_OFFSETS[i];
-            if (!on_board64(sq) || abs(file_of(sq) - file_of(bk)) > 1) {
-                continue;
-            }
-            if (is_square_attacked(state, sq, WHITE)) {
-                attacks += 1;
-            }
-        }
-        score += attacks * 6;
-    }
-
-    return score;
-}
-
-static ENGINE_MAYBE_UNUSED int static_exchange_eval(const EngineState *state, const EngineMove *move) {
-    int target = state->board[move->to];
-    int attacker = state->board[move->from];
-    int gain = PIECE_VALUE[piece_abs(target)] - PIECE_VALUE[piece_abs(attacker)] / 8;
-    return gain;
-}
-
-static int evaluate_position(EngineState *state) {
-    int sq;
-    int mg = 0;
-    int eg = 0;
-    int phase = 0;
-    int score;
-
-    for (sq = 0; sq < 64; ++sq) {
-        int piece = state->board[sq];
-        int side;
-        int abs_piece;
-        int psq;
-
-        if (piece == EMPTY) {
-            continue;
-        }
-
-        side = piece_side(piece);
-        abs_piece = piece_abs(piece);
-        psq = side == WHITE ? sq : mirror_sq(sq);
-
-#if CFG_EVALUATION
-        mg += (side == WHITE ? 1 : -1) * PIECE_VALUE[abs_piece];
-        eg += (side == WHITE ? 1 : -1) * PIECE_VALUE[abs_piece];
-#endif
-
-#if CFG_PIECE_SQUARE_TABLES
-        switch (abs_piece) {
-            case WP:
-                mg += (side == WHITE ? 1 : -1) * PST_PAWN[psq];
-                eg += (side == WHITE ? 1 : -1) * PST_PAWN[psq];
-                break;
-            case WN:
-                mg += (side == WHITE ? 1 : -1) * PST_KNIGHT[psq];
-                eg += (side == WHITE ? 1 : -1) * PST_KNIGHT[psq];
-                phase += 1;
-                break;
-            case WB:
-                mg += (side == WHITE ? 1 : -1) * PST_BISHOP[psq];
-                eg += (side == WHITE ? 1 : -1) * PST_BISHOP[psq];
-                phase += 1;
-                break;
-            case WR:
-                mg += (side == WHITE ? 1 : -1) * PST_ROOK[psq];
-                eg += (side == WHITE ? 1 : -1) * PST_ROOK[psq];
-                phase += 2;
-                break;
-            case WQ:
-                mg += (side == WHITE ? 1 : -1) * PST_QUEEN[psq];
-                eg += (side == WHITE ? 1 : -1) * PST_QUEEN[psq];
-                phase += 4;
-                break;
-            case WK:
-                mg += (side == WHITE ? 1 : -1) * PST_KING_MG[psq];
-                eg += (side == WHITE ? 1 : -1) * PST_KING_EG[psq];
-                break;
-            default:
-                break;
-        }
-#endif
-    }
-
-#if CFG_PAWN_HASH_TABLE
-    {
-        uint64_t key = state_key(state);
-        PawnHashEntry *entry = &g_pawn_hash[key & PAWN_HASH_MASK];
-        if (entry->key == key) {
-            mg += entry->score;
-            eg += entry->score;
-        } else {
-            int pawn_score = evaluate_pawn_structure(state);
-            entry->key = key;
-            entry->score = pawn_score;
-            mg += pawn_score;
-            eg += pawn_score;
-        }
-    }
-#elif CFG_PAWN_STRUCTURE
-    mg += evaluate_pawn_structure(state);
-    eg += evaluate_pawn_structure(state);
-#endif
-
-#if CFG_MOBILITY
-    mg += evaluate_mobility(state);
-#endif
-
-#if CFG_KING_SAFETY
-    mg += evaluate_king_safety(state);
-#endif
-
-#if CFG_TAPERED_EVAL
-    if (phase > 24) {
-        phase = 24;
-    }
-    score = (mg * phase + eg * (24 - phase)) / 24;
-#else
-    (void)eg;
-    (void)phase;
-    score = mg;
-#endif
-
-    return state->side_to_move == WHITE ? score : -score;
-}
-
-static ENGINE_MAYBE_UNUSED int score_capture(const EngineState *state, const EngineMove *move) {
-    int victim = state->board[move->to];
-    int attacker = state->board[move->from];
-    int score = 0;
-
-    if (victim != EMPTY) {
-        score += 10 * PIECE_VALUE[piece_abs(victim)] - PIECE_VALUE[piece_abs(attacker)];
-#if CFG_STATIC_EXCHANGE_EVALUATION
-        score += static_exchange_eval(state, move);
-#endif
-    }
-    return score;
 }
 
 static ENGINE_MAYBE_UNUSED int move_to_int(const EngineMove *move) {
@@ -1852,6 +1063,9 @@ static void move_to_front(EngineMoveList *list, const EngineMove *move) {
 
 static void order_moves(EngineState *state, EngineMoveList *list, int ply, const EngineMove *hash_move) {
     (void)ply;
+#if !CFG_HASH_MOVE
+    (void)hash_move;
+#endif
 
 #if CFG_MOVE_ORDERING
     int i;
@@ -1866,7 +1080,7 @@ static void order_moves(EngineState *state, EngineMoveList *list, int ply, const
 #endif
 
         if (m->flags & FLAG_CAPTURE) {
-            score += 200000 + score_capture(state, m);
+            score += 200000 + engine_score_capture_internal(state, m);
         } else {
 #if CFG_KILLER_HEURISTIC
             int code = move_to_int(m);
@@ -1986,14 +1200,14 @@ static void record_beta_cutoff(EngineState *state, int ply, int depth, const Eng
 }
 
 static const EngineSearchOps SEARCH_OPS = {
-    .evaluate_position = evaluate_position,
+    .evaluate_position = engine_evaluate_position_internal,
     .in_check = in_check,
     .repetition_count = repetition_count,
     .now_ms = now_ms,
     .generate_moves = generate_moves,
     .make_move = make_move,
     .unmake_move = unmake_move,
-    .state_key = state_key,
+    .state_key = engine_state_key_internal,
     .order_moves = order_moves,
     .tt_probe = tt_probe,
     .tt_store = tt_store,
@@ -2101,10 +1315,9 @@ void engine_init(EngineState *state) {
     if (state == NULL) {
         return;
     }
-    init_square_maps();
     init_zobrist();
     memset(g_tt, 0, sizeof(g_tt));
-    memset(g_pawn_hash, 0, sizeof(g_pawn_hash));
+    engine_reset_evaluation_tables();
     memset(g_killers, 0, sizeof(g_killers));
     memset(g_history, 0, sizeof(g_history));
     state->pondering_enabled = false;
@@ -2123,7 +1336,7 @@ int engine_set_startpos(EngineState *state) {
     }
     state->plies_from_start = 0;
     state->history_count = 1;
-    state->position_history[0] = state_key(state);
+    state->position_history[0] = engine_state_key_internal(state);
     snprintf(state->last_fen, sizeof(state->last_fen), "%s", STARTPOS_FEN);
     return 0;
 }
@@ -2144,7 +1357,7 @@ int engine_set_fen(EngineState *state, const char *fen) {
         state->plies_from_start = 0;
     }
     state->history_count = 1;
-    state->position_history[0] = state_key(state);
+    state->position_history[0] = engine_state_key_internal(state);
     snprintf(state->last_fen, sizeof(state->last_fen), "%s", fen);
     return 0;
 #endif
@@ -2230,6 +1443,13 @@ uint64_t engine_perft(EngineState *state, int depth) {
 #endif
 }
 
+int engine_static_eval(EngineState *state) {
+    if (state == NULL) {
+        return 0;
+    }
+    return engine_evaluate_position_internal(state);
+}
+
 void engine_move_to_uci(const EngineMove *move, char out[6]) {
     int from_file;
     int from_rank;
@@ -2262,7 +1482,15 @@ void engine_variant_summary(char *out, size_t out_size) {
         return;
     }
 
-    snprintf(out, out_size, "variant=%s board=%s search=%s", PL_VARIANT_NAME, engine_board_backend_name(), engine_search_core_name());
+    snprintf(
+        out,
+        out_size,
+        "variant=%s board=%s search=%s eval=%s",
+        PL_VARIANT_NAME,
+        engine_board_backend_name(),
+        engine_search_core_name(),
+        engine_eval_profile_name()
+    );
 }
 
 void engine_print_compiled_features(FILE *out) {

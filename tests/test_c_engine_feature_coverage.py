@@ -12,10 +12,9 @@ def test_every_modeled_option_has_c_implementation_guard():
         if feature.get("variation_role") == "option" and feature.get("configurable")
     ]
 
-    c_sources = (
-        Path("c_engine_pl/src/engine.c").read_text(encoding="utf-8")
-        + "\n"
-        + Path("c_engine_pl/src/uci.c").read_text(encoding="utf-8")
+    c_sources = "\n".join(
+        path.read_text(encoding="utf-8")
+        for path in sorted(Path("c_engine_pl/src").glob("*.c"))
     )
 
     missing = []

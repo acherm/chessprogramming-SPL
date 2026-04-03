@@ -23,6 +23,10 @@ class ModelBuildResult:
     meta: dict
 
 
+def _normalize_name(name: str) -> str:
+    return " ".join(name.lower().split())
+
+
 def _find_seed_page(pages: list[PageDocument], needle: str) -> PageDocument | None:
     needle_l = needle.lower()
     for page in pages:
@@ -202,6 +206,160 @@ def _add_binding_layer(
     return features + new_features, traces + new_traces, warnings
 
 
+def _add_intermediate_groups(
+    features: list[FeatureNode],
+    traces: list[TraceRecord],
+    pages: list[PageDocument],
+) -> tuple[list[FeatureNode], list[TraceRecord], list[str]]:
+    warnings: list[str] = []
+    used_ids = {feature.id for feature in features}
+    trace_by_feature_id: dict[str, TraceRecord] = {}
+
+    for trace in traces:
+        trace_by_feature_id.setdefault(trace.feature_id, trace)
+
+    new_features: list[FeatureNode] = []
+    new_traces: list[TraceRecord] = []
+
+    def feature_for(name: str, variation_role: str | None = None) -> FeatureNode | None:
+        normalized = _normalize_name(name)
+        for feature in features:
+            if _normalize_name(feature.name) != normalized:
+                continue
+            if variation_role is not None and feature.variation_role != variation_role:
+                continue
+            return feature
+        return None
+
+    def reparent(names: list[str], parent_id: str) -> None:
+        for name in names:
+            feature = feature_for(name)
+            if feature is not None:
+                feature.parent_id = parent_id
+
+    evaluation_group = next((feature for feature in features if feature.id == "evaluation" and feature.variation_role == "group"), None)
+    if evaluation_group is None:
+        return features, traces, ["Skipped intermediate evaluation groups because Evaluation is missing"]
+
+    pawn_group = feature_for("Pawn Structure", variation_role="option")
+    if pawn_group is not None and pawn_group.variation_role == "option":
+        pawn_group.variation_role = "group"
+        pawn_group.kind = "or"
+        pawn_group.description = "Intermediate group for pawn-structure evaluation terms."
+        pawn_group.configurable = False
+        pawn_group.variability_stage = "none"
+        pawn_group.compile_flag = ""
+        pawn_group.runtime_flag = ""
+        reparent(["Passed Pawn", "Isolated Pawn", "Doubled Pawn", "Connected Pawn"], pawn_group.id)
+    else:
+        warnings.append("Skipped Pawn Structure intermediate group because the coarse feature is missing")
+
+    piece_coord_children = [
+        feature_for("Bishop Pair"),
+        feature_for("Rook on Open File"),
+        feature_for("Rook Semi-Open File"),
+    ]
+    piece_coord_children = [feature for feature in piece_coord_children if feature is not None]
+    if piece_coord_children:
+        piece_coord_id = "evaluation_piece_coordination"
+        if piece_coord_id not in used_ids:
+            used_ids.add(piece_coord_id)
+            piece_coord_group = FeatureNode(
+                id=piece_coord_id,
+                name="Piece Coordination",
+                parent_id=evaluation_group.id,
+                kind="or",
+                description="Intermediate group for piece-coordination evaluation terms.",
+                aliases=[],
+                variation_role="group",
+                variability_stage="none",
+                configurable=False,
+            )
+            new_features.append(piece_coord_group)
+
+            source_trace = trace_by_feature_id.get(piece_coord_children[0].id)
+            source_page = pages[0] if pages else None
+            if source_trace is not None:
+                new_traces.append(
+                    build_trace(
+                        feature_id=piece_coord_group.id,
+                        source_url=source_trace.source_url,
+                        source_title=source_trace.source_title,
+                        snippet=source_trace.snippet,
+                        rule_id="intermediate_group_inferred",
+                        term=piece_coord_group.name,
+                    )
+                )
+            elif source_page is not None:
+                new_traces.append(
+                    build_trace(
+                        feature_id=piece_coord_group.id,
+                        source_url=source_page.url,
+                        source_title=source_page.title,
+                        snippet=extract_snippet(source_page.text, "bishop pair"),
+                        rule_id="seed_page_fallback",
+                        term=piece_coord_group.name,
+                    )
+                )
+
+            for feature in piece_coord_children:
+                feature.parent_id = piece_coord_group.id
+        else:
+            warnings.append("Skipped Piece Coordination intermediate group because id already exists")
+
+    king_group = feature_for("King Safety", variation_role="option")
+    if king_group is not None and king_group.variation_role == "option":
+        source_trace = trace_by_feature_id.get(king_group.id)
+        king_group.name = "King Terms"
+        king_group.kind = "or"
+        king_group.description = "Intermediate group for king-centric evaluation terms."
+        king_group.configurable = False
+        king_group.variation_role = "group"
+        king_group.variability_stage = "none"
+        king_group.compile_flag = ""
+        king_group.runtime_flag = ""
+
+        king_pressure_id = "feat_king_pressure"
+        while king_pressure_id in used_ids:
+            king_pressure_id = f"{king_pressure_id}_x"
+        used_ids.add(king_pressure_id)
+        pressure_description = (
+            source_trace.snippet[:180]
+            if source_trace is not None
+            else "Attack pressure around the enemy king."
+        )
+        king_pressure = FeatureNode(
+            id=king_pressure_id,
+            name="King Pressure",
+            parent_id=king_group.id,
+            kind="optional",
+            description=pressure_description,
+            aliases=["King Safety", "Attacking King Zone"],
+            variation_role="option",
+            variability_stage="compile_time",
+            configurable=True,
+            compile_flag="CFG_KING_SAFETY",
+            runtime_flag="",
+        )
+        new_features.append(king_pressure)
+        if source_trace is not None:
+            new_traces.append(
+                build_trace(
+                    feature_id=king_pressure.id,
+                    source_url=source_trace.source_url,
+                    source_title=source_trace.source_title,
+                    snippet=source_trace.snippet,
+                    rule_id="intermediate_group_split",
+                    term=king_pressure.name,
+                )
+            )
+        reparent(["King Shelter", "King Activity"], king_group.id)
+    else:
+        warnings.append("Skipped King Terms intermediate group because the coarse feature is missing")
+
+    return features + new_features, traces + new_traces, warnings
+
+
 def build_feature_model(
     pages: list[PageDocument],
     depth: int = 3,
@@ -211,35 +369,42 @@ def build_feature_model(
     seeded = seed_feature_nodes()
     normalized_depth = max(1, depth)
     non_engine_pages = extract_non_engine_pages(pages)
+    seed_pages = non_engine_pages or pages
+    mining_pages = pages or non_engine_pages
 
     if normalized_depth == 1:
         # Depth 1 keeps only variability structure: root + top-level variation points.
         features = seeded
-        traces = _seed_traces(features, non_engine_pages)
+        traces = _seed_traces(features, seed_pages)
         constraints: list[ConstraintRule] = []
     else:
         leaf_nodes, leaf_traces, mining_warnings = mine_implementation_features(
-            non_engine_pages,
+            mining_pages,
             target_count=target_features,
         )
         warnings.extend(mining_warnings)
 
         features = seeded + leaf_nodes
-        traces = _seed_traces(features, non_engine_pages) + leaf_traces
+        traces = _seed_traces(features, seed_pages) + leaf_traces
+
+        if normalized_depth >= 4:
+            features, traces, grouping_warnings = _add_intermediate_groups(features, traces, pages or seed_pages)
+            warnings.extend(grouping_warnings)
+
         constraints, constraint_warnings = build_cross_tree_constraints(features)
         warnings.extend(constraint_warnings)
 
-        if normalized_depth >= 4:
+        if normalized_depth >= 5:
             features, traces, binding_warnings = _add_binding_layer(features, traces)
             warnings.extend(binding_warnings)
 
-    traces, trace_warnings = _ensure_trace_per_feature(features, traces, non_engine_pages)
+    traces, trace_warnings = _ensure_trace_per_feature(features, traces, pages or seed_pages)
     warnings.extend(trace_warnings)
 
     if depth < 1:
         warnings.append(f"Requested depth={depth}; clamped to depth=1")
-    if depth > 4:
-        warnings.append(f"Requested depth={depth}; current implementation emits depth up to 4")
+    if depth > 5:
+        warnings.append(f"Requested depth={depth}; current implementation emits depth up to 5")
 
     duplicate_trace_ids: set[str] = set()
     seen_trace_ids: set[str] = set()

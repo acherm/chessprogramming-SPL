@@ -65,6 +65,7 @@ int engine_set_fen(EngineState *state, const char *fen);
 int engine_apply_move_uci(EngineState *state, const char *move_uci);
 int engine_generate_legal_moves(EngineState *state, EngineMoveList *list);
 uint64_t engine_perft(EngineState *state, int depth);
+int engine_static_eval(EngineState *state);
 EngineSearchResult engine_search(EngineState *state, int max_depth, int movetime_ms);
 void engine_move_to_uci(const EngineMove *move, char out[6]);
 void engine_variant_summary(char *out, size_t out_size);

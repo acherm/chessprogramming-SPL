@@ -76,6 +76,6 @@ Mostly performance-impacting for perft:
 Mostly search-strength oriented (limited direct perft impact):
 
 - `Alpha-Beta`, `PVS`, `LMR`, `Null Move Pruning`, `Aspiration Windows`
-- evaluation features (`Piece-Square Tables`, `King Safety`, `Mobility`, etc.)
+- evaluation features (`Piece-Square Tables`, `King Pressure`, `King Shelter`, `Mobility`, etc.)
 
 Perft is a move-generation correctness benchmark, not a playing-strength benchmark.

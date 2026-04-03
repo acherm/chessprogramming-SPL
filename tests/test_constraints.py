@@ -17,6 +17,10 @@ def test_build_cross_tree_constraints_from_feature_set():
         FeatureNode(id="feat_mailbox", name="Mailbox", parent_id="board"),
         FeatureNode(id="feat_alpha_beta", name="Alpha-Beta", parent_id="search"),
         FeatureNode(id="feat_pvs", name="Principal Variation Search", parent_id="search"),
+        FeatureNode(id="feat_eval", name="Evaluation", parent_id="evaluation"),
+        FeatureNode(id="feat_passed", name="Passed Pawn", parent_id="evaluation"),
+        FeatureNode(id="feat_tapered", name="Tapered Eval", parent_id="evaluation"),
+        FeatureNode(id="feat_king_activity", name="King Activity", parent_id="evaluation"),
     ]
 
     constraints, warnings = build_cross_tree_constraints(features)
@@ -33,6 +37,8 @@ def test_build_cross_tree_constraints_from_feature_set():
     }
     assert ("Magic Bitboards", "Bitboards", "requires") in edge_names
     assert ("Bitboards", "Mailbox", "excludes") in edge_names
+    assert ("Passed Pawn", "Evaluation", "requires") in edge_names
+    assert ("King Activity", "Tapered Eval", "requires") in edge_names
 
 
 def test_featureide_constraints_export(tmp_path):

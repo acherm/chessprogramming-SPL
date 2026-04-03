@@ -222,7 +222,6 @@ CORE_FEATURE_SPECS = [
     CoreFeatureSpec("Legal Move Generation", "move_generation", ("legal move generation",)),
     CoreFeatureSpec("Castling", "move_generation", ("castling", "castling rights")),
     CoreFeatureSpec("En Passant", "move_generation", ("en passant", "ep capture")),
-    CoreFeatureSpec("Magic Bitboards", "move_generation", ("magic bitboards", "magic bitboard")),
     CoreFeatureSpec("Move Ordering", "move_generation", ("move ordering",)),
     CoreFeatureSpec("Alpha-Beta", "search", ("alpha-beta", "alpha beta", "alphabeta")),
     CoreFeatureSpec("Negamax", "search", ("negamax",)),
@@ -239,7 +238,70 @@ CORE_FEATURE_SPECS = [
     CoreFeatureSpec("Tapered Eval", "evaluation", ("tapered eval", "tapered evaluation")),
     CoreFeatureSpec("Static Exchange Evaluation", "evaluation", ("static exchange evaluation",)),
     CoreFeatureSpec("King Safety", "evaluation", ("king safety",)),
+    CoreFeatureSpec(
+        "King Shelter",
+        "evaluation",
+        ("king shelter", "pawn shelter", "pawn shield"),
+        compile_flag="CFG_KING_SHELTER",
+    ),
+    CoreFeatureSpec(
+        "King Activity",
+        "evaluation",
+        ("king activity", "king centralization"),
+        compile_flag="CFG_KING_ACTIVITY",
+    ),
     CoreFeatureSpec("Pawn Structure", "evaluation", ("pawn structure",)),
+    CoreFeatureSpec(
+        "Passed Pawn",
+        "evaluation",
+        ("passed pawn", "passed pawns"),
+        compile_flag="CFG_PASSED_PAWN",
+    ),
+    CoreFeatureSpec(
+        "Isolated Pawn",
+        "evaluation",
+        ("isolated pawn", "isolated pawns", "isolani"),
+        compile_flag="CFG_ISOLATED_PAWN",
+    ),
+    CoreFeatureSpec(
+        "Doubled Pawn",
+        "evaluation",
+        ("doubled pawn", "doubled pawns"),
+        compile_flag="CFG_DOUBLED_PAWN",
+    ),
+    CoreFeatureSpec(
+        "Connected Pawn",
+        "evaluation",
+        ("connected pawn", "connected pawns", "connected passed pawns"),
+        compile_flag="CFG_CONNECTED_PAWN",
+    ),
+    CoreFeatureSpec(
+        "Bishop Pair",
+        "evaluation",
+        ("bishop pair",),
+        compile_flag="CFG_BISHOP_PAIR",
+    ),
+    CoreFeatureSpec(
+        "Rook on Open File",
+        "evaluation",
+        ("rook on open file", "rooks on open files", "rook open file"),
+        compile_flag="CFG_ROOK_OPEN_FILE",
+    ),
+    CoreFeatureSpec(
+        "Rook Semi-Open File",
+        "evaluation",
+        (
+            "rook semi-open file",
+            "rook on semi-open file",
+            "rooks on semi open files",
+            "rooks on semi-open files",
+            "rook on half open file",
+            "rook on half-open file",
+            "rook on (half) open file",
+            "rooks on (semi) open files",
+        ),
+        compile_flag="CFG_ROOK_SEMI_OPEN_FILE",
+    ),
     CoreFeatureSpec("Mobility", "evaluation", ("mobility",)),
     CoreFeatureSpec("Transposition Table", "transposition_table", ("transposition table",)),
     CoreFeatureSpec("Zobrist Hashing", "transposition_table", ("zobrist", "zobrist hashing")),
@@ -764,20 +826,52 @@ def _find_page_evidence(pages: list[PageDocument], aliases: list[str]) -> tuple[
             continue
         normalized_aliases.append((alias, alias_norm))
 
+    best_match: tuple[int, int, PageDocument, str, str] | None = None
+    page_type_bonus = {"technique": 30, "engine": 10, "meta": 0}
+
     for page in pages:
         title_norm = normalize_term(page.title)
-        heading_blob = normalize_term(" ".join(page.headings[:24]))
+        heading_norms = [normalize_term(heading) for heading in page.headings[:24]]
+        bold_norms = [normalize_term(term) for term in page.bold_terms[:24]]
+        link_norms = [normalize_term(term) for term in page.links[:48]]
         text_norm = normalize_term(page.text)
-        combined = f"{title_norm} {heading_blob} {text_norm}"
 
         for alias, alias_norm in normalized_aliases:
+            score = 0
+
             if len(alias_norm) <= 2 and alias_norm not in {"0x88"}:
                 continue
-            if _has_alias_match(alias_norm, combined):
-                snippet = extract_snippet(page.text, alias)
-                return page, alias, snippet
 
-    return None
+            if title_norm == alias_norm:
+                score += 120
+            elif _has_alias_match(alias_norm, title_norm):
+                score += 80
+
+            if any(heading == alias_norm for heading in heading_norms):
+                score += 70
+            elif any(_has_alias_match(alias_norm, heading) for heading in heading_norms):
+                score += 45
+
+            if any(_has_alias_match(alias_norm, term) for term in bold_norms):
+                score += 25
+            if any(_has_alias_match(alias_norm, term) for term in link_norms):
+                score += 12
+            if _has_alias_match(alias_norm, text_norm):
+                score += 6
+
+            score += page_type_bonus.get(page.page_type, 0)
+            if score <= 0:
+                continue
+
+            rank = 0 if page.page_type == "technique" else 1 if page.page_type == "engine" else 2
+            snippet = extract_snippet(page.text, alias)
+            candidate = (score, -rank, page, alias, snippet)
+            if best_match is None or candidate[:2] > best_match[:2]:
+                best_match = candidate
+
+    if best_match is None:
+        return None
+    return best_match[2], best_match[3], best_match[4]
 
 
 def _stage_from_spec(spec: CoreFeatureSpec) -> str:

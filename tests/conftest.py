@@ -58,6 +58,51 @@ def sample_pages() -> list[PageDocument]:
             page_type="technique",
         ),
         PageDocument(
+            title="Pawn Structure",
+            url="https://www.chessprogramming.org/Pawn_Structure",
+            source_type="html",
+            retrieved_at="2026-01-01T00:00:00+00:00",
+            content_hash="h_pawn",
+            text=(
+                "Pawn structure evaluation includes passed pawn, isolated pawn, doubled pawn, and connected pawn bonuses or penalties."
+            ),
+            headings=["Pawn Structure"],
+            links=["Passed Pawn", "Isolated Pawn", "Doubled Pawn", "Connected Pawn"],
+            bold_terms=["Pawn Structure", "Passed Pawn"],
+            categories=["Evaluation"],
+            page_type="technique",
+        ),
+        PageDocument(
+            title="Material",
+            url="https://www.chessprogramming.org/Material",
+            source_type="html",
+            retrieved_at="2026-01-01T00:00:00+00:00",
+            content_hash="h_material",
+            text=(
+                "Material evaluation often includes the bishop pair bonus and rook on open file or semi-open file bonuses."
+            ),
+            headings=["Material", "Other Material Considerations"],
+            links=["Bishop Pair", "Rook on Open File"],
+            bold_terms=["Bishop Pair"],
+            categories=["Evaluation"],
+            page_type="technique",
+        ),
+        PageDocument(
+            title="King Safety",
+            url="https://www.chessprogramming.org/King_Safety",
+            source_type="html",
+            retrieved_at="2026-01-01T00:00:00+00:00",
+            content_hash="h_king",
+            text=(
+                "King safety can include pawn shelter and king activity or king centralization in later phases."
+            ),
+            headings=["King Safety"],
+            links=["Pawn Shelter", "King Centralization"],
+            bold_terms=["King Safety", "Pawn Shelter"],
+            categories=["Evaluation"],
+            page_type="technique",
+        ),
+        PageDocument(
             title="Monte-Carlo Tree Search",
             url="https://www.chessprogramming.org/Monte-Carlo_Tree_Search",
             source_type="html",

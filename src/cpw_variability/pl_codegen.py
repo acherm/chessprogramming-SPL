@@ -19,6 +19,12 @@ class ModelIndex:
     constraints: list[ConstraintRule]
 
 
+LEGACY_OPTION_EXPANSIONS: dict[str, tuple[str, ...]] = {
+    "pawn structure": ("Passed Pawn", "Isolated Pawn", "Doubled Pawn", "Connected Pawn"),
+    "king safety": ("King Pressure", "King Shelter"),
+}
+
+
 def _normalize_token(token: str) -> str:
     return " ".join(token.strip().lower().split())
 
@@ -72,6 +78,18 @@ def resolve_selected_option_ids(model: ModelIndex, selected_tokens: Iterable[str
             continue
 
         normalized = _normalize_token(raw)
+        if normalized in LEGACY_OPTION_EXPANSIONS:
+            expanded_names = LEGACY_OPTION_EXPANSIONS[normalized]
+            missing = [name for name in expanded_names if _normalize_token(name) not in model.options_by_name]
+            if missing:
+                errors.append(
+                    f"Legacy option token '{raw}' could not be expanded because these options are missing: {', '.join(missing)}"
+                )
+                continue
+            for name in expanded_names:
+                selected_ids.add(model.options_by_name[_normalize_token(name)].id)
+            continue
+
         if normalized in model.options_by_name:
             selected_ids.add(model.options_by_name[normalized].id)
             continue

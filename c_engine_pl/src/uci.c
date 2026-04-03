@@ -204,6 +204,21 @@ static void handle_perft(EngineState *state, const char *args) {
     fflush(stdout);
 }
 
+static void handle_eval(EngineState *state) {
+    int score_cp;
+    char summary[256];
+
+    if (state == NULL) {
+        return;
+    }
+
+    score_cp = engine_static_eval(state);
+    engine_variant_summary(summary, sizeof(summary));
+    printf("info string %s\n", summary);
+    printf("info string static_eval cp %d\n", score_cp);
+    fflush(stdout);
+}
+
 int uci_loop(void) {
     EngineState state;
     char line[2048];
@@ -254,6 +269,11 @@ int uci_loop(void) {
 
         if (strncmp(line, "perft", 5) == 0) {
             handle_perft(&state, line + 5);
+            continue;
+        }
+
+        if (strcmp(line, "eval") == 0) {
+            handle_eval(&state);
             continue;
         }
 

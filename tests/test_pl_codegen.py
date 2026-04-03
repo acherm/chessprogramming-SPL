@@ -69,3 +69,104 @@ def test_move_generation_is_mandatory_for_executable_variants(tmp_path):
 
     assert not resolve_errors
     assert any("Move Generation" in message and "mandatory" in message for message in validation_errors)
+
+
+def test_promoted_eval_subfeatures_generate_dedicated_flags(tmp_path):
+    config = tmp_path / "eval_subfeatures.json"
+    header = tmp_path / "variant_config.h"
+    manifest = tmp_path / "variant_manifest.json"
+
+    config.write_text(
+        json.dumps(
+            {
+                "name": "eval_subfeatures",
+                "selected_options": [
+                    "Bitboards",
+                    "Negamax",
+                    "Alpha-Beta",
+                    "Move Generation",
+                    "Legal Move Generation",
+                    "Make Move",
+                    "Unmake Move",
+                    "Castling",
+                    "En Passant",
+                    "Threefold Repetition",
+                    "Fifty-Move Rule",
+                    "Evaluation",
+                    "Passed Pawn",
+                    "Bishop Pair",
+                    "King Shelter",
+                    "Tapered Eval",
+                    "King Activity",
+                    "UCI",
+                ],
+            },
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+
+    report = derive_variant(
+        feature_model_path=Path("outputs/feature_model.json"),
+        config_path=config,
+        header_out=header,
+        manifest_out=manifest,
+    )
+
+    assert report["selected_count"] > 0
+
+    header_text = header.read_text(encoding="utf-8")
+    assert "#define CFG_PASSED_PAWN 1" in header_text
+    assert "#define CFG_BISHOP_PAIR 1" in header_text
+    assert "#define CFG_KING_SHELTER 1" in header_text
+    assert "#define CFG_KING_ACTIVITY 1" in header_text
+
+
+def test_legacy_eval_group_tokens_expand_to_leaf_options(tmp_path):
+    config = tmp_path / "legacy_eval_groups.json"
+    header = tmp_path / "variant_config.h"
+    manifest = tmp_path / "variant_manifest.json"
+
+    config.write_text(
+        json.dumps(
+            {
+                "name": "legacy_eval_groups",
+                "selected_options": [
+                    "Bitboards",
+                    "Negamax",
+                    "Alpha-Beta",
+                    "Move Generation",
+                    "Legal Move Generation",
+                    "Make Move",
+                    "Unmake Move",
+                    "Castling",
+                    "En Passant",
+                    "Threefold Repetition",
+                    "Fifty-Move Rule",
+                    "Evaluation",
+                    "Pawn Structure",
+                    "King Safety",
+                    "Tapered Eval",
+                    "UCI",
+                ],
+            },
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+
+    report = derive_variant(
+        feature_model_path=Path("outputs/feature_model.json"),
+        config_path=config,
+        header_out=header,
+        manifest_out=manifest,
+    )
+
+    assert report["selected_count"] > 0
+    header_text = header.read_text(encoding="utf-8")
+    assert "#define CFG_PASSED_PAWN 1" in header_text
+    assert "#define CFG_ISOLATED_PAWN 1" in header_text
+    assert "#define CFG_DOUBLED_PAWN 1" in header_text
+    assert "#define CFG_CONNECTED_PAWN 1" in header_text
+    assert "#define CFG_KING_SAFETY 1" in header_text
+    assert "#define CFG_KING_SHELTER 1" in header_text

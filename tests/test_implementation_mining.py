@@ -30,6 +30,9 @@ def test_model_is_implementation_oriented(sample_pages):
 
     option_names = {feature.name for feature in options}
     assert "Alpha-Beta" in option_names
+    assert "Passed Pawn" in option_names
+    assert "Bishop Pair" in option_names
+    assert "King Shelter" in option_names
 
     for option in options:
         lowered = option.name.lower()
@@ -57,8 +60,22 @@ def test_depth_one_emits_structural_model_only(sample_pages):
     assert result.constraints == []
 
 
-def test_depth_four_adds_binding_layer(sample_pages):
+def test_depth_four_adds_intermediate_groups(sample_pages):
     result = build_feature_model(sample_pages, depth=4, target_features=200)
+
+    options = [feature for feature in result.features if feature.variation_role == "option"]
+    groups = [feature for feature in result.features if feature.variation_role == "group"]
+
+    assert options
+    assert any(group.name == "Pawn Structure" and group.parent_id == "evaluation" for group in groups)
+    assert any(group.name == "Piece Coordination" and group.parent_id == "evaluation" for group in groups)
+    assert any(group.name == "King Terms" and group.parent_id == "evaluation" for group in groups)
+    assert any(feature.name == "Passed Pawn" and feature.parent_id != "evaluation" for feature in options)
+    assert any(feature.name == "King Pressure" and feature.parent_id != "evaluation" for feature in options)
+
+
+def test_depth_five_adds_binding_layer(sample_pages):
+    result = build_feature_model(sample_pages, depth=5, target_features=200)
 
     options = [feature for feature in result.features if feature.variation_role == "option"]
     bindings = [feature for feature in result.features if feature.variation_role == "binding"]
