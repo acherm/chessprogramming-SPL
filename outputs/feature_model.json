@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-04-04T08:31:52.144620+00:00",
+    "generated_at": "2026-04-04T12:09:48.866426+00:00",
     "model_perspective": "implementation_product_line",
     "configuration_goal": "each valid feature configuration maps to a chess-engine variant",
     "primary_variability_strategy": "compile_time_first_with_limited_runtime_options",
@@ -642,10 +642,10 @@
       "description": "Home * Knowledge * Opening Book Modern Chess Openings [1] Chess programs often look up the positions at the beginning of the game in an Opening Book .",
       "aliases": [],
       "variation_role": "option",
-      "variability_stage": "compile_time",
+      "variability_stage": "mixed",
       "configurable": true,
       "compile_flag": "CFG_OPENING_BOOK",
-      "runtime_flag": ""
+      "runtime_flag": "setoption name OwnBook/BookFile"
     },
     {
       "id": "feat_fen",
@@ -912,10 +912,10 @@
         "ponder"
       ],
       "variation_role": "option",
-      "variability_stage": "runtime",
+      "variability_stage": "mixed",
       "configurable": true,
       "compile_flag": "CFG_PONDERING",
-      "runtime_flag": "--pondering"
+      "runtime_flag": "setoption name Ponder value true"
     },
     {
       "id": "feat_time_management",
@@ -925,10 +925,10 @@
       "description": "Home * Search * Time Management Roland La Tuffo Barcsik - Time out [1] Time management refers to algorithms and heuristics to allocate time for searching a move under time control ",
       "aliases": [],
       "variation_role": "option",
-      "variability_stage": "runtime",
+      "variability_stage": "mixed",
       "configurable": true,
       "compile_flag": "CFG_TIME_MANAGEMENT",
-      "runtime_flag": "--time-management"
+      "runtime_flag": "go wtime/btime[/winc/binc/movestogo]"
     },
     {
       "id": "feat_hash_move",

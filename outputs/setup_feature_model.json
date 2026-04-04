@@ -1,0 +1,522 @@
+{
+  "meta": {
+    "model_perspective": "runtime_setup_layer",
+    "goal": "Model runtime and harness variability layered on top of a compile-time engine variant.",
+    "abstraction_note": "Numeric UCI parameters are abstracted into categorical setup bands so they fit a feature-model style representation.",
+    "scope_limit": "Only setup variability backed by the current engine implementation is modeled. Threads and Hash are intentionally excluded because they are not exposed as real engine options here.",
+    "variant_recommendations": 17,
+    "feature_recommendations": 56
+  },
+  "features": [
+    {
+      "id": "engine_setup",
+      "name": "EngineSetup",
+      "parent_id": null,
+      "kind": "mandatory",
+      "description": "Runtime and operational setup variability layered on top of a derived engine variant.",
+      "aliases": [],
+      "variation_role": "root",
+      "variability_stage": "none",
+      "configurable": false,
+      "compile_flag": "",
+      "runtime_flag": ""
+    },
+    {
+      "id": "setup_search_budget",
+      "name": "Search Budget",
+      "parent_id": "engine_setup",
+      "kind": "xor",
+      "description": "Primary runtime search-limit mode.",
+      "aliases": [],
+      "variation_role": "group",
+      "variability_stage": "none",
+      "configurable": false,
+      "compile_flag": "",
+      "runtime_flag": ""
+    },
+    {
+      "id": "setup_fixed_depth",
+      "name": "Fixed Depth",
+      "parent_id": "setup_search_budget",
+      "kind": "xor",
+      "description": "Use an exact search depth and disable time cutoffs.",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "runtime",
+      "configurable": true,
+      "compile_flag": "",
+      "runtime_flag": "go depth N"
+    },
+    {
+      "id": "setup_depth_shallow",
+      "name": "Shallow Depth",
+      "parent_id": "setup_fixed_depth",
+      "kind": "optional",
+      "description": "Small depth budget, typically depth 2-4.",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "runtime",
+      "configurable": true,
+      "compile_flag": "",
+      "runtime_flag": "depth 2-4"
+    },
+    {
+      "id": "setup_depth_medium",
+      "name": "Medium Depth",
+      "parent_id": "setup_fixed_depth",
+      "kind": "optional",
+      "description": "Moderate depth budget, typically depth 5-8.",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "runtime",
+      "configurable": true,
+      "compile_flag": "",
+      "runtime_flag": "depth 5-8"
+    },
+    {
+      "id": "setup_depth_deep",
+      "name": "Deep Depth",
+      "parent_id": "setup_fixed_depth",
+      "kind": "optional",
+      "description": "Deep analysis budget, typically depth 9+.",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "runtime",
+      "configurable": true,
+      "compile_flag": "",
+      "runtime_flag": "depth 9+"
+    },
+    {
+      "id": "setup_fixed_movetime",
+      "name": "Fixed MoveTime",
+      "parent_id": "setup_search_budget",
+      "kind": "xor",
+      "description": "Allocate a fixed exact movetime to each search.",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "runtime",
+      "configurable": true,
+      "compile_flag": "",
+      "runtime_flag": "go movetime <ms>"
+    },
+    {
+      "id": "setup_movetime_short",
+      "name": "Short MoveTime",
+      "parent_id": "setup_fixed_movetime",
+      "kind": "optional",
+      "description": "Short per-move budget, typically 50-250 ms.",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "runtime",
+      "configurable": true,
+      "compile_flag": "",
+      "runtime_flag": "movetime 50-250"
+    },
+    {
+      "id": "setup_movetime_medium",
+      "name": "Medium MoveTime",
+      "parent_id": "setup_fixed_movetime",
+      "kind": "optional",
+      "description": "Medium per-move budget, typically 300-1000 ms.",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "runtime",
+      "configurable": true,
+      "compile_flag": "",
+      "runtime_flag": "movetime 300-1000"
+    },
+    {
+      "id": "setup_movetime_long",
+      "name": "Long MoveTime",
+      "parent_id": "setup_fixed_movetime",
+      "kind": "optional",
+      "description": "Long per-move budget, typically 1500 ms or more.",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "runtime",
+      "configurable": true,
+      "compile_flag": "",
+      "runtime_flag": "movetime 1500+"
+    },
+    {
+      "id": "setup_clock_managed",
+      "name": "Clock Managed",
+      "parent_id": "setup_search_budget",
+      "kind": "optional",
+      "description": "Let the engine derive the budget from UCI clock information.",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "runtime",
+      "configurable": true,
+      "compile_flag": "",
+      "runtime_flag": "go wtime/btime[/winc/binc/movestogo]"
+    },
+    {
+      "id": "setup_increment_aware",
+      "name": "Increment Aware",
+      "parent_id": "setup_clock_managed",
+      "kind": "optional",
+      "description": "Budget calculation considers increment terms.",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "runtime",
+      "configurable": true,
+      "compile_flag": "",
+      "runtime_flag": "winc/binc"
+    },
+    {
+      "id": "setup_movestogo_aware",
+      "name": "Moves-To-Go Aware",
+      "parent_id": "setup_clock_managed",
+      "kind": "optional",
+      "description": "Budget calculation considers remaining moves to the time control.",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "runtime",
+      "configurable": true,
+      "compile_flag": "",
+      "runtime_flag": "movestogo"
+    },
+    {
+      "id": "setup_book_control",
+      "name": "Opening Book Control",
+      "parent_id": "engine_setup",
+      "kind": "xor",
+      "description": "Runtime control of opening-book usage.",
+      "aliases": [],
+      "variation_role": "group",
+      "variability_stage": "none",
+      "configurable": false,
+      "compile_flag": "",
+      "runtime_flag": ""
+    },
+    {
+      "id": "setup_book_disabled",
+      "name": "Own Book Disabled",
+      "parent_id": "setup_book_control",
+      "kind": "optional",
+      "description": "Disable the engine opening book at runtime.",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "runtime",
+      "configurable": true,
+      "compile_flag": "",
+      "runtime_flag": "setoption name OwnBook value false"
+    },
+    {
+      "id": "setup_book_enabled",
+      "name": "Own Book Enabled",
+      "parent_id": "setup_book_control",
+      "kind": "xor",
+      "description": "Enable the engine opening book at runtime.",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "runtime",
+      "configurable": true,
+      "compile_flag": "",
+      "runtime_flag": "setoption name OwnBook value true"
+    },
+    {
+      "id": "setup_book_default_file",
+      "name": "Default Book File",
+      "parent_id": "setup_book_enabled",
+      "kind": "optional",
+      "description": "Use the built-in default opening-book file.",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "runtime",
+      "configurable": true,
+      "compile_flag": "",
+      "runtime_flag": "BookFile=c_engine_pl/books/default_openings.txt"
+    },
+    {
+      "id": "setup_book_custom_file",
+      "name": "Custom Book File",
+      "parent_id": "setup_book_enabled",
+      "kind": "optional",
+      "description": "Use an explicitly selected external opening-book file.",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "runtime",
+      "configurable": true,
+      "compile_flag": "",
+      "runtime_flag": "setoption name BookFile value <path>"
+    },
+    {
+      "id": "setup_ponder_control",
+      "name": "Ponder Control",
+      "parent_id": "engine_setup",
+      "kind": "xor",
+      "description": "Runtime control of pondering.",
+      "aliases": [],
+      "variation_role": "group",
+      "variability_stage": "none",
+      "configurable": false,
+      "compile_flag": "",
+      "runtime_flag": ""
+    },
+    {
+      "id": "setup_ponder_disabled",
+      "name": "Ponder Disabled",
+      "parent_id": "setup_ponder_control",
+      "kind": "optional",
+      "description": "Disable pondering and use only normal go commands.",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "runtime",
+      "configurable": true,
+      "compile_flag": "",
+      "runtime_flag": "setoption name Ponder value false"
+    },
+    {
+      "id": "setup_ponder_enabled",
+      "name": "Ponder Enabled",
+      "parent_id": "setup_ponder_control",
+      "kind": "optional",
+      "description": "Enable asynchronous go ponder / ponderhit handling.",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "runtime",
+      "configurable": true,
+      "compile_flag": "",
+      "runtime_flag": "setoption name Ponder value true"
+    }
+  ],
+  "traces": [
+    {
+      "id": "setup_trace_setup_fixed_depth",
+      "feature_id": "setup_fixed_depth",
+      "source_url": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/c_engine_pl/src/uci.c",
+      "source_title": "UCI go depth",
+      "snippet": "Depth-only mode returns -1 and disables time cutoffs.",
+      "confidence": 0.95,
+      "rule_id": "runtime_setup_spec"
+    },
+    {
+      "id": "setup_trace_setup_depth_shallow",
+      "feature_id": "setup_depth_shallow",
+      "source_url": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/c_engine_pl/src/uci.c",
+      "source_title": "UCI go depth",
+      "snippet": "Shallow depth is a low fixed-depth budget such as depth 2-4.",
+      "confidence": 0.95,
+      "rule_id": "runtime_setup_spec"
+    },
+    {
+      "id": "setup_trace_setup_depth_medium",
+      "feature_id": "setup_depth_medium",
+      "source_url": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/c_engine_pl/src/uci.c",
+      "source_title": "UCI go depth",
+      "snippet": "Medium depth is a moderate fixed-depth budget such as depth 5-8.",
+      "confidence": 0.95,
+      "rule_id": "runtime_setup_spec"
+    },
+    {
+      "id": "setup_trace_setup_depth_deep",
+      "feature_id": "setup_depth_deep",
+      "source_url": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/c_engine_pl/src/uci.c",
+      "source_title": "UCI go depth",
+      "snippet": "Deep depth represents deeper fixed-depth analysis budgets.",
+      "confidence": 0.95,
+      "rule_id": "runtime_setup_spec"
+    },
+    {
+      "id": "setup_trace_setup_fixed_movetime",
+      "feature_id": "setup_fixed_movetime",
+      "source_url": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/c_engine_pl/src/uci.c",
+      "source_title": "UCI movetime",
+      "snippet": "Explicit movetime is parsed and marked exact.",
+      "confidence": 0.95,
+      "rule_id": "runtime_setup_spec"
+    },
+    {
+      "id": "setup_trace_setup_movetime_short",
+      "feature_id": "setup_movetime_short",
+      "source_url": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/c_engine_pl/src/uci.c",
+      "source_title": "UCI movetime",
+      "snippet": "Short movetime corresponds to very small exact budgets.",
+      "confidence": 0.95,
+      "rule_id": "runtime_setup_spec"
+    },
+    {
+      "id": "setup_trace_setup_movetime_medium",
+      "feature_id": "setup_movetime_medium",
+      "source_url": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/c_engine_pl/src/uci.c",
+      "source_title": "UCI movetime",
+      "snippet": "Medium movetime corresponds to moderate exact per-move budgets.",
+      "confidence": 0.95,
+      "rule_id": "runtime_setup_spec"
+    },
+    {
+      "id": "setup_trace_setup_movetime_long",
+      "feature_id": "setup_movetime_long",
+      "source_url": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/c_engine_pl/src/uci.c",
+      "source_title": "UCI movetime",
+      "snippet": "Long movetime corresponds to large exact per-move budgets.",
+      "confidence": 0.95,
+      "rule_id": "runtime_setup_spec"
+    },
+    {
+      "id": "setup_trace_setup_clock_managed",
+      "feature_id": "setup_clock_managed",
+      "source_url": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/c_engine_pl/src/search.c",
+      "source_title": "Search deadlines",
+      "snippet": "Clock-managed search derives soft and hard deadlines from runtime clock data.",
+      "confidence": 0.95,
+      "rule_id": "runtime_setup_spec"
+    },
+    {
+      "id": "setup_trace_setup_increment_aware",
+      "feature_id": "setup_increment_aware",
+      "source_url": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/c_engine_pl/src/uci.c",
+      "source_title": "UCI increment parsing",
+      "snippet": "Budget allocation considers winc/binc when present.",
+      "confidence": 0.95,
+      "rule_id": "runtime_setup_spec"
+    },
+    {
+      "id": "setup_trace_setup_movestogo_aware",
+      "feature_id": "setup_movestogo_aware",
+      "source_url": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/c_engine_pl/src/uci.c",
+      "source_title": "UCI movestogo parsing",
+      "snippet": "Budget allocation considers movestogo when present.",
+      "confidence": 0.95,
+      "rule_id": "runtime_setup_spec"
+    },
+    {
+      "id": "setup_trace_setup_book_disabled",
+      "feature_id": "setup_book_disabled",
+      "source_url": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/c_engine_pl/src/engine.c",
+      "source_title": "OwnBook option",
+      "snippet": "The engine exposes OwnBook to disable the book at runtime.",
+      "confidence": 0.95,
+      "rule_id": "runtime_setup_spec"
+    },
+    {
+      "id": "setup_trace_setup_book_enabled",
+      "feature_id": "setup_book_enabled",
+      "source_url": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/c_engine_pl/src/engine.c",
+      "source_title": "OwnBook option",
+      "snippet": "The engine exposes OwnBook to enable the book at runtime.",
+      "confidence": 0.95,
+      "rule_id": "runtime_setup_spec"
+    },
+    {
+      "id": "setup_trace_setup_book_default_file",
+      "feature_id": "setup_book_default_file",
+      "source_url": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/c_engine_pl/src/engine.c",
+      "source_title": "BookFile option",
+      "snippet": "The engine advertises the default book file path.",
+      "confidence": 0.95,
+      "rule_id": "runtime_setup_spec"
+    },
+    {
+      "id": "setup_trace_setup_book_custom_file",
+      "feature_id": "setup_book_custom_file",
+      "source_url": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/c_engine_pl/src/uci.c",
+      "source_title": "BookFile option",
+      "snippet": "The engine accepts a runtime BookFile path through setoption.",
+      "confidence": 0.95,
+      "rule_id": "runtime_setup_spec"
+    },
+    {
+      "id": "setup_trace_setup_ponder_disabled",
+      "feature_id": "setup_ponder_disabled",
+      "source_url": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/c_engine_pl/src/engine.c",
+      "source_title": "Ponder option",
+      "snippet": "The engine exposes Ponder to disable pondering at runtime.",
+      "confidence": 0.95,
+      "rule_id": "runtime_setup_spec"
+    },
+    {
+      "id": "setup_trace_setup_ponder_enabled",
+      "feature_id": "setup_ponder_enabled",
+      "source_url": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/c_engine_pl/src/uci.c",
+      "source_title": "Ponder option",
+      "snippet": "The engine supports go ponder, ponderhit, and stop.",
+      "confidence": 0.95,
+      "rule_id": "runtime_setup_spec"
+    }
+  ],
+  "constraints": [
+    {
+      "id": "setup_requires_shallow_fixed_depth",
+      "kind": "requires",
+      "left_feature_id": "setup_depth_shallow",
+      "right_feature_id": "setup_fixed_depth",
+      "rationale": "Depth bands refine fixed-depth search.",
+      "source": "setup_catalog"
+    },
+    {
+      "id": "setup_requires_medium_fixed_depth",
+      "kind": "requires",
+      "left_feature_id": "setup_depth_medium",
+      "right_feature_id": "setup_fixed_depth",
+      "rationale": "Depth bands refine fixed-depth search.",
+      "source": "setup_catalog"
+    },
+    {
+      "id": "setup_requires_deep_fixed_depth",
+      "kind": "requires",
+      "left_feature_id": "setup_depth_deep",
+      "right_feature_id": "setup_fixed_depth",
+      "rationale": "Depth bands refine fixed-depth search.",
+      "source": "setup_catalog"
+    },
+    {
+      "id": "setup_requires_short_movetime",
+      "kind": "requires",
+      "left_feature_id": "setup_movetime_short",
+      "right_feature_id": "setup_fixed_movetime",
+      "rationale": "Move-time bands refine fixed movetime.",
+      "source": "setup_catalog"
+    },
+    {
+      "id": "setup_requires_medium_movetime",
+      "kind": "requires",
+      "left_feature_id": "setup_movetime_medium",
+      "right_feature_id": "setup_fixed_movetime",
+      "rationale": "Move-time bands refine fixed movetime.",
+      "source": "setup_catalog"
+    },
+    {
+      "id": "setup_requires_long_movetime",
+      "kind": "requires",
+      "left_feature_id": "setup_movetime_long",
+      "right_feature_id": "setup_fixed_movetime",
+      "rationale": "Move-time bands refine fixed movetime.",
+      "source": "setup_catalog"
+    },
+    {
+      "id": "setup_requires_custom_book",
+      "kind": "requires",
+      "left_feature_id": "setup_book_custom_file",
+      "right_feature_id": "setup_book_enabled",
+      "rationale": "A custom book file only makes sense if the engine book is enabled.",
+      "source": "setup_catalog"
+    },
+    {
+      "id": "setup_requires_default_book",
+      "kind": "requires",
+      "left_feature_id": "setup_book_default_file",
+      "right_feature_id": "setup_book_enabled",
+      "rationale": "The default book file only makes sense if the engine book is enabled.",
+      "source": "setup_catalog"
+    },
+    {
+      "id": "setup_requires_increment_clock",
+      "kind": "requires",
+      "left_feature_id": "setup_increment_aware",
+      "right_feature_id": "setup_clock_managed",
+      "rationale": "Increment awareness refines clock-managed search.",
+      "source": "setup_catalog"
+    },
+    {
+      "id": "setup_requires_movestogo_clock",
+      "kind": "requires",
+      "left_feature_id": "setup_movestogo_aware",
+      "right_feature_id": "setup_clock_managed",
+      "rationale": "Moves-to-go awareness refines clock-managed search.",
+      "source": "setup_catalog"
+    }
+  ]
+}

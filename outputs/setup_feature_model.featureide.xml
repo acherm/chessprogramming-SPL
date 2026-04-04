@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='utf-8'?>
+<featureModel>
+  <struct>
+    <and name="EngineSetup">
+      <alt name="Opening Book Control">
+        <feature name="Own Book Disabled" />
+        <alt name="Own Book Enabled">
+          <feature name="Custom Book File" />
+          <feature name="Default Book File" />
+        </alt>
+      </alt>
+      <alt name="Ponder Control">
+        <feature name="Ponder Disabled" />
+        <feature name="Ponder Enabled" />
+      </alt>
+      <alt name="Search Budget">
+        <and name="Clock Managed">
+          <feature name="Increment Aware" />
+          <feature name="Moves-To-Go Aware" />
+        </and>
+        <alt name="Fixed Depth">
+          <feature name="Deep Depth" />
+          <feature name="Medium Depth" />
+          <feature name="Shallow Depth" />
+        </alt>
+        <alt name="Fixed MoveTime">
+          <feature name="Long MoveTime" />
+          <feature name="Medium MoveTime" />
+          <feature name="Short MoveTime" />
+        </alt>
+      </alt>
+    </and>
+  </struct>
+  <constraints>
+    <rule>
+      <imp>
+        <var>Shallow Depth</var>
+        <var>Fixed Depth</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Medium Depth</var>
+        <var>Fixed Depth</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Deep Depth</var>
+        <var>Fixed Depth</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Short MoveTime</var>
+        <var>Fixed MoveTime</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Medium MoveTime</var>
+        <var>Fixed MoveTime</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Long MoveTime</var>
+        <var>Fixed MoveTime</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Custom Book File</var>
+        <var>Own Book Enabled</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Default Book File</var>
+        <var>Own Book Enabled</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Increment Aware</var>
+        <var>Clock Managed</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Moves-To-Go Aware</var>
+        <var>Clock Managed</var>
+      </imp>
+    </rule>
+  </constraints>
+</featureModel>

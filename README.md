@@ -62,6 +62,19 @@ PYTHONPATH=src python3 -m cpw_variability.cli run-all \
   --target-features 200
 ```
 
+Generate the runtime/setup layer and setup recommendation tables:
+
+```bash
+PYTHONPATH=src python3 -m cpw_variability.cli build-setup
+```
+
+This writes:
+
+- `outputs/setup_feature_model.json`
+- `outputs/setup_feature_model.featureide.xml`
+- `outputs/setup_recommendations_by_variant.csv`
+- `outputs/setup_recommendations_by_feature.csv`
+
 ## C Engine Product Line (Compile-Time Derivation)
 
 The repository includes a C product-line implementation in `c_engine_pl/` driven by `outputs/feature_model.json`.
@@ -152,6 +165,7 @@ Main architectural and status notes:
 
 - [docs/product_line_architecture_and_interactions.md](docs/product_line_architecture_and_interactions.md)
 - [docs/feature_taxonomy_and_strengthening_roadmap.md](docs/feature_taxonomy_and_strengthening_roadmap.md)
+- [docs/setup_variability_model.md](docs/setup_variability_model.md)
 
 Representative validation artifacts:
 
@@ -192,6 +206,76 @@ Notes:
 - `Ponder`, `go ponder`, and `ponderhit` are only meaningful in variants that select `Pondering`.
 - The default book format is a simple text format with one line per opening:
   - `startpos moves e2e4 e7e5 g1f3 ...`
+
+## Setup Variability
+
+The repository now models two variability layers:
+
+- compile-time `variant` variability
+- runtime/harness `setup` variability
+
+In practice, the evaluation target is:
+
+- `(variant, setup)`
+
+The setup layer is intentionally narrower than the compile-time feature model. Only implemented runtime choices are modeled:
+
+- search-budget mode:
+  - `Fixed Depth`
+  - `Fixed MoveTime`
+  - `Clock Managed`
+- opening-book control:
+  - `Own Book Disabled`
+  - `Own Book Enabled`
+  - `Default Book File`
+  - `Custom Book File`
+- pondering control:
+  - `Ponder Disabled`
+  - `Ponder Enabled`
+
+The setup model deliberately excludes fictive knobs such as `Threads` and `Hash`, because the current engine does not expose them as real operational choices.
+
+Generate the setup artifacts:
+
+```bash
+PYTHONPATH=src python3 -m cpw_variability.cli build-setup
+```
+
+Use the generated tables:
+
+- `outputs/setup_recommendations_by_variant.csv`
+- `outputs/setup_recommendations_by_feature.csv`
+
+Interpretation:
+
+- per-variant recommendations describe the best known operating mode for that compiled engine
+- per-feature recommendations describe how a feature should influence setup policy, if at all
+- many evaluation leaves intentionally have no direct setup recommendation, because they change evaluation behavior rather than runtime control policy
+
+Example:
+
+- `phase1_minimax` is recommended with shallow fixed depth or small exact movetime
+- `phase3_full_eval` is recommended with deeper fixed-depth analysis and larger exact movetime
+- variants selecting `Opening Book` or `Pondering` may receive extra runtime options in match play
+
+Run a three-player best-setup tournament:
+
+```bash
+PYTHONPATH=src python3 scripts/setup_variant_tournament.py
+```
+
+This tournament:
+
+- picks `phase3_full_eval` as the supposed best variant
+- picks `phase1_minimax` as the supposed worst variant
+- picks one additional reproducible random variant
+- derives each binary separately
+- validates each binary with start-position perft
+- runs `cutechess-cli` using the recommended per-engine setup rather than forcing one global setup on every player
+
+Artifacts are written under:
+
+- `outputs/setup_variant_tournament_best_worst_random/`
 
 ## Tournament-Legality Scenario Pack
 

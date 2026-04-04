@@ -32,6 +32,7 @@ from .exporters import (
 from .fetcher import CPWFetcher
 from .matrix_builder import build_engine_feature_matrix
 from .model_builder import ModelBuildResult, build_feature_model
+from .setup_model import build_setup_feature_model, export_setup_outputs
 
 
 class PipelineError(Exception):
@@ -142,6 +143,15 @@ def run_build_matrix(paths, all_engines: bool = True, all_features: bool = True)
     )
 
     return matrix
+
+
+def run_build_setup(paths):
+    if not paths.feature_model_json_path.exists():
+        raise PipelineError("No feature model found. Run build-model first.")
+
+    result = build_setup_feature_model(paths)
+    export_setup_outputs(paths, result)
+    return result
 
 
 def run_all(
@@ -266,6 +276,8 @@ def _build_parser() -> argparse.ArgumentParser:
     matrix_cmd.add_argument("--all-engines", action="store_true", default=True, help="Include all discovered engines")
     matrix_cmd.add_argument("--all-features", action="store_true", default=True, help="Include all modeled features")
 
+    subparsers.add_parser("build-setup", help="Build runtime/setup feature model and setup recommendations")
+
     run_all_cmd = subparsers.add_parser("run-all", help="Run full pipeline")
     run_all_cmd.add_argument("--seed", default="implementation")
     run_all_cmd.add_argument("--mode", default="snapshot")
@@ -322,6 +334,16 @@ def main(argv: list[str] | None = None) -> int:
             print(f"Matrix rows: {len(result.statuses)}")
             return 0
 
+        if args.command == "build-setup":
+            result = run_build_setup(paths)
+            print(
+                "Setup model completed: "
+                f"features={len(result.features)} "
+                f"variants={len(result.variant_recommendations)} "
+                f"feature_rows={len(result.feature_recommendations)}"
+            )
+            return 0
+
         if args.command == "run-all":
             summary = run_all(
                 paths,
@@ -340,6 +362,7 @@ def main(argv: list[str] | None = None) -> int:
                 http_backoff_seconds=args.http_backoff,
                 respect_robots=not args.ignore_robots,
             )
+            run_build_setup(paths)
             print("Pipeline completed")
             print(json.dumps(summary["metrics"], indent=2))
             return 0
