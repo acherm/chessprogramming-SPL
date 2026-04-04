@@ -7,7 +7,7 @@ Automated pipeline that mines chessprogramming.org into a traceable SPL feature 
 The feature model is mined with a product-line implementation objective:
 
 - Features represent configurable engine variability points, not generic wiki topics.
-- Modeled options are implementation-backed (each option maps to concrete code paths in `c_engine_pl/src/engine.c`).
+- Modeled options are implementation-backed (each option maps to concrete code paths in `c_engine_pl/src/search.c`, `c_engine_pl/src/board_backend.c`, `c_engine_pl/src/eval.c`, or `c_engine_pl/src/engine.c`).
 - Tournament-legality options are explicitly modeled and implemented (`Castling`, `En Passant`, `Threefold Repetition`, `Fifty-Move Rule`).
 - Most options are marked as compile-time variability (`compile_flag`).
 - A small subset is marked runtime or mixed (`runtime_flag`).
@@ -24,7 +24,8 @@ Depth behavior:
 
 - `--depth 1`: root + top-level variation points only
 - `--depth 3` (default): root + groups + configurable options
-- `--depth 4`: adds binding subfeatures under options (compile/runtime flag layer)
+- `--depth 4`: adds intermediate groups such as `Pawn Structure`, `Piece Coordination`, `King Terms`, `Ordering Heuristics`, and `TT Support`
+- `--depth 5`: adds binding subfeatures under options (compile/runtime flag layer)
 
 ## Safe Crawling and Resume
 
@@ -92,6 +93,105 @@ What this does:
 - Generates `c_engine_pl/include/generated/variant_config.h` with compile-time flags.
 - Builds `c_engine_pl/build/engine_pl`.
 - Runs a UCI smoke flow (`uci`, `isready`, `go`, `quit`).
+
+## Executable Feature Status
+
+The current C engine product line supports real, implementation-backed variability in these families:
+
+- Search core:
+  - `Minimax`
+  - `Negamax`
+  - `Alpha-Beta`
+  - `Principal Variation Search`
+  - `Iterative Deepening`
+  - `Quiescence Search`
+- Search refinements:
+  - `Move Ordering`
+  - `Hash Move`
+  - `Killer Heuristic`
+  - `History Heuristic`
+  - `Aspiration Windows`
+  - `Null Move Pruning`
+  - `Late Move Reductions`
+  - `Futility Pruning`
+  - `Razoring`
+  - `Delta Pruning`
+  - `Transposition Table`
+  - `Zobrist Hashing`
+  - `Replacement Schemes`
+- Board representation:
+  - `Bitboards`
+  - `Magic Bitboards`
+  - `0x88`
+  - `Mailbox`
+  - `10x12 Board`
+  - `Piece Lists`
+- Evaluation:
+  - `Piece-Square Tables`
+  - `Passed Pawn`
+  - `Isolated Pawn`
+  - `Doubled Pawn`
+  - `Connected Pawn`
+  - `Bishop Pair`
+  - `Rook on Open File`
+  - `Rook Semi-Open File`
+  - `Mobility`
+  - `King Pressure`
+  - `King Shelter`
+  - `King Activity`
+  - `Tapered Eval`
+  - `Static Exchange Evaluation`
+- Runtime/UCI-exposed behavior:
+  - `OwnBook`
+  - `BookFile`
+  - `Ponder`
+  - `go ponder`
+  - `ponderhit`
+
+Main architectural and status notes:
+
+- [docs/product_line_architecture_and_interactions.md](docs/product_line_architecture_and_interactions.md)
+- [docs/feature_taxonomy_and_strengthening_roadmap.md](docs/feature_taxonomy_and_strengthening_roadmap.md)
+
+Representative validation artifacts:
+
+- `outputs/feature_completion_validation/`
+- `outputs/runtime_feature_validation/`
+
+## Runtime Book and Ponder Example
+
+Derive the runtime-feature variant:
+
+```bash
+PYTHONPATH=src python3 scripts/derive_variant.py \
+  --config c_engine_pl/variants/phase2_runtime_book_ponder.json \
+  --build
+```
+
+Then exercise external opening-book and asynchronous pondering behavior:
+
+```text
+uci
+isready
+setoption name OwnBook value true
+setoption name BookFile value c_engine_pl/books/default_openings.txt
+position startpos
+go depth 4
+
+setoption name Ponder value true
+position startpos moves e2e4 c7c5 g1f3
+go ponder depth 6
+isready
+ponderhit
+quit
+```
+
+Notes:
+
+- `OwnBook` and `BookFile` are only exposed in variants that select `Opening Book`.
+- `Ponder`, `go ponder`, and `ponderhit` are only meaningful in variants that select `Pondering`.
+- The default book format is a simple text format with one line per opening:
+  - `startpos moves e2e4 e7e5 g1f3 ...`
 
 ## Tournament-Legality Scenario Pack
 
