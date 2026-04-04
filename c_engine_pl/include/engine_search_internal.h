@@ -33,8 +33,9 @@ typedef struct EngineSearchOps {
     void (*unmake_move)(EngineState *state, const EngineMove *move, const Undo *undo);
     uint64_t (*state_key)(const EngineState *state);
     void (*order_moves)(EngineState *state, EngineMoveList *list, int ply, const EngineMove *hash_move);
-    int (*tt_probe)(uint64_t key, int depth, int alpha, int beta, int *score, EngineMove *best_move);
-    void (*tt_store)(uint64_t key, int depth, int score, int flag, const EngineMove *best_move);
+    int (*tt_probe)(uint64_t key, int depth, int alpha, int beta, int ply, int *score, EngineMove *best_move);
+    void (*tt_store)(uint64_t key, int depth, int score, int flag, int ply, const EngineMove *best_move);
+    void (*tt_new_search)(void);
     bool (*parse_move_uci)(const char *text, EngineMove *out);
     bool (*find_move_in_list)(const EngineMoveList *list, const EngineMove *needle, EngineMove *matched);
     void (*move_to_front)(EngineMoveList *list, const EngineMove *move);

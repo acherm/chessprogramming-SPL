@@ -223,7 +223,9 @@ CORE_FEATURE_SPECS = [
     CoreFeatureSpec("Castling", "move_generation", ("castling", "castling rights")),
     CoreFeatureSpec("En Passant", "move_generation", ("en passant", "ep capture")),
     CoreFeatureSpec("Move Ordering", "move_generation", ("move ordering",)),
+    CoreFeatureSpec("Magic Bitboards", "move_generation", ("magic bitboards", "magic bitboard")),
     CoreFeatureSpec("Alpha-Beta", "search", ("alpha-beta", "alpha beta", "alphabeta")),
+    CoreFeatureSpec("Minimax", "search", ("minimax",)),
     CoreFeatureSpec("Negamax", "search", ("negamax",)),
     CoreFeatureSpec("Principal Variation Search", "search", ("principal variation search", "pvs")),
     CoreFeatureSpec("Iterative Deepening", "search", ("iterative deepening",)),
@@ -1005,6 +1007,8 @@ def augment_with_core_features(
             kind="optional",
             description=snippet[:180],
             aliases=[alias for alias in spec.aliases if normalize_term(alias) != canonical_norm][:8],
+            compile_flag=_compile_flag_for(spec),
+            runtime_flag=_runtime_flag_for(spec),
         )
         leaves.append(node)
         by_normalized_name[canonical_norm] = node

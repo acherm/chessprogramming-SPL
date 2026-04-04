@@ -1,14 +1,15 @@
 {
   "meta": {
-    "generated_at": "2026-04-03T13:20:28.687120+00:00",
+    "generated_at": "2026-04-04T08:31:52.144620+00:00",
     "model_perspective": "implementation_product_line",
     "configuration_goal": "each valid feature configuration maps to a chess-engine variant",
     "primary_variability_strategy": "compile_time_first_with_limited_runtime_options",
+    "taxonomy_note": "distinguish configurable features from commonality and from feature-implementation debt",
     "depth": 4,
     "target_features": 150,
-    "total_features": 70,
-    "total_traces": 70,
-    "total_constraints": 41,
+    "total_features": 74,
+    "total_traces": 74,
+    "total_constraints": 49,
     "non_engine_pages": 958
   },
   "features": [
@@ -577,6 +578,21 @@
       "runtime_flag": ""
     },
     {
+      "id": "feat_magic_bitboards",
+      "name": "Magic Bitboards",
+      "parent_id": "move_generation",
+      "kind": "optional",
+      "description": "Home * Board Representation * Bitboards * Sliding Piece Attacks * Magic Bitboards Paul Klee - Magic Garden, 1926 [1] Magic Bitboards , a multiply-right-shift perfect hashing algori",
+      "aliases": [
+        "magic bitboard"
+      ],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_MAGIC_BITBOARDS",
+      "runtime_flag": ""
+    },
+    {
       "id": "feat_move_generation",
       "name": "Move Generation",
       "parent_id": "move_generation",
@@ -592,7 +608,7 @@
     {
       "id": "feat_move_ordering",
       "name": "Move Ordering",
-      "parent_id": "move_generation",
+      "parent_id": "search",
       "kind": "optional",
       "description": "Home * Search * Move Ordering Wassily Kandinsky - Four Parts [1] For the alpha-beta algorithm to perform well, the best moves need to be searched first.",
       "aliases": [],
@@ -781,7 +797,7 @@
     {
       "id": "feat_history_heuristic",
       "name": "History Heuristic",
-      "parent_id": "search",
+      "parent_id": "search_ordering_heuristics",
       "kind": "optional",
       "description": "Home * Search * Move Ordering * Relative History Heuristic The Relative History Heuristic was proposed by Mark Winands et al.",
       "aliases": [],
@@ -807,7 +823,7 @@
     {
       "id": "feat_killer_heuristic",
       "name": "Killer Heuristic",
-      "parent_id": "search",
+      "parent_id": "search_ordering_heuristics",
       "kind": "optional",
       "description": "Home * Search * Move Ordering * Killer Heuristic Jack the Ripper [1] Killer Heuristic , a dynamic, path-dependent move ordering technique.",
       "aliases": [],
@@ -815,6 +831,19 @@
       "variability_stage": "compile_time",
       "configurable": true,
       "compile_flag": "CFG_KILLER_HEURISTIC",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_minimax",
+      "name": "Minimax",
+      "parent_id": "search",
+      "kind": "optional",
+      "description": "Home * Search * Minimax Max Ernst - Little Machine Constructed by Minimax Dadamax in Person , 1919-1920 [1] Minimax , an algorithm used to determine the score in a zero-sum game af",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_MINIMAX",
       "runtime_flag": ""
     },
     {
@@ -904,7 +933,7 @@
     {
       "id": "feat_hash_move",
       "name": "Hash Move",
-      "parent_id": "transposition_table",
+      "parent_id": "search_ordering_heuristics",
       "kind": "optional",
       "description": "Home * Chess * Moves * Hash Move The Hash Move is a Move Ordering related issue.",
       "aliases": [],
@@ -917,7 +946,7 @@
     {
       "id": "feat_pawn_hash_table",
       "name": "Pawn Hash Table",
-      "parent_id": "transposition_table",
+      "parent_id": "transposition_table_support",
       "kind": "optional",
       "description": "Home * Evaluation * Pawn Structure * Pawn Hash Table Pawns threaten the King [1] A Pawn Hash Table is often used inside a chess programs to cache purely pawn related pattern and ev",
       "aliases": [
@@ -932,7 +961,7 @@
     {
       "id": "feat_replacement_schemes",
       "name": "Replacement Schemes",
-      "parent_id": "transposition_table",
+      "parent_id": "transposition_table_support",
       "kind": "optional",
       "description": "Replacement Schemes for Transposition Tables .",
       "aliases": [
@@ -960,7 +989,7 @@
     {
       "id": "feat_zobrist_hashing",
       "name": "Zobrist Hashing",
-      "parent_id": "transposition_table",
+      "parent_id": "transposition_table_support",
       "kind": "optional",
       "description": "Home * Search * Transposition Table * Zobrist Hashing King Wen sequence [1] [2] Zobrist Hashing , a technique to transform a board position of arbitrary size into a number of a set",
       "aliases": [
@@ -999,6 +1028,34 @@
       "variability_stage": "compile_time",
       "configurable": true,
       "compile_flag": "CFG_KING_SAFETY",
+      "runtime_flag": ""
+    },
+    {
+      "id": "search_ordering_heuristics",
+      "name": "Ordering Heuristics",
+      "parent_id": "feat_move_ordering",
+      "kind": "or",
+      "description": "Optional move-ordering heuristics layered under the Move Ordering framework.",
+      "aliases": [],
+      "variation_role": "group",
+      "variability_stage": "none",
+      "configurable": false,
+      "compile_flag": "",
+      "runtime_flag": ""
+    },
+    {
+      "id": "transposition_table_support",
+      "name": "TT Support",
+      "parent_id": "transposition_table",
+      "kind": "or",
+      "description": "Support mechanisms and policies underneath the transposition-table family.",
+      "aliases": [
+        "Transposition Table Support"
+      ],
+      "variation_role": "group",
+      "variability_stage": "none",
+      "configurable": false,
+      "compile_flag": "",
       "runtime_flag": ""
     }
   ],
@@ -1247,11 +1304,29 @@
       "rule_id": "core_feature_match"
     },
     {
+      "id": "tr_81c4d91a5541",
+      "feature_id": "feat_magic_bitboards",
+      "source_url": "https://www.chessprogramming.org/Magic_Bitboards",
+      "source_title": "Magic Bitboards",
+      "snippet": "Home * Board Representation * Bitboards * Sliding Piece Attacks * Magic Bitboards Paul Klee - Magic Garden, 1926 [1] Magic Bitboards , a multiply-right-shift perfect hashing algorithm to index an attack bitboard database",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
       "id": "tr_15a221b1a90b",
       "feature_id": "feat_alpha_beta",
       "source_url": "https://www.chessprogramming.org/Alpha-Beta",
       "source_title": "Alpha-Beta",
       "snippet": "Home * Search * Alpha-Beta Alpha Beta [1] The Alpha-Beta algorithm (Alpha-Beta Pruning, Alpha-Beta Heuristic [2] ) is a significant enhancement to the minimax search algorithm that eliminates the need to search large por",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_2ddbc79f509f",
+      "feature_id": "feat_minimax",
+      "source_url": "https://www.chessprogramming.org/Minimax",
+      "source_title": "Minimax",
+      "snippet": "Home * Search * Minimax Max Ernst - Little Machine Constructed by Minimax Dadamax in Person , 1919-1920 [1] Minimax , an algorithm used to determine the score in a zero-sum game after a certain number of moves, with best",
       "confidence": 1.0,
       "rule_id": "core_feature_match"
     },
@@ -1632,9 +1707,35 @@
       "snippet": "Home * Board Representation * Bitboards * King Pattern Moore neighborhood [1] King pattern are about king attacks , some king safety issues and pawn endgame related stuff.",
       "confidence": 0.5,
       "rule_id": "intermediate_group_split"
+    },
+    {
+      "id": "tr_bb6fcc92450b",
+      "feature_id": "search_ordering_heuristics",
+      "source_url": "https://www.chessprogramming.org/Move_Ordering",
+      "source_title": "Move Ordering",
+      "snippet": "Home * Search * Move Ordering Wassily Kandinsky - Four Parts [1] For the alpha-beta algorithm to perform well, the best moves need to be searched first.",
+      "confidence": 0.5,
+      "rule_id": "intermediate_group_inferred"
+    },
+    {
+      "id": "tr_fab61c3a9f46",
+      "feature_id": "transposition_table_support",
+      "source_url": "https://www.chessprogramming.org/Zobrist_Hashing",
+      "source_title": "Zobrist Hashing",
+      "snippet": "Home * Search * Transposition Table * Zobrist Hashing King Wen sequence [1] [2] Zobrist Hashing , a technique to transform a board position of arbitrary size into a number of a set length, with an equal distribution over",
+      "confidence": 0.5,
+      "rule_id": "intermediate_group_inferred"
     }
   ],
   "constraints": [
+    {
+      "id": "ctr_001_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_magic_bitboards",
+      "right_feature_id": "feat_bitboards",
+      "rationale": "Magic indexing is defined over bitboard representation.",
+      "source": "implementation_catalog"
+    },
     {
       "id": "ctr_002_requires",
       "kind": "requires",
@@ -1686,7 +1787,7 @@
     {
       "id": "ctr_008_requires",
       "kind": "requires",
-      "left_feature_id": "feat_alpha_beta",
+      "left_feature_id": "feat_minimax",
       "right_feature_id": "feat_make_move",
       "rationale": "Tree search requires move application.",
       "source": "implementation_catalog"
@@ -1694,13 +1795,29 @@
     {
       "id": "ctr_009_requires",
       "kind": "requires",
+      "left_feature_id": "feat_minimax",
+      "right_feature_id": "feat_unmake_move",
+      "rationale": "Minimax implementation uses make/unmake in recursion.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_010_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_alpha_beta",
+      "right_feature_id": "feat_make_move",
+      "rationale": "Tree search requires move application.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_011_requires",
+      "kind": "requires",
       "left_feature_id": "feat_alpha_beta",
       "right_feature_id": "feat_unmake_move",
       "rationale": "Alpha-Beta implementation uses make/unmake in recursion.",
       "source": "implementation_catalog"
     },
     {
-      "id": "ctr_010_requires",
+      "id": "ctr_012_requires",
       "kind": "requires",
       "left_feature_id": "feat_alpha_beta",
       "right_feature_id": "feat_castling",
@@ -1708,7 +1825,7 @@
       "source": "implementation_catalog"
     },
     {
-      "id": "ctr_011_requires",
+      "id": "ctr_013_requires",
       "kind": "requires",
       "left_feature_id": "feat_alpha_beta",
       "right_feature_id": "feat_en_passant",
@@ -1716,7 +1833,7 @@
       "source": "implementation_catalog"
     },
     {
-      "id": "ctr_012_requires",
+      "id": "ctr_014_requires",
       "kind": "requires",
       "left_feature_id": "feat_alpha_beta",
       "right_feature_id": "feat_threefold_repetition",
@@ -1724,7 +1841,7 @@
       "source": "implementation_catalog"
     },
     {
-      "id": "ctr_013_requires",
+      "id": "ctr_015_requires",
       "kind": "requires",
       "left_feature_id": "feat_alpha_beta",
       "right_feature_id": "feat_fifty_move_rule",
@@ -1732,7 +1849,7 @@
       "source": "implementation_catalog"
     },
     {
-      "id": "ctr_014_requires",
+      "id": "ctr_016_requires",
       "kind": "requires",
       "left_feature_id": "feat_negamax",
       "right_feature_id": "feat_make_move",
@@ -1740,7 +1857,7 @@
       "source": "implementation_catalog"
     },
     {
-      "id": "ctr_015_requires",
+      "id": "ctr_017_requires",
       "kind": "requires",
       "left_feature_id": "feat_negamax",
       "right_feature_id": "feat_unmake_move",
@@ -1748,7 +1865,7 @@
       "source": "implementation_catalog"
     },
     {
-      "id": "ctr_016_requires",
+      "id": "ctr_018_requires",
       "kind": "requires",
       "left_feature_id": "feat_quiescence_search",
       "right_feature_id": "feat_make_move",
@@ -1756,7 +1873,7 @@
       "source": "implementation_catalog"
     },
     {
-      "id": "ctr_017_requires",
+      "id": "ctr_019_requires",
       "kind": "requires",
       "left_feature_id": "feat_quiescence_search",
       "right_feature_id": "feat_unmake_move",
@@ -1764,7 +1881,7 @@
       "source": "implementation_catalog"
     },
     {
-      "id": "ctr_018_requires",
+      "id": "ctr_020_requires",
       "kind": "requires",
       "left_feature_id": "feat_hash_move",
       "right_feature_id": "feat_transposition_table",
@@ -1772,7 +1889,31 @@
       "source": "implementation_catalog"
     },
     {
-      "id": "ctr_019_requires",
+      "id": "ctr_021_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_hash_move",
+      "right_feature_id": "feat_move_ordering",
+      "rationale": "Hash move ordering refines the move ordering framework.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_022_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_killer_heuristic",
+      "right_feature_id": "feat_move_ordering",
+      "rationale": "Killer heuristic is part of the move ordering framework.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_023_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_history_heuristic",
+      "right_feature_id": "feat_move_ordering",
+      "rationale": "History heuristic is part of the move ordering framework.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_024_requires",
       "kind": "requires",
       "left_feature_id": "feat_pawn_hash_table",
       "right_feature_id": "feat_zobrist_hashing",
@@ -1780,7 +1921,15 @@
       "source": "implementation_catalog"
     },
     {
-      "id": "ctr_020_requires",
+      "id": "ctr_025_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_replacement_schemes",
+      "right_feature_id": "feat_transposition_table",
+      "rationale": "Replacement schemes refine how TT entries are stored.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_026_requires",
       "kind": "requires",
       "left_feature_id": "feat_principal_variation_search",
       "right_feature_id": "feat_alpha_beta",
@@ -1788,7 +1937,7 @@
       "source": "implementation_catalog"
     },
     {
-      "id": "ctr_021_requires",
+      "id": "ctr_027_requires",
       "kind": "requires",
       "left_feature_id": "feat_aspiration_windows",
       "right_feature_id": "feat_alpha_beta",
@@ -1796,7 +1945,7 @@
       "source": "implementation_catalog"
     },
     {
-      "id": "ctr_022_requires",
+      "id": "ctr_028_requires",
       "kind": "requires",
       "left_feature_id": "feat_null_move_pruning",
       "right_feature_id": "feat_alpha_beta",
@@ -1804,7 +1953,7 @@
       "source": "implementation_catalog"
     },
     {
-      "id": "ctr_023_requires",
+      "id": "ctr_029_requires",
       "kind": "requires",
       "left_feature_id": "feat_late_move_reductions",
       "right_feature_id": "feat_alpha_beta",
@@ -1812,7 +1961,7 @@
       "source": "implementation_catalog"
     },
     {
-      "id": "ctr_024_requires",
+      "id": "ctr_030_requires",
       "kind": "requires",
       "left_feature_id": "feat_futility_pruning",
       "right_feature_id": "feat_alpha_beta",
@@ -1820,7 +1969,7 @@
       "source": "implementation_catalog"
     },
     {
-      "id": "ctr_025_requires",
+      "id": "ctr_031_requires",
       "kind": "requires",
       "left_feature_id": "feat_delta_pruning",
       "right_feature_id": "feat_quiescence_search",
@@ -1828,7 +1977,7 @@
       "source": "implementation_catalog"
     },
     {
-      "id": "ctr_026_requires",
+      "id": "ctr_032_requires",
       "kind": "requires",
       "left_feature_id": "feat_passed_pawn",
       "right_feature_id": "feat_evaluation",
@@ -1836,7 +1985,7 @@
       "source": "implementation_catalog"
     },
     {
-      "id": "ctr_027_requires",
+      "id": "ctr_033_requires",
       "kind": "requires",
       "left_feature_id": "feat_isolated_pawn",
       "right_feature_id": "feat_evaluation",
@@ -1844,7 +1993,7 @@
       "source": "implementation_catalog"
     },
     {
-      "id": "ctr_028_requires",
+      "id": "ctr_034_requires",
       "kind": "requires",
       "left_feature_id": "feat_doubled_pawn",
       "right_feature_id": "feat_evaluation",
@@ -1852,7 +2001,7 @@
       "source": "implementation_catalog"
     },
     {
-      "id": "ctr_029_requires",
+      "id": "ctr_035_requires",
       "kind": "requires",
       "left_feature_id": "feat_connected_pawn",
       "right_feature_id": "feat_evaluation",
@@ -1860,7 +2009,7 @@
       "source": "implementation_catalog"
     },
     {
-      "id": "ctr_030_requires",
+      "id": "ctr_036_requires",
       "kind": "requires",
       "left_feature_id": "feat_bishop_pair",
       "right_feature_id": "feat_evaluation",
@@ -1868,7 +2017,7 @@
       "source": "implementation_catalog"
     },
     {
-      "id": "ctr_031_requires",
+      "id": "ctr_037_requires",
       "kind": "requires",
       "left_feature_id": "feat_rook_on_open_file",
       "right_feature_id": "feat_evaluation",
@@ -1876,7 +2025,7 @@
       "source": "implementation_catalog"
     },
     {
-      "id": "ctr_032_requires",
+      "id": "ctr_038_requires",
       "kind": "requires",
       "left_feature_id": "feat_rook_semi_open_file",
       "right_feature_id": "feat_evaluation",
@@ -1884,7 +2033,7 @@
       "source": "implementation_catalog"
     },
     {
-      "id": "ctr_033_requires",
+      "id": "ctr_039_requires",
       "kind": "requires",
       "left_feature_id": "feat_king_pressure",
       "right_feature_id": "feat_evaluation",
@@ -1892,7 +2041,7 @@
       "source": "implementation_catalog"
     },
     {
-      "id": "ctr_034_requires",
+      "id": "ctr_040_requires",
       "kind": "requires",
       "left_feature_id": "feat_king_shelter",
       "right_feature_id": "feat_evaluation",
@@ -1900,7 +2049,7 @@
       "source": "implementation_catalog"
     },
     {
-      "id": "ctr_035_requires",
+      "id": "ctr_041_requires",
       "kind": "requires",
       "left_feature_id": "feat_king_activity",
       "right_feature_id": "feat_evaluation",
@@ -1908,7 +2057,7 @@
       "source": "implementation_catalog"
     },
     {
-      "id": "ctr_036_requires",
+      "id": "ctr_042_requires",
       "kind": "requires",
       "left_feature_id": "feat_king_activity",
       "right_feature_id": "feat_tapered_eval",
@@ -1916,7 +2065,15 @@
       "source": "implementation_catalog"
     },
     {
-      "id": "ctr_037_excludes",
+      "id": "ctr_043_excludes",
+      "kind": "excludes",
+      "left_feature_id": "feat_minimax",
+      "right_feature_id": "feat_negamax",
+      "rationale": "Search core is modeled as a single primary choice.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_044_excludes",
       "kind": "excludes",
       "left_feature_id": "feat_bitboards",
       "right_feature_id": "feat_mailbox",
@@ -1924,7 +2081,7 @@
       "source": "implementation_catalog"
     },
     {
-      "id": "ctr_038_excludes",
+      "id": "ctr_045_excludes",
       "kind": "excludes",
       "left_feature_id": "feat_bitboards",
       "right_feature_id": "feat_0x88",
@@ -1932,7 +2089,7 @@
       "source": "implementation_catalog"
     },
     {
-      "id": "ctr_039_excludes",
+      "id": "ctr_046_excludes",
       "kind": "excludes",
       "left_feature_id": "feat_bitboards",
       "right_feature_id": "feat_10x12_board",
@@ -1940,7 +2097,7 @@
       "source": "implementation_catalog"
     },
     {
-      "id": "ctr_040_excludes",
+      "id": "ctr_047_excludes",
       "kind": "excludes",
       "left_feature_id": "feat_mailbox",
       "right_feature_id": "feat_0x88",
@@ -1948,7 +2105,7 @@
       "source": "implementation_catalog"
     },
     {
-      "id": "ctr_041_excludes",
+      "id": "ctr_048_excludes",
       "kind": "excludes",
       "left_feature_id": "feat_mailbox",
       "right_feature_id": "feat_10x12_board",
@@ -1956,7 +2113,7 @@
       "source": "implementation_catalog"
     },
     {
-      "id": "ctr_042_excludes",
+      "id": "ctr_049_excludes",
       "kind": "excludes",
       "left_feature_id": "feat_0x88",
       "right_feature_id": "feat_10x12_board",

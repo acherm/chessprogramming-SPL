@@ -26,6 +26,10 @@
 #define PAWN_HASH_SIZE (1u << 14)
 #define PAWN_HASH_MASK (PAWN_HASH_SIZE - 1u)
 
+#define FLAG_CAPTURE 1
+#define FLAG_PROMOTION 2
+#define FLAG_EN_PASSANT 4
+
 #if defined(__clang__) || defined(__GNUC__)
 #define EVAL_MAYBE_UNUSED __attribute__((unused))
 #else
@@ -160,6 +164,32 @@ static inline int piece_side(int piece) {
     return -1;
 }
 
+static inline int promotion_piece(int side, uint8_t promotion) {
+    if (side == WHITE) {
+        switch (promotion) {
+            case 1:
+                return WN;
+            case 2:
+                return WB;
+            case 3:
+                return WR;
+            default:
+                return WQ;
+        }
+    }
+
+    switch (promotion) {
+        case 1:
+            return BN;
+        case 2:
+            return BB;
+        case 3:
+            return BR;
+        default:
+            return BQ;
+    }
+}
+
 static inline int rank_of(int sq) {
     return sq / 8;
 }
@@ -176,6 +206,186 @@ static EVAL_MAYBE_UNUSED inline int mirror_sq(int sq) {
 
 static inline bool on_board64(int sq) {
     return sq >= 0 && sq < 64;
+}
+
+static bool attacks_square_on_board(const int board[64], int from, int to, int piece) {
+    int from_rank;
+    int from_file;
+    int to_rank;
+    int to_file;
+    int dr;
+    int df;
+    int step;
+    int sq;
+
+    if (!on_board64(from) || !on_board64(to) || piece == EMPTY || from == to) {
+        return false;
+    }
+
+    from_rank = rank_of(from);
+    from_file = file_of(from);
+    to_rank = rank_of(to);
+    to_file = file_of(to);
+    dr = to_rank - from_rank;
+    df = to_file - from_file;
+
+    switch (piece_abs(piece)) {
+        case WP:
+            if (piece > 0) {
+                return dr == 1 && abs(df) == 1;
+            }
+            return dr == -1 && abs(df) == 1;
+        case WN:
+            return (abs(dr) == 2 && abs(df) == 1) || (abs(dr) == 1 && abs(df) == 2);
+        case WB:
+            if (abs(dr) != abs(df)) {
+                return false;
+            }
+            step = (dr > 0 ? 8 : -8) + (df > 0 ? 1 : -1);
+            for (sq = from + step; sq != to; sq += step) {
+                if (board[sq] != EMPTY) {
+                    return false;
+                }
+            }
+            return true;
+        case WR:
+            if (dr != 0 && df != 0) {
+                return false;
+            }
+            if (dr == 0) {
+                step = df > 0 ? 1 : -1;
+            } else {
+                step = dr > 0 ? 8 : -8;
+            }
+            for (sq = from + step; sq != to; sq += step) {
+                if (board[sq] != EMPTY) {
+                    return false;
+                }
+            }
+            return true;
+        case WQ:
+            if (dr == 0 || df == 0) {
+                if (dr == 0 && df == 0) {
+                    return false;
+                }
+                if (dr == 0) {
+                    step = df > 0 ? 1 : -1;
+                } else {
+                    step = dr > 0 ? 8 : -8;
+                }
+            } else if (abs(dr) == abs(df)) {
+                step = (dr > 0 ? 8 : -8) + (df > 0 ? 1 : -1);
+            } else {
+                return false;
+            }
+            for (sq = from + step; sq != to; sq += step) {
+                if (board[sq] != EMPTY) {
+                    return false;
+                }
+            }
+            return true;
+        case WK:
+            return abs(dr) <= 1 && abs(df) <= 1;
+        default:
+            return false;
+    }
+}
+
+static int find_king_on_board(const int board[64], int side) {
+    int target = side == WHITE ? WK : BK;
+    int sq;
+
+    for (sq = 0; sq < 64; ++sq) {
+        if (board[sq] == target) {
+            return sq;
+        }
+    }
+    return -1;
+}
+
+static bool is_square_attacked_on_board(const int board[64], int sq, int attacker_side) {
+    int from;
+
+    for (from = 0; from < 64; ++from) {
+        int piece = board[from];
+        if (piece == EMPTY || piece_side(piece) != attacker_side) {
+            continue;
+        }
+        if (attacks_square_on_board(board, from, sq, piece)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+static int piece_after_capture(int piece, int target_sq, uint8_t promotion) {
+    if (promotion != 0 && piece_abs(piece) == WP) {
+        return promotion_piece(piece_side(piece), promotion);
+    }
+    if (piece == WP && rank_of(target_sq) == 7) {
+        return WQ;
+    }
+    if (piece == BP && rank_of(target_sq) == 0) {
+        return BQ;
+    }
+    return piece;
+}
+
+static bool see_capture_is_legal(int board[64], int from, int to, int side) {
+    int piece = board[from];
+    int captured = board[to];
+    int moved_piece = piece_after_capture(piece, to, 0);
+    int king_sq;
+    bool legal;
+
+    board[from] = EMPTY;
+    board[to] = moved_piece;
+    king_sq = piece_abs(piece) == WK ? to : find_king_on_board(board, side);
+    legal = king_sq >= 0 && !is_square_attacked_on_board(board, king_sq, side ^ 1);
+    board[from] = piece;
+    board[to] = captured;
+    return legal;
+}
+
+static int see_best_response(int board[64], int target_sq, int side) {
+    int current_piece = board[target_sq];
+    int captured_value;
+    int best = 0;
+    int from;
+
+    if (current_piece == EMPTY) {
+        return 0;
+    }
+
+    captured_value = PIECE_VALUE[piece_abs(current_piece)];
+    for (from = 0; from < 64; ++from) {
+        int piece = board[from];
+        int moved_piece;
+        int reply;
+
+        if (piece == EMPTY || piece_side(piece) != side) {
+            continue;
+        }
+        if (!attacks_square_on_board(board, from, target_sq, piece)) {
+            continue;
+        }
+        if (!see_capture_is_legal(board, from, target_sq, side)) {
+            continue;
+        }
+
+        moved_piece = piece_after_capture(piece, target_sq, 0);
+        board[from] = EMPTY;
+        board[target_sq] = moved_piece;
+        reply = captured_value - see_best_response(board, target_sq, side ^ 1);
+        board[from] = piece;
+        board[target_sq] = current_piece;
+
+        if (reply > best) {
+            best = reply;
+        }
+    }
+
+    return best;
 }
 
 static inline EvalScore eval_score_make(int mg, int eg) {
@@ -469,9 +679,50 @@ static __attribute__((unused)) int evaluate_king_shelter(const EngineState *stat
 }
 
 static __attribute__((unused)) int static_exchange_eval(const EngineState *state, const EngineMove *move) {
-    int target = state->board[move->to];
-    int attacker = state->board[move->from];
-    return PIECE_VALUE[piece_abs(target)] - PIECE_VALUE[piece_abs(attacker)] / 8;
+    int board[64];
+    int attacker;
+    int victim_sq;
+    int victim;
+    int placed_piece;
+    int immediate_gain = 0;
+    int side;
+
+    if (state == NULL || move == NULL || !on_board64(move->from) || !on_board64(move->to)) {
+        return 0;
+    }
+
+    memcpy(board, state->board, sizeof(board));
+    attacker = board[move->from];
+    if (attacker == EMPTY) {
+        return 0;
+    }
+
+    side = piece_side(attacker);
+    victim_sq = move->to;
+    victim = board[victim_sq];
+
+    if ((move->flags & FLAG_EN_PASSANT) != 0 && victim == EMPTY) {
+        victim_sq = side == WHITE ? ((int)move->to - 8) : ((int)move->to + 8);
+        if (!on_board64(victim_sq)) {
+            return 0;
+        }
+        victim = board[victim_sq];
+    }
+
+    if (victim != EMPTY) {
+        immediate_gain += PIECE_VALUE[piece_abs(victim)];
+    }
+
+    placed_piece = piece_after_capture(attacker, move->to, move->promotion);
+    if (move->promotion != 0 && piece_abs(attacker) == WP) {
+        immediate_gain += PIECE_VALUE[piece_abs(placed_piece)] - PIECE_VALUE[piece_abs(attacker)];
+    }
+
+    board[move->from] = EMPTY;
+    board[victim_sq] = EMPTY;
+    board[move->to] = placed_piece;
+
+    return immediate_gain - see_best_response(board, move->to, side ^ 1);
 }
 
 static void accumulate_material_and_tables(const EngineState *state, EvalAccumulator *acc) {
@@ -701,9 +952,26 @@ int engine_evaluate_position_internal(EngineState *state) {
 }
 
 int engine_score_capture_internal(const EngineState *state, const EngineMove *move) {
-    int victim = state->board[move->to];
-    int attacker = state->board[move->from];
+    int victim_sq;
+    int victim;
+    int attacker;
     int score = 0;
+
+    if (state == NULL || move == NULL) {
+        return 0;
+    }
+
+    attacker = state->board[move->from];
+
+    victim_sq = move->to;
+    victim = state->board[victim_sq];
+    if ((move->flags & FLAG_EN_PASSANT) != 0 && victim == EMPTY) {
+        int side = piece_side(attacker);
+        victim_sq = side == WHITE ? ((int)move->to - 8) : ((int)move->to + 8);
+        if (on_board64(victim_sq)) {
+            victim = state->board[victim_sq];
+        }
+    }
 
     if (victim != EMPTY) {
         score += 10 * PIECE_VALUE[piece_abs(victim)] - PIECE_VALUE[piece_abs(attacker)];

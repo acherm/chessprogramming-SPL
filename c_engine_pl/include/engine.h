@@ -10,6 +10,8 @@
 #define ENGINE_MAX_PLY 128
 #define ENGINE_MAX_FEN 128
 #define ENGINE_MAX_HISTORY 512
+#define ENGINE_MAX_PIECES_PER_TYPE 16
+#define ENGINE_MAX_BOOK_PATH 512
 
 typedef struct EngineMove {
     uint8_t from;
@@ -39,6 +41,8 @@ typedef struct EngineState {
     uint64_t bb_pieces[12];
     uint64_t bb_white_occ;
     uint64_t bb_black_occ;
+    int piece_list_squares[2][6][ENGINE_MAX_PIECES_PER_TYPE];
+    uint8_t piece_list_counts[2][6];
     int side_to_move; /* 0 white, 1 black */
     int castling_rights; /* bitmask: 1 WK, 2 WQ, 4 BK, 8 BQ */
     int en_passant_square; /* -1 if none, otherwise 0..63 */
@@ -49,14 +53,18 @@ typedef struct EngineState {
     int history_count;
 
     bool pondering_enabled;
+    bool opening_book_enabled;
     int max_depth_hint;
     int movetime_ms;
 
     uint64_t nodes;
     bool stop;
+    bool exact_movetime;
+    int64_t soft_deadline_ms;
     int64_t deadline_ms;
 
     char last_fen[ENGINE_MAX_FEN];
+    char opening_book_path[ENGINE_MAX_BOOK_PATH];
 } EngineState;
 
 void engine_init(EngineState *state);

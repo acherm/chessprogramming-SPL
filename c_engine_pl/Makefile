@@ -1,7 +1,7 @@
 CC ?= cc
-CFLAGS ?= -std=c11 -O2 -Wall -Wextra -pedantic
+CFLAGS ?= -std=c11 -O2 -Wall -Wextra -pedantic -pthread
 CPPFLAGS ?= -Ic_engine_pl/include -Ic_engine_pl/include/generated
-LDFLAGS ?=
+LDFLAGS ?= -pthread
 
 SRC := $(wildcard c_engine_pl/src/*.c)
 OBJ := $(patsubst c_engine_pl/src/%.c,c_engine_pl/build/%.o,$(SRC))

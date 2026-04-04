@@ -151,6 +151,16 @@ def _validate_required_variation_points(
     if len(selected_board) != 1:
         errors.append("Select exactly one primary board representation: Bitboards | 0x88 | Mailbox | 10x12 Board")
 
+    search_core_names = ("Minimax", "Negamax")
+    search_core_ids = {
+        option.id
+        for option in model.options_by_id.values()
+        if option.name in search_core_names
+    }
+    selected_search_cores = search_core_ids & selected_ids
+    if len(selected_search_cores) != 1:
+        errors.append("Select exactly one primary search core: Minimax | Negamax")
+
     return errors
 
 

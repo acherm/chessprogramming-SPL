@@ -15,6 +15,8 @@ def test_build_cross_tree_constraints_from_feature_set():
         FeatureNode(id="feat_magic_bitboards", name="Magic Bitboards", parent_id="move_generation"),
         FeatureNode(id="feat_bitboards", name="Bitboards", parent_id="board"),
         FeatureNode(id="feat_mailbox", name="Mailbox", parent_id="board"),
+        FeatureNode(id="feat_minimax", name="Minimax", parent_id="search"),
+        FeatureNode(id="feat_negamax", name="Negamax", parent_id="search"),
         FeatureNode(id="feat_alpha_beta", name="Alpha-Beta", parent_id="search"),
         FeatureNode(id="feat_pvs", name="Principal Variation Search", parent_id="search"),
         FeatureNode(id="feat_eval", name="Evaluation", parent_id="evaluation"),
@@ -36,6 +38,7 @@ def test_build_cross_tree_constraints_from_feature_set():
         for constraint in constraints
     }
     assert ("Magic Bitboards", "Bitboards", "requires") in edge_names
+    assert ("Minimax", "Negamax", "excludes") in edge_names
     assert ("Bitboards", "Mailbox", "excludes") in edge_names
     assert ("Passed Pawn", "Evaluation", "requires") in edge_names
     assert ("King Activity", "Tapered Eval", "requires") in edge_names

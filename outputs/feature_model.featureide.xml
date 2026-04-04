@@ -40,8 +40,8 @@
         <feature name="Castling" />
         <feature name="En Passant" />
         <feature name="Legal Move Generation" />
+        <feature name="Magic Bitboards" />
         <feature name="Move Generation" />
-        <feature name="Move Ordering" />
         <feature name="Pseudo-Legal Move Generation" />
       </or>
       <or name="Opening">
@@ -63,9 +63,15 @@
         <feature name="Alpha-Beta" />
         <feature name="Aspiration Windows" />
         <feature name="Fifty-Move Rule" />
-        <feature name="History Heuristic" />
         <feature name="Iterative Deepening" />
-        <feature name="Killer Heuristic" />
+        <feature name="Minimax" />
+        <and name="Move Ordering">
+          <or name="Ordering Heuristics">
+            <feature name="Hash Move" />
+            <feature name="History Heuristic" />
+            <feature name="Killer Heuristic" />
+          </or>
+        </and>
         <feature name="Negamax" />
         <feature name="Principal Variation Search" />
         <feature name="Quiescence Search" />
@@ -76,16 +82,23 @@
         <feature name="Time Management" />
       </or>
       <or name="TranspositionTable">
-        <feature name="Hash Move" />
-        <feature name="Pawn Hash Table" />
-        <feature name="Replacement Schemes" />
         <feature name="Transposition Table" />
-        <feature name="Zobrist Hashing" />
+        <or name="TT Support">
+          <feature name="Pawn Hash Table" />
+          <feature name="Replacement Schemes" />
+          <feature name="Zobrist Hashing" />
+        </or>
       </or>
       <feature name="Tuning" />
     </and>
   </struct>
   <constraints>
+    <rule>
+      <imp>
+        <var>Magic Bitboards</var>
+        <var>Bitboards</var>
+      </imp>
+    </rule>
     <rule>
       <imp>
         <var>Legal Move Generation</var>
@@ -120,6 +133,18 @@
       <imp>
         <var>En Passant</var>
         <var>Legal Move Generation</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Minimax</var>
+        <var>Make Move</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Minimax</var>
+        <var>Unmake Move</var>
       </imp>
     </rule>
     <rule>
@@ -190,8 +215,32 @@
     </rule>
     <rule>
       <imp>
+        <var>Hash Move</var>
+        <var>Move Ordering</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Killer Heuristic</var>
+        <var>Move Ordering</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>History Heuristic</var>
+        <var>Move Ordering</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
         <var>Pawn Hash Table</var>
         <var>Zobrist Hashing</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Replacement Schemes</var>
+        <var>Transposition Table</var>
       </imp>
     </rule>
     <rule>
@@ -295,6 +344,14 @@
         <var>King Activity</var>
         <var>Tapered Eval</var>
       </imp>
+    </rule>
+    <rule>
+      <not>
+        <and>
+          <var>Minimax</var>
+          <var>Negamax</var>
+        </and>
+      </not>
     </rule>
     <rule>
       <not>

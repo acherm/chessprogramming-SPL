@@ -6,6 +6,7 @@ It is intentionally narrower than the mined CPW feature model. The CPW model is 
 
 Related notes:
 
+- `docs/feature_taxonomy_and_strengthening_roadmap.md`
 - `docs/variant_constraints_and_perft.md`
 - `outputs/phase1_search_assessment/report.md`
 - `outputs/phase2_board_assessment/report.md`
@@ -49,6 +50,9 @@ The executable derivation profile is enforced by:
 Important consequences:
 
 - exactly one primary board representation must be selected;
+- exactly one primary search core must be selected:
+  - `Minimax`
+  - `Negamax`
 - `Move Generation` is mandatory for executable engine variants;
 - tournament-legality features are enforced by default:
   - `Castling`
@@ -59,19 +63,31 @@ Important consequences:
   - `Principal Variation Search -> Alpha-Beta`
   - `Hash Move -> Transposition Table`
   - `Legal Move Generation -> Move Generation`
+  - `Magic Bitboards -> Bitboards`
+  - `Minimax excludes Negamax`
   - board encodings exclude one another
-- the executable subset excludes features that are still only conceptual in this C engine:
-  - `Magic Bitboards` was removed from the derivable catalog because the current bitboard backend does not implement a real magic-bitboard attack generator
 - legacy coarse config tokens are still accepted for compatibility:
   - `Pawn Structure` expands to `Passed Pawn + Isolated Pawn + Doubled Pawn + Connected Pawn`
   - `King Safety` expands to `King Pressure + King Shelter`
 
 This separation matters because the mined feature model is a conceptual space, while the executable profile is a derivable implementation space.
 
+It also matters because not everything that improves engine strength should be modeled as a configurable feature. The current executable taxonomy distinguishes:
+
+- configurable features: selectable variation points such as `Null Move Pruning`, `Hash Move`, `Bishop Pair`, `Bitboards`
+- commonality: shared infrastructure and quality improvements such as time-allocation policy, TT replacement quality, or move-ordering plumbing
+- feature implementation debt: cases where the feature exists in the model, but the implementation is still partial or naive
+
+Recent commonality work landed in this layer rather than in the feature model:
+
+- UCI clock allocation now uses `movestogo`, reserve, and increment-aware budgeting
+- search uses soft/hard time cutoffs instead of a single naive deadline
+- TT uses bucketed replacement, generation aging, and mate-score normalization
+
 Depth convention in the current builder:
 
 - `depth=3`: executable flat option catalog
-- `depth=4`: adds intermediate groups such as `Pawn Structure`, `Piece Coordination`, and `King Terms`
+- `depth=4`: adds intermediate groups such as `Pawn Structure`, `Piece Coordination`, `King Terms`, `Ordering Heuristics`, and `TT Support`
 - `depth=5`: adds the compile/runtime binding layer below executable leaves
 
 ## 3. Architecture After Phase 1, Phase 2, and Phase 3
@@ -97,6 +113,10 @@ Search refinements are still layered on top of that stack, including:
 
 - `Quiescence Search`
 - `Move Ordering`
+- `Ordering Heuristics`
+  - `Hash Move`
+  - `Killer Heuristic`
+  - `History Heuristic`
 - `Hash Move`
 - `Transposition Table`
 - `Replacement Schemes`
@@ -107,7 +127,7 @@ Search refinements are still layered on top of that stack, including:
 - `Razoring`
 - `Delta Pruning`
 
-These are not all equally mature, but they are no longer purely cosmetic toggles.
+These are not all equally mature, but they are no longer purely cosmetic toggles. Some of them are feature families with internal subfeatures, while others are still waiting for stronger implementations behind the same feature name.
 
 ### 3.2 Board Representation Variation Point
 
@@ -139,10 +159,10 @@ The backend module owns:
 Implemented board backends:
 
 - `Bitboards`
+- `Magic Bitboards`
 - `0x88`
+- `Mailbox`
 - `10x12 Board`
-
-`Mailbox` is still modeled but currently reuses the `10x12` backend family in the backend dispatcher.
 
 ### 3.3 Evaluation Variation Point
 
@@ -178,6 +198,8 @@ Evaluation terms are organized as explicit term-level functions instead of remai
 - tapered-eval finalization
 - static exchange evaluation
 
+The important modeling point is that `Static Exchange Evaluation` is treated as a configurable feature, while a stronger SEE implementation is still an implementation-quality improvement to be done underneath that feature.
+
 ### 3.4 How the Three Variation Points Compose
 
 The architectural boundary is now:
@@ -196,6 +218,49 @@ So a search configuration does not need to know whether it is exploring moves fr
 It consumes the same engine-level move interface.
 
 That is the core reason why Phase 1, Phase 2, and Phase 3 combinations are possible.
+
+## 3.5 Revised Executable Hierarchy
+
+The executable hierarchy is now intentionally more explicit about feature families:
+
+- `Search`
+  - search-core leaves such as `Negamax`, `Alpha-Beta`, `Principal Variation Search`, `Iterative Deepening`
+  - `Move Ordering`
+    - `Ordering Heuristics`
+      - `Hash Move`
+      - `Killer Heuristic`
+      - `History Heuristic`
+- `Transposition Table`
+  - `Transposition Table`
+  - `TT Support`
+    - `Zobrist Hashing`
+    - `Replacement Schemes`
+    - `Pawn Hash Table`
+- `Evaluation`
+  - `Pawn Structure`
+  - `Piece Coordination`
+  - `King Terms`
+
+This structure is meant to reflect implementation-backed variability, not only conceptual similarity.
+
+## 3.6 Feature Completion Pass
+
+The more recent completion pass addressed several previously weak or aliased features.
+
+Completed items:
+
+- `Minimax` is now an explicit selectable search-core feature in the executable model, with a search-core exclusivity rule against `Negamax`
+- `Magic Bitboards` is now a real bitboard sub-backend with precomputed magic lookup tables for bishop and rook attacks
+- `Mailbox` no longer aliases `10x12 Board`; it has its own 64-square mailbox move-generation path
+- `Piece Lists` are now maintained in engine state and used by mailbox, `0x88`, and `10x12` generators for king lookup and piece iteration
+- `Opening Book` is now a small position-aware repertoire rather than a single hard-coded first move
+- `Opening Book` now reads from an external opening-book file and exposes `OwnBook` / `BookFile` UCI options
+- `Pondering` now runs as a background `go ponder` session and responds to `ponderhit` / `stop`
+
+Current caveats:
+
+- the default book format is intentionally simple (`startpos moves ...` lines), not Polyglot or another binary format
+- pondering is asynchronous and UCI-visible, but still implemented as repeated background search slices rather than a deeply integrated shared-search continuation model
 
 ## 4. What Is Actually Implemented
 
@@ -232,7 +297,9 @@ Interpretation:
 Backed by dedicated code paths:
 
 - `Bitboards`
+- `Magic Bitboards`
 - `0x88`
+- `Mailbox`
 - `10x12 Board`
 
 Behavioral evidence:
@@ -250,6 +317,7 @@ Interpretation:
 - board representation changes attack detection and move generation behavior;
 - the effect is visible in search node counts and runtime;
 - the bitboard backend is already behaviorally distinct, even though it is not yet the fastest backend for perft.
+- `Magic Bitboards` and `Mailbox` are now executable variants rather than documentation-only labels.
 
 ### 4.3 Implemented Interactions Across Families
 
@@ -471,9 +539,10 @@ The architecture is more honest than before, but it is not complete.
 
 These areas are still less modular than the search, board, and evaluation families:
 
-- opening-book behavior is not yet a first-class modular family
+- opening-book behavior is now real and file-backed, but the book format is intentionally simple and start-position oriented
 - time-management options are not yet modeled as deeply independent strategies
 - tuning features are mostly represented at the model/configuration level, not as distinct implementation modules
+- pondering now supports asynchronous `go ponder` plus `ponderhit`, but it is still a lightweight runtime subsystem rather than a deeply shared continuation search
 
 ### 7.2 Canonical State Still Exists
 
@@ -585,14 +654,30 @@ Use the Phase 1 presets:
 - `c_engine_pl/variants/phase1_negamax_ab.json`
 - `c_engine_pl/variants/phase1_negamax_ab_pvs_id.json`
 
+### 8.7 Re-run the feature-completion validation set
+
+Use the feature-completion presets:
+
+- `c_engine_pl/variants/phase1_minimax.json`
+- `c_engine_pl/variants/phase2_magic_bitboards_ab_pvs_id.json`
+- `c_engine_pl/variants/phase2_mailbox_piece_lists_ab_pvs_id.json`
+- `c_engine_pl/variants/phase2_runtime_book_ponder.json`
+
+Artifacts:
+
+- `outputs/feature_completion_validation/report.md`
+- `outputs/feature_completion_validation/summary.csv`
+- `outputs/feature_completion_validation/bin/`
+
 ## 9. Recommended Next Work
 
 The natural next steps are:
 
 1. decide whether `0x88` and `10x12` should remain equivalent or be made behaviorally distinct through backend-native move ordering or canonical-state ownership;
-2. deepen the evaluation family beyond the current term set, for example pawn-specific subfeatures, bishop-pair logic, rook-on-open-file logic, or more explicit endgame terms;
-3. modularize time-management and opening-book families with the same honesty standard;
-4. eventually decide whether board backends should remain synchronized caches or become true canonical state owners.
+2. deepen the evaluation family beyond the current term set, for example richer king-danger and threat terms;
+3. strengthen time-management commonality and, only if needed later, split it into genuine alternative strategies;
+4. decide whether the external opening-book subsystem should stay text-based or move to a richer exchange format;
+5. eventually decide whether board backends should remain synchronized caches or become true canonical state owners.
 
 ## 10. Bottom Line
 

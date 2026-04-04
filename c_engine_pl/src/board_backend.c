@@ -64,6 +64,70 @@ static int g_sq0x88_to_64[128];
 static int g_sq64_to_120[64];
 static int g_sq120_to_64[120];
 static bool g_backend_maps_ready = false;
+static int pop_lsb(uint64_t *bits);
+
+#if CFG_MAGIC_BITBOARDS
+#define MAGIC_ROOK_TABLE_SIZE 4096
+#define MAGIC_BISHOP_TABLE_SIZE 512
+
+static const int MAGIC_ROOK_BITS[64] = {
+    12, 11, 11, 11, 11, 11, 11, 12, 11, 10, 10, 10, 10, 10, 10, 11,
+    11, 10, 10, 10, 10, 10, 10, 11, 11, 10, 10, 10, 10, 10, 10, 11,
+    11, 10, 10, 10, 10, 10, 10, 11, 11, 10, 10, 10, 10, 10, 10, 11,
+    11, 10, 10, 10, 10, 10, 10, 11, 12, 11, 11, 11, 11, 11, 11, 12
+};
+
+static const int MAGIC_BISHOP_BITS[64] = {
+    6, 5, 5, 5, 5, 5, 5, 6, 5, 5, 5, 5, 5, 5, 5, 5,
+    5, 5, 7, 7, 7, 7, 5, 5, 5, 5, 7, 9, 9, 7, 5, 5,
+    5, 5, 7, 9, 9, 7, 5, 5, 5, 5, 7, 7, 7, 7, 5, 5,
+    5, 5, 5, 5, 5, 5, 5, 5, 6, 5, 5, 5, 5, 5, 5, 6
+};
+
+static const uint64_t MAGIC_ROOK_MAGICS[64] = {
+    0x2080021440002084ULL, 0x8140100040002000ULL, 0x0200082080120040ULL, 0x0200041040200a00ULL,
+    0x828018001400800aULL, 0x1180040002000b80ULL, 0x0200440200010088ULL, 0x0200088044090026ULL,
+    0x0100802080004004ULL, 0x2408c00140201001ULL, 0x0030801000802000ULL, 0x8080801000800800ULL,
+    0x0002800800040080ULL, 0x0100800400800200ULL, 0x1001800100800a00ULL, 0x2002000049008224ULL,
+    0x0080004000200044ULL, 0x0110014000c02000ULL, 0x0210010100200040ULL, 0x10001200400a0020ULL,
+    0x0004008006800800ULL, 0x0148808002000400ULL, 0x8004808002000100ULL, 0x0808820004912344ULL,
+    0x0000400080208000ULL, 0xc040030500458020ULL, 0x0002100480200080ULL, 0x0012200900100102ULL,
+    0x0000080080800400ULL, 0x0182000280040080ULL, 0x009c484400621110ULL, 0x00a0090200048064ULL,
+    0x0000844004800020ULL, 0x0002201001400044ULL, 0x0000100080802000ULL, 0x0028080080801006ULL,
+    0x0001b100c5002800ULL, 0x002a001002000408ULL, 0x808a000102000804ULL, 0x8004210042000084ULL,
+    0x0400208040008012ULL, 0x1200201000404000ULL, 0x0010008020068013ULL, 0x8203001000210009ULL,
+    0x0042080100110005ULL, 0x482c008002008004ULL, 0x0040022891040030ULL, 0x0101008044020001ULL,
+    0x0000801040290100ULL, 0x6010004000200040ULL, 0x2001012002411900ULL, 0x0001002008100100ULL,
+    0x8e08040082080080ULL, 0x0014008022000480ULL, 0x8880410208100400ULL, 0x9000090c04894200ULL,
+    0x448a408101201602ULL, 0x804220520084c102ULL, 0x8812002080081042ULL, 0x0c060020041040caULL,
+    0x80820060980450b2ULL, 0x0009000400080201ULL, 0x0002215210088804ULL, 0x100c040080210042ULL
+};
+
+static const uint64_t MAGIC_BISHOP_MAGICS[64] = {
+    0x3010101081040420ULL, 0x00a0188105002400ULL, 0x2404082081080800ULL, 0x8504042680040480ULL,
+    0x00011040c0000004ULL, 0x02648a10c0000802ULL, 0x000a008420080580ULL, 0x4142010101012000ULL,
+    0x4000302052040062ULL, 0x0000101009211022ULL, 0x0860500502012800ULL, 0x0104022082004400ULL,
+    0x000011114000c002ULL, 0x1000808804400030ULL, 0x1010020701284000ULL, 0x0000061100921004ULL,
+    0x0020444005040090ULL, 0xc06005440c8c2040ULL, 0x0028021000284014ULL, 0x6004000824001080ULL,
+    0x2001002820085290ULL, 0x208603a888040200ULL, 0x0404000061041022ULL, 0x000200404a640400ULL,
+    0x0020480104282801ULL, 0x82410801a0888108ULL, 0x0400904042040400ULL, 0x0008080010202020ULL,
+    0x0001010000104000ULL, 0x0804044108080a00ULL, 0x0820808984122800ULL, 0x0200410062150100ULL,
+    0x2024024000210480ULL, 0x4101412841200810ULL, 0x6021004100081802ULL, 0x1002020080080080ULL,
+    0x00400080211a0020ULL, 0x12040800200a00a0ULL, 0x081000b200008220ULL, 0x0068008081422222ULL,
+    0x0858080404121080ULL, 0x04014110a8291000ULL, 0x0060210040408802ULL, 0x2c00022214000800ULL,
+    0x8140400812010040ULL, 0x04040c8801100200ULL, 0x090830010a083069ULL, 0x1008010408280891ULL,
+    0x21240a0230041024ULL, 0x0141410401e00010ULL, 0x00002200a4042000ULL, 0x800001108404000aULL,
+    0x010a081082022210ULL, 0x0100202012908804ULL, 0x0004082208120040ULL, 0x4008020c004a1100ULL,
+    0x2024420804020202ULL, 0x8004204110901000ULL, 0x0048000180482800ULL, 0x8010800c10420200ULL,
+    0x0008802011820204ULL, 0x0800003012100442ULL, 0x0a4024600a440100ULL, 0x4810690125120200ULL
+};
+
+static uint64_t g_magic_rook_masks[64];
+static uint64_t g_magic_bishop_masks[64];
+static uint64_t g_magic_rook_attacks[64][MAGIC_ROOK_TABLE_SIZE];
+static uint64_t g_magic_bishop_attacks[64][MAGIC_BISHOP_TABLE_SIZE];
+static bool g_magic_tables_ready = false;
+#endif
 
 static inline int piece_abs(int piece) {
     return piece >= 0 ? piece : -piece;
@@ -99,6 +163,229 @@ static inline uint64_t square_bb(int sq) {
     return 1ULL << sq;
 }
 
+static inline int piece_type_index(int piece) {
+    int abs_piece = piece_abs(piece);
+    return abs_piece >= WP && abs_piece <= WK ? abs_piece - 1 : -1;
+}
+
+#if CFG_PIECE_LISTS
+static int king_square_from_piece_lists(const EngineState *state, int side) {
+    int count;
+
+    if (state == NULL || side < WHITE || side > BLACK) {
+        return -1;
+    }
+
+    count = state->piece_list_counts[side][5];
+    if (count <= 0) {
+        return -1;
+    }
+    return state->piece_list_squares[side][5][0];
+}
+
+static int collect_piece_list_squares(const EngineState *state, int side, int squares[32]) {
+    int total = 0;
+    int piece_index;
+    int i;
+
+    if (state == NULL || squares == NULL || side < WHITE || side > BLACK) {
+        return 0;
+    }
+
+    for (piece_index = 0; piece_index < 6; ++piece_index) {
+        int count = state->piece_list_counts[side][piece_index];
+        for (i = 0; i < count && total < 32; ++i) {
+            squares[total++] = state->piece_list_squares[side][piece_index][i];
+        }
+    }
+
+    return total;
+}
+#endif
+
+#if CFG_MAGIC_BITBOARDS
+static uint64_t rook_mask_magic(int sq) {
+    uint64_t result = 0ULL;
+    int rank = rank_of(sq);
+    int file = file_of(sq);
+    int r;
+    int f;
+
+    for (r = rank + 1; r <= 6; ++r) {
+        result |= square_bb(file + r * 8);
+    }
+    for (r = rank - 1; r >= 1; --r) {
+        result |= square_bb(file + r * 8);
+    }
+    for (f = file + 1; f <= 6; ++f) {
+        result |= square_bb(f + rank * 8);
+    }
+    for (f = file - 1; f >= 1; --f) {
+        result |= square_bb(f + rank * 8);
+    }
+    return result;
+}
+
+static uint64_t bishop_mask_magic(int sq) {
+    uint64_t result = 0ULL;
+    int rank = rank_of(sq);
+    int file = file_of(sq);
+    int r;
+    int f;
+
+    for (r = rank + 1, f = file + 1; r <= 6 && f <= 6; ++r, ++f) {
+        result |= square_bb(f + r * 8);
+    }
+    for (r = rank + 1, f = file - 1; r <= 6 && f >= 1; ++r, --f) {
+        result |= square_bb(f + r * 8);
+    }
+    for (r = rank - 1, f = file + 1; r >= 1 && f <= 6; --r, ++f) {
+        result |= square_bb(f + r * 8);
+    }
+    for (r = rank - 1, f = file - 1; r >= 1 && f >= 1; --r, --f) {
+        result |= square_bb(f + r * 8);
+    }
+    return result;
+}
+
+static uint64_t rook_attacks_on_the_fly(int sq, uint64_t blockers) {
+    uint64_t result = 0ULL;
+    int rank = rank_of(sq);
+    int file = file_of(sq);
+    int r;
+    int f;
+
+    for (r = rank + 1; r <= 7; ++r) {
+        int to = file + r * 8;
+        result |= square_bb(to);
+        if ((blockers & square_bb(to)) != 0ULL) {
+            break;
+        }
+    }
+    for (r = rank - 1; r >= 0; --r) {
+        int to = file + r * 8;
+        result |= square_bb(to);
+        if ((blockers & square_bb(to)) != 0ULL) {
+            break;
+        }
+    }
+    for (f = file + 1; f <= 7; ++f) {
+        int to = f + rank * 8;
+        result |= square_bb(to);
+        if ((blockers & square_bb(to)) != 0ULL) {
+            break;
+        }
+    }
+    for (f = file - 1; f >= 0; --f) {
+        int to = f + rank * 8;
+        result |= square_bb(to);
+        if ((blockers & square_bb(to)) != 0ULL) {
+            break;
+        }
+    }
+
+    return result;
+}
+
+static uint64_t bishop_attacks_on_the_fly(int sq, uint64_t blockers) {
+    uint64_t result = 0ULL;
+    int rank = rank_of(sq);
+    int file = file_of(sq);
+    int r;
+    int f;
+
+    for (r = rank + 1, f = file + 1; r <= 7 && f <= 7; ++r, ++f) {
+        int to = f + r * 8;
+        result |= square_bb(to);
+        if ((blockers & square_bb(to)) != 0ULL) {
+            break;
+        }
+    }
+    for (r = rank + 1, f = file - 1; r <= 7 && f >= 0; ++r, --f) {
+        int to = f + r * 8;
+        result |= square_bb(to);
+        if ((blockers & square_bb(to)) != 0ULL) {
+            break;
+        }
+    }
+    for (r = rank - 1, f = file + 1; r >= 0 && f <= 7; --r, ++f) {
+        int to = f + r * 8;
+        result |= square_bb(to);
+        if ((blockers & square_bb(to)) != 0ULL) {
+            break;
+        }
+    }
+    for (r = rank - 1, f = file - 1; r >= 0 && f >= 0; --r, --f) {
+        int to = f + r * 8;
+        result |= square_bb(to);
+        if ((blockers & square_bb(to)) != 0ULL) {
+            break;
+        }
+    }
+
+    return result;
+}
+
+static void init_magic_tables(void) {
+    int sq;
+
+    if (g_magic_tables_ready) {
+        return;
+    }
+
+    for (sq = 0; sq < 64; ++sq) {
+        int rook_variations = 1 << MAGIC_ROOK_BITS[sq];
+        int bishop_variations = 1 << MAGIC_BISHOP_BITS[sq];
+        int i;
+
+        g_magic_rook_masks[sq] = rook_mask_magic(sq);
+        g_magic_bishop_masks[sq] = bishop_mask_magic(sq);
+
+        for (i = 0; i < rook_variations; ++i) {
+            uint64_t blockers = 0ULL;
+            uint64_t mask = g_magic_rook_masks[sq];
+            int bit = 0;
+            while (mask != 0ULL) {
+                int blocker_sq = pop_lsb(&mask);
+                if ((i & (1 << bit)) != 0) {
+                    blockers |= square_bb(blocker_sq);
+                }
+                bit += 1;
+            }
+            g_magic_rook_attacks[sq][(int)(((blockers & g_magic_rook_masks[sq]) * MAGIC_ROOK_MAGICS[sq]) >> (64 - MAGIC_ROOK_BITS[sq]))] =
+                rook_attacks_on_the_fly(sq, blockers);
+        }
+
+        for (i = 0; i < bishop_variations; ++i) {
+            uint64_t blockers = 0ULL;
+            uint64_t mask = g_magic_bishop_masks[sq];
+            int bit = 0;
+            while (mask != 0ULL) {
+                int blocker_sq = pop_lsb(&mask);
+                if ((i & (1 << bit)) != 0) {
+                    blockers |= square_bb(blocker_sq);
+                }
+                bit += 1;
+            }
+            g_magic_bishop_attacks[sq][(int)(((blockers & g_magic_bishop_masks[sq]) * MAGIC_BISHOP_MAGICS[sq]) >> (64 - MAGIC_BISHOP_BITS[sq]))] =
+                bishop_attacks_on_the_fly(sq, blockers);
+        }
+    }
+
+    g_magic_tables_ready = true;
+}
+
+static inline uint64_t rook_attacks_magic(int sq, uint64_t occupancy) {
+    uint64_t blockers = occupancy & g_magic_rook_masks[sq];
+    return g_magic_rook_attacks[sq][(int)((blockers * MAGIC_ROOK_MAGICS[sq]) >> (64 - MAGIC_ROOK_BITS[sq]))];
+}
+
+static inline uint64_t bishop_attacks_magic(int sq, uint64_t occupancy) {
+    uint64_t blockers = occupancy & g_magic_bishop_masks[sq];
+    return g_magic_bishop_attacks[sq][(int)((blockers * MAGIC_BISHOP_MAGICS[sq]) >> (64 - MAGIC_BISHOP_BITS[sq]))];
+}
+#endif
+
 static void move_list_push(EngineMoveList *list, EngineMove move) {
     if (list->count >= ENGINE_MAX_MOVES) {
         return;
@@ -132,6 +419,9 @@ static void init_backend_maps(void) {
         g_sq120_to_64[sq120] = sq;
     }
 
+#if CFG_MAGIC_BITBOARDS
+    init_magic_tables();
+#endif
     g_backend_maps_ready = true;
 }
 
@@ -350,6 +640,12 @@ static void add_special_moves(const EngineState *state, EngineMoveList *list, bo
 }
 
 static ENGINE_MAYBE_UNUSED int find_king_square_default(const EngineState *state, int side) {
+#if CFG_PIECE_LISTS
+    int king_sq = king_square_from_piece_lists(state, side);
+    if (king_sq >= 0) {
+        return king_sq;
+    }
+#endif
     int sq;
     int king = side == WHITE ? WK : BK;
 
@@ -461,6 +757,12 @@ static ENGINE_MAYBE_UNUSED bool is_square_attacked_default(const EngineState *st
 }
 
 static ENGINE_MAYBE_UNUSED int find_king_square_0x88(const EngineState *state, int side) {
+#if CFG_PIECE_LISTS
+    int king_sq = king_square_from_piece_lists(state, side);
+    if (king_sq >= 0) {
+        return king_sq;
+    }
+#endif
     int sq;
     int king = side == WHITE ? WK : BK;
 
@@ -571,6 +873,12 @@ static ENGINE_MAYBE_UNUSED bool is_square_attacked_0x88(const EngineState *state
 }
 
 static ENGINE_MAYBE_UNUSED int find_king_square_120(const EngineState *state, int side) {
+#if CFG_PIECE_LISTS
+    int king_sq = king_square_from_piece_lists(state, side);
+    if (king_sq >= 0) {
+        return king_sq;
+    }
+#endif
     int sq;
     int king = side == WHITE ? WK : BK;
 
@@ -713,6 +1021,20 @@ static ENGINE_MAYBE_UNUSED bool is_square_attacked_bitboards(const EngineState *
         }
     }
 
+#if CFG_MAGIC_BITBOARDS
+    {
+        uint64_t bishop_like = state->bb_pieces[attacker_side == WHITE ? 2 : 8] | state->bb_pieces[attacker_side == WHITE ? 4 : 10];
+        if ((bishop_attacks_magic(sq, occ) & bishop_like) != 0ULL) {
+            return true;
+        }
+    }
+    {
+        uint64_t rook_like = state->bb_pieces[attacker_side == WHITE ? 3 : 9] | state->bb_pieces[attacker_side == WHITE ? 4 : 10];
+        if ((rook_attacks_magic(sq, occ) & rook_like) != 0ULL) {
+            return true;
+        }
+    }
+#else
     pieces = state->bb_pieces[attacker_side == WHITE ? 2 : 8] | state->bb_pieces[attacker_side == WHITE ? 4 : 10];
     while (pieces != 0ULL) {
         int from = pop_lsb(&pieces);
@@ -734,6 +1056,7 @@ static ENGINE_MAYBE_UNUSED bool is_square_attacked_bitboards(const EngineState *
             }
         }
     }
+#endif
 
     pieces = state->bb_pieces[attacker_side == WHITE ? 5 : 11];
     while (pieces != 0ULL) {
@@ -746,15 +1069,192 @@ static ENGINE_MAYBE_UNUSED bool is_square_attacked_bitboards(const EngineState *
     return false;
 }
 
-static ENGINE_MAYBE_UNUSED void generate_moves_0x88(const EngineState *state, EngineMoveList *list, bool captures_only) {
-    int sq;
+static ENGINE_MAYBE_UNUSED void generate_moves_mailbox(const EngineState *state, EngineMoveList *list, bool captures_only) {
+    int side = state->side_to_move;
+    int idx;
+#if CFG_PIECE_LISTS
+    int squares[32];
+    int square_count = collect_piece_list_squares(state, side, squares);
+#else
+    int squares[64];
+    int square_count = 64;
+    for (idx = 0; idx < 64; ++idx) {
+        squares[idx] = idx;
+    }
+#endif
 
     list->count = 0;
-    for (sq = 0; sq < 128; ++sq) {
-        int piece;
-        if ((sq & 0x88) != 0) {
+
+    for (idx = 0; idx < square_count; ++idx) {
+        int sq = squares[idx];
+        int piece = state->board[sq];
+        int abs_piece;
+        int i;
+
+        if (piece == EMPTY || piece_side(piece) != side) {
             continue;
         }
+
+        abs_piece = piece_abs(piece);
+        if (abs_piece == WP) {
+            int forward = side == WHITE ? 8 : -8;
+            int start_rank = side == WHITE ? 1 : 6;
+            int promote_rank = side == WHITE ? 6 : 1;
+            int to = sq + forward;
+
+            if (!captures_only && on_board64(to) && state->board[to] == EMPTY) {
+                EngineMove mv;
+                memset(&mv, 0, sizeof(mv));
+                mv.from = (uint8_t)sq;
+                mv.to = (uint8_t)to;
+                if (rank_of(sq) == promote_rank) {
+                    mv.promotion = 4;
+                    mv.flags |= FLAG_PROMOTION;
+                }
+                move_list_push(list, mv);
+
+                if (rank_of(sq) == start_rank) {
+                    int to2 = sq + 2 * forward;
+                    if (on_board64(to2) && state->board[to2] == EMPTY) {
+                        EngineMove dm = mv;
+                        dm.to = (uint8_t)to2;
+                        dm.promotion = 0;
+                        dm.flags = FLAG_DOUBLE_PAWN;
+                        move_list_push(list, dm);
+                    }
+                }
+            }
+
+            for (i = 0; i < 2; ++i) {
+                int delta = side == WHITE ? (i == 0 ? 7 : 9) : (i == 0 ? -9 : -7);
+                int capture_sq = sq + delta;
+                if (!on_board64(capture_sq) || abs(file_of(capture_sq) - file_of(sq)) != 1) {
+                    continue;
+                }
+                if (state->board[capture_sq] != EMPTY && piece_side(state->board[capture_sq]) != side) {
+                    EngineMove mv;
+                    memset(&mv, 0, sizeof(mv));
+                    mv.from = (uint8_t)sq;
+                    mv.to = (uint8_t)capture_sq;
+                    mv.flags = FLAG_CAPTURE;
+                    if (rank_of(sq) == promote_rank) {
+                        mv.promotion = 4;
+                        mv.flags |= FLAG_PROMOTION;
+                    }
+                    move_list_push(list, mv);
+                }
+            }
+            continue;
+        }
+
+        if (abs_piece == WN || abs_piece == WK) {
+            const int *deltas = abs_piece == WN ? KNIGHT_OFFSETS_64 : KING_OFFSETS_64;
+            for (i = 0; i < 8; ++i) {
+                int to = sq + deltas[i];
+                int target;
+                if (!on_board64(to)) {
+                    continue;
+                }
+                if ((abs_piece == WN && abs(file_of(to) - file_of(sq)) > 2) ||
+                    (abs_piece == WK && abs(file_of(to) - file_of(sq)) > 1)) {
+                    continue;
+                }
+                target = state->board[to];
+                if (target != EMPTY && piece_side(target) == side) {
+                    continue;
+                }
+                if (captures_only && target == EMPTY) {
+                    continue;
+                }
+                {
+                    EngineMove mv;
+                    memset(&mv, 0, sizeof(mv));
+                    mv.from = (uint8_t)sq;
+                    mv.to = (uint8_t)to;
+                    if (target != EMPTY) {
+                        mv.flags = FLAG_CAPTURE;
+                    }
+                    move_list_push(list, mv);
+                }
+            }
+            continue;
+        }
+
+        {
+            const int *deltas = NULL;
+            int delta_count = 0;
+            if (abs_piece == WB) {
+                deltas = BISHOP_OFFSETS_64;
+                delta_count = 4;
+            } else if (abs_piece == WR) {
+                deltas = ROOK_OFFSETS_64;
+                delta_count = 4;
+            } else if (abs_piece == WQ) {
+                static const int queen_offsets[8] = {9, 7, -9, -7, 8, -8, 1, -1};
+                deltas = queen_offsets;
+                delta_count = 8;
+            }
+            if (deltas == NULL) {
+                continue;
+            }
+
+            for (i = 0; i < delta_count; ++i) {
+                int delta = deltas[i];
+                int to = sq + delta;
+                while (step_preserves_geometry(to - delta, to, delta)) {
+                    int target = state->board[to];
+                    if (target == EMPTY) {
+                        if (!captures_only) {
+                            EngineMove mv;
+                            memset(&mv, 0, sizeof(mv));
+                            mv.from = (uint8_t)sq;
+                            mv.to = (uint8_t)to;
+                            move_list_push(list, mv);
+                        }
+                    } else {
+                        if (piece_side(target) != side) {
+                            EngineMove mv;
+                            memset(&mv, 0, sizeof(mv));
+                            mv.from = (uint8_t)sq;
+                            mv.to = (uint8_t)to;
+                            mv.flags = FLAG_CAPTURE;
+                            move_list_push(list, mv);
+                        }
+                        break;
+                    }
+                    to += delta;
+                }
+            }
+        }
+    }
+
+    add_special_moves(state, list, captures_only);
+}
+
+static ENGINE_MAYBE_UNUSED void generate_moves_0x88(const EngineState *state, EngineMoveList *list, bool captures_only) {
+    int idx;
+#if CFG_PIECE_LISTS
+    int squares[32];
+    int square_count = collect_piece_list_squares(state, state->side_to_move, squares);
+#else
+    int squares[128];
+    int square_count = 0;
+    int sq;
+    for (sq = 0; sq < 128; ++sq) {
+        if ((sq & 0x88) == 0) {
+            squares[square_count++] = sq;
+        }
+    }
+#endif
+
+    list->count = 0;
+    for (idx = 0; idx < square_count; ++idx) {
+        int piece;
+#if CFG_PIECE_LISTS
+        int sq = g_sq64_to_0x88[squares[idx]];
+#else
+        int sq = squares[idx];
+#endif
         piece = state->board_0x88[sq];
         if (piece == EMPTY || piece_side(piece) != state->side_to_move) {
             continue;
@@ -911,10 +1411,28 @@ static ENGINE_MAYBE_UNUSED void generate_moves_0x88(const EngineState *state, En
 }
 
 static ENGINE_MAYBE_UNUSED void generate_moves_120(const EngineState *state, EngineMoveList *list, bool captures_only) {
+    int idx;
+#if CFG_PIECE_LISTS
+    int squares[32];
+    int square_count = collect_piece_list_squares(state, state->side_to_move, squares);
+#else
+    int squares[120];
+    int square_count = 0;
     int sq;
+    for (sq = 0; sq < 120; ++sq) {
+        if (state->board_120[sq] != OFFBOARD_120) {
+            squares[square_count++] = sq;
+        }
+    }
+#endif
 
     list->count = 0;
-    for (sq = 0; sq < 120; ++sq) {
+    for (idx = 0; idx < square_count; ++idx) {
+#if CFG_PIECE_LISTS
+        int sq = g_sq64_to_120[squares[idx]];
+#else
+        int sq = squares[idx];
+#endif
         int piece = state->board_120[sq];
         if (piece == OFFBOARD_120 || piece == EMPTY || piece_side(piece) != state->side_to_move) {
             continue;
@@ -1169,6 +1687,24 @@ static ENGINE_MAYBE_UNUSED void generate_moves_bitboards(const EngineState *stat
     pieces = state->bb_pieces[side == WHITE ? 2 : 8];
     while (pieces != 0ULL) {
         int from = pop_lsb(&pieces);
+#if CFG_MAGIC_BITBOARDS
+        uint64_t targets;
+        targets = bishop_attacks_magic(from, all_occ) & ~own_occ;
+        if (captures_only) {
+            targets &= opp_occ;
+        }
+        while (targets != 0ULL) {
+            int to = pop_lsb(&targets);
+            EngineMove mv;
+            memset(&mv, 0, sizeof(mv));
+            mv.from = (uint8_t)from;
+            mv.to = (uint8_t)to;
+            if ((opp_occ & square_bb(to)) != 0ULL) {
+                mv.flags = FLAG_CAPTURE;
+            }
+            move_list_push(list, mv);
+        }
+#else
         int i;
         for (i = 0; i < 4; ++i) {
             int to = from + BISHOP_OFFSETS_64[i];
@@ -1195,11 +1731,30 @@ static ENGINE_MAYBE_UNUSED void generate_moves_bitboards(const EngineState *stat
                 to += BISHOP_OFFSETS_64[i];
             }
         }
+#endif
     }
 
     pieces = state->bb_pieces[side == WHITE ? 3 : 9];
     while (pieces != 0ULL) {
         int from = pop_lsb(&pieces);
+#if CFG_MAGIC_BITBOARDS
+        uint64_t targets;
+        targets = rook_attacks_magic(from, all_occ) & ~own_occ;
+        if (captures_only) {
+            targets &= opp_occ;
+        }
+        while (targets != 0ULL) {
+            int to = pop_lsb(&targets);
+            EngineMove mv;
+            memset(&mv, 0, sizeof(mv));
+            mv.from = (uint8_t)from;
+            mv.to = (uint8_t)to;
+            if ((opp_occ & square_bb(to)) != 0ULL) {
+                mv.flags = FLAG_CAPTURE;
+            }
+            move_list_push(list, mv);
+        }
+#else
         int i;
         for (i = 0; i < 4; ++i) {
             int to = from + ROOK_OFFSETS_64[i];
@@ -1226,11 +1781,30 @@ static ENGINE_MAYBE_UNUSED void generate_moves_bitboards(const EngineState *stat
                 to += ROOK_OFFSETS_64[i];
             }
         }
+#endif
     }
 
     pieces = state->bb_pieces[side == WHITE ? 4 : 10];
     while (pieces != 0ULL) {
         int from = pop_lsb(&pieces);
+#if CFG_MAGIC_BITBOARDS
+        uint64_t targets;
+        targets = (rook_attacks_magic(from, all_occ) | bishop_attacks_magic(from, all_occ)) & ~own_occ;
+        if (captures_only) {
+            targets &= opp_occ;
+        }
+        while (targets != 0ULL) {
+            int to = pop_lsb(&targets);
+            EngineMove mv;
+            memset(&mv, 0, sizeof(mv));
+            mv.from = (uint8_t)from;
+            mv.to = (uint8_t)to;
+            if ((opp_occ & square_bb(to)) != 0ULL) {
+                mv.flags = FLAG_CAPTURE;
+            }
+            move_list_push(list, mv);
+        }
+#else
         int i;
         static const int queen_offsets[8] = {9, 7, -9, -7, 8, -8, 1, -1};
         for (i = 0; i < 8; ++i) {
@@ -1259,6 +1833,7 @@ static ENGINE_MAYBE_UNUSED void generate_moves_bitboards(const EngineState *stat
                 to += delta;
             }
         }
+#endif
     }
 
     pieces = state->bb_pieces[side == WHITE ? 5 : 11];
@@ -1302,6 +1877,8 @@ void engine_sync_backend_state(EngineState *state) {
     init_backend_maps();
     memset(state->board_0x88, 0, sizeof(state->board_0x88));
     memset(state->bb_pieces, 0, sizeof(state->bb_pieces));
+    memset(state->piece_list_squares, 0, sizeof(state->piece_list_squares));
+    memset(state->piece_list_counts, 0, sizeof(state->piece_list_counts));
     for (sq = 0; sq < 120; ++sq) {
         state->board_120[sq] = OFFBOARD_120;
     }
@@ -1328,6 +1905,18 @@ void engine_sync_backend_state(EngineState *state) {
         } else {
             state->bb_black_occ |= square_bb(sq);
         }
+
+        {
+            int side = piece_side(piece);
+            int type = piece_type_index(piece);
+            if (side >= WHITE && side <= BLACK && type >= 0) {
+                int count = state->piece_list_counts[side][type];
+                if (count < ENGINE_MAX_PIECES_PER_TYPE) {
+                    state->piece_list_squares[side][type][count] = sq;
+                    state->piece_list_counts[side][type] = (uint8_t)(count + 1);
+                }
+            }
+        }
     }
 }
 
@@ -1340,8 +1929,10 @@ int engine_backend_find_king_square(const EngineState *state, int side) {
     return find_king_square_bitboards(state, side);
 #elif CFG_0X88
     return find_king_square_0x88(state, side);
-#elif CFG_10X12_BOARD || CFG_MAILBOX
+#elif CFG_10X12_BOARD
     return find_king_square_120(state, side);
+#elif CFG_MAILBOX
+    return find_king_square_default(state, side);
 #else
     return find_king_square_default(state, side);
 #endif
@@ -1356,8 +1947,10 @@ bool engine_backend_is_square_attacked(const EngineState *state, int sq, int att
     return is_square_attacked_bitboards(state, sq, attacker_side);
 #elif CFG_0X88
     return is_square_attacked_0x88(state, sq, attacker_side);
-#elif CFG_10X12_BOARD || CFG_MAILBOX
+#elif CFG_10X12_BOARD
     return is_square_attacked_120(state, sq, attacker_side);
+#elif CFG_MAILBOX
+    return is_square_attacked_default(state, sq, attacker_side);
 #else
     return is_square_attacked_default(state, sq, attacker_side);
 #endif
@@ -1377,8 +1970,10 @@ void engine_backend_generate_pseudo_moves(const EngineState *state, EngineMoveLi
     generate_moves_bitboards(state, list, captures_only);
 #elif CFG_0X88
     generate_moves_0x88(state, list, captures_only);
-#elif CFG_10X12_BOARD || CFG_MAILBOX
+#elif CFG_10X12_BOARD
     generate_moves_120(state, list, captures_only);
+#elif CFG_MAILBOX
+    generate_moves_mailbox(state, list, captures_only);
 #else
     (void)captures_only;
 #endif
@@ -1386,7 +1981,11 @@ void engine_backend_generate_pseudo_moves(const EngineState *state, EngineMoveLi
 
 const char *engine_board_backend_name(void) {
 #if CFG_BITBOARDS
+#if CFG_MAGIC_BITBOARDS
+    return "MagicBitboards";
+#else
     return "Bitboards";
+#endif
 #elif CFG_0X88
     return "0x88";
 #elif CFG_10X12_BOARD

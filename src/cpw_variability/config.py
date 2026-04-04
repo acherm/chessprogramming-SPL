@@ -38,6 +38,7 @@ SEED_TITLES: dict[str, list[str]] = {
         "Category:Parallel_Search",
         "Category:Automated_Tuning",
         "Alpha-Beta",
+        "Minimax",
         "Bitboards",
         "0x88",
         "Mailbox",
@@ -77,6 +78,7 @@ GROUP_SPECS = [
         "keywords": [
             "search",
             "alpha-beta",
+            "minimax",
             "negamax",
             "iterative deepening",
             "mcts",

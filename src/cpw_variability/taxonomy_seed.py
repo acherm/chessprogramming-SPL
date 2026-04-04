@@ -20,6 +20,7 @@ IMPLEMENTATION_GROUP_SPECS = [
         "description": "Search core and search-level enhancements.",
         "keywords": [
             "alpha-beta",
+            "minimax",
             "negamax",
             "iterative deepening",
             "quiescence",

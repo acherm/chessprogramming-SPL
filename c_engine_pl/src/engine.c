@@ -40,8 +40,9 @@
 #define CASTLE_BLACK_K 4
 #define CASTLE_BLACK_Q 8
 
-#define TT_SIZE (1u << 18)
-#define TT_MASK (TT_SIZE - 1u)
+#define TT_BUCKET_SIZE 4u
+#define TT_SET_COUNT (1u << 16)
+#define TT_SET_MASK (TT_SET_COUNT - 1u)
 
 #define QUIESCENCE_MAX_DEPTH 8
 
@@ -60,13 +61,16 @@ static const int KING_OFFSETS[8] = {8, -8, 1, -1, 9, 7, -9, -7};
 
 typedef struct TTEntry {
     uint64_t key;
-    int depth;
     int score;
+    int depth;
     int flag; /* 0 exact, -1 alpha, 1 beta */
     uint16_t move16;
+    uint8_t generation;
+    uint8_t reserved;
 } TTEntry;
 
-static TTEntry g_tt[TT_SIZE];
+static TTEntry g_tt[TT_SET_COUNT][TT_BUCKET_SIZE];
+static uint8_t g_tt_generation = 1;
 
 static uint64_t g_zobrist_piece[12][64];
 static uint64_t g_zobrist_side;
@@ -253,6 +257,8 @@ static void clear_board(EngineState *state) {
     for (i = 0; i < 12; ++i) {
         state->bb_pieces[i] = 0ULL;
     }
+    memset(state->piece_list_squares, 0, sizeof(state->piece_list_squares));
+    memset(state->piece_list_counts, 0, sizeof(state->piece_list_counts));
     state->bb_white_occ = 0ULL;
     state->bb_black_occ = 0ULL;
     state->side_to_move = WHITE;
@@ -267,6 +273,8 @@ static void clear_board(EngineState *state) {
     }
     state->nodes = 0;
     state->stop = false;
+    state->exact_movetime = false;
+    state->soft_deadline_ms = 0;
     state->deadline_ms = 0;
 }
 
@@ -1119,57 +1127,162 @@ static void order_moves(EngineState *state, EngineMoveList *list, int ply, const
 #endif
 }
 
-static int tt_probe(uint64_t key, int depth, int alpha, int beta, int *score, EngineMove *best_move) {
+static int tt_store_score(int score, int ply) {
+    if (score >= ENGINE_MATE - ENGINE_MAX_PLY) {
+        return score + ply;
+    }
+    if (score <= -ENGINE_MATE + ENGINE_MAX_PLY) {
+        return score - ply;
+    }
+    return score;
+}
+
+static int tt_load_score(int score, int ply) {
+    if (score >= ENGINE_MATE - ENGINE_MAX_PLY) {
+        return score - ply;
+    }
+    if (score <= -ENGINE_MATE + ENGINE_MAX_PLY) {
+        return score + ply;
+    }
+    return score;
+}
+
+static int tt_entry_priority(const TTEntry *entry) {
+    int age;
+    int priority;
+
+    if (entry == NULL || entry->generation == 0) {
+        return INT_MIN;
+    }
+
+    age = (int)((uint8_t)(g_tt_generation - entry->generation));
+    priority = entry->depth - age * 4;
+    if (entry->flag != 0) {
+        priority -= 1;
+    }
+    return priority;
+}
+
+static void tt_new_search(void) {
 #if CFG_TRANSPOSITION_TABLE
-    TTEntry *entry = &g_tt[key & TT_MASK];
-    if (entry->key == key) {
+    g_tt_generation += 1;
+    if (g_tt_generation == 0) {
+        g_tt_generation = 1;
+    }
+#endif
+}
+
+static int tt_probe(uint64_t key, int depth, int alpha, int beta, int ply, int *score, EngineMove *best_move) {
+#if CFG_TRANSPOSITION_TABLE
+    TTEntry *bucket = g_tt[key & TT_SET_MASK];
+    const TTEntry *best_entry = NULL;
+    unsigned i;
+
+    for (i = 0; i < TT_BUCKET_SIZE; ++i) {
+        TTEntry *entry = &bucket[i];
+        int entry_score;
+
+        if (entry->generation == 0 || entry->key != key) {
+            continue;
+        }
+        if (best_entry == NULL || entry->depth > best_entry->depth) {
+            best_entry = entry;
+        }
         if (best_move != NULL && entry->move16 != 0) {
             *best_move = decode_move16(entry->move16);
         }
-        if (entry->depth >= depth) {
-            if (entry->flag == 0) {
-                *score = entry->score;
-                return 1;
-            }
-            if (entry->flag < 0 && entry->score <= alpha) {
-                *score = alpha;
-                return 1;
-            }
-            if (entry->flag > 0 && entry->score >= beta) {
-                *score = beta;
-                return 1;
-            }
+        if (entry->depth < depth) {
+            continue;
         }
+        entry_score = tt_load_score(entry->score, ply);
+        if (depth <= 0) {
+            if (score != NULL) {
+                *score = entry_score;
+            }
+            return 1;
+        }
+        if (entry->flag == 0) {
+            *score = entry_score;
+            return 1;
+        }
+        if (entry->flag < 0 && entry_score <= alpha) {
+            *score = entry_score;
+            return 1;
+        }
+        if (entry->flag > 0 && entry_score >= beta) {
+            *score = entry_score;
+            return 1;
+        }
+    }
+
+    if (best_move != NULL && best_entry != NULL && best_entry->move16 != 0) {
+        *best_move = decode_move16(best_entry->move16);
     }
 #else
     (void)key;
     (void)depth;
     (void)alpha;
     (void)beta;
+    (void)ply;
     (void)score;
     (void)best_move;
 #endif
     return 0;
 }
 
-static void tt_store(uint64_t key, int depth, int score, int flag, const EngineMove *best_move) {
+static void tt_store(uint64_t key, int depth, int score, int flag, int ply, const EngineMove *best_move) {
 #if CFG_TRANSPOSITION_TABLE
-    TTEntry *entry = &g_tt[key & TT_MASK];
+    TTEntry *bucket = g_tt[key & TT_SET_MASK];
+    TTEntry *target = NULL;
+    int target_priority = INT_MAX;
+    unsigned i;
+
+    for (i = 0; i < TT_BUCKET_SIZE; ++i) {
+        TTEntry *entry = &bucket[i];
+        int priority;
+
+        if (entry->generation == 0) {
+            target = entry;
+            break;
+        }
+        if (entry->key == key) {
+            target = entry;
+            break;
+        }
+        priority = tt_entry_priority(entry);
+        if (priority < target_priority) {
+            target = entry;
+            target_priority = priority;
+        }
+    }
+
+    if (target == NULL) {
+        target = &bucket[0];
+    }
+
 #if CFG_REPLACEMENT_SCHEMES
-    if (entry->key != key && entry->depth > depth) {
+    if (
+        target->generation != 0 &&
+        target->key == key &&
+        target->depth > depth &&
+        target->flag == 0 &&
+        flag != 0
+    ) {
         return;
     }
 #endif
-    entry->key = key;
-    entry->depth = depth;
-    entry->score = score;
-    entry->flag = flag;
-    entry->move16 = best_move != NULL ? encode_move16(best_move) : 0;
+    target->key = key;
+    target->depth = depth;
+    target->score = tt_store_score(score, ply);
+    target->flag = flag;
+    target->move16 = best_move != NULL ? encode_move16(best_move) : 0;
+    target->generation = g_tt_generation;
 #else
     (void)key;
     (void)depth;
     (void)score;
     (void)flag;
+    (void)ply;
     (void)best_move;
 #endif
 }
@@ -1211,6 +1324,7 @@ static const EngineSearchOps SEARCH_OPS = {
     .order_moves = order_moves,
     .tt_probe = tt_probe,
     .tt_store = tt_store,
+    .tt_new_search = tt_new_search,
     .parse_move_uci = parse_move_uci,
     .find_move_in_list = find_move_in_list,
     .move_to_front = move_to_front,
@@ -1317,12 +1431,15 @@ void engine_init(EngineState *state) {
     }
     init_zobrist();
     memset(g_tt, 0, sizeof(g_tt));
+    g_tt_generation = 1;
     engine_reset_evaluation_tables();
     memset(g_killers, 0, sizeof(g_killers));
     memset(g_history, 0, sizeof(g_history));
     state->pondering_enabled = false;
+    state->opening_book_enabled = true;
     state->max_depth_hint = 5;
     state->movetime_ms = 150;
+    snprintf(state->opening_book_path, sizeof(state->opening_book_path), "%s", "c_engine_pl/books/default_openings.txt");
     engine_set_startpos(state);
 }
 
@@ -1501,7 +1618,13 @@ void engine_print_compiled_features(FILE *out) {
 
     fprintf(out, "id name CPW-PL-Engine (%s)\n", PL_VARIANT_NAME);
     fprintf(out, "id author Codex\n");
+#if CFG_OPENING_BOOK
+    fprintf(out, "option name OwnBook type check default true\n");
+    fprintf(out, "option name BookFile type string default %s\n", "c_engine_pl/books/default_openings.txt");
+#endif
+#if CFG_PONDERING
     fprintf(out, "option name Ponder type check default false\n");
+#endif
 
     for (i = 0; i < PL_SELECTED_OPTION_COUNT; ++i) {
         fprintf(out, "info string feature[%d]=%s\n", i + 1, PL_SELECTED_OPTION_NAMES[i]);

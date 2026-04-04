@@ -238,6 +238,8 @@ def _add_intermediate_groups(
                 feature.parent_id = parent_id
 
     evaluation_group = next((feature for feature in features if feature.id == "evaluation" and feature.variation_role == "group"), None)
+    search_group = next((feature for feature in features if feature.id == "search" and feature.variation_role == "group"), None)
+    tt_group = next((feature for feature in features if feature.id == "transposition_table" and feature.variation_role == "group"), None)
     if evaluation_group is None:
         return features, traces, ["Skipped intermediate evaluation groups because Evaluation is missing"]
 
@@ -357,6 +359,117 @@ def _add_intermediate_groups(
     else:
         warnings.append("Skipped King Terms intermediate group because the coarse feature is missing")
 
+    move_ordering = feature_for("Move Ordering", variation_role="option")
+    ordering_children = [
+        feature_for("Hash Move"),
+        feature_for("Killer Heuristic"),
+        feature_for("History Heuristic"),
+    ]
+    ordering_children = [feature for feature in ordering_children if feature is not None]
+    if move_ordering is not None and search_group is not None:
+        move_ordering.parent_id = search_group.id
+        if ordering_children:
+            ordering_group_id = "search_ordering_heuristics"
+            if ordering_group_id not in used_ids:
+                used_ids.add(ordering_group_id)
+                ordering_group = FeatureNode(
+                    id=ordering_group_id,
+                    name="Ordering Heuristics",
+                    parent_id=move_ordering.id,
+                    kind="or",
+                    description="Optional move-ordering heuristics layered under the Move Ordering framework.",
+                    aliases=[],
+                    variation_role="group",
+                    variability_stage="none",
+                    configurable=False,
+                )
+                new_features.append(ordering_group)
+
+                source_trace = trace_by_feature_id.get(move_ordering.id) or trace_by_feature_id.get(ordering_children[0].id)
+                source_page = pages[0] if pages else None
+                if source_trace is not None:
+                    new_traces.append(
+                        build_trace(
+                            feature_id=ordering_group.id,
+                            source_url=source_trace.source_url,
+                            source_title=source_trace.source_title,
+                            snippet=source_trace.snippet,
+                            rule_id="intermediate_group_inferred",
+                            term=ordering_group.name,
+                        )
+                    )
+                elif source_page is not None:
+                    new_traces.append(
+                        build_trace(
+                            feature_id=ordering_group.id,
+                            source_url=source_page.url,
+                            source_title=source_page.title,
+                            snippet=extract_snippet(source_page.text, "move ordering"),
+                            rule_id="seed_page_fallback",
+                            term=ordering_group.name,
+                        )
+                    )
+
+                for feature in ordering_children:
+                    feature.parent_id = ordering_group.id
+            else:
+                warnings.append("Skipped Ordering Heuristics intermediate group because id already exists")
+    else:
+        warnings.append("Skipped Ordering Heuristics intermediate group because Move Ordering or Search is missing")
+
+    tt_support_children = [
+        feature_for("Zobrist Hashing"),
+        feature_for("Replacement Schemes"),
+        feature_for("Pawn Hash Table"),
+    ]
+    tt_support_children = [feature for feature in tt_support_children if feature is not None]
+    if tt_group is not None and tt_support_children:
+        tt_support_id = "transposition_table_support"
+        if tt_support_id not in used_ids:
+            used_ids.add(tt_support_id)
+            tt_support_group = FeatureNode(
+                id=tt_support_id,
+                name="TT Support",
+                parent_id=tt_group.id,
+                kind="or",
+                description="Support mechanisms and policies underneath the transposition-table family.",
+                aliases=["Transposition Table Support"],
+                variation_role="group",
+                variability_stage="none",
+                configurable=False,
+            )
+            new_features.append(tt_support_group)
+
+            source_trace = trace_by_feature_id.get(tt_support_children[0].id)
+            source_page = pages[0] if pages else None
+            if source_trace is not None:
+                new_traces.append(
+                    build_trace(
+                        feature_id=tt_support_group.id,
+                        source_url=source_trace.source_url,
+                        source_title=source_trace.source_title,
+                        snippet=source_trace.snippet,
+                        rule_id="intermediate_group_inferred",
+                        term=tt_support_group.name,
+                    )
+                )
+            elif source_page is not None:
+                new_traces.append(
+                    build_trace(
+                        feature_id=tt_support_group.id,
+                        source_url=source_page.url,
+                        source_title=source_page.title,
+                        snippet=extract_snippet(source_page.text, "transposition table"),
+                        rule_id="seed_page_fallback",
+                        term=tt_support_group.name,
+                    )
+                )
+
+            for feature in tt_support_children:
+                feature.parent_id = tt_support_group.id
+        else:
+            warnings.append("Skipped TT Support intermediate group because id already exists")
+
     return features + new_features, traces + new_traces, warnings
 
 
@@ -421,6 +534,7 @@ def build_feature_model(
         "model_perspective": "implementation_product_line",
         "configuration_goal": "each valid feature configuration maps to a chess-engine variant",
         "primary_variability_strategy": "compile_time_first_with_limited_runtime_options",
+        "taxonomy_note": "distinguish configurable features from commonality and from feature-implementation debt",
         "depth": normalized_depth,
         "target_features": target_features,
         "total_features": len(features),
