@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "engine_eval_internal.h"
 #include "generated/variant_config.h"
 
 #define QUIESCENCE_MAX_DEPTH 8
@@ -1311,9 +1312,6 @@ EngineSearchResult engine_search(EngineState *state, int max_depth, int movetime
         return result;
     }
 
-    if (max_depth <= 0) {
-        max_depth = state->max_depth_hint;
-    }
     if (movetime_ms == 0) {
 #if CFG_TIME_MANAGEMENT
         movetime_ms = state->movetime_ms > 0 ? state->movetime_ms : 150;
@@ -1321,10 +1319,18 @@ EngineSearchResult engine_search(EngineState *state, int max_depth, int movetime
         movetime_ms = 200;
 #endif
     }
+    if (max_depth <= 0) {
+        if (movetime_ms > 0) {
+            max_depth = ENGINE_MAX_PLY / 2;
+        } else {
+            max_depth = state->max_depth_hint;
+        }
+    }
 
     state->nodes = 0;
     state->stop = false;
     start_ms = search_ops()->now_ms();
+    engine_reset_instrumentation_internal();
     state->soft_deadline_ms = 0;
     if (movetime_ms < 0) {
         state->deadline_ms = 0;
@@ -1349,10 +1355,21 @@ EngineSearchResult engine_search(EngineState *state, int max_depth, int movetime
 
 #if CFG_OPENING_BOOK
     if (search_opening_book_move(state, &best_move)) {
+        EngineInstrumentation stats = engine_get_instrumentation_internal();
         result.best_move = best_move;
         result.score_cp = search_ops()->evaluate_position(state);
         result.depth = 1;
         result.nodes = 1;
+        result.elapsed_ms = search_ops()->now_ms() - start_ms;
+        result.tt_probes = stats.tt_probes;
+        result.tt_hits = stats.tt_hits;
+        result.tt_cutoff_hits = stats.tt_cutoff_hits;
+        result.tt_stores = stats.tt_stores;
+        result.eval_calls = stats.eval_calls;
+        result.eval_cache_hits = stats.eval_cache_hits;
+        result.movegen_calls = stats.movegen_calls;
+        result.attack_calls = stats.attack_calls;
+        result.beta_cutoffs = stats.beta_cutoffs;
         result.has_move = true;
         return result;
     }
@@ -1362,6 +1379,7 @@ EngineSearchResult engine_search(EngineState *state, int max_depth, int movetime
     if (root_moves.count == 0) {
         result.has_move = false;
         result.score_cp = search_ops()->in_check(state, state->side_to_move) ? root_score_to_cp(state, mate_score_absolute(state, 0)) : 0;
+        result.elapsed_ms = search_ops()->now_ms() - start_ms;
         return result;
     }
 
@@ -1420,7 +1438,20 @@ EngineSearchResult engine_search(EngineState *state, int max_depth, int movetime
         result.has_move = true;
         result.score_cp = 0;
     }
+    {
+        EngineInstrumentation stats = engine_get_instrumentation_internal();
     result.nodes = state->nodes;
+        result.elapsed_ms = search_ops()->now_ms() - start_ms;
+        result.tt_probes = stats.tt_probes;
+        result.tt_hits = stats.tt_hits;
+        result.tt_cutoff_hits = stats.tt_cutoff_hits;
+        result.tt_stores = stats.tt_stores;
+        result.eval_calls = stats.eval_calls;
+        result.eval_cache_hits = stats.eval_cache_hits;
+        result.movegen_calls = stats.movegen_calls;
+        result.attack_calls = stats.attack_calls;
+        result.beta_cutoffs = stats.beta_cutoffs;
+    }
     return result;
 }
 

@@ -1,0 +1,57 @@
+{
+  "variant": "phase3_full_eval_after_commonality_opt",
+  "opponent": "stockfish_2500",
+  "setup": {
+    "runner": "python-chess UCI referee",
+    "movetime_ms": 2000,
+    "opening_plies": 8,
+    "opening_count": 2,
+    "games": 4,
+    "max_fullmoves": 80,
+    "stockfish_options": {
+      "Skill Level": 20,
+      "UCI_LimitStrength": true,
+      "UCI_Elo": 2500,
+      "Threads": 1,
+      "Hash": 64
+    }
+  },
+  "result": {
+    "wins": 0,
+    "losses": 2,
+    "draws": 2,
+    "score": 1.0,
+    "games": 4,
+    "score_pct": 25.0,
+    "white_games": 2,
+    "white_wins": 0,
+    "black_games": 2,
+    "black_wins": 0,
+    "illegal_count": 0,
+    "move_cap_draws": 0
+  },
+  "depth": {
+    "variant_avg_depth_across_games": 9.37,
+    "variant_max_depth_seen": 24,
+    "stockfish_avg_depth_across_games": 40.95,
+    "stockfish_max_depth_seen": 245
+  },
+  "observability": {
+    "tt_probe": 404593108,
+    "tt_hit": 268885620,
+    "tt_cut": 234726241,
+    "tt_store": 101206691,
+    "eval": 375173827,
+    "eval_cache_hit": 128073594,
+    "movegen": 262816530,
+    "attack": 5310196126,
+    "beta_cut": 77961004,
+    "variant_moves_total": 206,
+    "variant_nodes_total": 725857132,
+    "tt_hit_rate": 0.6646,
+    "tt_cut_rate": 0.5802,
+    "eval_cache_hit_rate": 0.3414,
+    "attack_per_node": 7.3158,
+    "movegen_per_node": 0.3621
+  }
+}

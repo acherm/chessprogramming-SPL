@@ -20,6 +20,8 @@ typedef struct Undo {
     int en_passant_square;
     int halfmove_clock;
     int fullmove_number;
+    uint64_t zobrist_key;
+    uint64_t pawn_key;
     int history_count;
 } Undo;
 

@@ -7,6 +7,7 @@ It is intentionally narrower than the mined CPW feature model. The CPW model is 
 Related notes:
 
 - `docs/feature_taxonomy_and_strengthening_roadmap.md`
+- `docs/commonality_optimization_and_anchor_assessment.md`
 - `docs/variant_constraints_and_perft.md`
 - `outputs/phase1_search_assessment/report.md`
 - `outputs/phase2_board_assessment/report.md`
@@ -83,6 +84,11 @@ Recent commonality work landed in this layer rather than in the feature model:
 - UCI clock allocation now uses `movestogo`, reserve, and increment-aware budgeting
 - search uses soft/hard time cutoffs instead of a single naive deadline
 - TT uses bucketed replacement, generation aging, and mate-score normalization
+- engine state caches king squares explicitly
+- legal-move generation now uses a pin/check-aware fast path instead of forcing `make/check/unmake` on every pseudo move
+- bitboard attack/movegen hot paths now reuse precomputed knight and king attack masks
+
+The most important current caveat is that stronger shared infrastructure has clearly improved search depth, but that has not yet translated into a better short 2500-anchor result. The commonality note above records that tension explicitly.
 
 Depth convention in the current builder:
 

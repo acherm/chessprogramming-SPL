@@ -165,6 +165,7 @@ Main architectural and status notes:
 
 - [docs/product_line_architecture_and_interactions.md](docs/product_line_architecture_and_interactions.md)
 - [docs/feature_taxonomy_and_strengthening_roadmap.md](docs/feature_taxonomy_and_strengthening_roadmap.md)
+- [docs/commonality_optimization_and_anchor_assessment.md](docs/commonality_optimization_and_anchor_assessment.md)
 - [docs/setup_variability_model.md](docs/setup_variability_model.md)
 
 Representative validation artifacts:
@@ -257,6 +258,31 @@ Example:
 - `phase1_minimax` is recommended with shallow fixed depth or small exact movetime
 - `phase3_full_eval` is recommended with deeper fixed-depth analysis and larger exact movetime
 - variants selecting `Opening Book` or `Pondering` may receive extra runtime options in match play
+
+## Commonality Optimization Status
+
+Recent work focused on shared engine infrastructure rather than on adding new SPL features:
+
+- removed the implicit timed-search depth cap
+- reduced backend synchronization and legality-check overhead
+- added king-square caching and a pin/check-aware legal-move fast path
+- optimized bitboard knight/king attack and move generation with precomputed masks
+- added a reusable Stockfish-anchor match harness with TT/search observability
+
+Representative outputs:
+
+- `outputs/commonality_opt_report.md`
+- `outputs/commonality_opt_round2_report.md`
+- `outputs/commonality_opt_round3_report.md`
+- `outputs/sf2500_after_commonality_opt_clean/report.md`
+
+Current reading:
+
+- the best variant is no longer stuck near depth `5` at `2s/move`
+- the same benchmark positions now reach depth `6-7`
+- the clean rerun against the `~2500` Stockfish anchor searched much deeper on average, but did not improve match score in the small 4-game sample
+
+This means the next priority is search-quality tuning on top of the faster baseline, not simply chasing more raw depth.
 
 Run a three-player best-setup tournament:
 

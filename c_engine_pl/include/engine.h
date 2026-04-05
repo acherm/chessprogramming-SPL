@@ -31,6 +31,16 @@ typedef struct EngineSearchResult {
     int score_cp;
     int depth;
     uint64_t nodes;
+    int64_t elapsed_ms;
+    uint64_t tt_probes;
+    uint64_t tt_hits;
+    uint64_t tt_cutoff_hits;
+    uint64_t tt_stores;
+    uint64_t eval_calls;
+    uint64_t eval_cache_hits;
+    uint64_t movegen_calls;
+    uint64_t attack_calls;
+    uint64_t beta_cutoffs;
     bool has_move;
 } EngineSearchResult;
 
@@ -41,6 +51,7 @@ typedef struct EngineState {
     uint64_t bb_pieces[12];
     uint64_t bb_white_occ;
     uint64_t bb_black_occ;
+    int king_square[2];
     int piece_list_squares[2][6][ENGINE_MAX_PIECES_PER_TYPE];
     uint8_t piece_list_counts[2][6];
     int side_to_move; /* 0 white, 1 black */
@@ -49,6 +60,8 @@ typedef struct EngineState {
     int halfmove_clock;
     int fullmove_number;
     int plies_from_start;
+    uint64_t zobrist_key;
+    uint64_t pawn_key;
     uint64_t position_history[ENGINE_MAX_HISTORY];
     int history_count;
 

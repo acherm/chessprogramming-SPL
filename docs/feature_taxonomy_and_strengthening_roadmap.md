@@ -123,6 +123,9 @@ Current implementation status:
 - search now uses a soft deadline between completed iterations and a hard deadline inside the tree
 - TT storage now uses bucketed replacement with generation aging and mate-score normalization
 - move ordering now benefits from real SEE under the `Static Exchange Evaluation` feature
+- timed search is no longer implicitly capped at depth `5`
+- bitboard attack/movegen hot paths now use precomputed knight/king masks
+- legal-move generation now has a king-square cache and a pin/check-aware fast path
 
 ### Batch C: Reassessment
 
@@ -132,6 +135,12 @@ After Batch A and Batch B:
 2. rerun external-anchor matches, not only self-play
 3. keep the stronger preset as the new baseline best variant
 4. maintain a small feature-completion regression set for weak-feature regressions
+
+Current reading after the recent commonality batch:
+
+- the technical objective was met: the best variant now reaches depth `6-7` on the timed probes instead of being stuck near `5`
+- however, a 4-game rerun against the Stockfish `~2500` anchor did not improve match score despite the much deeper search
+- this means the next priority is search-quality tuning on top of the faster baseline, not further raw-depth chasing
 
 ## 5. Modeling Rule Of Thumb
 

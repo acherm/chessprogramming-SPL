@@ -80,6 +80,16 @@ static bool g_zobrist_ready = false;
 
 static int g_killers[ENGINE_MAX_PLY][2];
 static int g_history[2][64][64];
+static EngineInstrumentation g_instrumentation;
+
+typedef struct ThreatInfo {
+    int king_sq;
+    int checker_count;
+    uint64_t checkers_mask;
+    uint64_t evasion_mask;
+    uint64_t pinned_mask;
+    uint64_t pin_allowed[64];
+} ThreatInfo;
 
 static inline int piece_abs(int piece) {
     return piece >= 0 ? piece : -piece;
@@ -101,6 +111,106 @@ static inline int rank_of(int sq) {
 
 static inline int file_of(int sq) {
     return sq % 8;
+}
+
+static inline int step_delta_between(int from, int to) {
+    int dr = rank_of(to) - rank_of(from);
+    int df = file_of(to) - file_of(from);
+
+    if (df == 0 && dr != 0) {
+        return dr > 0 ? 8 : -8;
+    }
+    if (dr == 0 && df != 0) {
+        return df > 0 ? 1 : -1;
+    }
+    if (abs(dr) == abs(df) && dr != 0) {
+        if (dr > 0 && df > 0) {
+            return 9;
+        }
+        if (dr > 0 && df < 0) {
+            return 7;
+        }
+        if (dr < 0 && df > 0) {
+            return -7;
+        }
+        return -9;
+    }
+    return 0;
+}
+
+static inline bool step_preserves_geometry_local(int from, int to, int delta) {
+    if (from < 0 || from >= 64 || to < 0 || to >= 64 || to != from + delta) {
+        return false;
+    }
+    switch (delta) {
+        case 1:
+        case -1:
+            return rank_of(from) == rank_of(to);
+        case 8:
+        case -8:
+            return file_of(from) == file_of(to);
+        case 9:
+        case -9:
+        case 7:
+        case -7:
+            return abs(file_of(to) - file_of(from)) == 1 && abs(rank_of(to) - rank_of(from)) == 1;
+        default:
+            return false;
+    }
+}
+
+static inline uint64_t square_bb_local(int sq) {
+    return 1ULL << sq;
+}
+
+static inline int square_to_0x88(int sq) {
+    return (rank_of(sq) << 4) + file_of(sq);
+}
+
+static inline int square_to_120(int sq) {
+    return (rank_of(sq) + 2) * 10 + (file_of(sq) + 1);
+}
+
+void engine_reset_instrumentation_internal(void) {
+    memset(&g_instrumentation, 0, sizeof(g_instrumentation));
+}
+
+EngineInstrumentation engine_get_instrumentation_internal(void) {
+    return g_instrumentation;
+}
+
+void engine_note_eval_call_internal(void) {
+    g_instrumentation.eval_calls += 1;
+}
+
+void engine_note_eval_cache_hit_internal(void) {
+    g_instrumentation.eval_cache_hits += 1;
+}
+
+void engine_note_movegen_call_internal(void) {
+    g_instrumentation.movegen_calls += 1;
+}
+
+void engine_note_attack_call_internal(void) {
+    g_instrumentation.attack_calls += 1;
+}
+
+void engine_note_tt_probe_internal(bool hit, bool cutoff_hit) {
+    g_instrumentation.tt_probes += 1;
+    if (hit) {
+        g_instrumentation.tt_hits += 1;
+    }
+    if (cutoff_hit) {
+        g_instrumentation.tt_cutoff_hits += 1;
+    }
+}
+
+void engine_note_tt_store_internal(void) {
+    g_instrumentation.tt_stores += 1;
+}
+
+void engine_note_beta_cutoff_internal(void) {
+    g_instrumentation.beta_cutoffs += 1;
 }
 
 static inline int square_from_coords(char file_ch, char rank_ch) {
@@ -218,6 +328,22 @@ static ENGINE_MAYBE_UNUSED uint64_t compute_zobrist(const EngineState *state) {
     return key;
 }
 
+static uint64_t compute_pawn_key(const EngineState *state) {
+    uint64_t key = 0ULL;
+    int sq;
+
+    init_zobrist();
+    for (sq = 0; sq < 64; ++sq) {
+        int piece = state->board[sq];
+        if (piece == WP) {
+            key ^= g_zobrist_piece[0][sq];
+        } else if (piece == BP) {
+            key ^= g_zobrist_piece[6][sq];
+        }
+    }
+    return key;
+}
+
 static ENGINE_MAYBE_UNUSED uint64_t compute_fallback_hash(const EngineState *state) {
     uint64_t x = 0x9e3779b97f4a7c15ULL;
     int sq;
@@ -233,9 +359,185 @@ static ENGINE_MAYBE_UNUSED uint64_t compute_fallback_hash(const EngineState *sta
 
 uint64_t engine_state_key_internal(const EngineState *state) {
 #if CFG_ZOBRIST_HASHING
-    return compute_zobrist(state);
+    return state->zobrist_key;
 #else
     return compute_fallback_hash(state);
+#endif
+}
+
+uint64_t engine_pawn_key_internal(const EngineState *state) {
+#if CFG_ZOBRIST_HASHING
+    return state->pawn_key;
+#else
+    return compute_pawn_key(state);
+#endif
+}
+
+static void refresh_cached_keys(EngineState *state) {
+    if (state == NULL) {
+        return;
+    }
+#if CFG_ZOBRIST_HASHING
+    state->zobrist_key = compute_zobrist(state);
+    state->pawn_key = compute_pawn_key(state);
+#else
+    state->zobrist_key = compute_fallback_hash(state);
+    state->pawn_key = compute_pawn_key(state);
+#endif
+}
+
+static inline int piece_type_index_local(int piece) {
+    int abs_piece = piece_abs(piece);
+    return abs_piece >= WP && abs_piece <= WK ? abs_piece - 1 : -1;
+}
+
+static void piece_list_add(EngineState *state, int piece, int sq) {
+#if CFG_PIECE_LISTS
+    int side = piece_side(piece);
+    int type = piece_type_index_local(piece);
+    if (side >= WHITE && side <= BLACK && type >= 0) {
+        int count = state->piece_list_counts[side][type];
+        if (count < ENGINE_MAX_PIECES_PER_TYPE) {
+            state->piece_list_squares[side][type][count] = sq;
+            state->piece_list_counts[side][type] = (uint8_t)(count + 1);
+        }
+    }
+#else
+    (void)state;
+    (void)piece;
+    (void)sq;
+#endif
+}
+
+static void piece_list_remove(EngineState *state, int piece, int sq) {
+#if CFG_PIECE_LISTS
+    int side = piece_side(piece);
+    int type = piece_type_index_local(piece);
+    if (side >= WHITE && side <= BLACK && type >= 0) {
+        int count = state->piece_list_counts[side][type];
+        int i;
+        for (i = 0; i < count; ++i) {
+            if (state->piece_list_squares[side][type][i] == sq) {
+                int last = count - 1;
+                state->piece_list_squares[side][type][i] = state->piece_list_squares[side][type][last];
+                state->piece_list_squares[side][type][last] = 0;
+                state->piece_list_counts[side][type] = (uint8_t)last;
+                break;
+            }
+        }
+    }
+#else
+    (void)state;
+    (void)piece;
+    (void)sq;
+#endif
+}
+
+static void backend_add_piece(EngineState *state, int piece, int sq) {
+    if (state == NULL || piece == EMPTY || sq < 0 || sq >= 64) {
+        return;
+    }
+    if (piece == WK) {
+        state->king_square[WHITE] = sq;
+    } else if (piece == BK) {
+        state->king_square[BLACK] = sq;
+    }
+#if CFG_0X88
+    state->board_0x88[square_to_0x88(sq)] = piece;
+#endif
+#if CFG_10X12_BOARD
+    state->board_120[square_to_120(sq)] = piece;
+#endif
+#if CFG_BITBOARDS
+    {
+        int idx = piece_to_zobrist_index(piece);
+        uint64_t bit = square_bb_local(sq);
+        if (idx >= 0) {
+            state->bb_pieces[idx] |= bit;
+        }
+        if (piece_side(piece) == WHITE) {
+            state->bb_white_occ |= bit;
+        } else {
+            state->bb_black_occ |= bit;
+        }
+    }
+#endif
+    piece_list_add(state, piece, sq);
+}
+
+static void backend_remove_piece(EngineState *state, int piece, int sq) {
+    if (state == NULL || piece == EMPTY || sq < 0 || sq >= 64) {
+        return;
+    }
+    if (piece == WK && state->king_square[WHITE] == sq) {
+        state->king_square[WHITE] = -1;
+    } else if (piece == BK && state->king_square[BLACK] == sq) {
+        state->king_square[BLACK] = -1;
+    }
+#if CFG_0X88
+    state->board_0x88[square_to_0x88(sq)] = EMPTY;
+#endif
+#if CFG_10X12_BOARD
+    state->board_120[square_to_120(sq)] = EMPTY;
+#endif
+#if CFG_BITBOARDS
+    {
+        int idx = piece_to_zobrist_index(piece);
+        uint64_t bit = square_bb_local(sq);
+        if (idx >= 0) {
+            state->bb_pieces[idx] &= ~bit;
+        }
+        if (piece_side(piece) == WHITE) {
+            state->bb_white_occ &= ~bit;
+        } else {
+            state->bb_black_occ &= ~bit;
+        }
+    }
+#endif
+    piece_list_remove(state, piece, sq);
+}
+
+static inline void cached_key_toggle_piece(EngineState *state, int piece, int sq) {
+#if CFG_ZOBRIST_HASHING
+    int idx = piece_to_zobrist_index(piece);
+    if (idx >= 0) {
+        state->zobrist_key ^= g_zobrist_piece[idx][sq];
+        if (piece == WP || piece == BP) {
+            state->pawn_key ^= g_zobrist_piece[idx][sq];
+        }
+    }
+#else
+    (void)state;
+    (void)piece;
+    (void)sq;
+#endif
+}
+
+static inline void cached_key_toggle_side(EngineState *state) {
+#if CFG_ZOBRIST_HASHING
+    state->zobrist_key ^= g_zobrist_side;
+#else
+    (void)state;
+#endif
+}
+
+static inline void cached_key_toggle_castling(EngineState *state, int rights) {
+#if CFG_ZOBRIST_HASHING
+    state->zobrist_key ^= g_zobrist_castling[rights & 0x0f];
+#else
+    (void)state;
+    (void)rights;
+#endif
+}
+
+static inline void cached_key_toggle_ep(EngineState *state, int ep_sq) {
+#if CFG_ZOBRIST_HASHING
+    if (ep_sq >= 0 && ep_sq < 64) {
+        state->zobrist_key ^= g_zobrist_ep_file[file_of(ep_sq)];
+    }
+#else
+    (void)state;
+    (void)ep_sq;
 #endif
 }
 
@@ -261,12 +563,16 @@ static void clear_board(EngineState *state) {
     memset(state->piece_list_counts, 0, sizeof(state->piece_list_counts));
     state->bb_white_occ = 0ULL;
     state->bb_black_occ = 0ULL;
+    state->king_square[WHITE] = -1;
+    state->king_square[BLACK] = -1;
     state->side_to_move = WHITE;
     state->castling_rights = 0;
     state->en_passant_square = -1;
     state->halfmove_clock = 0;
     state->fullmove_number = 1;
     state->plies_from_start = 0;
+    state->zobrist_key = 0ULL;
+    state->pawn_key = 0ULL;
     state->history_count = 0;
     for (i = 0; i < ENGINE_MAX_HISTORY; ++i) {
         state->position_history[i] = 0ULL;
@@ -445,6 +751,7 @@ static int parse_fen_board(EngineState *state, const char *fen) {
     state->halfmove_clock = hm_clock >= 0 ? hm_clock : 0;
     state->fullmove_number = fm_number > 0 ? fm_number : 1;
     engine_sync_backend_state(state);
+    refresh_cached_keys(state);
     return 0;
 }
 
@@ -479,10 +786,14 @@ static void move_list_push(EngineMoveList *list, EngineMove move) {
 }
 
 int engine_find_king_square_internal(const EngineState *state, int side) {
+    if (state != NULL && side >= WHITE && side <= BLACK && state->king_square[side] >= 0) {
+        return state->king_square[side];
+    }
     return engine_backend_find_king_square(state, side);
 }
 
 bool engine_is_square_attacked_internal(const EngineState *state, int sq, int attacker_side) {
+    engine_note_attack_call_internal();
     return engine_backend_is_square_attacked(state, sq, attacker_side);
 }
 
@@ -492,6 +803,158 @@ static bool in_check(const EngineState *state, int side) {
         return false;
     }
     return engine_is_square_attacked_internal(state, king_sq, side ^ 1);
+}
+
+static uint64_t line_mask_from_to(int from, int to) {
+    uint64_t mask = 0ULL;
+    int step = step_delta_between(from, to);
+    int sq;
+
+    if (step == 0) {
+        return 0ULL;
+    }
+
+    for (sq = from + step; sq != to; sq += step) {
+        if (!step_preserves_geometry_local(sq - step, sq, step)) {
+            return 0ULL;
+        }
+        mask |= square_bb_local(sq);
+    }
+    mask |= square_bb_local(to);
+    return mask;
+}
+
+static void threat_info_add_checker(ThreatInfo *info, int checker_sq, uint64_t evasion_mask) {
+    if (info == NULL || checker_sq < 0 || checker_sq >= 64) {
+        return;
+    }
+    info->checker_count += 1;
+    info->checkers_mask |= square_bb_local(checker_sq);
+    if (info->checker_count == 1) {
+        info->evasion_mask = evasion_mask;
+    } else {
+        info->evasion_mask = 0ULL;
+    }
+}
+
+static void analyze_king_threats(const EngineState *state, int side, ThreatInfo *info) {
+    static const int rook_dirs[4] = {8, -8, 1, -1};
+    static const int bishop_dirs[4] = {9, 7, -9, -7};
+    int enemy = side ^ 1;
+    int king_sq;
+    int i;
+
+    memset(info, 0, sizeof(*info));
+    for (i = 0; i < 64; ++i) {
+        info->pin_allowed[i] = 0ULL;
+    }
+
+    king_sq = engine_find_king_square_internal(state, side);
+    info->king_sq = king_sq;
+    info->evasion_mask = ~0ULL;
+    if (king_sq < 0) {
+        return;
+    }
+
+    if (side == WHITE) {
+        int sq = king_sq + 7;
+        if (on_board64(sq) && abs(file_of(sq) - file_of(king_sq)) == 1 && state->board[sq] == BP) {
+            threat_info_add_checker(info, sq, square_bb_local(sq));
+        }
+        sq = king_sq + 9;
+        if (on_board64(sq) && abs(file_of(sq) - file_of(king_sq)) == 1 && state->board[sq] == BP) {
+            threat_info_add_checker(info, sq, square_bb_local(sq));
+        }
+    } else {
+        int sq = king_sq - 7;
+        if (on_board64(sq) && abs(file_of(sq) - file_of(king_sq)) == 1 && state->board[sq] == WP) {
+            threat_info_add_checker(info, sq, square_bb_local(sq));
+        }
+        sq = king_sq - 9;
+        if (on_board64(sq) && abs(file_of(sq) - file_of(king_sq)) == 1 && state->board[sq] == WP) {
+            threat_info_add_checker(info, sq, square_bb_local(sq));
+        }
+    }
+
+    for (i = 0; i < 8; ++i) {
+        int sq = king_sq + KNIGHT_OFFSETS[i];
+        if (!on_board64(sq) || abs(file_of(sq) - file_of(king_sq)) > 2) {
+            continue;
+        }
+        if (state->board[sq] == (enemy == WHITE ? WN : BN)) {
+            threat_info_add_checker(info, sq, square_bb_local(sq));
+        }
+    }
+
+    for (i = 0; i < 8; ++i) {
+        int sq = king_sq + KING_OFFSETS[i];
+        if (!on_board64(sq) || abs(file_of(sq) - file_of(king_sq)) > 1) {
+            continue;
+        }
+        if (state->board[sq] == (enemy == WHITE ? WK : BK)) {
+            threat_info_add_checker(info, sq, square_bb_local(sq));
+        }
+    }
+
+    for (i = 0; i < 4; ++i) {
+        int delta = rook_dirs[i];
+        int sq = king_sq + delta;
+        int first_own = -1;
+        while (step_preserves_geometry_local(sq - delta, sq, delta)) {
+            int piece = state->board[sq];
+            if (piece == EMPTY) {
+                sq += delta;
+                continue;
+            }
+            if (piece_side(piece) == side) {
+                if (first_own == -1) {
+                    first_own = sq;
+                    sq += delta;
+                    continue;
+                }
+                break;
+            }
+            if (piece == (enemy == WHITE ? WR : BR) || piece == (enemy == WHITE ? WQ : BQ)) {
+                if (first_own == -1) {
+                    threat_info_add_checker(info, sq, line_mask_from_to(king_sq, sq));
+                } else {
+                    info->pinned_mask |= square_bb_local(first_own);
+                    info->pin_allowed[first_own] = line_mask_from_to(king_sq, sq);
+                }
+            }
+            break;
+        }
+    }
+
+    for (i = 0; i < 4; ++i) {
+        int delta = bishop_dirs[i];
+        int sq = king_sq + delta;
+        int first_own = -1;
+        while (step_preserves_geometry_local(sq - delta, sq, delta)) {
+            int piece = state->board[sq];
+            if (piece == EMPTY) {
+                sq += delta;
+                continue;
+            }
+            if (piece_side(piece) == side) {
+                if (first_own == -1) {
+                    first_own = sq;
+                    sq += delta;
+                    continue;
+                }
+                break;
+            }
+            if (piece == (enemy == WHITE ? WB : BB) || piece == (enemy == WHITE ? WQ : BQ)) {
+                if (first_own == -1) {
+                    threat_info_add_checker(info, sq, line_mask_from_to(king_sq, sq));
+                } else {
+                    info->pinned_mask |= square_bb_local(first_own);
+                    info->pin_allowed[first_own] = line_mask_from_to(king_sq, sq);
+                }
+            }
+            break;
+        }
+    }
 }
 
 static int repetition_count(const EngineState *state) {
@@ -581,6 +1044,8 @@ static bool make_move(EngineState *state, const EngineMove *move, Undo *undo) {
     int captured_sq;
     int rook_from = -1;
     int rook_to = -1;
+    int placed_piece;
+    int rook_piece = EMPTY;
 
     if (!on_board64(move->from) || !on_board64(move->to)) {
         return false;
@@ -613,16 +1078,21 @@ static bool make_move(EngineState *state, const EngineMove *move, Undo *undo) {
     undo->en_passant_square = state->en_passant_square;
     undo->halfmove_clock = state->halfmove_clock;
     undo->fullmove_number = state->fullmove_number;
+    undo->zobrist_key = state->zobrist_key;
+    undo->pawn_key = state->pawn_key;
     undo->history_count = state->history_count;
 
-    state->board[move->to] = piece;
-    state->board[move->from] = EMPTY;
-    if ((move->flags & FLAG_EN_PASSANT) != 0) {
-        state->board[captured_sq] = EMPTY;
-    }
+    cached_key_toggle_castling(state, state->castling_rights);
+    cached_key_toggle_ep(state, state->en_passant_square);
+    cached_key_toggle_piece(state, piece, move->from);
 
-    if (move->promotion != 0) {
-        state->board[move->to] = promotion_piece(side, move->promotion);
+    backend_remove_piece(state, piece, move->from);
+    state->board[move->from] = EMPTY;
+
+    if (captured != EMPTY) {
+        cached_key_toggle_piece(state, captured, captured_sq);
+        backend_remove_piece(state, captured, captured_sq);
+        state->board[captured_sq] = EMPTY;
     }
 
     if ((move->flags & FLAG_CASTLING) != 0) {
@@ -640,10 +1110,20 @@ static bool make_move(EngineState *state, const EngineMove *move, Undo *undo) {
             rook_to = 59;
         }
         if (rook_from >= 0 && rook_to >= 0) {
-            state->board[rook_to] = state->board[rook_from];
+            rook_piece = state->board[rook_from];
+            cached_key_toggle_piece(state, rook_piece, rook_from);
+            backend_remove_piece(state, rook_piece, rook_from);
             state->board[rook_from] = EMPTY;
+            state->board[rook_to] = rook_piece;
+            backend_add_piece(state, rook_piece, rook_to);
+            cached_key_toggle_piece(state, rook_piece, rook_to);
         }
     }
+
+    placed_piece = move->promotion != 0 ? promotion_piece(side, move->promotion) : piece;
+    state->board[move->to] = placed_piece;
+    backend_add_piece(state, placed_piece, move->to);
+    cached_key_toggle_piece(state, placed_piece, move->to);
 
     update_castling_rights_on_move(state, piece, move->from, move->to, captured, captured_sq);
 
@@ -665,7 +1145,9 @@ static bool make_move(EngineState *state, const EngineMove *move, Undo *undo) {
     }
 
     state->side_to_move ^= 1;
-    engine_sync_backend_state(state);
+    cached_key_toggle_castling(state, state->castling_rights);
+    cached_key_toggle_ep(state, state->en_passant_square);
+    cached_key_toggle_side(state);
     state->plies_from_start += 1;
     if (state->history_count < ENGINE_MAX_HISTORY) {
         state->position_history[state->history_count] = engine_state_key_internal(state);
@@ -690,6 +1172,7 @@ static ENGINE_MAYBE_UNUSED void unmake_move(EngineState *state, const EngineMove
     return;
 #else
     int mover_side;
+    int piece_on_to;
 
     state->side_to_move ^= 1;
     mover_side = state->side_to_move;
@@ -698,33 +1181,53 @@ static ENGINE_MAYBE_UNUSED void unmake_move(EngineState *state, const EngineMove
     state->en_passant_square = undo->en_passant_square;
     state->halfmove_clock = undo->halfmove_clock;
     state->fullmove_number = undo->fullmove_number;
+    state->zobrist_key = undo->zobrist_key;
+    state->pawn_key = undo->pawn_key;
     state->history_count = undo->history_count;
 
-    state->board[move->from] = undo->moved_piece;
-    state->board[move->to] = EMPTY;
-
-    if ((move->flags & FLAG_EN_PASSANT) != 0) {
-        state->board[undo->captured_square] = undo->captured;
-    } else {
-        state->board[move->to] = undo->captured;
+    piece_on_to = state->board[move->to];
+    if (piece_on_to != EMPTY) {
+        backend_remove_piece(state, piece_on_to, move->to);
     }
+    state->board[move->to] = EMPTY;
+    state->board[move->from] = undo->moved_piece;
+    backend_add_piece(state, undo->moved_piece, move->from);
 
     if ((move->flags & FLAG_CASTLING) != 0) {
         if (mover_side == WHITE && move->from == 4 && move->to == 6) {
+            backend_remove_piece(state, WR, 5);
             state->board[7] = WR;
             state->board[5] = EMPTY;
+            backend_add_piece(state, WR, 7);
         } else if (mover_side == WHITE && move->from == 4 && move->to == 2) {
+            backend_remove_piece(state, WR, 3);
             state->board[0] = WR;
             state->board[3] = EMPTY;
+            backend_add_piece(state, WR, 0);
         } else if (mover_side == BLACK && move->from == 60 && move->to == 62) {
+            backend_remove_piece(state, BR, 61);
             state->board[63] = BR;
             state->board[61] = EMPTY;
+            backend_add_piece(state, BR, 63);
         } else if (mover_side == BLACK && move->from == 60 && move->to == 58) {
+            backend_remove_piece(state, BR, 59);
             state->board[56] = BR;
             state->board[59] = EMPTY;
+            backend_add_piece(state, BR, 56);
         }
     }
-    engine_sync_backend_state(state);
+
+    if ((move->flags & FLAG_EN_PASSANT) != 0) {
+        state->board[undo->captured_square] = undo->captured;
+        if (undo->captured != EMPTY) {
+            backend_add_piece(state, undo->captured, undo->captured_square);
+        }
+    } else {
+        state->board[move->to] = undo->captured;
+        if (undo->captured != EMPTY) {
+            backend_add_piece(state, undo->captured, move->to);
+        }
+    }
 #endif
 }
 
@@ -1001,6 +1504,7 @@ static ENGINE_MAYBE_UNUSED void generate_moves_scan(const EngineState *state, En
 }
 
 void engine_generate_pseudo_moves_internal(const EngineState *state, EngineMoveList *list, bool captures_only) {
+    engine_note_movegen_call_internal();
 #if CFG_BITBOARDS
     engine_backend_generate_pseudo_moves(state, list, captures_only);
 #elif CFG_MAILBOX || CFG_10X12_BOARD
@@ -1015,19 +1519,57 @@ void engine_generate_pseudo_moves_internal(const EngineState *state, EngineMoveL
 static void generate_legal_moves(const EngineState *state, EngineMoveList *list, bool captures_only) {
     EngineMoveList pseudo;
     EngineState tmp;
-    Undo undo;
+    ThreatInfo threats;
+    bool tmp_initialized = false;
     int i;
 
     list->count = 0;
     engine_generate_pseudo_moves_internal(state, &pseudo, captures_only);
+    analyze_king_threats(state, state->side_to_move, &threats);
 
     for (i = 0; i < pseudo.count; ++i) {
-        tmp = *state;
-        if (!make_move(&tmp, &pseudo.moves[i], &undo)) {
+        const EngineMove *move = &pseudo.moves[i];
+        int piece = state->board[move->from];
+        bool needs_fallback = true;
+
+        if (piece != EMPTY && piece_abs(piece) != WK && (move->flags & FLAG_EN_PASSANT) == 0) {
+            uint64_t from_mask = square_bb_local(move->from);
+            uint64_t to_mask = square_bb_local(move->to);
+
+            if (threats.checker_count > 1) {
+                needs_fallback = false;
+            } else {
+                if ((threats.pinned_mask & from_mask) != 0ULL &&
+                    (threats.pin_allowed[move->from] & to_mask) == 0ULL) {
+                    needs_fallback = false;
+                } else if (threats.checker_count == 1 &&
+                           (threats.evasion_mask & to_mask) == 0ULL) {
+                    needs_fallback = false;
+                } else {
+                    needs_fallback = false;
+                    move_list_push(list, *move);
+                }
+            }
+        }
+
+        if (!needs_fallback) {
             continue;
         }
-        if (!in_check(&tmp, state->side_to_move)) {
-            move_list_push(list, pseudo.moves[i]);
+
+        if (!tmp_initialized) {
+            tmp = *state;
+            tmp_initialized = true;
+        }
+
+        {
+            Undo undo;
+            if (!make_move(&tmp, move, &undo)) {
+                continue;
+            }
+            if (!in_check(&tmp, state->side_to_move)) {
+                move_list_push(list, *move);
+            }
+            unmake_move(&tmp, move, &undo);
         }
     }
 }
@@ -1177,6 +1719,8 @@ static int tt_probe(uint64_t key, int depth, int alpha, int beta, int ply, int *
     TTEntry *bucket = g_tt[key & TT_SET_MASK];
     const TTEntry *best_entry = NULL;
     unsigned i;
+    bool probe_hit = false;
+    bool cutoff_hit = false;
 
     for (i = 0; i < TT_BUCKET_SIZE; ++i) {
         TTEntry *entry = &bucket[i];
@@ -1185,6 +1729,8 @@ static int tt_probe(uint64_t key, int depth, int alpha, int beta, int ply, int *
         if (entry->generation == 0 || entry->key != key) {
             continue;
         }
+        probe_hit = true;
+        entry->generation = g_tt_generation;
         if (best_entry == NULL || entry->depth > best_entry->depth) {
             best_entry = entry;
         }
@@ -1199,18 +1745,26 @@ static int tt_probe(uint64_t key, int depth, int alpha, int beta, int ply, int *
             if (score != NULL) {
                 *score = entry_score;
             }
+            cutoff_hit = true;
+            engine_note_tt_probe_internal(probe_hit, cutoff_hit);
             return 1;
         }
         if (entry->flag == 0) {
             *score = entry_score;
+            cutoff_hit = true;
+            engine_note_tt_probe_internal(probe_hit, cutoff_hit);
             return 1;
         }
         if (entry->flag < 0 && entry_score <= alpha) {
             *score = entry_score;
+            cutoff_hit = true;
+            engine_note_tt_probe_internal(probe_hit, cutoff_hit);
             return 1;
         }
         if (entry->flag > 0 && entry_score >= beta) {
             *score = entry_score;
+            cutoff_hit = true;
+            engine_note_tt_probe_internal(probe_hit, cutoff_hit);
             return 1;
         }
     }
@@ -1218,6 +1772,7 @@ static int tt_probe(uint64_t key, int depth, int alpha, int beta, int ply, int *
     if (best_move != NULL && best_entry != NULL && best_entry->move16 != 0) {
         *best_move = decode_move16(best_entry->move16);
     }
+    engine_note_tt_probe_internal(probe_hit, cutoff_hit);
 #else
     (void)key;
     (void)depth;
@@ -1277,6 +1832,7 @@ static void tt_store(uint64_t key, int depth, int score, int flag, int ply, cons
     target->flag = flag;
     target->move16 = best_move != NULL ? encode_move16(best_move) : 0;
     target->generation = g_tt_generation;
+    engine_note_tt_store_internal();
 #else
     (void)key;
     (void)depth;
@@ -1294,6 +1850,7 @@ static void record_beta_cutoff(EngineState *state, int ply, int depth, const Eng
     if (state == NULL || move == NULL) {
         return;
     }
+    engine_note_beta_cutoff_internal();
 #if CFG_KILLER_HEURISTIC
     if (!(move->flags & FLAG_CAPTURE) && ply < ENGINE_MAX_PLY) {
         int code = move_to_int(move);

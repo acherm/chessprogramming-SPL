@@ -559,7 +559,7 @@ int uci_loop(void) {
         if (strncmp(line, "go", 2) == 0) {
             EngineSearchResult result;
             char bestmove[6] = "0000";
-            int depth = state.max_depth_hint;
+            int depth = 0;
             int movetime;
             bool exact_movetime = false;
             bool has_depth = false;
@@ -601,32 +601,56 @@ int uci_loop(void) {
             if (result.has_move) {
                 engine_move_to_uci(&result.best_move, bestmove);
             }
-            printf("info depth %d score cp %d nodes %llu pv %s\n",
+            printf("info depth %d score cp %d nodes %llu time %lld nps %llu pv %s\n",
                    result.depth,
                    result.score_cp,
                    (unsigned long long)result.nodes,
+                   (long long)result.elapsed_ms,
+                   (unsigned long long)(result.elapsed_ms > 0 ? (result.nodes * 1000ULL) / (uint64_t)result.elapsed_ms : 0ULL),
                    bestmove);
+            printf("info string stats tt_probe=%llu tt_hit=%llu tt_cut=%llu tt_store=%llu eval=%llu eval_cache_hit=%llu movegen=%llu attack=%llu beta_cut=%llu\n",
+                   (unsigned long long)result.tt_probes,
+                   (unsigned long long)result.tt_hits,
+                   (unsigned long long)result.tt_cutoff_hits,
+                   (unsigned long long)result.tt_stores,
+                   (unsigned long long)result.eval_calls,
+                   (unsigned long long)result.eval_cache_hits,
+                   (unsigned long long)result.movegen_calls,
+                   (unsigned long long)result.attack_calls,
+                   (unsigned long long)result.beta_cutoffs);
             printf("bestmove %s\n", bestmove);
             fflush(stdout);
             continue;
         }
 
-        if (strcmp(line, "ponderhit") == 0) {
+            if (strcmp(line, "ponderhit") == 0) {
 #if CFG_PONDERING
             EngineSearchResult result;
             char bestmove[6] = "0000";
 
             if (!ponder_session_stop(&ponder_session, &result)) {
-                result = engine_search(&state, state.max_depth_hint, state.movetime_ms);
+                result = engine_search(&state, 0, state.movetime_ms);
             }
             if (result.has_move) {
                 engine_move_to_uci(&result.best_move, bestmove);
             }
-            printf("info depth %d score cp %d nodes %llu pv %s\n",
+            printf("info depth %d score cp %d nodes %llu time %lld nps %llu pv %s\n",
                    result.depth,
                    result.score_cp,
                    (unsigned long long)result.nodes,
+                   (long long)result.elapsed_ms,
+                   (unsigned long long)(result.elapsed_ms > 0 ? (result.nodes * 1000ULL) / (uint64_t)result.elapsed_ms : 0ULL),
                    bestmove);
+            printf("info string stats tt_probe=%llu tt_hit=%llu tt_cut=%llu tt_store=%llu eval=%llu eval_cache_hit=%llu movegen=%llu attack=%llu beta_cut=%llu\n",
+                   (unsigned long long)result.tt_probes,
+                   (unsigned long long)result.tt_hits,
+                   (unsigned long long)result.tt_cutoff_hits,
+                   (unsigned long long)result.tt_stores,
+                   (unsigned long long)result.eval_calls,
+                   (unsigned long long)result.eval_cache_hits,
+                   (unsigned long long)result.movegen_calls,
+                   (unsigned long long)result.attack_calls,
+                   (unsigned long long)result.beta_cutoffs);
             printf("bestmove %s\n", bestmove);
             fflush(stdout);
 #endif
@@ -642,11 +666,23 @@ int uci_loop(void) {
                 if (result.has_move) {
                     engine_move_to_uci(&result.best_move, bestmove);
                 }
-                printf("info depth %d score cp %d nodes %llu pv %s\n",
+                printf("info depth %d score cp %d nodes %llu time %lld nps %llu pv %s\n",
                        result.depth,
                        result.score_cp,
                        (unsigned long long)result.nodes,
+                       (long long)result.elapsed_ms,
+                       (unsigned long long)(result.elapsed_ms > 0 ? (result.nodes * 1000ULL) / (uint64_t)result.elapsed_ms : 0ULL),
                        bestmove);
+                printf("info string stats tt_probe=%llu tt_hit=%llu tt_cut=%llu tt_store=%llu eval=%llu eval_cache_hit=%llu movegen=%llu attack=%llu beta_cut=%llu\n",
+                       (unsigned long long)result.tt_probes,
+                       (unsigned long long)result.tt_hits,
+                       (unsigned long long)result.tt_cutoff_hits,
+                       (unsigned long long)result.tt_stores,
+                       (unsigned long long)result.eval_calls,
+                       (unsigned long long)result.eval_cache_hits,
+                       (unsigned long long)result.movegen_calls,
+                       (unsigned long long)result.attack_calls,
+                       (unsigned long long)result.beta_cutoffs);
                 printf("bestmove %s\n", bestmove);
                 fflush(stdout);
             }

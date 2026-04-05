@@ -63,6 +63,8 @@ static int g_sq64_to_0x88[64];
 static int g_sq0x88_to_64[128];
 static int g_sq64_to_120[64];
 static int g_sq120_to_64[120];
+static uint64_t g_knight_attack_masks[64];
+static uint64_t g_king_attack_masks[64];
 static bool g_backend_maps_ready = false;
 static int pop_lsb(uint64_t *bits);
 
@@ -166,6 +168,25 @@ static inline uint64_t square_bb(int sq) {
 static inline int piece_type_index(int piece) {
     int abs_piece = piece_abs(piece);
     return abs_piece >= WP && abs_piece <= WK ? abs_piece - 1 : -1;
+}
+
+static uint64_t attack_mask_from_offsets(int sq, const int *offsets, int count, int max_file_delta) {
+    uint64_t mask = 0ULL;
+    int from_file = file_of(sq);
+    int i;
+
+    for (i = 0; i < count; ++i) {
+        int to = sq + offsets[i];
+        if (!on_board64(to)) {
+            continue;
+        }
+        if (abs(file_of(to) - from_file) > max_file_delta) {
+            continue;
+        }
+        mask |= square_bb(to);
+    }
+
+    return mask;
 }
 
 #if CFG_PIECE_LISTS
@@ -417,6 +438,8 @@ static void init_backend_maps(void) {
         g_sq0x88_to_64[sq0x88] = sq;
         g_sq64_to_120[sq] = sq120;
         g_sq120_to_64[sq120] = sq;
+        g_knight_attack_masks[sq] = attack_mask_from_offsets(sq, KNIGHT_OFFSETS_64, 8, 2);
+        g_king_attack_masks[sq] = attack_mask_from_offsets(sq, KING_OFFSETS_64, 8, 1);
     }
 
 #if CFG_MAGIC_BITBOARDS
@@ -988,8 +1011,10 @@ static ENGINE_MAYBE_UNUSED int find_king_square_bitboards(const EngineState *sta
 }
 
 static ENGINE_MAYBE_UNUSED bool is_square_attacked_bitboards(const EngineState *state, int sq, int attacker_side) {
-    uint64_t target;
     uint64_t occ;
+    uint64_t target;
+    uint64_t knights;
+    uint64_t kings;
     uint64_t pieces;
 
     if (!on_board64(sq)) {
@@ -1013,12 +1038,9 @@ static ENGINE_MAYBE_UNUSED bool is_square_attacked_bitboards(const EngineState *
         }
     }
 
-    pieces = state->bb_pieces[attacker_side == WHITE ? 1 : 7];
-    while (pieces != 0ULL) {
-        int from = pop_lsb(&pieces);
-        if (square_attacked_by_knight_64(from, sq)) {
-            return true;
-        }
+    knights = state->bb_pieces[attacker_side == WHITE ? 1 : 7];
+    if ((g_knight_attack_masks[sq] & knights) != 0ULL) {
+        return true;
     }
 
 #if CFG_MAGIC_BITBOARDS
@@ -1058,12 +1080,9 @@ static ENGINE_MAYBE_UNUSED bool is_square_attacked_bitboards(const EngineState *
     }
 #endif
 
-    pieces = state->bb_pieces[attacker_side == WHITE ? 5 : 11];
-    while (pieces != 0ULL) {
-        int from = pop_lsb(&pieces);
-        if (square_attacked_by_king_64(from, sq)) {
-            return true;
-        }
+    kings = state->bb_pieces[attacker_side == WHITE ? 5 : 11];
+    if ((g_king_attack_masks[sq] & kings) != 0ULL) {
+        return true;
     }
 
     return false;
@@ -1659,28 +1678,20 @@ static ENGINE_MAYBE_UNUSED void generate_moves_bitboards(const EngineState *stat
     pieces = state->bb_pieces[side == WHITE ? 1 : 7];
     while (pieces != 0ULL) {
         int from = pop_lsb(&pieces);
-        int i;
-        for (i = 0; i < 8; ++i) {
-            int to = from + KNIGHT_OFFSETS_64[i];
-            if (!on_board64(to) || abs(file_of(to) - file_of(from)) > 2) {
-                continue;
+        uint64_t targets = g_knight_attack_masks[from] & ~own_occ;
+        if (captures_only) {
+            targets &= opp_occ;
+        }
+        while (targets != 0ULL) {
+            int to = pop_lsb(&targets);
+            EngineMove mv;
+            memset(&mv, 0, sizeof(mv));
+            mv.from = (uint8_t)from;
+            mv.to = (uint8_t)to;
+            if ((opp_occ & square_bb(to)) != 0ULL) {
+                mv.flags = FLAG_CAPTURE;
             }
-            if ((own_occ & square_bb(to)) != 0ULL) {
-                continue;
-            }
-            if (captures_only && (opp_occ & square_bb(to)) == 0ULL) {
-                continue;
-            }
-            {
-                EngineMove mv;
-                memset(&mv, 0, sizeof(mv));
-                mv.from = (uint8_t)from;
-                mv.to = (uint8_t)to;
-                if ((opp_occ & square_bb(to)) != 0ULL) {
-                    mv.flags = FLAG_CAPTURE;
-                }
-                move_list_push(list, mv);
-            }
+            move_list_push(list, mv);
         }
     }
 
@@ -1839,28 +1850,20 @@ static ENGINE_MAYBE_UNUSED void generate_moves_bitboards(const EngineState *stat
     pieces = state->bb_pieces[side == WHITE ? 5 : 11];
     while (pieces != 0ULL) {
         int from = pop_lsb(&pieces);
-        int i;
-        for (i = 0; i < 8; ++i) {
-            int to = from + KING_OFFSETS_64[i];
-            if (!on_board64(to) || abs(file_of(to) - file_of(from)) > 1) {
-                continue;
+        uint64_t targets = g_king_attack_masks[from] & ~own_occ;
+        if (captures_only) {
+            targets &= opp_occ;
+        }
+        while (targets != 0ULL) {
+            int to = pop_lsb(&targets);
+            EngineMove mv;
+            memset(&mv, 0, sizeof(mv));
+            mv.from = (uint8_t)from;
+            mv.to = (uint8_t)to;
+            if ((opp_occ & square_bb(to)) != 0ULL) {
+                mv.flags = FLAG_CAPTURE;
             }
-            if ((own_occ & square_bb(to)) != 0ULL) {
-                continue;
-            }
-            if (captures_only && (opp_occ & square_bb(to)) == 0ULL) {
-                continue;
-            }
-            {
-                EngineMove mv;
-                memset(&mv, 0, sizeof(mv));
-                mv.from = (uint8_t)from;
-                mv.to = (uint8_t)to;
-                if ((opp_occ & square_bb(to)) != 0ULL) {
-                    mv.flags = FLAG_CAPTURE;
-                }
-                move_list_push(list, mv);
-            }
+            move_list_push(list, mv);
         }
     }
 
@@ -1875,27 +1878,43 @@ void engine_sync_backend_state(EngineState *state) {
     }
 
     init_backend_maps();
+#if CFG_0X88
     memset(state->board_0x88, 0, sizeof(state->board_0x88));
+#endif
+#if CFG_BITBOARDS
     memset(state->bb_pieces, 0, sizeof(state->bb_pieces));
+    state->bb_white_occ = 0ULL;
+    state->bb_black_occ = 0ULL;
+#endif
+    state->king_square[WHITE] = -1;
+    state->king_square[BLACK] = -1;
+#if CFG_PIECE_LISTS
     memset(state->piece_list_squares, 0, sizeof(state->piece_list_squares));
     memset(state->piece_list_counts, 0, sizeof(state->piece_list_counts));
+#endif
+#if CFG_10X12_BOARD
     for (sq = 0; sq < 120; ++sq) {
         state->board_120[sq] = OFFBOARD_120;
     }
-    state->bb_white_occ = 0ULL;
-    state->bb_black_occ = 0ULL;
+#endif
 
     for (sq = 0; sq < 64; ++sq) {
         int piece = state->board[sq];
-        int idx;
-
+        
+#if CFG_0X88
         state->board_0x88[g_sq64_to_0x88[sq]] = piece;
+#endif
+#if CFG_10X12_BOARD
         state->board_120[g_sq64_to_120[sq]] = piece;
+#endif
 
         if (piece == EMPTY) {
             continue;
         }
 
+#if CFG_BITBOARDS
+        {
+            int idx;
         idx = piece_to_bb_index(piece);
         if (idx >= 0) {
             state->bb_pieces[idx] |= square_bb(sq);
@@ -1905,7 +1924,10 @@ void engine_sync_backend_state(EngineState *state) {
         } else {
             state->bb_black_occ |= square_bb(sq);
         }
+        }
+#endif
 
+#if CFG_PIECE_LISTS
         {
             int side = piece_side(piece);
             int type = piece_type_index(piece);
@@ -1917,6 +1939,7 @@ void engine_sync_backend_state(EngineState *state) {
                 }
             }
         }
+#endif
     }
 }
 

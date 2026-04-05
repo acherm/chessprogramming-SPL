@@ -25,6 +25,8 @@
 
 #define PAWN_HASH_SIZE (1u << 14)
 #define PAWN_HASH_MASK (PAWN_HASH_SIZE - 1u)
+#define EVAL_CACHE_SIZE (1u << 15)
+#define EVAL_CACHE_MASK (EVAL_CACHE_SIZE - 1u)
 
 #define FLAG_CAPTURE 1
 #define FLAG_PROMOTION 2
@@ -60,6 +62,11 @@ typedef struct EvalScore {
     int mg;
     int eg;
 } EvalScore;
+
+typedef struct EvalCacheEntry {
+    uint64_t key;
+    int score;
+} EvalCacheEntry;
 
 typedef struct EvalAccumulator {
     int mg;
@@ -149,6 +156,7 @@ static EVAL_MAYBE_UNUSED const int PST_KING_EG[64] = {
 static const int KING_OFFSETS[8] = {8, -8, 1, -1, 9, 7, -9, -7};
 
 static PawnHashEntry g_pawn_hash[PAWN_HASH_SIZE];
+static EvalCacheEntry g_eval_cache[EVAL_CACHE_SIZE];
 
 static inline int piece_abs(int piece) {
     return piece >= 0 ? piece : -piece;
@@ -206,6 +214,10 @@ static EVAL_MAYBE_UNUSED inline int mirror_sq(int sq) {
 
 static inline bool on_board64(int sq) {
     return sq >= 0 && sq < 64;
+}
+
+static inline bool on_board_rf(int rank, int file) {
+    return rank >= 0 && rank < 8 && file >= 0 && file < 8;
 }
 
 static bool attacks_square_on_board(const int board[64], int from, int to, int piece) {
@@ -579,17 +591,95 @@ static int mobility_weight(int abs_piece) {
     }
 }
 
-static int mobility_for_side(const EngineState *state, int side) {
-    EngineMoveList list;
-    EngineState copy = *state;
+static int count_knight_mobility(const EngineState *state, int from, int side) {
+    static const int KNIGHT_DR[8] = {2, 2, 1, 1, -1, -1, -2, -2};
+    static const int KNIGHT_DF[8] = {1, -1, 2, -2, 2, -2, 1, -1};
+    int from_rank = rank_of(from);
+    int from_file = file_of(from);
+    int count = 0;
     int i;
+
+    for (i = 0; i < 8; ++i) {
+        int to_rank = from_rank + KNIGHT_DR[i];
+        int to_file = from_file + KNIGHT_DF[i];
+        int to_sq;
+        int target;
+        if (!on_board_rf(to_rank, to_file)) {
+            continue;
+        }
+        to_sq = to_rank * 8 + to_file;
+        target = state->board[to_sq];
+        if (target == EMPTY || piece_side(target) != side) {
+            count += 1;
+        }
+    }
+    return count;
+}
+
+static int count_slider_mobility(const EngineState *state, int from, int side, const int dr[], const int df[], int count_dirs) {
+    int from_rank = rank_of(from);
+    int from_file = file_of(from);
+    int count = 0;
+    int dir;
+
+    for (dir = 0; dir < count_dirs; ++dir) {
+        int to_rank = from_rank + dr[dir];
+        int to_file = from_file + df[dir];
+        while (on_board_rf(to_rank, to_file)) {
+            int to_sq = to_rank * 8 + to_file;
+            int target = state->board[to_sq];
+            if (target == EMPTY) {
+                count += 1;
+            } else {
+                if (piece_side(target) != side) {
+                    count += 1;
+                }
+                break;
+            }
+            to_rank += dr[dir];
+            to_file += df[dir];
+        }
+    }
+
+    return count;
+}
+
+static int mobility_from_square(const EngineState *state, int sq, int piece, int side) {
+    static const int BISHOP_DR[4] = {1, 1, -1, -1};
+    static const int BISHOP_DF[4] = {1, -1, 1, -1};
+    static const int ROOK_DR[4] = {1, -1, 0, 0};
+    static const int ROOK_DF[4] = {0, 0, 1, -1};
+
+    switch (piece_abs(piece)) {
+        case WN:
+            return count_knight_mobility(state, sq, side);
+        case WB:
+            return count_slider_mobility(state, sq, side, BISHOP_DR, BISHOP_DF, 4);
+        case WR:
+            return count_slider_mobility(state, sq, side, ROOK_DR, ROOK_DF, 4);
+        case WQ:
+            return count_slider_mobility(state, sq, side, BISHOP_DR, BISHOP_DF, 4) +
+                   count_slider_mobility(state, sq, side, ROOK_DR, ROOK_DF, 4);
+        default:
+            return 0;
+    }
+}
+
+static int mobility_for_side(const EngineState *state, int side) {
+    int sq;
     int score = 0;
 
-    copy.side_to_move = side;
-    engine_generate_pseudo_moves_internal(&copy, &list, false);
-    for (i = 0; i < list.count; ++i) {
-        int piece = copy.board[list.moves[i].from];
-        score += mobility_weight(piece_abs(piece));
+    for (sq = 0; sq < 64; ++sq) {
+        int piece = state->board[sq];
+        int weight;
+        if (piece == EMPTY || piece_side(piece) != side) {
+            continue;
+        }
+        weight = mobility_weight(piece_abs(piece));
+        if (weight == 0) {
+            continue;
+        }
+        score += mobility_from_square(state, sq, piece, side) * weight;
     }
     return score;
 }
@@ -859,7 +949,7 @@ static EVAL_MAYBE_UNUSED EvalScore evaluate_king_activity(const EngineState *sta
 
 static void accumulate_pawn_terms(const EngineState *state, EvalAccumulator *acc) {
 #if CFG_PAWN_HASH_TABLE && EVAL_USE_ANY_PAWN_TERM
-    uint64_t key = engine_state_key_internal(state);
+    uint64_t key = engine_pawn_key_internal(state);
     PawnHashEntry *entry = &g_pawn_hash[key & PAWN_HASH_MASK];
     if (entry->key == key) {
         acc->mg += entry->mg;
@@ -939,7 +1029,18 @@ static int finalize_score(const EngineState *state, const EvalAccumulator *acc) 
 }
 
 int engine_evaluate_position_internal(EngineState *state) {
+    uint64_t key;
+    EvalCacheEntry *entry;
     EvalAccumulator acc = {0, 0, 0};
+    int score;
+
+    engine_note_eval_call_internal();
+    key = engine_state_key_internal(state);
+    entry = &g_eval_cache[key & EVAL_CACHE_MASK];
+    if (entry->key == key) {
+        engine_note_eval_cache_hit_internal();
+        return entry->score;
+    }
 
     accumulate_material_and_tables(state, &acc);
     accumulate_piece_coordination_terms(state, &acc);
@@ -948,7 +1049,10 @@ int engine_evaluate_position_internal(EngineState *state) {
     accumulate_king_safety_term(state, &acc);
     accumulate_king_activity_term(state, &acc);
 
-    return finalize_score(state, &acc);
+    score = finalize_score(state, &acc);
+    entry->key = key;
+    entry->score = score;
+    return score;
 }
 
 int engine_score_capture_internal(const EngineState *state, const EngineMove *move) {
@@ -984,6 +1088,7 @@ int engine_score_capture_internal(const EngineState *state, const EngineMove *mo
 
 void engine_reset_evaluation_tables(void) {
     memset(g_pawn_hash, 0, sizeof(g_pawn_hash));
+    memset(g_eval_cache, 0, sizeof(g_eval_cache));
 }
 
 static void append_profile_token(char *profile, size_t profile_size, const char *token) {
