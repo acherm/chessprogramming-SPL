@@ -1,0 +1,43 @@
+{
+  "variant": "phase3_full_eval",
+  "opponent": "stockfish_2500",
+  "setup": {
+    "runner": "python-chess UCI referee",
+    "movetime_ms": 2000,
+    "opening_plies": 8,
+    "opening_count": 2,
+    "games": 4,
+    "max_fullmoves": 80,
+    "stockfish_options": {
+      "Skill Level": 20,
+      "UCI_LimitStrength": true,
+      "UCI_Elo": 2500,
+      "Threads": 1,
+      "Hash": 64
+    }
+  },
+  "result": {
+    "wins": 1,
+    "losses": 2,
+    "draws": 1,
+    "score": 1.5,
+    "games": 4,
+    "score_pct": 37.5,
+    "white_games": 2,
+    "white_wins": 0,
+    "black_games": 2,
+    "black_wins": 1,
+    "illegal_count": 0,
+    "move_cap_draws": 0
+  },
+  "depth": {
+    "variant_avg_depth_across_games": 4.96,
+    "variant_max_depth_seen": 5,
+    "stockfish_avg_depth_across_games": 37.66,
+    "stockfish_max_depth_seen": 245
+  },
+  "timing": {
+    "total_elapsed_sec": 353.353,
+    "avg_game_sec": 88.34
+  }
+}

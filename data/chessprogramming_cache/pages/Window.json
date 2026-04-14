@@ -1,0 +1,59 @@
+{
+  "title": "Window",
+  "url": "https://www.chessprogramming.org/Window",
+  "source_type": "api",
+  "retrieved_at": "2026-03-01T15:11:19.484482+00:00",
+  "content_hash": "c3c5edacf2acdf881412d9cbd4fc991a5fe6ffc95c64820ee3288836823340b4",
+  "text": "Home * Search * Alpha-Beta * Window Arched Window of wall painting showing Dalí [1] A Window in the context of Alpha-Beta search (Alpha-Beta window) is the open interval between the lower bound Alpha and the upper bound Beta . (α,β) = ]α,β[ = { x ∈ ℤ | α < x < β} Only values inside this interval, that is excluding Alpha and Beta, are exact scores . Thus, with integers at least a window of (x-1, x+1) is necessary to reveal one exact score x. A Null Window as used in the Scout part of PVS aka NegaScout , and MTD(f) , with integers (α, α+1) or (β-1, β), can therefor only provide a bound , either failing-high with a lower bound or failing-low with an upper bound. Contents 1 Minimax Wall 2 See also 3 Forum Posts 4 External Links 5 References Minimax Wall [ edit ] Robert Hyatt in a CCC reply to Bruce Moreland , January 1998 [2] : If the window is above the true value, so that you will fail low , you get maximal efficiency. Here's the way to follow why. If every root move fails low, it can do so after searching only one move at ply 2, the one move necessary to 'refute' the root move. So you get a truly small tree. If the window is below the true value, so you fail high on every move at the root, to fail high at the root means *every* move at ply=2 must fail low. The tree is roughly W times larger in this case. Schaeffer noticed this and referred to this as the \"minimax wall\", that point where the window just drops down over the real score so that you don't get the quick fail lows. I saw this when I played with mtd(f) a few months ago, as it was faster when the window was too high. Fast enough that it is best to keep it up there rather than dropping below the real value and having to fail upward... See also [ edit ] Aspiration Windows MTD(f) Null Window Odd-Even Effect Scoring Root Moves Forum Posts [ edit ] Alpha-Beta window in transposition tables? by Marty Bochane, rgcc , October 25, 1996 » Transposition Table [3] Negative alpha/beta windows: Are they useful? by Thomas Dybdahl Ahle , CCC , March 06, 2015 External Links [ edit ] Interval (mathematics) from Wikipedia Window (disambiguation) from Wikipedia Window from Wikipedia Launch window from Wikipedia Window (computing) from Wikipedia  » GUI Register window from Wikipedia Window function from Wikipedia Window (short story) from Wikipedia References [ edit ] ↑ Arched Window of a wall painting showing Salvador Dalí , Lima , Peru , 2005 by Tabea Huth, Wikimedia Commons ↑ Re: New(?) search idea by Robert Hyatt , CCC , January 22, 1998 ↑ Re. Fail low after fail high by Marcel van Kervinck , CCC , April 05, 2015 » Fail-Low , Fail-High Up one level",
+  "headings": [
+    "Contents",
+    "Minimax Wall[edit]",
+    "See also[edit]",
+    "Forum Posts[edit]",
+    "External Links[edit]",
+    "References[edit]"
+  ],
+  "links": [
+    "Alpha",
+    "Alpha-Beta",
+    "Aspiration Windows",
+    "Beta",
+    "Bound",
+    "Bruce Moreland",
+    "CCC",
+    "Category:Salvador Dalí",
+    "Computer Chess Forums",
+    "Exact Score",
+    "Fail-High",
+    "Fail-Low",
+    "GUI",
+    "Jonathan Schaeffer",
+    "Lower Bound",
+    "MTD(f)",
+    "Main Page",
+    "Marcel van Kervinck",
+    "NegaScout",
+    "Null Window",
+    "Odd-Even Effect",
+    "Principal Variation Search",
+    "Robert Hyatt",
+    "Ronald de Man",
+    "Scout",
+    "Search",
+    "Thomas Dybdahl Ahle",
+    "Transposition Table",
+    "Upper Bound",
+    "index.php"
+  ],
+  "bold_terms": [
+    "Home * Search * Alpha-Beta * Window",
+    "Window",
+    "(α,β) = ]α,β[ = { x ∈ &#8484; | α &lt; x &lt; β}",
+    "Up one level"
+  ],
+  "categories": [
+    "Salvador_Dalí"
+  ],
+  "page_type": "technique",
+  "raw_payload_path": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/data/chessprogramming_cache/raw/Window.api.json"
+}

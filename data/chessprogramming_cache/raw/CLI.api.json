@@ -1,0 +1,354 @@
+{
+  "parse": {
+    "title": "CLI",
+    "pageid": 1594,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/User_Interface\" title=\"User Interface\">User Interface</a> * Command Line Interface</b>\n</p><p><b>Command Line Interface (CLI)</b>,<br />\na means of a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/User_%28computing%29\">user</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/User_agent\">agent</a> or <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Client_%28computing%29\">client</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Interaction\">interacting</a> with a <a href=\"/index.php?title=Program&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Program (page does not exist)\">computer program</a> in form of <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Plain_text\">plain text-</a> or command lines. Programs are either the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Operating_system\">operating system</a>, their <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Operating_system_shell#Command-line_OS_shells\">command-line shells</a>, or <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Application_software\">application software</a>, for instance chess programs.\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#History\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">History</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Unix_Philosophy\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Unix Philosophy</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Shell_and_Applications\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Shell and Applications</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Commands\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Commands</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#CLI_and_Chess_Engines\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">CLI and Chess Engines</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-6\"><a href=\"#Interruptible\"><span class=\"tocnumber\">5.1</span> <span class=\"toctext\">Interruptible</span></a></li>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#Protocols\"><span class=\"tocnumber\">5.2</span> <span class=\"toctext\">Protocols</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-8\"><a href=\"#Chess_CLIs\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Chess CLIs</span></a></li>\n<li class=\"toclevel-1 tocsection-9\"><a href=\"#See_also\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-10\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">Forum Posts</span></a></li>\n<li class=\"toclevel-1 tocsection-11\"><a href=\"#External_Links\"><span class=\"tocnumber\">9</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-12\"><a href=\"#References\"><span class=\"tocnumber\">10</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"History\">History</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=CLI&amp;action=edit&amp;section=1\" title=\"Edit section: History\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>The CLI has its origins in <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Teleprinter\">teletype</a> and later <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Computer_terminal\">computer terminals</a> to act as a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/System_console\">system console</a> and sequential <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Input_device\">input-</a> and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Output_device\">output device</a>, where the program <a rel=\"nofollow\" class=\"external text\" href=\"http://en.wiktionary.org/wiki/prompt\">prompts</a> for input, that is, prints a message or symbol on the teletype printer to indicate readiness for user input, and acts upon command lines as they are entered. \n</p>\n<h1><span class=\"mw-headline\" id=\"Unix_Philosophy\">Unix Philosophy</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=CLI&amp;action=edit&amp;section=2\" title=\"Edit section: Unix Philosophy\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><a href=\"/Unix\" title=\"Unix\">Unix</a> and its <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Composability\">composable design</a> and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Unix_philosophy\">philosophy</a> originated by <a href=\"/Ken_Thompson\" title=\"Ken Thompson\">Ken Thompson</a> was summarized by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Douglas_McIlroy\">Doug McIlroy</a>, contributor to <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pipeline_%28Unix%29\">Unix pipes</a> <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup>: <i>Write programs that do one thing and do it well. Write programs to work together. Write programs to handle <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Standard_streams\">text streams</a>, because that is a universal interface</i>.\n</p>\n<h1><span class=\"mw-headline\" id=\"Shell_and_Applications\">Shell and Applications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=CLI&amp;action=edit&amp;section=3\" title=\"Edit section: Shell and Applications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Operating_system\">Operating systems</a> such as <a href=\"/MS-DOS\" title=\"MS-DOS\">MS-DOS</a>, <a href=\"/Unix\" title=\"Unix\">Unix</a> or <a href=\"/Linux\" title=\"Linux\">Linux</a> per default provide a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Shell_%28computing%29\">shell</a> as CLI, such as <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/COMMAND.COM\">Command.com</a> or <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Unix_shell\">Unix shell</a>. Modern desktop versions of <a href=\"/Windows\" title=\"Windows\">Windows</a> use the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Windows_shell\">Windows shell</a> which is a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Graphical_user_interface\">graphical user interface</a>, but include a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Command_Prompt\">command prompt window</a> for <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Console_application\">console applications</a>. Most operating systems support <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Inter-process_communication\">inter-process communication</a> with <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Standard_streams\">standard streams</a> or <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Named_pipe\">named pipes</a> and are able to <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Redirection_%28computing%29\">redirect</a> standard streams from and to other <a href=\"/Process\" title=\"Process\">processes</a>. Command line interfaces are therefor often preferred by advanced users or software developers, as they provide a more concise and powerful way to control a program or operating system, and are generally easier to automate via <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Scripting_language\">scripting</a> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>. \n</p>\n<h1><span class=\"mw-headline\" id=\"Commands\">Commands</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=CLI&amp;action=edit&amp;section=4\" title=\"Edit section: Commands\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Text commands as entered via the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Computer_keyboard\">keyboard</a>, are a sequence of <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/ASCII\">ASCII</a>- or <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Unicode\">Unicode</a> characters finally confirmed and send to the programs standard input by typing the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Enter_key\">Enter key</a>, which is typically encoded at the end of the command string as <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Newline\">newline</a> character (\"\\n\") (Posix) or a sequence of <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Carriage_return\">carriage return</a> (\"\\r\") and newline under <a href=\"/Windows\" title=\"Windows\">Windows</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Syntax\">Syntax</a> and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Semantics\">semantics</a> of commands and their required or optional <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Command-line_argument#Arguments\">arguments</a> depend on the OS or application of course, its state or <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Game_mechanics#Game_modes\">mode</a>. When the command is <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Parsing\">parsed</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Interpreter_%28computing%29\">interpreted</a> and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Execution_%28computing%29\">executed</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Acknowledgement_%28data_networks%29\">acknowledgments</a>, results or answers are send back for a communication according to a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Communications_protocol\">protocol</a>.\n</p>\n<h1><span class=\"mw-headline\" id=\"CLI_and_Chess_Engines\">CLI and Chess Engines</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=CLI&amp;action=edit&amp;section=5\" title=\"Edit section: CLI and Chess Engines\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Most current chess engines are implemented as <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Console_application\">console application</a> to communicate via a command line interface. This is the most <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Software_portability#Source_code_portability\">portable</a> way, supported by all common operating systems, <a href=\"/Languages\" title=\"Languages\">programming languages</a> and their <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Standard_library\">standard libraries</a>. A proprietary chess engine interface for direct console play may be implemented by printing an <a href=\"/Graphics_Programming#ASCIIDiagrams\" title=\"Graphics Programming\">ASCII-board</a> and the <a href=\"/Game_Notation\" title=\"Game Notation\">game record</a>, and prompting for a move or command, also streaming the <a href=\"/Iterative_Deepening\" title=\"Iterative Deepening\">iterative</a> \"thinking process\", i.e. formatted text lines with <a href=\"/Score\" title=\"Score\">score</a>, <a href=\"/Depth\" title=\"Depth\">depth</a>, and <a href=\"/Principal_Variation\" title=\"Principal Variation\">principal variation</a> to the console. \n</p>\n<h2><span class=\"mw-headline\" id=\"Interruptible\">Interruptible</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=CLI&amp;action=edit&amp;section=6\" title=\"Edit section: Interruptible\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p><a href=\"/Pondering\" title=\"Pondering\">Pondering</a> and the need to <a href=\"/Entering_Moves\" title=\"Entering Moves\">enter moves</a> and commands even if the program is \"thinking\", requires an interruptible <a href=\"/Search\" title=\"Search\">search</a> routine. In single tasking operating systems like <a href=\"/MS-DOS\" title=\"MS-DOS\">MS-DOS</a>, engines often used <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Coroutine\">coroutines</a> to implement internal <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Context_switch\">context switching</a> between search and user interaction. Today, it is more common to rely on <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Multi-threading\">multithreading</a> abilities of modern operating systems, and to use an explicit <a href=\"/Thread\" title=\"Thread\">I/O-thread</a>, while the search routine is regularly pondering whether it needs to be interrupted by pending input received by another thread, with the option to asynchronously stop the search.\n</p>\n<h2><span class=\"mw-headline\" id=\"Protocols\">Protocols</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=CLI&amp;action=edit&amp;section=7\" title=\"Edit section: Protocols\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>The UNIX paradigm was further archetype of both primary <a href=\"/Protocols\" title=\"Protocols\">protocols</a> in computer chess, to communicate with a <a href=\"/GUI\" title=\"GUI\">GUI</a> or game playing controller or server - the <a href=\"/Chess_Engine_Communication_Protocol\" title=\"Chess Engine Communication Protocol\">Chess Engine Communication Protocol</a>, and <a href=\"/UCI\" title=\"UCI\">UCI</a>. In conformance with these chess communication protocols, engines <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Standard_streams\">standard streams</a> are redirected and controlled by a parent process such as the <a href=\"/GUI\" title=\"GUI\">chess GUI</a>, a game- or match controller like  <a href=\"/Cutechess-cli\" title=\"Cutechess-cli\">Cutechess-cli</a> for automatic <a href=\"/Engine_Testing#Matches\" title=\"Engine Testing\">engine-engine matches</a> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>, or their <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Proxy_server\">proxies</a> inside a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Computer_network\">computer network</a>. \n</p>\n<h1><span class=\"mw-headline\" id=\"Chess_CLIs\">Chess CLIs</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=CLI&amp;action=edit&amp;section=8\" title=\"Edit section: Chess CLIs\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Cutechess-cli\" title=\"Cutechess-cli\">Cutechess-cli</a></li>\n<li> <a href=\"/C-chess-cli\" title=\"C-chess-cli\">c-chess-cli</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=CLI&amp;action=edit&amp;section=9\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Graphics_Programming#ASCIIDiagrams\" title=\"Graphics Programming\">ASCII Diagrams</a></li>\n<li> <a href=\"/CHEKMO-II#PDP8\" title=\"CHEKMO-II\">CHEKMO-II</a> on a <a href=\"/PDP-8\" title=\"PDP-8\">PDP-8</a> (Video)</li>\n<li> <a href=\"/Chess_Game\" title=\"Chess Game\">Chess Game</a></li>\n<li> <a href=\"/CPW-Engine_com\" title=\"CPW-Engine com\">CPW-Engine_com</a></li>\n<li> <a href=\"/Banksia\" title=\"Banksia\">Banksia</a></li>\n<li> <a href=\"/Entering_Moves\" title=\"Entering Moves\">Entering Moves</a></li>\n<li> <a href=\"/GUI\" title=\"GUI\">Graphical User Interface</a></li>\n<li> <a href=\"/InBetween\" title=\"InBetween\">InBetween</a></li>\n<li> <a href=\"/Protocols\" title=\"Protocols\">Protocols</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=CLI&amp;action=edit&amp;section=10\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=389667\">Kiwi for Win98 and input-reading stuff</a> by <a href=\"/Alessandro_Scotti\" title=\"Alessandro Scotti\">Alessandro Scotti</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 29, 2004&#160;» <a href=\"/Kiwi\" title=\"Kiwi\">Kiwi</a>, <a href=\"/Windows\" title=\"Windows\">Windows</a>, <a href=\"/Cpp\" title=\"Cpp\">C++</a>, <a href=\"/Thread\" title=\"Thread\">Thread</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=1622\">Safe I/O (repeated)</a> by <a href=\"/Fabien_Letouzey\" title=\"Fabien Letouzey\">Fabien Letouzey</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, February 11, 2005</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=27024\">Cutechess-cli: A command line tool for engine-engine matches</a> by <a href=\"/Ilari_Pihlajisto\" title=\"Ilari Pihlajisto\">Ilari Pihlajisto</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 16, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=34051\">Ponder console input move problem</a> by <a href=\"/Vlad_Stamate\" title=\"Vlad Stamate\">Vlad Stamate</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 28, 2010&#160;» <a href=\"/Pondering\" title=\"Pondering\">Pondering</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=50630\">Bash script to start UCI engine and get evaluation</a> by Scott O'Nan, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 25, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=56363\">how to probe egtb from console?</a> by <a href=\"/Marco_Belli\" title=\"Marco Belli\">Marco Belli</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 15, 2015&#160;» <a href=\"/Endgame_Tablebases\" title=\"Endgame Tablebases\">Endgame Tablebases</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61988\">command line engine match?</a> by <a href=\"/Erin_Dame\" title=\"Erin Dame\">Erin Dame</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 06, 2016</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=CLI&amp;action=edit&amp;section=11\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Command-line_interface\">Command-line interface from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/List_of_command-line_interpreters\">List of command-line interpreters from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Redirection_%28computing%29\">Redirection from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Shell_%28computing%29\">Shell (computing) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Command_Prompt\">Command Prompt from Wikipedia</a></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/COMMAND.COM\">COMMAND.COM</a></dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Unix_shell\">Unix shell from Wikipedia</a></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Thompson_shell\">Thompson shell</a> by <a href=\"/Ken_Thompson\" title=\"Ken Thompson\">Ken Thompson</a></dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/System_console\">System console from Wikipedia</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=CLI&amp;action=edit&amp;section=12\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Unix_philosophy#McIlroy:_A_Quarter_Century_of_Unix\">Unix philosophy - McIlroy: A Quarter Century of Unix - Wikipedia</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Command-line_interface\">Command-line interface from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Unix2dos\">unix2dos from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=27024\">Cutechess-cli: A command line tool for engine-engine matches</a> by <a href=\"/Ilari_Pihlajisto\" title=\"Ilari Pihlajisto\">Ilari Pihlajisto</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 16, 2009</span>\n</li>\n</ol></div>\n<p><b><a href=\"/User_Interface\" title=\"User Interface\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301024613\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.014 seconds\nReal time usage: 0.015 seconds\nPreprocessor visited node count: 107/1000000\nPreprocessor generated node count: 198/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1594-0!canonical and timestamp 20260301024613 and revision id 22138\n -->\n"
+    },
+    "categories": [],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alessandro Scotti"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Banksia"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "C-chess-cli"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CHEKMO-II"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CPW-Engine com"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Engine Communication Protocol"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Game"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cpp"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cutechess-cli"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Endgame Tablebases"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engine Testing"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Entering Moves"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Erin Dame"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fabien Letouzey"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "GUI"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Game Notation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Graphics Programming"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ilari Pihlajisto"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "InBetween"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iterative Deepening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ken Thompson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kiwi"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Languages"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Linux"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "MS-DOS"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marco Belli"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "PDP-8"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pondering"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Process"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Protocols"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Score"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Thread"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "UCI"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Unix"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "User Interface"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vlad Stamate"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Windows"
+      },
+      {
+        "ns": 0,
+        "*": "Program"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "History",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "CLI",
+        "byteoffset": 781,
+        "anchor": "History"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Unix Philosophy",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "CLI",
+        "byteoffset": 1381,
+        "anchor": "Unix_Philosophy"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Shell and Applications",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "CLI",
+        "byteoffset": 2106,
+        "anchor": "Shell_and_Applications"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Commands",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "CLI",
+        "byteoffset": 3599,
+        "anchor": "Commands"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "CLI and Chess Engines",
+        "number": "5",
+        "index": "5",
+        "fromtitle": "CLI",
+        "byteoffset": 5055,
+        "anchor": "CLI_and_Chess_Engines"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Interruptible",
+        "number": "5.1",
+        "index": "6",
+        "fromtitle": "CLI",
+        "byteoffset": 5935,
+        "anchor": "Interruptible"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Protocols",
+        "number": "5.2",
+        "index": "7",
+        "fromtitle": "CLI",
+        "byteoffset": 6728,
+        "anchor": "Protocols"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Chess CLIs",
+        "number": "6",
+        "index": "8",
+        "fromtitle": "CLI",
+        "byteoffset": 7612,
+        "anchor": "Chess_CLIs"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "7",
+        "index": "9",
+        "fromtitle": "CLI",
+        "byteoffset": 7664,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "8",
+        "index": "10",
+        "fromtitle": "CLI",
+        "byteoffset": 7926,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "9",
+        "index": "11",
+        "fromtitle": "CLI",
+        "byteoffset": 9057,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "10",
+        "index": "12",
+        "fromtitle": "CLI",
+        "byteoffset": 9836,
+        "anchor": "References"
+      }
+    ]
+  }
+}

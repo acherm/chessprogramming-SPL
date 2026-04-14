@@ -1,0 +1,595 @@
+{
+  "parse": {
+    "title": "Backtracking",
+    "pageid": 696,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Programming\" title=\"Programming\">Programming</a> * <a href=\"/Algorithms\" title=\"Algorithms\">Algorithms</a> * Backtracking</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"https://commons.wikimedia.org/wiki/File:Eight-queens-animation.gif\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Eight-queens-animation.gif/330px-Eight-queens-animation.gif\" width=\"300\" height=\"300\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/1/1f/Eight-queens-animation.gif 1.5x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Eight-queens-animation.gif\" class=\"internal\" title=\"Enlarge\"></a></div>Eight queens puzzle <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>Backtracking</b>,<br />\na general search algorithm for finding solutions of certain <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Computational_problem\">computational problems</a>. It incrementally builds candidates to a solution, and \"backtracks\" a partial candidate as soon as it determines it cannot become member of the solution. Therefor backtracking algorithms, most often implemented as <a href=\"/Recursion\" title=\"Recursion\">recursive</a> <a href=\"/Depth-First\" title=\"Depth-First\">depth-first</a> algorithm, are not considered <a href=\"/Brute-Force\" title=\"Brute-Force\">brute-force</a>, and have the advantage of potentially requiring a search tree with less nodes. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#History\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">History</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Applications\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Applications</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#De_Bruijn_Sequences\"><span class=\"tocnumber\">2.1</span> <span class=\"toctext\">De Bruijn Sequences</span></a></li>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#Looking_for_Magics\"><span class=\"tocnumber\">2.2</span> <span class=\"toctext\">Looking for Magics</span></a></li>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#8Q_in_Bitboards\"><span class=\"tocnumber\">2.3</span> <span class=\"toctext\">8Q in Bitboards</span></a>\n<ul>\n<li class=\"toclevel-3 tocsection-6\"><a href=\"#Code\"><span class=\"tocnumber\">2.3.1</span> <span class=\"toctext\">Code</span></a></li>\n<li class=\"toclevel-3 tocsection-7\"><a href=\"#Node_Counts\"><span class=\"tocnumber\">2.3.2</span> <span class=\"toctext\">Node Counts</span></a></li>\n<li class=\"toclevel-3 tocsection-8\"><a href=\"#Data_and_Print\"><span class=\"tocnumber\">2.3.3</span> <span class=\"toctext\">Data and Print</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#N_Queens\"><span class=\"tocnumber\">2.4</span> <span class=\"toctext\">N Queens</span></a>\n<ul>\n<li class=\"toclevel-3 tocsection-10\"><a href=\"#By_Marcel_van_Kervinck\"><span class=\"tocnumber\">2.4.1</span> <span class=\"toctext\">By Marcel van Kervinck</span></a></li>\n<li class=\"toclevel-3 tocsection-11\"><a href=\"#By_Tony_Lezard\"><span class=\"tocnumber\">2.4.2</span> <span class=\"toctext\">By Tony Lezard</span></a></li>\n</ul>\n</li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-12\"><a href=\"#See_also\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-13\"><a href=\"#Publications\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Publications</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-14\"><a href=\"#1960_...\"><span class=\"tocnumber\">4.1</span> <span class=\"toctext\">1960 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-15\"><a href=\"#1970_...\"><span class=\"tocnumber\">4.2</span> <span class=\"toctext\">1970 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-16\"><a href=\"#1980_...\"><span class=\"tocnumber\">4.3</span> <span class=\"toctext\">1980 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-17\"><a href=\"#1990_...\"><span class=\"tocnumber\">4.4</span> <span class=\"toctext\">1990 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-18\"><a href=\"#2000_...\"><span class=\"tocnumber\">4.5</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-19\"><a href=\"#2010_...\"><span class=\"tocnumber\">4.6</span> <span class=\"toctext\">2010 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-20\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Forum Posts</span></a></li>\n<li class=\"toclevel-1 tocsection-21\"><a href=\"#External_Links\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-22\"><a href=\"#References\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"History\">History</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Backtracking&amp;action=edit&amp;section=1\" title=\"Edit section: History\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><a href=\"/Mathematician#JRBitner\" title=\"Mathematician\">Bitner</a> and <a href=\"/Mathematician#EMReingold\" title=\"Mathematician\">Reingold</a> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup> credit <a href=\"/Mathematician#DHLehmer\" title=\"Mathematician\">Derrick H. Lehmer</a> with first using the term 'backtrack' in the 1950s, but it has been discovered and rediscovered many times. <a href=\"/Mathematician#RJWalker\" title=\"Mathematician\">Robert J. Walker</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup> was the first who called using a well-known depth-first procedure Backtracking in 1960.\n</p>\n<h1><span class=\"mw-headline\" id=\"Applications\">Applications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Backtracking&amp;action=edit&amp;section=2\" title=\"Edit section: Applications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Classic examples of using backtracking algorithms are solving <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Exact_cover\">Exact cover problems</a> and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Tour_puzzle\">Tour puzzles</a>, like the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Eight_queens_puzzle\">Eight queens puzzle</a>, the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Knight%27s_tour\">Knight's tour puzzle</a> and other <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Maze\">Maze</a> or <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Labyrinth\">Labyrinth</a> puzzles. <a href=\"/Donald_Knuth\" title=\"Donald Knuth\">Knuth's</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Knuth%27s_Algorithm_X\">Algorithm X</a> along with <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Dancing_Links\">Dancing Links</a> finds all solutions to an exact cover problem. Backtracking is further applied to solving <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Constraint_satisfaction_problem\">Constraint satisfaction problems</a>, such as <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Crosswords\">Crossword puzzles</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Sudoku\">Sudoku</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pentomino\">Pentomino</a> tiling, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Boolean_satisfiability_problem\">boolean satisfiability problems</a> and other <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/NP-complete\">NP-complete problems</a>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Logic_programming\">Logic programming languages</a> such as <a href=\"/index.php?title=Prolog&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Prolog (page does not exist)\">Prolog</a> internally use backtracking to generate answers.\n</p>\n<h2><span class=\"mw-headline\" id=\"De_Bruijn_Sequences\">De Bruijn Sequences</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Backtracking&amp;action=edit&amp;section=3\" title=\"Edit section: De Bruijn Sequences\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>A further sample is to find <a href=\"/De_Bruijn_Sequence\" title=\"De Bruijn Sequence\">De Bruijn sequences</a>, as demonstrated by the recursive <a href=\"/De_Bruijn_Sequence_Generator\" title=\"De Bruijn Sequence Generator\">De Bruijn Sequence Generator</a>. Here early partial candidates may be discarded if the lock indicates a new six-bit number already occured before. \n</p>\n<h2><span class=\"mw-headline\" id=\"Looking_for_Magics\">Looking for Magics</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Backtracking&amp;action=edit&amp;section=4\" title=\"Edit section: Looking for Magics\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Unfortunately, <a href=\"/Looking_for_Magics\" title=\"Looking for Magics\">looking for magics</a> to find factors for the application of <a href=\"/Magic_Bitboards\" title=\"Magic Bitboards\">Magic Bitboards</a>, seems not to fit into a class of these kind of problems. Here <a href=\"/Trial_and_Error\" title=\"Trial and Error\">trial and error</a> with spare populated, but otherwise randomly chosen numbers is used.\n<span id=\"8QinBitboards\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"8Q_in_Bitboards\">8Q in Bitboards</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Backtracking&amp;action=edit&amp;section=5\" title=\"Edit section: 8Q in Bitboards\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>\"Thinking\" <a href=\"/Bitboards\" title=\"Bitboards\">Bitboards</a>, <a href=\"/Gerd_Isenberg\" title=\"Gerd Isenberg\">Gerd Isenberg</a> made following <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Eight_queens_puzzle\">Eight queens</a> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup> <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup> proposal, to traverse <a href=\"/Ranks\" title=\"Ranks\">ranks</a> as disjoint candidate sets for one <a href=\"/Queen\" title=\"Queen\">queen</a> each, with premature elimination of redundant tests <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup> of <a href=\"/Squares\" title=\"Squares\">squares</a> already <a href=\"/Sliding_Piece_Attacks\" title=\"Sliding Piece Attacks\">attacked</a> by queens put on the board . Therefor, while <a href=\"/Bitboard_Serialization\" title=\"Bitboard Serialization\">serializing</a> the set of not attacked candidate squares from one rank to put a queen on it, it maintains a \"taboo\" <a href=\"/General_Setwise_Operations#Union\" title=\"General Setwise Operations\">union set</a> for consequent queens on upper ranks by \"oring\" <a href=\"/On_an_empty_Board\" title=\"On an empty Board\">queen attacks</a> in <a href=\"/On_an_empty_Board#PositiveRays\" title=\"On an empty Board\">north</a> <a href=\"/Direction\" title=\"Direction\">directions</a>. It performs some optimization to keep the processed rank always the first, to only use a lookup <a href=\"/Array\" title=\"Array\">array</a> of queen attacks of that first rank, and to <a href=\"/General_Setwise_Operations#ShiftingBitboards\" title=\"General Setwise Operations\">shift</a> the taboo-set consecutively <a href=\"/General_Setwise_Operations#OneStepOnly\" title=\"General Setwise Operations\">one rank down</a>. A little <a href=\"/Space-Time_Tradeoff\" title=\"Space-Time Tradeoff\">space-time tradeoff</a> saves the <a href=\"/BitScan\" title=\"BitScan\">bitscan</a> at the cost of some more <a href=\"/Memory\" title=\"Memory\">memory</a> to index the eight attacks from an <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Sparse_array\">sparse array</a> of 129 bitboards with the <a href=\"/General_Setwise_Operations#LS1BIsolation\" title=\"General Setwise Operations\">single isolated</a> <a href=\"/Bit\" title=\"Bit\">bit</a> inside one <a href=\"/Byte\" title=\"Byte\">byte</a> (the first rank). \n</p>\n<h3><span class=\"mw-headline\" id=\"Code\">Code</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Backtracking&amp;action=edit&amp;section=6\" title=\"Edit section: Code\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p>The sample <a href=\"/C\" title=\"C\">C</a> code demonstrates an <a href=\"/Iteration\" title=\"Iteration\">iterative solution</a> using <a href=\"/Array\" title=\"Array\">arrays</a> as explicit <a href=\"/Stack\" title=\"Stack\">stacks</a> on the stack:\n</p>\n<pre>\ntypedef unsigned char U8;\n\n/**\n * eightQueen Bitboard implementation\n * @author Gerd Isenberg\n * @date April 29, 2011\n */\nvoid eightQueenBitboard( /*U64 taboo */ ) {\n   U64 t[8];             /* stack of taboo bitboards */\n   U8  q[8], c[8];       /* stack of queens and candidate squares */\n   unsigned int p = 0;   /* ply, queen index 0..7 as \"stack pointer\" */\n   t[0] = 0;             /* no square attacked so far (taboo) */\n\nC: c[p] = ~(U8)t[p];     /* 1. rank squares not attacked */\n   while ( c[p] ) {      /* while candidate squares */\n      q[p] = c[p]&amp;-c[p]; /* LS1B -&gt; 1,2,4,8,16,32,64,128 */\n      if ( p == 7 ) {\n         print8Q( q );   /* solution found */\n      } else {           /* \"or\" attacks to taboo, shift it  */\n         t[p+1] = (t[p] | nAtt[q[p]]) &gt;&gt; 8; /* one rank down */\n         ++p; goto C;    /* make \"recursive call\" iterative  */\nR:       p--;\n      }\n      c[p] ^= q[p];      /* reset candidate square */\n   }\n   if ( p ) goto R;      /* return from iterative \"call\" */\n}\n</pre>\n<h3><span class=\"mw-headline\" id=\"Node_Counts\">Node Counts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Backtracking&amp;action=edit&amp;section=7\" title=\"Edit section: Node Counts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p>The algorithm backtracks all <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Eight_queens_puzzle#Constructing_a_solution\">92 distinct Eight queen solutions</a>. Using an <b>if do-while else</b> construct instead of <b>while</b> control structure allows counting \"pruned\" <a href=\"/Node\" title=\"Node\">nodes</a>, where the candidate set is initially empty in the else case, leaving following node statistics differentiated by ply (excluding the <a href=\"/Root\" title=\"Root\">root</a>):\n</p>\n<table class=\"wikitable\">\n\n<tr>\n<th> Ply\n</th>\n<th> Nodes\n</th>\n<th> Pruned\n</th>\n<th> Sum\n</th></tr>\n<tr>\n<th> 0\n</th>\n<td style=\"text-align:right;\"> 8\n</td>\n<td style=\"text-align:right;\"> 0\n</td>\n<td style=\"text-align:right;\"> 8\n</td></tr>\n<tr>\n<th> 1\n</th>\n<td style=\"text-align:right;\"> 42\n</td>\n<td style=\"text-align:right;\"> 0\n</td>\n<td style=\"text-align:right;\"> 42\n</td></tr>\n<tr>\n<th> 2\n</th>\n<td style=\"text-align:right;\"> 140\n</td>\n<td style=\"text-align:right;\"> 0\n</td>\n<td style=\"text-align:right;\"> 140\n</td></tr>\n<tr>\n<th> 3\n</th>\n<td style=\"text-align:right;\"> 344\n</td>\n<td style=\"text-align:right;\"> 0\n</td>\n<td style=\"text-align:right;\"> 344\n</td></tr>\n<tr>\n<th> 4\n</th>\n<td style=\"text-align:right;\"> 568\n</td>\n<td style=\"text-align:right;\"> 18\n</td>\n<td style=\"text-align:right;\"> 586\n</td></tr>\n<tr>\n<th> 5\n</th>\n<td style=\"text-align:right;\"> 550\n</td>\n<td style=\"text-align:right;\"> 150\n</td>\n<td style=\"text-align:right;\"> 700\n</td></tr>\n<tr>\n<th> 6\n</th>\n<td style=\"text-align:right;\"> 312\n</td>\n<td style=\"text-align:right;\"> 256\n</td>\n<td style=\"text-align:right;\"> 568\n</td></tr>\n<tr>\n<th> 7\n</th>\n<td style=\"text-align:right;\"> <b>92</b>\n</td>\n<td style=\"text-align:right;\"> 220\n</td>\n<td style=\"text-align:right;\"> 312\n</td></tr>\n<tr>\n<th> Sum\n</th>\n<td style=\"text-align:right;\"> 2056\n</td>\n<td style=\"text-align:right;\"> 644\n</td>\n<td style=\"text-align:right;\"> 2700\n</td></tr></table>\n<h3><span class=\"mw-headline\" id=\"Data_and_Print\">Data and Print</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Backtracking&amp;action=edit&amp;section=8\" title=\"Edit section: Data and Print\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p>The declaration of the north attack array to save a byte-wise <a href=\"/BitScan\" title=\"BitScan\">bitscan</a>, and for convenience the print routine used:\n</p>\n<pre>\n/**\n * north | nw | ne attacks of a queen on the 1. rank\n *\n * indexed by a first rank - bitboard\n * with one bit set, representing the file\n * 1,2,4,8,16,32,64,128\n */\nstatic const U64 nAtt[130] = {\n   0,\n   C64(0x8141211109050300), /*   1 */\n   C64(0x02824222120A0700), /*   2 */\n   0,\n   C64(0x0404844424150E00), /*   4 */\n   0,0,0,\n   C64(0x08080888492A1C00), /*   8 */\n   0,0,0,0,0,0,0,\n   C64(0x1010101192543800), /*  16 */\n   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n   C64(0x2020212224A87000), /*  32 */\n   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n   C64(0x404142444850E000), /*  64 */\n   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n   C64(0x8182848890A0C000), /* 128 */\n   0\n};\n\n/**\n * printing 8q boards\n */\nvoid print8Q( unsigned char q8[] ) {\n   static int count=1;\n   int r, f, b;\n   printf(\"NQ&#160;%d\\n\", count++ );\n   for (r=7; r &gt;= 0; --r) { /* 8th rank top */\n      for ( f=0, b=1; f &lt; 8; ++f, b &lt;&lt;= 1) {\n         printf(\"%c \", (q8[r] &amp; b)&#160;? 'Q'&#160;: '.');\n      }\n      printf(\"\\n\");\n   }\n   printf(\"\\n\");\n}\n</pre>\n<h2><span class=\"mw-headline\" id=\"N_Queens\">N Queens</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Backtracking&amp;action=edit&amp;section=9\" title=\"Edit section: N Queens\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<h3><span class=\"mw-headline\" id=\"By_Marcel_van_Kervinck\">By Marcel van Kervinck</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Backtracking&amp;action=edit&amp;section=10\" title=\"Edit section: By Marcel van Kervinck\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p>A very short and therefor slightly obfuscated, but elegant and tricky general backtracker in enumerating N Queen solutions is given by <a href=\"/Marcel_van_Kervinck\" title=\"Marcel van Kervinck\">Marcel van Kervinck</a> in two lines of <a href=\"/C\" title=\"C\">C</a> code, Version 2, 1996 <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup>, <a href=\"/Bit-Twiddling\" title=\"Bit-Twiddling\">Bit-Twiddling</a> as its best:\n</p>\n<pre>\nt(a,b,c){int d=0,e=a&amp;~b&amp;~c,f=1;if(a)for(f=0;e-=d,d=e&amp;-e;f+=t(a-d,(b+d)*2,(\nc+d)/2));return f;}main(q){scanf(\"%d\",&amp;q);printf(\"%d\\n\",t(~(~0&lt;&lt;q),0,0));}\n</pre>\n<h3><span class=\"mw-headline\" id=\"By_Tony_Lezard\">By Tony Lezard</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Backtracking&amp;action=edit&amp;section=11\" title=\"Edit section: By Tony Lezard\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p>As mentioned by Marcel van Kervinck, a similar 8 Queen program was introduced by Tony Lezard in 1991 <sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup>:\n</p>\n<pre>\nstatic int count = 0;\n\nvoid try(int row, int left, int right) {\n   int poss, place;\n   if (row == 0xFF) ++count;\n   else {\n      poss = ~(row|left|right) &amp; 0xFF;\n      while (poss&#160;!= 0) {\n         place = poss &amp; -poss;\n         try(row|place, (left|place)&lt;&lt;1, (right|place)&gt;&gt;1);\n         poss &amp;= ~place;\n      }\n   }\n}\n\nvoid main() {   \n   try(0,0,0);\n   printf(\"There are&#160;%d solutions.\\n\", count);\n}\n</pre>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Backtracking&amp;action=edit&amp;section=12\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Brute-Force\" title=\"Brute-Force\">Brute-Force</a></li>\n<li> <a href=\"/De_Bruijn_Sequence_Generator\" title=\"De Bruijn Sequence Generator\">De Bruijn Sequence Generator</a></li>\n<li> <a href=\"/Depth-First\" title=\"Depth-First\">Depth-First</a></li>\n<li> <a href=\"/Iterative_Search\" title=\"Iterative Search\">Iterative Search</a></li>\n<li> <a href=\"/Looking_for_Magics\" title=\"Looking for Magics\">Looking for Magics</a></li>\n<li> <a href=\"/index.php?title=Prolog&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Prolog (page does not exist)\">Prolog</a></li>\n<li> <a href=\"/Recursion\" title=\"Recursion\">Recursion</a></li>\n<li> <a href=\"/Search\" title=\"Search\">Search</a></li>\n<li> <a href=\"/Trial_and_Error\" title=\"Trial and Error\">Trial and Error</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Backtracking&amp;action=edit&amp;section=13\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1960_...\">1960 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Backtracking&amp;action=edit&amp;section=14\" title=\"Edit section: 1960 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Mathematician#RJWalker\" title=\"Mathematician\">Robert J. Walker</a> (<b>1960</b>). <i>An Enumerative Technique for a Class of Combinatorial Problems</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.bibliopolis.com/main/books/caliban_0036592.html\">Proceedings of Symposia in Applied Mathematics, Vol. X, Combinatorial Analysis</a>, <a href=\"/Richard_E._Bellman\" title=\"Richard E. Bellman\">Richard E. Bellman</a> and <a href=\"/Mathematician#MHallJr\" title=\"Mathematician\">Marshall Hall, Jr.</a>, eds., <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/American_Mathematical_Society\">American Mathematical Society</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Providence,_RI\">Providence, Rhode Island</a>, pp. 91-94</li>\n<li> <a href=\"/Mathematician#SMGolomb\" title=\"Mathematician\">Solomon W. Golomb</a>, <a href=\"/Mathematician#LDBaumert\" title=\"Mathematician\">Leonard D. Baumert</a> (<b>1965</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://portal.acm.org/citation.cfm?id=321300&amp;dl=ACM&amp;coll=DL\">Backtrack Programming</a></i>. <a href=\"/ACM#Journal\" title=\"ACM\">Journal of the ACM</a>, Vol. 12, No. 4</li>\n<li> <a href=\"/Martin_Gardner\" title=\"Martin Gardner\">Martin Gardner</a> (<b>1969, 1991</b>). <i>The Unexpected Hanging and Other Mathematical Diversions</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Simon_%26_Schuster\">Simon &amp; Schuster</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/University_of_Chicago_Press\">University Of Chicago Press</a>. </li></ul>\n<dl><dd> Chapter 16: <i>The Eight Queens and Other Chessboard Diversions</i>.</dd></dl>\n<h2><span class=\"mw-headline\" id=\"1970_...\">1970 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Backtracking&amp;action=edit&amp;section=15\" title=\"Edit section: 1970 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Mathematician#MBWells\" title=\"Mathematician\">Mark B. Wells</a> (<b>1971</b>). <i>Elements of Combinatorial Computing</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pergamon_Press\">Pergamon Press</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.amazon.com/Elements-combinatorial-computing-Mark-Wells/dp/B0000EG7JI\">amazon.com</a></li>\n<li> <a href=\"/Mathematician#JRBitner\" title=\"Mathematician\">James R. Bitner</a>, <a href=\"/Mathematician#EMReingold\" title=\"Mathematician\">Edward M. Reingold</a> (<b>1975</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://portal.acm.org/citation.cfm?id=361224&amp;dl=ACM&amp;coll=DL&amp;CFID=18128359&amp;CFTOKEN=31610180\">Backtrack Programming Techniques</a></i>. <a href=\"/ACM#Communications\" title=\"ACM\">Communications of the ACM</a>, Vol. 18, No. 11 <sup id=\"cite_ref-9\" class=\"reference\"><a href=\"#cite_note-9\">&#91;9&#93;</a></sup></li>\n<li> <a href=\"/Donald_Knuth\" title=\"Donald Knuth\">Donald Knuth</a> (<b>1974</b>). <i>Estimating efficiency of backtrack programs</i>. STAN-CS-74-442, CS-Department, <a href=\"/Stanford_University\" title=\"Stanford University\">Stanford University</a> <sup id=\"cite_ref-10\" class=\"reference\"><a href=\"#cite_note-10\">&#91;10&#93;</a></sup></li>\n<li> <a href=\"/Donald_Knuth\" title=\"Donald Knuth\">Donald Knuth</a> (<b>1975</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.ams.org/journals/mcom/1975-29-129/S0025-5718-1975-0373371-6/home.html\">Estimating the Efficiency of Backtrack Programs</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.ams.org/publications/journals/journalsframework/mcom\">Mathemathics of Computation</a>, Vol. 29</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.technion.ac.il/%7Efrancez/\">Nissim Francez</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/%7Eley/db/indices/a-tree/k/Klebansky:Boris.html\">Boris Klebansky</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Amir_Pnueli\">Amir Pnueli</a> (<b>1977</b>). <i>Backtracking in Recursive Computations</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://ftp.math.utah.edu/pub//tex/bib/toc/actainfo.html#8%282%29:May:1977\">Acta Informatica Vol. 8, No. 2</a></li>\n<li> <a href=\"/John_Gaschnig\" title=\"John Gaschnig\">John Gaschnig</a> (<b>1977</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://dl.acm.org/citation.cfm?id=1624534\">A General Backtrack Algorithm That Eliminates Most Redundant Tests</a></i>. <a href=\"/Conferences#IJCAI1977\" title=\"Conferences\">IJCAI 1977</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/%7Eley/db/indices/a-tree/h/Hitotumatu:Hirosi.html\">Hirosi Hitotumatua</a>, <a href=\"/index.php?title=Kohei_Noshita&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Kohei Noshita (page does not exist)\">Kohei Noshita</a> (<b>1979</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://portal.acm.org/citation.cfm?id=1710829\">A technique for implementing backtrack algorithms and its application</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Information_Processing_Letters\">Information Processing Letters</a> Vol. 8, No. 4</li>\n<li> <a href=\"/Gary_Lindstrom\" title=\"Gary Lindstrom\">Gary Lindstrom</a> (<b>1979</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://dl.acm.org/citation.cfm?id=357063\">Backtracking in a Generalized Control Setting</a></i>. <a href=\"/ACM#TOPLAS\" title=\"ACM\">ACM Transactions on Programming Languages and Systems</a>, Vol. 1, No. 1</li></ul>\n<h2><span class=\"mw-headline\" id=\"1980_...\">1980 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Backtracking&amp;action=edit&amp;section=16\" title=\"Edit section: 1980 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Paul_W._Purdom\" title=\"Paul W. Purdom\">Paul W. Purdom</a>, <a href=\"/Mathematician#CABrown\" title=\"Mathematician\">Cynthia A. Brown</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://www.cs.indiana.edu/%7Eedrbtsn/\">Edward L. Robertson</a> (<b>1981</b>). <i>Backtracking with Multi-Level Dynamic Search Rearrangement</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://ftp.math.utah.edu/pub//tex/bib/toc/actainfo.html#15%282%29:December:1981\">Acta Informatica Vol. 15, No. 2</a></li>\n<li> <a href=\"/Robert_A._Wagner\" title=\"Robert A. Wagner\">Robert A. Wagner</a>, <a href=\"/Mathematician#RGeist\" title=\"Mathematician\">Robert Geist</a> (<b>1984</b>). <i>The Crippled Queen Placement Problem</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/db/journals/scp/scp4.html\">Science of Computer Programming, Vol. 4</a>, No. 3, <a rel=\"nofollow\" class=\"external text\" href=\"https://core.ac.uk/download/pdf/82594002.pdf\">pdf</a></li>\n<li> <a href=\"/Oliver_Vornberger\" title=\"Oliver Vornberger\">Oliver Vornberger</a>, <a href=\"/Burkhard_Monien\" title=\"Burkhard Monien\">Burkhard Monien</a>, <a href=\"/Ewald_Speckenmeyer\" title=\"Ewald Speckenmeyer\">Ewald Speckenmeyer</a> (<b>1986</b>). <i>Superlinear Speedup for Parallel Backtracking.</i> Technical Report 30, <a href=\"/Paderborn_University\" title=\"Paderborn University\">Paderborn University</a></li>\n<li> <a href=\"/index.php?title=Andrew_Appel&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Andrew Appel (page does not exist)\">Andrew Appel</a>, <a href=\"/index.php?title=Guy_Jacobson&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Guy Jacobson (page does not exist)\">Guy Jacobson</a> (<b>1988</b>). <i>The World’s Fastest Scrabble Program</i>. <a href=\"/ACM#Communications\" title=\"ACM\">Communications of the ACM</a>, Vol. 31, No. 5, <a rel=\"nofollow\" class=\"external text\" href=\"https://pdfs.semanticscholar.org/da31/cb24574f7c881a5dbf008e52aac7048c9d9c.pdf\">pdf</a>&#160;» <a href=\"/index.php?title=Scrabble&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Scrabble (page does not exist)\">Scrabble</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1990_...\">1990 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Backtracking&amp;action=edit&amp;section=17\" title=\"Edit section: 1990 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Ilan_Vardi\" title=\"Ilan Vardi\">Ilan Vardi</a> (<b>1991</b>). <i>Computational Recreations in Mathematica</i>. Redwood City, CA: Addison-Wesley, ISBN 0201529890, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.amazon.com/Computational-Recreations-Mathematica-Ilan-Vardi/dp/0201529890\">amazon.com</a> </li>\n<li> <a href=\"/Matthew_L._Ginsberg\" title=\"Matthew L. Ginsberg\">Matthew L. Ginsberg</a> (<b>1993</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.jair.org/papers/paper1.html\">Dynamic Backtracking</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.jair.org/vol/vol1.html\">JAIR Vol. 1</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Patrick_Prosser\">Patrick Prosser</a> (<b>1993</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1467-8640.1993.tb00310.x\">Hybrid Algorithms for the Constraint Satisfaction Problem</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Computational_Intelligence_(journal)\">Computational Intelligence</a>, Vol. 9, No. 3</li>\n<li> <a href=\"/Richard_Karp\" title=\"Richard Karp\">Richard Karp</a>, <a href=\"/Yanjun_Zhang\" title=\"Yanjun Zhang\">Yanjun Zhang</a> (<b>1993</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://dl.acm.org/citation.cfm?id=174130.174145&amp;coll=DL&amp;dl=GUIDE&amp;CFID=67253533&amp;CFTOKEN=20355103\">Randomized parallel algorithms for backtrack search and branch-and-bound computation</a></i>. <a href=\"/ACM#Journal\" title=\"ACM\">Journal of the ACM</a>, Vol. 40, No. 3 <sup id=\"cite_ref-11\" class=\"reference\"><a href=\"#cite_note-11\">&#91;11&#93;</a></sup></li>\n<li> <a href=\"/Matthew_L._Ginsberg\" title=\"Matthew L. Ginsberg\">Matthew L. Ginsberg</a>, <a href=\"/David_McAllester\" title=\"David McAllester\">David McAllester</a> (<b>1994</b>). <i>GSAT and Dynamic Backtracking</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/conf/kr/kr94.html#GinsbergM94\">KR 1994</a> <sup id=\"cite_ref-12\" class=\"reference\"><a href=\"#cite_note-12\">&#91;12&#93;</a></sup></li>\n<li> <a href=\"/Peter_Sanders\" title=\"Peter Sanders\">Peter Sanders</a> (<b>1995</b>). <i>Better Algorithms for Parallel Backtracking</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/conf/irregular/irregular95.html#HoppS95\">IRREGULAR 1995</a></li>\n<li> <a href=\"/Paul_W._Purdom\" title=\"Paul W. Purdom\">Paul W. Purdom</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/pid/15/2493.html\">G. Neil Haven</a> (<b>1996</b>). <i>Backtracking and Probing</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/db/conf/dimacs/dimacs35.html#PurdomH96\">Satisfiability Problem: Theory and Applications 1996</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://www.academia.edu/22023319/Backtracking_and_probing\">pdf</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/basilv\">Basil Vandegriend</a>, <a href=\"/Joe_Culberson\" title=\"Joe Culberson\">Joe Culberson</a> (<b>1998</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.jair.org/index.php/jair/article/view/10213\">The Gn, m Phase Transition is Not Hard for the Hamiltonian Cycle Problem</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Journal_of_Artificial_Intelligence_Research\">JAIR</a>, Vol. 9, <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1105.5443\">arXiv:1105.5443</a> <sup id=\"cite_ref-13\" class=\"reference\"><a href=\"#cite_note-13\">&#91;13&#93;</a></sup></li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Backtracking&amp;action=edit&amp;section=18\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.cornell.edu/gomes/\">Carla P. Gomes</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://dblp.uni-trier.de/pers/hd/f/Fern=aacute=ndez:C=egrave=sar\">Cèsar Fernández</a>, <a href=\"/Bart_Selman\" title=\"Bart Selman\">Bart Selman</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://dblp.uni-trier.de/pers/hd/b/Bessiere:Christian\">Christian Bessière</a> (<b>2004</b>). <i>Statistical Regimes Across Constrainedness Regions</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://dblp.uni-trier.de/db/conf/cp/cp2004.html#GomesFSB04\">CP 2004</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.cornell.edu/selman/papers/pdf/04.cp.stat-regimes.pdf\">pdf</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.cornell.edu/~kroc/\">Lukas Kroc</a>, <a href=\"/Ashish_Sabharwal\" title=\"Ashish Sabharwal\">Ashish Sabharwal</a>, <a href=\"/Bart_Selman\" title=\"Bart Selman\">Bart Selman</a> (<b>2008, 2011</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/article/10.1007%2Fs10479-009-0680-7\">Leveraging Belief Propagation, Backtrack Search, and Statistics for Model Counting</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://dblp.uni-trier.de/db/conf/cpaior/cpaior2008.html#KrocSS08\">CPAIOR 2008</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://dblp.uni-trier.de/db/journals/anor/anor184.html#KrocSS11\">Annals of Operations Research, Vol. 184</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Backtracking&amp;action=edit&amp;section=19\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Pablo_San_Segundo\" title=\"Pablo San Segundo\">Pablo San Segundo</a> (<b>2011</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.springerlink.com/content/t18m6980g334nu84/\">New decision rules for exact search in N-Queens</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/journals/jgo/jgo51.html#Segundo11\">Journal of Global Optimization, Vol. 51, No. 3</a></li>\n<li> <a href=\"/Martin_Gardner\" title=\"Martin Gardner\">Martin Gardner</a> (<b>2014</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.cambridge.org/gb/academic/subjects/mathematics/recreational-mathematics/knots-and-borromean-rings-rep-tiles-and-eight-queens-martin-gardners-unexpected-hanging\">Knots and Borromean Rings, Rep-Tiles, and Eight Queens: Martin Gardner’s Unexpected Hanging</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Mathematical_Association_of_America\">The Mathematical Association of America</a> / <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Cambridge_University_Press\">Cambridge University Press</a> </li></ul>\n<dl><dd> Chapter 16: <i>The Eight Queens and Other Chessboard Diversions</i>.</dd></dl>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Backtracking&amp;action=edit&amp;section=20\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/g/rec.games.chess.computer/c/ty2-qKDlJUI/m/Wt292BRnL14J\">N-Queens number for large boards</a> by <a href=\"/Truman_Collins\" title=\"Truman Collins\">Truman Collins</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcm</a>, January 30, 1997</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66016\">N Queens Puzzle Algorithm</a> by Aaron Alfer, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 15, 2017</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Backtracking&amp;action=edit&amp;section=21\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Backtracking\">Backtracking from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Backjumping\">Backjumping from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cecm.sfu.ca/organics/papers/lam/paper/html/node4.html\">Backtrack Search using a Computer</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cecm.sfu.ca/organics/papers/lam/paper/html/paper.html\">The Search for a Finite Projective Plane of Order 10</a> by <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cecm.sfu.ca/organics/authors/lam/\">Clement W. H. Lam</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Constraint_satisfaction_problem\">Constraint satisfaction problem from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Boolean_satisfiability_problem\">Boolean satisfiability problem</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/NP-complete\">NP-complete from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Karp%27s_21_NP-complete_problems\">Karp's 21 NP-complete problems from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/List_of_NP-complete_problems\">List of NP-complete problems from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Four_color_theorem\">Four color theorem from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Knight%27s_tour\">Knight's tour from Wikipedia</a> and <a rel=\"nofollow\" class=\"external text\" href=\"http://www.compgeom.com/%7Epiyush/teach/3330/homeworks/knightour.cpp\">a backtracking implementation in C++</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Eight_queens_puzzle\">Eight queens puzzle from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://rosettacode.org/wiki/N-queens_problem\">N-queens problem</a> - <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Rosetta_Code\">Rosetta Code</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Knuth%27s_Algorithm_X\">Knuth's Algorithm X from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Dancing_Links\">Dancing Links from Wikipedi</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://cgi.cse.unsw.edu.au/%7Exche635/dlx_sodoku/\">Dancing Links&#160;: Solving Sodoku</a> by <a rel=\"nofollow\" class=\"external text\" href=\"http://youtu.be/FL2VahPZlk4\">Xi Chen</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Sudoku_algorithms\">Sudoku algorithms from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.dylanscott.org/blog/2010/03/exact-covering-and-dlx/\">Exact Covering and DLX</a> by <a rel=\"nofollow\" class=\"external text\" href=\"http://www.dylanscott.org/\">Dylan Scott</a>, March 6, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.dylanscott.org/blog/2010/03/sudoku-as-an-exact-cover-problem/\">Sudoku as an Exact Cover Problem</a> by <a rel=\"nofollow\" class=\"external text\" href=\"http://www.dylanscott.org/\">Dylan Scott</a>, March 17, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Trial_and_error\">Trial and error from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.hostpublications.com/books/backtracking.html\">Backtracking</a> poems by <a rel=\"nofollow\" class=\"external text\" href=\"http://www.hostpublications.com/books/bookinfo/backtracking-author.html\">Dave Oliphant</a></li>\n<li> <a href=\"/Category:Flora_Purim\" title=\"Category:Flora Purim\">Flora Purim</a> - Niura is Coming Back, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/IHi8BbeVq68?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Backtracking&amp;action=edit&amp;section=22\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap mw-references-columns\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\">Visual Example of the Eight Queens backtrack Algorithm, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wikimedia_Commons\">Wikimedia Commons</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Eight_queens_puzzle\">Eight queens puzzle from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a href=\"/Mathematician#JRBitner\" title=\"Mathematician\">James R. Bitner</a>, <a href=\"/Mathematician#EMReingold\" title=\"Mathematician\">Edward M. Reingold</a> (<b>1975</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://portal.acm.org/citation.cfm?id=361224&amp;dl=ACM&amp;coll=DL&amp;CFID=18128359&amp;CFTOKEN=31610180\">Backtrack Programming Techniques</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Communications_of_the_ACM\">Communications of the ACM</a>, Vol. 18, No. 11</span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a href=\"/Mathematician#RJWalker\" title=\"Mathematician\">Robert J. Walker</a> (<b>1960</b>). <i>An Enumerative Technique for a Class of Combinatorial Problems</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.bibliopolis.com/main/books/caliban_0036592.html\">Proceedings of Symposia in Applied Mathematics, Vol. X, Combinatorial Analysis</a>, <a href=\"/Richard_E._Bellman\" title=\"Richard E. Bellman\">Richard E. Bellman</a> and <a href=\"/Mathematician#MHallJr\" title=\"Mathematician\">Marshall Hall, Jr.</a>, eds., <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/American_Mathematical_Society\">American Mathematical Society</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Providence,_RI\">Providence, Rhode Island</a>, pp. 91-94</span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.ii.metu.edu.tr/people/onur-demir%C3%B6rs\">Onur Demirörs</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.ii.metu.edu.tr/biblio/author/749\">N. Rafraf</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.ii.metu.edu.tr/biblio/author/750\">M.M. Tanik</a> (<b>1992</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.ii.metu.edu.tr/publications/1992/obtaining-n-queens-solutions-magic-squares-and-constructing-magic-squares-n-queens\">Obtaining n-queens solutions from magic squares and constructing magic squares from n-queens solutions</a></i>. Journal of Recreational Mathematics, Vol. 24</span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Magic_square\">Magic square from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a href=\"/John_Gaschnig\" title=\"John Gaschnig\">John Gaschnig</a> (<b>1977</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://dl.acm.org/citation.cfm?id=1624534\">A General Backtrack Algorithm That Eliminates Most Redundant Tests</a></i>. <a href=\"/Conferences#IJCAI1977\" title=\"Conferences\">IJCAI 1977</a></span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://marcelk.net/queens/\">Queens ~ /etc/marcelk</a></span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.puzzles/msg/4820204ffbaad284?hl=en&amp;dmode=source\">8 Queens (NO *SPOILER*)</a> by Tony Lezard, <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.puzzles/topics?hl=en\">rec.puzzles</a>, November 18, 1991</span>\n</li>\n<li id=\"cite_note-9\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-9\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://home.datacomm.ch/t_wolf/tw/misc/squares.html\">The 70*70 Square Puzzle</a> by <a rel=\"nofollow\" class=\"external text\" href=\"http://home.datacomm.ch/t_wolf/\">Thomas Wolf</a></span>\n</li>\n<li id=\"cite_note-10\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-10\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=47740&amp;start=36\">Re: Perft(15) estimate after averaging 800 MC samples</a> by <a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel Shawul</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 21, 2013&#160;» <a href=\"/Perft\" title=\"Perft\">Perft</a></span>\n</li>\n<li id=\"cite_note-11\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-11\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Branch_and_bound\">Branch and bound - Wikipedia</a></span>\n</li>\n<li id=\"cite_note-12\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-12\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/WalkSAT\">WalkSAT from WIkipedia</a></span>\n</li>\n<li id=\"cite_note-13\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-13\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Hamiltonian_path_problem\">Hamiltonian path problem from Wikipedia</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Algorithms\" title=\"Algorithms\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260228154102\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.087 seconds\nReal time usage: 0.646 seconds\nPreprocessor visited node count: 315/1000000\nPreprocessor generated node count: 640/1000000\nPost‐expand include size: 27/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:696-0!canonical and timestamp 20260228154101 and revision id 25225\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Flora_Purim"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ACM"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Algorithms"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Array"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ashish Sabharwal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bart Selman"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bit"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bit-Twiddling"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "BitScan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboard Serialization"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Brute-Force"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Burkhard Monien"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Byte"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "C"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Conferences"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Daniel Shawul"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David McAllester"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "De Bruijn Sequence"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "De Bruijn Sequence Generator"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth-First"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Direction"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Donald Knuth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ewald Speckenmeyer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gary Lindstrom"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "General Setwise Operations"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gerd Isenberg"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ilan Vardi"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iteration"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iterative Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Joe Culberson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "John Gaschnig"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Looking for Magics"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Magic Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marcel van Kervinck"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Martin Gardner"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mathematician"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Matthew L. Ginsberg"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Memory"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Node"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Oliver Vornberger"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "On an empty Board"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pablo San Segundo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Paderborn University"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Paul W. Purdom"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Perft"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter Sanders"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Programming"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Queen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ranks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Recursion"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Richard E. Bellman"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Richard Karp"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert A. Wagner"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Root"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sliding Piece Attacks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Space-Time Tradeoff"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Squares"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stack"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stanford University"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Trial and Error"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Truman Collins"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Yanjun Zhang"
+      },
+      {
+        "ns": 0,
+        "*": "Prolog"
+      },
+      {
+        "ns": 0,
+        "*": "Kohei Noshita"
+      },
+      {
+        "ns": 0,
+        "*": "Andrew Appel"
+      },
+      {
+        "ns": 0,
+        "*": "Guy Jacobson"
+      },
+      {
+        "ns": 0,
+        "*": "Scrabble"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Flora Purim"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "History",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Backtracking",
+        "byteoffset": 1018,
+        "anchor": "History"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Applications",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Backtracking",
+        "byteoffset": 2280,
+        "anchor": "Applications"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "De Bruijn Sequences",
+        "number": "2.1",
+        "index": "3",
+        "fromtitle": "Backtracking",
+        "byteoffset": 3601,
+        "anchor": "De_Bruijn_Sequences"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Looking for Magics",
+        "number": "2.2",
+        "index": "4",
+        "fromtitle": "Backtracking",
+        "byteoffset": 3881,
+        "anchor": "Looking_for_Magics"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "8Q in Bitboards",
+        "number": "2.3",
+        "index": "5",
+        "fromtitle": "Backtracking",
+        "byteoffset": 4221,
+        "anchor": "8Q_in_Bitboards"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Code",
+        "number": "2.3.1",
+        "index": "6",
+        "fromtitle": "Backtracking",
+        "byteoffset": 6390,
+        "anchor": "Code"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Node Counts",
+        "number": "2.3.2",
+        "index": "7",
+        "fromtitle": "Backtracking",
+        "byteoffset": 7559,
+        "anchor": "Node_Counts"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Data and Print",
+        "number": "2.3.3",
+        "index": "8",
+        "fromtitle": "Backtracking",
+        "byteoffset": 9061,
+        "anchor": "Data_and_Print"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "N Queens",
+        "number": "2.4",
+        "index": "9",
+        "fromtitle": "Backtracking",
+        "byteoffset": 10354,
+        "anchor": "N_Queens"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "By Marcel van Kervinck",
+        "number": "2.4.1",
+        "index": "10",
+        "fromtitle": "Backtracking",
+        "byteoffset": 10367,
+        "anchor": "By_Marcel_van_Kervinck"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "By Tony Lezard",
+        "number": "2.4.2",
+        "index": "11",
+        "fromtitle": "Backtracking",
+        "byteoffset": 10857,
+        "anchor": "By_Tony_Lezard"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "3",
+        "index": "12",
+        "fromtitle": "Backtracking",
+        "byteoffset": 11620,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "4",
+        "index": "13",
+        "fromtitle": "Backtracking",
+        "byteoffset": 11816,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1960 ...",
+        "number": "4.1",
+        "index": "14",
+        "fromtitle": "Backtracking",
+        "byteoffset": 11832,
+        "anchor": "1960_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1970 ...",
+        "number": "4.2",
+        "index": "15",
+        "fromtitle": "Backtracking",
+        "byteoffset": 12948,
+        "anchor": "1970_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1980 ...",
+        "number": "4.3",
+        "index": "16",
+        "fromtitle": "Backtracking",
+        "byteoffset": 15413,
+        "anchor": "1980_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1990 ...",
+        "number": "4.4",
+        "index": "17",
+        "fromtitle": "Backtracking",
+        "byteoffset": 16455,
+        "anchor": "1990_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "4.5",
+        "index": "18",
+        "fromtitle": "Backtracking",
+        "byteoffset": 18773,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "4.6",
+        "index": "19",
+        "fromtitle": "Backtracking",
+        "byteoffset": 19672,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "5",
+        "index": "20",
+        "fromtitle": "Backtracking",
+        "byteoffset": 20529,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "6",
+        "index": "21",
+        "fromtitle": "Backtracking",
+        "byteoffset": 20861,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "7",
+        "index": "22",
+        "fromtitle": "Backtracking",
+        "byteoffset": 23470,
+        "anchor": "References"
+      }
+    ]
+  }
+}

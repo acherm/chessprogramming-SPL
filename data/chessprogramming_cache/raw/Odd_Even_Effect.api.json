@@ -1,0 +1,346 @@
+{
+  "parse": {
+    "title": "Odd-Even Effect",
+    "pageid": 1084,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Search\" title=\"Search\">Search</a> * <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">Alpha-Beta</a> * Odd-Even Effect</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:182px;\"><a href=\"/index.php?title=Special:Upload&amp;wpDestFile=Odd_even.png\" class=\"new\" title=\"File:Odd even.png\">File:Odd even.png</a>  <div class=\"thumbcaption\">Odd Numbers and Even Numbers <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p>The <b>Odd-Even Effect</b> of <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">Alpha-Beta</a> is caused by the topology of the <a href=\"/Search_Tree#MinimalGameTree\" title=\"Search Tree\">minimal game tree</a> of uniform <a href=\"/Depth\" title=\"Depth\">depth</a> <b>n</b> and <a href=\"/Branching_Factor\" title=\"Branching Factor\">branching factor</a> <b>b</b>. <a href=\"/Michael_Levin\" title=\"Michael Levin\">Michael Levin</a> found the formula of the number of <a href=\"/Leaf_Node\" title=\"Leaf Node\">leaf nodes</a>, which was published in <a href=\"/Daniel_Edwards\" title=\"Daniel Edwards\">Edwards'</a> and <a href=\"/Timothy_Hart\" title=\"Timothy Hart\">Hart's</a> 1961 Alpha-Beta paper <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup> .\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Even_Leaves\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Even Leaves</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Odd_Leaves\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Odd Leaves</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Node_Types\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Node Types</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Leaves_by_Depth\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Leaves by Depth</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#Leaf_Ratios\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Leaf Ratios</span></a></li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#Iterative_Deepening\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Iterative Deepening</span></a></li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#Score_Oscillation\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">Score Oscillation</span></a></li>\n<li class=\"toclevel-1 tocsection-8\"><a href=\"#See_also\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-9\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">9</span> <span class=\"toctext\">Forum Posts</span></a></li>\n<li class=\"toclevel-1 tocsection-10\"><a href=\"#External_Links\"><span class=\"tocnumber\">10</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-11\"><a href=\"#References\"><span class=\"tocnumber\">11</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Even_Leaves\">Even Leaves</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Odd-Even_Effect&amp;action=edit&amp;section=1\" title=\"Edit section: Even Leaves\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<pre>2b<span style=\"vertical-align: super;\">n/2</span> - 1\n</pre>\n<h1><span class=\"mw-headline\" id=\"Odd_Leaves\">Odd Leaves</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Odd-Even_Effect&amp;action=edit&amp;section=2\" title=\"Edit section: Odd Leaves\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<pre>b<span style=\"vertical-align: super;\">(n+1)/2</span> + b<span style=\"vertical-align: super;\">(n-1)/2</span> - 1 \n</pre>\n<h1><span class=\"mw-headline\" id=\"Node_Types\">Node Types</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Odd-Even_Effect&amp;action=edit&amp;section=3\" title=\"Edit section: Node Types\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Number of Leaf nodes of a certain <a href=\"/Node_Types\" title=\"Node Types\">Node type</a> at depth n <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>:\n</p><p><b>n = even:</b>\n</p>\n<pre>PV<span style=\"vertical-align: sub;\">n</span> = 1\nCUT<span style=\"vertical-align: sub;\">n</span> = b<span style=\"vertical-align: super;\">n/2</span> - 1     = CUT<span style=\"vertical-align: sub;\">n-1</span>\nALL<span style=\"vertical-align: sub;\">n</span> = b<span style=\"vertical-align: super;\">n/2</span> - 1     = ALL<span style=\"vertical-align: sub;\">n-1</span> + b<span style=\"vertical-align: super;\">n/2</span> - b<span style=\"vertical-align: super;\">(n-2)/2</span> \n</pre>\n<p><b>n = odd:</b>\n</p>\n<pre>PV<span style=\"vertical-align: sub;\">n</span> = 1\nCUT<span style=\"vertical-align: sub;\">n</span> = b<span style=\"vertical-align: super;\">(n+1)/2</span> - 1 = CUT<span style=\"vertical-align: sub;\">n-1</span> + b<span style=\"vertical-align: super;\">(n+1)/2</span> + b<span style=\"vertical-align: super;\">(n-1)/2</span>\nALL<span style=\"vertical-align: sub;\">n</span> = b<span style=\"vertical-align: super;\">(n-1)/2</span> - 1 = ALL<span style=\"vertical-align: sub;\">n-1</span>\n</pre>\n<p>So for the sum of the Leaf-nodes at depth n as well as the total sum of nodes (including <a href=\"/Interior_Node\" title=\"Interior Node\">interior nodes</a>) up to depth n holds\n</p>\n<pre>ALL<span style=\"vertical-align: sub;\">n</span> = CUT<span style=\"vertical-align: sub;\">n-1</span>\n \n</pre>\n<p><span id=\"Leaves\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Leaves_by_Depth\">Leaves by Depth</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Odd-Even_Effect&amp;action=edit&amp;section=4\" title=\"Edit section: Leaves by Depth\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Assuming a constant <a href=\"/Branching_Factor\" title=\"Branching Factor\">branching factor</a> of 40, this results in following number of leaves, using the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Floor_and_ceiling_functions\">floor and ceiling</a> formulas&#160;:\n</p>\n<pre>CUT<span style=\"vertical-align: sub;\">n</span> = b<span style=\"vertical-align: super;\">&#8968;n/2&#8969;</span> - 1\nALL<span style=\"vertical-align: sub;\">n</span> = b<span style=\"vertical-align: super;\">&#8970;n/2&#8971;</span> - 1\n</pre>\n<table class=\"wikitable\">\n<caption> <a href=\"/Template:Number_of_Leaves\" title=\"Template:Number of Leaves\">number of leaves with depth n and b = 40</a>\n</caption>\n<tr>\n<th> depth\n</th>\n<th> worst case\n</th>\n<th> best case\n</th>\n<th> PV\n</th>\n<th> CUT\n</th>\n<th> ALL\n</th></tr>\n<tr>\n<th> n\n</th>\n<td style=\"text-align:center;\"> b<span style=\"vertical-align: super;\">n</span>\n</td>\n<td style=\"text-align:center;\"> b<span style=\"vertical-align: super;\">&#8968;n/2&#8969;</span> + b<span style=\"vertical-align: super;\">&#8970;n/2&#8971;</span>  - 1\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<td style=\"text-align:center;\"> b<span style=\"vertical-align: super;\">&#8968;n/2&#8969;</span> - 1\n</td>\n<td style=\"text-align:center;\"> b<span style=\"vertical-align: super;\">&#8970;n/2&#8971;</span> - 1\n</td></tr>\n<tr>\n<th> 0\n</th>\n<td style=\"text-align:right;\"> 1\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<td style=\"text-align:right;\"> 0\n</td>\n<td style=\"text-align:right;\"> 0\n</td></tr>\n<tr>\n<th>  1\n</th>\n<td style=\"text-align:right;\"> 40\n</td>\n<td style=\"text-align:right;\"> 40\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<td style=\"text-align:right;\"> 39\n</td>\n<td style=\"text-align:right;\"> 0\n</td></tr>\n<tr>\n<th> 2\n</th>\n<td style=\"text-align:right;\"> 1,600\n</td>\n<td style=\"text-align:right;\"> 79\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<td style=\"text-align:right;\"> 39\n</td>\n<td style=\"text-align:right;\"> 39\n</td></tr>\n<tr>\n<th>  3\n</th>\n<td style=\"text-align:right;\"> 64,000\n</td>\n<td style=\"text-align:right;\"> 1,639\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<td style=\"text-align:right;\"> 1,599\n</td>\n<td style=\"text-align:right;\"> 39\n</td></tr>\n<tr>\n<th>  4\n</th>\n<td style=\"text-align:right;\"> 2,560,000\n</td>\n<td style=\"text-align:right;\"> 3,199\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<td style=\"text-align:right;\"> 1,599\n</td>\n<td style=\"text-align:right;\"> 1,599\n</td></tr>\n<tr>\n<th>  5\n</th>\n<td style=\"text-align:right;\"> 102,400,000\n</td>\n<td style=\"text-align:right;\"> 65,569\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<td style=\"text-align:right;\"> 63,999\n</td>\n<td style=\"text-align:right;\"> 1,599\n</td></tr>\n<tr>\n<th>  6\n</th>\n<td style=\"text-align:right;\"> 4,096,000,000\n</td>\n<td style=\"text-align:right;\"> 127,999\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<td style=\"text-align:right;\"> 63,999\n</td>\n<td style=\"text-align:right;\"> 63,999\n</td></tr>\n<tr>\n<th>  7\n</th>\n<td style=\"text-align:right;\"> 163,840,000,000\n</td>\n<td style=\"text-align:right;\"> 2,623,999\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<td style=\"text-align:right;\"> 2,559,999\n</td>\n<td style=\"text-align:right;\">  63,999\n</td></tr>\n<tr>\n<th>  8\n</th>\n<td style=\"text-align:right;\"> 6,553,600,000,000\n</td>\n<td style=\"text-align:right;\"> 5,119,999\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<td style=\"text-align:right;\"> 2,559,999\n</td>\n<td style=\"text-align:right;\"> 2,559,999\n</td></tr></table>\n<p>resulting in following \n</p>\n<h1><span class=\"mw-headline\" id=\"Leaf_Ratios\">Leaf Ratios</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Odd-Even_Effect&amp;action=edit&amp;section=5\" title=\"Edit section: Leaf Ratios\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><b>n = even:</b>\n</p>\n<div class=\"floatnone\"><a href=\"/File:OddEven_EvenFormula.jpg\" class=\"image\"><img alt=\"OddEven EvenFormula.jpg\" src=\"/images/c/c4/OddEven_EvenFormula.jpg\" width=\"282\" height=\"58\" style=\"vertical-align: text-bottom\" /></a></div>\n<p><b>n = odd:</b>\n</p>\n<div class=\"floatnone\"><a href=\"/File:OddEven_OddFormula.jpg\" class=\"image\"><img alt=\"OddEven OddFormula.jpg\" src=\"/images/a/a3/OddEven_OddFormula.jpg\" width=\"288\" height=\"58\" style=\"vertical-align: text-bottom\" /></a></div>\n<p><br />\n</p>\n<h1><span class=\"mw-headline\" id=\"Iterative_Deepening\">Iterative Deepening</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Odd-Even_Effect&amp;action=edit&amp;section=6\" title=\"Edit section: Iterative Deepening\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Inside an <a href=\"/Iterative_Deepening\" title=\"Iterative Deepening\">iterative deepening</a> framework, the odd-even effect causes an asymmetry in time usage. Even-odd transitions grow (much) more than odd-even. The effect diminishes due to <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">quiescence search</a> and <a href=\"/Selectivity\" title=\"Selectivity\">selectivity</a> in the upper part of the tree. However, past and recent programs addressed that issue. For instance <a href=\"/L%27Excentrique\" title=\"L&#39;Excentrique\">L'Excentrique</a> used two <a href=\"/Ply\" title=\"Ply\">ply</a> increments <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>, and <a href=\"/Bebe\" title=\"Bebe\">Bebe</a> had no quiescence at all, and searched in two ply increments as well <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup>. Other programs used fractional plies for <a href=\"/Extensions#FractionalExtensions\" title=\"Extensions\">extensions</a> <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup> and <a href=\"/Iterative_Deepening\" title=\"Iterative Deepening\">ID</a> increments.\n<span id=\"ScoreOscillation\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Score_Oscillation\">Score Oscillation</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Odd-Even_Effect&amp;action=edit&amp;section=7\" title=\"Edit section: Score Oscillation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Additionally, many programs exhibit an effect on the <a href=\"/Score\" title=\"Score\">score</a> based on the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Parity_%28mathematics%29\">parity</a> of the search depth due to the extra tempo of odd ply searches. Scores are stable when one looks at results from the odd plies only, or even plies only, but are sometimes unstable when they are mixed. One remedial on this odd-even effect is to apply a <a href=\"/Tempo\" title=\"Tempo\">tempo bonus</a> in <a href=\"/Evaluation\" title=\"Evaluation\">leaf evaluation</a> for the <a href=\"/Side_to_move\" title=\"Side to move\">side to move</a>.\n</p>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Odd-Even_Effect&amp;action=edit&amp;section=8\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Asymmetric_Evaluation\" title=\"Asymmetric Evaluation\">Asymmetric Evaluation</a></li>\n<li> <a href=\"/Window#MinimaxWall\" title=\"Window\">Minimax Wall</a></li>\n<li> <a href=\"/Parity_Pruning\" title=\"Parity Pruning\">Parity Pruning</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Odd-Even_Effect&amp;action=edit&amp;section=9\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/-0DHwUHcBio/FJnxLgRajgUJ\">Odd ply versus even ply searches</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, February 28, 1996&#160;» <a href=\"/Bebe\" title=\"Bebe\">Bebe</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/d3e7bdb00afc9dc4\">PROG: odd/even score alternance</a> by <a href=\"/R%C3%A9mi_Coulom\" title=\"Rémi Coulom\">Rémi Coulom</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, June 5, 1997&#160;» <a href=\"/Tempo\" title=\"Tempo\">Tempo</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=10903\">pv score oscillation</a> by <a href=\"/Will_Singleton\" title=\"Will Singleton\">Willie Wood</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 18, 1997</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=5&amp;t=1403\">Node counts at a given depth/iteration in search</a> by <a href=\"/Mark_Watkins\" title=\"Mark Watkins\">BB+</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">OpenChess Forum</a>, May 23, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48205\">CUT/ALL nodes ratio</a> by <a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel Shawul</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 06, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=60262\">Asymmetrical evaluation</a> by <a href=\"/Laurie_Tunnicliffe\" title=\"Laurie Tunnicliffe\">Laurie Tunnicliffe</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 24, 2016&#160;» <a href=\"/Asymmetric_Evaluation\" title=\"Asymmetric Evaluation\">Asymmetric Evaluation</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Odd-Even_Effect&amp;action=edit&amp;section=10\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Parity_(mathematics)\">Parity (mathematics) from Wikipedia</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Odd-Even_Effect&amp;action=edit&amp;section=11\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\">Image by TNSENesamaniTpr, July 06, 2017, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wikimedia_Commons\">Wikimedia Commons</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a href=\"/Daniel_Edwards\" title=\"Daniel Edwards\">Daniel Edwards</a>, <a href=\"/Timothy_Hart\" title=\"Timothy Hart\">Timothy Hart</a>, (<b>1961</b>). <i>The Alpha-Beta Heuristic</i>. AIM-030, available from <a rel=\"nofollow\" class=\"external text\" href=\"http://dspace.mit.edu/handle/1721.1/6098\">DSpace</a> at <a href=\"/Massachusetts_Institute_of_Technology\" title=\"Massachusetts Institute of Technology\">MIT</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48205\">CUT/ALL nodes ratio</a> by <a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel Shawul</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 06, 2013</span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a href=\"/Eric_Th%C3%A9\" title=\"Eric Thé\">Eric Thé</a> (<b>1992</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://digitool.library.mcgill.ca/R/?func=dbin-jump-full&amp;object_id=56753&amp;local_base=GEN01-MCG02\">An analysis of move ordering on the efficiency of alpha-beta search</a></i>. Master's thesis, <a href=\"/McGill_University\" title=\"McGill University\">McGill University</a>, advisor <a href=\"/Monroe_Newborn\" title=\"Monroe Newborn\">Monroe Newborn</a></span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/fb40c7c141dc062a\">Odd ply versus even ply searches</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, February 28, 1996</span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a href=\"/David_Levy\" title=\"David Levy\">David Levy</a>, <a href=\"/David_Broughton\" title=\"David Broughton\">David Broughton</a>, and <a href=\"/Mark_Taylor\" title=\"Mark Taylor\">Mark Taylor</a> (<b>1989</b>). <i>The SEX Algorithm in Computer Chess</i>. <a href=\"/ICGA_Journal#12_1\" title=\"ICGA Journal\">ICCA Journal, Vol. 12, No. 1</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">Up one level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301060250\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.040 seconds\nReal time usage: 0.056 seconds\nPreprocessor visited node count: 169/1000000\nPreprocessor generated node count: 336/1000000\nPost‐expand include size: 2375/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    1.294      1 Template:Number_of_Leaves\n100.00%    1.294      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1084-0!canonical and timestamp 20260301060250 and revision id 10391\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "missing": "",
+        "*": "Pages_with_broken_file_links"
+      }
+    ],
+    "links": [
+      {
+        "ns": 10,
+        "exists": "",
+        "*": "Template:Number of Leaves"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha-Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Asymmetric Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bebe"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Branching Factor"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Daniel Edwards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Daniel Shawul"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David Broughton"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David Levy"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Eric Thé"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA Journal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Interior Node"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iterative Deepening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "L'Excentrique"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Laurie Tunnicliffe"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Leaf Node"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mark Taylor"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mark Watkins"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Massachusetts Institute of Technology"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "McGill University"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michael Levin"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Monroe Newborn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Node Types"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Parity Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ply"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiescence Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Hyatt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rémi Coulom"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Score"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search Tree"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Selectivity"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Side to move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tempo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Timothy Hart"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Will Singleton"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Window"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Even Leaves",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Odd-Even_Effect",
+        "byteoffset": 880,
+        "anchor": "Even_Leaves"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Odd Leaves",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Odd-Even_Effect",
+        "byteoffset": 950,
+        "anchor": "Odd_Leaves"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Node Types",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Odd-Even_Effect",
+        "byteoffset": 1078,
+        "anchor": "Node_Types"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Leaves by Depth",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Odd-Even_Effect",
+        "byteoffset": 2550,
+        "anchor": "Leaves_by_Depth"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Leaf Ratios",
+        "number": "5",
+        "index": "5",
+        "fromtitle": "Odd-Even_Effect",
+        "byteoffset": 3058,
+        "anchor": "Leaf_Ratios"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Iterative Deepening",
+        "number": "6",
+        "index": "6",
+        "fromtitle": "Odd-Even_Effect",
+        "byteoffset": 3204,
+        "anchor": "Iterative_Deepening"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Score Oscillation",
+        "number": "7",
+        "index": "7",
+        "fromtitle": "Odd-Even_Effect",
+        "byteoffset": 4560,
+        "anchor": "Score_Oscillation"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "8",
+        "index": "8",
+        "fromtitle": "Odd-Even_Effect",
+        "byteoffset": 5075,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "9",
+        "index": "9",
+        "fromtitle": "Odd-Even_Effect",
+        "byteoffset": 5175,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "10",
+        "index": "10",
+        "fromtitle": "Odd-Even_Effect",
+        "byteoffset": 6194,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "11",
+        "index": "11",
+        "fromtitle": "Odd-Even_Effect",
+        "byteoffset": 6303,
+        "anchor": "References"
+      }
+    ]
+  }
+}

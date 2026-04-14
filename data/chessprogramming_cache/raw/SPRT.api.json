@@ -1,0 +1,170 @@
+{
+  "parse": {
+    "title": "Sequential Probability Ratio Test",
+    "pageid": 8040,
+    "redirects": [
+      {
+        "from": "SPRT",
+        "to": "Sequential Probability Ratio Test"
+      }
+    ],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Engine_Testing\" title=\"Engine Testing\">Engine Testing</a> * Sequential Probability Ratio Test</b>\n</p><p><b>Sequential Probability Ratio Test</b>, or <b>SPRT</b>, is a sequential hypothesis testing method. Generally regarded as the most important process in modern engine development, it is used by virtually all top engines today, including <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a>.\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Advantages\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Advantages</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Disadvantages\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Disadvantages</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Testing_Methodology\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Testing Methodology</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Performing_an_SPRT_Test\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Performing an SPRT Test</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#Preparing_an_SPRT_Test\"><span class=\"tocnumber\">4.1</span> <span class=\"toctext\">Preparing an SPRT Test</span></a></li>\n<li class=\"toclevel-2 tocsection-6\"><a href=\"#Performing_an_SPRT_Test_With_Gainer_Bounds\"><span class=\"tocnumber\">4.2</span> <span class=\"toctext\">Performing an SPRT Test With Gainer Bounds</span></a></li>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#Performing_an_SPRT_Test_With_Non-regression_Bounds\"><span class=\"tocnumber\">4.3</span> <span class=\"toctext\">Performing an SPRT Test With Non-regression Bounds</span></a></li>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#Common_Bounds\"><span class=\"tocnumber\">4.4</span> <span class=\"toctext\">Common Bounds</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-9\"><a href=\"#Minimum_UCI_Requirements\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Minimum UCI Requirements</span></a></li>\n<li class=\"toclevel-1 tocsection-10\"><a href=\"#External_Links\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">External Links</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Advantages\">Advantages</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Sequential_Probability_Ratio_Test&amp;action=edit&amp;section=1\" title=\"Edit section: Advantages\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Compared to fixed games:\n</p>\n<ul><li> SPRT guarantees that the end result is statistically significant, and therefore can be trusted</li>\n<li> SPRT does not require prior knowledge of how large the sample size should be</li></ul>\n<p>Compared to test positions:\n</p>\n<ul><li> SPRT simulates real game play</li>\n<li> SPRT allows for statistical certainty that a patch gains strength</li>\n<li> SPRT provides a large sample size and low uncertainty</li>\n<li> SPRT allows time management testing</li>\n<li> SPRT is proven to work</li></ul>\n<h1><span class=\"mw-headline\" id=\"Disadvantages\">Disadvantages</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Sequential_Probability_Ratio_Test&amp;action=edit&amp;section=2\" title=\"Edit section: Disadvantages\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> No local GUI support (Refer to <a href=\"/OpenBench\" title=\"OpenBench\">OpenBench</a> for self-hosted web application)</li></ul>\n<h1><span class=\"mw-headline\" id=\"Testing_Methodology\">Testing Methodology</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Sequential_Probability_Ratio_Test&amp;action=edit&amp;section=3\" title=\"Edit section: Testing Methodology\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Generally, SPRT is performed on every proposed functional change. Some non-functional speedup changes can also be performed using SPRT, although a speedup script may take less resources than a SPRT test.\n</p><p>In order to perform an SPRT test, four parameters are generally provided:\n</p>\n<ul><li> <b>Elo_0</b> - This represents our null hypothesis that the elo difference is exactly <b>Elo_0</b>.</li>\n<li> <b>Elo_1</b> - This represents our alternative hypothesis that the elo difference is exactly <b>Elo_1</b>.</li>\n<li> <b>alpha</b> - This represents our tolerated type I (false positive) error rate.</li>\n<li> <b>beta</b> - This represents our tolerated type II (false negative) error rate.</li></ul>\n<p>First, two <b>LLR (Log Likelihood Ratio)</b> bounds are calculated from alpha and beta. The log likelihood ratio is the logarithmic value of <span style=\"background-color: #e0e0e0;\">(likelihood that Elo = Elo_1) / (likelihood that Elo = Elo_0)</span>. When the log likelihood ratio is positive, then the likelihood that Elo=Elo_1 is higher than that of Elo=Elo_0, and vice versa. As more games are played, the LLR is updated continuously. The SPRT test will keep going until the LLR value reaches either bound. At which point, the test can guarantee, within the specified degree of confidence, whether or not a feature is more likely to change the strength of the by engine Elo_1 Elo than it is to change the strength of the engine by Elo_0 Elo. The choice of Elo_0 and Elo_1 is important as it both influences the number of tests to be run on, and the Elo gain needed for a patch to pass a SPRT test. \n</p><p>Note that the idea of using SPRTs to test changes is to be able stop the test when a statistically significant result is obtained, so when applicable some very large number of games (say, 999999) should be specified to avoid the test stopping prematurely.  \n</p><p>There are many tools one can use to perform SPRT tests, the most popular ones are <a href=\"/OpenBench\" title=\"OpenBench\">OpenBench</a>, <a href=\"/Cutechess-cli\" title=\"Cutechess-cli\">cutechess-cli</a>, and <a href=\"/Fast-chess\" class=\"mw-redirect\" title=\"Fast-chess\">fast-chess</a>.\n</p>\n<h1><span class=\"mw-headline\" id=\"Performing_an_SPRT_Test\">Performing an SPRT Test</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Sequential_Probability_Ratio_Test&amp;action=edit&amp;section=4\" title=\"Edit section: Performing an SPRT Test\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>The following sections describe the procedure for local SPRT testing. For distributed SPRT testing, refer to <a href=\"/OpenBench\" title=\"OpenBench\">OpenBench</a>.\n</p>\n<h2><span class=\"mw-headline\" id=\"Preparing_an_SPRT_Test\">Preparing an SPRT Test</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Sequential_Probability_Ratio_Test&amp;action=edit&amp;section=5\" title=\"Edit section: Preparing an SPRT Test\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>In order to perform an SPRT test on the command line, there some programs and resources you would need.\n</p>\n<ul><li> A <a href=\"/Tournament_Manager\" title=\"Tournament Manager\">Tournament Manager</a> that supports SPRT testing. <a href=\"/Fast-chess\" class=\"mw-redirect\" title=\"Fast-chess\">fast-chess</a> is recommended as it supports pentanomial statistics, which can make tests finish faster.</li>\n<li> An opening book (.pgn or .epd, <b>not</b> .bin). Some opening books can be found in the <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/official-stockfish/books\">Stockfish opening books repository</a>. Balanced books such as <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/official-stockfish/books/blob/master/8moves_v3.pgn.zip\">8moves_v3.pgn</a> are recommended for weaker engines, while more biased books such as <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/official-stockfish/books/blob/master/UHO_Lichess_4852_v1.epd.zip\">UHO_Lichess_4852_v1.epd</a> and <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/AndyGrant/openbench-books/blob/master/Pohl.epd.zip\">Pohl.epd</a> are recommended with stronger engines to reduce draw rate.</li></ul>\n<h2><span class=\"mw-headline\" id=\"Performing_an_SPRT_Test_With_Gainer_Bounds\">Performing an SPRT Test With Gainer Bounds</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Sequential_Probability_Ratio_Test&amp;action=edit&amp;section=6\" title=\"Edit section: Performing an SPRT Test With Gainer Bounds\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Say you want to introduce <a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">LMR</a> to your <a href=\"/UCI\" title=\"UCI\">UCI</a> engine. Build a binary of your engine with LMR added, and a binary of your base engine (without LMR). We'll call the two binaries engine_LMR and engine_BASE respectively.\n</p><p>In your shell, run the following command\n</p>\n<pre>\n.\\fast-chess -engine cmd=[Path to engine_LMR] name=engine_LMR -engine cmd=[Path to engine_BASE] name=engine_BASE -each tc=8+0.08 -rounds 15000 -repeat -concurrency [Number of Available Threads] -recover -randomseed -openings file=[Path to Opening Book] format=[Opening book format (pgn or epd)] -sprt elo0=0 elo1=5 alpha=0.05 beta=0.05\n</pre>\n<p>Here, elo0 and elo1 represent the test bounds, while alpha and beta represent the expected alpha and beta errors of the test. The test verifies if the elo difference with the proposed changes is closer to 0 elo or 5 elo. Therefore, if the test passes, we can be reasonably certain that it brings more than 0 elo.\n</p>\n<h2><span class=\"mw-headline\" id=\"Performing_an_SPRT_Test_With_Non-regression_Bounds\">Performing an SPRT Test With Non-regression Bounds</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Sequential_Probability_Ratio_Test&amp;action=edit&amp;section=7\" title=\"Edit section: Performing an SPRT Test With Non-regression Bounds\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Say you want to remove <a href=\"/Countermove_Heuristic\" title=\"Countermove Heuristic\">Countermove Heuristic</a> from your <a href=\"/UCI\" title=\"UCI\">UCI</a> engine, as it takes a large amount of code and does not necessarily gain elo. To verify that the removal doesn't lose elo below an accepted amount, a non-regression test is performed. Build a binary of your engine with Countermove Heuristic removed, and a binary of your base engine (without removal of Countermove Heuristic). We'll call the two binaries engine_NOCM and engine_BASE respectively.\n</p>\n<pre>\n.\\fast-chess -engine cmd=[Path to engine_NOCM] name=engine_NOCM -engine cmd=[Path to engine_BASE] name=engine_BASE -each tc=8+0.08 -rounds 15000 -repeat -concurrency [Number of Available Threads] -recover -randomseed -openings file=[Path to Opening Book] format=[Opening book format (pgn or epd)] -sprt elo0=-5 elo1=0 alpha=0.05 beta=0.05\n</pre>\n<p>Here, the bounds [-5, 0] are a flipped version of the gainer bounds. This is equivalent to testing engine_BASE against engine_NOCM (notice the reverse order) with [0, 5] bounds. If the test fails, it means that Counter Moves is still worth more than an acceptable amount of elo, therefore it should not be simplified.\n</p>\n<h2><span class=\"mw-headline\" id=\"Common_Bounds\">Common Bounds</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Sequential_Probability_Ratio_Test&amp;action=edit&amp;section=8\" title=\"Edit section: Common Bounds\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>A good choice of bounds balances the expected number of games and the lowest elo gain needed for passing. Due to a variety of factors, including elo compression, bounds are generally looser for weaker engines and tighter for stronger engines.\n</p>\n<table class=\"wikitable\">\n\n<tr>\n<th> Gainer Bounds\n</th>\n<th> Non-regression Bounds\n</th>\n<th> Usage\n</th></tr>\n<tr>\n<td> [0.5, 2.5]\n</td>\n<td> [-1.75, 0.25]\n</td>\n<td> Stockfish LTC\n</td></tr>\n<tr>\n<td> [0, 2]\n</td>\n<td> [-1.75, 0.25]\n</td>\n<td> Stockfish STC\n</td></tr>\n<tr>\n<td> [0, 3]\n</td>\n<td> [-3, 1]\n</td>\n<td> Top 30 engines\n</td></tr>\n<tr>\n<td> [0, 5]\n</td>\n<td> [-5, 0]\n</td>\n<td> Top 200 engines\n</td></tr>\n<tr>\n<td> [0, 10]\n</td>\n<td> [-10, 0]\n</td>\n<td> All other engines\n</td></tr></table>\n<h1><span class=\"mw-headline\" id=\"Minimum_UCI_Requirements\">Minimum UCI Requirements</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Sequential_Probability_Ratio_Test&amp;action=edit&amp;section=9\" title=\"Edit section: Minimum UCI Requirements\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>For SPRT testing platforms such as <a href=\"/Cutechess-cli\" title=\"Cutechess-cli\">cutechess-cli</a>, <a href=\"/Fast-chess\" class=\"mw-redirect\" title=\"Fast-chess\">fast-chess</a> and <a href=\"/OpenBench\" title=\"OpenBench\">OpenBench</a>, the minimum UCI requirements are as follows.\n</p><p>Commands to support:\n</p>\n<pre>\ngo wtime &lt;&gt; btime &lt;&gt; winc &lt;&gt; binc &lt;&gt;\nposition startpos [moves &lt;moves...&gt;]\nposition fen &lt;fen&gt; [moves &lt;moves...&gt;]\nquit\nuci\nucinewgame\nisready\n</pre>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Sequential_Probability_Ratio_Test&amp;action=edit&amp;section=10\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><a rel=\"nofollow\" class=\"external text\" href=\"https://tests.stockfishchess.org/sprt_calc\">Chess SPRT Calculator</a>&#160;» <a href=\"/Stockfish#Fishtest\" title=\"Stockfish\">Fishtest</a>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301102805\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.006 seconds\nReal time usage: 0.006 seconds\nPreprocessor visited node count: 67/1000000\nPreprocessor generated node count: 106/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:8040-0!canonical and timestamp 20260301102805 and revision id 27402\n -->\n"
+    },
+    "categories": [],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Countermove Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cutechess-cli"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engine Testing"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fast-chess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Late Move Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "OpenBench"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stockfish"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tournament Manager"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "UCI"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Advantages",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Sequential_Probability_Ratio_Test",
+        "byteoffset": 334,
+        "anchor": "Advantages"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Disadvantages",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Sequential_Probability_Ratio_Test",
+        "byteoffset": 800,
+        "anchor": "Disadvantages"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Testing Methodology",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Sequential_Probability_Ratio_Test",
+        "byteoffset": 898,
+        "anchor": "Testing_Methodology"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Performing an SPRT Test",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Sequential_Probability_Ratio_Test",
+        "byteoffset": 2872,
+        "anchor": "Performing_an_SPRT_Test"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Preparing an SPRT Test",
+        "number": "4.1",
+        "index": "5",
+        "fromtitle": "Sequential_Probability_Ratio_Test",
+        "byteoffset": 3024,
+        "anchor": "Preparing_an_SPRT_Test"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Performing an SPRT Test With Gainer Bounds",
+        "number": "4.2",
+        "index": "6",
+        "fromtitle": "Sequential_Probability_Ratio_Test",
+        "byteoffset": 3924,
+        "anchor": "Performing_an_SPRT_Test_With_Gainer_Bounds"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Performing an SPRT Test With Non-regression Bounds",
+        "number": "4.3",
+        "index": "7",
+        "fromtitle": "Sequential_Probability_Ratio_Test",
+        "byteoffset": 4921,
+        "anchor": "Performing_an_SPRT_Test_With_Non-regression_Bounds"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Common Bounds",
+        "number": "4.4",
+        "index": "8",
+        "fromtitle": "Sequential_Probability_Ratio_Test",
+        "byteoffset": 6114,
+        "anchor": "Common_Bounds"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Minimum UCI Requirements",
+        "number": "5",
+        "index": "9",
+        "fromtitle": "Sequential_Probability_Ratio_Test",
+        "byteoffset": 6675,
+        "anchor": "Minimum_UCI_Requirements"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "6",
+        "index": "10",
+        "fromtitle": "Sequential_Probability_Ratio_Test",
+        "byteoffset": 7012,
+        "anchor": "External_Links"
+      }
+    ]
+  }
+}

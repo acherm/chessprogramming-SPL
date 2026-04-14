@@ -1,0 +1,139 @@
+{
+  "parse": {
+    "title": "David E. Moriarty",
+    "pageid": 7292,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/People\" title=\"People\">People</a> * David E. Moriarty</b>\n</p><p><b>David Eric Moriarty</b>,<br />\nan American computer scientist an Ph.D. alumni from <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/University_of_Texas_at_Austin\">University of Texas at Austin</a> <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup>.\nDuring the 90s, along with his advisor, <a href=\"/Risto_Miikkulainen\" title=\"Risto Miikkulainen\">Risto Miikkulainen</a>, David E. Moriarty worked on <a href=\"/Reinforcement_Learning\" title=\"Reinforcement Learning\">reinforcement learning</a> by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Symbiosis\">Symbiotic</a>, Adaptive <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Neuroevolution\">NeuroEvolution</a> dubbed SANE, also topic of his Ph.D. thesis <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#SANE\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">SANE</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Selected_Publications\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Selected Publications</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#External_Links\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#References\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"SANE\">SANE</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=David_E._Moriarty&amp;action=edit&amp;section=1\" title=\"Edit section: SANE\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>SANE (<a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Symbiosis\">Symbiotic</a>, Adaptive <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Neuroevolution\">NeuroEvolution</a>) evolves <a href=\"/Neural_Networks\" title=\"Neural Networks\">neural networks</a> with <a href=\"/Genetic_Programming#GeneticAlgorithm\" title=\"Genetic Programming\">genetic algorithms</a> for <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Sequential_decision_making\">sequential decision tasks</a>,\nalso applied to the <a href=\"/Games\" title=\"Games\">games</a> of <a href=\"/Othello\" title=\"Othello\">Othello</a> and <a href=\"/Go\" title=\"Go\">Go</a>. \nSANE selects a population of hidden neurons of a \"vanilla\" three-layer feed-forward neural network with the connections and weights in both directions,\nperforming following basic steps in one generation <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>:\n</p>\n<pre>\n1. Clear all fitness values from each neuron\n2.   Select neurons randomly from the population\n3.   Create a neural network from the selected neurons\n4.   Evaluate the network in the given task\n5.   Add the network's score to each selected neuron's fitness variable\n6. Repeat steps 2-5 a sufficient number of times\n7. Get each neuron's average fitness score by dividing its total fitness values by the number of networks in which it was implemented\n8. Perform crossover operations on the population based on the average fitness value of each neuron\n</pre>\n<p>For Go and Othello, the input layer sees the board configuration, while the output layer indicates the goodness of each possible move by an output neuron associated with each space or point of the board.\nHowever the research was conducted a few years before the <a href=\"/Monte-Carlo_Tree_Search\" title=\"Monte-Carlo Tree Search\">MCTS</a> revolution appeared in computer Go, not to mention the <a href=\"/Deep_Learning\" title=\"Deep Learning\">deep learning</a> breakthrough. \nIn the <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">alpha-beta</a> search of the Othello experiment, the neural network <a href=\"/Move_Ordering\" title=\"Move Ordering\">orders the moves</a>, and further controls whether moves are <a href=\"/Pruning\" title=\"Pruning\">pruned forward</a> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>. \n</p>\n<h1><span class=\"mw-headline\" id=\"Selected_Publications\">Selected Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=David_E._Moriarty&amp;action=edit&amp;section=2\" title=\"Edit section: Selected Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup> \n</p>\n<ul><li> <a class=\"mw-selflink selflink\">David E. Moriarty</a>, <a href=\"/Risto_Miikkulainen\" title=\"Risto Miikkulainen\">Risto Miikkulainen</a> (<b>1994</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://ieeexplore.ieee.org/document/349900\">Improving Game-Tree Search with Evolutionary Neural Networks</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/db/conf/icec/icec1994-1.html\">ICEC 1994</a></li>\n<li> <a class=\"mw-selflink selflink\">David E. Moriarty</a>, <a href=\"/Risto_Miikkulainen\" title=\"Risto Miikkulainen\">Risto Miikkulainen</a> (<b>1994</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://nn.cs.utexas.edu/?moriarty:aaai94\">Evolving Neural Networks to focus Minimax Search</a></i>. <a href=\"/Conferences#AAAI-94\" title=\"Conferences\">AAAI-94</a>&#160;» <a href=\"/Othello\" title=\"Othello\">Othello</a></li>\n<li> <a class=\"mw-selflink selflink\">David E. Moriarty</a>, <a href=\"/Risto_Miikkulainen\" title=\"Risto Miikkulainen\">Risto Miikkulainen</a> (<b>1995</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://nn.cs.utexas.edu/?moriarty:connsci95\">Discovering Complex Othello Strategies Through Evolutionary Neural Networks</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://www.scimagojr.com/journalsearch.php?q=24173&amp;tip=sid\">Connection Science</a>, Vol. 7</li>\n<li> <a class=\"mw-selflink selflink\">David E. Moriarty</a>, <a href=\"/Risto_Miikkulainen\" title=\"Risto Miikkulainen\">Risto Miikkulainen</a> (<b>1996</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://nn.cs.utexas.edu/?moriarty:mlj96\">Efficient Reinforcement Learning through Symbiotic Evolution</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Machine_Learning_(journal)\">Machine Learning</a>, Vol. 22 <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup></li>\n<li> <a class=\"mw-selflink selflink\">David E. Moriarty</a> (<b>1997</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://nn.cs.utexas.edu/?moriarty:phd97\">Symbiotic Evolution of Neural Networks in Sequential Decision Tasks</a></i>. Ph.D. thesis, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/University_of_Texas_at_Austin\">University of Texas at Austin</a>, advisor <a href=\"/Risto_Miikkulainen\" title=\"Risto Miikkulainen\">Risto Miikkulainen</a></li>\n<li> <a href=\"/index.php?title=Norman_Richards&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Norman Richards (page does not exist)\">Norman Richards</a>, <a class=\"mw-selflink selflink\">David E. Moriarty</a>, <a href=\"/Risto_Miikkulainen\" title=\"Risto Miikkulainen\">Risto Miikkulainen</a> (<b>1998</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://nn.cs.utexas.edu/?richards:apin98\">Evolving Neural Networks to Play Go</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://www.springer.com/journal/10489\">Applied Intelligence</a>, Vol. 8, No. 1</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=David_E._Moriarty&amp;action=edit&amp;section=3\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://nn.cs.utexas.edu/?moriarty\">NNRG People - David E. Moriarty</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.utexas.edu/users/ai-lab/?moriarty\">AI-Lab People - David E. Moriarty</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.mathgenealogy.org/id.php?id=128214\">David Moriarty - The Mathematics Genealogy Project</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=David_E._Moriarty&amp;action=edit&amp;section=4\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://nn.cs.utexas.edu/?moriarty\">NNRG People - David E. Moriarty</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a class=\"mw-selflink selflink\">David E. Moriarty</a> (<b>1997</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://nn.cs.utexas.edu/?moriarty:phd97\">Symbiotic Evolution of Neural Networks in Sequential Decision Tasks</a></i>. Ph.D. thesis, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/University_of_Texas_at_Austin\">University of Texas at Austin</a>, advisor <a href=\"/Risto_Miikkulainen\" title=\"Risto Miikkulainen\">Risto Miikkulainen</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a class=\"mw-selflink selflink\">David E. Moriarty</a>, <a href=\"/Risto_Miikkulainen\" title=\"Risto Miikkulainen\">Risto Miikkulainen</a> (<b>1996</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://nn.cs.utexas.edu/?moriarty:mlj96\">Efficient Reinforcement Learning through Symbiotic Evolution</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Machine_Learning_(journal)\">Machine Learning</a>, Vol. 22</span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a class=\"mw-selflink selflink\">David E. Moriarty</a>, <a href=\"/Risto_Miikkulainen\" title=\"Risto Miikkulainen\">Risto Miikkulainen</a> (<b>1994</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://nn.cs.utexas.edu/?moriarty:aaai94\">Evolving Neural Networks to focus Minimax Search</a></i>. <a href=\"/Conferences#AAAI-94\" title=\"Conferences\">AAAI-94</a></span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/pers/hd/m/Moriarty:David_E=\">dblp: David E. Moriarty</a></span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Inverted_pendulum\">Inverted pendulum from Wikipedia</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/People\" title=\"People\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301082049\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.011 seconds\nReal time usage: 0.012 seconds\nPreprocessor visited node count: 112/1000000\nPreprocessor generated node count: 250/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:7292-0!canonical and timestamp 20260301082049 and revision id 20209\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "Moriarty",
+        "*": "Researcher"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha-Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Conferences"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Deep Learning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Games"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Genetic Programming"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Go"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Monte-Carlo Tree Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Ordering"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Neural Networks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Othello"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "People"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Reinforcement Learning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Risto Miikkulainen"
+      },
+      {
+        "ns": 0,
+        "*": "Norman Richards"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "SANE",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "David_E._Moriarty",
+        "byteoffset": 931,
+        "anchor": "SANE"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Selected Publications",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "David_E._Moriarty",
+        "byteoffset": 3149,
+        "anchor": "Selected_Publications"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "David_E._Moriarty",
+        "byteoffset": 4874,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "David_E._Moriarty",
+        "byteoffset": 5150,
+        "anchor": "References"
+      }
+    ]
+  }
+}

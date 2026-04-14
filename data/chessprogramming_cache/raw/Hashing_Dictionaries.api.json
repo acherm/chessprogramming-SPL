@@ -1,0 +1,155 @@
+{
+  "parse": {
+    "title": "Hashing Dictionaries",
+    "pageid": 1622,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Board_Representation\" title=\"Board Representation\">Board Representation</a> * <a href=\"/Bitboards\" title=\"Bitboards\">Bitboards</a> * <a href=\"/Sliding_Piece_Attacks\" title=\"Sliding Piece Attacks\">Sliding Piece Attacks</a> * Hashing Dictionaries</b>\n</p><p>This approach using associate arrays or <a href=\"/Hash_Table\" title=\"Hash Table\">hash tables</a> was introduced in the <a href=\"/ICGA_Journal\" title=\"ICGA Journal\">ICGA Journal</a> (June 2007) by <a href=\"/Sam_Tannous\" title=\"Sam Tannous\">Sam Tannous</a> <sup id=\"cite_ref-ICGAJ_1-0\" class=\"reference\"><a href=\"#cite_note-ICGAJ-1\">&#91;1&#93;</a></sup>. Like other <a href=\"/Occupancy\" title=\"Occupancy\">occupancy</a> lookup approaches it works line-wise for ranks, files, diagonals and anti-diagonals. It uses hash arrays from an interpreted, high level language, <a href=\"/Python\" title=\"Python\">Python</a>:\n</p>\n<pre>Many high level programming languages (notably <a href=\"/Python\" title=\"Python\">Python</a> (van Rossum, 1993)) have useful predefined data structures (e.g. associative arrays) which are dynamically resizable hash tables that resolve collisions by probing techniques. The basic lookup function used in Python is based on Algorithm D: Open Addressing with Double Hashing from Section 6.4 in Knuth <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>. \n</pre>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Avoiding_Rotated_Bitboards\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Avoiding Rotated Bitboards</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-2\"><a href=\"#Abstract\"><span class=\"tocnumber\">1.1</span> <span class=\"toctext\">Abstract</span></a></li>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#Toolkit\"><span class=\"tocnumber\">1.2</span> <span class=\"toctext\">Toolkit</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Forum Posts</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#References\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Avoiding_Rotated_Bitboards\">Avoiding Rotated Bitboards</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Hashing_Dictionaries&amp;action=edit&amp;section=1\" title=\"Edit section: Avoiding Rotated Bitboards\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Sam Tannous compared this approach to a <a href=\"/Rotated_Bitboards\" title=\"Rotated Bitboards\">Rotated Bitboards</a> implementation in Python and found direct lookup favorable for move generation. In languages like <a href=\"/C\" title=\"C\">C</a>, targeting 64-bit cpus like <a href=\"/X86-64\" title=\"X86-64\">x86-64</a>, or even in <a href=\"/Java\" title=\"Java\">Java</a>, it is likely another story if one compares <i>Open Addressing with Double Hashing</i> with <a href=\"/Rotated_Bitboards\" title=\"Rotated Bitboards\">rotated</a> or <a href=\"/Hash_Table#PerfectHashing\" title=\"Hash Table\">perfect hashing</a> techniques like <a href=\"/Kindergarten_Bitboards\" title=\"Kindergarten Bitboards\">Kindergarten</a> or even <a href=\"/Magic_Bitboards\" title=\"Magic Bitboards\">Magic Bitboards</a>.\n</p>\n<h2><span class=\"mw-headline\" id=\"Abstract\">Abstract</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Hashing_Dictionaries&amp;action=edit&amp;section=2\" title=\"Edit section: Abstract\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Quoted from <i>Avoiding Rotated Bitboards with Direct Lookup</i> <sup id=\"cite_ref-ICGAJ_1-1\" class=\"reference\"><a href=\"#cite_note-ICGAJ-1\">&#91;1&#93;</a></sup>: \n</p>\n<pre>This paper describes an approach for obtaining direct access to the attacked squares of sliding pieces without resorting to rotated bitboards. The technique involves creating four <a href=\"/Hash_Table\" title=\"Hash Table\">hash tables</a> using the built in hash arrays from an interpreted, high level language. The rank, file, and diagonal occupancy are first isolated by masking the desired portion of the board. The attacked squares are then directly retrieved from the hash tables. Maintaining incrementally updated rotated bitboards becomes unnecessary as does all the updating, mapping and shifting required to access the attacked squares. Finally, rotated bitboard move generation speed is compared with that of the direct hash table lookup method. \n</pre>\n<h2><span class=\"mw-headline\" id=\"Toolkit\">Toolkit</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Hashing_Dictionaries&amp;action=edit&amp;section=3\" title=\"Edit section: Toolkit\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Shatranj_(Toolkit)\" title=\"Shatranj (Toolkit)\">Shatranj (Toolkit)</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Hashing_Dictionaries&amp;action=edit&amp;section=4\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=40503&amp;start=10\">Re: Explain like I'm five - what is the 'n' in right shift 6</a> by Bayowulf, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 24, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=77648\">What is the point of magic hashing over simply using masked occupancy as index&#160;?</a> by Gautier Blandin, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 06, 2021&#160;» <a href=\"/Magic_Bitboards\" title=\"Magic Bitboards\">Magic Bitboards</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Hashing_Dictionaries&amp;action=edit&amp;section=5\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-ICGAJ-1\"><span class=\"mw-cite-backlink\">↑ <sup><a href=\"#cite_ref-ICGAJ_1-0\">1.0</a></sup> <sup><a href=\"#cite_ref-ICGAJ_1-1\">1.1</a></sup></span> <span class=\"reference-text\"><a href=\"/Sam_Tannous\" title=\"Sam Tannous\">Sam Tannous</a> (<b>2007</b>). <i>Avoiding Rotated Bitboards with Direct Lookup</i>. <a href=\"/ICGA_Journal#30_2\" title=\"ICGA Journal\">ICGA Journal, Vol. 30, No. 2</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/0704.3773\">arXiv:0704.3773</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a href=\"/Donald_Knuth\" title=\"Donald Knuth\">Donald Knuth</a> (<b>1998</b>). <i>The Art of Computer Programming</i>. Volume 3, Sorting and Searching. Addison Wesley. ISBN 0201896850</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Sliding_Piece_Attacks\" title=\"Sliding Piece Attacks\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301033438\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.008 seconds\nReal time usage: 0.008 seconds\nPreprocessor visited node count: 59/1000000\nPreprocessor generated node count: 124/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1622-0!canonical and timestamp 20260301033437 and revision id 25536\n -->\n"
+    },
+    "categories": [],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Board Representation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "C"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Donald Knuth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hash Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA Journal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Java"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kindergarten Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Magic Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Occupancy"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Python"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rotated Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sam Tannous"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Shatranj (Toolkit)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sliding Piece Attacks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "X86-64"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Avoiding Rotated Bitboards",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Hashing_Dictionaries",
+        "byteoffset": 1170,
+        "anchor": "Avoiding_Rotated_Bitboards"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Abstract",
+        "number": "1.1",
+        "index": "2",
+        "fromtitle": "Hashing_Dictionaries",
+        "byteoffset": 1680,
+        "anchor": "Abstract"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Toolkit",
+        "number": "1.2",
+        "index": "3",
+        "fromtitle": "Hashing_Dictionaries",
+        "byteoffset": 2504,
+        "anchor": "Toolkit"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "2",
+        "index": "4",
+        "fromtitle": "Hashing_Dictionaries",
+        "byteoffset": 2542,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "3",
+        "index": "5",
+        "fromtitle": "Hashing_Dictionaries",
+        "byteoffset": 2938,
+        "anchor": "References"
+      }
+    ]
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "parse": {
+    "title": "Improving",
+    "pageid": 8034,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Search\" title=\"Search\">Search</a> * Improving</b>\n</p><p>Improving is an important modifier for many search heuristics. It is a boolean flag indicating whether the static evaluation of a position has improved from the position two plys ago. Improving can be used to modify the frequency and aggressiveness of certain pruning heuristics.\n</p>\n<h1><span class=\"mw-headline\" id=\"Improving_as_a_Modifier_to_Search_Heuristics\">Improving as a Modifier to Search Heuristics</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Improving&amp;action=edit&amp;section=1\" title=\"Edit section: Improving as a Modifier to Search Heuristics\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<table class=\"wikitable\">\n\n<tr>\n<th> Heuristic\n</th>\n<th> Modification\n</th></tr>\n<tr>\n<td>  <a href=\"/Reverse_Futility_Pruning\" title=\"Reverse Futility Pruning\">Reverse Futility Pruning</a>\n</td>\n<td style=\"text-align:left;\"> Lower pruning margin when improving\n</td></tr>\n<tr>\n<td>  <a href=\"/Futility_Pruning#MoveCountBasedPruning\" title=\"Futility Pruning\">Late Move Pruning</a>\n</td>\n<td style=\"text-align:left;\"> Prune more late quiet moves when not improving\n</td></tr>\n<tr>\n<td>  <a href=\"/ProbCut\" title=\"ProbCut\">ProbCut</a>\n</td>\n<td style=\"text-align:left;\"> Lower ProbCut beta threshold when improving\n</td></tr>\n<tr>\n<td>  <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">Null Move Pruning</a>\n</td>\n<td style=\"text-align:left;\"> More NMP when improving. This can be done by allowing pruning <br /> even when eval is under beta (and above a certain threshold) when improving.\n</td></tr>\n<tr>\n<td>  <a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">Late Move Reductions</a>\n</td>\n<td style=\"text-align:left;\"> Reduce more when not improving / less when improving\n</td></tr></table>\n<h1><span class=\"mw-headline\" id=\"Code_Example\">Code Example</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Improving&amp;action=edit&amp;section=2\" title=\"Edit section: Code Example\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>The following code is taken from <a href=\"/index.php?title=Alexandria&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Alexandria (page does not exist)\">Alexandria</a>. Note that in case the position is in check both 2 and 4 plies ago, improving can be set to either true or false. SPRT testing should be done to determine which of the two options is optimal for a given engine.\n</p>\n<pre>\n// Improving is a very important modifier to many heuristics. It checks if our static eval has improved since our last move.\n// As we don't evaluate in check, we look for the first ply we weren't in check between 2 and 4 plies ago. If we find that\n// static eval has improved, or that we were in check both 2 and 4 plies ago, we set improving to true.\nif(inCheck)\n    improving = false;\nelse if ((ss - 2)-&gt;staticEval&#160;!= SCORE_NONE) {\n    improving = ss-&gt;staticEval &gt; (ss - 2)-&gt;staticEval;\n}\nelse if ((ss - 4)-&gt;staticEval&#160;!= SCORE_NONE) {\n    improving = ss-&gt;staticEval &gt; (ss - 4)-&gt;staticEval;\n}\nelse\n    improving = true;\n</pre>\n<p>This following code is from <a href=\"/index.php?title=Integral&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Integral (page does not exist)\">Integral</a>. It demonstrates one way to adjust LMP margin with dynamic improving.\n</p>\n<pre>\nconst int lmp_threshold = static_cast&lt;int&gt;((3.0 + depth * depth) /\n                                           (2.0 - stack-&gt;improving_rate));\nif (is_quiet &amp;&amp; moves_seen &gt;= lmp_threshold) {\n    move_picker.SkipQuiets();\n    continue;\n}\n</pre>\n<h1><span class=\"mw-headline\" id=\"Dynamic_Improving\">Dynamic Improving</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Improving&amp;action=edit&amp;section=3\" title=\"Edit section: Dynamic Improving\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><a href=\"/Aron_Petkovski\" title=\"Aron Petkovski\">Aron Petkovski</a> introduced the concept of <i>Dynamic Improving</i>. By using static evaluation differences as a bonus to a improving score, Dynamic Improving allows for more control over improving-based mechanisms.\n</p>\n<pre>\nSearchStackEntry *past_stack = nullptr;\nif ((stack - 2)-&gt;static_eval&#160;!= kScoreNone) {\n  past_stack = stack - 2;\n} else if ((stack - 4)-&gt;static_eval&#160;!= kScoreNone) {\n  past_stack = stack - 4;\n}\n\nif (past_stack) {\n  // Smoothen the improving rate from the static eval of our position in\n  // previous turns\n  const Score diff = stack-&gt;static_eval - past_stack-&gt;static_eval;\n  stack-&gt;improving_rate =\n      std::clamp(past_stack-&gt;improving_rate + diff / 50.0, -1.0, 1.0);\n}\n</pre>\n\n<!-- \nNewPP limit report\nCached time: 20260301015303\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.004 seconds\nReal time usage: 0.005 seconds\nPreprocessor visited node count: 32/1000000\nPreprocessor generated node count: 76/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:8034-0!canonical and timestamp 20260301015303 and revision id 27129\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Search"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aron Petkovski"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Futility Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Late Move Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ProbCut"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Reverse Futility Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "*": "Alexandria"
+      },
+      {
+        "ns": 0,
+        "*": "Integral"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Improving as a Modifier to Search Heuristics",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Improving",
+        "byteoffset": 332,
+        "anchor": "Improving_as_a_Modifier_to_Search_Heuristics"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Code Example",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Improving",
+        "byteoffset": 1092,
+        "anchor": "Code_Example"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Dynamic Improving",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Improving",
+        "byteoffset": 2365,
+        "anchor": "Dynamic_Improving"
+      }
+    ]
+  }
+}

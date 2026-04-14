@@ -1,0 +1,210 @@
+{
+  "parse": {
+    "title": "Sliding Pieces",
+    "pageid": 1113,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Chess\" title=\"Chess\">Chess</a> * <a href=\"/Pieces\" title=\"Pieces\">Pieces</a> * Sliding Pieces</b>\n</p><p><b>Sliding Pieces</b> can move an indefinite number of <a href=\"/Squares\" title=\"Squares\">squares</a> along a <a href=\"/Ranks\" title=\"Ranks\">horizontal</a>, <a href=\"/Files\" title=\"Files\">vertical</a>, or <a href=\"/Diagonals\" title=\"Diagonals\">diagonal</a> line until the edge of the board or another piece obstructs the <a href=\"/Rays\" title=\"Rays\">ray</a> of a line. This applies for <a href=\"/Bishop\" title=\"Bishop\">bishops</a>, <a href=\"/Rook\" title=\"Rook\">rooks</a> and <a href=\"/Queen\" title=\"Queen\">queen</a>. Sliding piece <a href=\"/Move_Generation\" title=\"Move Generation\">move generation</a> is more extensive than generation of none sliding <a href=\"/Knight\" title=\"Knight\">knight</a>, <a href=\"/Pawn\" title=\"Pawn\">pawn</a> or <a href=\"/King\" title=\"King\">king</a> moves. With board arrays it requires a loop along the ray, scanning each square for emptiness to continue, or <a href=\"/Occupancy\" title=\"Occupancy\">occupancy</a> by own or opponent piece to break, combined with an off the board test to terminate the ray loop as well. However, such a loop may be designed in an efficient way generalized for all pieces as broached in <a href=\"/Table-driven_Move_Generation\" title=\"Table-driven Move Generation\">Table-driven Move Generation</a> and in <a href=\"/Bruce_Moreland\" title=\"Bruce Moreland\">Bruce Moreland's</a> <i>Programming Topics</i> <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup>. With <a href=\"/Bitboards\" title=\"Bitboards\">bitboards</a> one relies on the various techniques to <a href=\"/Sliding_Piece_Attacks\" title=\"Sliding Piece Attacks\">generate attack sets</a>, which further requires <a href=\"/Bitboard_Serialization\" title=\"Bitboard Serialization\">serialization</a> to finally <a href=\"/Encoding_Moves\" title=\"Encoding Moves\">encode moves</a> in move generation.\n</p><p>The advantage of the bitboard method seems the cheaper generation of moves to certain subsets of squares, for instance <a href=\"/Captures\" title=\"Captures\">captures</a> in <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">quiescence search</a>. Despite <a href=\"/Fritz_Reul\" title=\"Fritz Reul\">Fritz Reul</a> demonstrated dense and efficient <a href=\"/Vector_Attacks#NewArchitecture\" title=\"Vector Attacks\">blocking loops</a> in <a href=\"/Mailbox\" title=\"Mailbox\">mailbox</a> based <a href=\"/Board_Representation\" title=\"Board Representation\">board representations</a>, and in conjunction with <a href=\"/Pieces#DisjointPieceFlags\" title=\"Pieces\">disjoint piece flags</a> and <a href=\"/Piece-Lists\" title=\"Piece-Lists\">piece-lists</a> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>. \n</p>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Sliding_Pieces&amp;action=edit&amp;section=1\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Bishop\" title=\"Bishop\">Bishop</a></li>\n<li> <a href=\"/Vector_Attacks#NewArchitecture\" title=\"Vector Attacks\">Blocking Loop</a></li>\n<li> <a href=\"/Discovered_Attack\" title=\"Discovered Attack\">Discovered Attack</a></li>\n<li> <a href=\"/Discovered_Check\" title=\"Discovered Check\">Discovered Check</a></li>\n<li> <a href=\"/Move_Generation\" title=\"Move Generation\">Move Generation</a></li>\n<li> <a href=\"/Pin\" title=\"Pin\">Pin</a></li>\n<li> <a href=\"/Rook\" title=\"Rook\">Rook</a></li>\n<li> <a href=\"/Queen\" title=\"Queen\">Queen</a></li>\n<li> <a href=\"/Sliding_Piece_Attacks\" title=\"Sliding Piece Attacks\">Sliding Piece Attacks</a> with <a href=\"/Bitboards\" title=\"Bitboards\">Bitboards</a></li>\n<li> <a href=\"/Table-driven_Move_Generation\" title=\"Table-driven Move Generation\">Table-driven Move Generation</a></li>\n<li> <a href=\"/Vector_Attacks\" title=\"Vector Attacks\">Vector Attacks</a></li>\n<li> <a href=\"/King_Pattern#VulnerableOnDistantChecks\" title=\"King Pattern\">Vulnerable on Distant Checks</a> from <a href=\"/King_Pattern\" title=\"King Pattern\">King Pattern</a> in <a href=\"/Bitboards\" title=\"Bitboards\">Bitboards</a></li>\n<li> <a href=\"/X-ray\" title=\"X-ray\">X-ray</a></li>\n<li> <a href=\"/X-ray_Attacks_(Bitboards)\" title=\"X-ray Attacks (Bitboards)\">X-ray Attacks (Bitboards)</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Sliding_Pieces&amp;action=edit&amp;section=2\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://web.archive.org/web/20070715002634/www.brucemo.com/compchess/programming/movetable.htm\">Move Table move generation</a> from <a href=\"/Bruce_Moreland\" title=\"Bruce Moreland\">Bruce Moreland's</a> <a rel=\"nofollow\" class=\"external text\" href=\"http://web.archive.org/web/20070607231311/www.brucemo.com/compchess/programming/index.htm\">Programming Topics</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a href=\"/Fritz_Reul\" title=\"Fritz Reul\">Fritz Reul</a> (<b>2009</b>). <i>New Architectures in Computer Chess</i>, Ph.D. Thesis, <i>Chapter 2 Non-Bitboard Architectures</i></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Pieces\" title=\"Pieces\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260228224345\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.006 seconds\nReal time usage: 0.007 seconds\nPreprocessor visited node count: 39/1000000\nPreprocessor generated node count: 94/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1113-0!canonical and timestamp 20260228224345 and revision id 1434\n -->\n"
+    },
+    "categories": [],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bishop"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboard Serialization"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Board Representation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bruce Moreland"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Captures"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Diagonals"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Discovered Attack"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Discovered Check"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Encoding Moves"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Files"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fritz Reul"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "King"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "King Pattern"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Knight"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mailbox"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Generation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Occupancy"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Piece-Lists"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pieces"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pin"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Queen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiescence Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ranks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rays"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rook"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sliding Piece Attacks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Squares"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Table-driven Move Generation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vector Attacks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "X-ray"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "X-ray Attacks (Bitboards)"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Sliding_Pieces",
+        "byteoffset": 2113,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Sliding_Pieces",
+        "byteoffset": 2551,
+        "anchor": "References"
+      }
+    ]
+  }
+}

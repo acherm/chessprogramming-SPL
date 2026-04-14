@@ -1,0 +1,349 @@
+{
+  "parse": {
+    "title": "Meep",
+    "pageid": 3380,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Engines\" title=\"Engines\">Engines</a> * Meep</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:262px;\"><a href=\"/File:Bizarre_1946_volume_3.jpg\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Bizarre_1946_volume_3.jpg/330px-Bizarre_1946_volume_3.jpg\" width=\"260\" height=\"414\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/0/02/Bizarre_1946_volume_3.jpg 1.5x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Bizarre_1946_volume_3.jpg\" class=\"internal\" title=\"Enlarge\"></a></div>Strapped woman <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>Meep</b>,<br />\nan experimental chess engine as subject of research on <a href=\"/Learning\" title=\"Learning\">machine learning</a> techniques and <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">automated tuning</a>, written by <a href=\"/Joel_Veness\" title=\"Joel Veness\">Joel Veness</a>, supported by <a href=\"/David_Silver\" title=\"David Silver\">David Silver</a>, <a href=\"/William_Uther\" title=\"William Uther\">William Uther</a>, and <a href=\"/Alan_Blair\" title=\"Alan Blair\">Alan Blair</a>, as elaborated in their 2009 research paper this page is based on <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup> , and in Joel Veness' Ph.D. thesis <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>. Meep is based on the tournament chess engine <a href=\"/Bodo\" title=\"Bodo\">Bodo</a>, where the hand-crafted <a href=\"/Evaluation_Function\" title=\"Evaluation Function\">evaluation function</a> is replaced by a weighted <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Linear_combination\">linear combination</a> of 1812 features. Given a position s, a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Feature_vector\">feature vector</a> Φ(s) can be constructed from the 1812 numeric values of each feature. The majority of these features are binary. Φ(s) is typically sparse, with approximately 100 features active in any given position. Five wellknown, chess specific feature construction concepts, <a href=\"/Material\" title=\"Material\">material</a>, <a href=\"/Piece-Square_Tables\" title=\"Piece-Square Tables\">piece square tables</a>, <a href=\"/Pawn_Structure\" title=\"Pawn Structure\">pawn structure</a>, <a href=\"/Mobility\" title=\"Mobility\">mobility</a> and <a href=\"/King_Safety\" title=\"King Safety\">king safety</a> were used to generate the 1812 distinct features. In a training mode with various search frameworks, Meep learns from self-play to adjust the weights of its evaluation function towards the value of the deep search. A tournament mode is later used to verify the <a href=\"/Playing_Strength\" title=\"Playing Strength\">strength</a> of a trained weight configuration. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#BootStrap\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">BootStrap</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-2\"><a href=\"#RootStrap\"><span class=\"tocnumber\">1.1</span> <span class=\"toctext\">RootStrap</span></a></li>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#TreeStrap\"><span class=\"tocnumber\">1.2</span> <span class=\"toctext\">TreeStrap</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Results\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Results</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#See_also\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#Publications\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Publications</span></a></li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Forum Posts</span></a></li>\n<li class=\"toclevel-1 tocsection-8\"><a href=\"#External_Links\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-9\"><a href=\"#References\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"BootStrap\">BootStrap</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Meep&amp;action=edit&amp;section=1\" title=\"Edit section: BootStrap\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>In contrast to <a href=\"/Temporal_Difference_Learning\" title=\"Temporal Difference Learning\">temporal difference methods</a> such as <a href=\"/Temporal_Difference_Learning#TDLeaf\" title=\"Temporal Difference Learning\">TD-Leaf</a> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup> as used in <a href=\"/KnightCap\" title=\"KnightCap\">KnightCap</a>, where the target search is performed at subsequent time-steps, after a real move and response have been played, Meep performs various <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Bootstrap_aggregating\">bootstrapping</a> techniques during training, dubbed <b>RootStrap</b> and <b>TreeStrap</b>, to adjust the weights at every time-step inside either a <a href=\"/Minimax\" title=\"Minimax\">minimax</a> or <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">alpha-beta</a> search. With the heuristic evaluation function as linear combination of\n</p>\n<div class=\"floatnone\"><a href=\"/File:MeepFormula1.jpg\" class=\"image\"><img alt=\"MeepFormula1.jpg\" src=\"/images/9/93/MeepFormula1.jpg\" width=\"171\" height=\"31\" style=\"vertical-align: text-bottom\" /></a></div>\n<p>where Φ(s) is a vector of features of position s, and θ is a parameter vector specifying the weight of each feature in the linear combination, following backup rules are given, using V as backed up value of the minimax or alpha-beta search (left arrow <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Theta\">theta</a> (←<span style=\"vertical-align: super; font-size: 70%;\"><i>θ</i></span>) denotes the operator that updates the heuristic function towards some target value): \n</p>\n<table class=\"wikitable\">\n\n<tr>\n<th> Algorithm\n</th>\n<th> Backup\n</th></tr>\n<tr>\n<td>  TD\n</td>\n<td>  <div class=\"floatnone\"><a href=\"/File:MeepFormula2.jpg\" class=\"image\"><img alt=\"MeepFormula2.jpg\" src=\"/images/7/73/MeepFormula2.jpg\" width=\"157\" height=\"22\" style=\"vertical-align: text-bottom\" /></a></div>\n</td></tr>\n<tr>\n<td>  TD-Root\n</td>\n<td>  <div class=\"floatnone\"><a href=\"/File:MeepFormula3.jpg\" class=\"image\"><img alt=\"MeepFormula3.jpg\" src=\"/images/4/45/MeepFormula3.jpg\" width=\"166\" height=\"26\" style=\"vertical-align: text-bottom\" /></a></div>\n</td></tr>\n<tr>\n<td>  TD-Leaf\n</td>\n<td>  <div class=\"floatnone\"><a href=\"/File:MeepFormula4.jpg\" class=\"image\"><img alt=\"MeepFormula4.jpg\" src=\"/images/b/b7/MeepFormula4.jpg\" width=\"197\" height=\"27\" style=\"vertical-align: text-bottom\" /></a></div>\n</td></tr>\n<tr>\n<td>  RootStrap(minimax)\n</td>\n<td>  <div class=\"floatnone\"><a href=\"/File:MeepFormula5.jpg\" class=\"image\"><img alt=\"MeepFormula5.jpg\" src=\"/images/8/8b/MeepFormula5.jpg\" width=\"144\" height=\"28\" style=\"vertical-align: text-bottom\" /></a></div>\n</td></tr>\n<tr>\n<td>  TreeStrap(minimax)\n</td>\n<td>  <div class=\"floatnone\"><a href=\"/File:MeepFormula6.jpg\" class=\"image\"><img alt=\"MeepFormula6.jpg\" src=\"/images/7/78/MeepFormula6.jpg\" width=\"211\" height=\"28\" style=\"vertical-align: text-bottom\" /></a></div>\n</td></tr>\n<tr>\n<td>  TreeStrap(αβ)\n</td>\n<td>  <div class=\"floatnone\"><a href=\"/File:MeepFormula7.jpg\" class=\"image\"><img alt=\"MeepFormula7.jpg\" src=\"/images/4/46/MeepFormula7.jpg\" width=\"275\" height=\"31\" style=\"vertical-align: text-bottom\" /></a></div>\n</td></tr></table>\n<table>\n\n<tr>\n<td>  <div class=\"floatnone\"><a href=\"/File:TDRootAndLeaf.jpg\" class=\"image\"><img alt=\"TDRootAndLeaf.jpg\" src=\"/images/b/b9/TDRootAndLeaf.jpg\" width=\"434\" height=\"320\" style=\"vertical-align: text-bottom\" class=\"thumbborder\" /></a></div>\n</td>\n<td>  <div class=\"floatnone\"><a href=\"/File:MeepStraps.jpg\" class=\"image\"><img alt=\"MeepStraps.jpg\" src=\"/images/8/88/MeepStraps.jpg\" width=\"457\" height=\"320\" style=\"vertical-align: text-bottom\" class=\"thumbborder\" /></a></div>\n</td></tr>\n<tr>\n<td>  TD, TD-Root and TD-Leaf backups\n</td>\n<td>  RootStrap and TreeStrap(minimax) backups <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup>\n</td></tr></table>\n<h2><span class=\"mw-headline\" id=\"RootStrap\">RootStrap</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Meep&amp;action=edit&amp;section=2\" title=\"Edit section: RootStrap\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>RootStrap(minimax) or the identical RootStrap(αβ) adjust the weights by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Stochastic_gradient_descent\">stochastic gradient descent</a> <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup> on the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Mean_squared_error\">squared error</a> between the <a href=\"/Evaluation\" title=\"Evaluation\">static evaluation</a> and the minimax (or alpha-beta) search value of the <a href=\"/Root\" title=\"Root\">root</a>.\n</p>\n<div class=\"floatnone\"><a href=\"/File:MeepFormula8.jpg\" class=\"image\"><img alt=\"MeepFormula8.jpg\" src=\"/images/e/e0/MeepFormula8.jpg\" width=\"227\" height=\"32\" style=\"vertical-align: text-bottom\" /></a></div>\n<div class=\"floatnone\"><a href=\"/File:MeepFormula9.jpg\" class=\"image\"><img alt=\"MeepFormula9.jpg\" src=\"/images/2/22/MeepFormula9.jpg\" width=\"302\" height=\"46\" style=\"vertical-align: text-bottom\" /></a></div>\n<p>where η is a step size constant.\n</p>\n<h2><span class=\"mw-headline\" id=\"TreeStrap\">TreeStrap</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Meep&amp;action=edit&amp;section=3\" title=\"Edit section: TreeStrap\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>TreeStrap(mm) also considers all <a href=\"/Interior_Node\" title=\"Interior Node\">interior nodes</a> of the <a href=\"/Search_Tree\" title=\"Search Tree\">search tree</a> for the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Stochastic_gradient_descent\">stochastic gradient descent</a> on the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Mean_squared_error\">squared error</a>. The minimax algorithm used for TreeStrap(mm), keeps the entire tree in <a href=\"/Memory\" title=\"Memory\">memory</a>. TreeStrap(αβ) applies a generic implementation, that uses only a few enhancements, <a href=\"/Transposition_Table\" title=\"Transposition Table\">transposition table</a>, <a href=\"/Killer_Heuristic\" title=\"Killer Heuristic\">killer</a> and <a href=\"/History_Heuristic\" title=\"History Heuristic\">history heuristics</a>, and <a href=\"/Check_Extensions\" title=\"Check Extensions\">check extensions</a>. Bounds computed by alpha-beta can be exploited by using a one-sided <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Loss_function\">loss functions</a>. If the static evaluation is larger than alpha, then it is reduced towards alpha. If the value from the heuristic evaluation is smaller than beta, then it is increased respectively.\n</p>\n<h1><span class=\"mw-headline\" id=\"Results\">Results</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Meep&amp;action=edit&amp;section=4\" title=\"Edit section: Results\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>A tournament of ~16,000 games of 1 minute per game plus 1 second per move <a href=\"/Time_Management#FischerTime\" title=\"Time Management\">Fischer time</a> between different trained Meep versions and a reference player with randomly initialised weights and arbitrarily assigned rating of 250 was played. Training was previously done by self-play with the same time, using a small opening book to maintain diversity. The target values were determined by at least one ply of full-width search, plus a varying amount of <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">quiescence search</a>. All Elo values are calculated relative to the reference player, the best performance with 95% confidence intervals given <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup>&#160;:\n</p>\n<table class=\"wikitable\">\n\n<tr>\n<th> Algorithm\n</th>\n<th> Elo\n</th></tr>\n<tr>\n<td style=\"text-align:left;\"> Untrained\n</td>\n<td style=\"text-align:right;\"> 250 ± 63\n</td></tr>\n<tr>\n<td style=\"text-align:left;\"> TD-Leaf\n</td>\n<td style=\"text-align:right;\"> 1068 ± 36\n</td></tr>\n<tr>\n<td style=\"text-align:left;\"> RootStrap(αβ)\n</td>\n<td style=\"text-align:right;\"> 1362 ± 59\n</td></tr>\n<tr>\n<td style=\"text-align:left;\"> TreeStrap(mm)\n</td>\n<td style=\"text-align:right;\"> 1807 ± 32\n</td></tr>\n<tr>\n<td style=\"text-align:left;\"> TreeStrap(αβ)\n</td>\n<td style=\"text-align:right;\"> 2157 ± 31\n</td></tr></table>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Meep&amp;action=edit&amp;section=5\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">Automated Tuning</a></li>\n<li> <a href=\"/Bodo\" title=\"Bodo\">Bodo</a></li>\n<li> <a href=\"/Alan_Blair#Duchess\" title=\"Alan Blair\">Duchess</a> (Multi-Player Chess Variant)</li>\n<li> <a href=\"/KnightCap\" title=\"KnightCap\">KnightCap</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Meep&amp;action=edit&amp;section=6\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Joel_Veness\" title=\"Joel Veness\">Joel Veness</a>, <a href=\"/David_Silver\" title=\"David Silver\">David Silver</a>, <a href=\"/William_Uther\" title=\"William Uther\">William Uther</a>, <a href=\"/Alan_Blair\" title=\"Alan Blair\">Alan Blair</a> (<b>2009</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://papers.nips.cc/paper/3722-bootstrapping-from-game-tree-search\">Bootstrapping from Game Tree Search</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://jveness.info/publications/nips2009%20-%20bootstrapping%20from%20game%20tree%20search.pdf\">pdf</a> <sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup></li>\n<li> <a href=\"/Joel_Veness\" title=\"Joel Veness\">Joel Veness</a> (<b>2011</b>). <i>Approximate Universal Artificial Intelligence and Self-Play Learning for Games</i>. Ph.D. thesis, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/University_of_New_South_Wales\">University of New South Wales</a>, supervisors: <a href=\"/index.php?title=Kee_Siong_Ng&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Kee Siong Ng (page does not exist)\">Kee Siong Ng</a>, <a href=\"/Marcus_Hutter\" title=\"Marcus Hutter\">Marcus Hutter</a>, <a href=\"/Alan_Blair\" title=\"Alan Blair\">Alan Blair</a>, <a href=\"/William_Uther\" title=\"William Uther\">William Uther</a>, <a href=\"/index.php?title=John_Lloyd&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"John Lloyd (page does not exist)\">John Lloyd</a>; <a rel=\"nofollow\" class=\"external text\" href=\"http://jveness.info/publications/veness_phd_thesis_final.pdf\">pdf</a></li>\n<li> <a href=\"/Istv%C3%A1n_Szita\" title=\"István Szita\">István Szita</a> (<b>2012</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/chapter/10.1007%2F978-3-642-27645-3_17\">Reinforcement Learning in Games</a></i>. in <a href=\"/Marco_Wiering\" title=\"Marco Wiering\">Marco Wiering</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://martijnvanotterlo.nl/\">Martijn Van Otterlo</a> (eds.). <i>Reinforcement learning: State-of-the-art</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/book/10.1007/978-3-642-27645-3\">Adaptation, Learning, and Optimization, Vol. 12</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Springer_Science%2BBusiness_Media\">Springer</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Meep&amp;action=edit&amp;section=7\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?start=0&amp;t=31667\">A paper about parameter tuning</a> by <a href=\"/R%C3%A9mi_Coulom\" title=\"Rémi Coulom\">Rémi Coulom</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 12, 2010</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?start=0&amp;t=31667&amp;start=25\">Re: A paper about parameter tuning</a> by <a href=\"/Joel_Veness\" title=\"Joel Veness\">Joel Veness</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 15, 2010</dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?start=0&amp;t=31667&amp;start=27\">Re: A paper about parameter tuning</a> by <a href=\"/Joel_Veness\" title=\"Joel Veness\">Joel Veness</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 15, 2010</dd></dl>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Meep&amp;action=edit&amp;section=8\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://videolectures.net/nips09_veness_bfg/\">Bootstrapping from Game Tree Search</a>, video presentation by <a href=\"/Joel_Veness\" title=\"Joel Veness\">Joel Veness</a>, from <a rel=\"nofollow\" class=\"external text\" href=\"http://videolectures.net/\">VideoLectures - exchange ideas &amp; share knowledge</a>, December 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Meep\">Meep from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://de.urbandictionary.com/define.php?term=meep\">Urban Dictionary: meep</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Bootstrapping\">Bootstrapping from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Bootstrapping_%28disambiguation%29\">Bootstrapping (disambiguation) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Bootstrap_aggregating\">Bootstrap aggregating from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Strapping\">Strapping from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://de.wikipedia.org/wiki/Strapse\">Strapse from Wikipedia.de</a> (German)</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Garter_%28stockings%29#Garter_belts\">Wearing suspenders or garter belts from Wikipedia</a></dd></dl>\n<ul><li> <a href=\"/Category:Volker_Kriegel\" title=\"Category:Volker Kriegel\">Volker Kriegel</a> - Three Or Two In One, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.discogs.com/Volker-Kriegel-Lift/release/726875\">Lift!</a>, 1973, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> feat: <a href=\"/Category:Eberhard_Weber\" title=\"Category:Eberhard Weber\">Eberhard Weber</a>, <a href=\"/Category:John_Marshall\" title=\"Category:John Marshall\">John Marshall</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Stan_Sulzmann\">Stan Sulzmann</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/John_Taylor_%28jazz%29\">John Taylor</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://de.wikipedia.org/wiki/Cees_See\">Cees See</a>, <a href=\"/Category:Zbigniew_Seifert\" title=\"Category:Zbigniew Seifert\">Zbigniew Seifert</a></dd>\n<dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/NmiEyjWgkRc?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Meep&amp;action=edit&amp;section=9\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\">Cover of <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Bizarre\">Bizarre</a>, Vol. 3 from 1946, depicting a chained woman, and a devil with tailoring tools promising torments due to the wasp-waisted \"Fashions of 1946\". by <a rel=\"nofollow\" class=\"external text\" href=\"https://commons.wikimedia.org/wiki/Category:John_Willie\">John Willie</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wikimedia_Commons\">Wikimedia Commons</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a href=\"/Joel_Veness\" title=\"Joel Veness\">Joel Veness</a>, <a href=\"/David_Silver\" title=\"David Silver\">David Silver</a>, <a href=\"/William_Uther\" title=\"William Uther\">William Uther</a>, <a href=\"/Alan_Blair\" title=\"Alan Blair\">Alan Blair</a> (<b>2009</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://papers.nips.cc/paper/3722-bootstrapping-from-game-tree-search\">Bootstrapping from Game Tree Search</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://jveness.info/publications/nips2009%20-%20bootstrapping%20from%20game%20tree%20search.pdf\">pdf</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a href=\"/Joel_Veness\" title=\"Joel Veness\">Joel Veness</a> (<b>2011</b>). <i>Approximate Universal Artificial Intelligence and Self-Play Learning for Games</i>. Ph.D. thesis, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/University_of_New_South_Wales\">University of New South Wales</a>, supervisors: <a href=\"/index.php?title=Kee_Siong_Ng&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Kee Siong Ng (page does not exist)\">Kee Siong Ng</a>, <a href=\"/Marcus_Hutter\" title=\"Marcus Hutter\">Marcus Hutter</a>, <a href=\"/Alan_Blair\" title=\"Alan Blair\">Alan Blair</a>, <a href=\"/William_Uther\" title=\"William Uther\">William Uther</a>, <a href=\"/index.php?title=John_Lloyd&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"John Lloyd (page does not exist)\">John Lloyd</a>; <a rel=\"nofollow\" class=\"external text\" href=\"http://jveness.info/publications/veness_phd_thesis_final.pdf\">pdf</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a href=\"/Jonathan_Baxter\" title=\"Jonathan Baxter\">Jonathan Baxter</a>, <a href=\"/Andrew_Tridgell\" title=\"Andrew Tridgell\">Andrew Tridgell</a>, <a href=\"/Lex_Weaver\" title=\"Lex Weaver\">Lex Weaver</a> (<b>1998</b>). <i>TDLeaf(lambda): Combining Temporal Difference Learning with Game-Tree Search</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://www.chatbots.org/journal/australian_journal_of_intelligent_information_processing_systems/\">Australian Journal of Intelligent Information Processing Systems</a>, Vol. 5 No. 1, <a rel=\"nofollow\" class=\"external text\" href=\"http://arxiv.org/abs/cs/9901001\">arXiv:cs/9901001</a></span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\">Images cropped from <a href=\"/Joel_Veness\" title=\"Joel Veness\">Joel Veness</a>, <a href=\"/David_Silver\" title=\"David Silver\">David Silver</a>, <a href=\"/William_Uther\" title=\"William Uther\">William Uther</a>, <a href=\"/Alan_Blair\" title=\"Alan Blair\">Alan Blair</a> (<b>2009</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://papers.nips.cc/paper/3722-bootstrapping-from-game-tree-search\">Bootstrapping from Game Tree Search</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://jveness.info/publications/nips2009%20-%20bootstrapping%20from%20game%20tree%20search.pdf\">pdf</a>, Figure 1, pp. 2</span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Del\">Nabla operator from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a href=\"/Joel_Veness\" title=\"Joel Veness\">Joel Veness</a>, <a href=\"/David_Silver\" title=\"David Silver\">David Silver</a>, <a href=\"/William_Uther\" title=\"William Uther\">William Uther</a>, <a href=\"/Alan_Blair\" title=\"Alan Blair\">Alan Blair</a> (<b>2009</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://papers.nips.cc/paper/3722-bootstrapping-from-game-tree-search\">Bootstrapping from Game Tree Search</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://jveness.info/publications/nips2009%20-%20bootstrapping%20from%20game%20tree%20search.pdf\">pdf</a></span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?start=0&amp;t=31667\">A paper about parameter tuning</a> by <a href=\"/R%C3%A9mi_Coulom\" title=\"Rémi Coulom\">Rémi Coulom</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 12, 2010</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Engines\" title=\"Engines\">Up one level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260228164328\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.097 seconds\nReal time usage: 0.650 seconds\nPreprocessor visited node count: 157/1000000\nPreprocessor generated node count: 348/1000000\nPost‐expand include size: 26/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:3380-0!canonical and timestamp 20260228164328 and revision id 19541\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Thesis"
+      },
+      {
+        "sortkey": "",
+        "*": "Volker_Kriegel"
+      },
+      {
+        "sortkey": "",
+        "*": "John_Marshall"
+      },
+      {
+        "sortkey": "",
+        "*": "Zbigniew_Seifert"
+      },
+      {
+        "sortkey": "",
+        "*": "Eberhard_Weber"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alan Blair"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha-Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Andrew Tridgell"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Automated Tuning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bodo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Check Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David Silver"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engines"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation Function"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "History Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Interior Node"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "István Szita"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Joel Veness"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jonathan Baxter"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Killer Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "King Safety"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "KnightCap"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Learning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lex Weaver"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marco Wiering"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marcus Hutter"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Material"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Memory"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Minimax"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mobility"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Structure"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Piece-Square Tables"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Playing Strength"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiescence Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Root"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rémi Coulom"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search Tree"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Temporal Difference Learning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Time Management"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "William Uther"
+      },
+      {
+        "ns": 0,
+        "*": "Kee Siong Ng"
+      },
+      {
+        "ns": 0,
+        "*": "John Lloyd"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Eberhard Weber"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:John Marshall"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Volker Kriegel"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Zbigniew Seifert"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "BootStrap",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Meep",
+        "byteoffset": 2608,
+        "anchor": "BootStrap"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "RootStrap",
+        "number": "1.1",
+        "index": "2",
+        "fromtitle": "Meep",
+        "byteoffset": 5113,
+        "anchor": "RootStrap"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "TreeStrap",
+        "number": "1.2",
+        "index": "3",
+        "fromtitle": "Meep",
+        "byteoffset": 5672,
+        "anchor": "TreeStrap"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Results",
+        "number": "2",
+        "index": "4",
+        "fromtitle": "Meep",
+        "byteoffset": 6604,
+        "anchor": "Results"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "3",
+        "index": "5",
+        "fromtitle": "Meep",
+        "byteoffset": 8045,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "4",
+        "index": "6",
+        "fromtitle": "Meep",
+        "byteoffset": 8170,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "5",
+        "index": "7",
+        "fromtitle": "Meep",
+        "byteoffset": 9473,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "6",
+        "index": "8",
+        "fromtitle": "Meep",
+        "byteoffset": 9941,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "7",
+        "index": "9",
+        "fromtitle": "Meep",
+        "byteoffset": 11474,
+        "anchor": "References"
+      }
+    ]
+  }
+}

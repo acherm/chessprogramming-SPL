@@ -1,0 +1,850 @@
+{
+  "parse": {
+    "title": "Array",
+    "pageid": 2005,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Programming\" title=\"Programming\">Programming</a> * <a href=\"/Data\" title=\"Data\">Data</a> * Array</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"/File:ENIAC_Penn2.jpg\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/ENIAC_Penn2.jpg/330px-ENIAC_Penn2.jpg\" width=\"300\" height=\"273\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/ENIAC_Penn2.jpg/500px-ENIAC_Penn2.jpg 1.5x, https://upload.wikimedia.org/wikipedia/commons/c/c9/ENIAC_Penn2.jpg 2x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:ENIAC_Penn2.jpg\" class=\"internal\" title=\"Enlarge\"></a></div><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/ENIAC\">ENIAC</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Vacuum_tube\">vacuum tube</a> array <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p>An <b>Array</b> is a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia/.org/wiki/List_of_data_structures#Linear_data_structures\">linear data structure</a> to <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Collection_%28computing%29\">collect</a> data elements or entities by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Random_access\">random access</a>, which also includes <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Sequential_access\">sequential access</a>. The <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Memory_address\">address</a> of each array element can be identified by one or more integer indices. Array structures are the computer analog of the mathematical concepts of <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Vector_space\">vector</a> and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Matrix_%28mathematics%29\">matrix</a>. \n</p><p>Therefore, an <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Dimension\">one-dimensional</a> array is often synonymously called vector, either in the context of a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Vector_processor\">vector processors</a> and <a href=\"/SIMD_and_SWAR_Techniques\" title=\"SIMD and SWAR Techniques\">SIMD</a> instruction sets, operating on multiple data, or as <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Vector_%28C%2B%2B%29\">vector container</a>, for instance as  <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Template_%28programming%29#Class_templates\">class template</a> in the <a href=\"/Cpp\" title=\"Cpp\">C++</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Standard_Template_Library\">Standard Template Library</a>, which works like a dynamic array. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#One-Dimensional_Array\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">One-Dimensional Array</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Multidimensional_Array\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Multidimensional Array</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#Homogeneous\"><span class=\"tocnumber\">2.1</span> <span class=\"toctext\">Homogeneous</span></a></li>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#Array_of_Arrays\"><span class=\"tocnumber\">2.2</span> <span class=\"toctext\">Array of Arrays</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#Fixed_Sized_Arrays\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Fixed Sized Arrays</span></a></li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#Dynamic_Arrays\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Dynamic Arrays</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#On_the_Heap\"><span class=\"tocnumber\">4.1</span> <span class=\"toctext\">On the Heap</span></a></li>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#On_the_Stack\"><span class=\"tocnumber\">4.2</span> <span class=\"toctext\">On the Stack</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-9\"><a href=\"#Array_Samples\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Array Samples</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#Assembly\"><span class=\"tocnumber\">5.1</span> <span class=\"toctext\">Assembly</span></a></li>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#C_.2F_C.2B.2B\"><span class=\"tocnumber\">5.2</span> <span class=\"toctext\">C / C++</span></a></li>\n<li class=\"toclevel-2 tocsection-12\"><a href=\"#Java\"><span class=\"tocnumber\">5.3</span> <span class=\"toctext\">Java</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-13\"><a href=\"#Arrays_inside_a_Chess_Program\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Arrays inside a Chess Program</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-14\"><a href=\"#Lookup_Tables\"><span class=\"tocnumber\">6.1</span> <span class=\"toctext\">Lookup Tables</span></a>\n<ul>\n<li class=\"toclevel-3 tocsection-15\"><a href=\"#Square\"><span class=\"tocnumber\">6.1.1</span> <span class=\"toctext\">Square</span></a></li>\n<li class=\"toclevel-3 tocsection-16\"><a href=\"#Two_Squares\"><span class=\"tocnumber\">6.1.2</span> <span class=\"toctext\">Two Squares</span></a></li>\n<li class=\"toclevel-3 tocsection-17\"><a href=\"#Square_and_Occupancies\"><span class=\"tocnumber\">6.1.3</span> <span class=\"toctext\">Square and Occupancies</span></a></li>\n<li class=\"toclevel-3 tocsection-18\"><a href=\"#Square_and_Piece\"><span class=\"tocnumber\">6.1.4</span> <span class=\"toctext\">Square and Piece</span></a></li>\n<li class=\"toclevel-3 tocsection-19\"><a href=\"#Material\"><span class=\"tocnumber\">6.1.5</span> <span class=\"toctext\">Material</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-2 tocsection-20\"><a href=\"#Read.2FWrite\"><span class=\"tocnumber\">6.2</span> <span class=\"toctext\">Read/Write</span></a>\n<ul>\n<li class=\"toclevel-3 tocsection-21\"><a href=\"#Square_2\"><span class=\"tocnumber\">6.2.1</span> <span class=\"toctext\">Square</span></a></li>\n<li class=\"toclevel-3 tocsection-22\"><a href=\"#Two_Squares_2\"><span class=\"tocnumber\">6.2.2</span> <span class=\"toctext\">Two Squares</span></a></li>\n<li class=\"toclevel-3 tocsection-23\"><a href=\"#Ply\"><span class=\"tocnumber\">6.2.3</span> <span class=\"toctext\">Ply</span></a></li>\n<li class=\"toclevel-3 tocsection-24\"><a href=\"#Pieces\"><span class=\"tocnumber\">6.2.4</span> <span class=\"toctext\">Pieces</span></a></li>\n<li class=\"toclevel-3 tocsection-25\"><a href=\"#Hash_key\"><span class=\"tocnumber\">6.2.5</span> <span class=\"toctext\">Hash key</span></a></li>\n</ul>\n</li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-26\"><a href=\"#See_also\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-27\"><a href=\"#Publications\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">Publications</span></a></li>\n<li class=\"toclevel-1 tocsection-28\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">9</span> <span class=\"toctext\">Forum Posts</span></a></li>\n<li class=\"toclevel-1 tocsection-29\"><a href=\"#External_Links\"><span class=\"tocnumber\">10</span> <span class=\"toctext\">External Links</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-30\"><a href=\"#Assembly_2\"><span class=\"tocnumber\">10.1</span> <span class=\"toctext\">Assembly</span></a></li>\n<li class=\"toclevel-2 tocsection-31\"><a href=\"#Basic\"><span class=\"tocnumber\">10.2</span> <span class=\"toctext\">Basic</span></a></li>\n<li class=\"toclevel-2 tocsection-32\"><a href=\"#C\"><span class=\"tocnumber\">10.3</span> <span class=\"toctext\">C</span></a></li>\n<li class=\"toclevel-2 tocsection-33\"><a href=\"#C.2B.2B\"><span class=\"tocnumber\">10.4</span> <span class=\"toctext\">C++</span></a></li>\n<li class=\"toclevel-2 tocsection-34\"><a href=\"#D\"><span class=\"tocnumber\">10.5</span> <span class=\"toctext\">D</span></a></li>\n<li class=\"toclevel-2 tocsection-35\"><a href=\"#Java_2\"><span class=\"tocnumber\">10.6</span> <span class=\"toctext\">Java</span></a></li>\n<li class=\"toclevel-2 tocsection-36\"><a href=\"#Lisp\"><span class=\"tocnumber\">10.7</span> <span class=\"toctext\">Lisp</span></a></li>\n<li class=\"toclevel-2 tocsection-37\"><a href=\"#Pascal\"><span class=\"tocnumber\">10.8</span> <span class=\"toctext\">Pascal</span></a></li>\n<li class=\"toclevel-2 tocsection-38\"><a href=\"#Perl\"><span class=\"tocnumber\">10.9</span> <span class=\"toctext\">Perl</span></a></li>\n<li class=\"toclevel-2 tocsection-39\"><a href=\"#Python\"><span class=\"tocnumber\">10.10</span> <span class=\"toctext\">Python</span></a></li>\n<li class=\"toclevel-2 tocsection-40\"><a href=\"#Ruby\"><span class=\"tocnumber\">10.11</span> <span class=\"toctext\">Ruby</span></a></li>\n<li class=\"toclevel-2 tocsection-41\"><a href=\"#TCL\"><span class=\"tocnumber\">10.12</span> <span class=\"toctext\">TCL</span></a></li>\n<li class=\"toclevel-2 tocsection-42\"><a href=\"#.NET\"><span class=\"tocnumber\">10.13</span> <span class=\"toctext\">.NET</span></a></li>\n<li class=\"toclevel-2 tocsection-43\"><a href=\"#Math\"><span class=\"tocnumber\">10.14</span> <span class=\"toctext\">Math</span></a></li>\n<li class=\"toclevel-2 tocsection-44\"><a href=\"#Misc\"><span class=\"tocnumber\">10.15</span> <span class=\"toctext\">Misc</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-45\"><a href=\"#References\"><span class=\"tocnumber\">11</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"One-Dimensional_Array\">One-Dimensional Array</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=1\" title=\"Edit section: One-Dimensional Array\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>A one-dimensional or linear Array contains n elements indexed by one integer. Each element has the same size. Arrays exploit the addressing machinery of computers, whose <a href=\"/Memory#RAM\" title=\"Memory\">random-access memory</a> is treated as one-dimensional array of <a href=\"/Byte\" title=\"Byte\">bytes</a> or <a href=\"/Word\" title=\"Word\">words</a>, and indices are their addresses. One-dimensional arrays are therefore very efficient, and used to implement many other data structures, such as multidimensional arrays, <a href=\"/Linked_List\" title=\"Linked List\">linked lists</a>, <a href=\"/Queue\" title=\"Queue\">queues</a>, <a href=\"/Stack\" title=\"Stack\">stacks</a>, <a href=\"/Hash_Table\" title=\"Hash Table\">hash tables</a>, <a href=\"/Search_Tree\" title=\"Search Tree\">trees</a> and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/String_%28computer_science%29\">strings</a>.\n</p>\n<div class=\"floatnone\"><a href=\"http://net.pku.edu.cn/%7Ecourse/cs201/2003/mirrorWebster.cs.ucr.edu/Page_AoAWin/HTML/Arrays.html\" rel=\"nofollow\"><img alt=\"Arraysa.gif\" src=\"/images/2/23/Arraysa.gif\" width=\"560\" height=\"192\" style=\"vertical-align: text-bottom\" class=\"thumbborder\" /></a></div> \n<p>Array in <a href=\"/Memory\" title=\"Memory\">memory</a> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup> \n</p>\n<h1><span class=\"mw-headline\" id=\"Multidimensional_Array\">Multidimensional Array</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=2\" title=\"Edit section: Multidimensional Array\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Homogeneous\">Homogeneous</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=3\" title=\"Edit section: Homogeneous\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>A homogeneous two- or multidimensional array may be interpreted as array of commensurate, embedded arrays, typically associated with the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Array_data_structure\">array data structure</a>. A one-dimensional address calculation from an index tuple is a simple, multiplicative formula.\n</p>\n<pre>\nint zobristKeys[12][64];\nzobristKey[piece][square]\n</pre>\n<p>With following one-dimensional translation:\n</p>\n<pre>\nint zobristKeys[12*64];\nzobristKey[piece*64 + square]\n</pre>\n<p>Often, those index translations are already done by the (chess) programmer, i.e. a classical <a href=\"/8x8_Board\" title=\"8x8 Board\">8x8 board</a> is most often treated as one-dimensional array indexed by square rather than a two-dimensional array indexed by a tuple of <a href=\"/Files\" title=\"Files\">file</a> and <a href=\"/Ranks\" title=\"Ranks\">rank</a>.\n</p>\n<div class=\"floatnone\"><a href=\"http://net.pku.edu.cn/%7Ecourse/cs201/2003/mirrorWebster.cs.ucr.edu/Page_AoAWin/HTML/Arraysa2.html\" rel=\"nofollow\"><img alt=\"Arrays2.gif\" src=\"/images/3/3d/Arrays2.gif\" width=\"560\" height=\"497\" style=\"vertical-align: text-bottom\" class=\"thumbborder\" /></a></div> \n<p>Multidimensional Array <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup> \n</p>\n<h2><span class=\"mw-headline\" id=\"Array_of_Arrays\">Array of Arrays</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=4\" title=\"Edit section: Array of Arrays\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>If sub-arrays of a multidimensional array have different sizes, they are allocated elsewhere and referred by a pointer or reference. In <a href=\"/Java\" title=\"Java\">Java</a>, multidimensional arrays are treated that way implicitly as <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Array_data_type\">array data type</a>, in <a href=\"/C\" title=\"C\">C</a> and <a href=\"/Cpp\" title=\"Cpp\">C++</a> they need to be implemented explicitly. Due to the additional indirection(s), the access is slightly slower. \n</p><p>Arrays of different sized sub-arrays are f. i. used in <a href=\"/Magic_Bitboards#Fancy\" title=\"Magic Bitboards\">Fancy Magic Bitboards</a> to safe memory for \"denser\" squares. A <a href=\"/Triangular_PV-Table\" title=\"Triangular PV-Table\">triangular PV-table</a> is often implemented as a one-dimensional array either with accordant index calculation, or wasting some space for commensurate, maximum sized sub-arrays for each <a href=\"/index.php?title=Principal_variation&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Principal variation (page does not exist)\">PV</a>. \n</p>\n<div class=\"floatnone\"><a href=\"/File:Array_of_array_storage.svg\" class=\"image\"><img alt=\"Array of array storage.svg\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Array_of_array_storage.svg/960px-Array_of_array_storage.svg.png\" width=\"560\" height=\"402\" style=\"vertical-align: text-bottom\" class=\"thumbborder\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Array_of_array_storage.svg/1280px-Array_of_array_storage.svg.png 2x\" /></a></div>\n<p>Array of Arrays <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup> \n</p>\n<h1><span class=\"mw-headline\" id=\"Fixed_Sized_Arrays\">Fixed Sized Arrays</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=5\" title=\"Edit section: Fixed Sized Arrays\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>An Array whose size is already determined at <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Compile_time\">compile time</a> is <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Static_memory_allocation\">allocated statically</a> if either declared as fixed sized <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Global_variable\">global</a> array, or in <a href=\"/C\" title=\"C\">C</a> equivalently as <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Static_variable\">static</a> array inside the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Scope_%28programming%29\">scope</a> of a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Subroutine\">subroutine</a> or <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Module_%28programming%29\">module</a>, whose <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Object_lifetime\">lifetime</a> extends across the run of the program. Alternatively, fixed sized arrays may be allocated once from the dynamic <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Dynamic_memory_allocation\">heap</a>, or created temporary as <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Local_variable\">local</a> array-variable on the <a href=\"/Stack\" title=\"Stack\">stack</a> of the processor, valid inside a scope of a routine. \n</p><p>These arrays work most efficiently, since one array access of a word or integer element directly translates into an appropriate machine instruction using a (scaled) <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Index_register\">index register</a> in conjunction with an <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Addressing_mode#Base_plus_index\">immediate address or base register</a> for the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Base_address\">base address</a> of the array. The danger without any runtime <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Bounds_checking\">bounds checking</a> is that (a probably very rare) index-overflow will either cause the program to crash, or even harder to find, to make the program behave sporadically erroneous. Some programmers, often provide a debug <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Assertion_%28computing%29\">assertion</a> <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup> to check array bounds at runtime in a debug version.\n</p>\n<pre>\n// assuming signed index\nassert (index &gt;= 0 &amp;&amp; index &lt; MAX_PLY);\nalpha[index] = a;\n</pre>\n<p>While global and static arrays may be initialized at compile time as well, as often used for <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Lookup_table\">lookup tables</a>, arrays located in the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/.bss\">bss-segment</a> or allocated from the heap or stack may require <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Run_time_%28computing%29\">runtime</a> initialization depending on the application.\n</p>\n<h1><span class=\"mw-headline\" id=\"Dynamic_Arrays\">Dynamic Arrays</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=6\" title=\"Edit section: Dynamic Arrays\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Dynamic arrays can be created at <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Run_time_%28computing%29\">runtime</a> with a size or number of elements actually needed. Once created, they may be treated as static arrays without further bound checking, or they may be <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Malloc#realloc\">re-allcoated</a> to dynamically shrink or grow their size. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Array_data_type#Abstract_arrays\">Abstract arrays</a> support a random access interface, and may pre-check the index to perform a dynamic re-allocation policy if required. \n<span id=\"Heap\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"On_the_Heap\">On the Heap</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=7\" title=\"Edit section: On the Heap\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Dynamic arrays are usually allocated from the heap, a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Dynamic_memory_allocation\">dynamic data area</a> supported by the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Operating_system\">operating system</a> and underlying <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/BIOS\">BIOS</a>. In <a href=\"/C\" title=\"C\">C</a>, dynamic arrays can be created by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Malloc\">malloc</a> (sizeof(type)*size), in <a href=\"/Cpp\" title=\"Cpp\">C++</a> by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/New_%28C%2B%2B%29\">new type [size</a>]. Memory areas should be explicitly freed if no longer needed, in C++ by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Delete_%28C%2B%2B%29\">delete[</a>]. Various configurable sized <a href=\"/Hash_Table\" title=\"Hash Table\">hash tables</a> like the <a href=\"/Transposition_Table\" title=\"Transposition Table\">transposition table</a> are usually allocated from the heap by explicit runtime initialization.\n<span id=\"Stack\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"On_the_Stack\">On the Stack</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=8\" title=\"Edit section: On the Stack\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Some operating systems provide <a href=\"/C\" title=\"C\">C</a> library calls which allow runtime dynamic allocation from the stack rather than the heap, e. g. in <a href=\"/Unix\" title=\"Unix\">Unix</a> with <i>alloca</i> <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup> and <i>malloca</i> <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup> for <a href=\"/Windows\" title=\"Windows\">Windows</a>. Further, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/C99\">C99</a> supports <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Variable-length_array\">variable-length arrays</a> (VLA). Like other automatic variables or fixed sized arrays on the stack, this memory is freed automatically after leaving the scope of the routine. \n</p>\n<h1><span class=\"mw-headline\" id=\"Array_Samples\">Array Samples</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=9\" title=\"Edit section: Array Samples\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Definitions and usage in various <a href=\"/Languages\" title=\"Languages\">programming languages</a>:\n</p>\n<h2><span class=\"mw-headline\" id=\"Assembly\"><a href=\"/Assembly\" title=\"Assembly\">Assembly</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=10\" title=\"Edit section: Assembly\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<pre>\n board db 64 dup (?)\n square dd\n\n mov ebx, [square]\n mov al, [board+ebx]\n</pre>\n<h2><span class=\"mw-headline\" id=\"C_.2F_C.2B.2B\"><a href=\"/C\" title=\"C\">C</a> / <a href=\"/Cpp\" title=\"Cpp\">C++</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=11\" title=\"Edit section: C / C++\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Note that in C and C++, pointer may be treated as array.\n</p>\n<pre>\n static const int magicTable[64] = {\n   0, 1,48, 2,57,49,28, 3,\n  61,58,50,42,38,29,17, 4,\n  62,55,59,36,53,51,43,22,\n  45,39,33,30,24,18,12, 5,\n  63,47,56,27,60,41,37,16,\n  54,35,52,21,44,32,23,11,\n  46,26,40,15,34,20,31,10,\n  25,14,19, 9,13, 8, 7, 6,\n };\n\n int board[64];\n int distance[64][64];\n int zobristKeys[12][64];\n int* pBoard = malloc(sizeof(int) * 64);\n\n int* pboard = new int[64];\n for (int sq = 0; sq &lt; 64; ++sq)\n    pboard[sq] = board[sq]; // in C/C++ identical to *(pboard + sq) = board[sq];\n ...\n delete[] pboard;\n</pre>\n<h2><span class=\"mw-headline\" id=\"Java\"><a href=\"/Java\" title=\"Java\">Java</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=12\" title=\"Edit section: Java\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<pre>\n static private final int[] magicTable = {\n   0, 1,48, 2,57,49,28, 3,\n  61,58,50,42,38,29,17, 4,\n  62,55,59,36,53,51,43,22,\n  45,39,33,30,24,18,12, 5,\n  63,47,56,27,60,41,37,16,\n  54,35,52,21,44,32,23,11,\n  46,26,40,15,34,20,31,10,\n  25,14,19, 9,13, 8, 7, 6,\n };\n \n int[] board = new int[64];\n</pre>\n<h1><span class=\"mw-headline\" id=\"Arrays_inside_a_Chess_Program\">Arrays inside a Chess Program</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=13\" title=\"Edit section: Arrays inside a Chess Program\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Lookup_Tables\">Lookup Tables</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=14\" title=\"Edit section: Lookup Tables\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Lookup_table\">Lookup tables</a> are arrays containing pre-calculated values. They are indexed by or related to:\n</p>\n<h3><span class=\"mw-headline\" id=\"Square\"><a href=\"/Squares\" title=\"Squares\">Square</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=15\" title=\"Edit section: Square\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<ul><li> <a href=\"/Center_Distance\" title=\"Center Distance\">Center Distance</a></li>\n<li> <a href=\"/Center_Manhattan-Distance\" title=\"Center Manhattan-Distance\">Center Manhattan-Distance</a></li>\n<li> <a href=\"/BitScan#DeBruijnMultiplation\" title=\"BitScan\">BitScan by De Bruijn Multiplication</a></li></ul>\n<h3><span class=\"mw-headline\" id=\"Two_Squares\">Two <a href=\"/Squares\" title=\"Squares\">Squares</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=16\" title=\"Edit section: Two Squares\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<ul><li> <a href=\"/Distance\" title=\"Distance\">Distance</a></li>\n<li> <a href=\"/Direction\" title=\"Direction\">Direction</a></li>\n<li> <a href=\"/Square_Attacked_By#LegalityTest\" title=\"Square Attacked By\">Legality Test</a></li>\n<li> <a href=\"/Manhattan-Distance\" title=\"Manhattan-Distance\">Manhattan-Distance</a></li></ul>\n<h3><span class=\"mw-headline\" id=\"Square_and_Occupancies\"><a href=\"/Squares\" title=\"Squares\">Square</a> and <a href=\"/Occupancy\" title=\"Occupancy\">Occupancies</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=17\" title=\"Edit section: Square and Occupancies\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<ul><li> <a href=\"/Kindergarten_Bitboards\" title=\"Kindergarten Bitboards\">Kindergarten Bitboards</a></li>\n<li> <a href=\"/Magic_Bitboards\" title=\"Magic Bitboards\">Magic Bitboards</a></li>\n<li> <a href=\"/Rotated_Bitboards\" title=\"Rotated Bitboards\">Rotated Bitboards</a></li></ul>\n<h3><span class=\"mw-headline\" id=\"Square_and_Piece\"><a href=\"/Squares\" title=\"Squares\">Square</a> and <a href=\"/Pieces\" title=\"Pieces\">Piece</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=18\" title=\"Edit section: Square and Piece\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<ul><li> <a href=\"/Zobrist_Hashing\" title=\"Zobrist Hashing\">Zobrist Hashing</a></li></ul>\n<h3><span class=\"mw-headline\" id=\"Material\"><a href=\"/Material\" title=\"Material\">Material</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=19\" title=\"Edit section: Material\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<ul><li> <a href=\"/Material_Tables\" title=\"Material Tables\">Material Tables</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Read.2FWrite\">Read/Write</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=20\" title=\"Edit section: Read/Write\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Those are indexed by or related to:\n</p>\n<h3><span class=\"mw-headline\" id=\"Square_2\"><a href=\"/Squares\" title=\"Squares\">Square</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=21\" title=\"Edit section: Square\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<ul><li> <a href=\"/Mailbox\" title=\"Mailbox\">Mailbox</a></li></ul>\n<dl><dd> <a href=\"/8x8_Board\" title=\"8x8 Board\">8x8 Board</a></dd>\n<dd> <a href=\"/10x12_Board\" title=\"10x12 Board\">10x12 Board</a></dd>\n<dd> <a href=\"/Vector_Attacks\" title=\"Vector Attacks\">Vector Attacks</a></dd>\n<dd> <a href=\"/0x88\" title=\"0x88\">0x88</a></dd></dl>\n<ul><li> <a href=\"/Nibble#ArrayOfNibbles\" title=\"Nibble\">Array of Nibbles</a></li></ul>\n<h3><span class=\"mw-headline\" id=\"Two_Squares_2\">Two <a href=\"/Squares\" title=\"Squares\">Squares</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=22\" title=\"Edit section: Two Squares\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<ul><li> <a href=\"/Butterfly_Boards\" title=\"Butterfly Boards\">Butterfly Boards</a> (also by piece, square)</li></ul>\n<h3><span class=\"mw-headline\" id=\"Ply\"><a href=\"/Ply\" title=\"Ply\">Ply</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=23\" title=\"Edit section: Ply\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<ul><li> <a href=\"/Triangular_PV-Table\" title=\"Triangular PV-Table\">Triangular PV-Table</a></li>\n<li> <a href=\"/Move_List\" title=\"Move List\">Move List</a></li>\n<li> <a href=\"/Node\" title=\"Node\">Nodes</a> or <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/State_variable\">state variables</a> of a <a href=\"/Depth-First\" title=\"Depth-First\">depth-first</a> <a href=\"/Search\" title=\"Search\">search</a></li></ul>\n<h3><span class=\"mw-headline\" id=\"Pieces\"><a href=\"/Pieces\" title=\"Pieces\">Pieces</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=24\" title=\"Edit section: Pieces\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<ul><li> <a href=\"/Piece-Lists\" title=\"Piece-Lists\">Piece-Lists</a></li>\n<li> <a href=\"/Bitboard_Board-Definition\" title=\"Bitboard Board-Definition\">Bitboard Board-Definition</a></li></ul>\n<h3><span class=\"mw-headline\" id=\"Hash_key\">Hash key</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=25\" title=\"Edit section: Hash key\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<ul><li> <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Table</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=26\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Nibble#ArrayOfNibbles\" title=\"Nibble\">Array of Nibbles</a></li>\n<li> <a href=\"/Hash_Table\" title=\"Hash Table\">Hash Table</a></li>\n<li> <a href=\"/Initial_Position\" title=\"Initial Position\">Initial Position</a> (also dubbed array)</li>\n<li> <a href=\"/Iteration\" title=\"Iteration\">Iteration</a></li>\n<li> <a href=\"/Linked_List\" title=\"Linked List\">Linked List</a></li>\n<li> <a href=\"/Memory\" title=\"Memory\">Memory</a></li>\n<li> <a href=\"/Queue\" title=\"Queue\">Queue</a></li>\n<li> <a href=\"/SIMD_and_SWAR_Techniques\" title=\"SIMD and SWAR Techniques\">SIMD and SWAR Techniques</a></li>\n<li> <a href=\"/Stack\" title=\"Stack\">Stack</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=27\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Alex_Bell\" title=\"Alex Bell\">Alex Bell</a> (<b>1972</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.chilton-computing.org.uk/acl/literature/books/gamesplaying/overview.htm\">Games Playing with Computers</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Allen_%26_Unwin\">Allen &amp; Unwin</a>, ISBN-13: 978-0080212227, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.chilton-computing.org.uk/acl/literature/books/gamesplaying/p003.htm\">Chapter 3: Board Games</a></li>\n<li> <a href=\"/Gerard_Zieli%C5%84ski\" title=\"Gerard Zieliński\">Gerard Zieliński</a> (<b>1976</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.emeraldinsight.com/doi/abs/10.1108/eb005412\">Arrays for Programming Chess</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.emeraldinsight.com/loi/k\">Kybernetes</a>, Vol. 5, No. 2</li>\n<li> <a href=\"/Mathematician#Kung\" title=\"Mathematician\">Hsiang-Tsung Kung</a>, <a href=\"/Charles_Leiserson\" title=\"Charles Leiserson\">Charles E. Leiserson</a> (<b>1979</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://apps.dtic.mil/docs/citations/ADA066060\">Systolic arrays (for VLSI)</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://searchworks.stanford.edu/view/786087\">Sparse Matrix Proceedings</a> 1978 <sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup></li>\n<li>  <a href=\"/Alan_H._Bond\" title=\"Alan H. Bond\">Alan H. Bond</a> (<b>1987</b>). <i>Broadcasting Arrays - A Highly Parallel Computer Architecture Suitable For Easy Fabrication</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.exso.com/bc.pdf\">pdf</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=28\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=53820\">std::vector&lt;&gt; considered harmful</a> by <a href=\"/Folkert_van_Heusden\" title=\"Folkert van Heusden\">Folkert van Heusden</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 25, 2014&#160;» <a href=\"/Move_List\" title=\"Move List\">Move List</a>, <a href=\"/Cpp\" title=\"Cpp\">C++</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=55301\">Initializing portions of arrays</a> by <a href=\"/Robert_Pope\" title=\"Robert Pope\">Robert Pope</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 12, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=55853\">Initializing Arrays at compile time with macros... fun!!!</a> by <a href=\"/Syed_Fahad\" title=\"Syed Fahad\">Syed Fahad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 01, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=73273\">Stockfish and latest +6 ELO patch!</a> by <a href=\"/Jouni_Uski\" title=\"Jouni Uski\">Jouni Uski</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 05, 2020&#160;» <a href=\"/Distance\" title=\"Distance\">Distance</a>, <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a> <sup id=\"cite_ref-9\" class=\"reference\"><a href=\"#cite_note-9\">&#91;9&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=73319\">Removing Large Arrays</a> by Deberger, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 10, 2020&#160;» <a href=\"/Space-Time_Tradeoff\" title=\"Space-Time Tradeoff\">Space-Time Tradeoff</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=29\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Array\">Array from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Array_data_structure\">Array data structure from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Array_data_type\">Array data type from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Dynamic_array\">Dynamic array from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Lookup_table\">Lookup table from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Bounds_checking\">Bounds checking from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Associative_array\">Associative array from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Vector_processor\">Vector processor from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Global_array\">Global array (GA) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Collection_%28computing%29\">Collection (computing) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://en.wikibooks.org/wiki/Data_Structures/Arrays\">Data Structures/Arrays from Wikibooks</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Systolic_array\">Systolic array from Wikipedia</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Assembly_2\"><a href=\"/Assembly\" title=\"Assembly\">Assembly</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=30\" title=\"Edit section: Assembly\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://net.pku.edu.cn/%7Ecourse/cs201/2003/mirrorWebster.cs.ucr.edu/Page_AoAWin/HTML/Arrays.html\">Chapter Four Arrays</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://homepage.mac.com/randyhyde/webster.cs.ucr.edu/index.html\">Art of Assembly Language Programming and HLA</a> by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Randall_Hyde\">Randall Hyde</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://net.pku.edu.cn/%7Ecourse/cs201/2003/mirrorWebster.cs.ucr.edu/Page_AoAWin/HTML/Arraysa2.html\">Multidimensional Arrays</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://homepage.mac.com/randyhyde/webster.cs.ucr.edu/index.html\">Art of Assembly Language Programming and HLA</a> by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Randall_Hyde\">Randall Hyde</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.virginia.edu/~evans/cs216/guides/x86.html\">x86 Assembly Guide</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Basic\"><a href=\"/Basic\" title=\"Basic\">Basic</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=31\" title=\"Edit section: Basic\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://en.wikibooks.org/wiki/QBasic/Arrays_and_Types\">QBasic/Arrays and Types from Wikibooks</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://en.wikibooks.org/wiki/Visual_Basic/Arrays\">Visual Basic/Arrays from Wikibooks</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://en.wikibooks.org/wiki/Visual_Basic_.NET/Arrays\">Visual Basic .NET/Arrays from Wikibooks</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://msdn.microsoft.com/en-us/library/wak0wfyt%28v=VS.100%29.aspx\">Arrays in Visual Basic</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://msdn.microsoft.com/en-us/library/ms123401.aspx\">MSDN Library</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"C\"><a href=\"/C\" title=\"C\">C</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=32\" title=\"Edit section: C\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://en.wikibooks.org/wiki/C_Programming/Arrays\">C Programming/Arrays from Wikibooks</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://en.wikibooks.org/wiki/C_Programming/Pointers_and_arrays\">C Programming/Pointers and arrays from Wikibooks</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.gnu.org/software/hello/manual/libc/String-and-Array-Utilities.html#String-and-Array-Utilities\">String and Array Utilities</a> - <a href=\"/Free_Software_Foundation#GLIBC\" title=\"Free Software Foundation\">The GNU C Library</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"C.2B.2B\"><a href=\"/Cpp\" title=\"Cpp\">C++</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=33\" title=\"Edit section: C++\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.fredosaurus.com/notes-cpp/newdelete/50dynamalloc.html\">Dynamic Allocation of Arrays</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://www.fredosaurus.com/notes-cpp/index.html\">C++ Notes</a> by <a href=\"/Fred_Swartz\" title=\"Fred Swartz\">Fred Swartz</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Vector_%28C%2B%2B%29\">Vector (C++) from Wikipedia</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"D\"><a href=\"/D_(Programming_Language)\" title=\"D (Programming Language)\">D</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=34\" title=\"Edit section: D\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.digitalmars.com/d/2.0/arrays.html\">Arrays - D Programming Language 2.0 - Digital Mars</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Java_2\"><a href=\"/Java\" title=\"Java\">Java</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=35\" title=\"Edit section: Java\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://download.oracle.com/javase/1.4.2/docs/api/java/util/Arrays.html\">Arrays (Java 2 Platform SE v1.4.2)</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://leepoint.net/notes-java/data/arrays/arrays.html\">Arrays</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://leepoint.net/notes-java/index.html\">Java Programming Notes</a> by <a href=\"/Fred_Swartz\" title=\"Fred Swartz\">Fred Swartz</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://download.oracle.com/javase/tutorial/java/nutsandbolts/arrays.html\">Arrays - The Java™ Tutorials &gt; Learning the Java Language &gt; Language Basics</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Lisp\"><a href=\"/index.php?title=Lisp&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Lisp (page does not exist)\">Lisp</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=36\" title=\"Edit section: Lisp\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.cmu.edu/Groups/AI/html/cltl/clm/node157.html\">17. Arrays</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.cmu.edu/Groups/AI/html/cltl/clm/clm.html\">Common Lisp the Language, Second Edition</a> by <a href=\"/Mathematician#GSteele\" title=\"Mathematician\">Guy L. Steele Jr.</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Pascal\"><a href=\"/Pascal\" title=\"Pascal\">Pascal</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=37\" title=\"Edit section: Pascal\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://en.wikibooks.org/wiki/Pascal_Programming/Arrays\">Pascal Programming/Arrays from Wikibooks</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Perl\"><a href=\"/index.php?title=Perl&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Perl (page does not exist)\">Perl</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=38\" title=\"Edit section: Perl\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://perldoc.perl.org/search.html?q=Array\">Search results for query \"Array\"</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://perldoc.perl.org/index.html\">perldoc.perl.org</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://perldoc.perl.org/perllol.html\">perllol - Declaration and Access of Arrays of Arrays</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://perldoc.perl.org/index.html\">perldoc.perl.org</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://perldoc.perl.org/perlfaq4.html#What-is-the-difference-between-a-list-and-an-array%3F\">What is the difference between a list and an array?</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://perldoc.perl.org/index.html\">perldoc.perl.org</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Python\"><a href=\"/Python\" title=\"Python\">Python</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=39\" title=\"Edit section: Python\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://docs.python.org/library/array.html\">8.6. array — Efficient arrays of numeric values</a> - <a rel=\"nofollow\" class=\"external text\" href=\"http://docs.python.org/index.html\">Python v2.7 documentation</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Ruby\"><a href=\"/index.php?title=Ruby&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Ruby (page does not exist)\">Ruby</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=40\" title=\"Edit section: Ruby\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://ruby-doc.org/core/classes/Array.html\">Class: Array</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://ruby-doc.org/\">Ruby-Doc.org: Documenting the Ruby Language</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"TCL\"><a href=\"/index.php?title=Tcl-Tk&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Tcl-Tk (page does not exist)\">TCL</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=41\" title=\"Edit section: TCL\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://wiki.tcl.tk/532\">Arrays / Hash Maps</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://philip.greenspun.com/tcl/array-operations.adp\">Array Operations</a> part of <a rel=\"nofollow\" class=\"external text\" href=\"http://philip.greenspun.com/tcl/index.adp\">Tcl for Web Nerds</a> by <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.csail.mit.edu/mac/users/hal/hal.html\">Hal Abelson</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://philip.greenspun.com/\">Philip Greenspun</a>, and Lydia Sandon</li></ul>\n<h2><span class=\"mw-headline\" id=\".NET\">.NET</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=42\" title=\"Edit section: .NET\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://en.wikibooks.org/wiki/Visual_Basic_.NET/Arrays\">Visual Basic .NET/Arrays from Wikibooks</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://msdn.microsoft.com/en-us/library/system.windows.vector.aspx\">Vector Structure</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://msdn.microsoft.com/en-us/library/ms123401.aspx\">MSDN Library</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Math\">Math</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=43\" title=\"Edit section: Math\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <span id=\"Costas\"></span><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Costas_array\">Costas array - Wikipedia</a> by <a href=\"/Mathematician#JPCostas\" title=\"Mathematician\">John P. Costas</a> and independently by <a href=\"/Mathematician#EGilbert\" title=\"Mathematician\">Edgar Gilbert</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Misc\">Misc</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=44\" title=\"Edit section: Misc\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://en.wikibooks.org/wiki/Ada_Programming/Types/array\">Ada Programming/Types/array from Wikibooks</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://en.wikibooks.org/wiki/Haskell/Hierarchical_libraries/Arrays\">Haskell/Hierarchical libraries/Arrays from Wikibooks</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://en.wikibooks.org/wiki/MATLAB_Programming/Arrays\">MATLAB Programming/Arrays from Wikibooks</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Array&amp;action=edit&amp;section=45\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Computer_memory\">Computer memory from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://net.pku.edu.cn/%7Ecourse/cs201/2003/mirrorWebster.cs.ucr.edu/Page_AoAWin/HTML/Arrays.html\">Chapter Four Arrays</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://homepage.mac.com/randyhyde/webster.cs.ucr.edu/index.html\">Art of Assembly Language Programming and HLA</a> by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Randall_Hyde\">Randall Hyde</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://net.pku.edu.cn/%7Ecourse/cs201/2003/mirrorWebster.cs.ucr.edu/Page_AoAWin/HTML/Arraysa2.html\">Multidimensional Arrays</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://homepage.mac.com/randyhyde/webster.cs.ucr.edu/index.html\">Art of Assembly Language Programming and HLA</a> by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Randall_Hyde\">Randall Hyde</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Array_data_type\">Array data type from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Assert.h\">assert.h from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.freebsd.org/cgi/man.cgi?alloca\">alloca</a></span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://msdn.microsoft.com/en-us/library/5471dc8s.aspx\">_malloca</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://msdn.microsoft.com/en-us/library/ms123401.aspx\">MSDN Library</a></span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Systolic_array\">Systolic array from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-9\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-9\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/official-stockfish/Stockfish/commit/5a7b45eac9dedbf7ebc61d9deb4dd934058d1ca1#diff-4cd6bcdb505b124d7bdc612c4789dc26L57-R59\">Use equations for PushAway and PushClose · official-stockfish/Stockfish@5a7b45e · GitHub</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Data\" title=\"Data\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260228125326\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.152 seconds\nReal time usage: 1.234 seconds\nPreprocessor visited node count: 366/1000000\nPreprocessor generated node count: 616/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:2005-0!canonical and timestamp 20260228125325 and revision id 18485\n -->\n"
+    },
+    "categories": [],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "0x88"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "10x12 Board"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "8x8 Board"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alan H. Bond"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alex Bell"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Assembly"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Basic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "BitScan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboard Board-Definition"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Butterfly Boards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Byte"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "C"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Center Distance"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Center Manhattan-Distance"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Charles Leiserson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cpp"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "D (Programming Language)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Data"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth-First"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Direction"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Distance"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Files"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Folkert van Heusden"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fred Swartz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Free Software Foundation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gerard Zieliński"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hash Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Initial Position"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iteration"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Java"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jouni Uski"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kindergarten Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Languages"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Linked List"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Magic Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mailbox"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Manhattan-Distance"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Material"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Material Tables"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mathematician"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Memory"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move List"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Nibble"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Node"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Occupancy"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pascal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Piece-Lists"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pieces"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ply"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Programming"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Python"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Queue"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ranks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Pope"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rotated Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SIMD and SWAR Techniques"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search Tree"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Space-Time Tradeoff"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Square Attacked By"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Squares"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stack"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stockfish"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Syed Fahad"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Triangular PV-Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Unix"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vector Attacks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Windows"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Word"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Zobrist Hashing"
+      },
+      {
+        "ns": 0,
+        "*": "Principal variation"
+      },
+      {
+        "ns": 0,
+        "*": "Lisp"
+      },
+      {
+        "ns": 0,
+        "*": "Perl"
+      },
+      {
+        "ns": 0,
+        "*": "Ruby"
+      },
+      {
+        "ns": 0,
+        "*": "Tcl-Tk"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "One-Dimensional Array",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Array",
+        "byteoffset": 1621,
+        "anchor": "One-Dimensional_Array"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Multidimensional Array",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Array",
+        "byteoffset": 2776,
+        "anchor": "Multidimensional_Array"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Homogeneous",
+        "number": "2.1",
+        "index": "3",
+        "fromtitle": "Array",
+        "byteoffset": 2802,
+        "anchor": "Homogeneous"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Array of Arrays",
+        "number": "2.2",
+        "index": "4",
+        "fromtitle": "Array",
+        "byteoffset": 4070,
+        "anchor": "Array_of_Arrays"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Fixed Sized Arrays",
+        "number": "3",
+        "index": "5",
+        "fromtitle": "Array",
+        "byteoffset": 5050,
+        "anchor": "Fixed_Sized_Arrays"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Dynamic Arrays",
+        "number": "4",
+        "index": "6",
+        "fromtitle": "Array",
+        "byteoffset": 7453,
+        "anchor": "Dynamic_Arrays"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "On the Heap",
+        "number": "4.1",
+        "index": "7",
+        "fromtitle": "Array",
+        "byteoffset": 8043,
+        "anchor": "On_the_Heap"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "On the Stack",
+        "number": "4.2",
+        "index": "8",
+        "fromtitle": "Array",
+        "byteoffset": 8865,
+        "anchor": "On_the_Stack"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Array Samples",
+        "number": "5",
+        "index": "9",
+        "fromtitle": "Array",
+        "byteoffset": 9575,
+        "anchor": "Array_Samples"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Assembly",
+        "number": "5.1",
+        "index": "10",
+        "fromtitle": "Array",
+        "byteoffset": 9662,
+        "anchor": "Assembly"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "C / C++",
+        "number": "5.2",
+        "index": "11",
+        "fromtitle": "Array",
+        "byteoffset": 9766,
+        "anchor": "C_.2F_C.2B.2B"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Java",
+        "number": "5.3",
+        "index": "12",
+        "fromtitle": "Array",
+        "byteoffset": 10391,
+        "anchor": "Java"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Arrays inside a Chess Program",
+        "number": "6",
+        "index": "13",
+        "fromtitle": "Array",
+        "byteoffset": 10711,
+        "anchor": "Arrays_inside_a_Chess_Program"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Lookup Tables",
+        "number": "6.1",
+        "index": "14",
+        "fromtitle": "Array",
+        "byteoffset": 10744,
+        "anchor": "Lookup_Tables"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Square",
+        "number": "6.1.1",
+        "index": "15",
+        "fromtitle": "Array",
+        "byteoffset": 10902,
+        "anchor": "Square"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Two Squares",
+        "number": "6.1.2",
+        "index": "16",
+        "fromtitle": "Array",
+        "byteoffset": 11053,
+        "anchor": "Two_Squares"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Square and Occupancies",
+        "number": "6.1.3",
+        "index": "17",
+        "fromtitle": "Array",
+        "byteoffset": 11184,
+        "anchor": "Square_and_Occupancies"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Square and Piece",
+        "number": "6.1.4",
+        "index": "18",
+        "fromtitle": "Array",
+        "byteoffset": 11315,
+        "anchor": "Square_and_Piece"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Material",
+        "number": "6.1.5",
+        "index": "19",
+        "fromtitle": "Array",
+        "byteoffset": 11384,
+        "anchor": "Material"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Read/Write",
+        "number": "6.2",
+        "index": "20",
+        "fromtitle": "Array",
+        "byteoffset": 11427,
+        "anchor": "Read.2FWrite"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Square",
+        "number": "6.2.1",
+        "index": "21",
+        "fromtitle": "Array",
+        "byteoffset": 11479,
+        "anchor": "Square_2"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Two Squares",
+        "number": "6.2.2",
+        "index": "22",
+        "fromtitle": "Array",
+        "byteoffset": 11630,
+        "anchor": "Two_Squares_2"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Ply",
+        "number": "6.2.3",
+        "index": "23",
+        "fromtitle": "Array",
+        "byteoffset": 11700,
+        "anchor": "Ply"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Pieces",
+        "number": "6.2.4",
+        "index": "24",
+        "fromtitle": "Array",
+        "byteoffset": 11891,
+        "anchor": "Pieces"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Hash key",
+        "number": "6.2.5",
+        "index": "25",
+        "fromtitle": "Array",
+        "byteoffset": 11959,
+        "anchor": "Hash_key"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "7",
+        "index": "26",
+        "fromtitle": "Array",
+        "byteoffset": 12002,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "8",
+        "index": "27",
+        "fromtitle": "Array",
+        "byteoffset": 12222,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "9",
+        "index": "28",
+        "fromtitle": "Array",
+        "byteoffset": 13283,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "10",
+        "index": "29",
+        "fromtitle": "Array",
+        "byteoffset": 14327,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Assembly",
+        "number": "10.1",
+        "index": "30",
+        "fromtitle": "Array",
+        "byteoffset": 15331,
+        "anchor": "Assembly_2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Basic",
+        "number": "10.2",
+        "index": "31",
+        "fromtitle": "Array",
+        "byteoffset": 16029,
+        "anchor": "Basic"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "C",
+        "number": "10.3",
+        "index": "32",
+        "fromtitle": "Array",
+        "byteoffset": 16494,
+        "anchor": "C"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "C++",
+        "number": "10.4",
+        "index": "33",
+        "fromtitle": "Array",
+        "byteoffset": 16901,
+        "anchor": "C.2B.2B"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "D",
+        "number": "10.5",
+        "index": "34",
+        "fromtitle": "Array",
+        "byteoffset": 17182,
+        "anchor": "D"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Java",
+        "number": "10.6",
+        "index": "35",
+        "fromtitle": "Array",
+        "byteoffset": 17317,
+        "anchor": "Java_2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Lisp",
+        "number": "10.7",
+        "index": "36",
+        "fromtitle": "Array",
+        "byteoffset": 17750,
+        "anchor": "Lisp"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Pascal",
+        "number": "10.8",
+        "index": "37",
+        "fromtitle": "Array",
+        "byteoffset": 17987,
+        "anchor": "Pascal"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Perl",
+        "number": "10.9",
+        "index": "38",
+        "fromtitle": "Array",
+        "byteoffset": 18102,
+        "anchor": "Perl"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Python",
+        "number": "10.10",
+        "index": "39",
+        "fromtitle": "Array",
+        "byteoffset": 18615,
+        "anchor": "Python"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Ruby",
+        "number": "10.11",
+        "index": "40",
+        "fromtitle": "Array",
+        "byteoffset": 18788,
+        "anchor": "Ruby"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "TCL",
+        "number": "10.12",
+        "index": "41",
+        "fromtitle": "Array",
+        "byteoffset": 18934,
+        "anchor": "TCL"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": ".NET",
+        "number": "10.13",
+        "index": "42",
+        "fromtitle": "Array",
+        "byteoffset": 19278,
+        "anchor": ".NET"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Math",
+        "number": "10.14",
+        "index": "43",
+        "fromtitle": "Array",
+        "byteoffset": 19547,
+        "anchor": "Math"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Misc",
+        "number": "10.15",
+        "index": "44",
+        "fromtitle": "Array",
+        "byteoffset": 19760,
+        "anchor": "Misc"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "11",
+        "index": "45",
+        "fromtitle": "Array",
+        "byteoffset": 20098,
+        "anchor": "References"
+      }
+    ]
+  }
+}

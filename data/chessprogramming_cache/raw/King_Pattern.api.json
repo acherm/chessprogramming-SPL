@@ -1,0 +1,329 @@
+{
+  "parse": {
+    "title": "King Pattern",
+    "pageid": 1264,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Board_Representation\" title=\"Board Representation\">Board Representation</a> * <a href=\"/Bitboards\" title=\"Bitboards\">Bitboards</a> * King Pattern</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:254px;\"><a href=\"http://en.wikipedia.org/wiki/File:Moore_d.gif\"><img alt=\"\" src=\"/images/4/41/Moore_d.gif\" width=\"252\" height=\"247\" class=\"thumbimage\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Moore_d.gif\" class=\"internal\" title=\"Enlarge\"></a></div>Moore neighborhood  <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>King pattern</b> are about <b>king attacks</b>, some <a href=\"/King_Safety\" title=\"King Safety\">king safety</a> issues and <a href=\"/Pawn_Endgame\" title=\"Pawn Endgame\">pawn endgame</a> related stuff. There is exactly one king per side - the whole game. Not a big issue, but even if white and black kings are member of the <a href=\"/Bitboard_Board-Definition\" title=\"Bitboard Board-Definition\">standard bitboard definition</a> one may avoid <a href=\"/BitScan\" title=\"BitScan\">bitscanning</a> whole the time. Even without explicit <a href=\"/Piece-Lists\" title=\"Piece-Lists\">piece-lists</a> , one may consider to keep the redundant king-squares <a href=\"/Incremental_Updates\" title=\"Incremental Updates\">incrementally updated</a> during <a href=\"/Make_Move\" title=\"Make Move\">make</a>/<a href=\"/Unmake_Move\" title=\"Unmake Move\">unmake</a>. \n<span id=\"KingAttacks\"></span>\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#King_Attacks\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">King Attacks</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-2\"><a href=\"#by_Lookup\"><span class=\"tocnumber\">1.1</span> <span class=\"toctext\">by Lookup</span></a></li>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#by_Calculation\"><span class=\"tocnumber\">1.2</span> <span class=\"toctext\">by Calculation</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#King_Safety\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">King Safety</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#Pawn-Shield_Pattern\"><span class=\"tocnumber\">2.1</span> <span class=\"toctext\">Pawn-Shield Pattern</span></a></li>\n<li class=\"toclevel-2 tocsection-6\"><a href=\"#Vulnerable_on_distant_Checks\"><span class=\"tocnumber\">2.2</span> <span class=\"toctext\">Vulnerable on distant Checks</span></a>\n<ul>\n<li class=\"toclevel-3 tocsection-7\"><a href=\"#Branchless\"><span class=\"tocnumber\">2.2.1</span> <span class=\"toctext\">Branchless</span></a></li>\n<li class=\"toclevel-3 tocsection-8\"><a href=\"#SSE4\"><span class=\"tocnumber\">2.2.2</span> <span class=\"toctext\">SSE4</span></a></li>\n</ul>\n</li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-9\"><a href=\"#King_and_Pawns\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">King and Pawns</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#Set-wise_Rule_of_the_Square\"><span class=\"tocnumber\">3.1</span> <span class=\"toctext\">Set-wise Rule of the Square</span></a></li>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#Flood_Fill_Algorithms\"><span class=\"tocnumber\">3.2</span> <span class=\"toctext\">Flood Fill Algorithms</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-12\"><a href=\"#See_also\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-13\"><a href=\"#External_Links\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-14\"><a href=\"#References\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"King_Attacks\">King Attacks</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=King_Pattern&amp;action=edit&amp;section=1\" title=\"Edit section: King Attacks\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>The King <a href=\"/Attacks\" title=\"Attacks\">attacks</a> all squares in <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Moore_neighborhood\">Moore neighborhood</a>, that is squares with a <a href=\"/Distance\" title=\"Distance\">Chebyshev distance</a> of one.\n</p>\n<h2><span class=\"mw-headline\" id=\"by_Lookup\">by Lookup</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=King_Pattern&amp;action=edit&amp;section=2\" title=\"Edit section: by Lookup\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Likely we have a the square-index handy, to access a table of precalculated king-attacks.\n</p>\n<pre>\nU64 arrKingAttacks[64];\n\nU64 kingAttacks(enumSquare sq) {return arrKingAttacks[sq];}\n</pre>\n<p>For instance a king on g2:\n</p>\n<pre>\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\n. . . . . 1 1 1\n. . . . . 1 . 1\n. . . . . 1 1 1\n</pre>\n<p><span id=\"byCalculation\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"by_Calculation\">by Calculation</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=King_Pattern&amp;action=edit&amp;section=3\" title=\"Edit section: by Calculation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>To calculate all eight <a href=\"/Direction\" title=\"Direction\">directions</a>, one can actually do some simple <a href=\"/Parallel_Prefix_Algorithms\" title=\"Parallel Prefix Algorithms\">parallel prefix stuff</a>. Rather than to do a union of all eight <a href=\"/General_Setwise_Operations#OneStepOnly\" title=\"General Setwise Operations\">direction-steps</a>, one first applies the <a href=\"/General_Setwise_Operations#OneStepOnly\" title=\"General Setwise Operations\">horizontal attacks</a> considering file-wraps. Those up to two bits are then shifted up and down, together with the king-bitboard itself, to get all the other direction bits:\n</p>\n<pre>\nU64 kingAttacks(U64 kingSet) {\n   U64 attacks = eastOne(kingSet) | westOne(kingSet);\n   kingSet    |= attacks;\n   attacks    |= nortOne(kingSet) | soutOne(kingSet);\n   return attacks;\n}\n</pre>\n<p>The routine is handy to initialize the kingAttacks <a href=\"/Array\" title=\"Array\">arrays</a>:\n</p>\n<pre>\nU64 sqBB = 1;\nfor (int sq = 0; sq &lt; 64; sq++, sqBB &lt;&lt;= 1)\n   arrKingAttacks[sq] = kingAttacks(sqBB);\n</pre>\n<p>It must not necessarily called with single-populated bitboards, and is base of <a href=\"/King_Pattern#FloodFillAlgorithms\" title=\"King Pattern\">king path fill algorithms</a>.\n<span id=\"KingSafety\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"King_Safety\">King Safety</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=King_Pattern&amp;action=edit&amp;section=4\" title=\"Edit section: King Safety\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><a href=\"/King_Safety\" title=\"King Safety\">King Safety</a> is an important evaluation topic. Some bitboard pattern are about to recognize king safety related features. To evaluate those features is a complete other story.\n</p>\n<h2><span class=\"mw-headline\" id=\"Pawn-Shield_Pattern\">Pawn-Shield Pattern</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=King_Pattern&amp;action=edit&amp;section=5\" title=\"Edit section: Pawn-Shield Pattern\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>During the <a href=\"/Middlegame\" title=\"Middlegame\">middlegame</a>, the king is encouraged to hide behind own pawn shields. Beside Considering open and half-open files on king's and adjacent files, one idea is to mask potential pawn shield pattern per wing of the king file - and to hash it to an appropriate index range to access tables with precalculated stuff. This mask might be used for kings on f1-h1 or f1-h2:\n</p>\n<pre>\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\n. . . . . 1 1 1\n. . . . . 1 1 1\n. . . . . . . .\n</pre>\n<p><span id=\"VulnerableOnDistantChecks\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Vulnerable_on_distant_Checks\">Vulnerable on distant Checks</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=King_Pattern&amp;action=edit&amp;section=6\" title=\"Edit section: Vulnerable on distant Checks\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Assuming we are aware of all taboo squares of the king. That is the union of own pieces with all opposite attacks, then we can simply calculate a move target set by relative complement of the king attacks.\n</p>\n<pre>\nmoveTargets = arrKingAttacks[sq] &amp; ~taboo;\n</pre>\n<p>If moveTargets is empty - the king has no move. The king might be vulnerable on distant checks from any <a href=\"/Sliding_Pieces\" title=\"Sliding Pieces\">sliding piece</a> <a href=\"/Direction\" title=\"Direction\">direction</a>, due to lack of any escape. Otherwise, the king might be vulnerable on distant checks, if escape squares are on one line only - either rank, file, diagonal or anti-diagonal:\n</p>\n<pre>\nif ( moveTargets == 0 )\n{\n   dirSet = 15; // vulnerable on all lines\n}\nelse\n{\n   dirSet = 0;\n   pattern = moveTargets | sqBBofKing;\n   if ( pattern &amp; rankBits[sq] == pattern )\n      dirSet =  1; // vulnerable on rank, e.g. base rank\n   else if ( pattern &amp; fileBits[sq] == pattern )\n      dirSet =  2; // vulnerable on file\n   else if ( pattern &amp; diagBits[sq] == pattern )\n      dirSet =  4; // vulnerable on diagonal\n   else if ( pattern &amp; antiBits[sq] == pattern )\n      dirSet =  8; // vulnerable on antidiagonal\n}\n</pre>\n<h3><span class=\"mw-headline\" id=\"Branchless\">Branchless</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=King_Pattern&amp;action=edit&amp;section=7\" title=\"Edit section: Branchless\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p>Branchless in C - since boolean compare result is treated 0 or 1 arithmetically:\n</p>\n<pre>\npattern = moveTargets | sqBBofKing;\ndirSet  = ( pattern &amp; rankBits[sq] == pattern ) * 1;\ndirSet += ( pattern &amp; fileBits[sq] == pattern ) * 2;\ndirSet += ( pattern &amp; diagBits[sq] == pattern ) * 4;\ndirSet += ( pattern &amp; antiBits[sq] == pattern ) * 8;\n</pre>\n<p>to possibly test later\n</p>\n<pre>\nif ( dirSet ) evaluate and look for possible distant mates\n</pre>\n<p><span id=\"SSE4\"></span>\n</p>\n<h3><span class=\"mw-headline\" id=\"SSE4\">SSE4</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=King_Pattern&amp;action=edit&amp;section=8\" title=\"Edit section: SSE4\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p>Using the <a href=\"/SSE4#SSE4.1\" title=\"SSE4\">SSE4.1</a> PCMPEQQ <a href=\"/Quad_Word\" title=\"Quad Word\">Quadword</a> compare for equality instruction via <a rel=\"nofollow\" class=\"external text\" href=\"http://msdn.microsoft.com/en-us/library/bb513998.aspx\">_mm_cmpeq_epi64</a> intrinsic, following otherwise <a href=\"/SSE2\" title=\"SSE2\">SSE2</a> approach might be applied:\n</p>\n<pre>\nstruct SKingBits {\n    U64 rankBits;\n    U64 fileBits;\n    U64 diagBits;\n    U64 antiBits;\n} XMM_ALIGN kingBits[64];\n\nint dirSet(U64 pattern, int sq)\n{\n   static const U64 XMM_ALIGN weights[4] = {\n     C64(0x0000000000000001),\n     C64(0x0000000000000002),\n     C64(0x0000000000000004),\n     C64(0x0000000000000008)\n   };\n   __m128i x0, x1, x2;\n   const __m128i* pKB = (__m128i*)(kingBits + sq);\n   const __m128i* pW  = (__m128i*) weights;\n   x2 = _mm_cvtsi64x_si128 (pattern);\n   x2 = _mm_unpacklo_epi64 (x2, x2);\n   x0 = _mm_and_si128   (x2, pKB[0]);\n   x1 = _mm_and_si128   (x2, pKB[1]);\n   x0 = _mm_cmpeq_epi64 (x0, x2);\n   x1 = _mm_cmpeq_epi64 (x1, x2);\n   x0 = _mm_and_si128   (x0, pW[0]);\n   x1 = _mm_and_si128   (x1, pW[1]);\n   x0 = _mm_or_si128    (x0, x1);\n   x1 = _mm_unpackhi_epi64 (x0, x0);\n   x0 = _mm_or_si128    (x0, x1);\n   return _mm_cvtsi128_si32(x0);\n}\n</pre>\n<p><span id=\"KingAndPawns\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"King_and_Pawns\">King and Pawns</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=King_Pattern&amp;action=edit&amp;section=9\" title=\"Edit section: King and Pawns\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Some <a href=\"/Pawn_Endgame\" title=\"Pawn Endgame\">pawn endgame</a> issues. A set-wise <a href=\"/Rule_of_the_Square\" title=\"Rule of the Square\">rule of the square</a> from king's point of view. Or does a king have a connected path along safe and empty squares to a certain square?\n<span id=\"SetwiseRuleoftheSquare\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Set-wise_Rule_of_the_Square\">Set-wise Rule of the Square</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=King_Pattern&amp;action=edit&amp;section=10\" title=\"Edit section: Set-wise Rule of the Square\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Assuming a black-king on g5 - white to move. What is the set of squares, where a king can never catch a white <a href=\"/Passed_Pawn\" title=\"Passed Pawn\">passer</a>? Or the inverse, where can passers might be caught, considering the <a href=\"/Rule_of_the_Square\" title=\"Rule of the Square\">rule of the square</a>? In this inverse case, where passers may be close enough, there are other aspects to consider like two distant passers, or passer supported by own king - here it is only about <a href=\"/index.php?title=Pawn_race&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Pawn race (page does not exist)\">races</a> between passers and opponent king. It is about a set-wise view, where the distance to promotion is greater or equal than the distance of the king. We need to consider <b>double pushes</b> from the initial rank though.\n</p>\n<pre>\nblack king on g5    white passers         double pawn push, need\nwtm                 possibly caught       to copy 3rd to 2nd rank\n. . . . . . . .      . . . . . . . .      . . . . . . . .\n. . . . . . . .      . . . . . . . .      . . . . . . . .\n. . . . . . . .      . . . . . . . .      . . . . . . . .\n. . . . . . K .      . . . 1 1 1 K 1      . . . 1 1 1 K 1\n. . . . . . . .      . . 1 1 1 1 1 1      . . 1 1 1 1 1 1\n. . . . . . . .      . 1 1 1 1 1 1 1      . 1 1 1 1 1 1 1\n. . . . . . . .      1 1 1 1 1 1 1 1      . 1 1 1 1 1 1 1\n. . . . . . . .      1 1 1 1 1 1 1 1      1 1 1 1 1 1 1 1\n</pre>\n<p><i>Of course we may even mask off the base ranks since pawns can not exist there - but since we intersect with passers anyway, it don't cares.</i>\n</p><p>We need to consider <a href=\"/Tempo\" title=\"Tempo\">tempo</a>, if black to move, the area of caught grows accordantly:\n</p>\n<pre>\nblack king on g5    white passers\nbtm                 possibly caught\n. . . . . . . .      . . . . . . . .\n. . . . . . . .      . . . . . . . .\n. . . . . K K K      . . . 1 1 1 1 1\n. . . . . K K K      . . 1 1 1 1 K 1\n. . . . . K K K      . 1 1 1 1 1 1 1\n. . . . . . . .      1 1 1 1 1 1 1 1\n. . . . . . . .      1 1 1 1 1 1 1 1\n. . . . . . . .      1 1 1 1 1 1 1 1\n</pre>\n<p>We can now pre-initialize an <a href=\"/Array\" title=\"Array\">array</a> of <b>caught pawn area</b> for each king square, for both black and white king as well as <a href=\"/Side_to_move\" title=\"Side to move\">side to move</a>:\n</p>\n<pre>\nU64 arrCaughtableArea[2][2][64];  // [color of king][side to move][square]\n\nunCaughtable = whitePassers &amp; ~arrCaughtableArea[black][white][squareOfBlackKing];\n</pre>\n<p>How can the array be initialized, how can we calculate it? That is already some special fill approach. For the mentioned black king, wtm case, we use the rank-distance of the black king to the 8th rank.\n</p>\n<pre>\ndistance = rank(kingSquare) ^ 7; // 7 - rank\n\n. . . . 3 . . .\n. . . . 2 . . .\n. . . . 1 . . .\n. . . . K . . .\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\n. . . . . . . .\n</pre>\n<p>One solution is first expand the king-set distance (3) times, in east and west direction along the rank:\n</p>\n<pre>\ncaughtable = kingBB;\nfor (i = 0; i &lt; distance; i++)\n   caughtable |= westOne(caughtable) | eastOne(caughtable);\n\n. . . . . . . .     . . . . . . . .      . . . . . . . .\n. . . . . . . .     . . . . . . . .      . . . . . . . .\n. . . . . . . .     . . . . . . . .      . . . . . . . .\n. . . . . 1 1 1     . . . . 1 1 1 1      . . . 1 1 1 1 1\n. . . . . . . .     . . . . . . . .      . . . . . . . .\n. . . . . . . .     . . . . . . . .      . . . . . . . .\n. . . . . . . .     . . . . . . . .      . . . . . . . .\n. . . . . . . .     . . . . . . . .      . . . . . . . .\n</pre>\n<p>Now it is about filling south-west and south-east rank(kingSquare) times, which finally results in the desired set of  catchable passers. Special handling is required for the doubles pushes <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>:\n</p>\n<pre>\nfor (i = 0; i &lt; rank(kingSquare)-2; i++)\n   caughtable |= soutOne(westOne(caughtable) | caughtable | eastOne(caughtable) );\ncaughtable |= soutOne(caughtable) | 0xff;\n\n. . . . . . . .     . . . . . . . .      . . . . . . . .\n. . . . . . . .     . . . . . . . .      . . . . . . . .\n. . . . . . . .     . . . . . . . .      . . . . . . . .\n. . . 1 1 1 1 1     . . . 1 1 1 1 1      . . . 1 1 1 1 1\n. . 1 1 1 1 1 1     . . 1 1 1 1 1 1      . . 1 1 1 1 1 1\n. . . . . . . .     . 1 1 1 1 1 1 1   |  . 1 1 1 1 1 1 1\n. . . . . . . .     . . . . . . . .   |  . 1 1 1 1 1 1 1\n. . . . . . . .     . . . . . . . .   v  1 1 1 1 1 1 1 1\n</pre>\n<p>To initialize black to move and white king arrays should not that difficult either - and is left to the ambitious reader.\n</p><p><span id=\"FloodFillAlgorithms\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Flood_Fill_Algorithms\">Flood Fill Algorithms</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=King_Pattern&amp;action=edit&amp;section=11\" title=\"Edit section: Flood Fill Algorithms\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Answering questions like can a king on a1 reach h8 along this path?\n</p>\n<pre>\n. . . . . . 1 T\n. . 1 1 1 1 . .\n. 1 . . . . . .\n. . 1 1 1 1 . .\n. . . . . . 1 .\n. . . . . . . 1\n. . . . . . 1 .\nF 1 1 1 1 1 . .\n</pre>\n<p>The <b>squaresAreConnected</b> flood-fill <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup> algorithm was introduced by <a href=\"/Steffan_Westcott\" title=\"Steffan Westcott\">Steffan Westcott</a> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>.\n</p><p>A flood fill algorithm, like the one below, starting at the \"from\" square and stopping if the fill hits the to\" square or the fill can't make any more progress. The fill progresses in all directions at once, so should return an answer within a few iterations. Each iteration is pretty fast too, as it just a bunch of shifting and logic operations. And no lookup tables either.\n</p>\n<pre>\n/////////////////////////////////////////////////////////////////////////\n//\n// Returns true if a path of set bits in 'path' exists that 8-way connect\n// any set bit in sq1 to any set bit of sq2\n\nbool squaresAreConnected(U64 sq1, U64 sq2, U64 path)\n{\n   // With bitboard sq1, do an 8-way flood fill, masking off bits not in\n   // path at every step. Stop when fill reaches any set bit in sq2, or\n   // fill cannot progress any further\n\n   if (!(sq1 &amp;= path) ||&#160;!(sq2 &amp;= path)) return false;\n                      // Drop bits not in path\n                      // Early exit if sq1 or sq2 not on any path\n\n   while(!(sq1 &amp; sq2))\n   {\n      U64 temp = sq1;\n      sq1 |= eastOne(sq1) | westOne(sq1);    // Set all 8 neighbours\n      sq1 |= soutOne(sq1) | nortOne(sq1);\n      sq1 &amp;= path;                           // Drop bits not in path\n      if (sq1 == temp) return false;         // Fill has stopped\n   }\n   return true;                              // Found a good path\n}\n</pre>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=King_Pattern&amp;action=edit&amp;section=12\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/All_Shortest_Paths\" title=\"All Shortest Paths\">All shortest Paths</a></li>\n<li> <a href=\"/Fill_Algorithms\" title=\"Fill Algorithms\">Fill Algorithms</a></li>\n<li> <a href=\"/Mate_at_a_Glance\" title=\"Mate at a Glance\">Mate at a Glance</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=King_Pattern&amp;action=edit&amp;section=13\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Checkmate_pattern\">Checkmate pattern from Wikipedia</a></li>\n<li> <a href=\"/Category:Amon_D%C3%BC%C3%BCl_II\" title=\"Category:Amon Düül II\">Amon Düül II</a> - Archangel Thunderbird (1971), <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video </li></ul>\n<dl><dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/XzSi1qPxBIQ?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=King_Pattern&amp;action=edit&amp;section=14\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Moore_neighborhood\">Moore neighborhood from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\">Thanks to Thomas Herges for pointing out a bug if kings are on the eighth rank</span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Flood_fill\">Flood Fill from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=251180.\">Re: algorithm question</a> answer by <a href=\"/Steffan_Westcott\" title=\"Steffan Westcott\">Steffan Westcott</a> in <a href=\"/CCC\" title=\"CCC\">CCC</a> September 09, 2002</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Bitboards\" title=\"Bitboards\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260228222715\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.021 seconds\nReal time usage: 0.023 seconds\nPreprocessor visited node count: 290/1000000\nPreprocessor generated node count: 614/1000000\nPost‐expand include size: 27/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1264-0!canonical and timestamp 20260228222714 and revision id 25720\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Amon_Düül_II"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "King Pattern"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "All Shortest Paths"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Array"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Attacks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "BitScan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboard Board-Definition"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Board Representation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Direction"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Distance"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fill Algorithms"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "General Setwise Operations"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Incremental Updates"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "King Safety"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Make Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mate at a Glance"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Middlegame"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Parallel Prefix Algorithms"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Passed Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Endgame"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Piece-Lists"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quad Word"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rule of the Square"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SSE2"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SSE4"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Side to move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sliding Pieces"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Steffan Westcott"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tempo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Unmake Move"
+      },
+      {
+        "ns": 0,
+        "*": "Pawn race"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Amon Düül II"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "King Attacks",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "King_Pattern",
+        "byteoffset": 899,
+        "anchor": "King_Attacks"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "by Lookup",
+        "number": "1.1",
+        "index": "2",
+        "fromtitle": "King_Pattern",
+        "byteoffset": 1094,
+        "anchor": "by_Lookup"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "by Calculation",
+        "number": "1.2",
+        "index": "3",
+        "fromtitle": "King_Pattern",
+        "byteoffset": 1498,
+        "anchor": "by_Calculation"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "King Safety",
+        "number": "2",
+        "index": "4",
+        "fromtitle": "King_Pattern",
+        "byteoffset": 2543,
+        "anchor": "King_Safety"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Pawn-Shield Pattern",
+        "number": "2.1",
+        "index": "5",
+        "fromtitle": "King_Pattern",
+        "byteoffset": 2738,
+        "anchor": "Pawn-Shield_Pattern"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Vulnerable on distant Checks",
+        "number": "2.2",
+        "index": "6",
+        "fromtitle": "King_Pattern",
+        "byteoffset": 3336,
+        "anchor": "Vulnerable_on_distant_Checks"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Branchless",
+        "number": "2.2.1",
+        "index": "7",
+        "fromtitle": "King_Pattern",
+        "byteoffset": 4497,
+        "anchor": "Branchless"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "SSE4",
+        "number": "2.2.2",
+        "index": "8",
+        "fromtitle": "King_Pattern",
+        "byteoffset": 4975,
+        "anchor": "SSE4"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "King and Pawns",
+        "number": "3",
+        "index": "9",
+        "fromtitle": "King_Pattern",
+        "byteoffset": 6144,
+        "anchor": "King_and_Pawns"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Set-wise Rule of the Square",
+        "number": "3.1",
+        "index": "10",
+        "fromtitle": "King_Pattern",
+        "byteoffset": 6414,
+        "anchor": "Set-wise_Rule_of_the_Square"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Flood Fill Algorithms",
+        "number": "3.2",
+        "index": "11",
+        "fromtitle": "King_Pattern",
+        "byteoffset": 10810,
+        "anchor": "Flood_Fill_Algorithms"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "4",
+        "index": "12",
+        "fromtitle": "King_Pattern",
+        "byteoffset": 12730,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "5",
+        "index": "13",
+        "fromtitle": "King_Pattern",
+        "byteoffset": 12832,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "6",
+        "index": "14",
+        "fromtitle": "King_Pattern",
+        "byteoffset": 13149,
+        "anchor": "References"
+      }
+    ]
+  }
+}

@@ -1,0 +1,276 @@
+{
+  "parse": {
+    "title": "Centipawns",
+    "pageid": 2075,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Search\" title=\"Search\">Search</a> * <a href=\"/Score\" title=\"Score\">Score</a> * Centipawns</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"/File:Centipede.jpg\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Centipede.jpg/330px-Centipede.jpg\" width=\"300\" height=\"262\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Centipede.jpg/500px-Centipede.jpg 1.5x, https://upload.wikimedia.org/wikipedia/commons/6/66/Centipede.jpg 2x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Centipede.jpg\" class=\"internal\" title=\"Enlarge\"></a></div>Centipede <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>Centipawns</b>, (Centi-pawns)<br />\na score unit which corresponds approximately to <b>one hundredth</b> of a <a href=\"/Pawn_Advantage,_Win_Percentage,_and_Elo\" title=\"Pawn Advantage, Win Percentage, and Elo\">pawn unit</a>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Fixed-point_arithmetic\">Fixed point</a> representation with centipawn fractions allows a smooth relation of all <a href=\"/Point_Value\" title=\"Point Value\">piece values</a> with a reasonable granularity to distinguish positional scores. 16 or even 15 bits are sufficient to store signed centipawn ranges in <a href=\"/Hash_Table\" title=\"Hash Table\">hash tables</a>, while sign extension to the common 32-bit integer range is convenient to avoid overflows in scaling terms like in the <a href=\"/Tapered_Eval\" title=\"Tapered Eval\">tapered eval</a>, even with an internal finer granularity used inside the evaluation <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup> . \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Quotes\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Quotes</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-2\"><a href=\"#Robert_Hyatt\"><span class=\"tocnumber\">1.1</span> <span class=\"toctext\">Robert Hyatt</span></a></li>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#Aske_Plaat\"><span class=\"tocnumber\">1.2</span> <span class=\"toctext\">Aske Plaat</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#See_also\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-6\"><a href=\"#2000_...\"><span class=\"tocnumber\">3.1</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#2010_...\"><span class=\"tocnumber\">3.2</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#2020_...\"><span class=\"tocnumber\">3.3</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-9\"><a href=\"#External_Links\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-10\"><a href=\"#References\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Quotes\">Quotes</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Centipawns&amp;action=edit&amp;section=1\" title=\"Edit section: Quotes\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Robert_Hyatt\">Robert Hyatt</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Centipawns&amp;action=edit&amp;section=2\" title=\"Edit section: Robert Hyatt\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p><a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a> on score grain in <a href=\"/Crafty\" title=\"Crafty\">Crafty</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>:\n</p>\n<pre>Having done all three, my take on the issue is this:\n</pre>\n<ol><li> <code><b>Decipawns</b> (0.1) is too coarse. Not every positional consideration is worth 0.1 pawns, so you either have to round the score up to 0.1, or else throw it out since it would be zero.</code></li>\n<li> <code><b>Millipawns</b> (0.001) is too fine. I do not believe that my evaluation has any .001 accuracy ideas in it. As you spread the evaluation scores out, your tree search becomes less efficient (for example, compare a program with no positional scoring to one with, with respect to tree size).</code></li>\n<li> <code><b>Centipawns</b> (0.01) is reasonable. One could make the argument that maybe .05 is better (1/20th of a pawn). Or some other number. But my intuition after trying all three during the development of Crafty is that the right value lies in the interval {0.01, 0.1}. Whether it is on one end or the other, or somewhere in the middle, is a point for conjecture. It is too hard to test the idea, although I suppose I could just do a normal eval and then at the end, reduce it to the accuracy needed. But it is not easy to test for smaller than .01 increments since no increments in crafty would be smaller than .01... </code></li></ol>\n<h2><span class=\"mw-headline\" id=\"Aske_Plaat\">Aske Plaat</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Centipawns&amp;action=edit&amp;section=3\" title=\"Edit section: Aske Plaat\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p><a href=\"/Aske_Plaat\" title=\"Aske Plaat\">Aske Plaat's</a> implementation tip on <a href=\"/MTD(f)\" title=\"MTD(f)\">MTD(f)</a> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>:\n</p>\n<pre>The coarser the grain of eval, the less passes <a href=\"/MTD(f)\" title=\"MTD(f)\">MTD(f)</a> has to make to converge to the minimax value. Some programs have a fine grained evaluation function, where positional knowledge can be worth as little as one hundredth of a pawn. Big score swings can become inefficient for these programs. It may help to dynamically increase the step size: instead of using the previous bound, one can, for example, add an extra few points in the search direction (for failing high, or searching upward, adding the bonus, and for failing low, or searching downward, subtracting the bonus) every two passes or so. (<a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a> found that a scheme like this works well in a version of <a href=\"/Cilkchess\" class=\"mw-redirect\" title=\"Cilkchess\">Cilkchess</a>.) At the end, if you overshoot the minimax value, you have to make a small search in the opposite direction, using the previous search bound without an extra bonus, to make the final convergence. Also, it can be quite instructive to experiment with different evaluation function grain sizes. Sometimes coarse grain functions work better than fine grain, both for <a href=\"/NegaScout\" title=\"NegaScout\">NegaScout</a> and MTD(f). \n</pre>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Centipawns&amp;action=edit&amp;section=4\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Millipawns\" title=\"Millipawns\">Millipawns</a></li>\n<li> <a href=\"/Pawn_Advantage,_Win_Percentage,_and_Elo\" title=\"Pawn Advantage, Win Percentage, and Elo\">Pawn Advantage, Win Percentage, and Elo</a></li>\n<li> <a href=\"/Point_Value\" title=\"Point Value\">Point Value</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Centipawns&amp;action=edit&amp;section=5\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Centipawns&amp;action=edit&amp;section=6\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=195217\">Performance of MTD(f) versus eval granularity?</a> by Werner Mühlpfordt, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 01, 2001&#160;» <a href=\"/MTD(f)\" title=\"MTD(f)\">MTD(f)</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=29694\">Centipawns and Millipawns</a> by Ricardo Gibert, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 08, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=30695\">Winning percentage and centipawns</a> by <a href=\"/Luca_Hemmerich\" title=\"Luca Hemmerich\">Luca Hemmerich</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 18, 2009</li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Centipawns&amp;action=edit&amp;section=7\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=36389\">xboard protocol and centipawn</a> by <a href=\"/index.php?title=Joshua_Shriver&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Joshua Shriver (page does not exist)\">Joshua Shriver</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 17, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=45692\">Evaluations in centipawns and symbols</a> by <a href=\"/index.php?title=Marek_Soszynski&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Marek Soszynski (page does not exist)\">Marek Soszynski</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 23, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61071\">Is centipawn the right unit for measuring the score?</a> by Karol Majewski, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 09, 2016</li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Centipawns&amp;action=edit&amp;section=8\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=75501\">Centipawns vs Millipawns with NNUE</a>  by Madeleine Birchfield, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 23, 2020&#160;» <a href=\"/NNUE\" title=\"NNUE\">NNUE</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Centipawns&amp;action=edit&amp;section=9\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://chess.wikia.com/wiki/Centipawn\">Centipawn - WikiChess</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://en.wiktionary.org/wiki/centi-\">centi- - Wiktionary</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Centi-\">Centi- from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Fixed-point_arithmetic\">Fixed-point arithmetic from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Granularity\">Granularity from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Resolution\">Resolution from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Rounding\">Rounding from Wikipedia</a></li>\n<li> <span id=\"Centipede\"></span><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Centipede_%28band%29\">Centipede</a> - <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Septober_Energy\">Septober Energy</a>, 1971 (edited), <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> feat. <a href=\"/Category:Keith_Tippett\" title=\"Category:Keith Tippett\">Keith Tippett</a>, <a href=\"/Category:Ian_Carr\" title=\"Category:Ian Carr\">Ian Carr</a>, <a href=\"/Category:Karl_Jenkins\" title=\"Category:Karl Jenkins\">Karl Jenkins</a>, <a href=\"/Category:John_Marshall\" title=\"Category:John Marshall\">John Marshall</a>, <a href=\"/Category:Jeff_Clyne\" title=\"Category:Jeff Clyne\">Jeff Clyne</a>, <a href=\"/Category:Roy_Babbington\" title=\"Category:Roy Babbington\">Roy Babbington</a>, ...</dd>\n<dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/3wm4Kpb_ygY?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Centipawns&amp;action=edit&amp;section=10\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\">Centipede in peat <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wetland\">marshlands</a> of <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Kawai_Nui_Marsh\">Kawai Nui</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Oahu\">O'ahu</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Hawaii\">Hawai'i</a> photographed by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/User:Marshman\">Eric Guinther</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Centipede\">Centipede from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=29694&amp;start=10\">Re: Centipawns and Millipawns</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 08, 2009</span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=29694&amp;start=14\">Re: Centipawns and Millipawns</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 09, 2009 </span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://people.csail.mit.edu/plaat/mtdf.html\">MTD(f) - A Minimax Algorithm faster than NegaScout</a> by <a href=\"/Aske_Plaat\" title=\"Aske Plaat\">Aske Plaat</a>, December 3, 1997</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Score\" title=\"Score\">Up one level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260228213459\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.068 seconds\nReal time usage: 0.625 seconds\nPreprocessor visited node count: 105/1000000\nPreprocessor generated node count: 224/1000000\nPost‐expand include size: 26/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:2075-0!canonical and timestamp 20260228213458 and revision id 23156\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Quotes"
+      },
+      {
+        "sortkey": "",
+        "*": "Hyatt_Quotes"
+      },
+      {
+        "sortkey": "",
+        "*": "Roy_Babbington"
+      },
+      {
+        "sortkey": "",
+        "*": "Ian_Carr"
+      },
+      {
+        "sortkey": "",
+        "*": "Jeff_Clyne"
+      },
+      {
+        "sortkey": "",
+        "*": "Karl_Jenkins"
+      },
+      {
+        "sortkey": "",
+        "*": "John_Marshall"
+      },
+      {
+        "sortkey": "",
+        "*": "Keith_Tippett"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aske Plaat"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cilkchess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Crafty"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Don Dailey"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hash Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Luca Hemmerich"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "MTD(f)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Millipawns"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "NNUE"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "NegaScout"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Advantage, Win Percentage, and Elo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Point Value"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Hyatt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Score"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tapered Eval"
+      },
+      {
+        "ns": 0,
+        "*": "Joshua Shriver"
+      },
+      {
+        "ns": 0,
+        "*": "Marek Soszynski"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Ian Carr"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Jeff Clyne"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:John Marshall"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Karl Jenkins"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Keith Tippett"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Roy Babbington"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Quotes",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Centipawns",
+        "byteoffset": 1363,
+        "anchor": "Quotes"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Robert Hyatt",
+        "number": "1.1",
+        "index": "2",
+        "fromtitle": "Centipawns",
+        "byteoffset": 1372,
+        "anchor": "Robert_Hyatt"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Aske Plaat",
+        "number": "1.2",
+        "index": "3",
+        "fromtitle": "Centipawns",
+        "byteoffset": 2782,
+        "anchor": "Aske_Plaat"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "2",
+        "index": "4",
+        "fromtitle": "Centipawns",
+        "byteoffset": 4086,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "3",
+        "index": "5",
+        "fromtitle": "Centipawns",
+        "byteoffset": 4180,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "3.1",
+        "index": "6",
+        "fromtitle": "Centipawns",
+        "byteoffset": 4194,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "3.2",
+        "index": "7",
+        "fromtitle": "Centipawns",
+        "byteoffset": 4640,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "3.3",
+        "index": "8",
+        "fromtitle": "Centipawns",
+        "byteoffset": 5088,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "4",
+        "index": "9",
+        "fromtitle": "Centipawns",
+        "byteoffset": 5262,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "5",
+        "index": "10",
+        "fromtitle": "Centipawns",
+        "byteoffset": 6343,
+        "anchor": "References"
+      }
+    ]
+  }
+}

@@ -1,0 +1,471 @@
+{
+  "parse": {
+    "title": "Mater",
+    "pageid": 1360,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Engines\" title=\"Engines\">Engines</a> * Mater</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"/File:Yale%27s_Hartmann_astrolabe.jpg\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Yale%27s_Hartmann_astrolabe.jpg/330px-Yale%27s_Hartmann_astrolabe.jpg\" width=\"300\" height=\"276\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Yale%27s_Hartmann_astrolabe.jpg/500px-Yale%27s_Hartmann_astrolabe.jpg 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Yale%27s_Hartmann_astrolabe.jpg/960px-Yale%27s_Hartmann_astrolabe.jpg 2x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Yale%27s_Hartmann_astrolabe.jpg\" class=\"internal\" title=\"Enlarge\"></a></div><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Astrolabe\">Astrolabe</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Astrolabe#Construction\">Mater</a> and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Tympan\">Tympan</a> <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>Mater</b>,<br />\na chess <a href=\"/Checkmate\" title=\"Checkmate\">mating</a> <a href=\"/Combination\" title=\"Combination\">combinations</a> program, developed in the mid 60s by <a href=\"/George_Baylor\" title=\"George Baylor\">George Baylor</a> and <a href=\"/Herbert_Simon\" title=\"Herbert Simon\">Herbert Simon</a>, which was subject of Baylor's Masters thesis at <a href=\"/Carnegie_Mellon_University\" title=\"Carnegie Mellon University\">Carnegie Mellon University</a>  <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>. It was an early pioneering attempt in finding forced checkmates, employing \"<a href=\"/Artificial_Intelligence\" title=\"Artificial Intelligence\">Artificial Intelligence</a>\" rather than \"<a href=\"/Brute-Force\" title=\"Brute-Force\">Brute-Force</a>\" <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>. Only <a href=\"/Moves\" title=\"Moves\">moves</a> which either put the enemy king in <a href=\"/Check\" title=\"Check\">check</a> (<b>Mater I</b>), or <a href=\"/Threat_Move\" title=\"Threat Move\">threaten</a> <a href=\"/Mate_at_a_Glance\" title=\"Mate at a Glance\">mate in one</a> (<b>Mater II</b>) were <a href=\"/Move_Generation\" title=\"Move Generation\">generated</a> for the attacking side, <a href=\"/Mate_Search\" title=\"Mate Search\">searching</a> those moves first which leave the minimum number of defensive replies, to eventually reduce the defender's <a href=\"/Mobility\" title=\"Mobility\">mobility</a> to zero. \n</p><p><br />\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Abstract\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Abstract</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#History\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">History</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Mater_I\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Mater I</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Mater_II\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Mater II</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#Board_Representation\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Board Representation</span></a></li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#Move_Generation\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Move Generation</span></a></li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#Processing_Speed\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">Processing Speed</span></a></li>\n<li class=\"toclevel-1 tocsection-8\"><a href=\"#Namesake\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">Namesake</span></a></li>\n<li class=\"toclevel-1 tocsection-9\"><a href=\"#See_also\"><span class=\"tocnumber\">9</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-10\"><a href=\"#Publications\"><span class=\"tocnumber\">10</span> <span class=\"toctext\">Publications</span></a></li>\n<li class=\"toclevel-1 tocsection-11\"><a href=\"#External_Links\"><span class=\"tocnumber\">11</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-12\"><a href=\"#References\"><span class=\"tocnumber\">12</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Abstract\">Abstract</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Mater&amp;action=edit&amp;section=1\" title=\"Edit section: Abstract\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>This page is based on the description of Mater by <a href=\"/George_Baylor\" title=\"George Baylor\">George Baylor</a> and <a href=\"/Herbert_Simon\" title=\"Herbert Simon\">Herbert Simon</a>, 1966, <i>A chess mating combinations program</i> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>:\n</p>\n<pre>The program reported here is not a complete chess player; it does not play games. Rather, it is a chess analyst limited to <a href=\"/Search\" title=\"Search\">searching</a> for <a href=\"/Checkmate\" title=\"Checkmate\">checkmating</a> <a href=\"/Combination\" title=\"Combination\">combinations</a> in <a href=\"/Chess_Position\" title=\"Chess Position\">positions</a> containing <a href=\"/Tactics\" title=\"Tactics\">tactical</a> possibilities. A combination in chess is a series of forcing moves with <a href=\"/Sacrifice\" title=\"Sacrifice\">sacrifice</a> that ends with an objective advantage for the active side. A checkmating combination, then, is a combination in which that objective advantage is checkmate. Thus the program described here - dubbed MATER - given a position, proceeds by <a href=\"/Move_Generation\" title=\"Move Generation\">generating</a> that class of forcing moves that put the enemy King in <a href=\"/Check\" title=\"Check\">check</a> or threaten mate in one move, and then by analyzing first those moves that appear most promising. \n</pre>\n<h1><span class=\"mw-headline\" id=\"History\">History</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Mater&amp;action=edit&amp;section=2\" title=\"Edit section: History\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>The original mating combination program, as conceived by Herbert Simon and his son Peter Simon in 1962 <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup>, was a hand simulation setting forth a strategy of search. It discovered mating combinations in 52 of the 129 positions collected in <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Reuben_Fine\">Fine's</a> chapter of the mating attack from <i>The Middlegame in Chess</i>. <a href=\"/Allen_Newell\" title=\"Allen Newell\">Newell's</a> and Prasad's <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Information_Processing_Language\">IPL</a> program <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup>, which could set up a <a href=\"/Board_Representation\" title=\"Board Representation\">chessboard</a>, recorded positions, generated and <a href=\"/Make_Move\" title=\"Make Move\">made moves</a> and testing their <a href=\"/index.php?title=Legal_Mov&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Legal Mov (page does not exist)\">legality</a>, was base of <b>Mater I</b> and in 1964 the revised <b>Mater II</b> programs. According to <a href=\"/Monroe_Newborn\" title=\"Monroe Newborn\">Monroe Newborn</a>, Mater was ported to <a href=\"/Fortran\" title=\"Fortran\">Fortran</a> and incorporated into <a href=\"/Coko\" title=\"Coko\">Cooper-Kozdrowicki</a> program by <a href=\"/Dennis_Cooper\" title=\"Dennis Cooper\">Dennis Cooper</a> and <a href=\"/Ed_Kozdrowicki\" title=\"Ed Kozdrowicki\">Ed Kozdrowicki</a> <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup>:\n</p>\n<pre>MATER is written by George Baylor and Simon in FORTRAN. It is able to search to great depths for checkmates. MATER is presently part of the Cooper-Kozdrowicki program. While MATER is an interesting program in its own right, the opportunity to checkmate one's opponent plays a relatively small computational part of the game of chess, and its inclusion in the Cooper-Kozdrowicki program does not seem to add measurably to the program's strength. \n</pre>\n<h1><span class=\"mw-headline\" id=\"Mater_I\">Mater I</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Mater&amp;action=edit&amp;section=3\" title=\"Edit section: Mater I\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<table>\n\n<tr style=\"vertical-align:top;\">\n<td>  <table class=\"fentt\" style=\"font-size:24pt\"><tr><td class=\"board\" style=\"width: 8em;\"><div class=\"board\"><div class=\"sq\">    <br/>    <br/>    <br/>    <br/>    <br/>    <br/>    <br/>    <br/></div><div class=\"pcbg\">   <br/>   <br/>      <br/>    <br/>       <br/>      <br/>     <br/>      <br/></div><div class=\"pcfg\">♜ ♝♚  ♞♜<br/>♟  ♟ ♟♘♟<br/>♞  ♗    <br/> ♟ ♘♙  ♙<br/>      ♙ <br/>   ♙ ♕  <br/>♙ ♙ ♔   <br/>♛     ♝ <br/></div></div></td></tr></table>\n</td>\n<th>\n</th>\n<td>  Only check giving moves were generated in <b>Mater I</b> for the attacking side and check evasions for the defending side, for each <a href=\"/Ply\" title=\"Ply\">ply</a> level put into a <a href=\"/Move_List\" title=\"Move List\">try-list</a>. For the attacker, the list is ordered by the fewest-reply heuristic, highest priority goes to moves with the fewest number of legal replies, while checking moves with more than <b>four</b> legal replies are pruned entirely. Ties are broken by giving priority to <a href=\"/Double_Check\" title=\"Double Check\">double checks</a> and then to checks with no <a href=\"/Captures\" title=\"Captures\">capturing</a> replies. Search only continues down a particular path so long as the opponent's mobility is on the decline, which implies a maximum <a href=\"/Depth\" title=\"Depth\">search depth</a> of 9 <a href=\"/Ply\" title=\"Ply\">plies</a>. The defender's side considers captures in <a href=\"/MVV-LVA\" title=\"MVV-LVA\">MVV/LVA</a> order first, followed by king moves and interpositions. In <i>A chess mating combinations program</i>, the <a href=\"/Beta-Cutoff\" title=\"Beta-Cutoff\">beta-cutoff</a> was mentioned as \"killing reply\" <sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup>, also with a footnote <sup id=\"cite_ref-9\" class=\"reference\"><a href=\"#cite_note-9\">&#91;9&#93;</a></sup> on <a href=\"/John_McCarthy\" title=\"John McCarthy\">McCarthy.'s</a> <a href=\"/Killer_Heuristic\" title=\"Killer Heuristic\">killer heuristic</a> referring <a href=\"/Alan_Kotok\" title=\"Alan Kotok\">Alan Kotok's</a> 1962 paper <sup id=\"cite_ref-10\" class=\"reference\"><a href=\"#cite_note-10\">&#91;10&#93;</a></sup>, covering <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">alpha-beta</a>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Reuben_Fine\">Reuben Fine's</a> position from <i>The Middlegame in Chess</i> served as one example of Mater's ability <sup id=\"cite_ref-11\" class=\"reference\"><a href=\"#cite_note-11\">&#91;11&#93;</a></sup> <sup id=\"cite_ref-12\" class=\"reference\"><a href=\"#cite_note-12\">&#91;12&#93;</a></sup>.\n</td></tr></table>\n<p><span id=\"MaterII\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Mater_II\">Mater II</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Mater&amp;action=edit&amp;section=4\" title=\"Edit section: Mater II\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<table>\n\n<tr style=\"vertical-align:top;\">\n<td>  <table class=\"fentt\" style=\"font-size:24pt\"><tr><td class=\"board\" style=\"width: 8em;\"><div class=\"board\"><div class=\"sq\">    <br/>    <br/>    <br/>    <br/>    <br/>    <br/>    <br/>    <br/></div><div class=\"pcbg\">   <br/>    <br/>    <br/>        <br/>        <br/>       <br/>    <br/>     <br/></div><div class=\"pcfg\">♜ ♝  ♛♜♚<br/>♟♟   ♟ ♟<br/>    ♟♙♟♕<br/>        <br/>        <br/>     ♘  <br/>♙    ♙♙♙<br/>   ♖  ♔♖<br/></div></div></td></tr></table>\n</td>\n<th>\n</th>\n<td> At its first level of search, <b>Mater II</b> also generates moves threatening mate in one. After generation and trying checking moves without success, but triggered after collecting useful informations of \"nearly\" mate with only one legal reply, Mater II considers none checking moves which put additional pressure to the enemy king's sector, that is moves which directly or indirectly (<a href=\"/X-ray\" title=\"X-ray\">x-ray</a>) attack squares around the king. In this respect it resembles what <a href=\"/Adriaan_de_Groot\" title=\"Adriaan de Groot\">Adriaan de Groot</a> has called a \"sample variation\" <sup id=\"cite_ref-13\" class=\"reference\"><a href=\"#cite_note-13\">&#91;13&#93;</a></sup>,  a kind of trial balloon sent up for the express purpose of gathering information to direct subsequent investigations. A further condition to finally add the move into the try-list is that after the move is internally made followed by a defender's <a href=\"/Null_Move\" title=\"Null Move\">null move</a>, the resulting position is mate in one. Now, the defender's <a href=\"/Move_Ordering\" title=\"Move Ordering\">move ordering</a> heuristic needs to prefer moves that defend the mating square. Fine's diagram 97 <sup id=\"cite_ref-14\" class=\"reference\"><a href=\"#cite_note-14\">&#91;14&#93;</a></sup> was given as example of the abilities of Mater II.\n</td></tr></table>\n<h1><span class=\"mw-headline\" id=\"Board_Representation\">Board Representation</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Mater&amp;action=edit&amp;section=5\" title=\"Edit section: Board Representation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Mater was written in <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Information_Processing_Language\">IPL V</a> with its primary data structure of a <a href=\"/Linked_List\" title=\"Linked List\">list</a>, and kept lists with a header (name) and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Attribute%E2%80%93value_pair\">attribute-value pairs</a> for each <a href=\"/Squares\" title=\"Squares\">square</a> and <a href=\"/Pieces\" title=\"Pieces\">piece</a> to <a href=\"/Board_Representation\" title=\"Board Representation\">represent the board</a>, where values for piece and square attributes are addresses (cells) of lists again, yielding in an extensive network of relations among squares and pieces:\n</p>\n<table class=\"wikitable\">\n\n<tr>\n<th> Name\n</th>\n<th> Attribut\n</th>\n<th> Value\n</th></tr>\n<tr>\n<td rowspan=\"6\"> H1\n</td>\n<td>  Man on square\n</td>\n<td>  M8\n</td></tr>\n<tr>\n<td>  North\n</td>\n<td>  H2\n</td></tr>\n<tr>\n<td>  West\n</td>\n<td>  G1\n</td></tr>\n<tr>\n<td>  WNW\n</td>\n<td>  F2\n</td></tr>\n<tr>\n<td>  NW\n</td>\n<td>  G2\n</td></tr>\n<tr>\n<td>  NNW\n</td>\n<td>  G3\n</td></tr>\n<tr>\n<td>  ...\n</td>\n<td>  ...\n</td>\n<td>  ...\n</td></tr>\n<tr>\n<td rowspan=\"5\"> M8\n</td>\n<td>  Man on what square\n</td>\n<td>  H1\n</td></tr>\n<tr>\n<td>  Type of man\n</td>\n<td>  Rook\n</td></tr>\n<tr>\n<td>  Color of man\n</td>\n<td>  White\n</td></tr>\n<tr>\n<td>  Move directions\n</td>\n<td>  list of directions\n</td></tr>\n<tr>\n<td>  Capture directions\n</td>\n<td>  list of directions\n</td></tr>\n<tr>\n<td>  ...\n</td>\n<td>  ...\n</td>\n<td>  ...\n</td></tr></table>\n<h1><span class=\"mw-headline\" id=\"Move_Generation\">Move Generation</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Mater&amp;action=edit&amp;section=6\" title=\"Edit section: Move Generation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>In <i>A chess mating combinations program</i>, Baylor and Simon further elaborate on <a href=\"/Move_Generation\" title=\"Move Generation\">move generation</a>, with two tacks, corresponding to a <b>one-many</b> or <b>many-one</b> approach. In trying to find all checking moves, one could either radiate out from the enemy king, and for each <a href=\"/Squares\" title=\"Squares\">square</a>, search for a <a href=\"/Pieces\" title=\"Pieces\">piece</a> that can get there and <a href=\"/Check\" title=\"Check\">check</a> (one-many), or converge from the squares along the <a href=\"/Direction#MoveDirections\" title=\"Direction\">move directions</a> of each attacking piece onto the enemy king's square (many-one). If there are many pieces on the board, the former tends to be more effective, if few, the latter.\n</p>\n<h1><span class=\"mw-headline\" id=\"Processing_Speed\">Processing Speed</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Mater&amp;action=edit&amp;section=7\" title=\"Edit section: Processing Speed\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Mater was written in an <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Interpreted_language\">interpretive language</a> IPL, without any attempts to provide a special <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Machine_code\">machine-language</a> representation for primitive board manipulation. The most difficult mates, requiring the examination of about 100 positions, were achieved in about 3 minutes on an <a href=\"/IBM_7090\" title=\"IBM 7090\">IBM 7090</a> <sup id=\"cite_ref-15\" class=\"reference\"><a href=\"#cite_note-15\">&#91;15&#93;</a></sup>.\n</p>\n<h1><span class=\"mw-headline\" id=\"Namesake\">Namesake</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Mater&amp;action=edit&amp;section=8\" title=\"Edit section: Namesake\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/index.php?title=Mater_(Albillo)&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Mater (Albillo) (page does not exist)\">Mater</a> by <a href=\"/index.php?title=Valentin_Albillo&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Valentin Albillo (page does not exist)\">Valentin Albillo</a> <sup id=\"cite_ref-16\" class=\"reference\"><a href=\"#cite_note-16\">&#91;16&#93;</a></sup></li></ul>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Mater&amp;action=edit&amp;section=9\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Chest\" title=\"Chest\">Chest</a></li>\n<li> <a href=\"/MAPP\" title=\"MAPP\">MAPP</a></li>\n<li> <a href=\"/Mate_at_a_Glance\" title=\"Mate at a Glance\">Mate at a Glance</a></li>\n<li> <a href=\"/Mate-in-two\" title=\"Mate-in-two\">Mate-in-two</a></li>\n<li> <a href=\"/Mate_Search\" title=\"Mate Search\">Mate Search</a></li>\n<li> <a href=\"/NSS\" title=\"NSS\">NSS</a></li>\n<li> <a href=\"/Perceiver\" title=\"Perceiver\">Perceiver</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Mater&amp;action=edit&amp;section=10\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Herbert_Simon\" title=\"Herbert Simon\">Herbert A. Simon</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.cmu.edu/simon/kfrank.html\">Peter A. Simon</a> (<b>1962</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://psycnet.apa.org/index.cfm?fa=search.displayRecord&amp;UID=1963-06169-001\">Trial and Error Search in Solving Difficult Problems: Evidence from the Game of Chess</a></i>. Behavioral Science, Vol. 7, No. 4, pp. 425-429</li>\n<li> <a href=\"/George_Baylor\" title=\"George Baylor\">George W. Baylor</a> (<b>1965</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.dtic.mil/docs/citations/AD0619018\">Report on a Mating Combinations Program</a></i>. SDC Paper, No. SP-2150, System Development Corporation, Santa Monica, Calif.</li>\n<li> <a href=\"/George_Baylor\" title=\"George Baylor\">George W. Baylor</a>, <a href=\"/Herbert_Simon\" title=\"Herbert Simon\">Herbert A. Simon</a> (<b>1966</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://dl.acm.org/citation.cfm?id=1464182.1464233&amp;coll=GUIDE&amp;dl=GUIDE\">A chess mating combinations program</a></i>.  <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/American_Federation_of_Information_Processing_Societies\">AFIPS</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Joint_Computer_Conference\">Joint Computer Conferences</a>, reprinted  in <a href=\"/Herbert_Simon\" title=\"Herbert Simon\">Herbert A. Simon</a> (<b>1979</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://yalepress.yale.edu/yupbooks/book.asp?isbn=9780300024326\">Models of Thought</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Yale_University_Press\">Yale University Press</a>, pp. 181-200, in <a href=\"/David_Levy\" title=\"David Levy\">David Levy</a> (ed.) (<b>1988</b>). <i><a href=\"/Computer_Chess_Compendium\" title=\"Computer Chess Compendium\">Computer Chess Compendium</a></i>.</li>\n<li> <a href=\"/George_Baylor\" title=\"George Baylor\">George W. Baylor</a>  (<b>1966</b>). <i>A Computer Model of Checkmating Behaviour in Chess</i>. in <a href=\"/Adriaan_de_Groot\" title=\"Adriaan de Groot\">Adriaan de Groot</a>, <a href=\"/Walter_R._Reitman\" title=\"Walter R. Reitman\">Walter R. Reitman</a> (eds.) (<b>1966</b>). <i>Heuristic Processes in Thinking</i>. International Congress of Psychology, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Nauka_%28publisher%29\">Nauka</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Moscow\">Moscow</a></li>\n<li> <a href=\"/Herbert_Simon\" title=\"Herbert Simon\">Herbert Simon</a> (<b>1973</b>). <i>Lessons from Perception for Chess-Playing Programs (and Vice Versa)</i>. Computer Science Research Review 1972-73, <a rel=\"nofollow\" class=\"external text\" href=\"http://digitalcollections.library.cmu.edu/awweb/awarchive?type=file&amp;item=33779\">pdf</a></li>\n<li> <a href=\"/Herbert_Simon\" title=\"Herbert Simon\">Herbert Simon</a>, <a href=\"/William_Chase\" title=\"William Chase\">William Chase</a> (<b>1973</b>). <i>Skill in Chess</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/American_Scientist\">American Scientist</a>, Vol. 61, No. 4, reprinted in <a href=\"/David_Levy\" title=\"David Levy\">David Levy</a> (ed.)  (<b>1988</b>) <i><a href=\"/Computer_Chess_Compendium\" title=\"Computer Chess Compendium\">Computer Chess Compendium</a></i>, <a rel=\"nofollow\" class=\"external text\" href=\"http://digitalcollections.library.cmu.edu/awweb/awarchive?type=file&amp;item=44582\">pdf</a></li>\n<li> <a href=\"/Max_Bramer\" title=\"Max Bramer\">Max Bramer</a> (<b>1982</b>). <i>Finding Checkmates</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Computer_and_Video_Games\">Computer &amp; Video Games</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.chesscomputeruk.com/html/publication_archive_1982.html\">Spring 1982</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.chesscomputeruk.com/Computer___Video_Games_Spring_1982.pdf\">pdf</a> hosted by <a href=\"/Mike_Watters\" title=\"Mike Watters\">Mike Watters</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Mater&amp;action=edit&amp;section=11\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wiktionary.org/wiki/mater\">mater - Wiktionary</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Mater\">Mater (disambiguation) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Alma_mater\">Alma mater from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Alma_mater_%28disambiguation%29\">Alma mater (disambiguation) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Stabat_Mater\">Stabat Mater from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Stata_Mater\">Stata Mater from Wikipedia</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Mater&amp;action=edit&amp;section=12\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap mw-references-columns\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\">One of four extant brass <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Astrolabe\">astrolabes</a> manufactured by the workshop of <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Georg_Hartmann\">Georg Hartmann</a> in <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Nuremberg\">Nuremberg</a> in 1537. This one part of the Scientific Instruments Collection of <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Yale_University\">Yale University's</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Peabody_Museum_of_Natural_History\">Peabody Museum of Natural History</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://commons.wikimedia.org/wiki/File:Yale%27s_Hartmann_astrolabe.jpg\">Yale's Hartmann astrolabe.jpg - Wikimedia Commons</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a href=\"/George_Baylor\" title=\"George Baylor\">George Baylor</a> in <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.cmu.edu/simon/all.html\">All Remembrance of Herbert A. Simon</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a href=\"/Max_Bramer\" title=\"Max Bramer\">Max Bramer</a> (<b>1982</b>). <i>Finding Checkmates</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Computer_and_Video_Games\">Computer &amp; Video Games</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.chesscomputeruk.com/html/publication_archive_1982.html\">Spring 1982</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.chesscomputeruk.com/Computer___Video_Games_Spring_1982.pdf\">pdf</a> hosted by <a href=\"/Mike_Watters\" title=\"Mike Watters\">Mike Watters</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a href=\"/George_Baylor\" title=\"George Baylor\">George W. Baylor</a>, <a href=\"/Herbert_Simon\" title=\"Herbert Simon\">Herbert A. Simon</a> (<b>1966</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://dl.acm.org/citation.cfm?id=1464182.1464233&amp;coll=GUIDE&amp;dl=GUIDE\">A chess mating combinations program</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/American_Federation_of_Information_Processing_Societies\">AFIPS</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Joint_Computer_Conference\">Joint Computer Conferences</a></span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a href=\"/Herbert_Simon\" title=\"Herbert Simon\">Herbert A. Simon</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.cmu.edu/simon/kfrank.html\">Peter A. Simon</a> (<b>1962</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://psycnet.apa.org/index.cfm?fa=search.displayRecord&amp;UID=1963-06169-001\">Trial and Error Search in Solving Difficult Problems: Evidence from the Game of Chess</a></i>. Behavioral Science, Vol. 7, No. 4, pp. 425-429</span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a href=\"/Allen_Newell\" title=\"Allen Newell\">Allen Newell</a>, N. S. Prasad (<b>1963</b>). <i>IPL-V Chess Position Program</i>. Internal Memo No. 63, <a href=\"/Carnegie_Mellon_University\" title=\"Carnegie Mellon University\">Carnegie Mellon University</a></span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a href=\"/Monroe_Newborn\" title=\"Monroe Newborn\">Monroe Newborn</a> (<b>1975</b>). <i>Computer Chess</i>. Academic Press, New York, N.Y. p. 26</span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\">\"this (<a href=\"/Move_Ordering\" title=\"Move Ordering\">Move ordering</a>) is an attempt to clip unnecessary proliferations in the move tree: if there is a \"killing\" reply to a checking move, further analysis of that checking move would seem futile\" from <b>4.</b> <i>The Executive and Heuristics of Search</i> in <a href=\"/George_Baylor\" title=\"George Baylor\">George W. Baylor</a>, <a href=\"/Herbert_Simon\" title=\"Herbert Simon\">Herbert A. Simon</a> (<b>1966</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://dl.acm.org/citation.cfm?id=1464182.1464233&amp;coll=GUIDE&amp;dl=GUIDE\">A chess mating combinations program</a></i>.  <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/American_Federation_of_Information_Processing_Societies\">AFIPS</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Joint_Computer_Conference\">Joint Computer Conferences</a></span>\n</li>\n<li id=\"cite_note-9\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-9\">↑</a></span> <span class=\"reference-text\">\"This is the <a href=\"/Minimax\" title=\"Minimax\">minimax</a> assumption: namely that the opponent will make his strongest reply at every opportunity.  <a href=\"/John_McCarthy\" title=\"John McCarthy\">McCarthy.'s</a> <i><a href=\"/Killer_Heuristic\" title=\"Killer Heuristic\">killer heuristic</a></i> (see <a href=\"/Alan_Kotok\" title=\"Alan Kotok\">Kotok</a>, <a href=\"/Alan_Kotok#1962\" title=\"Alan Kotok\">1962</a>) assumes that a killing reply to one checking move may be a killing reply to other checking moves and thus should be looked at first\" from <b>4.</b> <i>The Executive and Heuristics of Search</i> in <a href=\"/George_Baylor\" title=\"George Baylor\">George W. Baylor</a>, <a href=\"/Herbert_Simon\" title=\"Herbert Simon\">Herbert A. Simon</a> (<b>1966</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://dl.acm.org/citation.cfm?id=1464182.1464233&amp;coll=GUIDE&amp;dl=GUIDE\">A chess mating combinations program</a></i>.  <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/American_Federation_of_Information_Processing_Societies\">AFIPS</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Joint_Computer_Conference\">Joint Computer Conferences</a></span>\n</li>\n<li id=\"cite_note-10\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-10\">↑</a></span> <span class=\"reference-text\"><a href=\"/Alan_Kotok\" title=\"Alan Kotok\">Alan Kotok</a> (<b>1962</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.kotok.org/AI_Memo_41.html\">Artificial Intelligence Project - MIT Computation Center: Memo 41 - A Chess Playing Program</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"ftp://publications.ai.mit.edu/ai-publications/pdf/AIM-041.pdf\">pdf</a></span>\n</li>\n<li id=\"cite_note-11\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-11\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Reuben_Fine\">Reuben Fine</a> (<b>1952</b>). <i>The Middlegame in Chess</i>. McKay</span>\n</li>\n<li id=\"cite_note-12\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-12\">↑</a></span> <span class=\"reference-text\">r1bk2nr/p2p1pNp/n2B4/1p1NP2P/6P1/3P1Q2/P1P1K3/q5b1 w - - 0 1&#160;; Fine 1952, <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/wspeirs/chess/blob/master/src/test/resources/mate/BWTC.PGN\">chess/BWTC.PGN at master · wspeirs/chess · GitHub</a></span>\n</li>\n<li id=\"cite_note-13\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-13\">↑</a></span> <span class=\"reference-text\"> <a href=\"/Adriaan_de_Groot\" title=\"Adriaan de Groot\">Adriaan de Groot</a> (<b>1946</b>). <i>Het denken van den Schaker, een experimenteel-psychologische studie.</i> Ph.D. thesis, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/University_of_Amsterdam\">University of Amsterdam</a>, advisor <a href=\"/Mathematician#Revesz\" title=\"Mathematician\">Géza Révész</a>; N.V. Noord-Hollandse Uitgevers Maatschappij, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Amsterdam\">Amsterdam</a>. Translated with the help of <a href=\"/George_Baylor\" title=\"George Baylor\">George Baylor</a>, with additions, (in <b>1965</b>) as <i>Thought and Choice in Chess</i>. Mouton Publishers, The Hague. ISBN 90-279-7914-6.</span>\n</li>\n<li id=\"cite_note-14\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-14\">↑</a></span> <span class=\"reference-text\">r1b2qrk/pp3p1p/4pPpQ/8/8/5N2/P4PPP/3R2KR w - - 0 1&#160;; Fine 1952, <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/wspeirs/chess/blob/master/src/test/resources/mate/BWTC.PGN\">chess/BWTC.PGN at master · wspeirs/chess · GitHub</a></span>\n</li>\n<li id=\"cite_note-15\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-15\">↑</a></span> <span class=\"reference-text\"><a href=\"/George_Baylor\" title=\"George Baylor\">George W. Baylor</a>, <a href=\"/Herbert_Simon\" title=\"Herbert Simon\">Herbert A. Simon</a> (<b>1966</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://dl.acm.org/citation.cfm?id=1464182.1464233&amp;coll=GUIDE&amp;dl=GUIDE\">A chess mating combinations program</a></i>.  <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/American_Federation_of_Information_Processing_Societies\">AFIPS</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Joint_Computer_Conference\">Joint Computer Conferences</a> - Processing Speed</span>\n</li>\n<li id=\"cite_note-16\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-16\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=151785\">MATER === A simple Mate Searching Program</a> by <a href=\"/Jos%C3%A9_Ant%C3%B4nio_Fabiano_Mendes\" title=\"José Antônio Fabiano Mendes\">José Antônio Fabiano Mendes</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 24, 2001</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Engines\" title=\"Engines\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301062315\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.084 seconds\nReal time usage: 0.622 seconds\nPreprocessor visited node count: 294/1000000\nPreprocessor generated node count: 624/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1360-0!canonical and timestamp 20260301062314 and revision id 11788\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Astronomy"
+      },
+      {
+        "sortkey": "",
+        "*": "Thesis"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Adriaan de Groot"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alan Kotok"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Allen Newell"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha-Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Artificial Intelligence"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Beta-Cutoff"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Board Representation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Brute-Force"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Captures"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Carnegie Mellon University"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Check"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Checkmate"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Position"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chest"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Coko"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Combination"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Compendium"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David Levy"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dennis Cooper"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Direction"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Double Check"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ed Kozdrowicki"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engines"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fortran"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "George Baylor"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Herbert Simon"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "IBM 7090"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "John McCarthy"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "José Antônio Fabiano Mendes"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Killer Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Linked List"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "MAPP"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "MVV-LVA"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Make Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mate-in-two"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mate Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mate at a Glance"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mathematician"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Max Bramer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mike Watters"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Minimax"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mobility"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Monroe Newborn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Generation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move List"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Ordering"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Moves"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "NSS"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Perceiver"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pieces"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ply"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sacrifice"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Squares"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tactics"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Threat Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Walter R. Reitman"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "William Chase"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "X-ray"
+      },
+      {
+        "ns": 0,
+        "*": "Legal Mov"
+      },
+      {
+        "ns": 0,
+        "*": "Mater (Albillo)"
+      },
+      {
+        "ns": 0,
+        "*": "Valentin Albillo"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Abstract",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Mater",
+        "byteoffset": 2067,
+        "anchor": "Abstract"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "History",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Mater",
+        "byteoffset": 3406,
+        "anchor": "History"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Mater I",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Mater",
+        "byteoffset": 5310,
+        "anchor": "Mater_I"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Mater II",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Mater",
+        "byteoffset": 8819,
+        "anchor": "Mater_II"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Board Representation",
+        "number": "5",
+        "index": "5",
+        "fromtitle": "Mater",
+        "byteoffset": 10722,
+        "anchor": "Board_Representation"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Move Generation",
+        "number": "6",
+        "index": "6",
+        "fromtitle": "Mater",
+        "byteoffset": 11742,
+        "anchor": "Move_Generation"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Processing Speed",
+        "number": "7",
+        "index": "7",
+        "fromtitle": "Mater",
+        "byteoffset": 12407,
+        "anchor": "Processing_Speed"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Namesake",
+        "number": "8",
+        "index": "8",
+        "fromtitle": "Mater",
+        "byteoffset": 13221,
+        "anchor": "Namesake"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "9",
+        "index": "9",
+        "fromtitle": "Mater",
+        "byteoffset": 13450,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "10",
+        "index": "10",
+        "fromtitle": "Mater",
+        "byteoffset": 13570,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "11",
+        "index": "11",
+        "fromtitle": "Mater",
+        "byteoffset": 16067,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "12",
+        "index": "12",
+        "fromtitle": "Mater",
+        "byteoffset": 16551,
+        "anchor": "References"
+      }
+    ]
+  }
+}

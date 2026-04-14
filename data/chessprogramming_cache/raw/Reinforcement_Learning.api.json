@@ -1,0 +1,1611 @@
+{
+  "parse": {
+    "title": "Reinforcement Learning",
+    "pageid": 1654,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Learning\" title=\"Learning\">Learning</a> * Reinforcement Learning</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"/File:Markov_Decision_Process.svg\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Markov_Decision_Process.svg/330px-Markov_Decision_Process.svg.png\" width=\"300\" height=\"240\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Markov_Decision_Process.svg/500px-Markov_Decision_Process.svg.png 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Markov_Decision_Process.svg/960px-Markov_Decision_Process.svg.png 2x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Markov_Decision_Process.svg\" class=\"internal\" title=\"Enlarge\"></a></div><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Markov_decision_process\">Markov decision processes</a> <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>Reinforcement Learning</b>,<br />\na learning paradigm inspired by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Behaviorism\">behaviourist</a> psychology and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Classical_conditioning\">classical conditioning</a> - learning by <a href=\"/Trial_and_Error\" title=\"Trial and Error\">trial and error</a>, interacting with an environment to map situations to <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Action_selection\">actions</a> in such a way that some notion of cumulative <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Reward_system\">reward</a> is maximized. In computer games, reinforcement learning deals with adjusting feature weights based on results or their subsequent predictions during self play.\n</p><p>Reinforcement learning is indebted to the idea of <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Markov_decision_process\">Markov decision processes</a> (MDPs) in the field of <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Optimal_control\">optimal control</a> utilizing <a href=\"/Dynamic_Programming\" title=\"Dynamic Programming\">dynamic programming</a> techniques. The crucial <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Monte_Carlo_tree_search#Exploration_and_exploitation\">exploitation and exploration</a> tradeoff in <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Multi-armed_bandit\">multi-armed bandit</a> problems as also considered in <a href=\"/UCT\" title=\"UCT\">UCT</a> of <a href=\"/Monte-Carlo_Tree_Search\" title=\"Monte-Carlo Tree Search\">Monte-Carlo Tree Search</a> - between \"<a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Exploitation\">exploitation</a>\" of the machine that has the highest expected payoff and \"<a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Exploration\">exploration</a>\" to get more information about the expected payoffs of the other machines - is also faced in reinforcement learning. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Q-Learning\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Q-Learning</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Temporal_Difference_Learning\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Temporal Difference Learning</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#See_also\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Selected_Publications\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Selected Publications</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#1954_...\"><span class=\"tocnumber\">4.1</span> <span class=\"toctext\">1954 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-6\"><a href=\"#1960_...\"><span class=\"tocnumber\">4.2</span> <span class=\"toctext\">1960 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#1970_...\"><span class=\"tocnumber\">4.3</span> <span class=\"toctext\">1970 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#1980_...\"><span class=\"tocnumber\">4.4</span> <span class=\"toctext\">1980 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#1990_...\"><span class=\"tocnumber\">4.5</span> <span class=\"toctext\">1990 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#1995_...\"><span class=\"tocnumber\">4.6</span> <span class=\"toctext\">1995 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#2000_...\"><span class=\"tocnumber\">4.7</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-12\"><a href=\"#2005_...\"><span class=\"tocnumber\">4.8</span> <span class=\"toctext\">2005 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-13\"><a href=\"#2010_...\"><span class=\"tocnumber\">4.9</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-14\"><a href=\"#2015_...\"><span class=\"tocnumber\">4.10</span> <span class=\"toctext\">2015 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-15\"><a href=\"#2020_...\"><span class=\"tocnumber\">4.11</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-16\"><a href=\"#Postings\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Postings</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-17\"><a href=\"#1995_..._2\"><span class=\"tocnumber\">5.1</span> <span class=\"toctext\">1995 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-18\"><a href=\"#2000_..._2\"><span class=\"tocnumber\">5.2</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-19\"><a href=\"#2010_..._2\"><span class=\"tocnumber\">5.3</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-20\"><a href=\"#2020_..._2\"><span class=\"tocnumber\">5.4</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-21\"><a href=\"#External_Links\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">External Links</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-22\"><a href=\"#Reinforcement_Learning\"><span class=\"tocnumber\">6.1</span> <span class=\"toctext\">Reinforcement Learning</span></a></li>\n<li class=\"toclevel-2 tocsection-23\"><a href=\"#MDP\"><span class=\"tocnumber\">6.2</span> <span class=\"toctext\">MDP</span></a></li>\n<li class=\"toclevel-2 tocsection-24\"><a href=\"#Q-Learning_2\"><span class=\"tocnumber\">6.3</span> <span class=\"toctext\">Q-Learning</span></a></li>\n<li class=\"toclevel-2 tocsection-25\"><a href=\"#Courses\"><span class=\"tocnumber\">6.4</span> <span class=\"toctext\">Courses</span></a></li>\n<li class=\"toclevel-2 tocsection-26\"><a href=\"#GitHub\"><span class=\"tocnumber\">6.5</span> <span class=\"toctext\">GitHub</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-27\"><a href=\"#References\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Q-Learning\">Q-Learning</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Reinforcement_Learning&amp;action=edit&amp;section=1\" title=\"Edit section: Q-Learning\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Q-Learning, introduced by <a href=\"/index.php?title=Chris_Watkins&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Chris Watkins (page does not exist)\">Chris Watkins</a> in 1989, is a simple way for <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Intelligent_agent\">agents</a> to learn how to act optimally in controlled Markovian domains <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>. It amounts to an incremental method for dynamic programming which imposes limited computational demands. It works by successively improving its evaluations of the quality of particular actions at particular states. Q-learning converges to the optimum action-values with probability 1 so long as all actions are repeatedly sampled in all states and the action-values are represented discretely <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>. Q-learning has been successfully applied to <a href=\"/Deep_Learning\" title=\"Deep Learning\">deep learning</a> by a <a href=\"/index.php?title=Google&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Google (page does not exist)\">Google</a> <a href=\"/index.php?title=DeepMind&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"DeepMind (page does not exist)\">DeepMind</a> team in playing some <a href=\"/Atari_8-bit\" title=\"Atari 8-bit\">Atari 2600</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/List_of_Atari_2600_games\">games</a> as published in <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Nature_%28journal%29\">Nature</a>, 2015, dubbed <i>deep reinforcement learning</i> or <i>deep Q-networks</i> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>, soon followed by the spectacular <a href=\"/index.php?title=AlphaGo&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"AlphaGo (page does not exist)\">AlphaGo</a> and <a href=\"/AlphaZero\" title=\"AlphaZero\">AlphaZero</a> breakthroughs. \n</p>\n<h1><span class=\"mw-headline\" id=\"Temporal_Difference_Learning\">Temporal Difference Learning</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Reinforcement_Learning&amp;action=edit&amp;section=2\" title=\"Edit section: Temporal Difference Learning\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><i>see main page <a href=\"/Temporal_Difference_Learning\" title=\"Temporal Difference Learning\">Temporal Difference Learning</a></i>\n</p><p>Q-learning at its simplest uses tables to store data. This very quickly loses viability with increasing sizes of state/action space of the system it is monitoring/controlling. One solution to this problem is to use an (adapted) <a href=\"/Neural_Networks\" title=\"Neural Networks\">artificial neural network</a> as a function approximator, as demonstrated by <a href=\"/Gerald_Tesauro\" title=\"Gerald Tesauro\">Gerald Tesauro</a> in his <a href=\"/Backgammon\" title=\"Backgammon\">Backgammon</a> playing temporal difference learning research <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup> <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup>.\n</p><p>Temporal Difference Learning is a prediction method primarily used for reinforcement learning. In the domain of computer games and computer chess, TD learning is applied through self play, subsequently predicting the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Probability\">probability</a> of winning a <a href=\"/Chess_Game\" title=\"Chess Game\">game</a> during the sequence of <a href=\"/Moves\" title=\"Moves\">moves</a> from the <a href=\"/Initial_Position\" title=\"Initial Position\">initial position</a> until the end, to adjust weights for a more reliable prediction. \n</p>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Reinforcement_Learning&amp;action=edit&amp;section=3\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/AlphaZero\" title=\"AlphaZero\">AlphaZero</a></li>\n<li> <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">Automated Tuning</a></li>\n<li> <a href=\"/Deep_Learning\" title=\"Deep Learning\">Deep Learning</a></li>\n<li> <a href=\"/Dynamic_Programming\" title=\"Dynamic Programming\">Dynamic Programming</a></li>\n<li> <a href=\"/Michael_L._Littman#MarkovModels\" title=\"Michael L. Littman\">Markov Models</a> by <a href=\"/Michael_L._Littman\" title=\"Michael L. Littman\">Michael L. Littman</a></li>\n<li> <a href=\"/Donald_Michie#MENACE\" title=\"Donald Michie\">MENACE</a> by <a href=\"/Donald_Michie\" title=\"Donald Michie\">Donald Michie</a></li>\n<li> <a href=\"/Monte-Carlo_Tree_Search\" title=\"Monte-Carlo Tree Search\">Monte-Carlo Tree Search</a></li></ul>\n<dl><dd> <a href=\"/UCT\" title=\"UCT\">UCT</a></dd></dl>\n<ul><li> <a href=\"/Neural_Networks\" title=\"Neural Networks\">Neural Networks</a></li>\n<li> <a href=\"/Planning\" title=\"Planning\">Planning</a></li>\n<li> <a href=\"/Temporal_Difference_Learning\" title=\"Temporal Difference Learning\">Temporal Difference Learning</a></li>\n<li> <a href=\"/Trial_and_Error\" title=\"Trial and Error\">Trial and Error</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Selected_Publications\">Selected Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Reinforcement_Learning&amp;action=edit&amp;section=4\" title=\"Edit section: Selected Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1954_...\">1954 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Reinforcement_Learning&amp;action=edit&amp;section=5\" title=\"Edit section: 1954 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Richard_E._Bellman\" title=\"Richard E. Bellman\">Richard E. Bellman</a> (<b>1954</b>). <i>On a new Iterative Algorithm for Finding the Solutions of Games and Linear Programming Problems</i>. Technical Report P-473, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/RAND_Corporation\">RAND Corporation</a>, U. S. Air Force Project RAND</li>\n<li> <a href=\"/Arthur_Samuel\" title=\"Arthur Samuel\">Arthur Samuel</a> (<b>1959</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://domino.watson.ibm.com/tchjr/journalindex.nsf/600cc5649e2871db852568150060213c/39a870213169f45685256bfa00683d74!OpenDocument\">Some Studies in Machine Learning Using the Game of Checkers</a></i>. IBM Journal July 1959</li></ul>\n<h2><span class=\"mw-headline\" id=\"1960_...\">1960 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Reinforcement_Learning&amp;action=edit&amp;section=6\" title=\"Edit section: 1960 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Richard_E._Bellman\" title=\"Richard E. Bellman\">Richard E. Bellman</a> (<b>1960</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://dl.acm.org/citation.cfm?id=321011\">Sequential Machines, Ambiguity, and Dynamic Programming</a></i>. <a href=\"/ACM#Journal\" title=\"ACM\">Journal of the ACM</a>, Vol. 7, No. 1</li>\n<li>  <a href=\"/Mathematician#RAHoward\" title=\"Mathematician\">Ronald A. Howard</a> (<b>1960</b>).  <i>Dynamic Programming and Markov Processes</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/MIT_Press\">MIT Press</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://www.amazon.com/Programming-Processes-Technology-Research-Monographs/dp/0262080095\">amazon</a></li>\n<li> <a href=\"/Donald_Michie\" title=\"Donald Michie\">Donald Michie</a> (<b>1961</b>). <i>Trial and Error</i>. Penguin Science Survey</li>\n<li> <a href=\"/Donald_Michie\" title=\"Donald Michie\">Donald Michie</a>, Roger A. Chambers (<b>1968</b>). <i>Boxes: An experiment on adaptive control</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.doc.ic.ac.uk/%7Eshm/MI/mi2.html\">Machine Intelligence 2</a>, Edinburgh: Oliver &amp; Boyd, <a rel=\"nofollow\" class=\"external text\" href=\"http://aitopics.org/sites/default/files/classic/Machine_Intelligence_2/MI2-Ch9-MichieChambers.pdf\">pdf</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1970_...\">1970 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Reinforcement_Learning&amp;action=edit&amp;section=7\" title=\"Edit section: 1970 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/A._Harry_Klopf\" title=\"A. Harry Klopf\">A. Harry Klopf</a> (<b>1972</b>). <i>Brain Function and Adaptive Systems - A Heterostatic Theory</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Air_Force_Cambridge_Research_Laboratories\">Air Force Cambridge Research Laboratories</a>, Special Reports, No. 133, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.dtic.mil/dtic/tr/fulltext/u2/742259.pdf\">pdf</a></li>\n<li> <a href=\"/Mathematician#Holland\" title=\"Mathematician\">John H. Holland</a> (<b>1975</b>). <i>Adaptation in Natural and Artificial Systems: An Introductory Analysis with Applications to Biology, Control, and Artificial Intelligence</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.amazon.com/Adaptation-Natural-Artificial-Systems-Introductory/dp/0262581116\">amazon.com</a></li>\n<li> <a href=\"/Ian_H._Witten\" title=\"Ian H. Witten\">Ian H. Witten</a> (<b>1977</b>). <i>An Adaptive Optimal Controller for Discrete-Time Markov Environments</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Information_and_Computation\">Information and Control</a>, Vol. 34, No. 4, <a rel=\"nofollow\" class=\"external text\" href=\"https://core.ac.uk/download/pdf/82451748.pdf\">pdf</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1980_...\">1980 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Reinforcement_Learning&amp;action=edit&amp;section=8\" title=\"Edit section: 1980 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Richard_Sutton\" title=\"Richard Sutton\">Richard Sutton</a> (<b>1984</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://scholarworks.umass.edu/dissertations/AAI8410337/\">Temporal Credit Assignment in Reinforcement Learning</a></i>. Ph.D. dissertation, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/University_of_Massachusetts\">University of Massachusetts</a></li>\n<li> <a href=\"/Mathematician#LValiant\" title=\"Mathematician\">Leslie Valiant</a> (<b>1984</b>). <i>A Theory of the Learnable</i>. <a href=\"/ACM#Communications\" title=\"ACM\">Communications of the ACM</a>, Vol. 27, No. 11, <a rel=\"nofollow\" class=\"external text\" href=\"http://web.mit.edu/6.435/www/Valiant84.pdf\">pdf</a></li>\n<li> <a href=\"/index.php?title=Chris_Watkins&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Chris Watkins (page does not exist)\">Chris Watkins</a> (<b>1989</b>). <i>Learning from Delayed Rewards</i>. Ph.D. thesis, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/University_of_Cambridge\">Cambridge University</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.rhul.ac.uk/~chrisw/new_thesis.pdf\">pdf</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1990_...\">1990 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Reinforcement_Learning&amp;action=edit&amp;section=9\" title=\"Edit section: 1990 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Richard_Sutton\" title=\"Richard Sutton\">Richard Sutton</a>, <a href=\"/Andrew_Barto\" title=\"Andrew Barto\">Andrew Barto</a> (<b>1990</b>). <i>Time Derivative Models of Pavlovian Reinforcement</i>. Learning and Computational Neuroscience: Foundations of Adaptive Networks: 497-537</li>\n<li> <a href=\"/J%C3%BCrgen_Schmidhuber\" title=\"Jürgen Schmidhuber\">Jürgen Schmidhuber</a> (<b>1990</b>). <i>Reinforcement Learning in Markovian and Non-Markovian Environments</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/db/conf/nips/nips1990.html\">NIPS 1990</a>, <a rel=\"nofollow\" class=\"external text\" href=\"ftp://ftp.idsia.ch/pub/juergen/nipsnonmarkov.pdf\">pdf</a></li>\n<li> <a href=\"/Peter_Dayan\" title=\"Peter Dayan\">Peter Dayan</a> (<b>1991</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.era.lib.ed.ac.uk/handle/1842/14754\">Reinforcing Connectionism: Learning the Statistical Way</a></i>. Ph.D. thesis, <a href=\"/University_of_Edinburgh\" title=\"University of Edinburgh\">University of Edinburgh</a></li>\n<li> <a href=\"/index.php?title=Chris_Watkins&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Chris Watkins (page does not exist)\">Chris Watkins</a>, <a href=\"/Peter_Dayan\" title=\"Peter Dayan\">Peter Dayan</a> (<b>1992</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.gatsby.ucl.ac.uk/~dayan/papers/wd92.html\">Q-learning</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Machine_Learning_(journal)\">Machine Learning</a>, Vol. 8, No. 2</li>\n<li> <a href=\"/Gerald_Tesauro\" title=\"Gerald Tesauro\">Gerald Tesauro</a> (<b>1992</b>). <i>Temporal Difference Learning of Backgammon Strategy</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/conf/icml/ml1992.html#Tesauro92\">ML 1992</a></li>\n<li> <a href=\"/Justin_A._Boyan\" title=\"Justin A. Boyan\">Justin A. Boyan</a>, <a href=\"/Michael_L._Littman\" title=\"Michael L. Littman\">Michael L. Littman</a> (<b>1993</b>). <i>Packet Routing in Dynamically Changing Networks: A Reinforcement Learning Approach</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://papers.nips.cc/book/advances-in-neural-information-processing-systems-6-1993\">NIPS 1993</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://www.cs.cmu.edu/~jab/cv/pubs/boyan.q-routing.pdf\">pdf</a></li>\n<li> <a href=\"/Michael_L._Littman\" title=\"Michael L. Littman\">Michael L. Littman</a> (<b>1994</b>). <i>Markov Games as a Framework for Multi-Agent Reinforcement Learning</i>. International Conference on Machine Learning, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.duke.edu/courses/spring07/cps296.3/littman94markov.pdf\">pdf</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1995_...\">1995 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Reinforcement_Learning&amp;action=edit&amp;section=10\" title=\"Edit section: 1995 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Marco_Wiering\" title=\"Marco Wiering\">Marco Wiering</a> (<b>1995</b>). <i>TD Learning of Game Evaluation Functions with Hierarchical Neural Architectures</i>. Master's thesis, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/University_of_Amsterdam\">University of Amsterdam</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://webber.physik.uni-freiburg.de/~hon/vorlss02/Literatur/reinforcement/GameEvaluationWithNeuronal.pdf\">pdf</a></li>\n<li> <a href=\"/Gerald_Tesauro\" title=\"Gerald Tesauro\">Gerald Tesauro</a> (<b>1995</b>). <i>Temporal Difference Learning and TD-Gammon</i>. <a href=\"/ACM#Communications\" title=\"ACM\">Communications of the ACM</a>, Vol. 38, No. 3</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://dblp.uni-trier.de/pers/hd/b/Baird_III:Leemon_C=\">Leemon C. Baird III</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://dblp.uni-trier.de/pers/hd/h/Harmon:Mance_E=\">Mance E. Harmon</a>, <a href=\"/A._Harry_Klopf\" title=\"A. Harry Klopf\">A. Harry Klopf</a> (<b>1996</b>). <i>Reinforcement Learning: An Alternative Approach to Machine Intelligence</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.leemon.com/papers/1996bhk.pdf\">pdf</a></li>\n<li> <a href=\"/Mathematician#LPKaelbling\" title=\"Mathematician\">Leslie Pack Kaelbling</a>, <a href=\"/Michael_L._Littman\" title=\"Michael L. Littman\">Michael L. Littman</a>, <a href=\"/Mathematician#AWMoore\" title=\"Mathematician\">Andrew W. Moore</a> (<b>1996</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.washington.edu/research/jair/volume4/kaelbling96a-html/rl-survey.html\">Reinforcement Learning: A Survey</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.jair.org/vol/vol4.html\">JAIR Vol. 4</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.cmu.edu/afs/cs/project/jair/pub/volume4/kaelbling96a.pdf\">pdf</a></li>\n<li> <a href=\"/Robert_Levinson\" title=\"Robert Levinson\">Robert Levinson</a> (<b>1996</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://onlinelibrary.wiley.com/doi/10.1111/j.1467-8640.1996.tb00257.x/abstract\">General Game-Playing and Reinforcement Learning</a></i>.  <a rel=\"nofollow\" class=\"external text\" href=\"http://dblp.uni-trier.de/db/journals/ci/ci12.html#PellEL96\">Computational Intelligence, Vol. 12</a>, No. 1</li>\n<li> <a href=\"/David_E._Moriarty\" title=\"David E. Moriarty\">David E. Moriarty</a>, <a href=\"/Risto_Miikkulainen\" title=\"Risto Miikkulainen\">Risto Miikkulainen</a> (<b>1996</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://link.springer.com/article/10.1023/A:1018004120707\">Efficient Reinforcement Learning through Symbiotic Evolution</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Machine_Learning_(journal)\">Machine Learning</a>, Vol. 22</li>\n<li> <a href=\"/index.php?title=Ronald_Parr&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Ronald Parr (page does not exist)\">Ronald Parr</a>, <a href=\"/Stuart_Russell\" title=\"Stuart Russell\">Stuart Russell</a> (<b>1997</b>). <i>Reinforcement Learning with Hierarchies of Machines.</i> In Advances in Neural Information Processing Systems 10, MIT Press, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.berkeley.edu/~russell/papers/nips97-ham.ps.gz\">zipped ps</a></li>\n<li> <a href=\"/William_Uther\" title=\"William Uther\">William Uther</a>, <a href=\"/Manuela_Veloso\" title=\"Manuela Veloso\">Manuela M. Veloso</a> (<b>1997</b>). <i>Adversarial Reinforcement Learning</i>. <a href=\"/Carnegie_Mellon_University\" title=\"Carnegie Mellon University\">Carnegie Mellon University</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cse.unsw.edu.au/~willu/w/papers/Uther97a.ps\">ps</a></li>\n<li> <a href=\"/William_Uther\" title=\"William Uther\">William Uther</a>, <a href=\"/Manuela_Veloso\" title=\"Manuela Veloso\">Manuela M. Veloso</a> (<b>1997</b>). <i>Generalizing Adversarial Reinforcement Learning</i>. <a href=\"/Carnegie_Mellon_University\" title=\"Carnegie Mellon University\">Carnegie Mellon University</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cse.unsw.edu.au/~willu/w/papers/Uther97b.ps\">ps</a></li>\n<li> <a href=\"/Marco_Wiering\" title=\"Marco Wiering\">Marco Wiering</a>,  <a href=\"/J%C3%BCrgen_Schmidhuber\" title=\"Jürgen Schmidhuber\">Jürgen Schmidhuber</a> (<b>1997</b>). <i>HQ-learning</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Adaptive_Behavior_%28journal%29\">Adaptive Behavior</a>, Vol. 6, No 2</li>\n<li> <a href=\"/Csaba_Szepesv%C3%A1ri\" title=\"Csaba Szepesvári\">Csaba Szepesvári</a> (<b>1998</b>). <i>Reinforcement Learning: Theory and Practice</i>. Proceedings of the 2nd Slovak Conference on Artificial Neural Networks, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.sztaki.hu/%7Eszcsaba/papers/scann98.ps.gz\">zipped ps</a></li>\n<li> <a href=\"/Richard_Sutton\" title=\"Richard Sutton\">Richard Sutton</a>, <a href=\"/Andrew_Barto\" title=\"Andrew Barto\">Andrew Barto</a> (<b>1998</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://mitpress.mit.edu/books/reinforcement-learning\">Reinforcement Learning: An Introduction</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/MIT_Press\">MIT Press</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.ilsp.gr/homepages/papavasiliou_eng.html\">Vassilis Papavassiliou</a>, <a href=\"/Stuart_Russell\" title=\"Stuart Russell\">Stuart Russell</a> (<b>1999</b>). <i>Convergence of reinforcement learning with general function approximators.</i> In Proc. IJCAI-99, Stockholm, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.berkeley.edu/~russell/papers/ijcai99-bridge.ps\">ps</a></li>\n<li> <a href=\"/Marco_Wiering\" title=\"Marco Wiering\">Marco Wiering</a> (<b>1999</b>). <i>Explorations in Efficient Reinforcement Learning</i>. Ph.D. thesis, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/University_of_Amsterdam\">University of Amsterdam</a>, advisors <a href=\"/Mathematician#FGroen\" title=\"Mathematician\">Frans Groen</a> and <a href=\"/J%C3%BCrgen_Schmidhuber\" title=\"Jürgen Schmidhuber\">Jürgen Schmidhuber</a></li>\n<li> <a href=\"/Richard_Sutton\" title=\"Richard Sutton\">Richard Sutton</a>, <a href=\"/Doina_Precup\" title=\"Doina Precup\">Doina Precup</a>, <a href=\"/Mathematician#SSingh\" title=\"Mathematician\">Satinder Singh</a> (<b>1999</b>). <i>Between MDPs and semi-MDPs: A framework for temporal abstraction in reinforcement learning</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_(journal)\">Artificial Intelligence</a>, Vol. 112,  <a rel=\"nofollow\" class=\"external text\" href=\"https://people.cs.umass.edu/~barto/courses/cs687/Sutton-Precup-Singh-AIJ99.pdf\">pdf</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Reinforcement_Learning&amp;action=edit&amp;section=11\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Sebastian_Thrun\" title=\"Sebastian Thrun\">Sebastian Thrun</a>, <a href=\"/Michael_L._Littman\" title=\"Michael L. Littman\">Michael L. Littman</a> (<b>2000</b>). <i>A Review of Reinforcement Learning</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/journals/aim/aim21.html#ThrunL00\">AI Magazine, Vol. 21</a>, No. 1</li>\n<li> <a href=\"/Robert_Levinson\" title=\"Robert Levinson\">Robert Levinson</a>, <a href=\"/index.php?title=Ryan_Weber&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Ryan Weber (page does not exist)\">Ryan Weber</a> (<b>2000</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/chapter/10.1007/3-540-45579-5_9\">Chess Neighborhoods, Function Combination, and Reinforcement Learning</a></i>. <a href=\"/CG_2000\" title=\"CG 2000\">CG 2000</a></li>\n<li> <a href=\"/index.php?title=Andrew_Ng&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Andrew Ng (page does not exist)\">Andrew Ng</a>, <a href=\"/Stuart_Russell\" title=\"Stuart Russell\">Stuart Russell</a> (<b>2000</b>). <i>Algorithms for inverse reinforcement learning.</i> In Proceedings of the Seventeenth International Conference on Machine Learning, Stanford, California: Morgan Kaufmann, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.berkeley.edu/~russell/papers/ml00-irl.pdf\">pdf</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.ou.edu/~hougen/\">Dean F. Hougen</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www-users.cs.umn.edu/~gini/\">Maria Gini</a>, <a href=\"/James_R._Slagle\" title=\"James R. Slagle\">James R. Slagle</a> (<b>2000</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.23.2633\">An Integrated Connectionist Approach to Reinforcement Learning for Robotic Control</a></i>. ICML '00 Proceedings of the Seventeenth International Conference on Machine Learning</li>\n<li> <a href=\"/Jonathan_Baxter\" title=\"Jonathan Baxter\">Jonathan Baxter</a>, <a href=\"/Mathematician#PBartlett\" title=\"Mathematician\">Peter Bartlett</a> (<b>2000</b>). <i>Reinforcement Learning on POMDPs via Direct Gradient Ascent</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://dblp.uni-trier.de/db/conf/icml/icml2000.html\">ICML 2000</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://pdfs.semanticscholar.org/b874/98f0879d312c308889135203b17069aa0486.pdf\">pdf</a></li>\n<li> <a href=\"/Doina_Precup\" title=\"Doina Precup\">Doina Precup</a> (<b>2000</b>). <i>Temporal Abstraction in Reinforcement Learning</i>. Ph.D. Dissertation, Department of Computer Science, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/University_of_Massachusetts_Amherst\">University of Massachusetts</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Amherst,_Massachusetts\">Amherst</a>.</li>\n<li> <a href=\"/Robert_Levinson\" title=\"Robert Levinson\">Robert Levinson</a>, <a href=\"/index.php?title=Ryan_Weber&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Ryan Weber (page does not exist)\">Ryan Weber</a> (<b>2001</b>). <i>Chess Neighborhoods, Function Combinations and Reinforcements Learning</i>. In Computers and Games (eds. <a href=\"/Tony_Marsland\" title=\"Tony Marsland\">Tony Marsland</a> and I. Frank). <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Lecture_Notes_in_Computer_Science\">Lecture Notes in Computer Science</a>,. Springer,. <a rel=\"nofollow\" class=\"external text\" href=\"http://users.soe.ucsc.edu/~levinson/Papers/CNFCRL.pdf\">pdf</a></li>\n<li> <a href=\"/Marco_Block-Berlitz\" title=\"Marco Block-Berlitz\">Marco Block-Berlitz</a> (<b>2003</b>). <i>Reinforcement Learning in der Schachprogrammierung</i>. Studienarbeit, Freie Universität Berlin, Dozent: <a href=\"/Ra%C3%BAl_Rojas\" title=\"Raúl Rojas\">Prof. Dr. Raúl Rojas</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://page.mi.fu-berlin.de/block/Skripte/Reinforcement.pdf\">pdf</a> (German)</li>\n<li> <a href=\"/Henk_Mannen\" title=\"Henk Mannen\">Henk Mannen</a> (<b>2003</b>). <i>Learning to play chess using reinforcement learning with database games</i>. Master’s thesis, Cognitive Artiﬁcial Intelligence, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Utrecht_University\">Utrecht University</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.109.810&amp;rep=rep1&amp;type=pdf\">pdf</a></li>\n<li> <a href=\"/Joelle_Pineau\" title=\"Joelle Pineau\">Joelle Pineau</a>, <a href=\"/index.php?title=Geoffrey_Gordon&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Geoffrey Gordon (page does not exist)\">Geoffrey Gordon</a>, <a href=\"/Sebastian_Thrun\" title=\"Sebastian Thrun\">Sebastian Thrun</a> (<b>2003</b>). <i>Point-based value iteration: An anytime algorithm for POMDPs</i>. <a href=\"/Conferences#IJCAI2003\" title=\"Conferences\">IJCAI</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.fore.robot.cc/papers/Pineau03a.pdf\">pdf</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/pers/hd/k/Kerr:Amy_J=\">Amy J. Kerr</a>, <a href=\"/Todd_W._Neller\" title=\"Todd W. Neller\">Todd W. Neller</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/pers/hd/p/Pilla:Christopher_J=_La\">Christopher J. La Pilla</a> , <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/pers/hd/s/Schompert:Michael_D=\">Michael D. Schompert</a> (<b>2002</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.semanticscholar.org/paper/Java-Resources-for-Teaching-Reinforcement-Learning-Kerr-Neller/3d84018eb8b8668c13d1d4f6efca4442af2915b4\">Java Resources for Teaching Reinforcement Learning</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/db/conf/pdpta/pdpta2003-3.html\">PDPTA 2003</a></li>\n<li> <a href=\"/Yngvi_Bj%C3%B6rnsson\" title=\"Yngvi Björnsson\">Yngvi Björnsson</a>, Vignir Hafsteinsson, Ársæll Jóhannsson, Einar Jónsson (<b>2004</b>). <i>Efficient Use of Reinforcement Learning in a Computer Game</i>. In Computer Games: Artificial Intellignece, Design and Education (CGAIDE'04), pp. 379–383, 2004. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.ru.is/faculty/yngvi/pdf/BjornssonHJJ04.pdf\">pdf</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://imranontech.com/\">Imran Ghory</a> (<b>2004</b>). <i>Reinforcement learning in board games</i>. CSTR-04-004, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.bris.ac.uk/\">Department of Computer Science</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/University_of_Bristol\">University of Bristol</a>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.bris.ac.uk/Publications/Papers/2000100.pdf\">pdf</a> <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup></li>\n<li> <a href=\"/index.php?title=Eric_Wiewiora&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Eric Wiewiora (page does not exist)\">Eric Wiewiora</a> (<b>2004</b>). <i>Efficient Exploration for Reinforcement Learning</i>. MSc thesis, <a rel=\"nofollow\" class=\"external text\" href=\"http://cseweb.ucsd.edu/%7Eewiewior/04efficient.pdf\">pdf</a></li>\n<li> <a href=\"/Albert_Xin_Jiang\" title=\"Albert Xin Jiang\">Albert Xin Jiang</a> (<b>2004</b>). <i>Multiagent Reinforcement Learning in Stochastic Games with Continuous Action Spaces</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.ubc.ca/%7Ejiang/papers/continuous.pdf\">pdf</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2005_...\">2005 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Reinforcement_Learning&amp;action=edit&amp;section=12\" title=\"Edit section: 2005 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Sylvain_Gelly\" title=\"Sylvain Gelly\">Sylvain Gelly</a>, <a href=\"/J%C3%A9r%C3%A9mie_Mary\" title=\"Jérémie Mary\">Jérémie Mary</a>, <a href=\"/Olivier_Teytaud\" title=\"Olivier Teytaud\">Olivier Teytaud</a> (<b>2006</b>). <i>Learning for stochastic dynamic programming</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.lri.fr/%7Egelly/paper/lfordp.pdf\">pdf</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.grappa.univ-lille3.fr/~mary/paper/lfordp.pdf\">pdf</a></li>\n<li> <a href=\"/Sylvain_Gelly\" title=\"Sylvain Gelly\">Sylvain Gelly</a> (<b>2007</b>). <i>A Contribution to Reinforcement Learning; Application to Computer Go.</i> Ph.D. thesis, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.lri.fr/~gelly/paper/SylvainGellyThesis.pdf\">pdf</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/indices/a-tree/d/Duan:Yong.html\">Yong Duan</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/indices/a-tree/c/Cui:Baoxia.html\">Baoxia Cui</a>, <a href=\"/Xinhe_Xu\" title=\"Xinhe Xu\">Xinhe Xu</a> (<b>2007</b>). <i>State Space Partition for Reinforcement Learning Based on Fuzzy Min-Max Neural Network</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/conf/isnn/isnn2007-2.html#DuanCX07\">ISNN 2007</a></li>\n<li> <a href=\"/Yasuhiro_Osaki\" title=\"Yasuhiro Osaki\">Yasuhiro Osaki</a>, <a href=\"/Kazutomo_Shibahara\" title=\"Kazutomo Shibahara\">Kazutomo Shibahara</a>, <a href=\"/Yasuhiro_Tajima\" title=\"Yasuhiro Tajima\">Yasuhiro Tajima</a>, <a href=\"/Yoshiyuki_Kotani\" title=\"Yoshiyuki Kotani\">Yoshiyuki Kotani</a> (<b>2007</b>). <i>Reinforcement Learning of Evaluation Functions Using Temporal Difference-Monte Carlo learning method</i>. <a href=\"/Conferences#GPW\" title=\"Conferences\">12th Game Programming Workshop</a></li>\n<li> <a href=\"/David_Silver\" title=\"David Silver\">David Silver</a>, <a href=\"/Richard_Sutton\" title=\"Richard Sutton\">Richard Sutton</a>, <a href=\"/Martin_M%C3%BCller\" title=\"Martin Müller\">Martin Müller</a> (<b>2007</b>). <i>Reinforcement learning of local shape in the game of Go</i>. <a href=\"/Conferences#IJCAI2007\" title=\"Conferences\">20th IJCAI</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://webdocs.cs.ualberta.ca/~mmueller/ps/silver-ijcai2007.pdf\">pdf</a></li>\n<li> <a href=\"/Marco_Block-Berlitz\" title=\"Marco Block-Berlitz\">Marco Block</a>, Maro Bader, <a rel=\"nofollow\" class=\"external text\" href=\"http://page.mi.fu-berlin.de/tapia/\">Ernesto Tapia</a>, Marte Ramírez, Ketill Gunnarsson, Erik Cuevas, Daniel Zaldivar, <a href=\"/Ra%C3%BAl_Rojas\" title=\"Raúl Rojas\">Raúl Rojas</a> (<b>2008</b>). <i>Using Reinforcement Learning in Chess Engines</i>. CONCIBE SCIENCE 2008, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.micai.org/rcs/\">Research in Computing Science</a>: Special Issue in Electronics and Biomedical Engineering, Computer Science and Informatics, ISSN:1870-4069, Vol. 35, pp. 31-40, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Guadalajara\">Guadalajara</a>, Mexico, <a rel=\"nofollow\" class=\"external text\" href=\"http://page.mi.fu-berlin.de/block/concibe2008.pdf\">pdf</a></li>\n<li> <a href=\"/index.php?title=C%C3%A9cile_Germain-Renaud&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Cécile Germain-Renaud (page does not exist)\">Cécile Germain-Renaud</a>, <a href=\"/index.php?title=Julien_P%C3%A9rez&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Julien Pérez (page does not exist)\">Julien Pérez</a>, <a href=\"/index.php?title=Bal%C3%A1zs_K%C3%A9gl&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Balázs Kégl (page does not exist)\">Balázs Kégl</a>, <a href=\"/index.php?title=Charles_Loomis&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Charles Loomis (page does not exist)\">Charles Loomis</a> (<b>2008</b>). <i>Grid Differentiated Services: a Reinforcement Learning Approach</i>. In 8th <a href=\"/IEEE\" title=\"IEEE\">IEEE</a> Symposium on Cluster Computing and the Grid. Lyon, <a rel=\"nofollow\" class=\"external text\" href=\"http://hal.inria.fr/docs/00/28/78/26/PDF/RLccg08.pdf\">pdf</a></li>\n<li> <a href=\"/Bal%C3%A1zs_Csan%C3%A1d_Cs%C3%A1ji\" title=\"Balázs Csanád Csáji\">Balázs Csanád Csáji</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.dagstuhl.de/pers/hd/m/Monostori:L=aacute=szl=oacute=\">László Monostori</a> (<b>2008</b>). <i>Value function based reinforcement learning in changing Markovian environments</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Journal_of_Machine_Learning_Research\">Journal of Machine Learning Research</a>, Vol. 9, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.jmlr.org/papers/volume9/csaji08a/csaji08a.pdf\">pdf</a></li>\n<li> <a href=\"/David_Silver\" title=\"David Silver\">David Silver</a> (<b>2009</b>). <i>Reinforcement Learning and Simulation-Based Search</i>. Ph.D. thesis, <a href=\"/University_of_Alberta\" title=\"University of Alberta\">University of Alberta</a>. <a rel=\"nofollow\" class=\"external text\" href=\"http://webdocs.cs.ualberta.ca/~silver/David_Silver/Publications_files/thesis.pdf\">pdf</a></li>\n<li> <a href=\"/Marcin_Szubert\" title=\"Marcin Szubert\">Marcin Szubert</a> (<b>2009</b>). <i>Coevolutionary Reinforcement Learning and its Application to Othello</i>. M.Sc. thesis, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pozna%C5%84_University_of_Technology\">Poznań University of Technology</a>, supervisor <a href=\"/Krzysztof_Krawiec\" title=\"Krzysztof Krawiec\">Krzysztof Krawiec</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://mszubert.github.io/papers/Szubert_2009_MSC.pdf\">pdf</a></li>\n<li> <a href=\"/Joelle_Pineau\" title=\"Joelle Pineau\">Joelle Pineau</a>, <a href=\"/index.php?title=Geoffrey_Gordon&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Geoffrey Gordon (page does not exist)\">Geoffrey Gordon</a>, <a href=\"/Sebastian_Thrun\" title=\"Sebastian Thrun\">Sebastian Thrun</a> (<b>2006, 2011</b>). <i>Anytime Point-Based Approximations for Large POMDPs</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Journal_of_Artificial_Intelligence_Research\">Journal of Artificial Intelligence Research</a>, Vol. 27, <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1110.0027\">arXiv:1110.0027</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Reinforcement_Learning&amp;action=edit&amp;section=13\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Joel_Veness\" title=\"Joel Veness\">Joel Veness</a>, <a href=\"/index.php?title=Kee_Siong_Ng&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Kee Siong Ng (page does not exist)\">Kee Siong Ng</a>, <a href=\"/Marcus_Hutter\" title=\"Marcus Hutter\">Marcus Hutter</a>, <a href=\"/David_Silver\" title=\"David Silver\">David Silver</a> (<b>2010</b>). <i>Reinforcement Learning via AIXI Approximation</i>. Association for the Advancement of Artificial Intelligence (AAAI), <a rel=\"nofollow\" class=\"external text\" href=\"http://jveness.info/publications/veness_rl_via_aixi_approx.pdf\">pdf</a></li>\n<li> <a href=\"/index.php?title=Julien_P%C3%A9rez&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Julien Pérez (page does not exist)\">Julien Pérez</a>, <a href=\"/index.php?title=C%C3%A9cile_Germain-Renaud&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Cécile Germain-Renaud (page does not exist)\">Cécile Germain-Renaud</a>, <a href=\"/index.php?title=Bal%C3%A1zs_K%C3%A9gl&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Balázs Kégl (page does not exist)\">Balázs Kégl</a>, <a href=\"/index.php?title=Charles_Loomis&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Charles Loomis (page does not exist)\">Charles Loomis</a> (<b>2010</b>). <i>Multi-objective Reinforcement Learning for Responsive Grids</i>. In The Journal of Grid Computing. <a rel=\"nofollow\" class=\"external text\" href=\"http://hal.archives-ouvertes.fr/docs/00/49/15/60/PDF/RLGrid_JGC09_V7.pdf\">pdf</a></li>\n<li> <a href=\"/Csaba_Szepesv%C3%A1ri\" title=\"Csaba Szepesvári\">Csaba Szepesvári</a> (<b>2010</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://sites.ualberta.ca/~szepesva/RLBook.html\">Algorithms for Reinforcement Learning</a></i>. Morgan &amp; Claypool</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.org/pers/hd/z/Zaragoza:Julio_H=\">Julio H. Zaragoza</a>, <a href=\"/Eduardo_F._Morales\" title=\"Eduardo F. Morales\">Eduardo F. Morales</a> (<b>2010</b>). <i>Relational Reinforcement Learning with Continuous Actions by Combining Behavioral Cloning and Locally Weighted Regression</i>. Journal of Intelligent Systems and Applications, Vol. 2</li></ul>\n<p><b>2011</b>\n</p>\n<ul><li> <a href=\"/Peter_Auer\" title=\"Peter Auer\">Peter Auer</a> (<b>2011</b>). <i>Exploration and Exploitation in Online Learning</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://dblp.uni-trier.de/db/conf/icais/icais2011.html#Auer11\">ICAIS 2011</a></li>\n<li> <a href=\"/Charles_Elkan\" title=\"Charles Elkan\">Charles Elkan</a> (<b>2011</b>). <i>Reinforcement Learning with a Bilinear Q Function</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/conf/ewrl/ewrl2011.html#Elkan11\">EWRL 2011</a></li></ul>\n<p><b>2012</b>\n</p>\n<ul><li> <a href=\"/Marco_Wiering\" title=\"Marco Wiering\">Marco Wiering</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://martijnvanotterlo.nl/\">Martijn Van Otterlo</a> (<b>2012</b>). <i>Reinforcement learning: State-of-the-art</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/book/10.1007/978-3-642-27645-3\">Adaptation, Learning, and Optimization, Vol. 12</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Springer_Science%2BBusiness_Media\">Springer</a></li></ul>\n<dl><dd> <a href=\"/Istv%C3%A1n_Szita\" title=\"István Szita\">István Szita</a> (<b>2012</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/chapter/10.1007%2F978-3-642-27645-3_17\">Reinforcement Learning in Games</a></i>. Chapter 17</dd></dl>\n<ul><li> <a href=\"/index.php?title=Thomas_J._Walsh&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Thomas J. Walsh (page does not exist)\">Thomas J. Walsh</a>, <a href=\"/Istv%C3%A1n_Szita\" title=\"István Szita\">István Szita</a>, <a href=\"/index.php?title=Carlos_Diuk&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Carlos Diuk (page does not exist)\">Carlos Diuk</a>, <a href=\"/Michael_L._Littman\" title=\"Michael L. Littman\">Michael L. Littman</a> (<b>2012</b>). <i>Exploring compact reinforcement-learning representations with linear regression</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1205.2606\">arXiv:1205.2606</a></li>\n<li> <a href=\"/Arthur_Guez\" title=\"Arthur Guez\">Arthur Guez</a>, <a href=\"/David_Silver\" title=\"David Silver\">David Silver</a>, <a href=\"/Peter_Dayan\" title=\"Peter Dayan\">Peter Dayan</a> (<b>2012</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://papers.nips.cc/paper/4767-efficient-bayes-adaptive-reinforcement-learning-using-sample-based-search\">Efficient Bayes-Adaptive Reinforcement Learning using Sample-Based Search</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://papers.nips.cc/book/advances-in-neural-information-processing-systems-25-2012\">NIPS 2012</a></li></ul>\n<p><b>2013</b>\n</p>\n<ul><li> <a href=\"/Arthur_Guez\" title=\"Arthur Guez\">Arthur Guez</a>, <a href=\"/David_Silver\" title=\"David Silver\">David Silver</a>, <a href=\"/Peter_Dayan\" title=\"Peter Dayan\">Peter Dayan</a> (<b>2013</b>). <i>Scalable and Efficient Bayes-Adaptive Reinforcement Learning Based on Monte-Carlo Tree Search</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Journal_of_Artificial_Intelligence_Research\">Journal of Artificial Intelligence Research</a>, Vol. 48, <a rel=\"nofollow\" class=\"external text\" href=\"https://www.jair.org/media/4117/live-4117-7507-jair.pdf\">pdf</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://dblp.uni-trier.de/pers/hd/r/Ree:M=_van_der\">Michiel van der Ree</a>, <a href=\"/Marco_Wiering\" title=\"Marco Wiering\">Marco Wiering</a> (<b>2013</b>). <i>Reinforcement Learning in the Game of Othello: Learning Against a Fixed Opponent and Learning from Self-Play</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://dblp.uni-trier.de/db/conf/adprl/adprl2013.html#ReeW13\">ADPRL 2013</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://dblp.uni-trier.de/pers/hd/b/Bom:Luuk\">Luuk Bom</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://dblp.uni-trier.de/pers/hd/h/Henken:Ruud\">Ruud Henken</a>, <a href=\"/Marco_Wiering\" title=\"Marco Wiering\">Marco Wiering</a> (<b>2013</b>). <i>Reinforcement Learning to Train Ms. Pac-Man Using Higher-order Action-relative Inputs</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://dblp.uni-trier.de/db/conf/adprl/adprl2013.html#BomHW13\">ADPRL 2013</a> <sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup></li>\n<li> <a href=\"/Peter_Auer\" title=\"Peter Auer\">Peter Auer</a>, <a href=\"/Marcus_Hutter\" title=\"Marcus Hutter\">Marcus Hutter</a>, <a href=\"/index.php?title=Laurent_Orseau&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Laurent Orseau (page does not exist)\">Laurent Orseau</a> (<b>2013</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://drops.dagstuhl.de/opus/volltexte/2013/4340/\">Reinforcement Learning</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://dblp.uni-trier.de/db/journals/dagstuhl-reports/dagstuhl-reports3.html#AuerHO13\">Dagstuhl Reports, Vol. 3, No. 8</a>, DOI: <a rel=\"nofollow\" class=\"external text\" href=\"http://drops.dagstuhl.de/opus/volltexte/2013/4340/\">10.4230/DagRep.3.8.1</a>, URN: <a rel=\"nofollow\" class=\"external text\" href=\"http://drops.dagstuhl.de/opus/volltexte/2013/4340/\">urn:nbn:de:0030-drops-43409</a></li>\n<li> <a href=\"/Volodymyr_Mnih\" title=\"Volodymyr Mnih\">Volodymyr Mnih</a>, <a href=\"/Koray_Kavukcuoglu\" title=\"Koray Kavukcuoglu\">Koray Kavukcuoglu</a>, <a href=\"/David_Silver\" title=\"David Silver\">David Silver</a>, <a href=\"/index.php?title=Alex_Graves&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Alex Graves (page does not exist)\">Alex Graves</a>, <a href=\"/Ioannis_Antonoglou\" title=\"Ioannis Antonoglou\">Ioannis Antonoglou</a>, <a href=\"/index.php?title=Daan_Wierstra&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Daan Wierstra (page does not exist)\">Daan Wierstra</a>, <a href=\"/index.php?title=Martin_Riedmiller&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Martin Riedmiller (page does not exist)\">Martin Riedmiller</a> (<b>2013</b>). <i>Playing Atari with Deep Reinforcement Learning</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://arxiv.org/abs/1312.5602\">arXiv:1312.5602</a> <sup id=\"cite_ref-9\" class=\"reference\"><a href=\"#cite_note-9\">&#91;9&#93;</a></sup> <sup id=\"cite_ref-10\" class=\"reference\"><a href=\"#cite_note-10\">&#91;10&#93;</a></sup></li>\n<li> <a href=\"/Ari_Weinstein\" title=\"Ari Weinstein\">Ari Weinstein</a> (<b>2013</b>). <i>Local Planning For Continuous Markov Decision Processes</i>. Ph.D. thesis, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Rutgers_University\">Rutgers University</a>, advisor <a href=\"/Michael_L._Littman\" title=\"Michael L. Littman\">Michael L. Littman</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://cs.brown.edu/~mlittman/theses/weinstein.pdf\">pdf</a></li></ul>\n<p><b>2014</b>\n</p>\n<ul><li> <a href=\"/Marcin_Szubert\" title=\"Marcin Szubert\">Marcin Szubert</a> (<b>2014</b>). <i>Coevolutionary Shaping for Reinforcement Learning</i>. Ph.D. thesis, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pozna%C5%84_University_of_Technology\">Poznań University of Technology</a>, supervisor <a href=\"/Krzysztof_Krawiec\" title=\"Krzysztof Krawiec\">Krzysztof Krawiec</a>, co-supervisor <a href=\"/Wojciech_Ja%C5%9Bkowski\" title=\"Wojciech Jaśkowski\">Wojciech Jaśkowski</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.put.poznan.pl/mszubert/pub/phdthesis.pdf\">pdf</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2015_...\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Reinforcement_Learning&amp;action=edit&amp;section=14\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Volodymyr_Mnih\" title=\"Volodymyr Mnih\">Volodymyr Mnih</a>, <a href=\"/Koray_Kavukcuoglu\" title=\"Koray Kavukcuoglu\">Koray Kavukcuoglu</a>, <a href=\"/David_Silver\" title=\"David Silver\">David Silver</a>, <a href=\"/Mathematician#AARusu\" title=\"Mathematician\">Andrei A. Rusu</a>, <a href=\"/Joel_Veness\" title=\"Joel Veness\">Joel Veness</a>, <a href=\"/index.php?title=Marc_G._Bellemare&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Marc G. Bellemare (page does not exist)\">Marc G. Bellemare</a>, <a href=\"/index.php?title=Alex_Graves&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Alex Graves (page does not exist)\">Alex Graves</a>, <a href=\"/index.php?title=Martin_Riedmiller&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Martin Riedmiller (page does not exist)\">Martin Riedmiller</a>, <a href=\"/index.php?title=Andreas_K._Fidjeland&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Andreas K. Fidjeland (page does not exist)\">Andreas K. Fidjeland</a>, <a href=\"/index.php?title=Georg_Ostrovski&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Georg Ostrovski (page does not exist)\">Georg Ostrovski</a>, <a href=\"/index.php?title=Stig_Petersen&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Stig Petersen (page does not exist)\">Stig Petersen</a>, <a href=\"/index.php?title=Charles_Beattie&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Charles Beattie (page does not exist)\">Charles Beattie</a>, <a href=\"/index.php?title=Amir_Sadik&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Amir Sadik (page does not exist)\">Amir Sadik</a>, <a href=\"/Ioannis_Antonoglou\" title=\"Ioannis Antonoglou\">Ioannis Antonoglou</a>, <a href=\"/index.php?title=Helen_King&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Helen King (page does not exist)\">Helen King</a>, <a href=\"/Dharshan_Kumaran\" title=\"Dharshan Kumaran\">Dharshan Kumaran</a>, <a href=\"/index.php?title=Daan_Wierstra&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Daan Wierstra (page does not exist)\">Daan Wierstra</a>, <a href=\"/index.php?title=Shane_Legg&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Shane Legg (page does not exist)\">Shane Legg</a>, <a href=\"/Demis_Hassabis\" title=\"Demis Hassabis\">Demis Hassabis</a> (<b>2015</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.nature.com/nature/journal/v518/n7540/abs/nature14236.html\">Human-level control through deep reinforcement learning</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Nature_%28journal%29\">Nature</a>, Vol. 518</li>\n<li> <a href=\"/index.php?title=Tobias_Graf&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Tobias Graf (page does not exist)\">Tobias Graf</a>, <a href=\"/index.php?title=Marco_Platzner&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Marco Platzner (page does not exist)\">Marco Platzner</a> (<b>2015</b>). <i>Adaptive Playouts in Monte Carlo Tree Search with Policy Gradient Reinforcement Learning</i>. <a href=\"/Advances_in_Computer_Games_14\" title=\"Advances in Computer Games 14\">Advances in Computer Games 14</a></li>\n<li> <a href=\"/index.php?title=Arun_Nair&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Arun Nair (page does not exist)\">Arun Nair</a>, <a href=\"/index.php?title=Praveen_Srinivasan&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Praveen Srinivasan (page does not exist)\">Praveen Srinivasan</a>, <a href=\"/index.php?title=Sam_Blackwell&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Sam Blackwell (page does not exist)\">Sam Blackwell</a>, <a href=\"/index.php?title=Cagdas_Alcicek&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Cagdas Alcicek (page does not exist)\">Cagdas Alcicek</a>, <a href=\"/index.php?title=Rory_Fearon&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Rory Fearon (page does not exist)\">Rory Fearon</a>, <a href=\"/index.php?title=Alessandro_De_Maria&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Alessandro De Maria (page does not exist)\">Alessandro De Maria</a>, <a href=\"/index.php?title=Veda_Panneershelvam&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Veda Panneershelvam (page does not exist)\">Veda Panneershelvam</a>, <a href=\"/index.php?title=Mustafa_Suleyman&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Mustafa Suleyman (page does not exist)\">Mustafa Suleyman</a>, <a href=\"/index.php?title=Charles_Beattie&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Charles Beattie (page does not exist)\">Charles Beattie</a>, <a href=\"/index.php?title=Stig_Petersen&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Stig Petersen (page does not exist)\">Stig Petersen</a>, <a href=\"/index.php?title=Shane_Legg&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Shane Legg (page does not exist)\">Shane Legg</a>, <a href=\"/Volodymyr_Mnih\" title=\"Volodymyr Mnih\">Volodymyr Mnih</a>, <a href=\"/Koray_Kavukcuoglu\" title=\"Koray Kavukcuoglu\">Koray Kavukcuoglu</a>, <a href=\"/David_Silver\" title=\"David Silver\">David Silver</a> (<b>2015</b>). <i>Massively Parallel Methods for Deep Reinforcement Learning</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://arxiv.org/abs/1507.04296\">arXiv:1507.04296</a></li>\n<li> <a href=\"/Matthew_Lai\" title=\"Matthew Lai\">Matthew Lai</a> (<b>2015</b>). <i>Giraffe: Using Deep Reinforcement Learning to Play Chess</i>. M.Sc. thesis, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Imperial_College_London\">Imperial College London</a>,  <a rel=\"nofollow\" class=\"external text\" href=\"http://arxiv.org/abs/1509.01549v1\">arXiv:1509.01549v1</a>&#160;» <a href=\"/Giraffe\" title=\"Giraffe\">Giraffe</a></li>\n<li> <a href=\"/index.php?title=Hado_van_Hasselt&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Hado van Hasselt (page does not exist)\">Hado van Hasselt</a>, <a href=\"/Arthur_Guez\" title=\"Arthur Guez\">Arthur Guez</a>, <a href=\"/David_Silver\" title=\"David Silver\">David Silver</a> (<b>2015</b>). <i>Deep Reinforcement Learning with Double Q-learning</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://arxiv.org/abs/1509.06461\">arXiv:1509.06461</a></li></ul>\n<p><b>2016</b>\n</p>\n<ul><li> <a href=\"/index.php?title=Ziyu_Wang&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Ziyu Wang (page does not exist)\">Ziyu Wang</a>, <a href=\"/index.php?title=Nando_de_Freitas&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Nando de Freitas (page does not exist)\">Nando de Freitas</a>, <a href=\"/Marc_Lanctot\" title=\"Marc Lanctot\">Marc Lanctot</a> (<b>2016</b>). <i>Dueling Network Architectures for Deep Reinforcement Learning</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://arxiv.org/abs/1511.06581\">arXiv:1511.06581</a></li>\n<li> <a href=\"/David_Silver\" title=\"David Silver\">David Silver</a>, <a href=\"/Shih-Chieh_Huang\" title=\"Shih-Chieh Huang\">Aja Huang</a>, <a href=\"/Chris_J._Maddison\" title=\"Chris J. Maddison\">Chris J. Maddison</a>, <a href=\"/Arthur_Guez\" title=\"Arthur Guez\">Arthur Guez</a>, <a href=\"/Laurent_Sifre\" title=\"Laurent Sifre\">Laurent Sifre</a>, <a href=\"/index.php?title=George_van_den_Driessche&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"George van den Driessche (page does not exist)\">George van den Driessche</a>, <a href=\"/Julian_Schrittwieser\" title=\"Julian Schrittwieser\">Julian Schrittwieser</a>, <a href=\"/Ioannis_Antonoglou\" title=\"Ioannis Antonoglou\">Ioannis Antonoglou</a>, <a href=\"/index.php?title=Veda_Panneershelvam&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Veda Panneershelvam (page does not exist)\">Veda Panneershelvam</a>, <a href=\"/Marc_Lanctot\" title=\"Marc Lanctot\">Marc Lanctot</a>, <a href=\"/index.php?title=Sander_Dieleman&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Sander Dieleman (page does not exist)\">Sander Dieleman</a>, <a href=\"/index.php?title=Dominik_Grewe&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Dominik Grewe (page does not exist)\">Dominik Grewe</a>, <a href=\"/index.php?title=John_Nham&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"John Nham (page does not exist)\">John Nham</a>, <a href=\"/index.php?title=Nal_Kalchbrenner&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Nal Kalchbrenner (page does not exist)\">Nal Kalchbrenner</a>, <a href=\"/Ilya_Sutskever\" title=\"Ilya Sutskever\">Ilya Sutskever</a>, <a href=\"/Timothy_Lillicrap\" title=\"Timothy Lillicrap\">Timothy Lillicrap</a>, <a href=\"/index.php?title=Madeleine_Leach&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Madeleine Leach (page does not exist)\">Madeleine Leach</a>, <a href=\"/Koray_Kavukcuoglu\" title=\"Koray Kavukcuoglu\">Koray Kavukcuoglu</a>, <a href=\"/Thore_Graepel\" title=\"Thore Graepel\">Thore Graepel</a>, <a href=\"/Demis_Hassabis\" title=\"Demis Hassabis\">Demis Hassabis</a> (<b>2016</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.nature.com/nature/journal/v529/n7587/full/nature16961.html\">Mastering the game of Go with deep neural networks and tree search</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Nature_%28journal%29\">Nature</a>, Vol. 529&#160;» <a href=\"/index.php?title=AlphaGo&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"AlphaGo (page does not exist)\">AlphaGo</a></li>\n<li> <a href=\"/index.php?title=Hung_Guei&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Hung Guei (page does not exist)\">Hung Guei</a>, <a href=\"/index.php?title=Tinghan_Wei&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Tinghan Wei (page does not exist)\">Tinghan Wei</a>, <a href=\"/index.php?title=Jin-Bo_Huang&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Jin-Bo Huang (page does not exist)\">Jin-Bo Huang</a>, <a href=\"/I-Chen_Wu\" title=\"I-Chen Wu\">I-Chen Wu</a> (<b>2016</b>). <i>An Empirical Study on Applying Deep Reinforcement Learning to the Game 2048</i>. <a href=\"/CG_2016\" title=\"CG 2016\">CG 2016</a></li>\n<li> <a href=\"/Eli_David\" title=\"Eli David\">Omid E. David</a>, <a href=\"/Nathan_S._Netanyahu\" title=\"Nathan S. Netanyahu\">Nathan S. Netanyahu</a>, <a href=\"/index.php?title=Lior_Wolf&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Lior Wolf (page does not exist)\">Lior Wolf</a> (<b>2016</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/chapter/10.1007%2F978-3-319-44781-0_11\">DeepChess: End-to-End Deep Neural Network for Automatic Learning in Chess</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://icann2016.org/\">ICAAN 2016</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Lecture_Notes_in_Computer_Science\">Lecture Notes in Computer Science</a>, Vol. 9887, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Springer_Science%2BBusiness_Media\">Springer</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.tau.ac.il/~wolf/papers/deepchess.pdf\">pdf preprint</a>&#160;» <a href=\"/index.php?title=DeepChess&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"DeepChess (page does not exist)\">DeepChess</a> <sup id=\"cite_ref-11\" class=\"reference\"><a href=\"#cite_note-11\">&#91;11&#93;</a></sup> <sup id=\"cite_ref-12\" class=\"reference\"><a href=\"#cite_note-12\">&#91;12&#93;</a></sup></li>\n<li> <a href=\"/Volodymyr_Mnih\" title=\"Volodymyr Mnih\">Volodymyr Mnih</a>, <a href=\"/index.php?title=Adri%C3%A0_Puigdom%C3%A8nech_Badia&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Adrià Puigdomènech Badia (page does not exist)\">Adrià Puigdomènech Badia</a>, <a href=\"/index.php?title=Mehdi_Mirza&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Mehdi Mirza (page does not exist)\">Mehdi Mirza</a>, <a href=\"/index.php?title=Alex_Graves&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Alex Graves (page does not exist)\">Alex Graves</a>, <a href=\"/Timothy_Lillicrap\" title=\"Timothy Lillicrap\">Timothy Lillicrap</a>, <a href=\"/index.php?title=Tim_Harley&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Tim Harley (page does not exist)\">Tim Harley</a>, <a href=\"/David_Silver\" title=\"David Silver\">David Silver</a>, <a href=\"/Koray_Kavukcuoglu\" title=\"Koray Kavukcuoglu\">Koray Kavukcuoglu</a> (<b>2016</b>). <i>Asynchronous Methods for Deep Reinforcement Learning</i>.  <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1602.01783\">arXiv:1602.01783v2</a></li>\n<li> <a href=\"/index.php?title=Shixiang_Gu&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Shixiang Gu (page does not exist)\">Shixiang Gu</a>, <a href=\"/index.php?title=Ethan_Holly&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Ethan Holly (page does not exist)\">Ethan Holly</a>, <a href=\"/Timothy_Lillicrap\" title=\"Timothy Lillicrap\">Timothy Lillicrap</a>, <a href=\"/index.php?title=Sergey_Levine&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Sergey Levine (page does not exist)\">Sergey Levine</a> (<b>2016</b>). <i>Deep Reinforcement Learning for Robotic Manipulation with Asynchronous Off-Policy Updates</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1610.00633\">arXiv:1610.00633</a></li>\n<li> <a href=\"/index.php?title=Max_Jaderberg&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Max Jaderberg (page does not exist)\">Max Jaderberg</a>, <a href=\"/Volodymyr_Mnih\" title=\"Volodymyr Mnih\">Volodymyr Mnih</a>, <a href=\"/index.php?title=Wojciech_Marian_Czarnecki&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Wojciech Marian Czarnecki (page does not exist)\">Wojciech Marian Czarnecki</a>, <a href=\"/index.php?title=Tom_Schaul&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Tom Schaul (page does not exist)\">Tom Schaul</a>, <a href=\"/index.php?title=Joel_Z._Leibo&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Joel Z. Leibo (page does not exist)\">Joel Z. Leibo</a>, <a href=\"/David_Silver\" title=\"David Silver\">David Silver</a>, <a href=\"/Koray_Kavukcuoglu\" title=\"Koray Kavukcuoglu\">Koray Kavukcuoglu</a> (<b>2016</b>). <i>Reinforcement Learning with Unsupervised Auxiliary Tasks</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1611.05397v1\">arXiv:1611.05397v1</a></li>\n<li> <a href=\"/index.php?title=Jane_X_Wang&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Jane X Wang (page does not exist)\">Jane X Wang</a>, <a href=\"/index.php?title=Zeb_Kurth-Nelson&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Zeb Kurth-Nelson (page does not exist)\">Zeb Kurth-Nelson</a>, <a href=\"/index.php?title=Dhruva_Tirumala&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Dhruva Tirumala (page does not exist)\">Dhruva Tirumala</a>, <a href=\"/index.php?title=Hubert_Soyer&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Hubert Soyer (page does not exist)\">Hubert Soyer</a>, <a href=\"/index.php?title=Joel_Z_Leibo&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Joel Z Leibo (page does not exist)\">Joel Z Leibo</a>, <a href=\"/R%C3%A9mi_Munos\" title=\"Rémi Munos\">Rémi Munos</a>, <a href=\"/index.php?title=Charles_Blundell&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Charles Blundell (page does not exist)\">Charles Blundell</a>, <a href=\"/Dharshan_Kumaran\" title=\"Dharshan Kumaran\">Dharshan Kumaran</a>, <a href=\"/index.php?title=Matthew_Botvinick&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Matthew Botvinick (page does not exist)\">Matthew Botvinick</a> (<b>2016</b>). <i>Learning to reinforcement learn</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1611.05763\">arXiv:1611.05763</a></li>\n<li> <a href=\"/Zacharias_Georgiou\" title=\"Zacharias Georgiou\">Zacharias Georgiou</a>, <a href=\"/Evangelos_Karountzos\" title=\"Evangelos Karountzos\">Evangelos Karountzos</a>, <a href=\"/Yaroslav_Shkarupa\" title=\"Yaroslav Shkarupa\">Yaroslav Shkarupa</a>, <a href=\"/Matthia_Sabatelli\" title=\"Matthia Sabatelli\">Matthia Sabatelli</a> (<b>2016</b>). <i>A Reinforcement Learning Approach for Solving KRK Chess Endgames</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/paintception/A-Reinforcement-Learning-Approach-for-Solving-Chess-Endgames/blob/master/project_papers/final_paper/reinforcement-learning-approach(2).pdf\">pdf</a> <sup id=\"cite_ref-13\" class=\"reference\"><a href=\"#cite_note-13\">&#91;13&#93;</a></sup></li></ul>\n<p><b>2017</b>\n</p>\n<ul><li> <a href=\"/index.php?title=Hirotaka_Kameko&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Hirotaka Kameko (page does not exist)\">Hirotaka Kameko</a>, <a href=\"/index.php?title=Jun_Suzuki&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Jun Suzuki (page does not exist)\">Jun Suzuki</a>, <a href=\"/Naoki_Mizukami\" title=\"Naoki Mizukami\">Naoki Mizukami</a>, <a href=\"/Yoshimasa_Tsuruoka\" title=\"Yoshimasa Tsuruoka\">Yoshimasa Tsuruoka</a> (<b>2017</b>). <i>Deep Reinforcement Learning with Hidden Layers on Future States</i>. <a href=\"/Conferences#IJCA2017\" title=\"Conferences\">Computer Games Workshop at IJCAI 2017</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.lamsade.dauphine.fr/~cazenave/cgw2017/Kameko.pdf\">pdf</a></li>\n<li> <a href=\"/Marc_Lanctot\" title=\"Marc Lanctot\">Marc Lanctot</a>, <a href=\"/index.php?title=Vin%C3%ADcius_Flores_Zambaldi&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Vinícius Flores Zambaldi (page does not exist)\">Vinícius Flores Zambaldi</a>, <a href=\"/index.php?title=Audrunas_Gruslys&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Audrunas Gruslys (page does not exist)\">Audrunas Gruslys</a>, <a href=\"/index.php?title=Angeliki_Lazaridou&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Angeliki Lazaridou (page does not exist)\">Angeliki Lazaridou</a>, <a href=\"/index.php?title=Karl_Tuyls&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Karl Tuyls (page does not exist)\">Karl Tuyls</a>, <a href=\"/index.php?title=Julien_P%C3%A9rolat&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Julien Pérolat (page does not exist)\">Julien Pérolat</a>, <a href=\"/David_Silver\" title=\"David Silver\">David Silver</a>, <a href=\"/Thore_Graepel\" title=\"Thore Graepel\">Thore Graepel</a> (<b>2017</b>). <i>A Unified Game-Theoretic Approach to Multiagent Reinforcement Learning</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1711.00832\">arXiv:1711.00832</a></li>\n<li> <a href=\"/David_Silver\" title=\"David Silver\">David Silver</a>, <a href=\"/Julian_Schrittwieser\" title=\"Julian Schrittwieser\">Julian Schrittwieser</a>, <a href=\"/Karen_Simonyan\" title=\"Karen Simonyan\">Karen Simonyan</a>, <a href=\"/Ioannis_Antonoglou\" title=\"Ioannis Antonoglou\">Ioannis Antonoglou</a>, <a href=\"/Shih-Chieh_Huang\" title=\"Shih-Chieh Huang\">Aja Huang</a>, <a href=\"/Arthur_Guez\" title=\"Arthur Guez\">Arthur Guez</a>, <a href=\"/Thomas_Hubert\" title=\"Thomas Hubert\">Thomas Hubert</a>, <a href=\"/index.php?title=Lucas_Baker&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Lucas Baker (page does not exist)\">Lucas Baker</a>, <a href=\"/Matthew_Lai\" title=\"Matthew Lai\">Matthew Lai</a>, <a href=\"/index.php?title=Adrian_Bolton&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Adrian Bolton (page does not exist)\">Adrian Bolton</a>, <a href=\"/index.php?title=Yutian_Chen&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Yutian Chen (page does not exist)\">Yutian Chen</a>, <a href=\"/Timothy_Lillicrap\" title=\"Timothy Lillicrap\">Timothy Lillicrap</a>, <a href=\"/index.php?title=Fan_Hui&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Fan Hui (page does not exist)\">Fan Hui</a>, <a href=\"/Laurent_Sifre\" title=\"Laurent Sifre\">Laurent Sifre</a>, <a href=\"/index.php?title=George_van_den_Driessche&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"George van den Driessche (page does not exist)\">George van den Driessche</a>, <a href=\"/Thore_Graepel\" title=\"Thore Graepel\">Thore Graepel</a>, <a href=\"/Demis_Hassabis\" title=\"Demis Hassabis\">Demis Hassabis</a> (<b>2017</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.nature.com/nature/journal/v550/n7676/full/nature24270.html\">Mastering the game of Go without human knowledge</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Nature_%28journal%29\">Nature</a>, Vol. 550,  <a rel=\"nofollow\" class=\"external text\" href=\"https://www.gwern.net/docs/rl/2017-silver.pdf\">pdf</a> <sup id=\"cite_ref-14\" class=\"reference\"><a href=\"#cite_note-14\">&#91;14&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.peterhenderson.co/\">Peter Henderson</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://scholar.google.ca/citations?user=2_4Rs44AAAAJ&amp;hl=en\">Riashat Islam</a>, <a href=\"/index.php?title=Philip_Bachman&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Philip Bachman (page does not exist)\">Philip Bachman</a>, <a href=\"/Joelle_Pineau\" title=\"Joelle Pineau\">Joelle Pineau</a>, <a href=\"/Doina_Precup\" title=\"Doina Precup\">Doina Precup</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://scholar.google.ca/citations?user=gFwEytkAAAAJ&amp;hl=en\">David Meger</a> (<b>2017</b>). <i>Deep Reinforcement Learning that Matters</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1709.06560\">arXiv:1709.06560</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://scholar.google.com/citations?user=tiE4g64AAAAJ&amp;hl=en\">Maithra Raghu</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://scholar.google.com/citations?user=ZZNxNAYAAAAJ&amp;hl=en\">Alex Irpan</a>, <a href=\"/Mathematician#JAndreas\" title=\"Mathematician\">Jacob Andreas</a>, <a href=\"/Mathematician#RKleinberg\" title=\"Mathematician\">Robert Kleinberg</a>, <a href=\"/index.php?title=Quoc_V._Le&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Quoc V. Le (page does not exist)\">Quoc V. Le</a>, <a href=\"/Jon_Kleinberg\" title=\"Jon Kleinberg\">Jon Kleinberg</a> (<b>2017</b>). <i>Can Deep Reinforcement Learning Solve Erdos-Selfridge-Spencer Games?</i> <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1711.02301\">arXiv:1711.02301</a></li>\n<li> <a href=\"/David_Silver\" title=\"David Silver\">David Silver</a>, <a href=\"/Thomas_Hubert\" title=\"Thomas Hubert\">Thomas Hubert</a>, <a href=\"/Julian_Schrittwieser\" title=\"Julian Schrittwieser\">Julian Schrittwieser</a>, <a href=\"/Ioannis_Antonoglou\" title=\"Ioannis Antonoglou\">Ioannis Antonoglou</a>, <a href=\"/Matthew_Lai\" title=\"Matthew Lai\">Matthew Lai</a>, <a href=\"/Arthur_Guez\" title=\"Arthur Guez\">Arthur Guez</a>, <a href=\"/Marc_Lanctot\" title=\"Marc Lanctot\">Marc Lanctot</a>, <a href=\"/Laurent_Sifre\" title=\"Laurent Sifre\">Laurent Sifre</a>, <a href=\"/Dharshan_Kumaran\" title=\"Dharshan Kumaran\">Dharshan Kumaran</a>, <a href=\"/Thore_Graepel\" title=\"Thore Graepel\">Thore Graepel</a>, <a href=\"/Timothy_Lillicrap\" title=\"Timothy Lillicrap\">Timothy Lillicrap</a>, <a href=\"/Karen_Simonyan\" title=\"Karen Simonyan\">Karen Simonyan</a>, <a href=\"/Demis_Hassabis\" title=\"Demis Hassabis\">Demis Hassabis</a> (<b>2017</b>). <i>Mastering Chess and Shogi by Self-Play with a General Reinforcement Learning Algorithm</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1712.01815\">arXiv:1712.01815</a>&#160;» <a href=\"/AlphaZero\" title=\"AlphaZero\">AlphaZero</a></li>\n<li> <a href=\"/Kei_Takada\" title=\"Kei Takada\">Kei Takada</a>, <a href=\"/index.php?title=Hiroyuki_Iizuka&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Hiroyuki Iizuka (page does not exist)\">Hiroyuki Iizuka</a>, <a href=\"/index.php?title=Masahito_Yamamoto&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Masahito Yamamoto (page does not exist)\">Masahito Yamamoto</a> (<b>2017</b>). <i>Reinforcement Learning for Creating Evaluation Function Using Convolutional Neural Network in Hex</i>. <a href=\"/index.php?title=TAAI_2017&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"TAAI 2017 (page does not exist)\">TAAI 2017</a>&#160;» <a href=\"/Hex\" title=\"Hex\">Hex</a>, <a href=\"/Neural_Networks#Convolutional\" title=\"Neural Networks\">CNN</a></li>\n<li> <a href=\"/Ari_Weinstein\" title=\"Ari Weinstein\">Ari Weinstein</a>, <a href=\"/index.php?title=Matthew_Botvinick&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Matthew Botvinick (page does not exist)\">Matthew Botvinick</a> (<b>2017</b>). <i>Structure Learning in Motor Control: A Deep Reinforcement Learning Model</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1706.06827\">arXiv:1706.06827</a></li>\n<li> <a href=\"/Takuya_Hiraoka\" title=\"Takuya Hiraoka\">Takuya Hiraoka</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.org/pers/hd/t/Tsuchida:Masaaki\">Masaaki Tsuchida</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.org/pers/hd/w/Watanabe:Yotaro\">Yotaro Watanabe</a> (<b>2017</b>). <i>Deep Reinforcement Learning for Inquiry Dialog Policies with Logical Formula Embeddings</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1708.00667\">arXiv:1708.00667</a></li>\n<li> <a href=\"/William_Uther\" title=\"William Uther\">William Uther</a> (<b>2017</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://link.springer.com/referenceworkentry/10.1007/978-1-4899-7687-1_512\">Markov Decision Processes</a></i>. in <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Claude_Sammut\">Claude Sammut</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Geoff_Webb\">Geoffrey I. Webb</a> (eds) (<b>2017</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://link.springer.com/referencework/10.1007%2F978-1-4899-7687-1\">Encyclopedia of Machine Learning and Data Mining</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Springer_Science%2BBusiness_Media\">Springer</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://scholar.google.com/citations?user=zLksndkAAAAJ&amp;hl=en\">Jayvant Anantpur</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.org/pid/09/10702.html\">Nagendra Gulur Dwarakanath</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.org/pid/16/4410.html\">Shivaram Kalyanakrishnan</a>, <a href=\"/Shalabh_Bhatnagar\" title=\"Shalabh Bhatnagar\">Shalabh Bhatnagar</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.org/pid/45/3592.html\">R. Govindarajan</a> (<b>2017</b>). <i>RLWS: A Reinforcement Learning based GPU Warp Scheduler</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1712.04303\">arXiv:1712.04303</a></li></ul>\n<p><b>2018</b>\n</p>\n<ul><li> <a href=\"/Hui_Wang\" title=\"Hui Wang\">Hui Wang</a>, <a href=\"/index.php?title=Michael_Emmerich&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Michael Emmerich (page does not exist)\">Michael Emmerich</a>, <a href=\"/Aske_Plaat\" title=\"Aske Plaat\">Aske Plaat</a> (<b>2018</b>). <i>Monte Carlo Q-learning for General Game Playing</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1802.05944\">arXiv:1802.05944</a>&#160;» <a href=\"/Monte-Carlo_Tree_Search\" title=\"Monte-Carlo Tree Search\">MCTS</a>, <a href=\"/General_Game_Playing\" title=\"General Game Playing\">General Game Playing</a></li>\n<li> <a href=\"/index.php?title=Vin%C3%ADcius_Flores_Zambaldi&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Vinícius Flores Zambaldi (page does not exist)\">Vinícius Flores Zambaldi</a>, <a href=\"/index.php?title=David_Raposo&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"David Raposo (page does not exist)\">David Raposo</a>, <a href=\"/index.php?title=Adam_Santoro&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Adam Santoro (page does not exist)\">Adam Santoro</a>, <a href=\"/index.php?title=Victor_Bapst&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Victor Bapst (page does not exist)\">Victor Bapst</a>, <a href=\"/index.php?title=Yujia_Li&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Yujia Li (page does not exist)\">Yujia Li</a>, <a href=\"/index.php?title=Igor_Babuschkin&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Igor Babuschkin (page does not exist)\">Igor Babuschkin</a>, <a href=\"/index.php?title=Karl_Tuyls&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Karl Tuyls (page does not exist)\">Karl Tuyls</a>, <a href=\"/index.php?title=David_P._Reichert&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"David P. Reichert (page does not exist)\">David P. Reichert</a>, <a href=\"/Timothy_Lillicrap\" title=\"Timothy Lillicrap\">Timothy Lillicrap</a>, <a href=\"/Edward_Lockhart\" title=\"Edward Lockhart\">Edward Lockhart</a>, <a href=\"/index.php?title=Murray_Shanahan&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Murray Shanahan (page does not exist)\">Murray Shanahan</a>, <a href=\"/index.php?title=Victoria_Langston&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Victoria Langston (page does not exist)\">Victoria Langston</a>, <a href=\"/index.php?title=Razvan_Pascanu&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Razvan Pascanu (page does not exist)\">Razvan Pascanu</a>, <a href=\"/index.php?title=Matthew_Botvinick&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Matthew Botvinick (page does not exist)\">Matthew Botvinick</a>, <a href=\"/index.php?title=Oriol_Vinyals&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Oriol Vinyals (page does not exist)\">Oriol Vinyals</a>, <a href=\"/index.php?title=Peter_W._Battaglia&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Peter W. Battaglia (page does not exist)\">Peter W. Battaglia</a> (<b>2018</b>). <i>Relational Deep Reinforcement Learning</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1806.01830\">arXiv:1806.01830</a></li>\n<li> <a href=\"/Hui_Wang\" title=\"Hui Wang\">Hui Wang</a>, <a href=\"/index.php?title=Michael_Emmerich&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Michael Emmerich (page does not exist)\">Michael Emmerich</a>, <a href=\"/Aske_Plaat\" title=\"Aske Plaat\">Aske Plaat</a> (<b>2018</b>). <i>Assessing the Potential of Classical Q-learning in General Game Playing</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1810.06078\">arXiv:1810.06078</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://scholar.google.com/citations?user=n12uNYcAAAAJ&amp;hl=en\">Vincent Francois-Lavet</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://scholar.google.com/citations?user=dy_JBs0AAAAJ&amp;hl=en\">Peter Henderson</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://scholar.google.ca/citations?user=2_4Rs44AAAAJ&amp;hl=en\">Riashat Islam</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://scholar.google.com/citations?user=uyYPun0AAAAJ&amp;hl=en\">Marc G. Bellemare</a>, <a href=\"/Joelle_Pineau\" title=\"Joelle Pineau\">Joelle Pineau</a> (<b>2018</b>). <i>An Introduction to Deep Reinforcement Learning</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1811.12560\">arXiv:1811.12560</a></li>\n<li> <a href=\"/David_Silver\" title=\"David Silver\">David Silver</a>, <a href=\"/Thomas_Hubert\" title=\"Thomas Hubert\">Thomas Hubert</a>, <a href=\"/Julian_Schrittwieser\" title=\"Julian Schrittwieser\">Julian Schrittwieser</a>, <a href=\"/Ioannis_Antonoglou\" title=\"Ioannis Antonoglou\">Ioannis Antonoglou</a>, <a href=\"/Matthew_Lai\" title=\"Matthew Lai\">Matthew Lai</a>, <a href=\"/Arthur_Guez\" title=\"Arthur Guez\">Arthur Guez</a>, <a href=\"/Marc_Lanctot\" title=\"Marc Lanctot\">Marc Lanctot</a>, <a href=\"/Laurent_Sifre\" title=\"Laurent Sifre\">Laurent Sifre</a>, <a href=\"/Dharshan_Kumaran\" title=\"Dharshan Kumaran\">Dharshan Kumaran</a>, <a href=\"/Thore_Graepel\" title=\"Thore Graepel\">Thore Graepel</a>, <a href=\"/Timothy_Lillicrap\" title=\"Timothy Lillicrap\">Timothy Lillicrap</a>, <a href=\"/Karen_Simonyan\" title=\"Karen Simonyan\">Karen Simonyan</a>, <a href=\"/Demis_Hassabis\" title=\"Demis Hassabis\">Demis Hassabis</a> (<b>2018</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://science.sciencemag.org/content/362/6419/1140\">A general reinforcement learning algorithm that masters chess, shogi, and Go through self-play</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Science_(journal)\">Science</a>, Vol. 362, No. 6419 <sup id=\"cite_ref-15\" class=\"reference\"><a href=\"#cite_note-15\">&#91;15&#93;</a></sup></li>\n<li> <a href=\"/index.php?title=Tianhe_Wang&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Tianhe Wang (page does not exist)\">Tianhe Wang</a>, <a href=\"/Tomoyuki_Kaneko\" title=\"Tomoyuki Kaneko\">Tomoyuki Kaneko</a> (<b>2018</b>). <i>Application of Deep Reinforcement Learning in Werewolf Game Agents</i>. <a href=\"/TAAI_2018\" title=\"TAAI 2018\">TAAI 2018</a></li>\n<li> <a href=\"/index.php?title=Taichi_Nakayashiki&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Taichi Nakayashiki (page does not exist)\">Taichi Nakayashiki</a>, <a href=\"/Tomoyuki_Kaneko\" title=\"Tomoyuki Kaneko\">Tomoyuki Kaneko</a> (<b>2018</b>). <i>Learning of Evaluation Functions via Self-Play Enhanced by Checkmate Search</i>. <a href=\"/TAAI_2018\" title=\"TAAI 2018\">TAAI 2018</a></li>\n<li> <a href=\"/index.php?title=Hung_Guei&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Hung Guei (page does not exist)\">Hung Guei</a>, <a href=\"/Ting-Han_Wei\" title=\"Ting-Han Wei\">Ting-Han Wei</a>, <a href=\"/I-Chen_Wu\" title=\"I-Chen Wu\">I-Chen Wu</a> (<b>2018</b>). <i>Using 2048-like games as a pedagogical tool for reinforcement learning</i>. <a href=\"/CG_2018\" title=\"CG 2018\">CG 2018</a>, <a href=\"/ICGA_Journal#40_3\" title=\"ICGA Journal\">ICGA Journal, Vol. 40, No. 3</a></li></ul>\n<p><b>2019</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://scholar.google.co.uk/citations?user=OAkRr-YAAAAJ&amp;hl=en\">Sanjeevan Ahilan</a>, <a href=\"/Peter_Dayan\" title=\"Peter Dayan\">Peter Dayan</a> (<b>2019</b>). <i>Feudal Multi-Agent Hierarchies for Cooperative Reinforcement Learning</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1901.08492\">arXiv:1901.08492</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://scholar.google.co.in/citations?user=1QlrvHkAAAAJ&amp;hl=en\">Chandramouli Kamanchi</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://scholar.google.co.in/citations?user=nx4NlpsAAAAJ&amp;hl=en\">Raghuram Bharadwaj Diddigi</a>, <a href=\"/Shalabh_Bhatnagar\" title=\"Shalabh Bhatnagar\">Shalabh Bhatnagar</a> (<b>2019</b>). <i>Successive Over Relaxation Q-Learning</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1903.03812\">arXiv:1903.03812</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://scholar.google.co.in/citations?user=1QlrvHkAAAAJ&amp;hl=en\">Chandramouli Kamanchi</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://scholar.google.co.in/citations?user=nx4NlpsAAAAJ&amp;hl=en\">Raghuram Bharadwaj Diddigi</a>, <a href=\"/Shalabh_Bhatnagar\" title=\"Shalabh Bhatnagar\">Shalabh Bhatnagar</a> (<b>2019</b>). <i>Second Order Value Iteration in Reinforcement Learning</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1905.03927\">arXiv:1905.03927</a></li>\n<li> <a href=\"/Marc_Lanctot\" title=\"Marc Lanctot\">Marc Lanctot</a>, <a href=\"/Edward_Lockhart\" title=\"Edward Lockhart\">Edward Lockhart</a>, <a href=\"/index.php?title=Jean-Baptiste_Lespiau&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Jean-Baptiste Lespiau (page does not exist)\">Jean-Baptiste Lespiau</a>, <a href=\"/index.php?title=Vin%C3%ADcius_Flores_Zambaldi&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Vinícius Flores Zambaldi (page does not exist)\">Vinícius Flores Zambaldi</a>, <a href=\"/index.php?title=Satyaki_Upadhyay&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Satyaki Upadhyay (page does not exist)\">Satyaki Upadhyay</a>, <a href=\"/index.php?title=Julien_P%C3%A9rolat&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Julien Pérolat (page does not exist)\">Julien Pérolat</a>, <a href=\"/index.php?title=Sriram_Srinivasan&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Sriram Srinivasan (page does not exist)\">Sriram Srinivasan</a>, <a href=\"/index.php?title=Finbarr_Timbers&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Finbarr Timbers (page does not exist)\">Finbarr Timbers</a>, <a href=\"/index.php?title=Karl_Tuyls&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Karl Tuyls (page does not exist)\">Karl Tuyls</a>, <a href=\"/index.php?title=Shayegan_Omidshafiei&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Shayegan Omidshafiei (page does not exist)\">Shayegan Omidshafiei</a>, <a href=\"/index.php?title=Daniel_Hennes&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Daniel Hennes (page does not exist)\">Daniel Hennes</a>, <a href=\"/index.php?title=Dustin_Morrill&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Dustin Morrill (page does not exist)\">Dustin Morrill</a>, <a href=\"/index.php?title=Paul_Muller&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Paul Muller (page does not exist)\">Paul Muller</a>, <a href=\"/index.php?title=Timo_Ewalds&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Timo Ewalds (page does not exist)\">Timo Ewalds</a>, <a href=\"/index.php?title=Ryan_Faulkner&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Ryan Faulkner (page does not exist)\">Ryan Faulkner</a>, <a href=\"/index.php?title=J%C3%A1nos_Kram%C3%A1r&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"János Kramár (page does not exist)\">János Kramár</a>, <a href=\"/index.php?title=Bart_De_Vylder&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Bart De Vylder (page does not exist)\">Bart De Vylder</a>, <a href=\"/index.php?title=Brennan_Saeta&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Brennan Saeta (page does not exist)\">Brennan Saeta</a>, <a href=\"/index.php?title=James_Bradbury&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"James Bradbury (page does not exist)\">James Bradbury</a>, <a href=\"/index.php?title=David_Ding&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"David Ding (page does not exist)\">David Ding</a>, <a href=\"/index.php?title=Sebastian_Borgeaud&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Sebastian Borgeaud (page does not exist)\">Sebastian Borgeaud</a>, <a href=\"/Matthew_Lai\" title=\"Matthew Lai\">Matthew Lai</a>, <a href=\"/Julian_Schrittwieser\" title=\"Julian Schrittwieser\">Julian Schrittwieser</a>, <a href=\"/index.php?title=Thomas_Anthony&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Thomas Anthony (page does not exist)\">Thomas Anthony</a>, <a href=\"/index.php?title=Edward_Hughes&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Edward Hughes (page does not exist)\">Edward Hughes</a>, <a href=\"/index.php?title=Ivo_Danihelka&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Ivo Danihelka (page does not exist)\">Ivo Danihelka</a>, <a href=\"/index.php?title=Jonah_Ryan-Davis&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Jonah Ryan-Davis (page does not exist)\">Jonah Ryan-Davis</a> (<b>2019</b>). <i>OpenSpiel: A Framework for Reinforcement Learning in Games</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1908.09453\">arXiv:1908.09453</a> <sup id=\"cite_ref-16\" class=\"reference\"><a href=\"#cite_note-16\">&#91;16&#93;</a></sup></li>\n<li> <a href=\"/Julian_Schrittwieser\" title=\"Julian Schrittwieser\">Julian Schrittwieser</a>, <a href=\"/Ioannis_Antonoglou\" title=\"Ioannis Antonoglou\">Ioannis Antonoglou</a>, <a href=\"/Thomas_Hubert\" title=\"Thomas Hubert\">Thomas Hubert</a>, <a href=\"/Karen_Simonyan\" title=\"Karen Simonyan\">Karen Simonyan</a>, <a href=\"/Laurent_Sifre\" title=\"Laurent Sifre\">Laurent Sifre</a>, <a href=\"/index.php?title=Simon_Schmitt&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Simon Schmitt (page does not exist)\">Simon Schmitt</a>, <a href=\"/Arthur_Guez\" title=\"Arthur Guez\">Arthur Guez</a>, <a href=\"/Edward_Lockhart\" title=\"Edward Lockhart\">Edward Lockhart</a>, <a href=\"/Demis_Hassabis\" title=\"Demis Hassabis\">Demis Hassabis</a>, <a href=\"/Thore_Graepel\" title=\"Thore Graepel\">Thore Graepel</a>, <a href=\"/Timothy_Lillicrap\" title=\"Timothy Lillicrap\">Timothy Lillicrap</a>, <a href=\"/David_Silver\" title=\"David Silver\">David Silver</a> (<b>2019</b>). <i>Mastering Atari, Go, Chess and Shogi by Planning with a Learned Model</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1911.08265\">arXiv:1911.08265</a> <sup id=\"cite_ref-17\" class=\"reference\"><a href=\"#cite_note-17\">&#91;17&#93;</a></sup></li>\n<li> <a href=\"/Mathematician#SrbhBose\" title=\"Mathematician\">Sourabh Bose</a> (<b>2019</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://rc.library.uta.edu/uta-ir/handle/10106/28094\">Learning Representations Using Reinforcement Learning</a></i>. Ph.D. thesis, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/University_of_Texas_at_Arlington\">University of Texas at Arlington</a>, advisor <a href=\"/Mathematician#MHuber\" title=\"Mathematician\">Manfred Huber</a> <sup id=\"cite_ref-18\" class=\"reference\"><a href=\"#cite_note-18\">&#91;18&#93;</a></sup></li>\n<li> <a href=\"/Johannes_Czech\" title=\"Johannes Czech\">Johannes Czech</a> (<b>2019</b>). <i>Deep Reinforcement Learning for Crazyhouse</i>. Master thesis, <a href=\"/Darmstadt_University_of_Technology\" title=\"Darmstadt University of Technology\">TU Darmstadt</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://ml-research.github.io/papers/czech2019deep.pdf\">pdf</a>&#160;» <a href=\"/CrazyAra\" title=\"CrazyAra\">CrazyAra</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Reinforcement_Learning&amp;action=edit&amp;section=15\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/index.php?title=Hung_Guei&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Hung Guei (page does not exist)\">Hung Guei</a>, <a href=\"/Ting-Han_Wei\" title=\"Ting-Han Wei\">Ting-Han Wei</a>, <a href=\"/I-Chen_Wu\" title=\"I-Chen Wu\">I-Chen Wu</a> (<b>2020</b>). <i>2048-like games for teaching reinforcement learning</i>. <a href=\"/ICGA_Journal#42_1\" title=\"ICGA Journal\">ICGA Journal, Vol. 42, No. 1</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.org/pid/233/8144.html\">Indu John</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://scholar.google.co.in/citations?user=1QlrvHkAAAAJ&amp;hl=en\">Chandramouli Kamanchi</a>, <a href=\"/Shalabh_Bhatnagar\" title=\"Shalabh Bhatnagar\">Shalabh Bhatnagar</a> (<b>2020</b>). <i>Generalized Speedy Q-Learning</i>. <a href=\"/IEEE#CSL\" title=\"IEEE\">IEEE Control Systems Letters</a>, Vol. 4, No. 3, <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1911.00397\">arXiv:1911.00397</a></li>\n<li> <a href=\"/Takuya_Hiraoka\" title=\"Takuya Hiraoka\">Takuya Hiraoka</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.org/pers/hd/i/Imagawa:Takahisa\">Takahisa Imagawa</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.org/pers/hd/t/Tangkaratt:Voot\">Voot Tangkaratt</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.org/pers/hd/o/Osa:Takayuki\">Takayuki Osa</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.org/pers/hd/o/Onishi:Takashi\">Takashi Onishi</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.org/pers/hd/t/Tsuruoka:Yoshimasa\">Yoshimasa Tsuruoka</a>  (<b>2020</b>). <i>Meta-Model-Based Meta-Policy Optimization</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/2006.02608\">arXiv:2006.02608</a></li>\n<li> <a href=\"/Julian_Schrittwieser\" title=\"Julian Schrittwieser\">Julian Schrittwieser</a>, <a href=\"/Ioannis_Antonoglou\" title=\"Ioannis Antonoglou\">Ioannis Antonoglou</a>, <a href=\"/Thomas_Hubert\" title=\"Thomas Hubert\">Thomas Hubert</a>, <a href=\"/Karen_Simonyan\" title=\"Karen Simonyan\">Karen Simonyan</a>, <a href=\"/Laurent_Sifre\" title=\"Laurent Sifre\">Laurent Sifre</a>, <a href=\"/index.php?title=Simon_Schmitt&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Simon Schmitt (page does not exist)\">Simon Schmitt</a>, <a href=\"/Arthur_Guez\" title=\"Arthur Guez\">Arthur Guez</a>, <a href=\"/Edward_Lockhart\" title=\"Edward Lockhart\">Edward Lockhart</a>, <a href=\"/Demis_Hassabis\" title=\"Demis Hassabis\">Demis Hassabis</a>, <a href=\"/Thore_Graepel\" title=\"Thore Graepel\">Thore Graepel</a>, <a href=\"/Timothy_Lillicrap\" title=\"Timothy Lillicrap\">Timothy Lillicrap</a>, <a href=\"/David_Silver\" title=\"David Silver\">David Silver</a> (<b>2020</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.nature.com/articles/s41586-020-03051-4\">Mastering Atari, Go, chess and shogi by planning with a learned model</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Nature_%28journal%29\">Nature</a>, Vol. 588 <sup id=\"cite_ref-19\" class=\"reference\"><a href=\"#cite_note-19\">&#91;19&#93;</a></sup> <sup id=\"cite_ref-20\" class=\"reference\"><a href=\"#cite_note-20\">&#91;20&#93;</a></sup></li>\n<li> <a href=\"/Tristan_Cazenave\" title=\"Tristan Cazenave\">Tristan Cazenave</a>, <a href=\"/Yen-Chi_Chen\" title=\"Yen-Chi Chen\">Yen-Chi Chen</a>, <a href=\"/index.php?title=Guan-Wei_Chen&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Guan-Wei Chen (page does not exist)\">Guan-Wei Chen</a>, <a href=\"/index.php?title=Shi-Yu_Chen&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Shi-Yu Chen (page does not exist)\">Shi-Yu Chen</a>, <a href=\"/index.php?title=Xian-Dong_Chiu&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Xian-Dong Chiu (page does not exist)\">Xian-Dong Chiu</a>, <a href=\"/index.php?title=Julien_Dehos&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Julien Dehos (page does not exist)\">Julien Dehos</a>, <a href=\"/index.php?title=Maria_Elsa&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Maria Elsa (page does not exist)\">Maria Elsa</a>, <a href=\"/index.php?title=Qucheng_Gong&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Qucheng Gong (page does not exist)\">Qucheng Gong</a>, <a href=\"/index.php?title=Hengyuan_Hu&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Hengyuan Hu (page does not exist)\">Hengyuan Hu</a>, <a href=\"/index.php?title=Vasil_Khalidov&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Vasil Khalidov (page does not exist)\">Vasil Khalidov</a>, <a href=\"/index.php?title=Cheng-Ling_Li&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Cheng-Ling Li (page does not exist)\">Cheng-Ling Li</a>, <a href=\"/index.php?title=Hsin-I_Lin&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Hsin-I Lin (page does not exist)\">Hsin-I Lin</a>, <a href=\"/index.php?title=Yu-Jin_Lin&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Yu-Jin Lin (page does not exist)\">Yu-Jin Lin</a>, <a href=\"/index.php?title=Xavier_Martinet&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Xavier Martinet (page does not exist)\">Xavier Martinet</a>, <a href=\"/index.php?title=Vegard_Mella&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Vegard Mella (page does not exist)\">Vegard Mella</a>, <a href=\"/index.php?title=Jeremy_Rapin&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Jeremy Rapin (page does not exist)\">Jeremy Rapin</a>, <a href=\"/index.php?title=Baptiste_Roziere&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Baptiste Roziere (page does not exist)\">Baptiste Roziere</a>, <a href=\"/index.php?title=Gabriel_Synnaeve&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Gabriel Synnaeve (page does not exist)\">Gabriel Synnaeve</a>, <a href=\"/Fabien_Teytaud\" title=\"Fabien Teytaud\">Fabien Teytaud</a>, <a href=\"/Olivier_Teytaud\" title=\"Olivier Teytaud\">Olivier Teytaud</a>, <a href=\"/index.php?title=Shi-Cheng_Ye&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Shi-Cheng Ye (page does not exist)\">Shi-Cheng Ye</a>, <a href=\"/index.php?title=Yi-Jun_Ye&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Yi-Jun Ye (page does not exist)\">Yi-Jun Ye</a>, <a href=\"/Shi-Jim_Yen\" title=\"Shi-Jim Yen\">Shi-Jim Yen</a>, <a href=\"/index.php?title=Sergey_Zagoruyko&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Sergey Zagoruyko (page does not exist)\">Sergey Zagoruyko</a> (<b>2020</b>).  <i>Polygames: Improved zero learning</i>. <a href=\"/ICGA_Journal#42_4\" title=\"ICGA Journal\">ICGA Journal, Vol. 42, No. 4</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/2001.09832\">arXiv:2001.09832</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/2001.09832\">arXiv:2001.09832</a></li>\n<li> <a href=\"/Matthia_Sabatelli\" title=\"Matthia Sabatelli\">Matthia Sabatelli</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/glouppe\">Gilles Louppe</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://scholar.google.com/citations?user=tyFTsmIAAAAJ&amp;hl=en\">Pierre Geurts</a>, <a href=\"/Marco_Wiering\" title=\"Marco Wiering\">Marco Wiering</a> (<b>2020</b>). <i>The Deep Quality-Value Family of Deep Reinforcement Learning Algorithms</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.org/db/conf/ijcnn/ijcnn2020.html#SabatelliLGW20\">IJCNN 2020</a> <sup id=\"cite_ref-21\" class=\"reference\"><a href=\"#cite_note-21\">&#91;21&#93;</a></sup></li>\n<li> <a href=\"/index.php?title=Quentin_Cohen-Solal&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Quentin Cohen-Solal (page does not exist)\">Quentin Cohen-Solal</a> (<b>2020</b>). <i>Learning to Play Two-Player Perfect-Information Games without Knowledge</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/2008.01188\">arXiv:2008.01188</a></li>\n<li> <a href=\"/index.php?title=Quentin_Cohen-Solal&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Quentin Cohen-Solal (page does not exist)\">Quentin Cohen-Solal</a>, <a href=\"/Tristan_Cazenave\" title=\"Tristan Cazenave\">Tristan Cazenave</a> (<b>2020</b>). <i>Minimax Strikes Back</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/2012.10700\">arXiv:2012.10700</a></li></ul>\n<p><b>2021</b>\n</p>\n<ul><li> <a href=\"/index.php?title=Maximilian_Alexander_Gehrke&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Maximilian Alexander Gehrke (page does not exist)\">Maximilian Alexander Gehrke</a> (<b>2021</b>). <i>Assessing Popular Chess Variants Using Deep Reinforcement Learning</i>. Master thesis, <a href=\"/Darmstadt_University_of_Technology\" title=\"Darmstadt University of Technology\">TU Darmstadt</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://ml-research.github.io/papers/gehrke2021assessing.pdf\">pdf</a>&#160;» <a href=\"/CrazyAra\" title=\"CrazyAra\">CrazyAra</a></li>\n<li> <a href=\"/Dominik_Klein\" title=\"Dominik Klein\">Dominik Klein</a> (<b>2021</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/asdfjkl/neural_network_chess\">Neural Networks For Chess</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/asdfjkl/neural_network_chess/releases/tag/v1.1\">Release Version 1.1 · GitHub</a> <sup id=\"cite_ref-22\" class=\"reference\"><a href=\"#cite_note-22\">&#91;22&#93;</a></sup></li>\n<li> <a href=\"/index.php?title=Quentin_Cohen-Solal&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Quentin Cohen-Solal (page does not exist)\">Quentin Cohen-Solal</a>, <a href=\"/Tristan_Cazenave\" title=\"Tristan Cazenave\">Tristan Cazenave</a> (<b>2021</b>). <i>DESCENT wins five gold medals at the Computer Olympiad</i>. <a href=\"/ICGA_Journal#43_2\" title=\"ICGA Journal\">ICGA Journal, Vol. 43, No. 2</a></li>\n<li> <a href=\"/index.php?title=Boris_Doux&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Boris Doux (page does not exist)\">Boris Doux</a>, <a href=\"/index.php?title=Benjamin_Negrevergne&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Benjamin Negrevergne (page does not exist)\">Benjamin Negrevergne</a>, <a href=\"/Tristan_Cazenave\" title=\"Tristan Cazenave\">Tristan Cazenave</a> (<b>2021</b>). <i>Deep Reinforcement Learning for Morpion Solitaire</i>. <a href=\"/Advances_in_Computer_Games_17\" title=\"Advances in Computer Games 17\">Advances in Computer Games 17</a></li>\n<li> <a href=\"/index.php?title=Weirui_Ye&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Weirui Ye (page does not exist)\">Weirui Ye</a>, <a href=\"/index.php?title=Shaohuai_Liu&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Shaohuai Liu (page does not exist)\">Shaohuai Liu</a>, <a href=\"/index.php?title=Thanard_Kurutach&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Thanard Kurutach (page does not exist)\">Thanard Kurutach</a>, <a href=\"/index.php?title=Pieter_Abbeel&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Pieter Abbeel (page does not exist)\">Pieter Abbeel</a>, <a href=\"/index.php?title=Yang_Gao&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Yang Gao (page does not exist)\">Yang Gao</a> (<b>2021</b>). <i>Mastering Atari Games with Limited Data</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/2111.00210\">arXiv:2111.00210</a> <sup id=\"cite_ref-23\" class=\"reference\"><a href=\"#cite_note-23\">&#91;23&#93;</a></sup> <sup id=\"cite_ref-24\" class=\"reference\"><a href=\"#cite_note-24\">&#91;24&#93;</a></sup></li>\n<li> <a href=\"/index.php?title=Dennis_Soemers&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Dennis Soemers (page does not exist)\">Dennis Soemers</a>, <a href=\"/index.php?title=Vegard_Mella&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Vegard Mella (page does not exist)\">Vegard Mella</a>, <a href=\"/Cameron_Browne\" title=\"Cameron Browne\">Cameron Browne</a>, <a href=\"/Olivier_Teytaud\" title=\"Olivier Teytaud\">Olivier Teytaud</a> (<b>2021</b>). <i>Deep learning for general game playing with Ludii and Polygames</i>. <a href=\"/ICGA_Journal#43_3\" title=\"ICGA Journal\">ICGA Journal, Vol. 43, No. 3</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Postings\">Postings</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Reinforcement_Learning&amp;action=edit&amp;section=16\" title=\"Edit section: Postings\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1995_..._2\">1995 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Reinforcement_Learning&amp;action=edit&amp;section=17\" title=\"Edit section: 1995 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=28584\">Parameter Tuning</a> by <a href=\"/Jonathan_Baxter\" title=\"Jonathan Baxter\">Jonathan Baxter</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 01, 1998&#160;» <a href=\"/KnightCap\" title=\"KnightCap\">KnightCap</a></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=28819\">Re: Parameter Tuning</a> by <a href=\"/Don_Beal\" title=\"Don Beal\">Don Beal</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 02, 1998</dd></dl>\n<h2><span class=\"mw-headline\" id=\"2000_..._2\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Reinforcement_Learning&amp;action=edit&amp;section=18\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=117970\">Pseudo-code for TD learning</a> by <a href=\"/Daniel_Homan\" title=\"Daniel Homan\">Daniel Homan</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 06, 2000&#160;» <a href=\"/Temporal_Difference_Learning\" title=\"Temporal Difference Learning\">Temporal Difference Learning</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=147377\">any good experiences with genetic algos or temporal difference learning?</a> by <a href=\"/Rafael_B._Andrist\" title=\"Rafael B. Andrist\">Rafael B. Andrist</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 01, 2001</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=401974\">Temporal Differences</a> by <a href=\"/Peter_Fendrich\" title=\"Peter Fendrich\">Peter Fendrich</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 21, 2004</li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_..._2\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Reinforcement_Learning&amp;action=edit&amp;section=19\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://talkchess.com/forum/viewtopic.php?t=56913\">*First release* Giraffe, a new engine based on deep learning</a> by <a href=\"/Matthew_Lai\" title=\"Matthew Lai\">Matthew Lai</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 08, 2015&#160;» <a href=\"/Deep_Learning\" title=\"Deep Learning\">Deep Learning</a>, <a href=\"/Giraffe\" title=\"Giraffe\">Giraffe</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.nervanasys.com/demystifying-deep-reinforcement-learning/\">Demystifying Deep Reinforcement Learning</a> by <a rel=\"nofollow\" class=\"external text\" href=\"http://www.nervanasys.com/author/tambet/\">Tambet Matiisen</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.nervanasys.com/\">Nervana</a>, December 22, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://ai.intel.com/deep-reinforcement-learning-with-neon/\">Deep Reinforcement Learning with Neon</a> by <a rel=\"nofollow\" class=\"external text\" href=\"http://www.nervanasys.com/author/tambet/\">Tambet Matiisen</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.nervanasys.com/\">Nervana</a>, December 29, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65909\">Google's AlphaGo team has been working on chess</a> by <a href=\"/Peter_Kappler\" title=\"Peter Kappler\">Peter Kappler</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 06, 2017&#160;» <a href=\"/AlphaZero\" title=\"AlphaZero\">AlphaZero</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65990\">Understanding the power of reinforcement learning</a> by <a href=\"/Michael_Sherwin\" title=\"Michael Sherwin\">Michael Sherwin</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 12, 2017</li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_..._2\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Reinforcement_Learning&amp;action=edit&amp;section=20\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=72810\">Board adaptive / tuning evaluation function - no NN/AI</a> by Moritz Gedig, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 14, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=75411\">Unsupervised reinforcement tuning from zero</a> by Madeleine Birchfield, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 16, 2020&#160;» <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">Automated Tuning</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=75606\">Transhuman Chess with NN and RL...</a> by <a href=\"/Srdja_Matovic\" title=\"Srdja Matovic\">Srdja Matovic</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 30, 2020&#160;» <a href=\"/Neural_Networks\" title=\"Neural Networks\">NN</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=76465\">Reinforcement learning project</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 31, 2021&#160;» <a href=\"/Texel%27s_Tuning_Method\" title=\"Texel&#39;s Tuning Method\">Texel's Tuning Method</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Reinforcement_Learning&amp;action=edit&amp;section=21\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Reinforcement_Learning\">Reinforcement Learning</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Reinforcement_Learning&amp;action=edit&amp;section=22\" title=\"Edit section: Reinforcement Learning\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Reinforcement_learning\">Reinforcement learning from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.incompleteideas.net/sutton/book/ebook/the-book.html\">Reinforcement Learning: An Introduction</a> ebook by <a href=\"/Richard_Sutton\" title=\"Richard Sutton\">Richard Sutton</a> and <a href=\"/Andrew_Barto\" title=\"Andrew Barto\">Andrew Barto</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www0.cs.ucl.ac.uk/staff/D.Silver/web/Teaching_files/games.pdf\">Reinforcement Learning in Classic Board Games</a> (pdf) by <a href=\"/David_Silver\" title=\"David Silver\">David Silver</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.scholarpedia.org/article/Category:Reinforcement_Learning\">Category: Reinforcement Learning - Scholarpedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.scholarpedia.org/article/Reinforcement_learning\">Reinforcement Learning - Scholarpedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://spaces.facsci.ualberta.ca/rlai/\">Reinforcement Learning and Artificial Intelligence – Faculty of Science</a>, <a href=\"/University_of_Alberta\" title=\"University of Alberta\">University of Alberta</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"MDP\">MDP</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Reinforcement_Learning&amp;action=edit&amp;section=23\" title=\"Edit section: MDP\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Markov_decision_process\">Markov decision process from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Partially_observable_Markov_decision_process\">Partially observable Markov decision process</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.idsia.ch/%7Ejuergen/rl.html\">Reinforcement Learning and POMDPs</a> by <a href=\"/J%C3%BCrgen_Schmidhuber\" title=\"Jürgen Schmidhuber\">Jürgen Schmidhuber</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Q-Learning_2\">Q-Learning</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Reinforcement_Learning&amp;action=edit&amp;section=24\" title=\"Edit section: Q-Learning\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Q-learning\">Q-learning from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://mnemstudio.org/path-finding-q-learning-tutorial.htm\">A Painless Q-Learning Tutorial</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/State%E2%80%93action%E2%80%93reward%E2%80%93state%E2%80%93action\">State–action–reward–state–action from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Probably_approximately_correct_learning\">Probably approximately correct learning from Wikipedia</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Courses\">Courses</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Reinforcement_Learning&amp;action=edit&amp;section=25\" title=\"Edit section: Courses\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <span id=\"MOOC\"></span><a rel=\"nofollow\" class=\"external text\" href=\"http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching.html\">Reinforcement Learning Course</a> by <a href=\"/David_Silver\" title=\"David Silver\">David Silver</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/University_College_London\">University College London</a>, 2015, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Videos</li></ul>\n<ol><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://youtu.be/2pWv7GOvuf0\">Lecture 1: Introduction to Reinforcement Learning</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://youtu.be/lfHX2hHRMVQ\">Lecture 2: Markov Decision Process</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://youtu.be/Nd1-UUMVfz4\">Lecture 3: Planning by Dynamic Programming</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://youtu.be/PnHCvfgC_ZA\">Lecture 4: Model-Free Prediction</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://youtu.be/0g4j2k_Ggc4\">Lecture 5: Model Free Control</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://youtu.be/UoPei5o4fps\">Lecture 6: Value Function Approximation</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://youtu.be/KHZVXao4qXs\">Lecture 7: Policy Gradient Methods</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://youtu.be/ItMutbeOHtc\">Lecture 8: Integrating Learning and Planning</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://youtu.be/sGuiWX07sKw\">Lecture 9: Exploration and Exploitation</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://youtu.be/kZ_AUmFcZtk\">Lecture 10: Classic Games</a></li></ol>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://videolectures.net/deeplearning2016_pineau_reinforcement_learning/\">Introduction to Reinforcement Learning</a> by <a href=\"/Joelle_Pineau\" title=\"Joelle Pineau\">Joelle Pineau</a>, <a href=\"/McGill_University\" title=\"McGill University\">McGill University</a>, 2016, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/O_1Z63EDMvQ?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h2><span class=\"mw-headline\" id=\"GitHub\">GitHub</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Reinforcement_Learning&amp;action=edit&amp;section=26\" title=\"Edit section: GitHub\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/deepmind/open_spiel\">GitHub - deepmind/open_spiel: OpenSpiel is a collection of environments and algorithms for research in general reinforcement learning and search/planning in games</a> <sup id=\"cite_ref-25\" class=\"reference\"><a href=\"#cite_note-25\">&#91;25&#93;</a></sup>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/deepmind/open_spiel/tree/master/open_spiel/algorithms\">open_spiel/open_spiel/algorithms at master · deepmind/open_spiel · GitHub</a>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/deepmind/open_spiel/tree/master/open_spiel/algorithms/alpha_zero\">open_spiel/open_spiel/algorithms/alpha_zero at master · deepmind/open_spiel · GitHub</a></li></ul></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/deepmind/open_spiel/tree/master/open_spiel/games\">open_spiel/open_spiel/games at master · deepmind/open_spiel · GitHub</a>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/deepmind/open_spiel/tree/master/open_spiel/games/chess\">open_spiel/open_spiel/games/chess at master · deepmind/open_spiel · GitHub</a></li></ul></li></ul></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/koulanurag/muzero-pytorch\">GitHub - koulanurag/muzero-pytorch: Pytorch Implementation of MuZero</a> <sup id=\"cite_ref-26\" class=\"reference\"><a href=\"#cite_note-26\">&#91;26&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/YeWR/EfficientZero\">GitHub - YeWR/EfficientZero: Open-source codebase for EfficientZero, from \"Mastering Atari Games with Limited Data\" at NeurIPS 2021</a> <sup id=\"cite_ref-27\" class=\"reference\"><a href=\"#cite_note-27\">&#91;27&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/facebookarchive/Polygames\">GitHub - facebookarchive/Polygames: The project is a platform of zero learning with a library of games</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Reinforcement_Learning&amp;action=edit&amp;section=27\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap mw-references-columns\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\">Example of a simple <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Markov_decision_process\">Markov decision processes</a> with three states (green circles) and two actions (orange circles), with two rewards (orange arrows), <a rel=\"nofollow\" class=\"external text\" href=\"https://commons.wikimedia.org/wiki/File:Markov_Decision_Process.svg\">image</a> by <a rel=\"nofollow\" class=\"external text\" href=\"https://commons.wikimedia.org/wiki/User:Waldoalvarez\">waldoalvarez</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://creativecommons.org/licenses/by-sa/4.0/deed.en\">CC BY-SA 4.0</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wikimedia_Commons\">Wikimedia Commons</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Q-learning\">Q-learning from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a href=\"/index.php?title=Chris_Watkins&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Chris Watkins (page does not exist)\">Chris Watkins</a>, <a href=\"/Peter_Dayan\" title=\"Peter Dayan\">Peter Dayan</a> (<b>1992</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.gatsby.ucl.ac.uk/~dayan/papers/wd92.html\">Q-learning</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Machine_Learning_(journal)\">Machine Learning</a>, Vol. 8, No. 2</span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a href=\"/Volodymyr_Mnih\" title=\"Volodymyr Mnih\">Volodymyr Mnih</a>, <a href=\"/Koray_Kavukcuoglu\" title=\"Koray Kavukcuoglu\">Koray Kavukcuoglu</a>, <a href=\"/David_Silver\" title=\"David Silver\">David Silver</a>, <a href=\"/Mathematician#AARusu\" title=\"Mathematician\">Andrei A. Rusu</a>, <a href=\"/Joel_Veness\" title=\"Joel Veness\">Joel Veness</a>, <a href=\"/index.php?title=Marc_G._Bellemare&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Marc G. Bellemare (page does not exist)\">Marc G. Bellemare</a>, <a href=\"/index.php?title=Alex_Graves&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Alex Graves (page does not exist)\">Alex Graves</a>, <a href=\"/index.php?title=Martin_Riedmiller&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Martin Riedmiller (page does not exist)\">Martin Riedmiller</a>, <a href=\"/index.php?title=Andreas_K._Fidjeland&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Andreas K. Fidjeland (page does not exist)\">Andreas K. Fidjeland</a>, <a href=\"/index.php?title=Georg_Ostrovski&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Georg Ostrovski (page does not exist)\">Georg Ostrovski</a>, <a href=\"/index.php?title=Stig_Petersen&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Stig Petersen (page does not exist)\">Stig Petersen</a>, <a href=\"/index.php?title=Charles_Beattie&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Charles Beattie (page does not exist)\">Charles Beattie</a>, <a href=\"/index.php?title=Amir_Sadik&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Amir Sadik (page does not exist)\">Amir Sadik</a>, <a href=\"/Ioannis_Antonoglou\" title=\"Ioannis Antonoglou\">Ioannis Antonoglou</a>, <a href=\"/index.php?title=Helen_King&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Helen King (page does not exist)\">Helen King</a>, <a href=\"/Dharshan_Kumaran\" title=\"Dharshan Kumaran\">Dharshan Kumaran</a>, <a href=\"/index.php?title=Daan_Wierstra&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Daan Wierstra (page does not exist)\">Daan Wierstra</a>, <a href=\"/index.php?title=Shane_Legg&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Shane Legg (page does not exist)\">Shane Legg</a>, <a href=\"/Demis_Hassabis\" title=\"Demis Hassabis\">Demis Hassabis</a> (<b>2015</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.nature.com/nature/journal/v518/n7540/abs/nature14236.html\">Human-level control through deep reinforcement learning</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Nature_%28journal%29\">Nature</a>, Vol. 518</span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Q-learning\">Q-learning from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a href=\"/Gerald_Tesauro\" title=\"Gerald Tesauro\">Gerald Tesauro</a> (<b>1995</b>). <i>Temporal Difference Learning and TD-Gammon</i>. <a href=\"/ACM#Communications\" title=\"ACM\">Communications of the ACM</a>, Vol. 38, No. 3</span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.bris.ac.uk/Publications/pub_master.jsp?type=117\">University of Bristol - Department of Computer Science - Technical Reports</a></span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Ms._Pac-Man\">Ms. Pac-Man from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-9\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-9\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.nervanasys.com/demystifying-deep-reinforcement-learning/\">Demystifying Deep Reinforcement Learning</a> by <a rel=\"nofollow\" class=\"external text\" href=\"http://www.nervanasys.com/author/tambet/\">Tambet Matiisen</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.nervanasys.com/\">Nervana</a>, December 22, 2015</span>\n</li>\n<li id=\"cite_note-10\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-10\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.google.com/patents/US20150100530\">Patent US20150100530 - Methods and apparatus for reinforcement learning - Google Patents</a></span>\n</li>\n<li id=\"cite_note-11\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-11\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61748\">DeepChess: Another deep-learning based chess program</a> by <a href=\"/Matthew_Lai\" title=\"Matthew Lai\">Matthew Lai</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 17, 2016</span>\n</li>\n<li id=\"cite_note-12\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-12\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://icann2016.org/index.php/conference-programme/recipients-of-the-best-paper-awards/\">ICANN 2016 | Recipients of the best paper awards</a></span>\n</li>\n<li id=\"cite_note-13\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-13\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/paintception/A-Reinforcement-Learning-Approach-for-Solving-Chess-Endgames\">GitHub - paintception/A-Reinforcement-Learning-Approach-for-Solving-Chess-Endgames: Machine Learning - Reinforcement Learning</a></span>\n</li>\n<li id=\"cite_note-14\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-14\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://deepmind.com/blog/alphago-zero-learning-scratch/\">AlphaGo Zero: Learning from scratch</a> by <a href=\"/Demis_Hassabis\" title=\"Demis Hassabis\">Demis Hassabis</a> and <a href=\"/David_Silver\" title=\"David Silver\">David Silver</a>, <a href=\"/index.php?title=DeepMind&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"DeepMind (page does not exist)\">DeepMind</a>, October 18, 2017</span>\n</li>\n<li id=\"cite_note-15\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-15\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://deepmind.com/blog/alphazero-shedding-new-light-grand-games-chess-shogi-and-go/\">AlphaZero: Shedding new light on the grand games of chess, shogi and Go</a> by <a href=\"/David_Silver\" title=\"David Silver\">David Silver</a>, <a href=\"/Thomas_Hubert\" title=\"Thomas Hubert\">Thomas Hubert</a>, <a href=\"/Julian_Schrittwieser\" title=\"Julian Schrittwieser\">Julian Schrittwieser</a> and <a href=\"/Demis_Hassabis\" title=\"Demis Hassabis\">Demis Hassabis</a>, <a href=\"/index.php?title=DeepMind&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"DeepMind (page does not exist)\">DeepMind</a>, December 03, 2018</span>\n</li>\n<li id=\"cite_note-16\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-16\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/deepmind/open_spiel/blob/master/docs/contributing.md\">open_spiel/contributing.md at master · deepmind/open_spiel · GitHub</a></span>\n</li>\n<li id=\"cite_note-17\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-17\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=72381\">New DeepMind paper</a> by GregNeto, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 21, 2019</span>\n</li>\n<li id=\"cite_note-18\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-18\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=72810&amp;start=6\">e: Board adaptive / tuning evaluation function - no NN/AI</a> by Tony P., <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 15, 2020</span>\n</li>\n<li id=\"cite_note-19\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-19\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://deepmind.com/blog/article/muzero-mastering-go-chess-shogi-and-atari-without-rules?fbclid=IwAR3mSwrn1YXDKr9uuGm2GlFKh76wBilex7f8QvBiQecwiVmAvD6Bkyjx-rE\">MuZero: Mastering Go, chess, shogi and Atari without rules</a></span>\n</li>\n<li id=\"cite_note-20\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-20\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/koulanurag/muzero-pytorch\">GitHub - koulanurag/muzero-pytorch: Pytorch Implementation of MuZero</a></span>\n</li>\n<li id=\"cite_note-21\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-21\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/paintception/Deep-Quality-Value-DQV-Learning-\">GitHub - paintception/Deep-Quality-Value-DQV-Learning-: DQV-Learning: a novel faster synchronous Deep Reinforcement Learning algorithm</a></span>\n</li>\n<li id=\"cite_note-22\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-22\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=78283\">Book about Neural Networks for Chess</a> by dkl, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 29, 2021</span>\n</li>\n<li id=\"cite_note-23\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-23\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/YeWR/EfficientZero\">GitHub - YeWR/EfficientZero: Open-source codebase for EfficientZero, from \"Mastering Atari Games with Limited Data\" at NeurIPS 2021</a></span>\n</li>\n<li id=\"cite_note-24\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-24\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=78790\">Want to train nets faster?</a> by <a href=\"/Dann_Corbit\" title=\"Dann Corbit\">Dann Corbit</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 01, 2021</span>\n</li>\n<li id=\"cite_note-25\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-25\">↑</a></span> <span class=\"reference-text\"><a href=\"/Marc_Lanctot\" title=\"Marc Lanctot\">Marc Lanctot</a>, <a href=\"/Edward_Lockhart\" title=\"Edward Lockhart\">Edward Lockhart</a>, <a href=\"/index.php?title=Jean-Baptiste_Lespiau&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Jean-Baptiste Lespiau (page does not exist)\">Jean-Baptiste Lespiau</a>, <a href=\"/index.php?title=Vin%C3%ADcius_Flores_Zambaldi&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Vinícius Flores Zambaldi (page does not exist)\">Vinícius Flores Zambaldi</a>, <a href=\"/index.php?title=Satyaki_Upadhyay&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Satyaki Upadhyay (page does not exist)\">Satyaki Upadhyay</a>, <a href=\"/index.php?title=Julien_P%C3%A9rolat&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Julien Pérolat (page does not exist)\">Julien Pérolat</a>, <a href=\"/index.php?title=Sriram_Srinivasan&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Sriram Srinivasan (page does not exist)\">Sriram Srinivasan</a>, <a href=\"/index.php?title=Finbarr_Timbers&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Finbarr Timbers (page does not exist)\">Finbarr Timbers</a>, <a href=\"/index.php?title=Karl_Tuyls&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Karl Tuyls (page does not exist)\">Karl Tuyls</a>, <a href=\"/index.php?title=Shayegan_Omidshafiei&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Shayegan Omidshafiei (page does not exist)\">Shayegan Omidshafiei</a>, <a href=\"/index.php?title=Daniel_Hennes&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Daniel Hennes (page does not exist)\">Daniel Hennes</a>, <a href=\"/index.php?title=Dustin_Morrill&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Dustin Morrill (page does not exist)\">Dustin Morrill</a>, <a href=\"/index.php?title=Paul_Muller&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Paul Muller (page does not exist)\">Paul Muller</a>, <a href=\"/index.php?title=Timo_Ewalds&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Timo Ewalds (page does not exist)\">Timo Ewalds</a>, <a href=\"/index.php?title=Ryan_Faulkner&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Ryan Faulkner (page does not exist)\">Ryan Faulkner</a>, <a href=\"/index.php?title=J%C3%A1nos_Kram%C3%A1r&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"János Kramár (page does not exist)\">János Kramár</a>, <a href=\"/index.php?title=Bart_De_Vylder&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Bart De Vylder (page does not exist)\">Bart De Vylder</a>, <a href=\"/index.php?title=Brennan_Saeta&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Brennan Saeta (page does not exist)\">Brennan Saeta</a>, <a href=\"/index.php?title=James_Bradbury&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"James Bradbury (page does not exist)\">James Bradbury</a>, <a href=\"/index.php?title=David_Ding&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"David Ding (page does not exist)\">David Ding</a>, <a href=\"/index.php?title=Sebastian_Borgeaud&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Sebastian Borgeaud (page does not exist)\">Sebastian Borgeaud</a>, <a href=\"/Matthew_Lai\" title=\"Matthew Lai\">Matthew Lai</a>, <a href=\"/Julian_Schrittwieser\" title=\"Julian Schrittwieser\">Julian Schrittwieser</a>, <a href=\"/index.php?title=Thomas_Anthony&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Thomas Anthony (page does not exist)\">Thomas Anthony</a>, <a href=\"/index.php?title=Edward_Hughes&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Edward Hughes (page does not exist)\">Edward Hughes</a>, <a href=\"/index.php?title=Ivo_Danihelka&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Ivo Danihelka (page does not exist)\">Ivo Danihelka</a>, <a href=\"/index.php?title=Jonah_Ryan-Davis&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Jonah Ryan-Davis (page does not exist)\">Jonah Ryan-Davis</a> (<b>2019</b>). <i>OpenSpiel: A Framework for Reinforcement Learning in Games</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1908.09453\">arXiv:1908.09453</a></span>\n</li>\n<li id=\"cite_note-26\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-26\">↑</a></span> <span class=\"reference-text\"><a href=\"/Julian_Schrittwieser\" title=\"Julian Schrittwieser\">Julian Schrittwieser</a>, <a href=\"/Ioannis_Antonoglou\" title=\"Ioannis Antonoglou\">Ioannis Antonoglou</a>, <a href=\"/Thomas_Hubert\" title=\"Thomas Hubert\">Thomas Hubert</a>, <a href=\"/Karen_Simonyan\" title=\"Karen Simonyan\">Karen Simonyan</a>, <a href=\"/Laurent_Sifre\" title=\"Laurent Sifre\">Laurent Sifre</a>, <a href=\"/index.php?title=Simon_Schmitt&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Simon Schmitt (page does not exist)\">Simon Schmitt</a>, <a href=\"/Arthur_Guez\" title=\"Arthur Guez\">Arthur Guez</a>, <a href=\"/Edward_Lockhart\" title=\"Edward Lockhart\">Edward Lockhart</a>, <a href=\"/Demis_Hassabis\" title=\"Demis Hassabis\">Demis Hassabis</a>, <a href=\"/Thore_Graepel\" title=\"Thore Graepel\">Thore Graepel</a>, <a href=\"/Timothy_Lillicrap\" title=\"Timothy Lillicrap\">Timothy Lillicrap</a>, <a href=\"/David_Silver\" title=\"David Silver\">David Silver</a> (<b>2020</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.nature.com/articles/s41586-020-03051-4\">Mastering Atari, Go, chess and shogi by planning with a learned model</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Nature_%28journal%29\">Nature</a>, Vol. 588</span>\n</li>\n<li id=\"cite_note-27\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-27\">↑</a></span> <span class=\"reference-text\"><a href=\"/index.php?title=Weirui_Ye&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Weirui Ye (page does not exist)\">Weirui Ye</a>, <a href=\"/index.php?title=Shaohuai_Liu&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Shaohuai Liu (page does not exist)\">Shaohuai Liu</a>, <a href=\"/index.php?title=Thanard_Kurutach&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Thanard Kurutach (page does not exist)\">Thanard Kurutach</a>, <a href=\"/index.php?title=Pieter_Abbeel&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Pieter Abbeel (page does not exist)\">Pieter Abbeel</a>, <a href=\"/index.php?title=Yang_Gao&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Yang Gao (page does not exist)\">Yang Gao</a> (<b>2021</b>). <i>Mastering Atari Games with Limited Data</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/2111.00210\">arXiv:2111.00210</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Learning\" title=\"Learning\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301034707\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.129 seconds\nReal time usage: 0.674 seconds\nPreprocessor visited node count: 495/1000000\nPreprocessor generated node count: 1028/1000000\nPost‐expand include size: 27/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1654-0!canonical and timestamp 20260301034707 and revision id 26318\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Videos"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "A. Harry Klopf"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ACM"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Games 14"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Games 17"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Albert Xin Jiang"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "AlphaZero"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Andrew Barto"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ari Weinstein"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Arthur Guez"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Arthur Samuel"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aske Plaat"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Atari 8-bit"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Automated Tuning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Backgammon"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Balázs Csanád Csáji"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CG 2000"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CG 2016"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CG 2018"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cameron Browne"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Carnegie Mellon University"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Charles Elkan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Game"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chris J. Maddison"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Conferences"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CrazyAra"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Csaba Szepesvári"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Daniel Homan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dann Corbit"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Darmstadt University of Technology"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David E. Moriarty"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David Silver"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Deep Learning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Demis Hassabis"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dharshan Kumaran"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Doina Precup"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dominik Klein"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Don Beal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Donald Michie"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dynamic Programming"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Eduardo F. Morales"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Edward Lockhart"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Eli David"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evangelos Karountzos"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fabien Teytaud"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "General Game Playing"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gerald Tesauro"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Giraffe"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Harm Geert Muller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Henk Mannen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hex"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hui Wang"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "I-Chen Wu"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA Journal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "IEEE"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ian H. Witten"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ilya Sutskever"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Initial Position"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ioannis Antonoglou"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "István Szita"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "James R. Slagle"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Joel Veness"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Joelle Pineau"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Johannes Czech"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jon Kleinberg"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jonathan Baxter"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Julian Schrittwieser"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Justin A. Boyan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jérémie Mary"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jürgen Schmidhuber"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Karen Simonyan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kazutomo Shibahara"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kei Takada"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "KnightCap"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Koray Kavukcuoglu"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Krzysztof Krawiec"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Laurent Sifre"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Learning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Manuela Veloso"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marc Lanctot"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marcin Szubert"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marco Block-Berlitz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marco Wiering"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marcus Hutter"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Martin Müller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mathematician"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Matthew Lai"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Matthia Sabatelli"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "McGill University"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michael L. Littman"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michael Sherwin"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Monte-Carlo Tree Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Moves"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Naoki Mizukami"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Nathan S. Netanyahu"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Neural Networks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Olivier Teytaud"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter Auer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter Dayan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter Fendrich"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter Kappler"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Planning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rafael B. Andrist"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Raúl Rojas"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Richard E. Bellman"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Richard Sutton"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Risto Miikkulainen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Levinson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rémi Munos"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sebastian Thrun"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Shalabh Bhatnagar"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Shi-Jim Yen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Shih-Chieh Huang"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Srdja Matovic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stuart Russell"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sylvain Gelly"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "TAAI 2018"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Takuya Hiraoka"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Temporal Difference Learning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Texel's Tuning Method"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Thomas Hubert"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Thore Graepel"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Timothy Lillicrap"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ting-Han Wei"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Todd W. Neller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tomoyuki Kaneko"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tony Marsland"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Trial and Error"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tristan Cazenave"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "UCT"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "University of Alberta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "University of Edinburgh"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Volodymyr Mnih"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "William Uther"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Wojciech Jaśkowski"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Xinhe Xu"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Yaroslav Shkarupa"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Yasuhiro Osaki"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Yasuhiro Tajima"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Yen-Chi Chen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Yngvi Björnsson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Yoshimasa Tsuruoka"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Yoshiyuki Kotani"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Zacharias Georgiou"
+      },
+      {
+        "ns": 0,
+        "*": "Chris Watkins"
+      },
+      {
+        "ns": 0,
+        "*": "Marc G. Bellemare"
+      },
+      {
+        "ns": 0,
+        "*": "Alex Graves"
+      },
+      {
+        "ns": 0,
+        "*": "Martin Riedmiller"
+      },
+      {
+        "ns": 0,
+        "*": "Andreas K. Fidjeland"
+      },
+      {
+        "ns": 0,
+        "*": "Georg Ostrovski"
+      },
+      {
+        "ns": 0,
+        "*": "Stig Petersen"
+      },
+      {
+        "ns": 0,
+        "*": "Charles Beattie"
+      },
+      {
+        "ns": 0,
+        "*": "Amir Sadik"
+      },
+      {
+        "ns": 0,
+        "*": "Helen King"
+      },
+      {
+        "ns": 0,
+        "*": "Daan Wierstra"
+      },
+      {
+        "ns": 0,
+        "*": "Shane Legg"
+      },
+      {
+        "ns": 0,
+        "*": "DeepMind"
+      },
+      {
+        "ns": 0,
+        "*": "Jean-Baptiste Lespiau"
+      },
+      {
+        "ns": 0,
+        "*": "Vinícius Flores Zambaldi"
+      },
+      {
+        "ns": 0,
+        "*": "Satyaki Upadhyay"
+      },
+      {
+        "ns": 0,
+        "*": "Julien Pérolat"
+      },
+      {
+        "ns": 0,
+        "*": "Sriram Srinivasan"
+      },
+      {
+        "ns": 0,
+        "*": "Finbarr Timbers"
+      },
+      {
+        "ns": 0,
+        "*": "Karl Tuyls"
+      },
+      {
+        "ns": 0,
+        "*": "Shayegan Omidshafiei"
+      },
+      {
+        "ns": 0,
+        "*": "Daniel Hennes"
+      },
+      {
+        "ns": 0,
+        "*": "Dustin Morrill"
+      },
+      {
+        "ns": 0,
+        "*": "Paul Muller"
+      },
+      {
+        "ns": 0,
+        "*": "Timo Ewalds"
+      },
+      {
+        "ns": 0,
+        "*": "Ryan Faulkner"
+      },
+      {
+        "ns": 0,
+        "*": "János Kramár"
+      },
+      {
+        "ns": 0,
+        "*": "Bart De Vylder"
+      },
+      {
+        "ns": 0,
+        "*": "Brennan Saeta"
+      },
+      {
+        "ns": 0,
+        "*": "James Bradbury"
+      },
+      {
+        "ns": 0,
+        "*": "David Ding"
+      },
+      {
+        "ns": 0,
+        "*": "Sebastian Borgeaud"
+      },
+      {
+        "ns": 0,
+        "*": "Thomas Anthony"
+      },
+      {
+        "ns": 0,
+        "*": "Edward Hughes"
+      },
+      {
+        "ns": 0,
+        "*": "Ivo Danihelka"
+      },
+      {
+        "ns": 0,
+        "*": "Jonah Ryan-Davis"
+      },
+      {
+        "ns": 0,
+        "*": "Simon Schmitt"
+      },
+      {
+        "ns": 0,
+        "*": "Weirui Ye"
+      },
+      {
+        "ns": 0,
+        "*": "Shaohuai Liu"
+      },
+      {
+        "ns": 0,
+        "*": "Thanard Kurutach"
+      },
+      {
+        "ns": 0,
+        "*": "Pieter Abbeel"
+      },
+      {
+        "ns": 0,
+        "*": "Yang Gao"
+      },
+      {
+        "ns": 0,
+        "*": "Google"
+      },
+      {
+        "ns": 0,
+        "*": "AlphaGo"
+      },
+      {
+        "ns": 0,
+        "*": "Ronald Parr"
+      },
+      {
+        "ns": 0,
+        "*": "Ryan Weber"
+      },
+      {
+        "ns": 0,
+        "*": "Andrew Ng"
+      },
+      {
+        "ns": 0,
+        "*": "Geoffrey Gordon"
+      },
+      {
+        "ns": 0,
+        "*": "Eric Wiewiora"
+      },
+      {
+        "ns": 0,
+        "*": "Cécile Germain-Renaud"
+      },
+      {
+        "ns": 0,
+        "*": "Julien Pérez"
+      },
+      {
+        "ns": 0,
+        "*": "Balázs Kégl"
+      },
+      {
+        "ns": 0,
+        "*": "Charles Loomis"
+      },
+      {
+        "ns": 0,
+        "*": "Kee Siong Ng"
+      },
+      {
+        "ns": 0,
+        "*": "Thomas J. Walsh"
+      },
+      {
+        "ns": 0,
+        "*": "Carlos Diuk"
+      },
+      {
+        "ns": 0,
+        "*": "Laurent Orseau"
+      },
+      {
+        "ns": 0,
+        "*": "Tobias Graf"
+      },
+      {
+        "ns": 0,
+        "*": "Marco Platzner"
+      },
+      {
+        "ns": 0,
+        "*": "Arun Nair"
+      },
+      {
+        "ns": 0,
+        "*": "Praveen Srinivasan"
+      },
+      {
+        "ns": 0,
+        "*": "Sam Blackwell"
+      },
+      {
+        "ns": 0,
+        "*": "Cagdas Alcicek"
+      },
+      {
+        "ns": 0,
+        "*": "Rory Fearon"
+      },
+      {
+        "ns": 0,
+        "*": "Alessandro De Maria"
+      },
+      {
+        "ns": 0,
+        "*": "Veda Panneershelvam"
+      },
+      {
+        "ns": 0,
+        "*": "Mustafa Suleyman"
+      },
+      {
+        "ns": 0,
+        "*": "Hado van Hasselt"
+      },
+      {
+        "ns": 0,
+        "*": "Ziyu Wang"
+      },
+      {
+        "ns": 0,
+        "*": "Nando de Freitas"
+      },
+      {
+        "ns": 0,
+        "*": "George van den Driessche"
+      },
+      {
+        "ns": 0,
+        "*": "Sander Dieleman"
+      },
+      {
+        "ns": 0,
+        "*": "Dominik Grewe"
+      },
+      {
+        "ns": 0,
+        "*": "John Nham"
+      },
+      {
+        "ns": 0,
+        "*": "Nal Kalchbrenner"
+      },
+      {
+        "ns": 0,
+        "*": "Madeleine Leach"
+      },
+      {
+        "ns": 0,
+        "*": "Hung Guei"
+      },
+      {
+        "ns": 0,
+        "*": "Tinghan Wei"
+      },
+      {
+        "ns": 0,
+        "*": "Jin-Bo Huang"
+      },
+      {
+        "ns": 0,
+        "*": "Lior Wolf"
+      },
+      {
+        "ns": 0,
+        "*": "DeepChess"
+      },
+      {
+        "ns": 0,
+        "*": "Adrià Puigdomènech Badia"
+      },
+      {
+        "ns": 0,
+        "*": "Mehdi Mirza"
+      },
+      {
+        "ns": 0,
+        "*": "Tim Harley"
+      },
+      {
+        "ns": 0,
+        "*": "Shixiang Gu"
+      },
+      {
+        "ns": 0,
+        "*": "Ethan Holly"
+      },
+      {
+        "ns": 0,
+        "*": "Sergey Levine"
+      },
+      {
+        "ns": 0,
+        "*": "Max Jaderberg"
+      },
+      {
+        "ns": 0,
+        "*": "Wojciech Marian Czarnecki"
+      },
+      {
+        "ns": 0,
+        "*": "Tom Schaul"
+      },
+      {
+        "ns": 0,
+        "*": "Joel Z. Leibo"
+      },
+      {
+        "ns": 0,
+        "*": "Jane X Wang"
+      },
+      {
+        "ns": 0,
+        "*": "Zeb Kurth-Nelson"
+      },
+      {
+        "ns": 0,
+        "*": "Dhruva Tirumala"
+      },
+      {
+        "ns": 0,
+        "*": "Hubert Soyer"
+      },
+      {
+        "ns": 0,
+        "*": "Joel Z Leibo"
+      },
+      {
+        "ns": 0,
+        "*": "Charles Blundell"
+      },
+      {
+        "ns": 0,
+        "*": "Matthew Botvinick"
+      },
+      {
+        "ns": 0,
+        "*": "Hirotaka Kameko"
+      },
+      {
+        "ns": 0,
+        "*": "Jun Suzuki"
+      },
+      {
+        "ns": 0,
+        "*": "Audrunas Gruslys"
+      },
+      {
+        "ns": 0,
+        "*": "Angeliki Lazaridou"
+      },
+      {
+        "ns": 0,
+        "*": "Lucas Baker"
+      },
+      {
+        "ns": 0,
+        "*": "Adrian Bolton"
+      },
+      {
+        "ns": 0,
+        "*": "Yutian Chen"
+      },
+      {
+        "ns": 0,
+        "*": "Fan Hui"
+      },
+      {
+        "ns": 0,
+        "*": "Philip Bachman"
+      },
+      {
+        "ns": 0,
+        "*": "Quoc V. Le"
+      },
+      {
+        "ns": 0,
+        "*": "Hiroyuki Iizuka"
+      },
+      {
+        "ns": 0,
+        "*": "Masahito Yamamoto"
+      },
+      {
+        "ns": 0,
+        "*": "TAAI 2017"
+      },
+      {
+        "ns": 0,
+        "*": "Michael Emmerich"
+      },
+      {
+        "ns": 0,
+        "*": "David Raposo"
+      },
+      {
+        "ns": 0,
+        "*": "Adam Santoro"
+      },
+      {
+        "ns": 0,
+        "*": "Victor Bapst"
+      },
+      {
+        "ns": 0,
+        "*": "Yujia Li"
+      },
+      {
+        "ns": 0,
+        "*": "Igor Babuschkin"
+      },
+      {
+        "ns": 0,
+        "*": "David P. Reichert"
+      },
+      {
+        "ns": 0,
+        "*": "Murray Shanahan"
+      },
+      {
+        "ns": 0,
+        "*": "Victoria Langston"
+      },
+      {
+        "ns": 0,
+        "*": "Razvan Pascanu"
+      },
+      {
+        "ns": 0,
+        "*": "Oriol Vinyals"
+      },
+      {
+        "ns": 0,
+        "*": "Peter W. Battaglia"
+      },
+      {
+        "ns": 0,
+        "*": "Tianhe Wang"
+      },
+      {
+        "ns": 0,
+        "*": "Taichi Nakayashiki"
+      },
+      {
+        "ns": 0,
+        "*": "Guan-Wei Chen"
+      },
+      {
+        "ns": 0,
+        "*": "Shi-Yu Chen"
+      },
+      {
+        "ns": 0,
+        "*": "Xian-Dong Chiu"
+      },
+      {
+        "ns": 0,
+        "*": "Julien Dehos"
+      },
+      {
+        "ns": 0,
+        "*": "Maria Elsa"
+      },
+      {
+        "ns": 0,
+        "*": "Qucheng Gong"
+      },
+      {
+        "ns": 0,
+        "*": "Hengyuan Hu"
+      },
+      {
+        "ns": 0,
+        "*": "Vasil Khalidov"
+      },
+      {
+        "ns": 0,
+        "*": "Cheng-Ling Li"
+      },
+      {
+        "ns": 0,
+        "*": "Hsin-I Lin"
+      },
+      {
+        "ns": 0,
+        "*": "Yu-Jin Lin"
+      },
+      {
+        "ns": 0,
+        "*": "Xavier Martinet"
+      },
+      {
+        "ns": 0,
+        "*": "Vegard Mella"
+      },
+      {
+        "ns": 0,
+        "*": "Jeremy Rapin"
+      },
+      {
+        "ns": 0,
+        "*": "Baptiste Roziere"
+      },
+      {
+        "ns": 0,
+        "*": "Gabriel Synnaeve"
+      },
+      {
+        "ns": 0,
+        "*": "Shi-Cheng Ye"
+      },
+      {
+        "ns": 0,
+        "*": "Yi-Jun Ye"
+      },
+      {
+        "ns": 0,
+        "*": "Sergey Zagoruyko"
+      },
+      {
+        "ns": 0,
+        "*": "Quentin Cohen-Solal"
+      },
+      {
+        "ns": 0,
+        "*": "Maximilian Alexander Gehrke"
+      },
+      {
+        "ns": 0,
+        "*": "Boris Doux"
+      },
+      {
+        "ns": 0,
+        "*": "Benjamin Negrevergne"
+      },
+      {
+        "ns": 0,
+        "*": "Dennis Soemers"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Q-Learning",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Reinforcement_Learning",
+        "byteoffset": 2210,
+        "anchor": "Q-Learning"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Temporal Difference Learning",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Reinforcement_Learning",
+        "byteoffset": 4181,
+        "anchor": "Temporal_Difference_Learning"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Reinforcement_Learning",
+        "byteoffset": 5370,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Selected Publications",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Reinforcement_Learning",
+        "byteoffset": 5734,
+        "anchor": "Selected_Publications"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1954 ...",
+        "number": "4.1",
+        "index": "5",
+        "fromtitle": "Reinforcement_Learning",
+        "byteoffset": 5759,
+        "anchor": "1954_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1960 ...",
+        "number": "4.2",
+        "index": "6",
+        "fromtitle": "Reinforcement_Learning",
+        "byteoffset": 6286,
+        "anchor": "1960_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1970 ...",
+        "number": "4.3",
+        "index": "7",
+        "fromtitle": "Reinforcement_Learning",
+        "byteoffset": 7128,
+        "anchor": "1970_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1980 ...",
+        "number": "4.4",
+        "index": "8",
+        "fromtitle": "Reinforcement_Learning",
+        "byteoffset": 8002,
+        "anchor": "1980_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1990 ...",
+        "number": "4.5",
+        "index": "9",
+        "fromtitle": "Reinforcement_Learning",
+        "byteoffset": 8694,
+        "anchor": "1990_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1995 ...",
+        "number": "4.6",
+        "index": "10",
+        "fromtitle": "Reinforcement_Learning",
+        "byteoffset": 10243,
+        "anchor": "1995_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "4.7",
+        "index": "11",
+        "fromtitle": "Reinforcement_Learning",
+        "byteoffset": 14164,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2005 ...",
+        "number": "4.8",
+        "index": "12",
+        "fromtitle": "Reinforcement_Learning",
+        "byteoffset": 18646,
+        "anchor": "2005_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "4.9",
+        "index": "13",
+        "fromtitle": "Reinforcement_Learning",
+        "byteoffset": 22077,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "4.10",
+        "index": "14",
+        "fromtitle": "Reinforcement_Learning",
+        "byteoffset": 27244,
+        "anchor": "2015_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "4.11",
+        "index": "15",
+        "fromtitle": "Reinforcement_Learning",
+        "byteoffset": 42393,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Postings",
+        "number": "5",
+        "index": "16",
+        "fromtitle": "Reinforcement_Learning",
+        "byteoffset": 47394,
+        "anchor": "Postings"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1995 ...",
+        "number": "5.1",
+        "index": "17",
+        "fromtitle": "Reinforcement_Learning",
+        "byteoffset": 47405,
+        "anchor": "1995_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "5.2",
+        "index": "18",
+        "fromtitle": "Reinforcement_Learning",
+        "byteoffset": 47667,
+        "anchor": "2000_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "5.3",
+        "index": "19",
+        "fromtitle": "Reinforcement_Learning",
+        "byteoffset": 48139,
+        "anchor": "2010_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "5.4",
+        "index": "20",
+        "fromtitle": "Reinforcement_Learning",
+        "byteoffset": 49123,
+        "anchor": "2020_..._2"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "6",
+        "index": "21",
+        "fromtitle": "Reinforcement_Learning",
+        "byteoffset": 49820,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Reinforcement Learning",
+        "number": "6.1",
+        "index": "22",
+        "fromtitle": "Reinforcement_Learning",
+        "byteoffset": 49838,
+        "anchor": "Reinforcement_Learning"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "MDP",
+        "number": "6.2",
+        "index": "23",
+        "fromtitle": "Reinforcement_Learning",
+        "byteoffset": 50624,
+        "anchor": "MDP"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Q-Learning",
+        "number": "6.3",
+        "index": "24",
+        "fromtitle": "Reinforcement_Learning",
+        "byteoffset": 50956,
+        "anchor": "Q-Learning_2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Courses",
+        "number": "6.4",
+        "index": "25",
+        "fromtitle": "Reinforcement_Learning",
+        "byteoffset": 51412,
+        "anchor": "Courses"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "GitHub",
+        "number": "6.5",
+        "index": "26",
+        "fromtitle": "Reinforcement_Learning",
+        "byteoffset": 52720,
+        "anchor": "GitHub"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "7",
+        "index": "27",
+        "fromtitle": "Reinforcement_Learning",
+        "byteoffset": 55378,
+        "anchor": "References"
+      }
+    ]
+  }
+}

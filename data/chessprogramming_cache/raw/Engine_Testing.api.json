@@ -1,0 +1,1000 @@
+{
+  "parse": {
+    "title": "Engine Testing",
+    "pageid": 1257,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * Engine Testing</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"http://sanseverything.wordpress.com/2008/01/16/hope-springs-eternal/\"><img alt=\"\" src=\"/images/thumb/c/ce/WileECoyote.jpg/300px-WileECoyote.jpg\" width=\"300\" height=\"222\" class=\"thumbimage\" srcset=\"/images/thumb/c/ce/WileECoyote.jpg/450px-WileECoyote.jpg 1.5x, /images/c/ce/WileECoyote.jpg 2x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:WileECoyote.jpg\" class=\"internal\" title=\"Enlarge\"></a></div>The ever-optimistic <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wile_E._Coyote_and_Road_Runner\">Wile E. Coyote</a> <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>Engine Testing</b>,<br />\nthe process either to eliminate <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Software_bug\">bugs</a> and to measure <a href=\"/Playing_Strength\" title=\"Playing Strength\">performance</a> of a chess engine. New implementations of <a href=\"/Move_Generation\" title=\"Move Generation\">move generation</a> are tested with <a href=\"/Perft\" title=\"Perft\">Perft</a>, while new features and <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">tuning</a> of <a href=\"/Search\" title=\"Search\">search</a> and <a href=\"/Evaluation\" title=\"Evaluation\">evaluation</a> are verified via <a href=\"/Sequential_Probability_Ratio_Test\" title=\"Sequential Probability Ratio Test\">SPRT</a> testing, (historically) <a href=\"/Test-Positions\" title=\"Test-Positions\">test-positions</a> and by playing <a href=\"/Match_Statistics\" title=\"Match Statistics\">matches</a> against other engines. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Bug_Hunting\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Bug Hunting</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Analyzing\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Analyzing</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Tuning\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Tuning</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#SPRT\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">SPRT</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#Test-Positions\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Test-Positions</span></a></li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#Matches\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Matches</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#Time_Controls\"><span class=\"tocnumber\">6.1</span> <span class=\"toctext\">Time Controls</span></a></li>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#Opening\"><span class=\"tocnumber\">6.2</span> <span class=\"toctext\">Opening</span></a></li>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#Tournament_Manager\"><span class=\"tocnumber\">6.3</span> <span class=\"toctext\">Tournament Manager</span></a></li>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#Frameworks\"><span class=\"tocnumber\">6.4</span> <span class=\"toctext\">Frameworks</span></a></li>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#Chess_Server\"><span class=\"tocnumber\">6.5</span> <span class=\"toctext\">Chess Server</span></a></li>\n<li class=\"toclevel-2 tocsection-12\"><a href=\"#Statistics\"><span class=\"tocnumber\">6.6</span> <span class=\"toctext\">Statistics</span></a></li>\n<li class=\"toclevel-2 tocsection-13\"><a href=\"#Ratings\"><span class=\"tocnumber\">6.7</span> <span class=\"toctext\">Ratings</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-14\"><a href=\"#Test_Results\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">Test Results</span></a></li>\n<li class=\"toclevel-1 tocsection-15\"><a href=\"#Notable_Bugs\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">Notable Bugs</span></a></li>\n<li class=\"toclevel-1 tocsection-16\"><a href=\"#Publications\"><span class=\"tocnumber\">9</span> <span class=\"toctext\">Publications</span></a></li>\n<li class=\"toclevel-1 tocsection-17\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">10</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-18\"><a href=\"#1995_...\"><span class=\"tocnumber\">10.1</span> <span class=\"toctext\">1995 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-19\"><a href=\"#2000_...\"><span class=\"tocnumber\">10.2</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-20\"><a href=\"#2005_...\"><span class=\"tocnumber\">10.3</span> <span class=\"toctext\">2005 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-21\"><a href=\"#2010_...\"><span class=\"tocnumber\">10.4</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-22\"><a href=\"#2015_...\"><span class=\"tocnumber\">10.5</span> <span class=\"toctext\">2015 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-23\"><a href=\"#2020_...\"><span class=\"tocnumber\">10.6</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-24\"><a href=\"#External_Links\"><span class=\"tocnumber\">11</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-25\"><a href=\"#References\"><span class=\"tocnumber\">12</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Bug_Hunting\">Bug Hunting</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Testing&amp;action=edit&amp;section=1\" title=\"Edit section: Bug Hunting\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Perft\" title=\"Perft\">Perft</a> (<a href=\"/Perft_Results\" title=\"Perft Results\">Perft Results</a>)</li>\n<li> <a href=\"/Debugging\" title=\"Debugging\">Debugging</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Analyzing\">Analyzing</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Testing&amp;action=edit&amp;section=2\" title=\"Edit section: Analyzing\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Logging\" title=\"Logging\">Logging</a></li>\n<li> <a href=\"/index.php?title=Profiling&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Profiling (page does not exist)\">Profiling</a></li>\n<li> <a href=\"/Search_Statistics\" title=\"Search Statistics\">Search Statistics</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Tuning\">Tuning</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Testing&amp;action=edit&amp;section=3\" title=\"Edit section: Tuning\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">Automated Tuning</a></li>\n<li> <a href=\"/Engine_Similarity\" title=\"Engine Similarity\">Engine Similarity</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"SPRT\">SPRT</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Testing&amp;action=edit&amp;section=4\" title=\"Edit section: SPRT\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>The modern, preferred method to test strength modifications.\n</p>\n<ul><li> <a href=\"/Sequential_Probability_Ratio_Test\" title=\"Sequential Probability Ratio Test\">Sequential Probability Ratio Test</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Test-Positions\">Test-Positions</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Testing&amp;action=edit&amp;section=5\" title=\"Edit section: Test-Positions\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Running sets of test-positions with number of solutions per fixed time-frame is useful to prove whether things are broken after program changes or to get hints about missing knowledge. But one should be careful to tune engines based on test-position results, since solving (possible tactical) test-positions does not necessarily correlate with practical <a href=\"/Playing_Strength\" title=\"Playing Strength\">playing strength</a> in matches against other opponents.\n</p>\n<ul><li> <a href=\"/Test-Positions\" title=\"Test-Positions\">Test-Positions</a></li></ul>\n<p><span id=\"Matches\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Matches\">Matches</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Testing&amp;action=edit&amp;section=6\" title=\"Edit section: Matches\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Most testing involves running different versions of a program in matches, and comparing results.\n</p>\n<h2><span class=\"mw-headline\" id=\"Time_Controls\">Time Controls</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Testing&amp;action=edit&amp;section=7\" title=\"Edit section: Time Controls\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Generally speaking, for testing changes that don't alter the search tree itself, but only affect performance (eg. <a href=\"/Move_Generation\" title=\"Move Generation\">move generation</a>) can be tested with given fixed nodes, fixed time or fixed depth. In all other cases the <a href=\"/Time_Management\" title=\"Time Management\">time management</a> should be left to the engine to simulate real tournament conditions. On the other hand, <a href=\"/Debugging\" title=\"Debugging\">debugging</a> is much easier under fixed conditions as the games become deterministic.\n</p><p>A side from the type of <a href=\"/Time_Management#Time_Controls\" title=\"Time Management\">time control</a> one also has to decide on how much time should be spent per game, ie. what the average quality of the games should be like. While one can test more changes in the a certain time at short time controls, it is also relevant how a certain change scales to different strengths. So for example should one increase the <a href=\"/Depth_Reduction_R\" title=\"Depth Reduction R\">R</a> in <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">Null move pruning</a> to 3 in depths &gt; 7, this change may only be effectively tested on time controls where this new condition is triggered frequently enough, ie. where the average search depth is far greater than seven. It is hard to generalize, but on average changes of the search functions (<a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">LMR</a>, <a href=\"/Null_Move\" title=\"Null Move\">nullmove</a>, <a href=\"/Futility_Pruning\" title=\"Futility Pruning\">futility</a> or similar <a href=\"/Pruning\" title=\"Pruning\">pruning</a>, <a href=\"/Reductions\" title=\"Reductions\">reductions</a> and <a href=\"/Extensions\" title=\"Extensions\">extensions</a> ) tend to be more sensitive to the time control than the tuning of <a href=\"/Evaluation\" title=\"Evaluation\">evaluation</a> parameters.\n</p>\n<h2><span class=\"mw-headline\" id=\"Opening\">Opening</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Testing&amp;action=edit&amp;section=8\" title=\"Edit section: Opening\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>During testing the engines should ideally play the same style of openings they would play in a normal tournament, so not to optimize them for different types of positions. One option is to use the engines own <a href=\"/Opening_Book\" title=\"Opening Book\">opening book</a> or one can use <a href=\"/Test-Positions#OpeningSuites\" title=\"Test-Positions\">opening suites</a>, a set of quiet test positions. In the latter case the same opening suit would be used for each tournament conducted and furthermore each position is played a second time with colors reversed. With these measures one can try to minimize the disparity between tests caused by different openings.\n</p>\n<h2><span class=\"mw-headline\" id=\"Tournament_Manager\">Tournament Manager</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Testing&amp;action=edit&amp;section=9\" title=\"Edit section: Tournament Manager\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p><a href=\"/User_Interface\" title=\"User Interface\">User interfaces</a> or <a href=\"/CLI\" title=\"CLI\">command line tools</a> for <a href=\"/UCI\" title=\"UCI\">UCI</a> and <a href=\"/Chess_Engine_Communication_Protocol\" title=\"Chess Engine Communication Protocol\">Chess Engine Communication Protocol</a> compatible engines in engine-engine matches are mentioned under <a href=\"/Tournament_Manager\" title=\"Tournament Manager\">Tournament Manager</a>.\n</p>\n<h2><span class=\"mw-headline\" id=\"Frameworks\">Frameworks</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Testing&amp;action=edit&amp;section=10\" title=\"Edit section: Frameworks\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Stockfish#TestingFramework\" title=\"Stockfish\">Fishtest</a></li>\n<li> <a href=\"/OpenBench\" title=\"OpenBench\">OpenBench</a></li></ul>\n<p><span id=\"ChessServer\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Chess_Server\">Chess Server</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Testing&amp;action=edit&amp;section=11\" title=\"Edit section: Chess Server\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>One can also test an engine's performance by comparing it to other programs on the various internet platforms <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup> . In this case the different hardware and features like different <a href=\"/Endgame_Tablebases\" title=\"Endgame Tablebases\">Endgame Tablebases</a> or <a href=\"/Opening_Book\" title=\"Opening Book\">Opening Books</a> have to be considered.\n</p>\n<ul><li> <a href=\"/Chess_Server\" title=\"Chess Server\">Chess Server</a></li>\n<li> <a href=\"/Tournaments_and_Matches\" title=\"Tournaments and Matches\">Tournaments</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Statistics\">Statistics</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Testing&amp;action=edit&amp;section=12\" title=\"Edit section: Statistics\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>The question whether certain results actually indicates a <a href=\"/Playing_Strength\" title=\"Playing Strength\">strength</a> increase or not, can be answered with \n</p>\n<ul><li> <a href=\"/Match_Statistics\" title=\"Match Statistics\">Match Statistics</a></li>\n<li> <a href=\"/Pawn_Advantage,_Win_Percentage,_and_Elo\" title=\"Pawn Advantage, Win Percentage, and Elo\">Pawn Advantage, Win Percentage, and Elo</a></li>\n<li> <a href=\"/LOS_Table\" title=\"LOS Table\">LOS Table</a></li></ul>\n<p><span id=\"Ratings\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Ratings\">Ratings</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Testing&amp;action=edit&amp;section=13\" title=\"Edit section: Ratings\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/index.php?title=Rating_System&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Rating System (page does not exist)\">Rating System</a></li>\n<li> <a href=\"/Engine_Rating_Lists\" title=\"Engine Rating Lists\">Engine Rating Lists</a></li></ul>\n<p><span id=\"TestResults\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Test_Results\">Test Results</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Testing&amp;action=edit&amp;section=14\" title=\"Edit section: Test Results\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Null_Move_Pruning_Test_Results\" title=\"Null Move Pruning Test Results\">Null Move Pruning Test Results</a></li>\n<li> <a href=\"/Late_Move_Reduction_Test_Results\" title=\"Late Move Reduction Test Results\">Late Move Reduction Test Results</a></li></ul>\n<p><span id=\"bugs\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Notable_Bugs\">Notable Bugs</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Testing&amp;action=edit&amp;section=15\" title=\"Edit section: Notable Bugs\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Brute_Force_(Program)\" title=\"Brute Force (Program)\">Brute Force (Program)</a>, <a href=\"/En_passant#bugs\" title=\"En passant\">En passant bug</a>, <a href=\"/ACM_1977\" title=\"ACM 1977\">ACM 1977</a> and <a href=\"/ACM_1978\" title=\"ACM 1978\">ACM 1978</a></li>\n<li> <a href=\"/Coko#MateBug\" title=\"Coko\">Coko - Mate in One?</a>, <a href=\"/ACM_1971\" title=\"ACM 1971\">ACM 1971</a></li>\n<li> <a href=\"/4th_Computer_Olympiad#PromotionBug\" title=\"4th Computer Olympiad\">Chess 2175X vs. Genesis</a>, <a href=\"/Promotions\" title=\"Promotions\">Promotion</a> bug, <a href=\"/4th_Computer_Olympiad#Chess\" title=\"4th Computer Olympiad\">4th Computer Olympiad 1992</a></li>\n<li> <a href=\"/WMCCC_1993#NimzoBug\" title=\"WMCCC 1993\">Nimzo's winning white-black bug</a>, <a href=\"/WMCCC_1993\" title=\"WMCCC 1993\">WMCCC 1993</a></li>\n<li> <a href=\"/Novag_Micro_Chess#CastlingBug\" title=\"Novag Micro Chess\">Novag Micro Chess - Castling bug</a>, <a href=\"/CPWTIPC_1981\" title=\"CPWTIPC 1981\">CPWTIPC 1981</a></li>\n<li> <a href=\"/Proscha#bugs\" title=\"Proscha\">Proscha</a> capturing its own king versus <a href=\"/Daja\" title=\"Daja\">Daja</a>, <a href=\"/First_GI_Computer_Chess_Tournament\" title=\"First GI Computer Chess Tournament\">First GI Computer Chess Tournament 1975</a></li>\n<li> <a href=\"/WMCCC_1995#TalXXXX\" title=\"WMCCC 1995\">System Tal vs. XXXX</a>, <a href=\"/Promotions\" title=\"Promotions\">Promotion</a> bug, <a href=\"/WMCCC_1995\" title=\"WMCCC 1995\">WMCCC 1995</a></li>\n<li> <a href=\"/XiniX\" title=\"XiniX\">Xinix - Mate in One</a>, <a href=\"/DOCCC_2000\" title=\"DOCCC 2000\">DOCCC 2000</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Testing&amp;action=edit&amp;section=16\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Tony_Marsland\" title=\"Tony Marsland\">Tony Marsland</a>, <a href=\"/Paul_Rushton\" title=\"Paul Rushton\">Paul Rushton</a> (<b>1973</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://dl.acm.org/citation.cfm?id=805703\">Mechanisms for Comparing Chess Programs</a>.</i> <a href=\"/ACM_1973\" title=\"ACM 1973\">ACM Annual Conference</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://webdocs.cs.ualberta.ca/~tony/OldPapers/Marsland-Rushton-ACM73\">pdf</a></li>\n<li> <a href=\"/Tim_Breitkreutz\" title=\"Tim Breitkreutz\">Tim Breitkreutz</a>, <a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a> (<b>1984</b>). <i>Computer vs Computer via Computer</i>. <a href=\"/ICGA_Journal#7_4\" title=\"ICGA Journal\">ICCA Journal, Vol. 7, No. 4</a>, reprinted in <a href=\"/Computer_Chess_Reports\" title=\"Computer Chess Reports\">Computer Chess Reports 1985</a>, Vol. 3, No. 2&#160;» <a href=\"/Phoenix\" title=\"Phoenix\">Phoenix</a>, <a href=\"/Super_Constellation\" title=\"Super Constellation\">Super Constellation</a></li>\n<li> <a href=\"/John_Stanback\" title=\"John Stanback\">John Stanback</a> (<b>1990</b>). <i>Supercomputing '90: Computer-Chess Testing and Programming Session</i>. <a href=\"/ICGA_Journal#13_4\" title=\"ICGA Journal\">ICCA Journal, Vol. 13, No. 4</a>&#160;» <a href=\"/ACM_1990\" title=\"ACM 1990\">ACM 1990</a></li>\n<li> <a href=\"/Larry_Kaufman\" title=\"Larry Kaufman\">Larry Kaufman</a> (<b>1993</b>). <i>How Our PC Chess Programs Are Developed</i>. <a href=\"/Computer_Chess_Reports\" title=\"Computer Chess Reports\">Computer Chess Reports</a> 1992-93, Vol. 3, No. 2, pp. 12</li>\n<li> <a href=\"/Thomas_Mally\" title=\"Thomas Mally\">Thomas Mally</a> (<b>1993</b>). <i>Matt in Wieviel?</i> <a href=\"/PC_Schach\" title=\"PC Schach\">PC Schach</a> 3/93 (German)</li>\n<li> <a href=\"/Jeff_Rollason\" title=\"Jeff Rollason\">Jeff Rollason</a> (<b>2007</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.aifactory.co.uk/newsletter/2007_04_stat_minefields.htm\">Statistical Minefields with Version Testing</a></i>. <a href=\"/AI_Factory\" title=\"AI Factory\">AI Factory</a>, Winter 2007&#160;» <a href=\"/Match_Statistics\" title=\"Match Statistics\">Match Statistics</a></li>\n<li> <a href=\"/J%C3%B3nhei%C3%B0ur_%C3%8Dsleifsd%C3%B3ttir\" title=\"Jónheiður Ísleifsdóttir\">Jónheiður Ísleifsdóttir</a> (<b>2007</b>). <i>GTQL: A Query Language for Game Trees</i>. M.Sc. thesis, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Reykjav%C3%ADk_University\">Reykjavík University</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.ru.is/lisalib/getfile.aspx?itemid=9655\">pdf</a></li>\n<li> <a href=\"/J%C3%B3nhei%C3%B0ur_%C3%8Dsleifsd%C3%B3ttir\" title=\"Jónheiður Ísleifsdóttir\">Jónheiður Ísleifsdóttir</a>, <a href=\"/Yngvi_Bj%C3%B6rnsson\" title=\"Yngvi Björnsson\">Yngvi Björnsson</a>. (<b>2008</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/chapter/10.1007/978-3-540-87608-3_20\">GTQ: A Language and Tool for Game-Tree Analysis</a></i>. <a href=\"/CG_2008\" title=\"CG 2008\">CG 2008</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.ru.is/faculty/yngvi/pdf/IsleifsdottirB08.pdf\">pdf</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Testing&amp;action=edit&amp;section=17\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1995_...\">1995 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Testing&amp;action=edit&amp;section=18\" title=\"Edit section: 1995 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/2aaa054105f1445e\">Testing Chess Programs</a> by <a href=\"/Jan_Eric_Larsson\" title=\"Jan Eric Larsson\">Jan Eric Larsson</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, February 09, 1996</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=13569\">Self-test and others rating stuffs...</a> by <a href=\"/Christophe_Th%C3%A9ron\" title=\"Christophe Théron\">Christophe Théron</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 01, 1998</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=16851\">Proposal: New testing methods for SSDF (1)</a> by <a href=\"/Jeroen_Noomen\" title=\"Jeroen Noomen\">Jeroen Noomen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 13, 1998</li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Testing&amp;action=edit&amp;section=19\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=176716\">Using 2 machines for matches (Linux)</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 24, 2001&#160;» <a href=\"/XBoard\" title=\"XBoard\">XBoard</a>, <a href=\"/Linux\" title=\"Linux\">Linux</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=189308\">A proposed WAC replacement for testing</a> by <a href=\"/Gian-Carlo_Pascutto\" title=\"Gian-Carlo Pascutto\">Gian-Carlo Pascutto</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 18, 2001&#160;» <a href=\"/Win_at_Chess\" title=\"Win at Chess\">Win at Chess</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=275347\">Value of playing different versions of a program against each other</a> by <a href=\"/Tom_King\" title=\"Tom King\">Tom King</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 06, 2003</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=293815\">testing of evaluation function</a> by Steven Chu, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 17, 2003&#160;» <a href=\"/Evaluation\" title=\"Evaluation\">Evaluation</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=296689\">Testing the reliability of forward pruning</a> by <a href=\"/Russell_Reagan\" title=\"Russell Reagan\">Russell Reagan</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 15, 2003&#160;» <a href=\"/Pruning\" title=\"Pruning\">Pruning</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=334370\">To programmers: Hints for testing after a partial rewrite</a> by <a href=\"/Federico_Andr%C3%A9s_Corigliano\" title=\"Federico Andrés Corigliano\">Federico Corigliano</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 08, 2003</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=400589\">Is there a way?</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 13, 2004</li></ul>\n<h2><span class=\"mw-headline\" id=\"2005_...\">2005 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Testing&amp;action=edit&amp;section=20\" title=\"Edit section: 2005 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=484357\">table for detecting significant difference between two engines</a> by Joseph Ciarrochi, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 03, 2006</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=5866\">test methodology</a> by <a href=\"/Giuseppe_Cannella\" title=\"Giuseppe Cannella\">Giuseppe Cannella</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, November 13, 2006</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=5955\">Testing and debugging chess engines</a> by <a href=\"/Patrice_Duhamel\" title=\"Patrice Duhamel\">Patrice Duhamel</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, December 03, 2006</li></ul>\n<p><b>2007</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=13557\">Programmer bug hunt challenge</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 04, 2007&#160;» <a href=\"/Portable_Game_Notation\" title=\"Portable Game Notation\">Portable Game Notation</a>, <a href=\"/En_passant\" title=\"En passant\">En passant</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=13800\">a beat b,b beat c,c beat a question</a> by <a href=\"/Uri_Blass\" title=\"Uri Blass\">Uri Blass</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 16, 2007&#160;» <a href=\"/Playing_Strength\" title=\"Playing Strength\">Playing Strength</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=16412\">An objective test process for the rest of us?</a> by <a href=\"/Nicolai_Czempin\" title=\"Nicolai Czempin\">Nicolai Czempin</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 12, 2007</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=17947\">My new testing scheme</a> by <a href=\"/Zach_Wegner\" title=\"Zach Wegner\">Zach Wegner</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 20, 2007</li></ul>\n<p><b>2008</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=20082\">Test you engine</a> by <a href=\"/Fermin_Serrano\" title=\"Fermin Serrano\">Fermin Serrano</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 10, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=22832\">New testing thread</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 07, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=24590\">Comparing two version of the same engine</a> by <a href=\"/Fermin_Serrano\" title=\"Fermin Serrano\">Fermin Serrano</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 26, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=25461\">Debate: testing at fast time controls</a> by <a href=\"/Fermin_Serrano\" title=\"Fermin Serrano\">Fermin Serrano</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 15, 2008</li></ul>\n<p><b>2009</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=27024\">Cutechess-cli: A command line tool for engine-engine matches</a>, by <a href=\"/Ilari_Pihlajisto\" title=\"Ilari Pihlajisto\">Ilari Pihlajisto</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 16, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=28130\">Testing procedure</a> by <a href=\"/Matt_Gingell\" title=\"Matt Gingell\">Matt Gingell</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 27, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=293506&amp;t=27024\">Cutechess-cli version 0.1.8 released</a> by <a href=\"/Ilari_Pihlajisto\" title=\"Ilari Pihlajisto\">Ilari Pihlajisto</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 29, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=30513\">A reason for testing at fixed number of nodes</a> by <a href=\"/index.php?title=J._Wesley_Cleveland&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"J. Wesley Cleveland (page does not exist)\">J. Wesley Cleveland</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 06, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=30550\">different kinds of testing</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 09, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=30565\">more on fixed nodes</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 10, 2009</li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Testing&amp;action=edit&amp;section=21\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=32254\">XBoard and epd tournament</a> by <a href=\"/Vlad_Stamate\" title=\"Vlad Stamate\">Vlad Stamate</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 31, 2010&#160;» <a href=\"/Chess_Engine_Communication_Protocol\" title=\"Chess Engine Communication Protocol\">Chess Engine Communication Protocol</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=33685\">Long game vs short game testing</a> by <a href=\"/Vlad_Stamate\" title=\"Vlad Stamate\">Vlad Stamate</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 08, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=35537\">Pairings generation based on a big PGN file</a> by <a href=\"/Harun_Taner\" title=\"Harun Taner\">Harun Taner</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 22, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?p=358600\">hiatus good for bug-finding</a> by <a href=\"/Stuart_Cracraft\" title=\"Stuart Cracraft\">Stuart Cracraft</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 27, 2010</li></ul>\n<p><b>2011</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=39255\">testing question</a> by <a href=\"/Larry_Kaufman\" title=\"Larry Kaufman\">Larry Kaufman</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 01, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=39390\">Debugging regression tests</a> by <a href=\"/Onno_Garms\" title=\"Onno Garms\">Onno Garms</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 16, 2011 <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup></li></ul>\n<p><b>2012</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=41876\">fast game testing</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 08, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=477389&amp;t=44706&amp;sid=8b10031146b44f86ac4c4a129debf451\">Your best bug&#160;?</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 06, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=45158\">Yet Another Testing Question</a> by <a href=\"/Brian_Richardson\" title=\"Brian Richardson\">Brian Richardson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 15, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=45287\">Another testing question</a> by <a href=\"/Larry_Kaufman\" title=\"Larry Kaufman\">Larry Kaufman</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 23, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=46572\">A word for casual testers</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 25, 2012</li></ul>\n<p><b>2013</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=46759\">A poor man's testing environment</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 04, 2013 <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup>&#160;» <a href=\"/Match_Statistics\" title=\"Match Statistics\">Match Statistics</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=46948\">engine-engine testing isues</a> by <a href=\"/Jens_B%C3%A6k_Nielsen\" title=\"Jens Bæk Nielsen\">Jens Bæk Nielsen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 20, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=47407\">Beta for Stockfish distributed testing</a> by <a href=\"/Gary_Linscott\" title=\"Gary Linscott\">Gary</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 05, 2013&#160;» <a href=\"/Stockfish#TestingFramework\" title=\"Stockfish\">Fishtest</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=47885\">Fishtest Distributed Testing Framework</a> by <a href=\"/Marco_Costalba\" title=\"Marco Costalba\">Marco Costalba</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 01, 2013 &#160;» <a href=\"/Stockfish#TestingFramework\" title=\"Stockfish\">Fishtest</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48626\">cutechess-cli 0.6.0 released</a> by <a href=\"/Ilari_Pihlajisto\" title=\"Ilari Pihlajisto\">Ilari Pihlajisto</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 12, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=49054\">fast testing NIT algorithm</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 22, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=49103\">OICS: Computers Only ICS based Chess server for anyone</a> by <a href=\"/index.php?title=Joshua_Shriver&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Joshua Shriver (page does not exist)\">Joshua Shriver</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 26, 2013&#160;» <a href=\"/index.php?title=OICS&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"OICS (page does not exist)\">OICS</a></li></ul>\n<p><b>2014</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=51383\">testing procedure</a> by <a href=\"/Daniel_Jos%C3%A9_Queralt%C3%B3\" title=\"Daniel José Queraltó\">Daniel José Queraltó</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 23, 2014</li></ul>\n<h2><span class=\"mw-headline\" id=\"2015_...\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Testing&amp;action=edit&amp;section=22\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=57437\">Bullet vs regular time control, say 40/4m CCRL/CEGT</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 29, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=58359\">Static evaluation test posistions</a> by <a href=\"/Shawn_Chidester\" title=\"Shawn Chidester\">Shawn Chidester</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 25, 2015</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=58359&amp;start=2\">Re: Static evaluation test posistions</a> by <a href=\"/Ferdinand_Mosca\" title=\"Ferdinand Mosca\">Ferdinand Mosca</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 26, 2015&#160;» <a href=\"/Python\" title=\"Python\">Python</a></dd></dl>\n<p><b>2016</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=59038\">Ordo 1.0.9 (new features for testers)</a> by <a href=\"/Miguel_A._Ballicora\" title=\"Miguel A. Ballicora\">Miguel A. Ballicora</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 25, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=59984\">cluster versus single server</a> by <a href=\"/Folkert_van_Heusden\" title=\"Folkert van Heusden\">Folkert van Heusden</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 28, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61422\">Testing using many computers and architectures</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 14, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61988\">command line engine match?</a> by <a href=\"/Erin_Dame\" title=\"Erin Dame\">Erin Dame</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 06, 2016&#160;» <a href=\"/CLI\" title=\"CLI\">CLI</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=61991\">Looking for an epd file for sanity checks...</a> by <a href=\"/Fermin_Serrano\" title=\"Fermin Serrano\">Fermin Serrano</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 06, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=62576\">Testing with different EPD suits for search vs eval changes</a> by <a href=\"/Michael_Sherwin\" title=\"Michael Sherwin\">Michael Sherwin</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 23, 2016 </li></ul>\n<p><b>2017</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=62922\">sprt tourney manager</a> by <a href=\"/Richard_Delorme\" title=\"Richard Delorme\">Richard Delorme</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 24, 2017&#160;»  <a href=\"/Amoeba#TournamentManager\" title=\"Amoeba\">Amoeba Tournament Manager</a>, <a href=\"/Match_Statistics#SPRT\" title=\"Match Statistics\">SPRT</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63001\">how to properly test the changes to the engine&#160;?</a> by <a href=\"/index.php?title=Mahmoud_Uthman&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Mahmoud Uthman (page does not exist)\">Mahmoud Uthman</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 01, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63119\">How to go about chasing a bug like this?</a> by <a href=\"/Colin_Jenkins\" title=\"Colin Jenkins\">Colin Jenkins</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 09, 2017&#160;» <a href=\"/Debugging\" title=\"Debugging\">Debugging</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63454\">How to find SMP bugs&#160;?</a> by Lucas Braesch, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 15, 2017&#160;»  <a href=\"/Debugging\" title=\"Debugging\">Debugging</a>, <a href=\"/Lazy_SMP\" title=\"Lazy SMP\">Lazy SMP</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63555\">Testing for Move Ordering Improvements</a> by <a href=\"/index.php?title=Cheney_Nattress&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Cheney Nattress (page does not exist)\">Cheney Nattress</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 25, 2017&#160;» <a href=\"/Move_Ordering\" title=\"Move Ordering\">Move Ordering</a>, <a href=\"/Search_Statistics\" title=\"Search Statistics\">Search Statistics</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64356\">Testing endgame strength</a> by <a href=\"/%C3%81lvaro_Begu%C3%A9\" title=\"Álvaro Begué\">Álvaro Begué</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 21, 2017&#160;» <a href=\"/Endgame\" title=\"Endgame\">Endgame</a>, <a href=\"/RuyDos\" title=\"RuyDos\">RuyDos</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64358\">Opening testing suites efficiency</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 21, 2017&#160;» <a href=\"/Opening\" title=\"Opening\">Opening</a>, <a href=\"/Match_Statistics\" title=\"Match Statistics\">Match Statistics</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64394\">Testing A against B by playing a pool of others</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 24, 2017&#160;» <a href=\"/Match_Statistics\" title=\"Match Statistics\">Match Statistics</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64441\">Core behaviour</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schroder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 28, 2017&#160;» <a href=\"/Process\" title=\"Process\">Process</a>, <a href=\"/Thread\" title=\"Thread\">Thread</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64519\">Engine testing &amp; error margin&#160;?</a> by <a href=\"/index.php?title=Mahmoud_Uthman&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Mahmoud Uthman (page does not exist)\">Mahmoud Uthman</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 05, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65766\">Engines for testing (Linux, fast time control)</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 18, 2017&#160;» <a href=\"/Linux\" title=\"Linux\">Linux</a></li></ul>\n<p><b>2018</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=67485\">Issue with self play testing</a> by <a href=\"/Charles_Roberson\" title=\"Charles Roberson\">Charles Roberson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 18, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=68531\">Basic automated testing</a> by Josh Odom, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 28, 2018</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=68531&amp;start=6\">Re:Basic automated testing</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 30, 2018&#160;» <a href=\"/OpenBench\" title=\"OpenBench\">OpenBench</a></dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=69284\">testing consistency</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 16, 2018 </li></ul>\n<p><b>2019</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=70383\">Any testing framwork similair to Fishtest that can be run locally&#160;?</a> by  <a href=\"/index.php?title=Mahmoud_Uthman&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Mahmoud Uthman (page does not exist)\">Mahmoud Uthman</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 02, 2019</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=71848\">self test</a> by <a href=\"/Vivien_Clauzon\" title=\"Vivien Clauzon\">Vivien Clauzon</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 18, 2019</li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Testing&amp;action=edit&amp;section=23\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=73129\">EPD destruction tests</a> by <a href=\"/Chris_Whittington\" title=\"Chris Whittington\">Chris Whittington</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 19, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=73208\">EPD destruction tests, part 2</a> by <a href=\"/Chris_Whittington\" title=\"Chris Whittington\">Chris Whittington</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 27, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=74503\">Looking for automatic Engine Testing Software</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 19, 2020</li></ul>\n<p><b>2021</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=76225\">Testing strategies for my engines playing strength</a> by Thomas Jahn, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 04, 2021</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=76536\">Effect of adjudication and TC on testing process</a> by <a href=\"/Vivien_Clauzon\" title=\"Vivien Clauzon\">Vivien Clauzon</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 09, 2021&#160;» <a href=\"/Minic\" title=\"Minic\">Minic</a></li></ul>\n<p><b>2022</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=79276\">Strategies to unit testing the search</a> by Olexiy Svitashev, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 03, 2022&#160;» <a href=\"/Search\" title=\"Search\">Search</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=79280\">How do you know you improved&#160;?</a> by Philippe Chevalier, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 03, 2022</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Testing&amp;action=edit&amp;section=24\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://ajonsson.kapsi.fi/cutechess.html\">Cute Chess</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/cutechess/cutechess\">cutechess · GitHub</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/AndyGrant/OpenBench\">GitHub - OpenBench a Distributed SPRT Testing Framework for Chess Engines</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>&#160;» <a href=\"/OpenBench\" title=\"OpenBench\">OpenBench</a>, <a href=\"/Match_Statistics#SPRT\" title=\"Match Statistics\">SPRT</a> </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/ChrisWhittington/Chess-EPDs\">GitHub - ChrisWhittington/Chess-EPDs: Various EPD test suites</a> by <a href=\"/Chris_Whittington\" title=\"Chris Whittington\">Chris Whittington</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Regression_testing\">Regression testing from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.sp-cc.de/index.htm\">SPCC</a> by <a href=\"/index.php?title=Stefan_Pohl&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Stefan Pohl (page does not exist)\">Stefan Pohl</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://research.microsoft.com/en-us/projects/chess/\">CHESS - Microsoft Research</a> a tool for finding and reproducing <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Unusual_software_bug\">Heisenbugs</a> in concurrent programs.</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Engine_test_stand\">Engine test stand from Wikipedia</a></li>\n<li> <a href=\"/Category:Terje_Rypdal\" title=\"Category:Terje Rypdal\">Terje Rypdal Group</a> feat. <a href=\"/Category:Palle_Mikkelborg\" title=\"Category:Palle Mikkelborg\">Palle Mikkelborg</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://de.wikipedia.org/wiki/Haakon_Graf\">Håkon Graf</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://no.wikipedia.org/wiki/Sveinung_Hovensj%C3%B8\">Sveinung Hovensjø</a> and <a href=\"/Category:Jon_Christensen\" title=\"Category:Jon Christensen\">Jon Christensen</a> -  <a rel=\"nofollow\" class=\"external text\" href=\"http://no.wikipedia.org/wiki/Per_Ulv\">Per Ulv</a>, 1978, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/B5HwFDVWzFs?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Testing&amp;action=edit&amp;section=25\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://sanseverything.wordpress.com/2008/01/16/hope-springs-eternal/\">Hope Springs Eternal</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Category:Internet_chess_servers\">Internet chess servers from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.xs4all.nl/~timkr/chess2/honor.htm\">Defending Humanity's Honor</a> by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Tim_Krabb%C3%A9\">Tim Krabbé</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Regression_testing\">Regression testing from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.top-5000.nl/tuning.htm\">Testing a chess engine from the ground up</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://www.top-5000.nl/\">Home of the Dutch Rebel</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Main_Page\" title=\"Main Page\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301022242\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.038 seconds\nReal time usage: 0.042 seconds\nPreprocessor visited node count: 183/1000000\nPreprocessor generated node count: 324/1000000\nPost‐expand include size: 26/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1257-0!canonical and timestamp 20260301022242 and revision id 27016\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Jon_Christensen"
+      },
+      {
+        "sortkey": "",
+        "*": "Palle_Mikkelborg"
+      },
+      {
+        "sortkey": "",
+        "*": "Terje_Rypdal"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "4th Computer Olympiad"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ACM 1971"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ACM 1973"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ACM 1977"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ACM 1978"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ACM 1990"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "AI Factory"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Amoeba"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Andrew Grant"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Automated Tuning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Brian Richardson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Brute Force (Program)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CG 2008"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CLI"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CPWTIPC 1981"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Charles Roberson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Engine Communication Protocol"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Server"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chris Whittington"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Christophe Théron"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Coko"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Colin Jenkins"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Reports"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "DOCCC 2000"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Daja"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Daniel José Queraltó"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Debugging"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth Reduction R"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Don Dailey"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ed Schroder"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "En passant"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Endgame"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Endgame Tablebases"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engine Rating Lists"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engine Similarity"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Erin Dame"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Federico Andrés Corigliano"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ferdinand Mosca"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fermin Serrano"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "First GI Computer Chess Tournament"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Folkert van Heusden"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Futility Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gary Linscott"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gian-Carlo Pascutto"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Giuseppe Cannella"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Harun Taner"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA Journal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ilari Pihlajisto"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jan Eric Larsson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jeff Rollason"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jens Bæk Nielsen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jeroen Noomen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "John Stanback"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jon Dart"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jonathan Schaeffer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jónheiður Ísleifsdóttir"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kai Laskos"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "LOS Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Larry Kaufman"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Late Move Reduction Test Results"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Late Move Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lazy SMP"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Linux"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Logging"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marco Costalba"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Match Statistics"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Matt Gingell"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michael Sherwin"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Miguel A. Ballicora"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Minic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Generation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Ordering"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Nicolai Czempin"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Novag Micro Chess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Pruning Test Results"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Oliver Brausch"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Onno Garms"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "OpenBench"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Opening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Opening Book"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "PC Schach"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Patrice Duhamel"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Paul Rushton"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Advantage, Win Percentage, and Elo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Perft"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Perft Results"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Phoenix"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Playing Strength"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Portable Game Notation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Process"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Promotions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Proscha"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Python"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Richard Delorme"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Hyatt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Russell Reagan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "RuyDos"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search Statistics"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sequential Probability Ratio Test"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Shawn Chidester"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stockfish"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stuart Cracraft"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Super Constellation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Test-Positions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Thomas Mally"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Thread"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tim Breitkreutz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Time Management"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tom King"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tony Marsland"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tournament Manager"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tournaments and Matches"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "UCI"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Uri Blass"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "User Interface"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vivien Clauzon"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vlad Stamate"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "WMCCC 1993"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "WMCCC 1995"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Win at Chess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "XBoard"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "XiniX"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Yngvi Björnsson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Zach Wegner"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Álvaro Begué"
+      },
+      {
+        "ns": 0,
+        "*": "Profiling"
+      },
+      {
+        "ns": 0,
+        "*": "Rating System"
+      },
+      {
+        "ns": 0,
+        "*": "J. Wesley Cleveland"
+      },
+      {
+        "ns": 0,
+        "*": "Joshua Shriver"
+      },
+      {
+        "ns": 0,
+        "*": "OICS"
+      },
+      {
+        "ns": 0,
+        "*": "Mahmoud Uthman"
+      },
+      {
+        "ns": 0,
+        "*": "Cheney Nattress"
+      },
+      {
+        "ns": 0,
+        "*": "Stefan Pohl"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Jon Christensen"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Palle Mikkelborg"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Terje Rypdal"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Bug Hunting",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Engine_Testing",
+        "byteoffset": 916,
+        "anchor": "Bug_Hunting"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Analyzing",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Engine_Testing",
+        "byteoffset": 980,
+        "anchor": "Analyzing"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Tuning",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Engine_Testing",
+        "byteoffset": 1047,
+        "anchor": "Tuning"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "SPRT",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Engine_Testing",
+        "byteoffset": 1105,
+        "anchor": "SPRT"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Test-Positions",
+        "number": "5",
+        "index": "5",
+        "fromtitle": "Engine_Testing",
+        "byteoffset": 1215,
+        "anchor": "Test-Positions"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Matches",
+        "number": "6",
+        "index": "6",
+        "fromtitle": "Engine_Testing",
+        "byteoffset": 1709,
+        "anchor": "Matches"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Time Controls",
+        "number": "6.1",
+        "index": "7",
+        "fromtitle": "Engine_Testing",
+        "byteoffset": 1818,
+        "anchor": "Time_Controls"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Opening",
+        "number": "6.2",
+        "index": "8",
+        "fromtitle": "Engine_Testing",
+        "byteoffset": 3302,
+        "anchor": "Opening"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Tournament Manager",
+        "number": "6.3",
+        "index": "9",
+        "fromtitle": "Engine_Testing",
+        "byteoffset": 3913,
+        "anchor": "Tournament_Manager"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Frameworks",
+        "number": "6.4",
+        "index": "10",
+        "fromtitle": "Engine_Testing",
+        "byteoffset": 4147,
+        "anchor": "Frameworks"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Chess Server",
+        "number": "6.5",
+        "index": "11",
+        "fromtitle": "Engine_Testing",
+        "byteoffset": 4251,
+        "anchor": "Chess_Server"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Statistics",
+        "number": "6.6",
+        "index": "12",
+        "fromtitle": "Engine_Testing",
+        "byteoffset": 4700,
+        "anchor": "Statistics"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Ratings",
+        "number": "6.7",
+        "index": "13",
+        "fromtitle": "Engine_Testing",
+        "byteoffset": 4955,
+        "anchor": "Ratings"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Test Results",
+        "number": "7",
+        "index": "14",
+        "fromtitle": "Engine_Testing",
+        "byteoffset": 5044,
+        "anchor": "Test_Results"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Notable Bugs",
+        "number": "8",
+        "index": "15",
+        "fromtitle": "Engine_Testing",
+        "byteoffset": 5160,
+        "anchor": "Notable_Bugs"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "9",
+        "index": "16",
+        "fromtitle": "Engine_Testing",
+        "byteoffset": 6073,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "10",
+        "index": "17",
+        "fromtitle": "Engine_Testing",
+        "byteoffset": 7700,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1995 ...",
+        "number": "10.1",
+        "index": "18",
+        "fromtitle": "Engine_Testing",
+        "byteoffset": 7714,
+        "anchor": "1995_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "10.2",
+        "index": "19",
+        "fromtitle": "Engine_Testing",
+        "byteoffset": 8201,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2005 ...",
+        "number": "10.3",
+        "index": "20",
+        "fromtitle": "Engine_Testing",
+        "byteoffset": 9308,
+        "anchor": "2005_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "10.4",
+        "index": "21",
+        "fromtitle": "Engine_Testing",
+        "byteoffset": 11918,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "10.5",
+        "index": "22",
+        "fromtitle": "Engine_Testing",
+        "byteoffset": 15031,
+        "anchor": "2015_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "10.6",
+        "index": "23",
+        "fromtitle": "Engine_Testing",
+        "byteoffset": 19130,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "11",
+        "index": "24",
+        "fromtitle": "Engine_Testing",
+        "byteoffset": 20236,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "12",
+        "index": "25",
+        "fromtitle": "Engine_Testing",
+        "byteoffset": 21608,
+        "anchor": "References"
+      }
+    ]
+  }
+}

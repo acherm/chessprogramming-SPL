@@ -1,0 +1,919 @@
+{
+  "parse": {
+    "title": "Perft",
+    "pageid": 1330,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Board_Representation\" title=\"Board Representation\">Board Representation</a> * <a href=\"/Move_Generation\" title=\"Move Generation\">Move Generation</a> * Perft</b>\n</p><p><b>Perft</b>, (<b>perf</b>ormance <b>t</b>est, move path enumeration)<br />\na <a href=\"/Debugging\" title=\"Debugging\">debugging</a> function to walk the move generation tree of strictly <a href=\"/Legal_Move\" title=\"Legal Move\">legal moves</a> to count all the <a href=\"/Leaf_Node\" title=\"Leaf Node\">leaf nodes</a> of a certain <a href=\"/Depth\" title=\"Depth\">depth</a>, which can be compared to <a href=\"/Perft_Results\" title=\"Perft Results\">predetermined values</a> and used to isolate <a href=\"/Engine_Testing#bugs\" title=\"Engine Testing\">bugs</a>. In perft, nodes are only counted at the end after the last <a href=\"/Make_Move\" title=\"Make Move\">makemove</a>. Thus, \"higher\" <a href=\"/Terminal_Node\" title=\"Terminal Node\">terminal nodes</a> (e.g. mate or stalemate) are not counted, instead the number of move paths of a certain depth is counted. Perft ignores draws by <a href=\"/Repetitions\" title=\"Repetitions\">repetition</a>, by the <a href=\"/Fifty-move_Rule\" title=\"Fifty-move Rule\">fifty-move rule</a> and by <a href=\"/Material#InsufficientMaterial\" title=\"Material\">insufficient material</a>. By recording the amount of time taken for each iteration, it's possible to compare the performance of different move generators or the same generator on different machines, though this must be done with caution since there are variations to perft.\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Perft_function\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Perft function</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Speed_up\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Speed up</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#Bulk-counting\"><span class=\"tocnumber\">2.1</span> <span class=\"toctext\">Bulk-counting</span></a></li>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#Pseudo_Legal_Moves\"><span class=\"tocnumber\">2.2</span> <span class=\"toctext\">Pseudo Legal Moves</span></a></li>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#Hashing\"><span class=\"tocnumber\">2.3</span> <span class=\"toctext\">Hashing</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#Divide\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Divide</span></a></li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#Purposes\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Purposes</span></a></li>\n<li class=\"toclevel-1 tocsection-8\"><a href=\"#Known_issues\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Known issues</span></a></li>\n<li class=\"toclevel-1 tocsection-9\"><a href=\"#History\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">History</span></a></li>\n<li class=\"toclevel-1 tocsection-10\"><a href=\"#Quotes\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">Quotes</span></a></li>\n<li class=\"toclevel-1 tocsection-11\"><a href=\"#Results\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">Results</span></a></li>\n<li class=\"toclevel-1 tocsection-12\"><a href=\"#Publications\"><span class=\"tocnumber\">9</span> <span class=\"toctext\">Publications</span></a></li>\n<li class=\"toclevel-1 tocsection-13\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">10</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-14\"><a href=\"#1995_...\"><span class=\"tocnumber\">10.1</span> <span class=\"toctext\">1995 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-15\"><a href=\"#2000_...\"><span class=\"tocnumber\">10.2</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-16\"><a href=\"#2005_...\"><span class=\"tocnumber\">10.3</span> <span class=\"toctext\">2005 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-17\"><a href=\"#2010_...\"><span class=\"tocnumber\">10.4</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-18\"><a href=\"#2015_...\"><span class=\"tocnumber\">10.5</span> <span class=\"toctext\">2015 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-19\"><a href=\"#2020_...\"><span class=\"tocnumber\">10.6</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-20\"><a href=\"#External_Links\"><span class=\"tocnumber\">11</span> <span class=\"toctext\">External Links</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-21\"><a href=\"#Perft_in_other_Games\"><span class=\"tocnumber\">11.1</span> <span class=\"toctext\">Perft in other Games</span></a></li>\n<li class=\"toclevel-2 tocsection-22\"><a href=\"#Implementations\"><span class=\"tocnumber\">11.2</span> <span class=\"toctext\">Implementations</span></a></li>\n<li class=\"toclevel-2 tocsection-23\"><a href=\"#Video_Tutorial\"><span class=\"tocnumber\">11.3</span> <span class=\"toctext\">Video Tutorial</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-24\"><a href=\"#References\"><span class=\"tocnumber\">12</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Perft_function\">Perft function</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Perft&amp;action=edit&amp;section=1\" title=\"Edit section: Perft function\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>A simple perft function in <a href=\"/C\" title=\"C\">C</a> looks as the following:\n</p>\n<pre>\ntypedef unsigned long long u64;\n\nu64 Perft(int depth)\n{\n  MOVE move_list[256];\n  int n_moves, i;\n  u64 nodes = 0;\n\n  if (depth == 0) \n    return 1ULL;\n\n  n_moves = GenerateLegalMoves(move_list);\n  for (i = 0; i &lt; n_moves; i++) {\n    MakeMove(move_list[i]);\n    nodes += Perft(depth - 1);\n    UndoMove(move_list[i]);\n  }\n  return nodes;\n}\n</pre>\n<h1><span class=\"mw-headline\" id=\"Speed_up\">Speed up</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Perft&amp;action=edit&amp;section=2\" title=\"Edit section: Speed up\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Bulk-counting\"><span id=\"Bulk\"></span>Bulk-counting</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Perft&amp;action=edit&amp;section=3\" title=\"Edit section: Bulk-counting\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Assuming the above code used a legal move generator. The algorithm is simple and short, but it makes moves for every node, even if they are the leaves (ends of branches). It could improve speed significantly: instead of counting nodes at \"depth 0\", legal move generators can take advantage of the fact that the number of moves generated at \"depth 1\" represents the accurate Perft value for that branch. Therefore, they can skip the last <a href=\"/Make_Move\" title=\"Make Move\">makemove</a>/<a href=\"/Unmake_Move\" title=\"Unmake Move\">undomove</a>, which gives much faster results and is a better indicator of the raw move generator speed (versus move generator + make/unmake). However, this can cause some confusion when comparing Perft values and may make the task of collecting some extra information, such as the number of captures and checks, almost impossible. \n</p>\n<pre>\nu64 Perft(int depth /* assuming &gt;= 1 */)\n{\n  MOVE move_list[256];\n  int n_moves, i;\n  u64 nodes = 0;\n\n  n_moves = GenerateLegalMoves(move_list);\n\n  if (depth == 1) \n    return (u64) n_moves;\n\n  for (i = 0; i &lt; n_moves; i++) {\n    MakeMove(move_list[i]);\n    nodes += Perft(depth - 1);\n    UndoMove(move_list[i]);\n  }\n  return nodes;\n}\n</pre>\n<h2><span class=\"mw-headline\" id=\"Pseudo_Legal_Moves\">Pseudo Legal Moves</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Perft&amp;action=edit&amp;section=4\" title=\"Edit section: Pseudo Legal Moves\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>To generate legal moves, some programs have to make moves first, call a function to check if the position in-check and then undo those moves. That makes the above Perft function make and undo moves twice for all moves. The code below can avoid that problem and run much faster:\n</p>\n<pre>\nu64 Perft(int depth)\n{\n  MOVE move_list[256];\n  int n_moves, i;\n  u64 nodes = 0;\n\n  if (depth == 0) \n    return 1ULL;\n\n  n_moves = GenerateMoves(move_list);\n  for (i = 0; i &lt; n_moves; i++) {\n    MakeMove(move_list[i]);\n    if (!IsIncheck())\n      nodes += Perft(depth - 1);\n    UndoMove(move_list[i]);\n  }\n  return nodes;\n}\n</pre>\n<h2><span class=\"mw-headline\" id=\"Hashing\">Hashing</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Perft&amp;action=edit&amp;section=5\" title=\"Edit section: Hashing\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Perft can receive another speed boost by <a href=\"/Hash_Table\" title=\"Hash Table\">hashing</a> node counts, with a small chance for inaccurate results. Sometimes this is used as a sanity check to make sure the hash table and keys are working correctly. Hashing may speed up from 1.5 to 4 times<sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup>.\n</p>\n<h1><span class=\"mw-headline\" id=\"Divide\">Divide</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Perft&amp;action=edit&amp;section=6\" title=\"Edit section: Divide\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>The Divide command is often implemented as a variation of Perft, listing all moves and for each move, the Perft of the decremented depth. However, some programs already give \"divided\" output for Perft. Below is the output of <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a> when computing perft 5 for the start position:\n</p>\n<pre>\ngo perft 5\na2a3: 181046\nb2b3: 215255\nc2c3: 222861\nd2d3: 328511\ne2e3: 402988\nf2f3: 178889\ng2g3: 217210\nh2h3: 181044\na2a4: 217832\nb2b4: 216145\nc2c4: 240082\nd2d4: 361790\ne2e4: 405385\nf2f4: 198473\ng2g4: 214048\nh2h4: 218829\nb1a3: 198572\nb1c3: 234656\ng1f3: 233491\ng1h3: 198502\n\nNodes searched: 4865609\n</pre>\n<h1><span class=\"mw-headline\" id=\"Purposes\">Purposes</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Perft&amp;action=edit&amp;section=7\" title=\"Edit section: Purposes\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Perft is mostly for debugging purposes. It works mainly with functions: move generators, make move, and unmake move. They are all very basic and vital for chess engines. By comparing Perft results, developers can determine if those functions are working correctly or not. If they are incorrect, they can narrow down the search quickly by comparing branches. Then, they can call Perft for the wrong branches with lower depth and repeat the process until they find direct positions that yield the wrong result.\n</p><p>Other purposes:\n</p>\n<ul><li> give a glance at how good/bad their generators/make/unmake functions are, compared with the speed of other engines</li>\n<li> calculate branch factors</li>\n<li> a factor to estimate the complexity of chess variants, by comparing branch factors or Perft results at a given depth for their starting positions</li></ul>\n<h1><span class=\"mw-headline\" id=\"Known_issues\">Known issues</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Perft&amp;action=edit&amp;section=8\" title=\"Edit section: Known issues\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Perft algorithm considers only legal moves but ignores some <a href=\"/Draw\" title=\"Draw\">draw rules</a>. Before reaching the limit depth, it expands a position if it has some legal moves and stops if it does not. That means Perft stops at being mated and <a href=\"/Stalemate\" title=\"Stalemate\">draw-by-stalemate</a> positions. However, since the algorithm doesn’t mention, Perft doesn’t stop at other draw positions, including 1) <a href=\"/Fifty-move_Rule\" title=\"Fifty-move Rule\">fifty-move</a> 2) <a href=\"/Repetitions\" title=\"Repetitions\">repetitions</a>, and 3) <a href=\"/Material#InsufficientMaterial\" title=\"Material\">insufficient material</a>. Consequently, the Perft search trees are not the Chess <a href=\"/Search_Tree\" title=\"Search Tree\">search trees</a> even though they are quite close. The reason is from the historical when some early chess programs used Perft in that way, and then many others adopted it. The Perft's original form has been widely accepted because of its simple, fast and well-served debugging purposes.\n</p>\n<h1><span class=\"mw-headline\" id=\"History\">History</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Perft&amp;action=edit&amp;section=9\" title=\"Edit section: History\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Supposably, perft was first implemented within the <a href=\"/index.php?title=Cobol&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Cobol (page does not exist)\">Cobol</a> program <a href=\"/index.php?title=RSCE-1&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"RSCE-1 (page does not exist)\">RSCE-1</a> by <a href=\"/Rolf_C._Smith#RCSmith\" title=\"Rolf C. Smith\">R.C. Smith</a>, submitted to the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/United_States_Chess_Federation\">USCF</a> for evaluation, and subject of an <a href=\"/Timeline#1978\" title=\"Timeline\">1978</a> <a href=\"/Computerworld\" title=\"Computerworld\">Computerworld</a> article <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup> . RSCE-1's purpose was not to play chess games, but to position analysis, to find forced <a href=\"/Checkmate\" title=\"Checkmate\">mates</a>, and to perform a moving path enumeration of up to three <a href=\"/Ply\" title=\"Ply\">plies</a>, with the <a href=\"/Perft_Results\" title=\"Perft Results\">perft(3) result</a> of 8,902 from the <a href=\"/Initial_Position\" title=\"Initial Position\">initial position</a> already mentioned <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>. <a href=\"/Ken_Thompson\" title=\"Ken Thompson\">Ken Thompson</a> may have calculated perft(3) and perft(4) earlier than this date with <a href=\"/Belle\" title=\"Belle\">Belle</a>. <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a> suggested the move path enumeration in 1995 as implemented in <a href=\"/Spector\" title=\"Spector\">Spector</a> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup> and has since been actively involved in Perft computations, while the term \"Perft\" was likely coined by a <a href=\"/Crafty\" title=\"Crafty\">Crafty</a> command, despite its initial implementation was not conformed to the above definition <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup>.\n</p><p>In <b>December 2003</b>, <a href=\"/Albert_Bertilsson\" title=\"Albert Bertilsson\">Albert Bertilsson</a> started a distributed project <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup> to calculate perft(11) of the <a href=\"/Initial_Position\" title=\"Initial Position\">initial position</a>, taking over a week to calculate <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup> . Exact Perft numbers have been computed and verified up to a depth of 13 by Edwards and are now available in the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/On-Line_Encyclopedia_of_Integer_Sequences\">On-Line Encyclopedia of Integer Sequences</a> <sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup>, and are given under <a href=\"/Initial_Position_Summary\" title=\"Initial Position Summary\">Initial Position Summary</a>. A so far unverified claim for perft(<b>14</b>) of 61,885,021,521,585,529,237 was given by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a> in <b>April 2013</b> <sup id=\"cite_ref-9\" class=\"reference\"><a href=\"#cite_note-9\">&#91;9&#93;</a></sup>, while <a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel Shawul</a> proposed Perft estimation applying <a href=\"/Monte-Carlo_Tree_Search\" title=\"Monte-Carlo Tree Search\">Monte carlo methods</a> <sup id=\"cite_ref-10\" class=\"reference\"><a href=\"#cite_note-10\">&#91;10&#93;</a></sup> <sup id=\"cite_ref-11\" class=\"reference\"><a href=\"#cite_note-11\">&#91;11&#93;</a></sup>. \n<span id=\"15\"></span>\nIn <b>August 2017</b>, <a href=\"/Ankan_Banerjee\" title=\"Ankan Banerjee\">Ankan Banerjee</a>, who already confirmed Peter Österlund's perft(<b>14</b>) in September 2016 <sup id=\"cite_ref-12\" class=\"reference\"><a href=\"#cite_note-12\">&#91;12&#93;</a></sup>, computed perft(<b>15</b>) of 2,015,099,950,053,364,471,960 with his <a href=\"/GPU\" title=\"GPU\">GPU</a> perft program <sup id=\"cite_ref-13\" class=\"reference\"><a href=\"#cite_note-13\">&#91;13&#93;</a></sup>, running it several days two times with different <a href=\"/Zobrist_Hashing\" title=\"Zobrist Hashing\">zobrist keys</a> on a cluster of <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Nvidia_DGX-1\">Nvidia DGX-1</a> server systems <sup id=\"cite_ref-14\" class=\"reference\"><a href=\"#cite_note-14\">&#91;14&#93;</a></sup>. His program starts exploring the tree in <a href=\"/Depth-First\" title=\"Depth-First\">depth first</a> manner on the CPU. When a certain depth is reached a GPU function (kernel) is launched to compute perft of the subtree in <a href=\"/Best-First\" title=\"Best-First\">breadth first</a> manner <sup id=\"cite_ref-15\" class=\"reference\"><a href=\"#cite_note-15\">&#91;15&#93;</a></sup>. Ankan Banerjee dedicated his computations in honor to <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a> - whose tireless efforts for verifying perft(14) encouraged him to verify perft(14) and take up the challenge to compute perft(15) <sup id=\"cite_ref-16\" class=\"reference\"><a href=\"#cite_note-16\">&#91;16&#93;</a></sup>.\n</p>\n<h1><span class=\"mw-headline\" id=\"Quotes\">Quotes</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Perft&amp;action=edit&amp;section=10\" title=\"Edit section: Quotes\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a> in a forum post, June 12, 2020 <sup id=\"cite_ref-17\" class=\"reference\"><a href=\"#cite_note-17\">&#91;17&#93;</a></sup>&#160;:\n</p>\n<pre>I believe I was the first to use this. Back in the 80s. We rewrote the move generator in Cray Blitz in assembly language. It was a pain to debug. I decided on the \"perft\" approach solely to test/debug the move generator. We'd run two versions, one FORTRAN, one assembly, and we tested and debugged until they matched.\nI carried this over into Crafty as early versions went through several different approaches on move generation. Starting with the Slate/Atkin approach, then rotated bitboards (which took some time to debug), and the magic. It was really intended solely for that purpose. Then several started to use it as a benchmark for speed. I never followed that path since move generation is a very small part of the overall CPU time burned.\nSpeed here is not so important. I doubt anyone's move generator takes more than 10% of total search time, which means a 20% improvement in perft numbers is only a 2% overall speed gain. I would not worry about anything but matching the node counts exactly...\n</pre>\n<h1><span class=\"mw-headline\" id=\"Results\">Results</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Perft&amp;action=edit&amp;section=11\" title=\"Edit section: Results\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Perft_Results\" title=\"Perft Results\">Perft Results</a></li>\n<li> <a href=\"/Chess960_Perft_Results\" title=\"Chess960 Perft Results\">Chess960 Perft Results</a></li>\n<li> <a href=\"/Chinese_Chess_Perft_Results\" title=\"Chinese Chess Perft Results\">Chinese Chess Perft Results</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Perft&amp;action=edit&amp;section=12\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Aart_Bik\" title=\"Aart Bik\">Aart Bik</a> (<b>2012</b>). <i>Computing Deep Perft and Divide Numbers for Checkers</i>. <a href=\"/ICGA_Journal#35_4\" title=\"ICGA Journal\">ICGA Journal, Vol. 35, No. 4</a>&#160;» <a href=\"/Checkers\" title=\"Checkers\">Checkers</a></li>\n<li> <a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel S. Abdi</a> (<b>2013</b>). <i>Monte carlo methods for estimating game tree size</i>.  <sup id=\"cite_ref-18\" class=\"reference\"><a href=\"#cite_note-18\">&#91;18&#93;</a></sup>&#160;» <a href=\"/Monte-Carlo_Tree_Search\" title=\"Monte-Carlo Tree Search\">Monte-Carlo Tree Search</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Perft&amp;action=edit&amp;section=13\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1995_...\">1995 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Perft&amp;action=edit&amp;section=14\" title=\"Edit section: 1995 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/M8V1AzkfOok/YV9lcfOlfgIJ\">Re: Speed of Move Generator</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, August 16, 1995&#160;» <a href=\"/Spector\" title=\"Spector\">Spector</a> </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/2nqtCdHC-r0/ENqomE2u51kJ\">Re: complete opening tree stats</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, February 05, 1998&#160;» <a href=\"/Crafty\" title=\"Crafty\">Crafty</a> </li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Perft&amp;action=edit&amp;section=15\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=107258\">Testing speed of \"position visiting\"</a> by <a href=\"/Tom_Kerrigan\" title=\"Tom Kerrigan\">Tom Kerrigan</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 23, 2000</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/ek5fbFf4ajc/lrPxv2kDHgkJ\">Experiments with crafty perft command</a> by Guy Macon, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, December 10, 2000 </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=198498\">Who is the champion in calculating perft?</a> by <a href=\"/Uri_Blass\" title=\"Uri Blass\">Uri Blass</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 22, 2001</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=234025\">Perft 5,6 {Fastest program is List}</a> by <a href=\"/Dann_Corbit\" title=\"Dann Corbit\">Dann Corbit</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 04, 2002&#160;» <a href=\"/List_(Program)\" title=\"List (Program)\">List</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=275133\">Perft revisited</a> by <a href=\"/index.php?title=Normand_M._Blais&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Normand M. Blais (page does not exist)\">Normand M. Blais</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 05, 2003</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=276596\">perft question</a> by <a href=\"/Joel_Veness\" title=\"Joel Veness\">Joel Veness</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 12, 2003</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=18&amp;t=41318\">Perft</a> by <a href=\"/Andreas_Herrmann\" title=\"Andreas Herrmann\">Andreas Herrmann</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, February 18, 2003</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=326134\">Highest perft for initial position?</a> by <a href=\"/Albert_Bertilsson\" title=\"Albert Bertilsson\">Albert Bertilsson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 07, 2003</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=335026\">Distributed perft project</a> by <a href=\"/Albert_Bertilsson\" title=\"Albert Bertilsson\">Albert Bertilsson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 09, 2003</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=334499\">Perft(10) verified</a> by <a href=\"/Albert_Bertilsson\" title=\"Albert Bertilsson\">Albert Bertilsson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 09, 2003</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=335527\">Distributed perft, current standings and trends</a> by <a href=\"/Albert_Bertilsson\" title=\"Albert Bertilsson\">Albert Bertilsson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 12, 2003</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=336985\">Hashing in distributed perft</a> by <a href=\"/Steffen_A._Jakob\" title=\"Steffen A. Jakob\">Steffen Jakob</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 19, 2003</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=386249\">perft records</a> by <a href=\"/Peter_Fendrich\" title=\"Peter Fendrich\">Peter Fendrich</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 06, 2004</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=388806\">perft results (how accurate is accurate enough&#160;?)</a> by <a href=\"/Roman_Hartmann\" title=\"Roman Hartmann\">Roman Hartmann</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 23, 2004</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=394229\">FRC Perft</a> by Jürgen Suntinger, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 02, 2004</li></ul>\n<h2><span class=\"mw-headline\" id=\"2005_...\">2005 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Perft&amp;action=edit&amp;section=16\" title=\"Edit section: 2005 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=1377\">perft question</a> by <a href=\"/Sven_Sch%C3%BCle\" title=\"Sven Schüle\">Sven Schüle</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, January 19, 2005</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=466491\">Perft vs Search Re: Cache size does matter</a> by <a href=\"/Brian_Richardson\" title=\"Brian Richardson\">Brian Richardson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 03, 2005</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=488816\">Perft -- Test position and data</a> by <a href=\"/Charles_Roberson\" title=\"Charles Roberson\">Charles Roberson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 23, 2006</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=20834\">A perft faster than qperft?!</a> by <a href=\"/Allard_Siemelink\" title=\"Allard Siemelink\">Allard Siemelink</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 24, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=23634\">Perft problems...</a> by <a href=\"/index.php?title=Chris_Tatham&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Chris Tatham (page does not exist)\">Chris Tatham</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 10, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=27334\">What is perft(x) exactly meaning?</a> by <a href=\"/Jouni_Uski\" title=\"Jouni Uski\">Jouni Uski</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 06, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=29425\">Perft and mate</a> by <a href=\"/Stefano_Gemma\" title=\"Stefano Gemma\">Stefano Gemma</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 16, 2009&#160;» <a href=\"/Freccia\" title=\"Freccia\">Freccia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=30754\">Perft and insufficient material</a> by <a href=\"/Sven_Sch%C3%BCle\" title=\"Sven Schüle\">Sven Schüle</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 23, 2009</li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Perft&amp;action=edit&amp;section=17\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=34025\">Does perft include underpromotion?</a> by <a href=\"/Rasjid_Chan\" title=\"Rasjid Chan\">Chan Rasjid</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 27, 2010</li></ul>\n<p><b>2011</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=38235\">Perft 12 in progress</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 27, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=38862\">Perft(12) count confirmed</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 25, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=39678\">Perft(13) betting pool</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 10, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=40108\">Fastest perft</a> by ethan ara, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 19, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=41373\">Perft(3) from 1978, with a twist!</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 08, 2011 <sup id=\"cite_ref-19\" class=\"reference\"><a href=\"#cite_note-19\">&#91;19&#93;</a></sup></li></ul>\n<p><b>2012</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=42512\">estimating the number of possible stalemates in perft(n)</a> by <a href=\"/Uri_Blass\" title=\"Uri Blass\">Uri Blass</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>,  February 18, 2012&#160;» <a href=\"/Stalemate\" title=\"Stalemate\">Stalemate</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=42600\">Shatranj perfts</a> by <a href=\"/index.php?title=Paul_Byrne&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Paul Byrne (page does not exist)\">Paul Byrne</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 24, 2012&#160;» <a href=\"/Shatranj\" title=\"Shatranj\">Shatranj</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=45099\">Perft and en_passant</a> by <a href=\"/Harald_L%C3%BC%C3%9Fen\" title=\"Harald Lüßen\">Harald Lüßen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 11, 2012&#160;» <a href=\"/En_passant\" title=\"En passant\">En passant</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=46004\">about perft, what is the proper way of doing it?</a> by Fred Piche, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 14, 2012</li></ul>\n<p><b>2013</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=47318\">A few positions to test movegen</a> by <a href=\"/Martin_Sedlak\" title=\"Martin Sedlak\">Martin Sedlak</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 24, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=47335\">Perft(14) estimates thread</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 26, 2013</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=513308&amp;t=47335\">Re: Perft(14) estimates thread</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 02, 2013&#160;» 61,885,021,521,585,529,237</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=47740\">Perft(15) estimates thread</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 10, 2013</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=47740&amp;start=2\">MC methods</a> by <a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel Shawul</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 11, 2013&#160;» <a href=\"/Monte-Carlo_Tree_Search\" title=\"Monte-Carlo Tree Search\">Monte-Carlo Tree Search</a></dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=47740&amp;topic_view=flat&amp;start=11\">Re: MC methods</a> by <a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel Shawul</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 13, 2013</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.chessprogramming.net/computerchess/is-perft-speed-important/\">Is Perft Speed Important?</a> by <a href=\"/Steve_Maughan\" title=\"Steve Maughan\">Steve Maughan</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.chessprogramming.net/\">Computer Chess Programming</a>, April 19, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48217\">Perft search speed bottleneck</a> by Jim Jarvis, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 07, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48387\">Fast perft on GPU (upto 20 Billion nps w/o hashing)</a> by <a href=\"/Ankan_Banerjee\" title=\"Ankan Banerjee\">Ankan Banerjee</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 22, 2013&#160;» <a href=\"/GPU\" title=\"GPU\">GPU</a>, <a href=\"/Kogge-Stone_Algorithm\" title=\"Kogge-Stone Algorithm\">Kogge-Stone Algorithm</a> <sup id=\"cite_ref-20\" class=\"reference\"><a href=\"#cite_note-20\">&#91;20&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48423\">A perft() benchmark</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 26, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48491\">gperft</a> by <a href=\"/index.php?title=Paul_Byrne&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Paul Byrne (page does not exist)\">Paul Byrne</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 01, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=52965\">perft/divide bug in roce38 and Sharper? [SOLVED</a>] by thedrunkard, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, October 16, 2013&#160;» <a href=\"/ROCE\" title=\"ROCE\">ROCE</a>, <a href=\"/Sharper\" title=\"Sharper\">Sharper</a></li></ul>\n<p><b>2014</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=5&amp;t=2238\">Perft and Captures</a> by <a href=\"/Christian_Daley\" title=\"Christian Daley\">CDaley11</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">OpenChess Forum</a>, January 24, 2013&#160;» <a href=\"/Captures\" title=\"Captures\">Captures</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=53224\">Perft(14) revisited</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 08, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=53406\">Perft(14) Weekly Status Report</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 24, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=53408\">Non recursive perft()</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 24, 2014&#160;» <a href=\"/Iterative_Search\" title=\"Iterative Search\">Iterative Search</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=53439\">OpenCL perft() Technical Issues</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 26, 2014&#160;» <a href=\"/OpenCL\" title=\"OpenCL\">OpenCL</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=53743\">A method guaranteed to localize the toughest perft() bugs</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 18, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=54528\">FRC / Chess960 Engine with \"Divided\" Command</a> by <a href=\"/Steve_Maughan\" title=\"Steve Maughan\">Steve Maughan</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 02, 2014&#160;» <a href=\"/Chess960\" title=\"Chess960\">Chess960</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=54719\">Handling integer overflow for certain perft() calculations</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 22, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=54767\">Perft(14) verification</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 28, 2014</li></ul>\n<h2><span class=\"mw-headline\" id=\"2015_...\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Perft&amp;action=edit&amp;section=18\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=54853\">Perft(14) Weekly Status Reports for 2015</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 04, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=55195\">Perft(15)</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 09, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=55274\">Some Chess960/FRC positions to be confirmed</a> by <a href=\"/Reinhard_Scharnagl\" title=\"Reinhard Scharnagl\">Reinhard Scharnagl</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 09, 2015&#160;» <a href=\"/Chess960\" title=\"Chess960\">Chess960</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=55896\">An MPI perft program</a> by <a href=\"/Chao_Ma\" title=\"Chao Ma\">Chao Ma</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 05, 2015&#160;» <a href=\"/Parallel_Search\" title=\"Parallel Search\">Parallel Search</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=56523\">Deep split perft()</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 29, 2015&#160;» <a href=\"/Thread\" title=\"Thread\">Thread</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=5&amp;t=2855\">Please comment on my Perft speeds</a> by ppyvabw, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">OpenChess Forum</a>, July 10, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=56998\">100 easy perft(7) test positions</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 17, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=57417\">Perft using nullmove</a> by <a href=\"/Lasse_Hansen\" title=\"Lasse Hansen\">Lasse Hansen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 29, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=5&amp;t=2913\">Perft and hash with legal move generator</a> by <a href=\"/index.php?title=Izak_Pretorius&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Izak Pretorius (page does not exist)\">Peterpan</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">OpenChess Forum</a>, November 12, 2015&#160;» <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Table</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=58406\">Auriga - distributed and collaborative Perft</a> by <a href=\"/Giuseppe_Cannella\" title=\"Giuseppe Cannella\">Giuseppe Cannella</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 28, 2015 <sup id=\"cite_ref-21\" class=\"reference\"><a href=\"#cite_note-21\">&#91;21&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=58726\">Perft(14) Weekly Status Reports for 2016</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 29, 2015</li></ul>\n<p><b>2016</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=59046\">Best way to debug perft?</a> by Meni Rosenfeld, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 25, 2016&#160;» <a href=\"/Debugging\" title=\"Debugging\">Debugging</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=59567\">Perft, leaf nodes?</a> by <a href=\"/index.php?title=Luis_Babboni&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Luis Babboni (page does not exist)\">Luis Babboni</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 19, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=60108\">reverse perft</a> by <a href=\"/Alexandru_Mosoi\" title=\"Alexandru Mosoi\">Alexandru Mosoi</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 09, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=60445\">Perft for Xiangqi &amp; Shogi</a> by <a href=\"/Patrice_Duhamel\" title=\"Patrice Duhamel\">Patrice Duhamel</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 12, 2016&#160;» <a href=\"/Chinese_Chess\" title=\"Chinese Chess\">Xiangqi</a>, <a href=\"/Shogi\" title=\"Shogi\">Shogi</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61119\">yet another attempt on Perft(14)</a> by <a href=\"/Ankan_Banerjee\" title=\"Ankan Banerjee\">Ankan Banerjee</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 13, 2016</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61119&amp;start=30\">Re: yet another attempt on Perft(14)</a> by <a href=\"/Ankan_Banerjee\" title=\"Ankan Banerjee\">Ankan Banerjee</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 09, 2016 </dd></dl>\n<p><b>2017 ...</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=5&amp;t=3063\">Perft results?</a> by notachessplayer, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">OpenChess Forum</a>, January 01, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64983\">perft(15)</a> by <a href=\"/Ankan_Banerjee\" title=\"Ankan Banerjee\">Ankan Banerjee</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 25, 2017&#160;» <a href=\"/Perft#15\" title=\"Perft\">Perft(15)</a></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64983&amp;start=4\">Re: perft(15)</a> by <a href=\"/Ankan_Banerjee\" title=\"Ankan Banerjee\">Ankan Banerjee</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 25, 2017 </dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64983&amp;start=9\">Re: Perft(15): comparison of estimates with Ankan's result</a> by <a href=\"/Ankan_Banerjee\" title=\"Ankan Banerjee\">Ankan Banerjee</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 26, 2017 </dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=70530\">No standard specification for Perft</a> by <a href=\"/Michael_Sherwin\" title=\"Michael Sherwin\">Michael Sherwin</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 19, 2019</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=71379\">You gotta love Perft... just not too much!</a> by <a href=\"/Martin_Bryant\" title=\"Martin Bryant\">Martin Bryant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 27, 2019</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=71550\">Shogi Perft numbers</a> by <a href=\"/Toni_Helminen\" title=\"Toni Helminen\">Toni Helminen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 14, 2019&#160;» <a href=\"/Shogi\" title=\"Shogi\">Shogi</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=72669\">LastEmperor - Chess960 perft tool</a> by <a href=\"/Toni_Helminen\" title=\"Toni Helminen\">JohnWoe</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 28, 2019&#160;» <a href=\"/Chess960_Perft_Results\" title=\"Chess960 Perft Results\">Chess960 Perft Results</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Perft&amp;action=edit&amp;section=19\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=73493\">Where to enter/read position into hash table in perft?</a> by <a href=\"/Marcel_Vanthoor\" title=\"Marcel Vanthoor\">Marcel Vanthoor</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 28, 2020&#160;» <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Table</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=73558\">Count the number of nodes of perft(14) and beyond</a> by <a href=\"/Marc-Philippe_Huget\" title=\"Marc-Philippe Huget\">Marc-Philippe Huget</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 04, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=73625\">magic bitboard perft</a> by <a href=\"/Richard_Delorme\" title=\"Richard Delorme\">Richard Delorme</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 11, 2020&#160;» <a href=\"/Magic_Bitboards\" title=\"Magic Bitboards\">Magic Bitboards</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=73577\">Perft speed optimization</a> by <a href=\"/Marcel_Vanthoor\" title=\"Marcel Vanthoor\">Marcel Vanthoor</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 06, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=73812\">Request for InDoubleCheck PERFTS EPDs</a> by <a href=\"/Chris_Whittington\" title=\"Chris Whittington\">Chris Whittington</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 02, 2020&#160;» <a href=\"/Double_Check\" title=\"Double Check\">Double Check</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=74153\">Perft speed and depth questions</a> by <a href=\"/index.php?title=Mark_Buisseret&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Mark Buisseret (page does not exist)\">Mark Buisseret</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 12, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=75877\">Place to find correct perft result from a fen position</a> by <a href=\"/index.php?title=Elias_Nilsson&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Elias Nilsson (page does not exist)\">Elias Nilsson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 20, 2020&#160;» <a href=\"/Perft_Results\" title=\"Perft Results\">Perft Results</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=76430\">Chinese chess Xiangqi perft results</a> by <a href=\"/Maksim_Korzh\" title=\"Maksim Korzh\">Maksim Korzh</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 27, 2021&#160;» <a href=\"/Chinese_Chess_Perft_Results\" title=\"Chinese Chess Perft Results\">Chinese Chess Perft Results</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=77054\">PERFT transposition table funny?!</a> by <a href=\"/Martin_Bryant\" title=\"Martin Bryant\">Martin Bryant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 10, 2021&#160;» <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Table</a>, <a href=\"/Memory\" title=\"Memory\">Memory</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=77069\">Perft 7 -&gt; 1.6 trillion moves</a> by <a href=\"/Michael_Byrne\" title=\"Michael Byrne\">MikeB</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 12, 2021</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=77350\">Being silly with perft and legal move generation</a> by <a href=\"/index.php?title=Jakob_Progsch&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Jakob Progsch (page does not exist)\">Jakob Progsch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 19, 2021&#160;» <a href=\"/Move_Generation#Legal\" title=\"Move Generation\">Legal Move Generation</a>, <a href=\"/En_passant\" title=\"En passant\">En passant</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://talkchess.com/forum3/viewtopic.php?f=7&amp;t=78119\">Perft position to debug check-evasions via en passant capture</a> by <a href=\"/index.php?title=Roland_Tomasi&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Roland Tomasi (page does not exist)\">Roland Tomasi</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 06, 2021</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://talkchess.com/forum3/viewtopic.php?f=7&amp;t=78241\">Perft test</a> by <a href=\"/index.php?title=Pierluigi_Meloni&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Pierluigi Meloni (page does not exist)\">Pierluigi Meloni</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 24, 2021</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://talkchess.com/forum3/viewtopic.php?f=7&amp;t=78230\">Gigantua: 1.5 Giganodes per Second per Core move generator</a> by <a href=\"/index.php?title=Daniel_Infuehr&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Daniel Infuehr (page does not exist)\">Daniel Infuehr</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 22, 2021</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://talkchess.com/forum3/viewtopic.php?f=7&amp;t=78352\">Gigantua: 2 Gigamoves per Second per Core move generator - Sourcecode Release</a> by <a href=\"/index.php?title=Daniel_Infuehr&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Daniel Infuehr (page does not exist)\">Daniel Infuehr</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 07, 2021</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://talkchess.com/forum3/viewtopic.php?f=7&amp;t=80952\">My Perft Results</a> by <a href=\"/index.php?title=JoAnn_Peeler&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"JoAnn Peeler (page does not exist)\">JoAnn Peeler</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 04, 2022</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/viewtopic.php?t=82843\">Increase performance of make move, unmake move and move generation functions</a> by Elias Nilsson, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 09, 2023</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/viewtopic.php?t=83043\">What is a good perft speed?</a> by Imno Umni, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 20, 2023</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/viewtopic.php?t=83392\">Perft(16) estimate after averaging MC samples.</a> by Ajedrecista, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 26, 2024</li></ul>\n<p><b>2025...</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/viewtopic.php?t=84781\">Are the perft results wrong on the CPW?</a> by <a href=\"/Tim_Jones\" title=\"Tim Jones\">Tim Jones</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 30, 2025</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/viewtopic.php?t=84797\">The Grand Chess Tree</a> by <a href=\"/Tim_Jones\" title=\"Tim Jones\">Tim Jones</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 04, 2025</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/viewtopic.php?t=84847\">Perft and theoretic draws (FIDE)</a> by <a href=\"/Yves_De_Billo%C3%ABz\" title=\"Yves De Billoëz\">Yves De Billoëz</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 19, 2025</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/viewtopic.php?t=84892\">Perft engine - king moves</a> by Thomas Albert, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 09, 2025</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/viewtopic.php?t=85136\">Perft stats discrepencies</a> by Ben Vining, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 01, 2025</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/viewtopic.php?t=85453\">Writing the fastest move generator. Up to 4BNodes/s</a> by <a href=\"/index.php?title=Thomas_Albert&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Thomas Albert (page does not exist)\">Thomas Albert</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 14, 2025</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/viewtopic.php?t=85560\">Why is my move generator so slow&#160;?</a> by Paul Jérôme--Filio, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 14, 2025</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/viewtopic.php?t=85699\">Get MoveGen errorfree</a> by Aldo Voogt, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 23, 2025</li></ul>\n<p><br />\n</p>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Perft&amp;action=edit&amp;section=20\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://oeis.org/A048987\">A048987</a> from <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/On-Line_Encyclopedia_of_Integer_Sequences\">On-Line Encyclopedia of Integer Sequences</a> (OEIS)</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://wismuth.com/chess/statistics-games.html\">Statistics on chess games</a> by <a href=\"/Mathematician#FLabelle\" title=\"Mathematician\">François Labelle</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Performance_testing\">Performance testing from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20061014115710/http://www.albert.nu/programs/dperft/\">Distributed Perft Project</a> (<a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wayback_Machine\">Wayback Machine</a>)</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://grandchesstree.com/\">The Grand Chess Tree</a> by <a href=\"/Tim_Jones\" title=\"Tim Jones\">Tim Jones</a></li></ul>\n<p><br />\n</p>\n<h2><span class=\"mw-headline\" id=\"Perft_in_other_Games\">Perft in other Games</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Perft&amp;action=edit&amp;section=21\" title=\"Edit section: Perft in other Games\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://tonyjh.com/chess/technical/\">Perft for other forms of Chess</a> by <a href=\"/index.php?title=Tony_Hecker&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Tony Hecker (page does not exist)\">Tony Hecker</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://checker-board.blogspot.com/2009/02/perft-for-checkers.html\">Perft for Checkers</a> by <a href=\"/Martin_Fierz\" title=\"Martin Fierz\">Martin Fierz</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.aartbik.com/strategy.php\">Perft for Checkers and Reversi/Othello</a> by <a href=\"/Aart_Bik\" title=\"Aart Bik\">Aart Bik</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Implementations\">Implementations</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Perft&amp;action=edit&amp;section=22\" title=\"Edit section: Implementations\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://home.hccnet.nl/h.g.muller/dwnldpage.html\">µ-Max Dowload Page - qperft</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>&#160;» <a href=\"/Micro-Max\" title=\"Micro-Max\">Micro-Max</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/ankan-ban/perft_gpu\">ankan-ban/perft_gpu · GitHub</a> <sup id=\"cite_ref-22\" class=\"reference\"><a href=\"#cite_note-22\">&#91;22&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://cinnamonchess.altervista.org/auriga\">Auriga</a> by <a href=\"/Giuseppe_Cannella\" title=\"Giuseppe Cannella\">Giuseppe Cannella</a> <sup id=\"cite_ref-23\" class=\"reference\"><a href=\"#cite_note-23\">&#91;23&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/Mk-Chan/BBPerft\">BBPerft: A fast, bitboard based chess perft result generator</a> by <a href=\"/Manik_Charan\" title=\"Manik Charan\">Manik Charan</a> derived from <a href=\"/WyldChess\" title=\"WyldChess\">WyldChess</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://brausch.org/home/chess/index.html\">Chess Engine OliThink - New Move Generator OliPerft (Pre OliThink 5)</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>&#160;» <a href=\"/OliThink\" title=\"OliThink\">OliThink</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.craftychess.com/documentation/craftydoc.html\">Crafty Command Documentation</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, see perft &lt;depth&gt;&#160;» <a href=\"/Crafty\" title=\"Crafty\">Crafty</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/abulmo/hqperft\">hqperft: Chess move generation based on (H)yperbola (Q)uintessence &amp; range attacks</a> by <a href=\"/Richard_Delorme\" title=\"Richard Delorme\">Richard Delorme</a>&#160;» <a href=\"/Hyperbola_Quintessence\" title=\"Hyperbola Quintessence\">Hyperbola Quintessence</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/jniemann66/juddperft\">GitHub - jniemann66/juddperft: Chess move generation engine</a> by <a href=\"/Judd_Niemann\" title=\"Judd Niemann\">Judd Niemann</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.rocechess.ch/perft.html\">perft, divide, debugging a move generator</a> from <a href=\"/ROCE\" title=\"ROCE\">ROCE</a> by <a href=\"/Roman_Hartmann\" title=\"Roman Hartmann\">Roman Hartmann</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://marcelk.net/rookie/nostalgia/v3/perft-random.epd\">perft-random.epd</a> by <a href=\"/Marcel_van_Kervinck\" title=\"Marcel van Kervinck\">Marcel van Kervinck</a>&#160;» <a href=\"/Rookie\" title=\"Rookie\">Rookie</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Video_Tutorial\">Video Tutorial</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Perft&amp;action=edit&amp;section=23\" title=\"Edit section: Video Tutorial\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> A quick overview of the perft process by <a href=\"/Jonathan_Warkentin\" title=\"Jonathan Warkentin\">Jonathan Warkentin</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Videos</li></ul>\n<dl><dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/A0HJbwRwILk?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<ul><li> An example of debugging a perft error by <a href=\"/Jonathan_Warkentin\" title=\"Jonathan Warkentin\">Jonathan Warkentin</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Videos</li></ul>\n<dl><dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/bAONObdxF54?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<ul><li> Improving the perft speed &amp; debugging tips by <a href=\"/Jonathan_Warkentin\" title=\"Jonathan Warkentin\">Jonathan Warkentin</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Videos</li></ul>\n<dl><dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/BIzAfg5sdqg?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Perft&amp;action=edit&amp;section=24\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap mw-references-columns\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/viewtopic.php?p=836489\">Re: Where to enter/read position into hash table in perft?</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">HGM's</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 29, 2020</span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://news.google.com/newspapers?nid=849&amp;dat=19780417&amp;id=h8lOAAAAIBAJ&amp;sjid=DEoDAAAAIBAJ&amp;pg=6180,1080528\">Written in Cobol - Program Written as Chess Buff's Research Aid</a> by Brad Schultz, <a href=\"/Computerworld\" title=\"Computerworld\">Computerworld</a>, April 17, 1978, Page 37</span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=41373\">Perft(3) from 1978, with a twist!</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 08, 2011</span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/M8V1AzkfOok/YV9lcfOlfgIJ\">Re: Speed of Move Generator</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, August 16, 1995</span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/2nqtCdHC-r0/ENqomE2u51kJ\">Re: complete opening tree stats</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, February 05, 1998</span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=335026\">Distributed perft project</a> by <a href=\"/Albert_Bertilsson\" title=\"Albert Bertilsson\">Albert Bertilsson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 09, 2003</span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20061014115710/http://www.albert.nu/programs/dperft/\">Distributed Perft Project</a> (<a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wayback_Machine\">Wayback Machine</a>)</span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://oeis.org/A048987\">A048987</a> from <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/On-Line_Encyclopedia_of_Integer_Sequences\">On-Line Encyclopedia of Integer Sequences</a> (OEIS)</span>\n</li>\n<li id=\"cite_note-9\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-9\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=513308&amp;t=47335\">Re: Perft(14) estimates thread</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 02, 2013</span>\n</li>\n<li id=\"cite_note-10\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-10\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=47740&amp;start=2\">MC methods</a> by <a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel Shawul</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 11, 2013</span>\n</li>\n<li id=\"cite_note-11\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-11\">↑</a></span> <span class=\"reference-text\"><a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel S. Abdi</a> (<b>2013</b>). <i>Monte carlo methods for estimating game tree size</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://dl.dropboxusercontent.com/u/55295461/perft/perft.pdf\">pdf</a></span>\n</li>\n<li id=\"cite_note-12\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-12\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61119&amp;start=30\">Re: yet another attempt on Perft(14)</a> by <a href=\"/Ankan_Banerjee\" title=\"Ankan Banerjee\">Ankan Banerjee</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 09, 2016</span>\n</li>\n<li id=\"cite_note-13\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-13\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/ankan-ban/perft_gpu\">ankan-ban/perft_gpu · GitHub</a></span>\n</li>\n<li id=\"cite_note-14\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-14\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.nvidia.com/en-us/data-center/dgx-1/\">DGX-1 for AI Research | NVIDIA</a></span>\n</li>\n<li id=\"cite_note-15\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-15\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64983&amp;start=9\">Re: Perft(15): comparison of estimates with Ankan's result</a> by <a href=\"/Ankan_Banerjee\" title=\"Ankan Banerjee\">Ankan Banerjee</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 26, 2017</span>\n</li>\n<li id=\"cite_note-16\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-16\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64983&amp;start=4\">Re: perft(15)</a> by <a href=\"/Ankan_Banerjee\" title=\"Ankan Banerjee\">Ankan Banerjee</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 25, 2017</span>\n</li>\n<li id=\"cite_note-17\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-17\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://talkchess.com/forum3/viewtopic.php?f=7&amp;t=74153\">Re: Perft speed and depth questions</a> by <a href=\"/index.php?title=Mark_Buisseret&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Mark Buisseret (page does not exist)\">Mark Buisseret</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">CCRL Discussion Board</a>, June 12, 2020</span>\n</li>\n<li id=\"cite_note-18\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-18\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=47740&amp;topic_view=flat&amp;start=11\">Re: MC methods</a> by <a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel Shawul</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 13, 2013</span>\n</li>\n<li id=\"cite_note-19\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-19\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://news.google.com/newspapers?nid=849&amp;dat=19780417&amp;id=h8lOAAAAIBAJ&amp;sjid=DEoDAAAAIBAJ&amp;pg=6180,1080528\">Written in Cobol - Program Written as Chess Buff's Research Aid</a> by Brad Schultz, <a href=\"/Computerworld\" title=\"Computerworld\">Computerworld</a>, April 17, 1978, Page 37</span>\n</li>\n<li id=\"cite_note-20\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-20\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/ankan-ban/perft_gpu\">ankan-ban/perft_gpu · GitHub</a></span>\n</li>\n<li id=\"cite_note-21\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-21\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://cinnamonchess.altervista.org/auriga\">Auriga</a> by <a href=\"/Giuseppe_Cannella\" title=\"Giuseppe Cannella\">Giuseppe Cannella</a></span>\n</li>\n<li id=\"cite_note-22\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-22\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48387\">Fast perft on GPU (upto 20 Billion nps w/o hashing)</a> by <a href=\"/Ankan_Banerjee\" title=\"Ankan Banerjee\">Ankan Banerjee</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 22, 2013</span>\n</li>\n<li id=\"cite_note-23\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-23\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=58406\">Auriga - distributed and collaborative Perft</a> by <a href=\"/Giuseppe_Cannella\" title=\"Giuseppe Cannella\">Giuseppe Cannella</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 28, 2015</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Move_Generation\" title=\"Move Generation\">Up one level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301061757\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.054 seconds\nReal time usage: 0.056 seconds\nPreprocessor visited node count: 474/1000000\nPreprocessor generated node count: 1034/1000000\nPost‐expand include size: 81/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1330-0!canonical and timestamp 20260301061757 and revision id 27418\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Videos"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Perft"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aart Bik"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Albert Bertilsson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alexandru Mosoi"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Allard Siemelink"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Andreas Herrmann"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ankan Banerjee"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Belle"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Best-First"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Board Representation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Brian Richardson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "C"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Captures"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chao Ma"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Charles Roberson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Checkers"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Checkmate"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess960"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess960 Perft Results"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chinese Chess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chinese Chess Perft Results"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chris Whittington"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Christian Daley"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computerworld"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Crafty"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Daniel Shawul"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dann Corbit"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Debugging"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth-First"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Double Check"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Draw"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "En passant"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engine Testing"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fifty-move Rule"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Freccia"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "GPU"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Giuseppe Cannella"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Harald Lüßen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Harm Geert Muller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hash Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hyperbola Quintessence"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA Journal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Initial Position"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Initial Position Summary"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iterative Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Joel Veness"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jonathan Warkentin"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jouni Uski"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Judd Niemann"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ken Thompson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kogge-Stone Algorithm"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lasse Hansen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Leaf Node"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Legal Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "List (Program)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Magic Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Make Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Maksim Korzh"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Manik Charan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marc-Philippe Huget"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marcel Vanthoor"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marcel van Kervinck"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Martin Bryant"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Martin Fierz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Martin Sedlak"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Material"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mathematician"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Memory"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michael Byrne"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michael Sherwin"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Micro-Max"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Monte-Carlo Tree Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Generation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "OliThink"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Oliver Brausch"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "OpenCL"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Parallel Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Patrice Duhamel"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Perft Results"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter Fendrich"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter Österlund"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ply"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ROCE"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rasjid Chan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Reinhard Scharnagl"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Repetitions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Richard Delorme"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Hyatt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rolf C. Smith"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Roman Hartmann"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rookie"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search Tree"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sharper"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Shatranj"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Shogi"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Spector"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stalemate"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stefano Gemma"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Steffen A. Jakob"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Steve Maughan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Steven Edwards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stockfish"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sven Schüle"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Terminal Node"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Thread"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tim Jones"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Timeline"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tom Kerrigan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Toni Helminen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Unmake Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Uri Blass"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "WyldChess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Yves De Billoëz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Zobrist Hashing"
+      },
+      {
+        "ns": 0,
+        "*": "Mark Buisseret"
+      },
+      {
+        "ns": 0,
+        "*": "Cobol"
+      },
+      {
+        "ns": 0,
+        "*": "RSCE-1"
+      },
+      {
+        "ns": 0,
+        "*": "Normand M. Blais"
+      },
+      {
+        "ns": 0,
+        "*": "Chris Tatham"
+      },
+      {
+        "ns": 0,
+        "*": "Paul Byrne"
+      },
+      {
+        "ns": 0,
+        "*": "Izak Pretorius"
+      },
+      {
+        "ns": 0,
+        "*": "Luis Babboni"
+      },
+      {
+        "ns": 0,
+        "*": "Elias Nilsson"
+      },
+      {
+        "ns": 0,
+        "*": "Jakob Progsch"
+      },
+      {
+        "ns": 0,
+        "*": "Roland Tomasi"
+      },
+      {
+        "ns": 0,
+        "*": "Pierluigi Meloni"
+      },
+      {
+        "ns": 0,
+        "*": "Daniel Infuehr"
+      },
+      {
+        "ns": 0,
+        "*": "JoAnn Peeler"
+      },
+      {
+        "ns": 0,
+        "*": "Thomas Albert"
+      },
+      {
+        "ns": 0,
+        "*": "Tony Hecker"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Perft function",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Perft",
+        "byteoffset": 1092,
+        "anchor": "Perft_function"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Speed up",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Perft",
+        "byteoffset": 1519,
+        "anchor": "Speed_up"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Bulk-counting",
+        "number": "2.1",
+        "index": "3",
+        "fromtitle": "Perft",
+        "byteoffset": 1530,
+        "anchor": "Bulk-counting"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Pseudo Legal Moves",
+        "number": "2.2",
+        "index": "4",
+        "fromtitle": "Perft",
+        "byteoffset": 2726,
+        "anchor": "Pseudo_Legal_Moves"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Hashing",
+        "number": "2.3",
+        "index": "5",
+        "fromtitle": "Perft",
+        "byteoffset": 3365,
+        "anchor": "Hashing"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Divide",
+        "number": "3",
+        "index": "6",
+        "fromtitle": "Perft",
+        "byteoffset": 3815,
+        "anchor": "Divide"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Purposes",
+        "number": "4",
+        "index": "7",
+        "fromtitle": "Perft",
+        "byteoffset": 4422,
+        "anchor": "Purposes"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Known issues",
+        "number": "5",
+        "index": "8",
+        "fromtitle": "Perft",
+        "byteoffset": 5252,
+        "anchor": "Known_issues"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "History",
+        "number": "6",
+        "index": "9",
+        "fromtitle": "Perft",
+        "byteoffset": 6127,
+        "anchor": "History"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Quotes",
+        "number": "7",
+        "index": "10",
+        "fromtitle": "Perft",
+        "byteoffset": 11070,
+        "anchor": "Quotes"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Results",
+        "number": "8",
+        "index": "11",
+        "fromtitle": "Perft",
+        "byteoffset": 12332,
+        "anchor": "Results"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "9",
+        "index": "12",
+        "fromtitle": "Perft",
+        "byteoffset": 12427,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "10",
+        "index": "13",
+        "fromtitle": "Perft",
+        "byteoffset": 12884,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1995 ...",
+        "number": "10.1",
+        "index": "14",
+        "fromtitle": "Perft",
+        "byteoffset": 12899,
+        "anchor": "1995_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "10.2",
+        "index": "15",
+        "fromtitle": "Perft",
+        "byteoffset": 13315,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2005 ...",
+        "number": "10.3",
+        "index": "16",
+        "fromtitle": "Perft",
+        "byteoffset": 15412,
+        "anchor": "2005_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "10.4",
+        "index": "17",
+        "fromtitle": "Perft",
+        "byteoffset": 16528,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "10.5",
+        "index": "18",
+        "fromtitle": "Perft",
+        "byteoffset": 21512,
+        "anchor": "2015_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "10.6",
+        "index": "19",
+        "fromtitle": "Perft",
+        "byteoffset": 25337,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "11",
+        "index": "20",
+        "fromtitle": "Perft",
+        "byteoffset": 29419,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Perft in other Games",
+        "number": "11.1",
+        "index": "21",
+        "fromtitle": "Perft",
+        "byteoffset": 30064,
+        "anchor": "Perft_in_other_Games"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Implementations",
+        "number": "11.2",
+        "index": "22",
+        "fromtitle": "Perft",
+        "byteoffset": 30382,
+        "anchor": "Implementations"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Video Tutorial",
+        "number": "11.3",
+        "index": "23",
+        "fromtitle": "Perft",
+        "byteoffset": 31973,
+        "anchor": "Video_Tutorial"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "12",
+        "index": "24",
+        "fromtitle": "Perft",
+        "byteoffset": 32620,
+        "anchor": "References"
+      }
+    ]
+  }
+}

@@ -1,0 +1,441 @@
+{
+  "parse": {
+    "title": "Halogen",
+    "pageid": 7491,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Engines\" title=\"Engines\">Engines</a> * Halogen </b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:242px;\"><a href=\"/File:Silsesquixane_halogen_bond.tif\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Silsesquixane_halogen_bond.tif/lossy-page1-240px-Silsesquixane_halogen_bond.tif.jpg\" width=\"240\" height=\"202\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Silsesquixane_halogen_bond.tif/lossy-page1-360px-Silsesquixane_halogen_bond.tif.jpg 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Silsesquixane_halogen_bond.tif/lossy-page1-480px-Silsesquixane_halogen_bond.tif.jpg 2x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Silsesquixane_halogen_bond.tif\" class=\"internal\" title=\"Enlarge\"></a></div>Br···O halogen bonds <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>Halogen</b>,<br />\nan <a href=\"/UCI\" title=\"UCI\">UCI</a> compliant <a href=\"/Category:Open_Source\" title=\"Category:Open Source\">open source chess engine</a> by <a href=\"/Kieren_Pearson\" title=\"Kieren Pearson\">Kieren Pearson</a>, written in <a href=\"/Cpp\" title=\"Cpp\">C++</a>, licensed under the <a href=\"/Free_Software_Foundation#GPL\" title=\"Free Software Foundation\">GPL v3</a> and first released on <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/GitHub\">GitHub</a> in June 2019 <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>. \nSince version 7 in September 2020, Halogen features an own, <a href=\"/Incremental_Updates\" title=\"Incremental Updates\">incrementally updated</a> <a href=\"/Neural_Networks\" title=\"Neural Networks\">neural network</a> for its <a href=\"/Evaluation_Function\" title=\"Evaluation Function\">evaluation function</a>, inspired by <a href=\"/Stockfish_NNUE\" title=\"Stockfish NNUE\">Stockfish NNUE</a>.\nHalogen 8 features a larger network than Halogen 7, but runs significantly faster due to improvements and optimisations, best if compiled for <a href=\"/AVX2\" title=\"AVX2\">AVX2</a> instructions.\nIts development and testing was supported on the <a href=\"/OpenBench\" title=\"OpenBench\">OpenBench</a> framework. Networks are trained through a private, from scratch <a href=\"/C\" title=\"C\">C</a> implementation created in collaboration with <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>.\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Features\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Features</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-2\"><a href=\"#Board_Representation\"><span class=\"tocnumber\">1.1</span> <span class=\"toctext\">Board Representation</span></a></li>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#Search\"><span class=\"tocnumber\">1.2</span> <span class=\"toctext\">Search</span></a></li>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#Evaluation\"><span class=\"tocnumber\">1.3</span> <span class=\"toctext\">Evaluation</span></a></li>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#Misc\"><span class=\"tocnumber\">1.4</span> <span class=\"toctext\">Misc</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#2019\"><span class=\"tocnumber\">2.1</span> <span class=\"toctext\">2019</span></a></li>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#2020_...\"><span class=\"tocnumber\">2.2</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-9\"><a href=\"#External_Links\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">External Links</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#Chess_Engine\"><span class=\"tocnumber\">3.1</span> <span class=\"toctext\">Chess Engine</span></a></li>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#Misc_2\"><span class=\"tocnumber\">3.2</span> <span class=\"toctext\">Misc</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-12\"><a href=\"#References\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Features\">Features</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Halogen&amp;action=edit&amp;section=1\" title=\"Edit section: Features\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>\n</p>\n<h2><span class=\"mw-headline\" id=\"Board_Representation\"><a href=\"/Board_Representation\" title=\"Board Representation\">Board Representation</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Halogen&amp;action=edit&amp;section=2\" title=\"Edit section: Board Representation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Bitboards\" title=\"Bitboards\">Bitboards</a></li>\n<li> <a href=\"/Move_Generation#Legal\" title=\"Move Generation\">Legal Move Generation</a> by <a href=\"/Sliding_Piece_Attacks#Tinker.27s_Approach\" title=\"Sliding Piece Attacks\">Tinker's Approach</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Search\"><a href=\"/Search\" title=\"Search\">Search</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Halogen&amp;action=edit&amp;section=3\" title=\"Edit section: Search\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Iterative_Deepening\" title=\"Iterative Deepening\">Iterative Deepening</a></li>\n<li> <a href=\"/Aspiration_Windows\" title=\"Aspiration Windows\">Aspiration Windows</a></li>\n<li> <a href=\"/Lazy_SMP\" title=\"Lazy SMP\">Lazy SMP</a></li>\n<li> <a href=\"/NegaScout\" title=\"NegaScout\">NegaScout</a></li>\n<li> <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Table</a>\n<ul><li> <a href=\"/Shared_Hash_Table\" title=\"Shared Hash Table\">Shared Hash Table</a></li>\n<li> <a href=\"/Zobrist_Hashing\" title=\"Zobrist Hashing\">Zobrist Hashing</a></li></ul></li>\n<li> <a href=\"/Move_Ordering\" title=\"Move Ordering\">Move Ordering</a>\n<ul><li> <a href=\"/Hash_Move\" title=\"Hash Move\">Hash Move</a></li>\n<li> <a href=\"/Static_Exchange_Evaluation\" title=\"Static Exchange Evaluation\">SEE</a> for <a href=\"/Captures\" title=\"Captures\">Captures</a></li>\n<li> <a href=\"/Killer_Heuristic\" title=\"Killer Heuristic\">Killer Heuristic</a></li>\n<li> <a href=\"/History_Heuristic\" title=\"History Heuristic\">History Heuristic</a></li></ul></li>\n<li> <a href=\"/Selectivity\" title=\"Selectivity\">Selectivity</a>\n<ul><li> <a href=\"/Check_Extensions\" title=\"Check Extensions\">Check Extensions</a> if <a href=\"/Static_Exchange_Evaluation\" title=\"Static Exchange Evaluation\">SEE</a> &gt;= 0 or <a href=\"/Principal_Variation\" title=\"Principal Variation\">PV</a></li>\n<li> <a href=\"/Passed_Pawn_Extensions\" title=\"Passed Pawn Extensions\">Passed Pawn Extensions</a> (7th, 2nd rank)</li>\n<li> <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">Null Move Pruning</a></li>\n<li> <a href=\"/Mate_Distance_Pruning\" title=\"Mate Distance Pruning\">Mate Distance Pruning</a></li>\n<li> <a href=\"/Futility_Pruning\" title=\"Futility Pruning\">Futility Pruning</a></li>\n<li> <a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">Late Move Reductions</a></li>\n<li> <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">Quiescence Search</a></li></ul></li></ul>\n<h2><span class=\"mw-headline\" id=\"Evaluation\"><a href=\"/Evaluation\" title=\"Evaluation\">Evaluation</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Halogen&amp;action=edit&amp;section=4\" title=\"Edit section: Evaluation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Evaluation_Hash_Table\" title=\"Evaluation Hash Table\">Evaluation Hash Table</a></li>\n<li> <a href=\"/NNUE\" title=\"NNUE\">NNUE</a> (&gt;= Halogen 7)</li></ul>\n<h2><span class=\"mw-headline\" id=\"Misc\">Misc</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Halogen&amp;action=edit&amp;section=5\" title=\"Edit section: Misc\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Syzygy_Bases\" title=\"Syzygy Bases\">Syzygy Bases</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Halogen&amp;action=edit&amp;section=6\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"2019\">2019</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Halogen&amp;action=edit&amp;section=7\" title=\"Edit section: 2019\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://kirill-kryukov.com/chess/discussion-board/viewtopic.php?t=11671\">Requirements for a new chess engine</a> by <a href=\"/Kieren_Pearson\" title=\"Kieren Pearson\">Kieren Pearson</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">CCRL Discussion Board</a>, December 09, 2019</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=69754&amp;start=443\">Re: New engine releases 2019</a> by <a href=\"/G%C3%BCnther_Simon\" title=\"Günther Simon\">Günther Simon</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 22, 2019&#160;» Halogen 2.7.3</li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Halogen&amp;action=edit&amp;section=8\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=72613&amp;start=9\">Re: New engine releases 2020</a> by <a href=\"/Gabor_Szots\" title=\"Gabor Szots\">Gabor Szots</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 06, 2020&#160;» Halogen 3.0</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://kirill-kryukov.com/chess/discussion-board/viewtopic.php?f=7&amp;t=12174\">Halogen 4 release</a> by <a href=\"/Kieren_Pearson\" title=\"Kieren Pearson\">Kieren Pearson</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">CCRL Discussion Board</a>, June 22, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=72613&amp;start=264\">Re: New engine releases 2020</a> by <a href=\"/Kieren_Pearson\" title=\"Kieren Pearson\">Kieren Pearson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 22, 2020&#160;» Halogen 4</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=72613&amp;start=276\">Re: New engine releases 2020</a> by <a href=\"/Kieren_Pearson\" title=\"Kieren Pearson\">Kieren Pearson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 14, 2020&#160;» Halogen 5</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=72613&amp;start=308\">Re: New engine releases 2020</a> by <a href=\"/Kieren_Pearson\" title=\"Kieren Pearson\">Kieren Pearson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 12, 2020 &#160;» Halogen 6</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=72613&amp;start=390\">Re: New engine releases 2020</a> by <a href=\"/Kieren_Pearson\" title=\"Kieren Pearson\">Kieren Pearson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 22, 2020 &#160;» Halogen 7</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=72613&amp;start=457\">Re: New engine releases 2020</a> by <a href=\"/Kieren_Pearson\" title=\"Kieren Pearson\">Kieren Pearson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 27, 2020&#160;» Halogen 8</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=75640\">Halogen questions</a> by <a href=\"/G%C3%BCnther_Simon\" title=\"Günther Simon\">Günther Simon</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 01, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=72613&amp;start=487\">Re: New engine releases 2020</a> by <a href=\"/Kieren_Pearson\" title=\"Kieren Pearson\">Kieren Pearson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 11, 2020&#160;» Halogen 8.1</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=75890&amp;start=6\">Re: Speculations about NNUE development (was New engine releases 2020)</a> by <a href=\"/Connor_McMonigle\" title=\"Connor McMonigle\">Connor McMonigle</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 12, 2020&#160;» <a href=\"/Dragon_by_Komodo_Chess\" title=\"Dragon by Komodo Chess\">Dragon by Komodo Chess</a>, <a href=\"/Seer\" title=\"Seer\">Seer</a> </li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=75890&amp;start=9\">Re: Speculations about NNUE development (was New engine releases 2020)</a> by <a href=\"/Connor_McMonigle\" title=\"Connor McMonigle\">Connor McMonigle</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 12, 2020 </dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=77503&amp;start=55\">Re: will Tcec allow Stockfish with a Leela net to play?</a> by <a href=\"/Connor_McMonigle\" title=\"Connor McMonigle\">Connor McMonigle</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 17, 2021&#160;» <a href=\"/NNUE\" title=\"NNUE\">NNUE</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Halogen&amp;action=edit&amp;section=9\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Chess_Engine\">Chess Engine</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Halogen&amp;action=edit&amp;section=10\" title=\"Edit section: Chess Engine\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/KierenP/Halogen\">GitHub - KierenP/Halogen: A c++ chess engine</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://ccrl.chessdom.com/ccrl/404/cgi/compare_engines.cgi?family=Halogen&amp;print=Rating+list&amp;print=Results+table&amp;print=LOS+table&amp;print=Ponder+hit+table&amp;print=Eval+difference+table&amp;print=Comopp+gamenum+table&amp;print=Overlap+table&amp;print=Score+with+common+opponents\">Halogen in CCRL Blitz</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Misc_2\">Misc</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Halogen&amp;action=edit&amp;section=11\" title=\"Edit section: Misc\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wiktionary.org/wiki/halogen\">halogen - Wiktionary</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Halogen\">Halogen from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Halogen_(disambiguation)\">Halogen (disambiguation) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Halogen_lamp\">Halogen lamp from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Halogen_(band)\">Halogen</a> - The Letter, <a rel=\"nofollow\" class=\"external text\" href=\"https://www.discogs.com/de/Halogen-Sirens/release/10628035\">Sirens (2006)</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video </li></ul>\n <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/RquO9QdiSxs?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Halogen&amp;action=edit&amp;section=12\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\">Packing of <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Silsesquioxane\">silsesquixane</a> molecules in <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Bravais_lattice\">crystal lattice</a> including Br···O <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Halogen_bond\">halogen bonds</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://commons.wikimedia.org/wiki/File:Silsesquixane_halogen_bond.tif\">Image</a> by Wisznu101, May 21,2018, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wikimedia_Commons\">Wikimedia Commons</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/KierenP/Halogen/releases/tag/v2.3\">Release Halogen 2.3 · KierenP/Halogen · GitHub</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/KierenP/Halogen/blob/master/README.md\">Halogen/README.md at master · KierenP/Halogen · GitHub</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\">Features based on <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/KierenP/Halogen/releases/tag/v8\">Release Halogen 8 · KierenP/Halogen · GitHub</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Engines\" title=\"Engines\">Up one level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301100205\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.113 seconds\nReal time usage: 0.653 seconds\nPreprocessor visited node count: 112/1000000\nPreprocessor generated node count: 230/1000000\nPost‐expand include size: 26/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:7491-0!canonical and timestamp 20260301100204 and revision id 25143\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Open_Source"
+      },
+      {
+        "sortkey": "",
+        "*": "GPL"
+      },
+      {
+        "sortkey": "",
+        "*": "UCI"
+      },
+      {
+        "sortkey": "",
+        "*": "PC"
+      },
+      {
+        "sortkey": "",
+        "*": "X86"
+      },
+      {
+        "sortkey": "",
+        "*": "X64"
+      },
+      {
+        "sortkey": "",
+        "*": "Windows"
+      },
+      {
+        "sortkey": "",
+        "*": "NNUE"
+      },
+      {
+        "sortkey": "",
+        "*": "OpenBench"
+      },
+      {
+        "sortkey": "",
+        "*": "Music"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "AVX2"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Andrew Grant"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aspiration Windows"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Board Representation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "C"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Captures"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Check Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Connor McMonigle"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cpp"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dragon by Komodo Chess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engines"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation Function"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation Hash Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Free Software Foundation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Futility Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gabor Szots"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Günther Simon"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hash Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "History Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Incremental Updates"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iterative Deepening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kieren Pearson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Killer Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Late Move Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lazy SMP"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mate Distance Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Generation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Ordering"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "NNUE"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "NegaScout"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Neural Networks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "OpenBench"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Passed Pawn Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiescence Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Seer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Selectivity"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Shared Hash Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sliding Piece Attacks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Static Exchange Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stockfish NNUE"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Syzygy Bases"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "UCI"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Zobrist Hashing"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Open Source"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Features",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Halogen",
+        "byteoffset": 1659,
+        "anchor": "Features"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Board Representation",
+        "number": "1.1",
+        "index": "2",
+        "fromtitle": "Halogen",
+        "byteoffset": 1797,
+        "anchor": "Board_Representation"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Search",
+        "number": "1.2",
+        "index": "3",
+        "fromtitle": "Halogen",
+        "byteoffset": 1958,
+        "anchor": "Search"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Evaluation",
+        "number": "1.3",
+        "index": "4",
+        "fromtitle": "Halogen",
+        "byteoffset": 2563,
+        "anchor": "Evaluation"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Misc",
+        "number": "1.4",
+        "index": "5",
+        "fromtitle": "Halogen",
+        "byteoffset": 2637,
+        "anchor": "Misc"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "2",
+        "index": "6",
+        "fromtitle": "Halogen",
+        "byteoffset": 2666,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2019",
+        "number": "2.1",
+        "index": "7",
+        "fromtitle": "Halogen",
+        "byteoffset": 2680,
+        "anchor": "2019"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "2.2",
+        "index": "8",
+        "fromtitle": "Halogen",
+        "byteoffset": 3056,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "3",
+        "index": "9",
+        "fromtitle": "Halogen",
+        "byteoffset": 5126,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Chess Engine",
+        "number": "3.1",
+        "index": "10",
+        "fromtitle": "Halogen",
+        "byteoffset": 5143,
+        "anchor": "Chess_Engine"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Misc",
+        "number": "3.2",
+        "index": "11",
+        "fromtitle": "Halogen",
+        "byteoffset": 5530,
+        "anchor": "Misc_2"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "4",
+        "index": "12",
+        "fromtitle": "Halogen",
+        "byteoffset": 6129,
+        "anchor": "References"
+      }
+    ]
+  }
+}

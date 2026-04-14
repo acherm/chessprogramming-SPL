@@ -1,0 +1,214 @@
+{
+  "parse": {
+    "title": "Beta-Cutoff",
+    "pageid": 1031,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Search\" title=\"Search\">Search</a> * <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">Alpha-Beta</a> * Beta-Cutoff</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:202px;\"><a href=\"/File:Kutte_Motorrad_vorn.jpg\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Kutte_Motorrad_vorn.jpg/250px-Kutte_Motorrad_vorn.jpg\" width=\"200\" height=\"257\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Kutte_Motorrad_vorn.jpg/330px-Kutte_Motorrad_vorn.jpg 1.5x, https://upload.wikimedia.org/wikipedia/commons/3/3c/Kutte_Motorrad_vorn.jpg 2x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Kutte_Motorrad_vorn.jpg\" class=\"internal\" title=\"Enlarge\"></a></div>Cut-off <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p>A <b>beta-cutoff</b> occurs in the <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">alpha-beta algorithm</a>, if the <a href=\"/Score\" title=\"Score\">score</a> backed up by the search is greater than or equal to <a href=\"/Beta\" title=\"Beta\">beta</a> and <a href=\"/Fail-High\" title=\"Fail-High\">fails high</a>. No further <a href=\"/Moves\" title=\"Moves\">moves</a> need to be searched, since one <a href=\"/Refutation_Move\" title=\"Refutation Move\">refutation</a> is already sufficient to avoid the move that led to this <a href=\"/Node\" title=\"Node\">node</a> or <a href=\"/Chess_Position\" title=\"Chess Position\">position</a>. Nodes, where a beta-cutoff occurs are then <a href=\"/Node_Types#CUT\" title=\"Node Types\">cut-nodes</a> where <a href=\"/Move_Ordering\" title=\"Move Ordering\">move ordering</a> was crucial to try the refutation move as early as possible - typically as first move in 90 to 95 per cent of all cases. In <a href=\"/Alpha-Beta#MaxversusMin\" title=\"Alpha-Beta\">max versus min alpha-beta</a> a beta-cutoff can only occur for the max-player, while the min-player cuts if below or equal alpha,  called <b>alpha-cutoff</b>. Since the common <a href=\"/Negamax\" title=\"Negamax\">negamax</a> implementation makes both players maximizers, <a href=\"/Alpha-Beta#Negamax\" title=\"Alpha-Beta\">negamax alpha-beta</a> has beta-cutoffs exclusively for both players. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Shallow_or_Deep\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Shallow or Deep</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#See_also\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Forum Posts</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#External_Links\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#References\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Shallow_or_Deep\">Shallow or Deep</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Beta-Cutoff&amp;action=edit&amp;section=1\" title=\"Edit section: Shallow or Deep\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><span id=\"shallow\"></span> A <b>shallow</b> cutoff occurs if the <a href=\"/Window\" title=\"Window\">window</a> was narrowed at the parent node, that is, reduced current beta. <span id=\"deep\"></span>A <b>deep</b> cutoff occurs if the <a href=\"/Window\" title=\"Window\">window</a> was narrowed closer to the <a href=\"/Root\" title=\"Root\">root</a> with an odd ply-distance of at least three to the current node. Deep cutoffs were sometimes omitted in early chess programs if not passing <a href=\"/Alpha\" title=\"Alpha\">alpha</a> through the <a href=\"/Recursion\" title=\"Recursion\">recursive</a> call <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>.\n</p>\n<table>\n\n<tr>\n<td>  <div class=\"floatnone\"><a href=\"/File:Shallowcutoff.jpg\" class=\"image\"><img alt=\"Shallowcutoff.jpg\" src=\"/images/3/34/Shallowcutoff.jpg\" width=\"158\" height=\"212\" style=\"vertical-align: text-bottom\" class=\"thumbborder\" /></a></div>\n</td>\n<th>\n</th>\n<td>  <div class=\"floatnone\"><a href=\"/File:Deepcutoff.jpg\" class=\"image\"><img alt=\"Deepcutoff.jpg\" src=\"/images/5/50/Deepcutoff.jpg\" width=\"158\" height=\"212\" style=\"vertical-align: text-bottom\" class=\"thumbborder\" /></a></div>\n</td></tr>\n<tr>\n<td>   Shallow Cutoff if α &gt;= β\n</td>\n<th>\n</th>\n<td>  Deep Cutoff if α &gt;= β <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>\n</td></tr></table>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Beta-Cutoff&amp;action=edit&amp;section=2\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Node_Types#CUT\" title=\"Node Types\">Cut-Nodes</a></li>\n<li> <a href=\"/Sier%C5%BCant#Cutratio\" title=\"Sierżant\">Cutoff ratio in Sierżant</a></li>\n<li> <a href=\"/Fail-Hard\" title=\"Fail-Hard\">Fail-Hard</a></li>\n<li> <a href=\"/Fail-High\" title=\"Fail-High\">Fail-High</a></li>\n<li> <a href=\"/Fail-Low\" title=\"Fail-Low\">Fail-Low</a></li>\n<li> <a href=\"/Fail-Soft\" title=\"Fail-Soft\">Fail-Soft</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Beta-Cutoff&amp;action=edit&amp;section=3\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=64940\">Cutoffs in Quiescence Search</a> by jfern2011, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 20, 2017&#160;» <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">Quiescence Search</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65477\">cut nodes</a> by <a href=\"/Folkert_van_Heusden\" title=\"Folkert van Heusden\">Folkert van Heusden</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 18, 2017 &#160;» <a href=\"/Node_Types#CUT\" title=\"Node Types\">Cut-Nodes</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=79647\">Transposition table based cutoffs</a> by Michal Witanowski, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 05, 2022 &#160;» <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Table</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Beta-Cutoff&amp;action=edit&amp;section=4\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wiktionary.org/wiki/cutoff\">cutoff - Wiktionary</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wiktionary.org/wiki/cut_off\">cut off - Wiktionary</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Cutoff\">Cutoff from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Cut-off\">Cut-off from Wikipedia</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Beta-Cutoff&amp;action=edit&amp;section=5\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\">A Biker's vintage cut-off adorned with club badges, Image by <a rel=\"nofollow\" class=\"external text\" href=\"https://commons.wikimedia.org/wiki/User:Bullenw%C3%A4chter\">Bullenwächter</a>, December 12, 2004, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Cut-off\">Cut-off from Wikipedia</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wikimedia_Commons\">Wikimedia Commons</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=394125&amp;t=38007\">Re: What the computer chess community needs to decide</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">CCC</a>, February 11, 2011</span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\">Modified images from <a href=\"/Matthew_L._Ginsberg\" title=\"Matthew L. Ginsberg\">Matthew L. Ginsberg</a>, <a href=\"/index.php?title=Alan_Jaffray&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Alan Jaffray (page does not exist)\">Alan Jaffray</a> (<b>2002</b>). <i>Alpha-Beta Pruning Under Partial Orders</i>. in <a href=\"/Richard_J._Nowakowski\" title=\"Richard J. Nowakowski\">Richard J. Nowakowski</a> (ed.) <i><a rel=\"nofollow\" class=\"external text\" href=\"http://library.msri.org/books/Book42/\">More Games of No Chance</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Cambridge_University_Press\">Cambridge University Press</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://library.msri.org/books/Book42/files/ginsberg.pdf\">pdf</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301150525\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.085 seconds\nReal time usage: 0.651 seconds\nPreprocessor visited node count: 67/1000000\nPreprocessor generated node count: 142/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1031-0!canonical and timestamp 20260301150524 and revision id 26436\n -->\n"
+    },
+    "categories": [],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha-Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Position"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fail-Hard"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fail-High"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fail-Low"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fail-Soft"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Folkert van Heusden"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Harm Geert Muller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Matthew L. Ginsberg"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Ordering"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Moves"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Negamax"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Node"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Node Types"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiescence Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Recursion"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Refutation Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Richard J. Nowakowski"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Root"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Score"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sierżant"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Window"
+      },
+      {
+        "ns": 0,
+        "*": "Alan Jaffray"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Shallow or Deep",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Beta-Cutoff",
+        "byteoffset": 1410,
+        "anchor": "Shallow_or_Deep"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Beta-Cutoff",
+        "byteoffset": 2679,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Beta-Cutoff",
+        "byteoffset": 2834,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Beta-Cutoff",
+        "byteoffset": 3326,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "5",
+        "index": "5",
+        "fromtitle": "Beta-Cutoff",
+        "byteoffset": 3598,
+        "anchor": "References"
+      }
+    ]
+  }
+}

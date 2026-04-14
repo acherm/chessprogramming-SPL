@@ -1,0 +1,283 @@
+{
+  "parse": {
+    "title": "ShashChess",
+    "pageid": 7869,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Engines\" title=\"Engines\">Engines</a> * <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a> * ShashChess</b>\n</p><p><b>ShashChess</b>,<br />\na <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a> <a href=\"/Category:Derivative\" title=\"Category:Derivative\">derivative</a> by <a href=\"/Andrea_Manzo\" title=\"Andrea Manzo\">Andrea Manzo</a> with the aim to apply the proposals of <a href=\"/index.php?title=Alexander_Shashin&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Alexander Shashin (page does not exist)\">Alexander Shashin</a> as exposed in his book <i>Best Play: A New Method for Discovering the Strongest Move</i>  <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>\n<sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>.\nFirst released in July 2018 <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>,\nsubsequent ShashChess versions feature <a href=\"/Playing_Strength\" title=\"Playing Strength\">skill levels</a> and handicap modes, <a href=\"/NNUE\" title=\"NNUE\">NNUE</a>, <a href=\"/Monte-Carlo_Tree_Search\" title=\"Monte-Carlo Tree Search\">Monte-Carlo Tree Search</a> with one or multiple <a href=\"/Thread\" title=\"Thread\">threads</a> in conjunction with <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">alpha-beta</a>,\nand various <a href=\"/Learning\" title=\"Learning\">learning</a> techniques utilizing a <a href=\"/Persistent_Hash_Table\" title=\"Persistent Hash Table\">persistent hash table</a> <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup> \n<sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup>.\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Personalities\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Personalities</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Q-Learning\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Q-Learning</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#2018_...\"><span class=\"tocnumber\">3.1</span> <span class=\"toctext\">2018 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#2020_...\"><span class=\"tocnumber\">3.2</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#External_Links\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#References\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Personalities\">Personalities</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=ShashChess&amp;action=edit&amp;section=1\" title=\"Edit section: Personalities\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Based on static <a href=\"/Evaluation\" title=\"Evaluation\">evaluation</a> <a href=\"/Score\" title=\"Score\">score</a> ranges derivered from <a href=\"/Pawn\" title=\"Pawn\">pawn</a> endgame <a href=\"/Point_Value\" title=\"Point Value\">point value</a> (PawnValueEg = 208), ShashChess classifies the position with five personalities of three former <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/World_Chess_Championship\">World Chess Champions</a>,\n<a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Tigran_Petrosian\">Tigran Petrosian</a> for negative scores,\n<a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Jos%C3%A9_Ra%C3%BAl_Capablanca\">José Raúl Capablanca</a> for balanced scores,\nand <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Mikhail_Tal\">Mikhail Tal</a> for positive scores <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup>:\n</p>\n<pre>\nif      (eval &lt; -74) personality =  Petosian;\nelse if (eval &lt; -31) personality =  Petosian | Capablanca;\nelse if (eval &lt;  31) personality =             Capablanca;\nelse if (eval &lt;  74) personality =             Capablanca | Tal;\nelse                 personality =                          Tal; \n</pre>\n<p>These personalities are considered in various <a href=\"/Selectivity\" title=\"Selectivity\">search selectivity</a> thresholds, along with multiple dynamic evaluation score adjustments.  \n</p>\n<h1><span class=\"mw-headline\" id=\"Q-Learning\">Q-Learning</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=ShashChess&amp;action=edit&amp;section=2\" title=\"Edit section: Q-Learning\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>A <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Rote_learning\">rote learning</a> technique inspired from <a href=\"/Reinforcement_Learning#Q-Learning\" title=\"Reinforcement Learning\">Q-learning</a>, worked out and introduced by <a href=\"/index.php?title=Kelly_Kinyama&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Kelly Kinyama (page does not exist)\">Kelly Kinyama</a> \n<sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup>\n<sup id=\"cite_ref-9\" class=\"reference\"><a href=\"#cite_note-9\">&#91;9&#93;</a></sup> \nand also employed in <a href=\"/index.php?title=BrainLearn&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"BrainLearn (page does not exist)\">BrainLearn</a> 9.0 <sup id=\"cite_ref-10\" class=\"reference\"><a href=\"#cite_note-10\">&#91;10&#93;</a></sup>,\nwas applied in ShashChess since version 12.0 <sup id=\"cite_ref-11\" class=\"reference\"><a href=\"#cite_note-11\">&#91;11&#93;</a></sup>. \nAfter the end of a decisive selfplay game, the <a href=\"/Move_List\" title=\"Move List\">list of moves</a> (ml) and associated <a href=\"/Score\" title=\"Score\">scores</a> is merged into the learn table from end to start, \nthe score of timestep t adjusted as weighted average with the future reward of timestep t+1, using a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Q-learning#Learning_Rate\">learning rate</a> α of 0.5 and a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Q-learning#Discount_factor\">discount factor</a> γ of 0.99 <sup id=\"cite_ref-12\" class=\"reference\"><a href=\"#cite_note-12\">&#91;12&#93;</a></sup>:\n</p>\n<pre>\n  for (t = ml.size() - 2; t &gt;= 0; t--) {\n    ml[t].score = (1-α)*ml[t].score + α*γ*ml[t+1].score;\n    insertIntoOrUpdateLearningTable( ml[t] );\n  }\n</pre>\n<p>During repeated selfplay games, subsequently playing along the learned best line so far, decreasing score adjustments will stimulate exploration of alternative siblings, while increasing score adjustments correspondents to exploitation of the best move.\n</p>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=ShashChess&amp;action=edit&amp;section=3\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"2018_...\">2018 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=ShashChess&amp;action=edit&amp;section=4\" title=\"Edit section: 2018 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=68093\">ShashChess</a> by <a href=\"/Andrea_Manzo\" title=\"Andrea Manzo\">Andrea Manzo</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 28, 2018</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=68093&amp;start=103\">Re: ShashChess</a> (11.0) by <a href=\"/Andrea_Manzo\" title=\"Andrea Manzo\">Andrea Manzo</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 06, 2020</dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=68093&amp;start=105\">Re: ShashChess</a> (12.0) by <a href=\"/Andrea_Manzo\" title=\"Andrea Manzo\">Andrea Manzo</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 28, 2020</dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=68093&amp;start=209\">Re: ShashChess</a> (15.0) by <a href=\"/Andrea_Manzo\" title=\"Andrea Manzo\">Andrea Manzo</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 03, 2020</dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=68093&amp;start=272\">Re: ShashChess</a> (17.1) by <a href=\"/Andrea_Manzo\" title=\"Andrea Manzo\">Andrea Manzo</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 01, 2021</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=68120&amp;p=769919\">Build ShashChess for Android</a> by <a href=\"/Andrea_Manzo\" title=\"Andrea Manzo\">Andrea Manzo</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 01, 2018</li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=ShashChess&amp;action=edit&amp;section=5\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/g/fishcooking/c/GLag32ARtKo/m/3Zoaq3-rAwAJ\">ShashChess 12.0</a> by <a href=\"/Andrea_Manzo\" title=\"Andrea Manzo\">Andrea Manzo</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">FishCooking</a>, June 28, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/g/fishcooking/c/6IzmiSCB8lg/m/sFeSq9ykAQAJ\">A new reinforcement learning implementation of Q learning algorithm for alphabeta engines to automatically tune the evaluation of chess positions</a> by <a href=\"/index.php?title=Kelly_Kinyama&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Kelly Kinyama (page does not exist)\">Kelly Kinyama</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">FishCooking</a>, June 29, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/fishcooking/yWtpz_FY5_Y/RMTG56fkAAAJ\">ShashChess NNUE 1.0</a> by <a href=\"/Andrea_Manzo\" title=\"Andrea Manzo\">Andrea Manzo</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">FishCooking</a>, July 25, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=76394\">Shashchess which executable to use</a> by Andrew Bernasrd, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 23, 2021</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/g/fishcooking/c/Iy1AlEZJWc8\">New BrainLearn and ShashChess</a> by <a href=\"/Andrea_Manzo\" title=\"Andrea Manzo\">Andrea Manzo</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">FishCooking</a>, May 19, 2021</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/viewtopic.php?t=78738\">ShashChess</a> by criko, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 25, 2021</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/viewtopic.php?t=84274\">Shashin theory</a> by <a href=\"/Peter_Berger\" title=\"Peter Berger\">Peter Berger</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 22, 2024</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=ShashChess&amp;action=edit&amp;section=6\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/amchess/ShashChess\">GitHub - amchess/ShashChess: A try to implement Alexander Shashin's theory on a Stockfish's derived chess engine</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://ccrl.chessdom.com/ccrl/4040/cgi/engine_details.cgi?print=Details&amp;each_game=1&amp;eng=ShashChess%2011.0%2064-bit\">ShashChess 11.0 64-bit</a> in <a href=\"/CCRL\" title=\"CCRL\">CCRL 40/15</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://ccrl.chessdom.com/ccrl/4040/cgi/engine_details.cgi?print=Details&amp;each_game=1&amp;eng=ShashChess%2015.0%2064-bit\">ShashChess 15.0 64-bit</a> in <a href=\"/CCRL\" title=\"CCRL\">CCRL 40/15</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=ShashChess&amp;action=edit&amp;section=7\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap mw-references-columns\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.bs-chess.com/latin/lectures/2011/shashin4.html\">Welcome to BS Chess</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a href=\"/index.php?title=Alexander_Shashin&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Alexander Shashin (page does not exist)\">Alexander Shashin</a> (<b>2013</b>). <i>Best Play: A New Method for Discovering the Strongest Move</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://mongoosepress.com/\">Mongoose Press</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://www.amazon.com/Best-Play-Discovering-Strongest-2013-01-01/dp/B01A0CKJQM\">Amazon</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20130909054429/http://www.chessvibes.com/review-best-play\">Review: Best Play | ChessVibes</a> by <a rel=\"nofollow\" class=\"external text\" href=\"https://ratings.fide.com/profile/1005820\">Arne Moll</a>, September 05, 2013 (<a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wayback_Machine\">Wayback Machine</a>)</span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=68093\">ShashChess</a> by <a href=\"/Andrea_Manzo\" title=\"Andrea Manzo\">Andrea Manzo</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 28, 2018</span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/amchess/ShashChess/blob/master/README.md\">ShashChess/README.md at master · amchess/ShashChess · GitHub</a></span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=70948&amp;start=17\">Re: Komodo MCTS</a> by <a href=\"/Mark_Lefler\" title=\"Mark Lefler\">Mark Lefler</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 12, 2019&#160;» <a href=\"/Komodo#MCTS\" title=\"Komodo\">Komodo MCTS</a></span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/amchess/ShashChess/blob/master/src/All/search.cpp#L446\">ShashChess/search.cpp at master · amchess/ShashChess · GitHub</a></span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/g/fishcooking/c/fhX7dFAsyew/m/NSd0-OJjBwAJ\">Re: Self-Learning stockfish upgraded</a> by <a href=\"/index.php?title=Kelly_Kinyama&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Kelly Kinyama (page does not exist)\">Kelly Kinyama</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">FishCooking</a>, May 28, 2019</span>\n</li>\n<li id=\"cite_note-9\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-9\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/g/fishcooking/c/6IzmiSCB8lg/m/sFeSq9ykAQAJ\">A new reinforcement learning implementation of Q learning algorithm for alphabeta engines to automatically tune the evaluation of chess positions</a> by <a href=\"/index.php?title=Kelly_Kinyama&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Kelly Kinyama (page does not exist)\">Kelly Kinyama</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">FishCooking</a>, June 29, 2020</span>\n</li>\n<li id=\"cite_note-10\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-10\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/amchess/BrainLearn/releases/tag/9.0\">Release BrainLearn 9.0 · amchess/BrainLearn · GitHub</a></span>\n</li>\n<li id=\"cite_note-11\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-11\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/g/fishcooking/c/GLag32ARtKo/m/3Zoaq3-rAwAJ\">ShashChess 12.0</a> by <a href=\"/Andrea_Manzo\" title=\"Andrea Manzo\">Andrea Manzo</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">FishCooking</a>, June 28, 2020</span>\n</li>\n<li id=\"cite_note-12\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-12\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/amchess/ShashChess/blob/master/src/All/search.cpp#L2625\">ShashChess/search.cpp at master · amchess/ShashChess · GitHub</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Stockfish\" title=\"Stockfish\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301094417\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.018 seconds\nReal time usage: 0.019 seconds\nPreprocessor visited node count: 217/1000000\nPreprocessor generated node count: 474/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:7869-0!canonical and timestamp 20260301094417 and revision id 27185\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Derivative"
+      },
+      {
+        "sortkey": "",
+        "*": "GPL"
+      },
+      {
+        "sortkey": "",
+        "*": "Open_Source"
+      },
+      {
+        "sortkey": "",
+        "*": "NNUE"
+      },
+      {
+        "sortkey": "",
+        "*": "MCTS"
+      },
+      {
+        "sortkey": "",
+        "*": "UCI"
+      },
+      {
+        "sortkey": "",
+        "*": "Chess960"
+      },
+      {
+        "sortkey": "",
+        "*": "X86"
+      },
+      {
+        "sortkey": "",
+        "*": "X64"
+      },
+      {
+        "sortkey": "",
+        "*": "PC"
+      },
+      {
+        "sortkey": "",
+        "*": "Android"
+      },
+      {
+        "sortkey": "",
+        "*": "Mac"
+      },
+      {
+        "sortkey": "",
+        "*": "Linux"
+      },
+      {
+        "sortkey": "",
+        "*": "Windows"
+      },
+      {
+        "sortkey": "",
+        "*": "Chess_Suffix"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha-Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Andrea Manzo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCRL"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engines"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Komodo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Learning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mark Lefler"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Monte-Carlo Tree Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move List"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "NNUE"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Persistent Hash Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter Berger"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Playing Strength"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Point Value"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Reinforcement Learning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Score"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Selectivity"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stockfish"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Thread"
+      },
+      {
+        "ns": 0,
+        "*": "Alexander Shashin"
+      },
+      {
+        "ns": 0,
+        "*": "Kelly Kinyama"
+      },
+      {
+        "ns": 0,
+        "*": "BrainLearn"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Derivative"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Personalities",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "ShashChess",
+        "byteoffset": 1705,
+        "anchor": "Personalities"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Q-Learning",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "ShashChess",
+        "byteoffset": 2911,
+        "anchor": "Q-Learning"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "ShashChess",
+        "byteoffset": 4988,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2018 ...",
+        "number": "3.1",
+        "index": "4",
+        "fromtitle": "ShashChess",
+        "byteoffset": 5002,
+        "anchor": "2018_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "3.2",
+        "index": "5",
+        "fromtitle": "ShashChess",
+        "byteoffset": 5834,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "4",
+        "index": "6",
+        "fromtitle": "ShashChess",
+        "byteoffset": 6984,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "5",
+        "index": "7",
+        "fromtitle": "ShashChess",
+        "byteoffset": 7489,
+        "anchor": "References"
+      }
+    ]
+  }
+}

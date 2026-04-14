@@ -1,0 +1,964 @@
+{
+  "parse": {
+    "title": "Retrograde Analysis",
+    "pageid": 1323,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Knowledge\" title=\"Knowledge\">Knowledge</a> * Retrograde Analysis</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"http://www.flickr.com/photos/smurpiknik/5149247538/in/photostream\"><img alt=\"\" src=\"/images/thumb/1/16/RetrogradeAnalysissmurpiknik.jpg/300px-RetrogradeAnalysissmurpiknik.jpg\" width=\"300\" height=\"200\" class=\"thumbimage\" srcset=\"/images/1/16/RetrogradeAnalysissmurpiknik.jpg 1.5x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:RetrogradeAnalysissmurpiknik.jpg\" class=\"internal\" title=\"Enlarge\"></a></div>Retrograde analysis <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>Retrograde Analysis</b>,<br />\na method in <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Game_theory\">game theory</a> to solve <a href=\"/Chess_Position\" title=\"Chess Position\">game positions</a> for <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Best_response\">optimal play</a> by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Backward_induction\">backward induction</a> from known outcomes. A sub-genre of solving certain <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Chess_problem\">chess problems</a> uses retrograde analysis to determine which <a href=\"/Moves\" title=\"Moves\">moves</a> were played to reach a position, and for the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Proof_game\">proof game</a> whether a position is legal in the sense that it could be reached by a series of <a href=\"/Legal_Move\" title=\"Legal Move\">legal moves</a> from the <a href=\"/Initial_Position\" title=\"Initial Position\">initial position</a>. \n<span id=\"History\"></span>\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#History\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">History</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Algorithm\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Algorithm</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#See_also\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Selected_Publications\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Selected Publications</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#1910_...\"><span class=\"tocnumber\">4.1</span> <span class=\"toctext\">1910 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-6\"><a href=\"#1920_...\"><span class=\"tocnumber\">4.2</span> <span class=\"toctext\">1920 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#1940_...\"><span class=\"tocnumber\">4.3</span> <span class=\"toctext\">1940 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#1960_...\"><span class=\"tocnumber\">4.4</span> <span class=\"toctext\">1960 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#1970_...\"><span class=\"tocnumber\">4.5</span> <span class=\"toctext\">1970 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#1980_...\"><span class=\"tocnumber\">4.6</span> <span class=\"toctext\">1980 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#1990_...\"><span class=\"tocnumber\">4.7</span> <span class=\"toctext\">1990 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-12\"><a href=\"#2000_...\"><span class=\"tocnumber\">4.8</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-13\"><a href=\"#2005_...\"><span class=\"tocnumber\">4.9</span> <span class=\"toctext\">2005 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-14\"><a href=\"#2010_...\"><span class=\"tocnumber\">4.10</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-15\"><a href=\"#2015_...\"><span class=\"tocnumber\">4.11</span> <span class=\"toctext\">2015 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-16\"><a href=\"#2020_...\"><span class=\"tocnumber\">4.12</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-17\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-18\"><a href=\"#1995_...\"><span class=\"tocnumber\">5.1</span> <span class=\"toctext\">1995 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-19\"><a href=\"#2000_..._2\"><span class=\"tocnumber\">5.2</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-20\"><a href=\"#2005_..._2\"><span class=\"tocnumber\">5.3</span> <span class=\"toctext\">2005 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-21\"><a href=\"#2010_..._2\"><span class=\"tocnumber\">5.4</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-22\"><a href=\"#2015_..._2\"><span class=\"tocnumber\">5.5</span> <span class=\"toctext\">2015 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-23\"><a href=\"#2020_..._2\"><span class=\"tocnumber\">5.6</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-24\"><a href=\"#External_Links\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">External Links</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-25\"><a href=\"#Retrograde_Analysis\"><span class=\"tocnumber\">6.1</span> <span class=\"toctext\">Retrograde Analysis</span></a></li>\n<li class=\"toclevel-2 tocsection-26\"><a href=\"#GitHub\"><span class=\"tocnumber\">6.2</span> <span class=\"toctext\">GitHub</span></a></li>\n<li class=\"toclevel-2 tocsection-27\"><a href=\"#Programs\"><span class=\"tocnumber\">6.3</span> <span class=\"toctext\">Programs</span></a></li>\n<li class=\"toclevel-2 tocsection-28\"><a href=\"#Induction\"><span class=\"tocnumber\">6.4</span> <span class=\"toctext\">Induction</span></a></li>\n<li class=\"toclevel-2 tocsection-29\"><a href=\"#Retrograde\"><span class=\"tocnumber\">6.5</span> <span class=\"toctext\">Retrograde</span></a></li>\n<li class=\"toclevel-2 tocsection-30\"><a href=\"#Analysis\"><span class=\"tocnumber\">6.6</span> <span class=\"toctext\">Analysis</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-31\"><a href=\"#References\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"History\">History</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Retrograde_Analysis&amp;action=edit&amp;section=1\" title=\"Edit section: History\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>History based on <a href=\"/Lewis_Stiller\" title=\"Lewis Stiller\">Lewis Stiller</a>, <i>Multilinear Algebra and Chess Endgames</i> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>\n</p>\n<pre>The mathematical justification for the retrograde analysis algorithm was already implicit in the 1912 paper of <a href=\"/Ernst_Zermelo\" title=\"Ernst Zermelo\">Ernst Zermelo</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>. Additional theoretical work was done by <a href=\"/John_von_Neumann\" title=\"John von Neumann\">John von Neumann</a> and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Oskar_Morgenstern\">Oskar Morgenstern</a> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>. \n\nThe contemporary <a href=\"/Dynamic_Programming\" title=\"Dynamic Programming\">dynamic programming</a> methodology, which defines the field of retrograde endgame analysis, was discovered by <a href=\"/Richard_E._Bellman\" title=\"Richard E. Bellman\">Richard E. Bellman</a> in 1965 <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup>. Bellman had considered game theory from a classical perspective as well <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup> <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup>, but his work came to fruition in his 1965 paper, where he observed that the entire <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/State_space_%28dynamical_system%29\">state-space</a> could be stored and that dynamic programming techniques could then be used to compute whether either side could win any position. \n</pre>\n<pre>Bellman also sketched how a combination of <a href=\"/Search\" title=\"Search\">forward search</a>, dynamic programming, and <a href=\"/Evaluation\" title=\"Evaluation\">heuristic evaluation</a> could be used to solve much larger state spaces than could be tackled by either technique alone. He predicted that <a href=\"/Checkers\" title=\"Checkers\">Checkers</a> could be solved by his techniques, and the utility of his algorithms for solving very large state spaces has been validated by <a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a> et al. in the domain of Checkers <sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup>, <a href=\"/Ralph_Gasser\" title=\"Ralph Gasser\">Ralph Gasser</a> in the domain of <a href=\"/Nine_Men%E2%80%99s_Morris\" title=\"Nine Men’s Morris\">Nine Men’s Morris</a> <sup id=\"cite_ref-9\" class=\"reference\"><a href=\"#cite_note-9\">&#91;9&#93;</a></sup>, and <a href=\"/John_Romein\" title=\"John Romein\">John Romein</a> with <a href=\"/Henri_Bal\" title=\"Henri Bal\">Henri Bal</a> in the domain of <a href=\"/Awari\" title=\"Awari\">Awari</a> <sup id=\"cite_ref-10\" class=\"reference\"><a href=\"#cite_note-10\">&#91;10&#93;</a></sup>. The first retrograde analysis implementation was due to <a href=\"/Thomas_Str%C3%B6hlein\" title=\"Thomas Ströhlein\">Thomas Ströhlein</a>, whose important 1970 dissertation described the solution of several pawnless 4-piece endgames <sup id=\"cite_ref-11\" class=\"reference\"><a href=\"#cite_note-11\">&#91;11&#93;</a></sup>.\n</pre>\n<p><span id=\"Algorithm\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Algorithm\">Algorithm</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Retrograde_Analysis&amp;action=edit&amp;section=2\" title=\"Edit section: Algorithm\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Retrograde analysis is the basic <a href=\"/Algorithms\" title=\"Algorithms\">algorithm</a> to construct <a href=\"/Endgame_Tablebases\" title=\"Endgame Tablebases\">Endgame Tablebases</a>. A <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Bijection\">bijective function</a> is used to map <a href=\"/Chess_Position\" title=\"Chess Position\">chess positions</a> to <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/G%C3%B6del_numbering\">Gödel numbers</a> which index a database of bitmaps during construction and retrieval, in its simplest form based on a multi-dimensional <a href=\"/Array\" title=\"Array\">array</a> index. Following description is based on <a href=\"/Ken_Thompson\" title=\"Ken Thompson\">Ken Thompson's</a> paper <i>Retrograde Analysis of Certain Endgames</i> with <a href=\"/Endgame_Tablebases#DTM\" title=\"Endgame Tablebases\">depth to mate (DTM)</a> metric <sup id=\"cite_ref-12\" class=\"reference\"><a href=\"#cite_note-12\">&#91;12&#93;</a></sup>, and assumes White the winning side. Files of sets of chess positions, where a one-bit is associated with the Gödel number of a position, are successively manipulated during the <a href=\"/Iteration\" title=\"Iteration\">iterative</a> generation process:\n</p>\n<ul><li> B<span style=\"vertical-align: sub;font-size: 80%;\">i</span> set of the latest newly found Black-to-move and lose in i moves positions</li>\n<li> W<span style=\"vertical-align: sub;font-size: 80%;\">i</span> set of the latest newly found White-to-move and win in i moves positions</li>\n<li> B set of all currently known Black-to-move and lose positions, union of all B<span style=\"vertical-align: sub;font-size: 80%;\">i</span> so far</li>\n<li> W set of all currently known White-to-move and win positions, union of all W<span style=\"vertical-align: sub;font-size: 80%;\">i</span> so far</li>\n<li> J<span style=\"vertical-align: sub;font-size: 80%;\">i</span> is temporary superset of B<span style=\"vertical-align: sub;font-size: 80%;\">i</span> not necessarily lose positions</li></ul>\n<p>The algorithm starts in enumerating all Black-to-move <a href=\"/Checkmate\" title=\"Checkmate\">checkmate</a> positions B<span style=\"vertical-align: sub;font-size: 80%;\">0</span> with the material configuration under consideration, an <a href=\"/Move_Generation#Reverse\" title=\"Move Generation\">un-move generator</a> is used to to build predecessor or parent positions. The un-move generation is similar to <a href=\"/Move_Generation\" title=\"Move Generation\">move generation</a>, with the difference that it is illegal to start in <a href=\"/Check\" title=\"Check\">check</a>, but legal to un-move into check, and illegal to capture, but legal to un-capture by leaving an opponent piece behind.\n</p><p><b>for</b> (i=0; B<span style=\"vertical-align: sub; font-size: 80%;\">i</span>; i++)\n</p>\n<ol><li> Every parent of a B<span style=\"vertical-align: sub; font-size: 80%;\">i</span> position is a White-to-move won position - newly-won positions W<span style=\"vertical-align: sub; font-size: 80%;\">i+1</span> are parents of a B<span style=\"vertical-align: sub; font-size: 80%;\">i</span> not (yet) in W </li>\n<li> W<span style=\"vertical-align: sub;font-size: 80%;\">i+1</span> becomes subset of W</li>\n<li> Every parent of a W<span style=\"vertical-align: sub;font-size: 80%;\">i+1</span> position is a Black-to-move and lose position if Black wanted to mate himself, stored in J<span style=\"vertical-align: sub;font-size: 80%;\">i+1</span></li>\n<li> Only if all successors (by generating and making legal moves <sup id=\"cite_ref-13\" class=\"reference\"><a href=\"#cite_note-13\">&#91;13&#93;</a></sup>) of a J<span style=\"vertical-align: sub; font-size: 80%;\">i+1</span> position are member of W, the J<span style=\"vertical-align: sub; font-size: 80%;\">i+1</span> position becomes member of B<span style=\"vertical-align: sub;font-size: 80%;\">i+1</span> and B</li></ol>\n<p>The algorithm terminates, if no more newly predecessor positions were found, that is either W<span style=\"vertical-align: sub;font-size: 80%;\">i+1</span> or B<span style=\"vertical-align: sub;font-size: 80%;\">i+1</span> stay empty. Each one-bit in W or B correspondents to a White-to-move and won or Black-to-move and lose position. Remaining zero bits indicate either a <a href=\"/Draw\" title=\"Draw\">draw</a>, White-to-move and lose, Black-to-move and won, or illegal positions.\n</p>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Retrograde_Analysis&amp;action=edit&amp;section=3\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Chess_Position\" title=\"Chess Position\">Chess Position</a></li>\n<li> <a href=\"/Chess_Problems,_Compositions_and_Studies\" title=\"Chess Problems, Compositions and Studies\">Chess Problems, Compositions and Studies</a></li>\n<li> <a href=\"/Category:Problem\" title=\"Category:Problem\">Chess Problem Solving Engines</a></li>\n<li> <a href=\"/Corresponding_Squares\" title=\"Corresponding Squares\">Corresponding Squares</a></li>\n<li> <a href=\"/Dynamic_Programming\" title=\"Dynamic Programming\">Dynamic Programming</a></li>\n<li> <a href=\"/Endgame_Bitbases\" title=\"Endgame Bitbases\">Endgame Bitbases</a></li>\n<li> <a href=\"/Endgame_Tablebases\" title=\"Endgame Tablebases\">Endgame Tablebases</a></li>\n<li> <a href=\"/Oracle\" title=\"Oracle\">Oracle</a></li>\n<li> <a href=\"/Transposition#RetrogradeAnalysis\" title=\"Transposition\">Transposition | Retrograde Analysis</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Selected_Publications\">Selected Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Retrograde_Analysis&amp;action=edit&amp;section=4\" title=\"Edit section: Selected Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1910_...\">1910 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Retrograde_Analysis&amp;action=edit&amp;section=5\" title=\"Edit section: 1910 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Ernst_Zermelo\" title=\"Ernst Zermelo\">Ernst Zermelo</a> (<b>1913</b>). <i>Über eine Anwendung der Mengenlehre auf die Theorie des Schachspiels</i> Proc. Fifth Congress Mathematicians, (Cambridge 1912), Cambridge Univ. Press 1913, 501–504. Translation: <i>On an Application of Set Theory to the Theory of the Game of Chess</i>.</li></ul>\n<h2><span class=\"mw-headline\" id=\"1920_...\">1920 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Retrograde_Analysis&amp;action=edit&amp;section=6\" title=\"Edit section: 1920 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Mathematician#DenesKoenig\" title=\"Mathematician\">Dénes Kőnig</a> (<b>1927</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://acta.fyx.hu/acta/showCustomerArticle.action?id=5131&amp;dataObjectType=article&amp;returnAction=showCustomerVolume&amp;sessionDataSetId=2b29ea26fa2c9ba\">Über eine Schlussweise aus dem Endlichen ins Unendliche</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://acta.fyx.hu/acta/home.action?noDataSet=true\">Acta Scientiarum Mathematicarum</a> (<a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/University_of_Szeged\">University of Szeged</a>)</li></ul>\n<h2><span class=\"mw-headline\" id=\"1940_...\">1940 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Retrograde_Analysis&amp;action=edit&amp;section=7\" title=\"Edit section: 1940 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/John_von_Neumann\" title=\"John von Neumann\">John von Neumann</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Oskar_Morgenstern\">Oskar Morgenstern</a> (<b>1944</b>). <i>Theory of Games and Economic Behavior</i>. Princeton University Press, Princeton, NJ</li></ul>\n<h2><span class=\"mw-headline\" id=\"1960_...\">1960 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Retrograde_Analysis&amp;action=edit&amp;section=8\" title=\"Edit section: 1960 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Richard_E._Bellman\" title=\"Richard E. Bellman\">Richard E. Bellman</a> (<b>1965</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.rand.org/pubs/papers/P3013/\">On the Application of Dynamic Programming to the Determination of Optimal Play in Chess and Checkers</a>.</i> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Proceedings_of_the_National_Academy_of_Sciences_of_the_United_States_of_America\">PNAS</a></li>\n<li> <a href=\"/index.php?title=Vladimir_E._Alekseev&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Vladimir E. Alekseev (page does not exist)\">Vladimir E. Alekseev</a>  (<b>1969</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://oai.dtic.mil/oai/oai?verb=getRecord&amp;metadataPrefix=html&amp;identifier=AD0689470\">Compilation of Chess Problems on a Computer</a></i>. Technical translation FSTC-HT-23-124-69, US Army, NTIS AD 689470 (<a rel=\"nofollow\" class=\"external text\" href=\"http://www.worldcat.org/title/problemy-kibernetiki/oclc/1762911\">Problemy Kibernetiki</a>, 19, 1967)</li></ul>\n<h2><span class=\"mw-headline\" id=\"1970_...\">1970 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Retrograde_Analysis&amp;action=edit&amp;section=9\" title=\"Edit section: 1970 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Thomas_Str%C3%B6hlein\" title=\"Thomas Ströhlein\">Thomas Ströhlein</a> (<b>1970</b>). <i>Untersuchungen über kombinatorische Spiele.</i> Ph.D. Thesis, <a href=\"/Technical_University_of_Munich\" title=\"Technical University of Munich\">Technical University of Munich</a> (German)</li>\n<li> <a href=\"/Edward_Komissarchik\" title=\"Edward Komissarchik\">Edward Komissarchik</a>, <a href=\"/Aaron_L._Futer\" title=\"Aaron L. Futer\">Aaron L. Futer</a> (<b>1974</b>). <i>Ob Analize Ferzevogo Endshpilya pri Pomoshchi EVM.</i> (Analysis of a queen endgame using an IBM computer) Problemy Kybernetiki, Vol. 29, pp. 211-220. English translation by <a href=\"/Christian_Posthoff\" title=\"Christian Posthoff\">Christian Posthoff</a>, revised in <a href=\"/ICGA_Journal#9_4\" title=\"ICGA Journal\">ICCA Journal, Vol. 9, No. 4</a> (<b>1986</b>)</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.mathnet.ru/php/person.phtml?option_lang=eng&amp;personid=55935\">A. G. Alexandrov</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.mathnet.ru/php/person.phtml?option_lang=eng&amp;personid=96113\">A. M. Baraev</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.mathnet.ru/php/person.phtml?option_lang=eng&amp;personid=96114\">Ya. Yu. Gol'fand</a>, <a href=\"/Edward_Komissarchik\" title=\"Edward Komissarchik\">Edward Komissarchik</a>, <a href=\"/Aaron_L._Futer\" title=\"Aaron L. Futer\">Aaron L. Futer</a> (<b>1977</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.mathnet.ru/php/archive.phtml?wshow=paper&amp;jrnid=at&amp;paperid=7425&amp;option_lang=eng\">Computer analysis of rook end game</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Automation_and_Remote_Control\">Avtomatika i Telemekhanika</a>, No. 8, 113–117  </li>\n<li> <a href=\"/Thomas_Str%C3%B6hlein\" title=\"Thomas Ströhlein\">Thomas Ströhlein</a>, <a href=\"/Ludwig_Zagler\" title=\"Ludwig Zagler\">Ludwig Zagler</a> (<b>1977</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.sciencedirect.com/science/article/pii/0012365X77900334\">Analyzing games by Boolean matrix iteration</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Discrete_Mathematics_%28journal%29\">Discrete Mathematics</a>, Vol. 19, No. 2</li>\n<li> <a href=\"/Thomas_Str%C3%B6hlein\" title=\"Thomas Ströhlein\">Thomas Ströhlein</a>, <a href=\"/Ludwig_Zagler\" title=\"Ludwig Zagler\">Ludwig Zagler</a> (<b>1978</b>). <i>Ergebnisse einer vollstandigen Analyse von Schachendspielen: König und Turm gegen König, König und Turm gegen König und Läufer.</i> Report, Institut für Informatik, <a href=\"/Technical_University_of_Munich\" title=\"Technical University of Munich\">Technical University of Munich</a> (German)</li>\n<li> <a href=\"/Aaron_L._Futer\" title=\"Aaron L. Futer\">Aaron L. Futer</a> (<b>1978</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://zbmath.org/?q=an:03637634\">Programming endgames with few pieces</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Doklady_Physics\">Soviet Physics. Doklady</a>, No. 23</li>\n<li> <a href=\"/Vladimir_Arlazarov\" title=\"Vladimir Arlazarov\">Vladimir Arlazarov</a>, <a href=\"/Aaron_L._Futer\" title=\"Aaron L. Futer\">Aaron L. Futer</a> (<b>1979</b>). <i>Computer Analysis of a Rook End-Game</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.doc.ic.ac.uk/~shm/MI/mi9.html\">Machine Intelligence 9</a> (eds. <a href=\"/Jean_Hayes_Michie\" title=\"Jean Hayes Michie\">Jean Hayes Michie</a>, <a href=\"/Donald_Michie\" title=\"Donald Michie\">Donald Michie</a> and L.I. Mikulich), pp. 361-371. Ellis Horwood, Chichester. Reprinted in <a href=\"/Computer_Chess_Compendium\" title=\"Computer Chess Compendium\">Computer Chess Compendium</a></li>\n<li> <a href=\"/Raymond_Smullyan\" title=\"Raymond Smullyan\">Raymond Smullyan</a> (<b>1979</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.amazon.com/Chess-Mysteries-Sherlock-Holmes/dp/0394737571\">The Chess Mysteries of Sherlock Holmes</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Alfred_A._Knopf\">Alfred A. Knopf</a>, New York <sup id=\"cite_ref-14\" class=\"reference\"><a href=\"#cite_note-14\">&#91;14&#93;</a></sup></li></ul>\n<h2><span class=\"mw-headline\" id=\"1980_...\">1980 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Retrograde_Analysis&amp;action=edit&amp;section=10\" title=\"Edit section: 1980 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Raymond_Smullyan\" title=\"Raymond Smullyan\">Raymond Smullyan</a> (<b>1981</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.chesslund.com/detail.asp?id=2206&amp;n=Smullyan-The-Chess-Mysteries-of-the-Arabian-Knights\">The Chess Mysteries of the Arabian Knights </a></i>.  <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Alfred_A._Knopf\">Alfred A. Knopf</a>, New York <sup id=\"cite_ref-15\" class=\"reference\"><a href=\"#cite_note-15\">&#91;15&#93;</a></sup></li>\n<li> <a href=\"/Max_Bramer\" title=\"Max Bramer\">Max Bramer</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/pers/hy/a/Alden:B=_E=_P=.html\">B. E. P. Alden</a> (<b>1982</b>). <i>A Program for Solving Retrograde Analysis Chess Problems.</i> <a href=\"/Advances_in_Computer_Chess_3\" title=\"Advances in Computer Chess 3\">Advances in Computer Chess 3</a> <sup id=\"cite_ref-16\" class=\"reference\"><a href=\"#cite_note-16\">&#91;16&#93;</a></sup></li>\n<li> <a href=\"/Ken_Thompson\" title=\"Ken Thompson\">Ken Thompson</a> (<b>1986</b>). <i>Retrograde Analysis of Certain Endgames</i>. <a href=\"/ICGA_Journal#9_3\" title=\"ICGA Journal\">ICCA Journal, Vol. 9, No. 3</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://pdos.csail.mit.edu/~rsc/thompson86endgame.pdf\">pdf</a></li>\n<li> <a href=\"/Edward_Komissarchik\" title=\"Edward Komissarchik\">Edward Komissarchik</a>, <a href=\"/Aaron_L._Futer\" title=\"Aaron L. Futer\">Aaron L. Futer</a> (<b>1986</b>). <i>Computer Analysis of a Queen Endgame</i>. <a href=\"/ICGA_Journal#9_4\" title=\"ICGA Journal\">ICCA Journal, Vol. 9, No. 4</a></li>\n<li> <a href=\"/Lewis_Stiller\" title=\"Lewis Stiller\">Lewis Stiller</a> (<b>1988</b>). <i>Massively Parallel Retrograde Endgame Analysis</i>. BUCS Tech. Report #88-014, Boston University, Computer Science Department.</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/pers/hy/a/Alden:B=_E=_P=.html\">B. E. P. Alden</a>, <a href=\"/Max_Bramer\" title=\"Max Bramer\">Max Bramer</a> (<b>1988</b>). <i>An Expert System for Solving Retrograde-Analysis Chess Problems.</i> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.interaction-design.org/references/periodicals/international_journal_of_man-machine_studies_volume_29.html\">International Journal of Man-Machine Studies, Vol. 29, No. 2</a></li>\n<li> <a href=\"/Michael_Schlosser\" title=\"Michael Schlosser\">Michael Schlosser</a> (<b>1988</b>). <i>Computers and Chess-Problem Composition.</i> <a href=\"/ICGA_Journal#11_4\" title=\"ICGA Journal\">ICCA Journal, Vol. 11, No. 4</a></li>\n<li> <a href=\"/David_Forthoffer\" title=\"David Forthoffer\">David Forthoffer</a>, <a href=\"/Lars_Rasmussen\" title=\"Lars Rasmussen\">Lars Rasmussen</a>, <a href=\"/Sito_Dekker\" title=\"Sito Dekker\">Sito Dekker</a> (<b>1989</b>). <i>A Correction to some KRKB-Database Results</i>. <a href=\"/ICGA_Journal#12_1\" title=\"ICGA Journal\">ICCA Journal, Vol. 12, No. 1</a></li>\n<li> <a href=\"/Ingo_Alth%C3%B6fer\" title=\"Ingo Althöfer\">Ingo Althöfer</a> (<b>1989</b>). <i>Retrograde Analysis and two Computerizable Definitions of the Quality of Chess Games.</i> <a href=\"/ICGA_Journal#12_2\" title=\"ICGA Journal\">ICCA Journal, Vol. 12, No. 2</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1990_...\">1990 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Retrograde_Analysis&amp;action=edit&amp;section=11\" title=\"Edit section: 1990 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/L%C3%A1szl%C3%B3_Lindner\" title=\"László Lindner\">László Lindner</a>, <a href=\"/Michael_Schlosser\" title=\"Michael Schlosser\">Michael Schlosser</a> (<b>1991</b>). <i>New Ideas in Problem Solving and Composing Programs</i>. <a href=\"/Advances_in_Computer_Chess_6\" title=\"Advances in Computer Chess 6\">Advances in Computer Chess 6</a></li>\n<li> <a href=\"/Michael_Schlosser\" title=\"Michael Schlosser\">Michael Schlosser</a> (<b>1991</b>). <i>Can a Computer Compose Chess Problems?</i> <a href=\"/Advances_in_Computer_Chess_6\" title=\"Advances in Computer Chess 6\">Advances in Computer Chess 6</a></li>\n<li> <a href=\"/Lewis_Stiller\" title=\"Lewis Stiller\">Lewis Stiller</a> (<b>1991</b>). <i>Some Results from a Massively Parallel Retrograde Analysis.</i> <a href=\"/ICGA_Journal#14_3\" title=\"ICGA Journal\">ICCA Journal, Vol. 14, No. 3</a></li>\n<li> <a href=\"/Ralph_Gasser\" title=\"Ralph Gasser\">Ralph Gasser</a> (<b>1991</b>). <i>Applying Retrograde Analysis to Nine Men’s Morris.</i> <a href=\"/2nd_Computer_Olympiad#Workshop\" title=\"2nd Computer Olympiad\">Heuristic Programming in AI 2</a></li>\n<li> <a href=\"/index.php?title=Rob_Lake&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Rob Lake (page does not exist)\">Robert Lake</a>, <a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a>, <a href=\"/Paul_Lu\" title=\"Paul Lu\">Paul Lu</a> (<b>1993</b>). <i>Solving Large Retrograde Analysis Problems Using a Network of Workstations</i>. Technical Report, TR93-13, <a rel=\"nofollow\" class=\"external text\" href=\"ftp://ftp.cs.ualberta.ca/pub/TechReports/1993/TR93-13/\">ps</a></li>\n<li> <a href=\"/index.php?title=Rob_Lake&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Rob Lake (page does not exist)\">Robert Lake</a>, <a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a>, <a href=\"/Paul_Lu\" title=\"Paul Lu\">Paul Lu</a> (<b>1994</b>). <i>Solving Large Retrograde Analysis Problems Using a Network of Workstations</i>. <a href=\"/Advances_in_Computer_Chess_7\" title=\"Advances in Computer Chess 7\">Advances in Computer Chess 7</a></li>\n<li> <a href=\"/Henri_Bal\" title=\"Henri Bal\">Henri Bal</a>, <a href=\"/Victor_Allis\" title=\"Victor Allis\">Victor Allis</a> (<b>1995</b>). <i>Parallel Retrograde Analysis on a Distributed System</i>. Supercomputing ’95, San Diego, CA.</li>\n<li> <a href=\"/Lewis_Stiller\" title=\"Lewis Stiller\">Lewis Stiller</a> (<b>1996</b>). <i>Multilinear Algebra and Chess Endgames</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://library.msri.org/books/Book29/index.html\">Games of No Chance</a> edited by <a href=\"/Richard_J._Nowakowski\" title=\"Richard J. Nowakowski\">Richard J. Nowakowski</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.msri.org/publications/books/Book29/files/stiller.pdf\">pdf</a></li>\n<li> <a href=\"/index.php?title=Dietmar_Lippold&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Dietmar Lippold (page does not exist)\">Dietmar Lippold</a> (<b>1996</b>). <i>Legality of Positions of Simple Chess Endgames</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://digilander.libero.it/gargamellachess/papers/legality%20of%20positions.zip\">zipped pdf</a> <sup id=\"cite_ref-17\" class=\"reference\"><a href=\"#cite_note-17\">&#91;17&#93;</a></sup></li>\n<li> <a href=\"/index.php?title=Dietmar_Lippold&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Dietmar Lippold (page does not exist)\">Dietmar Lippold</a> (<b>1997</b>). <i>The Legitimacy of Positions in Endgame Databases</i>. <a href=\"/ICGA_Journal#20_1\" title=\"ICGA Journal\">ICCA Journal, Vol. 20, No. 1</a></li>\n<li> <a href=\"/Hiroyuki_Iida\" title=\"Hiroyuki Iida\">Hiroyuki Iida</a>, <a href=\"/Jin_Yoshimura\" title=\"Jin Yoshimura\">Jin Yoshimura</a>, <a href=\"/index.php?title=Kazuro_Morita&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Kazuro Morita (page does not exist)\">Kazuro Morita</a>, <a href=\"/Jos_Uiterwijk\" title=\"Jos Uiterwijk\">Jos Uiterwijk</a> (<b>1998</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.springerlink.com/content/pg7at646416va0re/\">Retrograde Analysis of the KGK Endgame in Shogi: Its Implications for Ancient Heian Shogi</a></i>. <a href=\"/CG_1998\" title=\"CG 1998\">CG 1998</a></li>\n<li> <a href=\"/Christoph_Wirth\" title=\"Christoph Wirth\">Christoph Wirth</a>, <a href=\"/J%C3%BCrg_Nievergelt\" title=\"Jürg Nievergelt\">Jürg Nievergelt</a> (<b>1999</b>). <i>Exhaustive and Heuristic Retrograde Analysis of the KPPKP Endgame.</i> <a href=\"/ICGA_Journal#22_2\" title=\"ICGA Journal\">ICCA Journal, Vol. 22, No. 2</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Retrograde_Analysis&amp;action=edit&amp;section=12\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/index.php?title=Roel_van_der_Goot&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Roel van der Goot (page does not exist)\">Roel van der Goot</a> (<b>2000</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/chapter/10.1007/3-540-45579-5_6\">Awari Retrograde Analysis</a></i>. <a href=\"/CG_2000\" title=\"CG 2000\">CG 2000</a></li>\n<li> <a href=\"/Haw-ren_Fang\" title=\"Haw-ren Fang\">Haw-ren Fang</a>, <a href=\"/Tsan-sheng_Hsu\" title=\"Tsan-sheng Hsu\">Tsan-sheng Hsu</a>, <a href=\"/Shun-Chin_Hsu\" title=\"Shun-Chin Hsu\">Shun-Chin Hsu</a> (<b>2000</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/chapter/10.1007/3-540-45579-5_7\">Construction of Chinese Chess Endgame Databases by Retrograde Analysis</a></i>. <a href=\"/CG_2000\" title=\"CG 2000\">CG 2000</a></li>\n<li> <a href=\"/Bruno_Bouzy\" title=\"Bruno Bouzy\">Bruno Bouzy</a> (<b>2001</b>). <i>Go Patterns Generated by Retrograde Analysis</i>. <a href=\"/6th_Computer_Olympiad#Workshop\" title=\"6th Computer Olympiad\">6th Computer Olympiad Workshop</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.mi.parisdescartes.fr/~bouzy/publications/RAGO.pdf\">pdf</a></li>\n<li> <a href=\"/Lewis_Stiller\" title=\"Lewis Stiller\">Lewis Stiller</a> (<b>2001</b>). <i>Retrograde Analysis: Software Architecture</i>. <a href=\"/ICGA_Journal#24_2\" title=\"ICGA Journal\">ICGA Journal, Vol. 24, No. 2</a></li>\n<li> <a href=\"/Ren_Wu\" title=\"Ren Wu\">Ren Wu</a>, <a href=\"/Don_Beal\" title=\"Don Beal\">Don Beal</a> (<b>2001</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://ilk.uvt.nl/icga/journal/contents/content24-3.htm#FAST\">Fast, Memory-efficient Retrograde Algorithms</a></i>. <a href=\"/ICGA_Journal#24_3\" title=\"ICGA Journal\">ICGA Journal, Vol. 24, No. 3</a> <sup id=\"cite_ref-18\" class=\"reference\"><a href=\"#cite_note-18\">&#91;18&#93;</a></sup> <sup id=\"cite_ref-19\" class=\"reference\"><a href=\"#cite_note-19\">&#91;19&#93;</a></sup></li>\n<li> <a href=\"/Ren_Wu\" title=\"Ren Wu\">Ren Wu</a>, <a href=\"/Don_Beal\" title=\"Don Beal\">Don Beal</a> (<b>2001</b>). <i>Parallel Retrograde Analysis on Different Architectures</i>. IEEE 10th Conference in High Performance Distributed Computing pp. 356-362, August 2001</li>\n<li> <a href=\"/Haw-ren_Fang\" title=\"Haw-ren Fang\">Haw-ren Fang</a>, <a href=\"/Tsan-sheng_Hsu\" title=\"Tsan-sheng Hsu\">Tsan-sheng Hsu</a>, <a href=\"/Shun-Chin_Hsu\" title=\"Shun-Chin Hsu\">Shun-Chin Hsu</a> (<b>2001</b>). <i>Construction of Chinese Chess Endgame Databases by Retrograde Analysis</i>. Lecture Notes in Computer Science 2063: <a href=\"/CG_2000\" title=\"CG 2000\">CG 2000</a></li>\n<li> <a href=\"/Ren_Wu\" title=\"Ren Wu\">Ren Wu</a>, <a href=\"/Don_Beal\" title=\"Don Beal\">Don Beal</a> (<b>2002</b>). <i>A memory efficient retrograde algorithm and its application to solve Chinese Chess endgames.</i> <a rel=\"nofollow\" class=\"external text\" href=\"http://library.msri.org/books/Book42/\">More Games of No Chance</a> edited by <a href=\"/Richard_J._Nowakowski\" title=\"Richard J. Nowakowski\">Richard J. Nowakowski</a></li>\n<li> <a href=\"/Thomas_Lincke\" title=\"Thomas Lincke\">Thomas Lincke</a> (<b>2002</b>). <i>Exploring the Computational Limits of Large Exhaustive Search Problems</i>. Ph.D thesis, <a href=\"/ETH_Zurich\" title=\"ETH Zurich\">ETH Zurich</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://e-collection.library.ethz.ch/eserv/eth:25905/eth-25905-02.pdf\">pdf</a></li>\n<li> <a href=\"/John_Romein\" title=\"John Romein\">John Romein</a>, <a href=\"/Henri_Bal\" title=\"Henri Bal\">Henri Bal</a> (<b>2003</b>). <i>Solving the Game of Awari using Parallel Retrograde Analysis</i>. IEEE Computer, Vol. 36, No. 10, pp. 26–33</li>\n<li> <a href=\"/index.php?title=Ping-hsun_Wu&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Ping-hsun Wu (page does not exist)\">Ping-hsun Wu</a>, <a href=\"/index.php?title=Ping-Yi_Liu&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Ping-Yi Liu (page does not exist)\">Ping-Yi Liu</a>, <a href=\"/Tsan-sheng_Hsu\" title=\"Tsan-sheng Hsu\">Tsan-sheng Hsu</a> (<b>2004</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/chapter/10.1007/11674399_10\">An External-Memory Retrograde Analysis Algorithm</a></i>. <a href=\"/CG_2004\" title=\"CG 2004\">CG 2004</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2005_...\">2005 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Retrograde_Analysis&amp;action=edit&amp;section=13\" title=\"Edit section: 2005 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Jesper_Torp_Kristensen\" title=\"Jesper Torp Kristensen\">Jesper Torp Kristensen</a> (<b>2005</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://issuu.com/jespertk/docs/master_thesis\">Generation and compression of endgame tables in chess with fast random access using OBDDs</a></i>. Master thesis, supervisor <a href=\"/Mathematician#Miltersen\" title=\"Mathematician\">Peter Bro Miltersen</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Aarhus_University\">Aarhus University</a></li>\n<li> <a href=\"/James_Glenn\" title=\"James Glenn\">James Glenn</a>, <a href=\"/Haw-ren_Fang\" title=\"Haw-ren Fang\">Haw-ren Fang</a>, <a href=\"/Clyde_Kruskal\" title=\"Clyde Kruskal\">Clyde Kruskal</a> (<b>2006</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://link.springer.com/chapter/10.1007/978-3-540-75538-8_13\">A Retrograde Approximation Algorithm for One-Player Can’t Stop</a></i>. <a href=\"/CG_2006\" title=\"CG 2006\">CG 2006</a></li>\n<li> <a href=\"/James_Glenn\" title=\"James Glenn\">James Glenn</a>, <a href=\"/Haw-ren_Fang\" title=\"Haw-ren Fang\">Haw-ren Fang</a>, <a href=\"/Clyde_Kruskal\" title=\"Clyde Kruskal\">Clyde Kruskal</a> (<b>2007</b>). <i>A Retrograde Approximation Algorithm for Two-Player Can't Stop</i>. <a href=\"/CGW_2007\" title=\"CGW 2007\">CGW 2007</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.loyola.edu/~jglenn/Papers/cantstop2.pdf\">pdf</a></li>\n<li> <a href=\"/Haw-ren_Fang\" title=\"Haw-ren Fang\">Haw-ren Fang</a>, <a href=\"/James_Glenn\" title=\"James Glenn\">James Glenn</a>, <a href=\"/Clyde_Kruskal\" title=\"Clyde Kruskal\">Clyde Kruskal</a> (<b>2008</b>). <i>Retrograde approximation algorithms for Jeopardy stochastic games</i>. <a href=\"/ICGA_Journal#31_2\" title=\"ICGA Journal\">ICGA Journal, Vol. 31, No. 2</a></li>\n<li> <a href=\"/James_Glenn\" title=\"James Glenn\">James Glenn</a>, <a href=\"/Haw-ren_Fang\" title=\"Haw-ren Fang\">Haw-ren Fang</a>, <a href=\"/Clyde_Kruskal\" title=\"Clyde Kruskal\">Clyde Kruskal</a> (<b>2008</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://link.springer.com/chapter/10.1007/978-3-540-87608-3_23\">A Retrograde Approximation Algorithm for Multi-player Can’t Stop</a></i>. <a href=\"/CG_2008\" title=\"CG 2008\">CG 2008</a></li>\n<li> <a href=\"/Noam_Elkies\" title=\"Noam Elkies\">Noam D. Elkies</a>, <a href=\"/Mathematician#RPStanley\" title=\"Mathematician\">Richard P. Stanley</a> (<b>2008</b>). <i>Chess and Mathematics</i>. excerpt, 6 Retrograde Analysis, <a rel=\"nofollow\" class=\"external text\" href=\"http://www-math.mit.edu/%7Erstan/chess/spg.pdf\">pdf</a></li>\n<li> <a href=\"/index.php?title=Marko_Malikovi%C4%87&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Marko Maliković (page does not exist)\">Marko Maliković</a> (<b>2008</b>). <i>Developing Heuristics for Solving Retrograde Chess Problems</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://seminar.foi.hr/\">Seminar on Formal Methods and Applications</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Vara%C5%BEdin\">Varaždin</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Croatia\">Croatia</a></li>\n<li> <a href=\"/Dan_Heisman\" title=\"Dan Heisman\">Dan Heisman</a> (<b>2009</b>). <i>Steinitz, Zermelo, and Elkies</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.chesscafe.com/text/skittles358.pdf\">pdf</a> from <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/ChessCafe.com\">ChessCafe.com</a>, on <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wilhelm_Steinitz\">Wilhelm Steinitz</a>, <a href=\"/Ernst_Zermelo\" title=\"Ernst Zermelo\">Ernst Zermelo</a> and <a href=\"/Noam_Elkies\" title=\"Noam Elkies\">Noam Elkies</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Retrograde_Analysis&amp;action=edit&amp;section=14\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Victor_Zakharov\" title=\"Victor Zakharov\">Victor Zakharov</a>, <a href=\"/Vladimir_Makhnychev\" title=\"Vladimir Makhnychev\">Vladimir Makhnychev</a> (<b>2010</b>). <i>A Retroanalysis Algorithm for Supercomputer Systems on the Example of Playing Chess</i>. Software Systems and Tools, Vol. 11 (Russian)</li>\n<li> <a href=\"/index.php?title=Ping-hsun_Wu&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Ping-hsun Wu (page does not exist)\">Ping-hsun Wu</a>, <a href=\"/index.php?title=Ping-yi_Liu&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Ping-yi Liu (page does not exist)\">Ping-yi Liu</a>, <a href=\"/Tsan-sheng_Hsu\" title=\"Tsan-sheng Hsu\">Tsan-sheng Hsu</a> (<b>2010</b>). <i>An External-memory Retrograde Analysis Algorithm</i>. slides as <a rel=\"nofollow\" class=\"external text\" href=\"http://www.iis.sinica.edu.tw/~tshsu/tcg2010/slides/slide12.pdf\">pdf</a></li>\n<li> <a href=\"/Paolo_Ciancarini\" title=\"Paolo Ciancarini\">Paolo Ciancarini</a>, <a href=\"/index.php?title=Gian_Piero_Favini&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Gian Piero Favini (page does not exist)\">Gian Piero Favini</a> (<b>2010</b>). <i>Retrograde analysis of Kriegspiel endgames</i>. IEEE Conf. on Computational Intelligence and Games, Copenhagen.</li>\n<li> <a href=\"/index.php?title=Marko_Malikovi%C4%87&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Marko Maliković (page does not exist)\">Marko Maliković</a>, <a href=\"/index.php?title=Mirko_%C4%8Cubrilo&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Mirko Čubrilo (page does not exist)\">Mirko Čubrilo</a> (<b>2010</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://bib.irb.hr/prikazi-rad?&amp;rad=445958\">What Were the Last Moves?</a></i> International Review on Computers and Software</li>\n<li> <a href=\"/index.php?title=Marko_Malikovi%C4%87&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Marko Maliković (page does not exist)\">Marko Maliković</a>, <a href=\"/index.php?title=Mirko_%C4%8Cubrilo&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Mirko Čubrilo (page does not exist)\">Mirko Čubrilo</a> (<b>2010</b>). <i>Solving Shortest Proof Games by Generating Trajectories using Coq Proof Management System</i>. Proceedings of 21st Central European Conference on Information and Intelligent Systems, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Vara%C5%BEdin\">Varaždin</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Croatia\">Croatia</a> <sup id=\"cite_ref-20\" class=\"reference\"><a href=\"#cite_note-20\">&#91;20&#93;</a></sup></li>\n<li> <a href=\"/index.php?title=Marko_Malikovi%C4%87&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Marko Maliković (page does not exist)\">Marko Maliković</a> (<b>2011</b>). <i>Automated Reasoning about Retrograde Chess Problems using Coq</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://argo.matf.bg.ac.rs/events/2011/fatpa2011/fatpa2011.html\">Fourth Workshop on Formal and Automated Theorem Proving and Applications</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Belgrade\">Belgrade</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Serbia\">Serbia</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://argo.matf.bg.ac.rs/events/2011/fatpa2011/slides/MarkoMalikovic.pdf\">slides as pdf</a></li>\n<li> <a href=\"/Jan_van_Rijn\" title=\"Jan van Rijn\">Jan van Rijn</a>, <a href=\"/index.php?title=Jonathan_K._Vis&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Jonathan K. Vis (page does not exist)\">Jonathan K. Vis</a> (<b>2013</b>). <i>Complexity and Retrograde Analysis of the Game Dou Shou Qi</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://bnaic2013.tudelft.nl/\">BNAIC 2013</a> <sup id=\"cite_ref-21\" class=\"reference\"><a href=\"#cite_note-21\">&#91;21&#93;</a></sup></li>\n<li> <a href=\"/Jan_van_Rijn\" title=\"Jan van Rijn\">Jan van Rijn</a>, <a href=\"/index.php?title=Jonathan_K._Vis&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Jonathan K. Vis (page does not exist)\">Jonathan K. Vis</a> (<b>2014</b>). <i>Endgame Analysis of Dou Shou Qi</i>. <a href=\"/ICGA_Journal#37_2\" title=\"ICGA Journal\">ICGA Journal, Vol. 37, No. 2</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.liacs.nl/~jvrijn/pdf/pub/icga2014a.pdf\">pdf</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2015_...\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Retrograde_Analysis&amp;action=edit&amp;section=15\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/index.php?title=Michael_Hartisch&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Michael Hartisch (page does not exist)\">Michael Hartisch</a> (<b>2015</b>). <i>Impact of Rounding during Retrograde Analysis for a Game with Chance Nodes: Karl’s Race as a Test Case</i>. <a href=\"/ICGA_Journal#38_2\" title=\"ICGA Journal\">ICGA Journal, Vol. 38, No. 2</a>&#160;» <a href=\"/Games\" title=\"Games\">Games</a>, <a href=\"/EinStein_w%C3%BCrfelt_nicht!\" title=\"EinStein würfelt nicht!\">EinStein würfelt nicht!</a> <sup id=\"cite_ref-22\" class=\"reference\"><a href=\"#cite_note-22\">&#91;22&#93;</a></sup></li>\n<li> <a href=\"/index.php?title=Michael_Hartisch&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Michael Hartisch (page does not exist)\">Michael Hartisch</a>, <a href=\"/Ingo_Alth%C3%B6fer\" title=\"Ingo Althöfer\">Ingo Althöfer</a> (<b>2015</b>). <i>Optimal Robot Play in Certain Chess Endgame Situations</i>. <a href=\"/ICGA_Journal#38_3\" title=\"ICGA Journal\">ICGA Journal, Vol. 38, No. 3</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Retrograde_Analysis&amp;action=edit&amp;section=16\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Guy_Haworth\" title=\"Guy Haworth\">Guy Haworth</a> (<b>2020</b>). <i>CEN: Thomas Ströhlein’s Endgame Tables, a 50th Anniversary</i>. <a href=\"/ICGA_Journal#42_23\" title=\"ICGA Journal\">ICGA Journal, Vol. 42, Nos. 2-3</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Retrograde_Analysis&amp;action=edit&amp;section=17\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1995_...\">1995 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Retrograde_Analysis&amp;action=edit&amp;section=18\" title=\"Edit section: 1995 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/b42e13fffe70a74e\">retrograde analysis</a> by  Stefan Schroedl, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, August 15, 1995</li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_..._2\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Retrograde_Analysis&amp;action=edit&amp;section=19\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/c2509d7520be9ba7\">reverse engineering</a> by  NoKetch, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, June 16, 2000</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=162252\">EGTB: Better algorithm</a> by <a href=\"/Urban_Koistinen\" title=\"Urban Koistinen\">Urban Koistinen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 07, 2001 <sup id=\"cite_ref-23\" class=\"reference\"><a href=\"#cite_note-23\">&#91;23&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/msg/392bcd5797808c0e\">Re: How endgame tablebases work</a> by <a href=\"/Bruce_Moreland\" title=\"Bruce Moreland\">Bruce Moreland</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, July 19, 2001</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=200335\">Generating egtbs ICGAJ</a> by <a href=\"/Tony_van_Roon-Werten\" title=\"Tony van Roon-Werten\">Tony Werten</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 04, 2001 <sup id=\"cite_ref-24\" class=\"reference\"><a href=\"#cite_note-24\">&#91;24&#93;</a></sup> <sup id=\"cite_ref-25\" class=\"reference\"><a href=\"#cite_note-25\">&#91;25&#93;</a></sup></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=200376\">Wu/Beal predates Koistinen</a> by <a href=\"/Guy_Haworth\" title=\"Guy Haworth\">Guy Haworth</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 04, 2001</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.abstract/browse_frm/thread/48cca090ce094620\">Question about retrograde analysis algorithm for endgame databases</a> by mathpolymath, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rec.games.abstract</a>, April 24, 2002 <sup id=\"cite_ref-26\" class=\"reference\"><a href=\"#cite_note-26\">&#91;26&#93;</a></sup></li></ul>\n<h2><span class=\"mw-headline\" id=\"2005_..._2\">2005 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Retrograde_Analysis&amp;action=edit&amp;section=20\" title=\"Edit section: 2005 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=6302&amp;p=29956\">Wu / Beal retrograde analisys algorithm</a> by <a href=\"/Alvaro_Cardoso\" title=\"Alvaro Cardoso\">Alvaro Jose Povoa Cardoso</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, March 10, 2007 </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=23214\">Could this program be written?</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 24, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=24713\">Retrograde analysis</a> by Geolm, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 04, 2008</li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_..._2\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Retrograde_Analysis&amp;action=edit&amp;section=21\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=5&amp;t=779\">Retrograde tablebase methods</a> by <a href=\"/Mark_Watkins\" title=\"Mark Watkins\">BB+</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">OpenChess Forum</a>, November 26, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=54796\">Reverse move generation</a> by Kostas Oreopoulos, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 30, 2014&#160;» <a href=\"/Move_Generation#Reverse\" title=\"Move Generation\">Un-Move Generation</a></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=54796&amp;start=6\">Re: Reverse move generation</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 30, 2014</dd></dl>\n<h2><span class=\"mw-headline\" id=\"2015_..._2\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Retrograde_Analysis&amp;action=edit&amp;section=22\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63515\">Position Legally Reachable?</a> by <a href=\"/Mark_Lefler\" title=\"Mark Lefler\">Mark Lefler</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 21, 2017</li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_..._2\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Retrograde_Analysis&amp;action=edit&amp;section=23\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=73332\">Retrograde analysis - TBs move sequences to checkmate</a> by Hedinn Steingrimsson, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 12, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=77685\">On the number of chess positions</a> by <a href=\"/John_Tromp\" title=\"John Tromp\">John Tromp</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 09, 2021</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=77685&amp;start=34\">Re: On the number of chess positions</a> by <a href=\"/John_Tromp\" title=\"John Tromp\">John Tromp</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 02, 2022</dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=77685&amp;start=42\">Re: On the number of chess positions</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 03, 2022&#160;» <a href=\"/Chess_Position\" title=\"Chess Position\">Chess Position</a></dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=78913\">Fast reverse move generation</a> by koedem, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 18, 2021&#160;» <a href=\"/Move_Generation#Reverse\" title=\"Move Generation\">Un-Move Generation</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Retrograde_Analysis&amp;action=edit&amp;section=24\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Retrograde_Analysis\">Retrograde Analysis</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Retrograde_Analysis&amp;action=edit&amp;section=25\" title=\"Edit section: Retrograde Analysis\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Retrograde_analysis\">Retrograde analysis from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://home.hccnet.nl/h.g.muller/EGT7/retro.html\">Leapfrog: Retrograde Analysis</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://home.hccnet.nl/h.g.muller/EGT7/7-men.html\">Leapfrog tablebase generator</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.abc.se/~m10051/eg.txt\">Computing endgames with few men</a> by <a href=\"/Urban_Koistinen\" title=\"Urban Koistinen\">Urban Koistinen</a> <sup id=\"cite_ref-27\" class=\"reference\"><a href=\"#cite_note-27\">&#91;27&#93;</a></sup> <sup id=\"cite_ref-28\" class=\"reference\"><a href=\"#cite_note-28\">&#91;28&#93;</a></sup> <sup id=\"cite_ref-29\" class=\"reference\"><a href=\"#cite_note-29\">&#91;29&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.janko.at/Retros/index.htm\">The Retrograde Analysis Corner</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://jewishchesshistory.blogspot.de/2008/01/prime-ministers-and-retrograde-analysis.html\">Jewish Chess History: Prime Ministers and Retrograde Analysis</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://joekisenwether.wordpress.com/non-chess-retrograde-analysis/\">Non-Chess Retrograde Analysis</a> «&#160;<a rel=\"nofollow\" class=\"external text\" href=\"http://joekisenwether.wordpress.com/\">Joe Kisenwether's Blog</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://levelup.gitconnected.com/build-your-own-chess-endgame-monster-a3fb23bb3ec1\">Build Your Own Chess Endgame Monster - Level Up Coding</a> by <a href=\"/Don_Cross\" title=\"Don Cross\">Don Cross</a>, February 17, 2020</li></ul>\n<h2><span class=\"mw-headline\" id=\"GitHub\">GitHub</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Retrograde_Analysis&amp;action=edit&amp;section=26\" title=\"Edit section: GitHub\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/tromp/ChessPositionRanking\">GitHub - tromp/ChessPositionRanking: Software suite for ranking chess positions and accurately estimating the number of legal chess positions</a> by <a href=\"/John_Tromp\" title=\"John Tromp\">John Tromp</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Programs\">Programs</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Retrograde_Analysis&amp;action=edit&amp;section=27\" title=\"Edit section: Programs\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://lestourtereaux.free.fr/euclide/\">Euclide 1.11 - Home</a> by <a href=\"/index.php?title=%C3%89tienne_Dupuis&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Étienne Dupuis (page does not exist)\">Étienne Dupuis</a>&#160;» <a href=\"/index.php?title=Euclide&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Euclide (page does not exist)\">Euclide</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.freezerchess.com/\">Freezerchess.com - Endgame Analysis beyond Databases</a> by <a href=\"/Eiko_Bleicher\" title=\"Eiko Bleicher\">Eiko Bleicher</a>&#160;» <a href=\"/Freezer\" title=\"Freezer\">Freezer</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://natch.free.fr/Natch.html\">Natch - Checking proof games</a> by <a href=\"/index.php?title=Pascal_Wassong&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Pascal Wassong (page does not exist)\">Pascal Wassong</a>&#160;» <a href=\"/index.php?title=Natch&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Natch (page does not exist)\">Natch</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://xenon.stanford.edu/~hwatheod/Retractor/\">Retractor</a> a program for Retrograde Analysis chess problems by <a href=\"/index.php?title=Chad_Whipkey&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Chad Whipkey (page does not exist)\">Chad Whipkey</a> and <a href=\"/index.php?title=Theodore_Hwa&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Theodore Hwa (page does not exist)\">Theodore Hwa</a>&#160;» <a href=\"/index.php?title=Retractor&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Retractor (page does not exist)\">Retractor</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Induction\">Induction</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Retrograde_Analysis&amp;action=edit&amp;section=28\" title=\"Edit section: Induction\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Inductive_reasoning\">Inductive reasoning from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Backward_induction\">Backward induction from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Backward_chaining\">Backward chaining from Wikipedia</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Retrograde\">Retrograde</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Retrograde_Analysis&amp;action=edit&amp;section=29\" title=\"Edit section: Retrograde\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Retrograde\">Retrograde (disambiguation) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Retrograde_motion\">Retrograde motion from Wikipedia</a></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Apparent_retrograde_motion\">Apparent retrograde motion from Wikipedia</a></dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Retrograde_%28music%29\">Retrograde (music) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.allaboutjazz.com/musicians/darryl-reeves\">Darryl Reeves</a> - The Mercury Sessions - Retrograde, July 22, 2011 - Churchill Grounds - <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Atlanta\">Atlanta, GA</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> Darryl Reeves, Kenny Banks, Joel Powell, Kenton \"Boom\" Bostick</dd>\n<dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/6cRHUd5iCtM?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h2><span class=\"mw-headline\" id=\"Analysis\">Analysis</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Retrograde_Analysis&amp;action=edit&amp;section=30\" title=\"Edit section: Analysis\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Analysis\">Analysis from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Analysis_%28disambiguation%29\">Analysis (disambiguation) from Wikipedia</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Retrograde_Analysis&amp;action=edit&amp;section=31\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap mw-references-columns\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.flickr.com/photos/smurpiknik/5149247538/in/photostream\">Ретроградный анализ. / Retrograde analysis</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.flickr.com/photos/smurpiknik/with/5149247538/#photo_5149247538\">Flickr: Fotostream by Segaboy</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a href=\"/Lewis_Stiller\" title=\"Lewis Stiller\">Lewis Stiller</a> (<b>1996</b>). <i>Multilinear Algebra and Chess Endgames</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://library.msri.org/books/Book29/index.html\">Games of No Chance</a> edited by <a href=\"/Richard_J._Nowakowski\" title=\"Richard J. Nowakowski\">Richard J. Nowakowski</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.msri.org/publications/books/Book29/files/stiller.pdf\">pdf</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a href=\"/Ernst_Zermelo\" title=\"Ernst Zermelo\">Ernst Zermelo</a> (<b>1913</b>). <i>Über eine Anwendung der Mengenlehre auf die Theorie des Schachspiels</i> Proc. Fifth Congress Mathematicians, (Cambridge 1912), Cambridge Univ. Press 1913, 501–504. Translation: <i>On an Application of Set Theory to the Theory of the Game of Chess</i></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a href=\"/John_von_Neumann\" title=\"John von Neumann\">John von Neumann</a> and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Oskar_Morgenstern\">Oskar Morgenstern</a> (<b>1944</b>). <i>Theory of Games and Economic Behavior</i>. Princeton University Press, Princeton, NJ</span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a href=\"/Richard_E._Bellman\" title=\"Richard E. Bellman\">Richard E. Bellman</a> (<b>1965</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.rand.org/pubs/papers/P3013/\">On the Application of Dynamic Programming to the Determination of Optimal Play in Chess and Checkers</a>.</i> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Proceedings_of_the_National_Academy_of_Sciences_of_the_United_States_of_America\">PNAS</a></span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a href=\"/Richard_E._Bellman\" title=\"Richard E. Bellman\">Richard E. Bellman</a> (<b>1954</b>). <i>On a new Iterative Algorithm for Finding the Solutions of Games and Linear Programming Problems</i>. Technical Report P-473, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/RAND_Corporation\">RAND Corporation</a>,  <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Santa_Monica,_California\">Santa Monica, CA</a></span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a href=\"/Richard_E._Bellman\" title=\"Richard E. Bellman\">Richard E. Bellman</a> (<b>1957</b>). <i>The Theory of Games</i>. Technical Report P-1062, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/RAND_Corporation\">RAND Corporation</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Santa_Monica,_California\">Santa Monica, CA</a></span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\"><a href=\"/index.php?title=Rob_Lake&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Rob Lake (page does not exist)\">Robert Lake</a>, <a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a>, <a href=\"/Paul_Lu\" title=\"Paul Lu\">Paul Lu</a> (<b>1994</b>). <i>Solving Large Retrograde Analysis Problems Using a Network of Workstations</i>. <a href=\"/Advances_in_Computer_Chess_7\" title=\"Advances in Computer Chess 7\">Advances in Computer Chess 7</a></span>\n</li>\n<li id=\"cite_note-9\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-9\">↑</a></span> <span class=\"reference-text\"><a href=\"/Ralph_Gasser\" title=\"Ralph Gasser\">Ralph Gasser</a> (<b>1991</b>). <i>Applying Retrograde Analysis to Nine Men’s Morris.</i> <a href=\"/2nd_Computer_Olympiad#Workshop\" title=\"2nd Computer Olympiad\">Heuristic Programming in AI 2</a></span>\n</li>\n<li id=\"cite_note-10\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-10\">↑</a></span> <span class=\"reference-text\"><a href=\"/John_Romein\" title=\"John Romein\">John Romein</a>, <a href=\"/Henri_Bal\" title=\"Henri Bal\">Henri Bal</a> (<b>2003</b>). <i>Solving the Game of Awari using Parallel Retrograde Analysis</i>. IEEE Computer, Vol. 36, No. 10</span>\n</li>\n<li id=\"cite_note-11\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-11\">↑</a></span> <span class=\"reference-text\"><a href=\"/Thomas_Str%C3%B6hlein\" title=\"Thomas Ströhlein\">Thomas Ströhlein</a> (<b>1970</b>). <i>Untersuchungen über kombinatorische Spiele.</i> Ph.D. Thesis, <a href=\"/Technical_University_of_Munich\" title=\"Technical University of Munich\">Technical University of Munich</a> (German)</span>\n</li>\n<li id=\"cite_note-12\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-12\">↑</a></span> <span class=\"reference-text\"><a href=\"/Ken_Thompson\" title=\"Ken Thompson\">Ken Thompson</a> (<b>1986</b>). <i>Retrograde Analysis of Certain Endgames</i>. <a href=\"/ICGA_Journal#9_3\" title=\"ICGA Journal\">ICCA Journal, Vol. 9, No. 3</a></span>\n</li>\n<li id=\"cite_note-13\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-13\">↑</a></span> <span class=\"reference-text\">dubbed \"grandfather\" method, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=5&amp;t=779\">Retrograde tablebase methods</a> by <a href=\"/Mark_Watkins\" title=\"Mark Watkins\">BB+</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">OpenChess Forum</a>, November 26, 2010</span>\n</li>\n<li id=\"cite_note-14\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-14\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/MyFmpXxqccg/Z6WgNuoF-hcJ\">Smullyan Problem in Sherlock Holmes book</a> by Christopher Heckman, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, January 18, 2013</span>\n</li>\n<li id=\"cite_note-15\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-15\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://de.wikipedia.org/wiki/Schachkomposition#Retrospektive_.28Retroanalyse.29\">Retrospektive (Retroanalyse)</a> from German Wikipedia,  <a href=\"/Mathematician#Smullyan\" title=\"Mathematician\">Raymond Smullyan</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/The_Guardian\">Manchester Guardian</a>, 1957</span>\n</li>\n<li id=\"cite_note-16\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-16\">↑</a></span> <span class=\"reference-text\"><a href=\"/Jaap_van_den_Herik\" title=\"Jaap van den Herik\">Jaap van den Herik</a> (<b>1981</b>). <i>Progress in Computer Chess.</i> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.aisb.org.uk/aisbq/qarchive.shtml\">AISB Quarterly</a>, reprinted in <a href=\"/ICGA_Journal#4_3\" title=\"ICGA Journal\">ICCA Newsletter, Vol. 4. No. 3</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://arno.uvt.nl/show.cgi?fid=106747\">pdf</a></span>\n</li>\n<li id=\"cite_note-17\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-17\">↑</a></span> <span class=\"reference-text\">referred in <a href=\"/Jesper_Torp_Kristensen\" title=\"Jesper Torp Kristensen\">Jesper Torp Kristensen</a> (<b>2005</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://issuu.com/jespertk/docs/master_thesis\">Generation and compression of endgame tables in chess with fast random access using OBDDs</a></i>. Master thesis, supervisor <a href=\"/Mathematician#Miltersen\" title=\"Mathematician\">Peter Bro Miltersen</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Aarhus_University\">Aarhus University</a></span>\n</li>\n<li id=\"cite_note-18\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-18\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=200335\">Generating egtbs ICGAJ</a> by <a href=\"/Tony_van_Roon-Werten\" title=\"Tony van Roon-Werten\">Tony Werten</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 04, 2001, with reference to <a rel=\"nofollow\" class=\"external text\" href=\"http://www.abc.se/~m10051/eg.txt\">Computing endgames with few men</a> by <a href=\"/Urban_Koistinen\" title=\"Urban Koistinen\">Urban Koistinen</a></span>\n</li>\n<li id=\"cite_note-19\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-19\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=6302&amp;p=29956\">Wu / Beal retrograde analisys algorithm</a> by <a href=\"/Alvaro_Cardoso\" title=\"Alvaro Cardoso\">Alvaro Jose Povoa Cardoso</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, March 10, 2007 </span>\n</li>\n<li id=\"cite_note-20\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-20\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Coq\">Coq from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-21\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-21\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Jungle_%28board_game%29\">Jungle (board game) from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-22\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-22\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.althofer.de/karls-race.html\">Karl's Race</a> A Game on <a href=\"/index.php?title=Karl_Scherer&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Karl Scherer (page does not exist)\">Karl Scherer's</a> Alternating Tiling by <a href=\"/Ingo_Alth%C3%B6fer\" title=\"Ingo Althöfer\">Ingo Althöfer</a>, 2006</span>\n</li>\n<li id=\"cite_note-23\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-23\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.abc.se/~m10051/eg.txt\">Computing endgames with few men</a> by <a href=\"/Urban_Koistinen\" title=\"Urban Koistinen\">Urban Koistinen</a></span>\n</li>\n<li id=\"cite_note-24\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-24\">↑</a></span> <span class=\"reference-text\"><a href=\"/Ren_Wu\" title=\"Ren Wu\">Ren Wu</a>, <a href=\"/Don_Beal\" title=\"Don Beal\">Don Beal</a> (<b>2001</b>). <i>Fast, Memory-efficient Retrograde Algorithms</i>. <a href=\"/ICGA_Journal#24_3\" title=\"ICGA Journal\">ICGA Journal, Vol. 24, No. 3</a></span>\n</li>\n<li id=\"cite_note-25\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-25\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.abc.se/~m10051/eg.txt\">Computing endgames with few men</a> by <a href=\"/Urban_Koistinen\" title=\"Urban Koistinen\">Urban Koistinen</a></span>\n</li>\n<li id=\"cite_note-26\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-26\">↑</a></span> <span class=\"reference-text\"><a href=\"/Ren_Wu\" title=\"Ren Wu\">Ren Wu</a>, <a href=\"/Don_Beal\" title=\"Don Beal\">Don Beal</a> (<b>2001</b>). <i>Fast, Memory-efficient Retrograde Algorithms</i>. <a href=\"/ICGA_Journal#24_3\" title=\"ICGA Journal\">ICGA Journal, Vol. 24, No. 3</a></span>\n</li>\n<li id=\"cite_note-27\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-27\">↑</a></span> <span class=\"reference-text\"> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=162252\">EGTB: Better algorithm</a> by <a href=\"/Urban_Koistinen\" title=\"Urban Koistinen\">Urban Koistinen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 07, 2001</span>\n</li>\n<li id=\"cite_note-28\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-28\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=200335\">Generating egtbs ICGAJ</a> by <a href=\"/Tony_van_Roon-Werten\" title=\"Tony van Roon-Werten\">Tony Werten</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 04, 2001</span>\n</li>\n<li id=\"cite_note-29\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-29\">↑</a></span> <span class=\"reference-text\"><a href=\"/Ren_Wu\" title=\"Ren Wu\">Ren Wu</a>, <a href=\"/Don_Beal\" title=\"Don Beal\">Don Beal</a> (<b>2001</b>). <i>Fast, Memory-efficient Retrograde Algorithms</i>. <a href=\"/ICGA_Journal#24_3\" title=\"ICGA Journal\">ICGA Journal, Vol. 24, No. 3</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Knowledge\" title=\"Knowledge\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301053110\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.058 seconds\nReal time usage: 0.061 seconds\nPreprocessor visited node count: 559/1000000\nPreprocessor generated node count: 1148/1000000\nPost‐expand include size: 27/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1323-0!canonical and timestamp 20260301053110 and revision id 26409\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Music"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "2nd Computer Olympiad"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "6th Computer Olympiad"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aaron L. Futer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 3"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 6"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 7"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Algorithms"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alvaro Cardoso"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Array"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Awari"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bruce Moreland"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bruno Bouzy"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CGW 2007"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CG 1998"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CG 2000"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CG 2004"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CG 2006"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CG 2008"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Check"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Checkers"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Checkmate"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Position"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Problems, Compositions and Studies"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Christian Posthoff"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Christoph Wirth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Clyde Kruskal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Compendium"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Corresponding Squares"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dan Heisman"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David Forthoffer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Don Beal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Don Cross"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Donald Michie"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Draw"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dynamic Programming"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ETH Zurich"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Edward Komissarchik"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Eiko Bleicher"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "EinStein würfelt nicht!"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Endgame Bitbases"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Endgame Tablebases"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ernst Zermelo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Freezer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Games"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Guy Haworth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Harm Geert Muller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Haw-ren Fang"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Henri Bal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hiroyuki Iida"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA Journal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ingo Althöfer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Initial Position"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iteration"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jaap van den Herik"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "James Glenn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jan van Rijn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jean Hayes Michie"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jesper Torp Kristensen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jin Yoshimura"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "John Romein"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "John Tromp"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "John von Neumann"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jonathan Schaeffer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jos Uiterwijk"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jürg Nievergelt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ken Thompson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Knowledge"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lars Rasmussen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Legal Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lewis Stiller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ludwig Zagler"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "László Lindner"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mark Lefler"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mark Watkins"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mathematician"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Max Bramer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michael Schlosser"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Generation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Moves"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Nine Men’s Morris"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Noam Elkies"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Oracle"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Paolo Ciancarini"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Paul Lu"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter Österlund"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ralph Gasser"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Raymond Smullyan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ren Wu"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Richard E. Bellman"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Richard J. Nowakowski"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Shun-Chin Hsu"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sito Dekker"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Steven Edwards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Technical University of Munich"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Thomas Lincke"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Thomas Ströhlein"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tony van Roon-Werten"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tsan-sheng Hsu"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Urban Koistinen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Victor Allis"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Victor Zakharov"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vladimir Arlazarov"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vladimir Makhnychev"
+      },
+      {
+        "ns": 0,
+        "*": "Rob Lake"
+      },
+      {
+        "ns": 0,
+        "*": "Karl Scherer"
+      },
+      {
+        "ns": 0,
+        "*": "Vladimir E. Alekseev"
+      },
+      {
+        "ns": 0,
+        "*": "Dietmar Lippold"
+      },
+      {
+        "ns": 0,
+        "*": "Kazuro Morita"
+      },
+      {
+        "ns": 0,
+        "*": "Roel van der Goot"
+      },
+      {
+        "ns": 0,
+        "*": "Ping-hsun Wu"
+      },
+      {
+        "ns": 0,
+        "*": "Ping-Yi Liu"
+      },
+      {
+        "ns": 0,
+        "*": "Marko Maliković"
+      },
+      {
+        "ns": 0,
+        "*": "Ping-yi Liu"
+      },
+      {
+        "ns": 0,
+        "*": "Gian Piero Favini"
+      },
+      {
+        "ns": 0,
+        "*": "Mirko Čubrilo"
+      },
+      {
+        "ns": 0,
+        "*": "Jonathan K. Vis"
+      },
+      {
+        "ns": 0,
+        "*": "Michael Hartisch"
+      },
+      {
+        "ns": 0,
+        "*": "Étienne Dupuis"
+      },
+      {
+        "ns": 0,
+        "*": "Euclide"
+      },
+      {
+        "ns": 0,
+        "*": "Pascal Wassong"
+      },
+      {
+        "ns": 0,
+        "*": "Natch"
+      },
+      {
+        "ns": 0,
+        "*": "Chad Whipkey"
+      },
+      {
+        "ns": 0,
+        "*": "Theodore Hwa"
+      },
+      {
+        "ns": 0,
+        "*": "Retractor"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Problem"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "History",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Retrograde_Analysis",
+        "byteoffset": 1184,
+        "anchor": "History"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Algorithm",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Retrograde_Analysis",
+        "byteoffset": 5150,
+        "anchor": "Algorithm"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Retrograde_Analysis",
+        "byteoffset": 9102,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Selected Publications",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Retrograde_Analysis",
+        "byteoffset": 9426,
+        "anchor": "Selected_Publications"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1910 ...",
+        "number": "4.1",
+        "index": "5",
+        "fromtitle": "Retrograde_Analysis",
+        "byteoffset": 9450,
+        "anchor": "1910_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1920 ...",
+        "number": "4.2",
+        "index": "6",
+        "fromtitle": "Retrograde_Analysis",
+        "byteoffset": 9747,
+        "anchor": "1920_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1940 ...",
+        "number": "4.3",
+        "index": "7",
+        "fromtitle": "Retrograde_Analysis",
+        "byteoffset": 10189,
+        "anchor": "1940_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1960 ...",
+        "number": "4.4",
+        "index": "8",
+        "fromtitle": "Retrograde_Analysis",
+        "byteoffset": 10393,
+        "anchor": "1960_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1970 ...",
+        "number": "4.5",
+        "index": "9",
+        "fromtitle": "Retrograde_Analysis",
+        "byteoffset": 11050,
+        "anchor": "1970_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1980 ...",
+        "number": "4.6",
+        "index": "10",
+        "fromtitle": "Retrograde_Analysis",
+        "byteoffset": 13588,
+        "anchor": "1980_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1990 ...",
+        "number": "4.7",
+        "index": "11",
+        "fromtitle": "Retrograde_Analysis",
+        "byteoffset": 15940,
+        "anchor": "1990_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "4.8",
+        "index": "12",
+        "fromtitle": "Retrograde_Analysis",
+        "byteoffset": 18454,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2005 ...",
+        "number": "4.9",
+        "index": "13",
+        "fromtitle": "Retrograde_Analysis",
+        "byteoffset": 21056,
+        "anchor": "2005_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "4.10",
+        "index": "14",
+        "fromtitle": "Retrograde_Analysis",
+        "byteoffset": 23004,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "4.11",
+        "index": "15",
+        "fromtitle": "Retrograde_Analysis",
+        "byteoffset": 25063,
+        "anchor": "2015_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "4.12",
+        "index": "16",
+        "fromtitle": "Retrograde_Analysis",
+        "byteoffset": 25632,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "5",
+        "index": "17",
+        "fromtitle": "Retrograde_Analysis",
+        "byteoffset": 25797,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1995 ...",
+        "number": "5.1",
+        "index": "18",
+        "fromtitle": "Retrograde_Analysis",
+        "byteoffset": 25811,
+        "anchor": "1995_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "5.2",
+        "index": "19",
+        "fromtitle": "Retrograde_Analysis",
+        "byteoffset": 26008,
+        "anchor": "2000_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2005 ...",
+        "number": "5.3",
+        "index": "20",
+        "fromtitle": "Retrograde_Analysis",
+        "byteoffset": 27507,
+        "anchor": "2005_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "5.4",
+        "index": "21",
+        "fromtitle": "Retrograde_Analysis",
+        "byteoffset": 27988,
+        "anchor": "2010_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "5.5",
+        "index": "22",
+        "fromtitle": "Retrograde_Analysis",
+        "byteoffset": 28495,
+        "anchor": "2015_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "5.6",
+        "index": "23",
+        "fromtitle": "Retrograde_Analysis",
+        "byteoffset": 28637,
+        "anchor": "2020_..._2"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "6",
+        "index": "24",
+        "fromtitle": "Retrograde_Analysis",
+        "byteoffset": 29462,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Retrograde Analysis",
+        "number": "6.1",
+        "index": "25",
+        "fromtitle": "Retrograde_Analysis",
+        "byteoffset": 29479,
+        "anchor": "Retrograde_Analysis"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "GitHub",
+        "number": "6.2",
+        "index": "26",
+        "fromtitle": "Retrograde_Analysis",
+        "byteoffset": 30887,
+        "anchor": "GitHub"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Programs",
+        "number": "6.3",
+        "index": "27",
+        "fromtitle": "Retrograde_Analysis",
+        "byteoffset": 31108,
+        "anchor": "Programs"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Induction",
+        "number": "6.4",
+        "index": "28",
+        "fromtitle": "Retrograde_Analysis",
+        "byteoffset": 31608,
+        "anchor": "Induction"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Retrograde",
+        "number": "6.5",
+        "index": "29",
+        "fromtitle": "Retrograde_Analysis",
+        "byteoffset": 31883,
+        "anchor": "Retrograde"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Analysis",
+        "number": "6.6",
+        "index": "30",
+        "fromtitle": "Retrograde_Analysis",
+        "byteoffset": 32667,
+        "anchor": "Analysis"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "7",
+        "index": "31",
+        "fromtitle": "Retrograde_Analysis",
+        "byteoffset": 32853,
+        "anchor": "References"
+      }
+    ]
+  }
+}

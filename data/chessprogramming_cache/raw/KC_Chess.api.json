@@ -1,0 +1,204 @@
+{
+  "parse": {
+    "title": "KC Chess",
+    "pageid": 7207,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Engines\" title=\"Engines\">Engines</a> * KC Chess</b>\n</p><p><b>KC Chess</b>,<br />\na chess program written by <a href=\"/R._Kevin_Phillips\" title=\"R. Kevin Phillips\">R. Kevin Phillips</a> and <a href=\"/Craig_S._Bruce\" title=\"Craig S. Bruce\">Craig S. Bruce</a> in 1990 for their undergraduate final project at the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/University_of_New_Brunswick\">University of New Brunswick</a> \n<sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup>. KC Chess is written in <a href=\"/Pascal#TurboPascal\" title=\"Pascal\">Turbo Pascal</a> to run under <a href=\"/MS-DOS\" title=\"MS-DOS\">MS-DOS</a> <a href=\"/IBM_PC\" title=\"IBM PC\">computers</a>. It has a <a href=\"/Mailbox\" title=\"Mailbox\">Mailbox</a> board representation, its <a href=\"/Search\" title=\"Search\">search</a> its based on static evaluation of <a href=\"/Moves\" title=\"Moves\">move</a> <a href=\"/Score\" title=\"Score\">score</a> differences rather than positions and passes a <a href=\"/Bound\" title=\"Bound\">bound</a> for backward pruning, missing the <a href=\"/Beta-Cutoff\" title=\"Beta-Cutoff\">deep cutoffs</a> of <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">alpha-beta</a>. There was no <a href=\"/Iterative_Deepening\" title=\"Iterative Deepening\">iterative deepening</a> nor <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">quiescence search</a>, MaxDepth aka level of play is preset at initialization time somehow based on the expected time to use. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Pseudo_Code\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Pseudo Code</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Summary\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Summary</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#See_also\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Forum Posts</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#External_Links\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#References\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Pseudo_Code\">Pseudo Code</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=KC_Chess&amp;action=edit&amp;section=1\" title=\"Edit section: Pseudo Code\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Source code and report of the program with pseudo code are available from Craig Bruce's sites <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>\n</p>\n<pre>\nCutoffSearch (Player, Depth, CutoffValue);\n    If Depth = 0 Then\n        return (0);\n    Else\n        BestScore&#160;:= -infinity;\n        Generate the move list for Player as per current board setup;\n        For each legal move in the move list do\n            Make the current move and get MoveScore;\n            SubTreeCutoffValue&#160;:= MoveScore - BestScore;\n            Score&#160;:= MoveScore - CutoffSearch (enemy of Player, Depth - 1,\n                                               SubTreeCutoffValue);\n            UnMake the current move;\n            If Score &gt; BestScore then BestScore&#160;:= Score;\n            If BestScore &gt;= CutoffValue then exit the For loop;\n        End For;\n        Return (BestScore);\n    End If;\nEnd CutoffSearch;\n</pre>\n<h1><span class=\"mw-headline\" id=\"Summary\">Summary</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=KC_Chess&amp;action=edit&amp;section=2\" title=\"Edit section: Summary\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Excerpt from the readme file <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>\n</p>\n<pre>The chess program is 3417 lines long and the project took 220 hours to complete.  The work was carried out from JAN - APR 1990 as our CS 4993 undergraduate project.  The program may be distributed freely and is considered <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Public_domain\">Public Domain</a> software. A 30 page written report was also produced and submitted with the rest of the work to Dr. J. D. Horton <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup> who was our project supervisor. \n</pre>\n<p>Excerpt from the report <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup>:\n</p>\n<pre>The greatest limitation of the program is the extremely simple evaluation of a given move. The score is determined exclusively by the number of value points assigned to the piece that is taken. If no piece is taken then no points are awarded. As implemented, the positional evaluation plays only a small roll in selecting a move. A better positional evaluator, which takes into account such things as attack strategy and special situations requiring special actions, etc. should be combined with a better capture value to calculate the value at all nodes in the search tree. A better capture value would take into account the fact that the material value of the piece varies with the stage and balance of the game. The combination of material and position values should be consistent with the strategy and circumstances of the game. Of course this was beyond the scope of this project (not to mention our own skill and knowledge of chess). This could be a future enhancement.\n</pre>\n<pre>Another deficiency is with the search tree algorithm itself. Since it only searches to a certain depth, it may attempt to push an inevitable loss out of its sight by sacrificing a less valuable piece to 'save' the greater valued one. This is known as the <a href=\"/Horizon_Effect\" title=\"Horizon Effect\">Horizon Effect</a> and is an inevitable consequence of the limited search. The only solution is to increase the search depth. This often would only serve to move the horizon a little father down the road. The solution to this problem is also beyond the scope of this project. \n</pre>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=KC_Chess&amp;action=edit&amp;section=3\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Pascal#SourceSample\" title=\"Pascal\">Source Sample</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=KC_Chess&amp;action=edit&amp;section=4\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/EQxCixpytBg/e1R0a7u1WMsJ\">Working with moves or with positions</a> by Guillem Barnolas, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, February 22, 1998&#160;» <a href=\"/Make_Move\" title=\"Make Move\">Make Move</a>, <a href=\"/Unmake_Move\" title=\"Unmake Move\">Unmake Move</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=KC_Chess&amp;action=edit&amp;section=5\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20120411173812/http://www.csbruce.com/~csbruce/chess/\">KC Chess: Kevin &amp; Craig's Chess Program</a> (<a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Internet_Archive\">Internet Archive</a>)</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20120414114219/http://www.csbruce.com/~csbruce/chess/report.html\">KC-Chess Report</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20120414024548/http://www.csbruce.com/~csbruce/chess/pieces.txt\">pieces.txt</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=KC_Chess&amp;action=edit&amp;section=6\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20120411173812/http://www.csbruce.com/~csbruce/chess/\">KC Chess: Kevin &amp; Craig's Chess Program</a> (<a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Internet_Archive\">Internet Archive</a>)</span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20120414114219/http://www.csbruce.com/~csbruce/chess/report.html\">KC-Chess Report - 4.5. SEARCH-TREE PRUNING</a> (<a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Internet_Archive\">Internet Archive</a>)</span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20120414114214/http://www.csbruce.com/~csbruce/chess/readme.txt\">readme.txt</a> (<a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Internet_Archive\">Internet Archive</a>)</span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.unb.ca/~jdh/\">Joseph D Horton</a></span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20120414114219/http://www.csbruce.com/~csbruce/chess/report.html\">KC-Chess Report - 6. PROGRAM LIMITATIONS</a> (<a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Internet_Archive\">Internet Archive</a>)</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Engines\" title=\"Engines\">Up one level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260228215834\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.010 seconds\nReal time usage: 0.010 seconds\nPreprocessor visited node count: 106/1000000\nPreprocessor generated node count: 226/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:7207-0!canonical and timestamp 20260228215834 and revision id 19571\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Open_Source"
+      },
+      {
+        "sortkey": "",
+        "*": "DosEngine"
+      },
+      {
+        "sortkey": "",
+        "*": "8086"
+      },
+      {
+        "sortkey": "",
+        "*": "Pascal"
+      },
+      {
+        "sortkey": "",
+        "*": "Thesis"
+      },
+      {
+        "sortkey": "",
+        "*": "Acronym"
+      },
+      {
+        "sortkey": "",
+        "*": "Chess_Suffix"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha-Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Beta-Cutoff"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bound"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Craig S. Bruce"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engines"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Horizon Effect"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "IBM PC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iterative Deepening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "MS-DOS"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mailbox"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Make Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Moves"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pascal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiescence Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "R. Kevin Phillips"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Score"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Unmake Move"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Pseudo Code",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "KC_Chess",
+        "byteoffset": 1088,
+        "anchor": "Pseudo_Code"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Summary",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "KC_Chess",
+        "byteoffset": 2157,
+        "anchor": "Summary"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "KC_Chess",
+        "byteoffset": 4618,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "KC_Chess",
+        "byteoffset": 4670,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "5",
+        "index": "5",
+        "fromtitle": "KC_Chess",
+        "byteoffset": 4912,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "6",
+        "index": "6",
+        "fromtitle": "KC_Chess",
+        "byteoffset": 5344,
+        "anchor": "References"
+      }
+    ]
+  }
+}

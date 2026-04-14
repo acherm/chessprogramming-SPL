@@ -1,0 +1,2124 @@
+{
+  "meta": {
+    "generated_at": "2026-04-04T12:09:48.866426+00:00",
+    "model_perspective": "implementation_product_line",
+    "configuration_goal": "each valid feature configuration maps to a chess-engine variant",
+    "primary_variability_strategy": "compile_time_first_with_limited_runtime_options",
+    "taxonomy_note": "distinguish configurable features from commonality and from feature-implementation debt",
+    "depth": 4,
+    "target_features": 150,
+    "total_features": 74,
+    "total_traces": 74,
+    "total_constraints": 49,
+    "non_engine_pages": 958
+  },
+  "features": [
+    {
+      "id": "chess_engine_product_line",
+      "name": "ChessEngineProductLine",
+      "parent_id": null,
+      "kind": "mandatory",
+      "description": "Implementation-oriented product-line model for configurable chess engine variants.",
+      "aliases": [],
+      "variation_role": "root",
+      "variability_stage": "none",
+      "configurable": false,
+      "compile_flag": "",
+      "runtime_flag": ""
+    },
+    {
+      "id": "board_representation",
+      "name": "BoardRepresentation",
+      "parent_id": "chess_engine_product_line",
+      "kind": "xor",
+      "description": "Primary board-state encoding strategy (typically one per build).",
+      "aliases": [],
+      "variation_role": "group",
+      "variability_stage": "none",
+      "configurable": false,
+      "compile_flag": "",
+      "runtime_flag": ""
+    },
+    {
+      "id": "search",
+      "name": "Search",
+      "parent_id": "chess_engine_product_line",
+      "kind": "or",
+      "description": "Search core and search-level enhancements.",
+      "aliases": [],
+      "variation_role": "group",
+      "variability_stage": "none",
+      "configurable": false,
+      "compile_flag": "",
+      "runtime_flag": ""
+    },
+    {
+      "id": "pruning_reductions",
+      "name": "PruningReductions",
+      "parent_id": "chess_engine_product_line",
+      "kind": "or",
+      "description": "Search pruning and reduction heuristics.",
+      "aliases": [],
+      "variation_role": "group",
+      "variability_stage": "none",
+      "configurable": false,
+      "compile_flag": "",
+      "runtime_flag": ""
+    },
+    {
+      "id": "evaluation",
+      "name": "Evaluation",
+      "parent_id": "chess_engine_product_line",
+      "kind": "xor",
+      "description": "Primary evaluation framework and terms.",
+      "aliases": [],
+      "variation_role": "group",
+      "variability_stage": "none",
+      "configurable": false,
+      "compile_flag": "",
+      "runtime_flag": ""
+    },
+    {
+      "id": "move_generation",
+      "name": "MoveGeneration",
+      "parent_id": "chess_engine_product_line",
+      "kind": "or",
+      "description": "Move generation and ordering machinery.",
+      "aliases": [],
+      "variation_role": "group",
+      "variability_stage": "none",
+      "configurable": false,
+      "compile_flag": "",
+      "runtime_flag": ""
+    },
+    {
+      "id": "transposition_table",
+      "name": "TranspositionTable",
+      "parent_id": "chess_engine_product_line",
+      "kind": "or",
+      "description": "Hashing and transposition storage mechanisms.",
+      "aliases": [],
+      "variation_role": "group",
+      "variability_stage": "none",
+      "configurable": false,
+      "compile_flag": "",
+      "runtime_flag": ""
+    },
+    {
+      "id": "time_management",
+      "name": "TimeManagement",
+      "parent_id": "chess_engine_product_line",
+      "kind": "or",
+      "description": "Clock allocation and timing-related behavior.",
+      "aliases": [],
+      "variation_role": "group",
+      "variability_stage": "none",
+      "configurable": false,
+      "compile_flag": "",
+      "runtime_flag": ""
+    },
+    {
+      "id": "parallelism",
+      "name": "Parallelism",
+      "parent_id": "chess_engine_product_line",
+      "kind": "or",
+      "description": "Threading/distributed search strategies.",
+      "aliases": [],
+      "variation_role": "group",
+      "variability_stage": "none",
+      "configurable": false,
+      "compile_flag": "",
+      "runtime_flag": ""
+    },
+    {
+      "id": "endgame",
+      "name": "Endgame",
+      "parent_id": "chess_engine_product_line",
+      "kind": "or",
+      "description": "Endgame databases and specialized logic.",
+      "aliases": [],
+      "variation_role": "group",
+      "variability_stage": "none",
+      "configurable": false,
+      "compile_flag": "",
+      "runtime_flag": ""
+    },
+    {
+      "id": "opening",
+      "name": "Opening",
+      "parent_id": "chess_engine_product_line",
+      "kind": "or",
+      "description": "Opening phase support and books.",
+      "aliases": [],
+      "variation_role": "group",
+      "variability_stage": "none",
+      "configurable": false,
+      "compile_flag": "",
+      "runtime_flag": ""
+    },
+    {
+      "id": "protocol",
+      "name": "Protocol",
+      "parent_id": "chess_engine_product_line",
+      "kind": "or",
+      "description": "Engine communication and position I/O protocols.",
+      "aliases": [],
+      "variation_role": "group",
+      "variability_stage": "none",
+      "configurable": false,
+      "compile_flag": "",
+      "runtime_flag": ""
+    },
+    {
+      "id": "tuning",
+      "name": "Tuning",
+      "parent_id": "chess_engine_product_line",
+      "kind": "or",
+      "description": "Automated tuning and validation workflows.",
+      "aliases": [],
+      "variation_role": "group",
+      "variability_stage": "none",
+      "configurable": false,
+      "compile_flag": "",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_0x88",
+      "name": "0x88",
+      "parent_id": "board_representation",
+      "kind": "optional",
+      "description": "Home * Board Representation * Mailbox * Vector Attacks * 0x88 0x88 , a square centric board representation.",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_0X88",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_10x12_board",
+      "name": "10x12 Board",
+      "parent_id": "board_representation",
+      "kind": "optional",
+      "description": "Home * Board Representation * Mailbox * 10x12 Board The 10x12 Board embeds the 8x8 board array , surrounded by sentinel files and ranks to recognize off the board indices while gen",
+      "aliases": [
+        "10x12"
+      ],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_10X12_BOARD",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_bitboards",
+      "name": "Bitboards",
+      "parent_id": "board_representation",
+      "kind": "optional",
+      "description": "Home * Board Representation * Bitboards Samuel Bak - Boards Meeting [1] Bitboards , also called bitsets or bitmaps, or better Square Sets , are among other things used to represent",
+      "aliases": [
+        "bitboard"
+      ],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_BITBOARDS",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_copy_make",
+      "name": "Copy-Make",
+      "parent_id": "board_representation",
+      "kind": "optional",
+      "description": "Home * Chess * Position * Copy-Make While traversing a Search Tree , the Copy-Make approach keeps and updates local copies of certain aspects of a chess position inside an array in",
+      "aliases": [
+        "copy make"
+      ],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_COPY_MAKE",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_mailbox",
+      "name": "Mailbox",
+      "parent_id": "board_representation",
+      "kind": "optional",
+      "description": "Home * Board Representation * Mailbox A fantastical mailbox [1] Mailbox , (Offset board representation [2] ) a square-centric board representation where the encoding of every squar",
+      "aliases": [
+        "mailbox board"
+      ],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_MAILBOX",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_make_move",
+      "name": "Make Move",
+      "parent_id": "board_representation",
+      "kind": "optional",
+      "description": "Home * Chess * Moves * Make Move Make Move is a function inside a chess program to update the internal chess position and its board representation as well as associated or dependen",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_MAKE_MOVE",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_piece_lists",
+      "name": "Piece Lists",
+      "parent_id": "board_representation",
+      "kind": "optional",
+      "description": "Contents 1 MicroChess 2 New Architecture 2.1 Declaration 2.2 Piece List Traversal 2.2.1 Forward 2.2.2 Backward 2.3 Incremental Update 2.3.1 Make Moves 2.3.2 Unmake Moves 3 Linked L",
+      "aliases": [
+        "piece list"
+      ],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_PIECE_LISTS",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_unmake_move",
+      "name": "Unmake Move",
+      "parent_id": "board_representation",
+      "kind": "optional",
+      "description": "Home * Chess * Moves * Unmake Move Unmake Move is a function inside a chess program to update the internal chess position and its Board representation as well as associated or depe",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_UNMAKE_MOVE",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_bishop_pair",
+      "name": "Bishop Pair",
+      "parent_id": "evaluation_piece_coordination",
+      "kind": "optional",
+      "description": "Since this is unlikely given even a four ply search, we may introduce another class of drawn positions: those that cannot be claimed, but can be evaluated as draws: Two Knights aga",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_BISHOP_PAIR",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_connected_pawn",
+      "name": "Connected Pawn",
+      "parent_id": "feat_pawn_structure",
+      "kind": "optional",
+      "description": "Traditional [ edit ] Material Piece-Square Tables Development Mobility Trapped Pieces Rooks on (Semi) Open Files Outposts Pawn Structure Pawn Hash Table Backward Pawn Doubled Pawn ",
+      "aliases": [
+        "connected pawns",
+        "connected passed pawns"
+      ],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_CONNECTED_PAWN",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_doubled_pawn",
+      "name": "Doubled Pawn",
+      "parent_id": "feat_pawn_structure",
+      "kind": "optional",
+      "description": "Traditional [ edit ] Material Piece-Square Tables Development Mobility Trapped Pieces Rooks on (Semi) Open Files Outposts Pawn Structure Pawn Hash Table Backward Pawn Doubled Pawn ",
+      "aliases": [
+        "doubled pawns"
+      ],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_DOUBLED_PAWN",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_evaluation",
+      "name": "Evaluation",
+      "parent_id": "evaluation",
+      "kind": "optional",
+      "description": "Home * Evaluation Wassily Kandinsky - Graceful Ascent, 1934 [1] Evaluation , a heuristic function to determine the relative value of a position , i.e.",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_EVALUATION",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_isolated_pawn",
+      "name": "Isolated Pawn",
+      "parent_id": "feat_pawn_structure",
+      "kind": "optional",
+      "description": "Traditional [ edit ] Material Piece-Square Tables Development Mobility Trapped Pieces Rooks on (Semi) Open Files Outposts Pawn Structure Pawn Hash Table Backward Pawn Doubled Pawn ",
+      "aliases": [
+        "isolated pawns",
+        "isolani"
+      ],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_ISOLATED_PAWN",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_king_activity",
+      "name": "King Activity",
+      "parent_id": "feat_king_safety",
+      "kind": "optional",
+      "description": "Home * Knowledge * Oracle File:John William Waterhouse oracle 1884.png John William Waterhouse - Consulting the Oracle [1] Oracle , an instance with the fame of perfect knowledge, ",
+      "aliases": [
+        "king centralization"
+      ],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_KING_ACTIVITY",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_king_safety",
+      "name": "King Terms",
+      "parent_id": "evaluation",
+      "kind": "or",
+      "description": "Intermediate group for king-centric evaluation terms.",
+      "aliases": [],
+      "variation_role": "group",
+      "variability_stage": "none",
+      "configurable": false,
+      "compile_flag": "",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_king_shelter",
+      "name": "King Shelter",
+      "parent_id": "feat_king_safety",
+      "kind": "optional",
+      "description": "Traditional [ edit ] Material Piece-Square Tables Development Mobility Trapped Pieces Rooks on (Semi) Open Files Outposts Pawn Structure Pawn Hash Table Backward Pawn Doubled Pawn ",
+      "aliases": [
+        "pawn shelter",
+        "pawn shield"
+      ],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_KING_SHELTER",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_mobility",
+      "name": "Mobility",
+      "parent_id": "evaluation",
+      "kind": "optional",
+      "description": "Contents 1 Mobility 2 Selected Publications 3 Forum Posts 4 External Links 5 References Mobility [ edit ] In his 1987 note Challenging that Mobility is Fundamental [3] , Larsson qu",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_MOBILITY",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_passed_pawn",
+      "name": "Passed Pawn",
+      "parent_id": "feat_pawn_structure",
+      "kind": "optional",
+      "description": "Home * Evaluation * Pawn Structure * Passed Pawn Schachclub Freibauer Schöneberg [1] A passed pawn, also called free pawn or passer , is a pawn with no opponent pawns in front on t",
+      "aliases": [
+        "passed pawns"
+      ],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_PASSED_PAWN",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_pawn_structure",
+      "name": "Pawn Structure",
+      "parent_id": "evaluation",
+      "kind": "or",
+      "description": "Intermediate group for pawn-structure evaluation terms.",
+      "aliases": [],
+      "variation_role": "group",
+      "variability_stage": "none",
+      "configurable": false,
+      "compile_flag": "",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_piece_square_tables",
+      "name": "Piece-Square Tables",
+      "parent_id": "evaluation",
+      "kind": "optional",
+      "description": "Home * Evaluation * Piece-Square Tables John Cage , Chess Pieces, ca.",
+      "aliases": [
+        "piece square tables"
+      ],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_PIECE_SQUARE_TABLES",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_rook_on_open_file",
+      "name": "Rook on Open File",
+      "parent_id": "evaluation_piece_coordination",
+      "kind": "optional",
+      "description": "4 External Links 5 References Features [ edit ] Board Representation [ edit ] Bitboards Magic Bitboards Search [ edit ] Iterative Deepening Aspiration Windows Alpha-Beta Transposit",
+      "aliases": [
+        "rooks on open files",
+        "rook open file"
+      ],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_ROOK_OPEN_FILE",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_rook_semi_open_file",
+      "name": "Rook Semi-Open File",
+      "parent_id": "evaluation_piece_coordination",
+      "kind": "optional",
+      "description": "Traditional [ edit ] Material Piece-Square Tables Development Mobility Trapped Pieces Rooks on (Semi) Open Files Outposts Pawn Structure Pawn Hash Table Backward Pawn Doubled Pawn ",
+      "aliases": [
+        "rook on semi-open file",
+        "rooks on semi open files",
+        "rooks on semi-open files",
+        "rook on half open file",
+        "rook on half-open file",
+        "rook on (half) open file",
+        "rooks on (semi) open files"
+      ],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_ROOK_SEMI_OPEN_FILE",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_static_exchange_evaluation",
+      "name": "Static Exchange Evaluation",
+      "parent_id": "evaluation",
+      "kind": "optional",
+      "description": "Home * Search * Move Ordering * Static Exchange Evaluation Wassily Kandinsky - Small Worlds IX [1] A Static Exchange Evaluation (SEE) examines the consequence of a series of exchan",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_STATIC_EXCHANGE_EVALUATION",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_tapered_eval",
+      "name": "Tapered Eval",
+      "parent_id": "evaluation",
+      "kind": "optional",
+      "description": "by cmylin, Stack Overflow , May 19, 2015 » Thread Re: Tapered Eval between 4 phases by Youri Matiounine , CCC , October 16, 2017 » Tapered Eval Re: Ryzen 2 and BMI2?",
+      "aliases": [
+        "tapered evaluation"
+      ],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_TAPERED_EVAL",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_castling",
+      "name": "Castling",
+      "parent_id": "move_generation",
+      "kind": "optional",
+      "description": "Home * Chess * Position * Castling Rights The Castling Rights specify whether both sides are principally able to castle king- or queen side, now or later during the game - whether ",
+      "aliases": [
+        "castling rights"
+      ],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_CASTLING",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_en_passant",
+      "name": "En Passant",
+      "parent_id": "move_generation",
+      "kind": "optional",
+      "description": "Home * Chess * Moves * En passant En passant (from French: \"in passing\") [1] is a special pawn capture move , which is only possible immediately after an opposing pawn tried passin",
+      "aliases": [
+        "ep capture"
+      ],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_EN_PASSANT",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_legal_move_generation",
+      "name": "Legal Move Generation",
+      "parent_id": "move_generation",
+      "kind": "optional",
+      "description": "Getting out of check [ edit ] While in check, it is recommended to perform a specialized Move Generation for check evasion of either a reasonable subset of all pseudo-legal moves o",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_LEGAL_MOVE_GENERATION",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_magic_bitboards",
+      "name": "Magic Bitboards",
+      "parent_id": "move_generation",
+      "kind": "optional",
+      "description": "Home * Board Representation * Bitboards * Sliding Piece Attacks * Magic Bitboards Paul Klee - Magic Garden, 1926 [1] Magic Bitboards , a multiply-right-shift perfect hashing algori",
+      "aliases": [
+        "magic bitboard"
+      ],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_MAGIC_BITBOARDS",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_move_generation",
+      "name": "Move Generation",
+      "parent_id": "move_generation",
+      "kind": "optional",
+      "description": "Home * Board Representation * Move Generation Blast Generation [1] Generation of moves is a basic part of a chess engine with many variations concerning a generator or an iterator ",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_MOVE_GENERATION",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_move_ordering",
+      "name": "Move Ordering",
+      "parent_id": "search",
+      "kind": "optional",
+      "description": "Home * Search * Move Ordering Wassily Kandinsky - Four Parts [1] For the alpha-beta algorithm to perform well, the best moves need to be searched first.",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_MOVE_ORDERING",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_pseudo_legal_move_generation",
+      "name": "Pseudo-Legal Move Generation",
+      "parent_id": "move_generation",
+      "kind": "optional",
+      "description": "Home * Chess * Moves * Pseudo-Legal Move A Pseudo-Legal Move is legal in the sense that it is consistent with the current board representation it is assigned to, and it must be mem",
+      "aliases": [
+        "pseudo legal",
+        "pseudo-legal"
+      ],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_PSEUDO_LEGAL_MOVE_GENERATION",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_opening_book",
+      "name": "Opening Book",
+      "parent_id": "opening",
+      "kind": "optional",
+      "description": "Home * Knowledge * Opening Book Modern Chess Openings [1] Chess programs often look up the positions at the beginning of the game in an Opening Book .",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "mixed",
+      "configurable": true,
+      "compile_flag": "CFG_OPENING_BOOK",
+      "runtime_flag": "setoption name OwnBook/BookFile"
+    },
+    {
+      "id": "feat_fen",
+      "name": "FEN",
+      "parent_id": "protocol",
+      "kind": "optional",
+      "description": "Contents 1 FEN 2 Diagram 3 Ambiguity 4 Perft 5 See also 6 Forum Posts 7 External Links 8 References FEN [ edit ] rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 Diagram [ ",
+      "aliases": [
+        "forsyth edwards notation"
+      ],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_FEN",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_uci",
+      "name": "UCI",
+      "parent_id": "protocol",
+      "kind": "optional",
+      "description": "Home * Protocols * UCI UCI , (Universal Chess Interface) an open communication protocol for chess engines to play games automatically, that is to communicate with other programs in",
+      "aliases": [
+        "universal chess interface"
+      ],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_UCI",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_delta_pruning",
+      "name": "Delta Pruning",
+      "parent_id": "pruning_reductions",
+      "kind": "optional",
+      "description": "Home * Search * Selectivity * Pruning * Delta Pruning Delta Pruning , a technique similar in concept to futility pruning , only used in the quiescence search .",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_DELTA_PRUNING",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_futility_pruning",
+      "name": "Futility Pruning",
+      "parent_id": "pruning_reductions",
+      "kind": "optional",
+      "description": "Home * Search * Selectivity * Pruning * Futility Pruning M.",
+      "aliases": [
+        "futility"
+      ],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_FUTILITY_PRUNING",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_late_move_reductions",
+      "name": "Late Move Reductions",
+      "parent_id": "pruning_reductions",
+      "kind": "optional",
+      "description": "Home * Search * Selectivity * Reductions * Late Move Reductions Samuel Bak - Other Rules [1] Late Move Reductions (LMR) , save search by reducing moves that are ordered closer to t",
+      "aliases": [
+        "lmr"
+      ],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_LATE_MOVE_REDUCTIONS",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_null_move_pruning",
+      "name": "Null Move Pruning",
+      "parent_id": "pruning_reductions",
+      "kind": "optional",
+      "description": "Home * Search * Selectivity * Pruning * Null Move Pruning Samuel Bak - Signals [1] Null Move Pruning , also called Null Move Heuristic ( NMH ), is a method based on the Null Move O",
+      "aliases": [
+        "null move"
+      ],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_NULL_MOVE_PRUNING",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_razoring",
+      "name": "Razoring",
+      "parent_id": "pruning_reductions",
+      "kind": "optional",
+      "description": "Home * Search * Selectivity * Reductions * Razoring Occam's razor [1] Unlike Alpha-Beta , classical Razoring [2] prunes branches forward, if the static evaluation of a move is less",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_RAZORING",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_alpha_beta",
+      "name": "Alpha-Beta",
+      "parent_id": "search",
+      "kind": "optional",
+      "description": "Home * Search * Alpha-Beta Alpha Beta [1] The Alpha-Beta algorithm (Alpha-Beta Pruning, Alpha-Beta Heuristic [2] ) is a significant enhancement to the minimax search algorithm that",
+      "aliases": [
+        "alpha beta",
+        "alphabeta"
+      ],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_ALPHA_BETA",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_aspiration_windows",
+      "name": "Aspiration Windows",
+      "parent_id": "search",
+      "kind": "optional",
+      "description": "Home * Search * Alpha-Beta * Aspiration Windows The Non-Euclidean Window [1] Aspiration windows are a way to reduce the search space in an alpha-beta search.",
+      "aliases": [
+        "aspiration window"
+      ],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_ASPIRATION_WINDOWS",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_fifty_move_rule",
+      "name": "Fifty-Move Rule",
+      "parent_id": "search",
+      "kind": "optional",
+      "description": "Home * Chess * Draw * Fifty-move Rule The Fifty-move rule states that a game of chess is considered drawn after fifty consecutive full moves without a capture or a pawn move .",
+      "aliases": [
+        "50-move rule"
+      ],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_FIFTY_MOVE_RULE",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_history_heuristic",
+      "name": "History Heuristic",
+      "parent_id": "search_ordering_heuristics",
+      "kind": "optional",
+      "description": "Home * Search * Move Ordering * Relative History Heuristic The Relative History Heuristic was proposed by Mark Winands et al.",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_HISTORY_HEURISTIC",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_iterative_deepening",
+      "name": "Iterative Deepening",
+      "parent_id": "search",
+      "kind": "optional",
+      "description": "Home * Search * Iterative Deepening Iterative deepening search [1] Iterative deepening (ID) has been adopted as the basic time management strategy in depth-first searches , but has",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_ITERATIVE_DEEPENING",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_killer_heuristic",
+      "name": "Killer Heuristic",
+      "parent_id": "search_ordering_heuristics",
+      "kind": "optional",
+      "description": "Home * Search * Move Ordering * Killer Heuristic Jack the Ripper [1] Killer Heuristic , a dynamic, path-dependent move ordering technique.",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_KILLER_HEURISTIC",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_minimax",
+      "name": "Minimax",
+      "parent_id": "search",
+      "kind": "optional",
+      "description": "Home * Search * Minimax Max Ernst - Little Machine Constructed by Minimax Dadamax in Person , 1919-1920 [1] Minimax , an algorithm used to determine the score in a zero-sum game af",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_MINIMAX",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_negamax",
+      "name": "Negamax",
+      "parent_id": "search",
+      "kind": "optional",
+      "description": "Home * Search * Negamax Negamax , a common way of implementing minimax and derived algorithms.",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_NEGAMAX",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_principal_variation_search",
+      "name": "Principal Variation Search",
+      "parent_id": "search",
+      "kind": "optional",
+      "description": "Home * Search * Principal Variation Search John Cage - Variations III, No.",
+      "aliases": [
+        "pvs"
+      ],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_PRINCIPAL_VARIATION_SEARCH",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_quiescence_search",
+      "name": "Quiescence Search",
+      "parent_id": "search",
+      "kind": "optional",
+      "description": "Home * Search * Quiescence Karen Schuman - Quiescence [1] Most chess programs, at the end of the main search perform a more limited quiescence search, containing fewer moves.",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_QUIESCENCE_SEARCH",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_threefold_repetition",
+      "name": "Threefold Repetition",
+      "parent_id": "search",
+      "kind": "optional",
+      "description": "8 External Links 9 References Assigning Draw Score [ edit ] Threefold repetition implies a position occurred thrice, that is repeated twice.",
+      "aliases": [
+        "repetition draw"
+      ],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_THREEFOLD_REPETITION",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_pondering",
+      "name": "Pondering",
+      "parent_id": "time_management",
+      "kind": "optional",
+      "description": "Home * Search * Pondering Vincent van Gogh - At Eternity's Gate , 1890 Pondering is simply using the opponent's move time to consider likely opponent moves and thus gain a pre-proc",
+      "aliases": [
+        "ponder"
+      ],
+      "variation_role": "option",
+      "variability_stage": "mixed",
+      "configurable": true,
+      "compile_flag": "CFG_PONDERING",
+      "runtime_flag": "setoption name Ponder value true"
+    },
+    {
+      "id": "feat_time_management",
+      "name": "Time Management",
+      "parent_id": "time_management",
+      "kind": "optional",
+      "description": "Home * Search * Time Management Roland La Tuffo Barcsik - Time out [1] Time management refers to algorithms and heuristics to allocate time for searching a move under time control ",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "mixed",
+      "configurable": true,
+      "compile_flag": "CFG_TIME_MANAGEMENT",
+      "runtime_flag": "go wtime/btime[/winc/binc/movestogo]"
+    },
+    {
+      "id": "feat_hash_move",
+      "name": "Hash Move",
+      "parent_id": "search_ordering_heuristics",
+      "kind": "optional",
+      "description": "Home * Chess * Moves * Hash Move The Hash Move is a Move Ordering related issue.",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_HASH_MOVE",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_pawn_hash_table",
+      "name": "Pawn Hash Table",
+      "parent_id": "transposition_table_support",
+      "kind": "optional",
+      "description": "Home * Evaluation * Pawn Structure * Pawn Hash Table Pawns threaten the King [1] A Pawn Hash Table is often used inside a chess programs to cache purely pawn related pattern and ev",
+      "aliases": [
+        "pawn hash"
+      ],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_PAWN_HASH_TABLE",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_replacement_schemes",
+      "name": "Replacement Schemes",
+      "parent_id": "transposition_table_support",
+      "kind": "optional",
+      "description": "Replacement Schemes for Transposition Tables .",
+      "aliases": [
+        "replacement scheme"
+      ],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_REPLACEMENT_SCHEMES",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_transposition_table",
+      "name": "Transposition Table",
+      "parent_id": "transposition_table",
+      "kind": "optional",
+      "description": "Home * Search * Transposition Table Salvador Dalí , The Persistence of Memory 1931 A Transposition Table , first used in Greenblatt's program Mac Hack VI [1] [2] [3] , is a databas",
+      "aliases": [],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_TRANSPOSITION_TABLE",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_zobrist_hashing",
+      "name": "Zobrist Hashing",
+      "parent_id": "transposition_table_support",
+      "kind": "optional",
+      "description": "Home * Search * Transposition Table * Zobrist Hashing King Wen sequence [1] [2] Zobrist Hashing , a technique to transform a board position of arbitrary size into a number of a set",
+      "aliases": [
+        "zobrist"
+      ],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_ZOBRIST_HASHING",
+      "runtime_flag": ""
+    },
+    {
+      "id": "evaluation_piece_coordination",
+      "name": "Piece Coordination",
+      "parent_id": "evaluation",
+      "kind": "or",
+      "description": "Intermediate group for piece-coordination evaluation terms.",
+      "aliases": [],
+      "variation_role": "group",
+      "variability_stage": "none",
+      "configurable": false,
+      "compile_flag": "",
+      "runtime_flag": ""
+    },
+    {
+      "id": "feat_king_pressure",
+      "name": "King Pressure",
+      "parent_id": "feat_king_safety",
+      "kind": "optional",
+      "description": "Home * Board Representation * Bitboards * King Pattern Moore neighborhood [1] King pattern are about king attacks , some king safety issues and pawn endgame related stuff.",
+      "aliases": [
+        "King Safety",
+        "Attacking King Zone"
+      ],
+      "variation_role": "option",
+      "variability_stage": "compile_time",
+      "configurable": true,
+      "compile_flag": "CFG_KING_SAFETY",
+      "runtime_flag": ""
+    },
+    {
+      "id": "search_ordering_heuristics",
+      "name": "Ordering Heuristics",
+      "parent_id": "feat_move_ordering",
+      "kind": "or",
+      "description": "Optional move-ordering heuristics layered under the Move Ordering framework.",
+      "aliases": [],
+      "variation_role": "group",
+      "variability_stage": "none",
+      "configurable": false,
+      "compile_flag": "",
+      "runtime_flag": ""
+    },
+    {
+      "id": "transposition_table_support",
+      "name": "TT Support",
+      "parent_id": "transposition_table",
+      "kind": "or",
+      "description": "Support mechanisms and policies underneath the transposition-table family.",
+      "aliases": [
+        "Transposition Table Support"
+      ],
+      "variation_role": "group",
+      "variability_stage": "none",
+      "configurable": false,
+      "compile_flag": "",
+      "runtime_flag": ""
+    }
+  ],
+  "traces": [
+    {
+      "id": "tr_d5c29c5c4a7f",
+      "feature_id": "chess_engine_product_line",
+      "source_url": "https://www.chessprogramming.org/Category:Karen_Schuman",
+      "source_title": "Category:Karen Schuman",
+      "snippet": "Category:Karen Schuman - Chessprogramming wiki Help Category:Karen Schuman From Chessprogramming wiki Jump to: navigation , search There is currently no text in this page.",
+      "confidence": 0.49,
+      "rule_id": "seed_page_fallback"
+    },
+    {
+      "id": "tr_4916271f6acb",
+      "feature_id": "board_representation",
+      "source_url": "https://www.chessprogramming.org/0x88",
+      "source_title": "0x88",
+      "snippet": "Home * Board Representation * Mailbox * Vector Attacks * 0x88 0x88 , a square centric board representation.",
+      "confidence": 0.62,
+      "rule_id": "seed_keyword_match"
+    },
+    {
+      "id": "tr_e17830fe8365",
+      "feature_id": "search",
+      "source_url": "https://www.chessprogramming.org/Abdallah_Saffidine",
+      "source_title": "Abdallah Saffidine",
+      "snippet": "Home * People * Abdallah Saffidine Abdallah Saffidine [1] Abdallah Saffidine , a French computer scientist and games researcher, currently at University of New South Wales .",
+      "confidence": 0.7,
+      "rule_id": "seed_keyword_match"
+    },
+    {
+      "id": "tr_0f005f3a69e1",
+      "feature_id": "pruning_reductions",
+      "source_url": "https://www.chessprogramming.org/Abdallah_Saffidine",
+      "source_title": "Abdallah Saffidine",
+      "snippet": "Home * People * Abdallah Saffidine Abdallah Saffidine [1] Abdallah Saffidine , a French computer scientist and games researcher, currently at University of New South Wales .",
+      "confidence": 0.62,
+      "rule_id": "seed_keyword_match"
+    },
+    {
+      "id": "tr_3e393411124c",
+      "feature_id": "evaluation",
+      "source_url": "https://www.chessprogramming.org/ACM",
+      "source_title": "ACM",
+      "snippet": ", SIGACT News , SIGACT from Wikipedia SIGARCH, the ACM Special Interest Group on Computer Architecture , Computer Architecture News SIGART, the ACM Special Interest Group on Artificial Intelligence , SIGART Wiki SIGCHI,",
+      "confidence": 0.62,
+      "rule_id": "seed_keyword_match"
+    },
+    {
+      "id": "tr_b1e5bc20edef",
+      "feature_id": "move_generation",
+      "source_url": "https://www.chessprogramming.org/0x88",
+      "source_title": "0x88",
+      "snippet": "Home * Board Representation * Mailbox * Vector Attacks * 0x88 0x88 , a square centric board representation.",
+      "confidence": 0.62,
+      "rule_id": "seed_keyword_match"
+    },
+    {
+      "id": "tr_b8d0805efe09",
+      "feature_id": "transposition_table",
+      "source_url": "https://www.chessprogramming.org/Abyss",
+      "source_title": "Abyss",
+      "snippet": "Home * Engines * Abyss At the Edge of the Abyss [1] Abyss , a Chinese Chess program by Chun Ye and Tony Marsland , written in C under Unix aka SunOS .",
+      "confidence": 0.62,
+      "rule_id": "seed_keyword_match"
+    },
+    {
+      "id": "tr_4a05d4a876a5",
+      "feature_id": "time_management",
+      "source_url": "https://www.chessprogramming.org/Arminius",
+      "source_title": "Arminius",
+      "snippet": "Home * Engines * Arminius Arminius Source [1] Arminius , a chess engine by Volker Annuss , which is a complete restructured successor of Hermann [2] .",
+      "confidence": 0.66,
+      "rule_id": "seed_keyword_match"
+    },
+    {
+      "id": "tr_bf9b511ed172",
+      "feature_id": "parallelism",
+      "source_url": "https://www.chessprogramming.org/Alcides_Schulz",
+      "source_title": "Alcides Schulz",
+      "snippet": "Home * People * Alcides Schulz Alcides Schulz [1] Alcides Schulz , a Brazilian professional software developer and programmer, currently working in the United States.",
+      "confidence": 0.62,
+      "rule_id": "seed_keyword_match"
+    },
+    {
+      "id": "tr_3cf3aeb0b6e2",
+      "feature_id": "endgame",
+      "source_url": "https://www.chessprogramming.org/7th_Computer_Olympiad",
+      "source_title": "7th Computer Olympiad",
+      "snippet": "Chess Endgame Tablebases .",
+      "confidence": 0.7,
+      "rule_id": "seed_keyword_match"
+    },
+    {
+      "id": "tr_2a5f131d22b1",
+      "feature_id": "opening",
+      "source_url": "https://www.chessprogramming.org/Aaron_L._Futer",
+      "source_title": "Aaron L. Futer",
+      "snippet": "Implementation of the opening book for the chess program.",
+      "confidence": 0.7,
+      "rule_id": "seed_keyword_match"
+    },
+    {
+      "id": "tr_ded1628528be",
+      "feature_id": "protocol",
+      "source_url": "https://www.chessprogramming.org/A0lite",
+      "source_title": "A0lite",
+      "snippet": "Home * Engines * A0lite A0lite , a didactic UCI compliant neural network chess engine by Dietrich Kappe , written in Python , released in March 2020 under the permissive MIT License [1] as successor of LeelaLite , alread",
+      "confidence": 0.62,
+      "rule_id": "seed_keyword_match"
+    },
+    {
+      "id": "tr_11a1204c02aa",
+      "feature_id": "tuning",
+      "source_url": "https://www.chessprogramming.org/Advances_in_Computer_Games_11",
+      "source_title": "Advances in Computer Games 11",
+      "snippet": "Home * Conferences * Advances in Computer Games 11 < Prev Next > Institute of Information Science [1] The 11th Advances in Computer Games was held from September 6 - 8, 2005 , at the Institute of Information Science, Aca",
+      "confidence": 0.62,
+      "rule_id": "seed_keyword_match"
+    },
+    {
+      "id": "tr_77fad2547567",
+      "feature_id": "feat_bitboards",
+      "source_url": "https://www.chessprogramming.org/Bitboards",
+      "source_title": "Bitboards",
+      "snippet": "Home * Board Representation * Bitboards Samuel Bak - Boards Meeting [1] Bitboards , also called bitsets or bitmaps, or better Square Sets , are among other things used to represent the board inside a chess program in a p",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_f366149db676",
+      "feature_id": "feat_0x88",
+      "source_url": "https://www.chessprogramming.org/0x88",
+      "source_title": "0x88",
+      "snippet": "Home * Board Representation * Mailbox * Vector Attacks * 0x88 0x88 , a square centric board representation.",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_8ac70e9e4769",
+      "feature_id": "feat_mailbox",
+      "source_url": "https://www.chessprogramming.org/Mailbox",
+      "source_title": "Mailbox",
+      "snippet": "Home * Board Representation * Mailbox A fantastical mailbox [1] Mailbox , (Offset board representation [2] ) a square-centric board representation where the encoding of every square resides in a separately addressable me",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_9d1ea8feec13",
+      "feature_id": "feat_10x12_board",
+      "source_url": "https://www.chessprogramming.org/10x12_Board",
+      "source_title": "10x12 Board",
+      "snippet": "Home * Board Representation * Mailbox * 10x12 Board The 10x12 Board embeds the 8x8 board array , surrounded by sentinel files and ranks to recognize off the board indices while generating moves using offsets per piece an",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_50c2dbff9067",
+      "feature_id": "feat_piece_lists",
+      "source_url": "https://www.chessprogramming.org/Piece-Lists",
+      "source_title": "Piece-Lists",
+      "snippet": "Contents 1 MicroChess 2 New Architecture 2.1 Declaration 2.2 Piece List Traversal 2.2.1 Forward 2.2.2 Backward 2.3 Incremental Update 2.3.1 Make Moves 2.3.2 Unmake Moves 3 Linked Lists 4 See also 5 Publications 6 Forum P",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_082a1c7cb3d5",
+      "feature_id": "feat_copy_make",
+      "source_url": "https://www.chessprogramming.org/Copy-Make",
+      "source_title": "Copy-Make",
+      "snippet": "Home * Chess * Position * Copy-Make While traversing a Search Tree , the Copy-Make approach keeps and updates local copies of certain aspects of a chess position inside an array indexed by ply , which could also be inter",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_8631aa0b61b0",
+      "feature_id": "feat_make_move",
+      "source_url": "https://www.chessprogramming.org/Make_Move",
+      "source_title": "Make Move",
+      "snippet": "Home * Chess * Moves * Make Move Make Move is a function inside a chess program to update the internal chess position and its board representation as well as associated or dependent state variables and data by a move mad",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_0f093893a3c9",
+      "feature_id": "feat_unmake_move",
+      "source_url": "https://www.chessprogramming.org/Unmake_Move",
+      "source_title": "Unmake Move",
+      "snippet": "Home * Chess * Moves * Unmake Move Unmake Move is a function inside a chess program to update the internal chess position and its Board representation as well as associated or dependent state variables and data by a move",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_58e63ce9811e",
+      "feature_id": "feat_move_generation",
+      "source_url": "https://www.chessprogramming.org/Move_Generation",
+      "source_title": "Move Generation",
+      "snippet": "Home * Board Representation * Move Generation Blast Generation [1] Generation of moves is a basic part of a chess engine with many variations concerning a generator or an iterator to loop over moves inside the search rou",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_2eeee6b2c999",
+      "feature_id": "feat_pseudo_legal_move_generation",
+      "source_url": "https://www.chessprogramming.org/Pseudo-Legal_Move",
+      "source_title": "Pseudo-Legal Move",
+      "snippet": "Home * Chess * Moves * Pseudo-Legal Move A Pseudo-Legal Move is legal in the sense that it is consistent with the current board representation it is assigned to, and it must be member of all pseudo legal generated moves",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_75c0af48c674",
+      "feature_id": "feat_legal_move_generation",
+      "source_url": "https://www.chessprogramming.org/Check",
+      "source_title": "Check",
+      "snippet": "Getting out of check [ edit ] While in check, it is recommended to perform a specialized Move Generation for check evasion of either a reasonable subset of all pseudo-legal moves or even a strict legal move generation: D",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_7335854b9648",
+      "feature_id": "feat_castling",
+      "source_url": "https://www.chessprogramming.org/Castling_Rights",
+      "source_title": "Castling Rights",
+      "snippet": "Home * Chess * Position * Castling Rights The Castling Rights specify whether both sides are principally able to castle king- or queen side, now or later during the game - whether the involved pieces have already moved o",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_9b5cb646eab6",
+      "feature_id": "feat_en_passant",
+      "source_url": "https://www.chessprogramming.org/En_passant",
+      "source_title": "En passant",
+      "snippet": "Home * Chess * Moves * En passant En passant (from French: \"in passing\") [1] is a special pawn capture move , which is only possible immediately after an opposing pawn tried passing an advanced pawn on the fifth rank (or",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_98dbc431a154",
+      "feature_id": "feat_move_ordering",
+      "source_url": "https://www.chessprogramming.org/Move_Ordering",
+      "source_title": "Move Ordering",
+      "snippet": "Home * Search * Move Ordering Wassily Kandinsky - Four Parts [1] For the alpha-beta algorithm to perform well, the best moves need to be searched first.",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_81c4d91a5541",
+      "feature_id": "feat_magic_bitboards",
+      "source_url": "https://www.chessprogramming.org/Magic_Bitboards",
+      "source_title": "Magic Bitboards",
+      "snippet": "Home * Board Representation * Bitboards * Sliding Piece Attacks * Magic Bitboards Paul Klee - Magic Garden, 1926 [1] Magic Bitboards , a multiply-right-shift perfect hashing algorithm to index an attack bitboard database",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_15a221b1a90b",
+      "feature_id": "feat_alpha_beta",
+      "source_url": "https://www.chessprogramming.org/Alpha-Beta",
+      "source_title": "Alpha-Beta",
+      "snippet": "Home * Search * Alpha-Beta Alpha Beta [1] The Alpha-Beta algorithm (Alpha-Beta Pruning, Alpha-Beta Heuristic [2] ) is a significant enhancement to the minimax search algorithm that eliminates the need to search large por",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_2ddbc79f509f",
+      "feature_id": "feat_minimax",
+      "source_url": "https://www.chessprogramming.org/Minimax",
+      "source_title": "Minimax",
+      "snippet": "Home * Search * Minimax Max Ernst - Little Machine Constructed by Minimax Dadamax in Person , 1919-1920 [1] Minimax , an algorithm used to determine the score in a zero-sum game after a certain number of moves, with best",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_5eb62457f0d3",
+      "feature_id": "feat_negamax",
+      "source_url": "https://www.chessprogramming.org/Negamax",
+      "source_title": "Negamax",
+      "snippet": "Home * Search * Negamax Negamax , a common way of implementing minimax and derived algorithms.",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_be7a58c28c06",
+      "feature_id": "feat_principal_variation_search",
+      "source_url": "https://www.chessprogramming.org/Principal_Variation_Search",
+      "source_title": "Principal Variation Search",
+      "snippet": "Home * Search * Principal Variation Search John Cage - Variations III, No.",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_d4c0737cd498",
+      "feature_id": "feat_iterative_deepening",
+      "source_url": "https://www.chessprogramming.org/Iterative_Deepening",
+      "source_title": "Iterative Deepening",
+      "snippet": "Home * Search * Iterative Deepening Iterative deepening search [1] Iterative deepening (ID) has been adopted as the basic time management strategy in depth-first searches , but has proved surprisingly beneficial as far a",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_9057e245133f",
+      "feature_id": "feat_quiescence_search",
+      "source_url": "https://www.chessprogramming.org/Quiescence_Search",
+      "source_title": "Quiescence Search",
+      "snippet": "Home * Search * Quiescence Karen Schuman - Quiescence [1] Most chess programs, at the end of the main search perform a more limited quiescence search, containing fewer moves.",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_77b35632028c",
+      "feature_id": "feat_threefold_repetition",
+      "source_url": "https://www.chessprogramming.org/Repetitions",
+      "source_title": "Repetitions",
+      "snippet": "8 External Links 9 References Assigning Draw Score [ edit ] Threefold repetition implies a position occurred thrice, that is repeated twice.",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_e243a1ac238c",
+      "feature_id": "feat_fifty_move_rule",
+      "source_url": "https://www.chessprogramming.org/Fifty-move_Rule",
+      "source_title": "Fifty-move Rule",
+      "snippet": "Home * Chess * Draw * Fifty-move Rule The Fifty-move rule states that a game of chess is considered drawn after fifty consecutive full moves without a capture or a pawn move .",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_57d4551df08e",
+      "feature_id": "feat_aspiration_windows",
+      "source_url": "https://www.chessprogramming.org/Aspiration_Windows",
+      "source_title": "Aspiration Windows",
+      "snippet": "Home * Search * Alpha-Beta * Aspiration Windows The Non-Euclidean Window [1] Aspiration windows are a way to reduce the search space in an alpha-beta search.",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_e37f63d4a4b8",
+      "feature_id": "feat_killer_heuristic",
+      "source_url": "https://www.chessprogramming.org/Killer_Heuristic",
+      "source_title": "Killer Heuristic",
+      "snippet": "Home * Search * Move Ordering * Killer Heuristic Jack the Ripper [1] Killer Heuristic , a dynamic, path-dependent move ordering technique.",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_248b79b40264",
+      "feature_id": "feat_history_heuristic",
+      "source_url": "https://www.chessprogramming.org/Relative_History_Heuristic",
+      "source_title": "Relative History Heuristic",
+      "snippet": "Home * Search * Move Ordering * Relative History Heuristic The Relative History Heuristic was proposed by Mark Winands et al.",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_83825a744cdc",
+      "feature_id": "feat_evaluation",
+      "source_url": "https://www.chessprogramming.org/Evaluation",
+      "source_title": "Evaluation",
+      "snippet": "Home * Evaluation Wassily Kandinsky - Graceful Ascent, 1934 [1] Evaluation , a heuristic function to determine the relative value of a position , i.e.",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_7450fcf99a1a",
+      "feature_id": "feat_piece_square_tables",
+      "source_url": "https://www.chessprogramming.org/Piece-Square_Tables",
+      "source_title": "Piece-Square Tables",
+      "snippet": "Home * Evaluation * Piece-Square Tables John Cage , Chess Pieces, ca.",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_9926e1df8310",
+      "feature_id": "feat_tapered_eval",
+      "source_url": "https://www.chessprogramming.org/AVX2",
+      "source_title": "AVX2",
+      "snippet": "by cmylin, Stack Overflow , May 19, 2015 » Thread Re: Tapered Eval between 4 phases by Youri Matiounine , CCC , October 16, 2017 » Tapered Eval Re: Ryzen 2 and BMI2?",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_a677ce556956",
+      "feature_id": "feat_static_exchange_evaluation",
+      "source_url": "https://www.chessprogramming.org/Static_Exchange_Evaluation",
+      "source_title": "Static Exchange Evaluation",
+      "snippet": "Home * Search * Move Ordering * Static Exchange Evaluation Wassily Kandinsky - Small Worlds IX [1] A Static Exchange Evaluation (SEE) examines the consequence of a series of exchanges on a single square after a given mov",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_0fd876b89881",
+      "feature_id": "feat_king_safety",
+      "source_url": "https://www.chessprogramming.org/King_Pattern",
+      "source_title": "King Pattern",
+      "snippet": "Home * Board Representation * Bitboards * King Pattern Moore neighborhood [1] King pattern are about king attacks , some king safety issues and pawn endgame related stuff.",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_5b44f69d0482",
+      "feature_id": "feat_king_shelter",
+      "source_url": "https://www.chessprogramming.org/Arasan",
+      "source_title": "Arasan",
+      "snippet": "Traditional [ edit ] Material Piece-Square Tables Development Mobility Trapped Pieces Rooks on (Semi) Open Files Outposts Pawn Structure Pawn Hash Table Backward Pawn Doubled Pawn Isolated Pawn Passed Pawn Connected Pass",
+      "confidence": 0.92,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_d06768590daa",
+      "feature_id": "feat_king_activity",
+      "source_url": "https://www.chessprogramming.org/Oracle",
+      "source_title": "Oracle",
+      "snippet": "Home * Knowledge * Oracle File:John William Waterhouse oracle 1884.png John William Waterhouse - Consulting the Oracle [1] Oracle , an instance with the fame of perfect knowledge, that is evaluation without noise or erro",
+      "confidence": 0.96,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_a9684b1f390a",
+      "feature_id": "feat_pawn_structure",
+      "source_url": "https://www.chessprogramming.org/Passed_Pawn",
+      "source_title": "Passed Pawn",
+      "snippet": "Home * Evaluation * Pawn Structure * Passed Pawn Schachclub Freibauer Schöneberg [1] A passed pawn, also called free pawn or passer , is a pawn with no opponent pawns in front on the same or adjacent files.",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_6c20db4079d2",
+      "feature_id": "feat_passed_pawn",
+      "source_url": "https://www.chessprogramming.org/Passed_Pawn",
+      "source_title": "Passed Pawn",
+      "snippet": "Home * Evaluation * Pawn Structure * Passed Pawn Schachclub Freibauer Schöneberg [1] A passed pawn, also called free pawn or passer , is a pawn with no opponent pawns in front on the same or adjacent files.",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_2a81bba3fddd",
+      "feature_id": "feat_isolated_pawn",
+      "source_url": "https://www.chessprogramming.org/Arasan",
+      "source_title": "Arasan",
+      "snippet": "Traditional [ edit ] Material Piece-Square Tables Development Mobility Trapped Pieces Rooks on (Semi) Open Files Outposts Pawn Structure Pawn Hash Table Backward Pawn Doubled Pawn Isolated Pawn Passed Pawn Connected Pass",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_8aae8c425d8f",
+      "feature_id": "feat_doubled_pawn",
+      "source_url": "https://www.chessprogramming.org/Arasan",
+      "source_title": "Arasan",
+      "snippet": "Traditional [ edit ] Material Piece-Square Tables Development Mobility Trapped Pieces Rooks on (Semi) Open Files Outposts Pawn Structure Pawn Hash Table Backward Pawn Doubled Pawn Isolated Pawn Passed Pawn Connected Pass",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_b4c12e854816",
+      "feature_id": "feat_connected_pawn",
+      "source_url": "https://www.chessprogramming.org/Arasan",
+      "source_title": "Arasan",
+      "snippet": "Traditional [ edit ] Material Piece-Square Tables Development Mobility Trapped Pieces Rooks on (Semi) Open Files Outposts Pawn Structure Pawn Hash Table Backward Pawn Doubled Pawn Isolated Pawn Passed Pawn Connected Pass",
+      "confidence": 0.92,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_2896416a5c9c",
+      "feature_id": "feat_bishop_pair",
+      "source_url": "https://www.chessprogramming.org/Draw_Evaluation",
+      "source_title": "Draw Evaluation",
+      "snippet": "Since this is unlikely given even a four ply search, we may introduce another class of drawn positions: those that cannot be claimed, but can be evaluated as draws: Two Knights against the bare King [1] Both Sides have a",
+      "confidence": 0.96,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_d21c8be4950b",
+      "feature_id": "feat_rook_on_open_file",
+      "source_url": "https://www.chessprogramming.org/Chess4j",
+      "source_title": "Chess4j",
+      "snippet": "4 External Links 5 References Features [ edit ] Board Representation [ edit ] Bitboards Magic Bitboards Search [ edit ] Iterative Deepening Aspiration Windows Alpha-Beta Transposition Table Move Ordering Hash Move Killer",
+      "confidence": 0.92,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_0601a511ee1f",
+      "feature_id": "feat_rook_semi_open_file",
+      "source_url": "https://www.chessprogramming.org/Arasan",
+      "source_title": "Arasan",
+      "snippet": "Traditional [ edit ] Material Piece-Square Tables Development Mobility Trapped Pieces Rooks on (Semi) Open Files Outposts Pawn Structure Pawn Hash Table Backward Pawn Doubled Pawn Isolated Pawn Passed Pawn Connected Pass",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_17c7d6e47a2e",
+      "feature_id": "feat_mobility",
+      "source_url": "https://www.chessprogramming.org/Jan_Eric_Larsson",
+      "source_title": "Jan Eric Larsson",
+      "snippet": "Contents 1 Mobility 2 Selected Publications 3 Forum Posts 4 External Links 5 References Mobility [ edit ] In his 1987 note Challenging that Mobility is Fundamental [3] , Larsson questions Dap Hartmann's definition of mob",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_365929fd7134",
+      "feature_id": "feat_transposition_table",
+      "source_url": "https://www.chessprogramming.org/Transposition_Table",
+      "source_title": "Transposition Table",
+      "snippet": "Home * Search * Transposition Table Salvador Dalí , The Persistence of Memory 1931 A Transposition Table , first used in Greenblatt's program Mac Hack VI [1] [2] [3] , is a database that stores results of previously perf",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_a2f132ca09b6",
+      "feature_id": "feat_zobrist_hashing",
+      "source_url": "https://www.chessprogramming.org/Zobrist_Hashing",
+      "source_title": "Zobrist Hashing",
+      "snippet": "Home * Search * Transposition Table * Zobrist Hashing King Wen sequence [1] [2] Zobrist Hashing , a technique to transform a board position of arbitrary size into a number of a set length, with an equal distribution over",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_05d97ca98c25",
+      "feature_id": "feat_replacement_schemes",
+      "source_url": "https://www.chessprogramming.org/Dennis_Breuker",
+      "source_title": "Dennis Breuker",
+      "snippet": "Replacement Schemes for Transposition Tables .",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_72ef5db06863",
+      "feature_id": "feat_pawn_hash_table",
+      "source_url": "https://www.chessprogramming.org/Pawn_Hash_Table",
+      "source_title": "Pawn Hash Table",
+      "snippet": "Home * Evaluation * Pawn Structure * Pawn Hash Table Pawns threaten the King [1] A Pawn Hash Table is often used inside a chess programs to cache purely pawn related pattern and evaluation stuff.",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_ce9e3ddaa799",
+      "feature_id": "feat_hash_move",
+      "source_url": "https://www.chessprogramming.org/Hash_Move",
+      "source_title": "Hash Move",
+      "snippet": "Home * Chess * Moves * Hash Move The Hash Move is a Move Ordering related issue.",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_ade1e16617db",
+      "feature_id": "feat_time_management",
+      "source_url": "https://www.chessprogramming.org/Time_Management",
+      "source_title": "Time Management",
+      "snippet": "Home * Search * Time Management Roland La Tuffo Barcsik - Time out [1] Time management refers to algorithms and heuristics to allocate time for searching a move under time control requirements in a game of chess .",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_2046514d09e9",
+      "feature_id": "feat_pondering",
+      "source_url": "https://www.chessprogramming.org/Pondering",
+      "source_title": "Pondering",
+      "snippet": "Home * Search * Pondering Vincent van Gogh - At Eternity's Gate , 1890 Pondering is simply using the opponent's move time to consider likely opponent moves and thus gain a pre-processing advantage when it is our turn to",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_33363f854295",
+      "feature_id": "feat_opening_book",
+      "source_url": "https://www.chessprogramming.org/Opening_Book",
+      "source_title": "Opening Book",
+      "snippet": "Home * Knowledge * Opening Book Modern Chess Openings [1] Chess programs often look up the positions at the beginning of the game in an Opening Book .",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_19a7a57adbde",
+      "feature_id": "feat_uci",
+      "source_url": "https://www.chessprogramming.org/UCI",
+      "source_title": "UCI",
+      "snippet": "Home * Protocols * UCI UCI , (Universal Chess Interface) an open communication protocol for chess engines to play games automatically, that is to communicate with other programs including Graphical User Interfaces .",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_8d0140a79c7f",
+      "feature_id": "feat_fen",
+      "source_url": "https://www.chessprogramming.org/Initial_Position",
+      "source_title": "Initial Position",
+      "snippet": "Contents 1 FEN 2 Diagram 3 Ambiguity 4 Perft 5 See also 6 Forum Posts 7 External Links 8 References FEN [ edit ] rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 Diagram [ edit ]   abcdefgh   8 7 6 5 4 3 2 1  ",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_eefc80c1a0e4",
+      "feature_id": "feat_null_move_pruning",
+      "source_url": "https://www.chessprogramming.org/Null_Move_Pruning",
+      "source_title": "Null Move Pruning",
+      "snippet": "Home * Search * Selectivity * Pruning * Null Move Pruning Samuel Bak - Signals [1] Null Move Pruning , also called Null Move Heuristic ( NMH ), is a method based on the Null Move Observation to reduce the search space by",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_9a882f584da6",
+      "feature_id": "feat_late_move_reductions",
+      "source_url": "https://www.chessprogramming.org/Late_Move_Reductions",
+      "source_title": "Late Move Reductions",
+      "snippet": "Home * Search * Selectivity * Reductions * Late Move Reductions Samuel Bak - Other Rules [1] Late Move Reductions (LMR) , save search by reducing moves that are ordered closer to the end.",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_d31eca4eb2b4",
+      "feature_id": "feat_futility_pruning",
+      "source_url": "https://www.chessprogramming.org/Futility_Pruning",
+      "source_title": "Futility Pruning",
+      "snippet": "Home * Search * Selectivity * Pruning * Futility Pruning M.",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_4a5f321475d1",
+      "feature_id": "feat_razoring",
+      "source_url": "https://www.chessprogramming.org/Razoring",
+      "source_title": "Razoring",
+      "snippet": "Home * Search * Selectivity * Reductions * Razoring Occam's razor [1] Unlike Alpha-Beta , classical Razoring [2] prunes branches forward, if the static evaluation of a move is less than or equal to Alpha .",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_77a28efe69eb",
+      "feature_id": "feat_delta_pruning",
+      "source_url": "https://www.chessprogramming.org/Delta_Pruning",
+      "source_title": "Delta Pruning",
+      "snippet": "Home * Search * Selectivity * Pruning * Delta Pruning Delta Pruning , a technique similar in concept to futility pruning , only used in the quiescence search .",
+      "confidence": 1.0,
+      "rule_id": "core_feature_match"
+    },
+    {
+      "id": "tr_7e251f549b19",
+      "feature_id": "evaluation_piece_coordination",
+      "source_url": "https://www.chessprogramming.org/Draw_Evaluation",
+      "source_title": "Draw Evaluation",
+      "snippet": "Since this is unlikely given even a four ply search, we may introduce another class of drawn positions: those that cannot be claimed, but can be evaluated as draws: Two Knights against the bare King [1] Both Sides have a",
+      "confidence": 0.54,
+      "rule_id": "intermediate_group_inferred"
+    },
+    {
+      "id": "tr_4614301dac68",
+      "feature_id": "feat_king_pressure",
+      "source_url": "https://www.chessprogramming.org/King_Pattern",
+      "source_title": "King Pattern",
+      "snippet": "Home * Board Representation * Bitboards * King Pattern Moore neighborhood [1] King pattern are about king attacks , some king safety issues and pawn endgame related stuff.",
+      "confidence": 0.5,
+      "rule_id": "intermediate_group_split"
+    },
+    {
+      "id": "tr_bb6fcc92450b",
+      "feature_id": "search_ordering_heuristics",
+      "source_url": "https://www.chessprogramming.org/Move_Ordering",
+      "source_title": "Move Ordering",
+      "snippet": "Home * Search * Move Ordering Wassily Kandinsky - Four Parts [1] For the alpha-beta algorithm to perform well, the best moves need to be searched first.",
+      "confidence": 0.5,
+      "rule_id": "intermediate_group_inferred"
+    },
+    {
+      "id": "tr_fab61c3a9f46",
+      "feature_id": "transposition_table_support",
+      "source_url": "https://www.chessprogramming.org/Zobrist_Hashing",
+      "source_title": "Zobrist Hashing",
+      "snippet": "Home * Search * Transposition Table * Zobrist Hashing King Wen sequence [1] [2] Zobrist Hashing , a technique to transform a board position of arbitrary size into a number of a set length, with an equal distribution over",
+      "confidence": 0.5,
+      "rule_id": "intermediate_group_inferred"
+    }
+  ],
+  "constraints": [
+    {
+      "id": "ctr_001_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_magic_bitboards",
+      "right_feature_id": "feat_bitboards",
+      "rationale": "Magic indexing is defined over bitboard representation.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_002_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_legal_move_generation",
+      "right_feature_id": "feat_move_generation",
+      "rationale": "Legal move generation extends the base move generation pipeline.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_003_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_pseudo_legal_move_generation",
+      "right_feature_id": "feat_move_generation",
+      "rationale": "Pseudo-legal generation still depends on core move generation support.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_004_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_copy_make",
+      "right_feature_id": "feat_make_move",
+      "rationale": "Copy-make still needs deterministic move application.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_005_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_unmake_move",
+      "right_feature_id": "feat_make_move",
+      "rationale": "Unmake is the inverse operation of make-move.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_006_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_castling",
+      "right_feature_id": "feat_legal_move_generation",
+      "rationale": "Castling legality depends on attack-aware legal move generation.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_007_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_en_passant",
+      "right_feature_id": "feat_legal_move_generation",
+      "rationale": "En-passant legality depends on legal move validation.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_008_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_minimax",
+      "right_feature_id": "feat_make_move",
+      "rationale": "Tree search requires move application.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_009_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_minimax",
+      "right_feature_id": "feat_unmake_move",
+      "rationale": "Minimax implementation uses make/unmake in recursion.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_010_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_alpha_beta",
+      "right_feature_id": "feat_make_move",
+      "rationale": "Tree search requires move application.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_011_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_alpha_beta",
+      "right_feature_id": "feat_unmake_move",
+      "rationale": "Alpha-Beta implementation uses make/unmake in recursion.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_012_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_alpha_beta",
+      "right_feature_id": "feat_castling",
+      "rationale": "Tournament-legal alpha-beta variants include castling rules.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_013_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_alpha_beta",
+      "right_feature_id": "feat_en_passant",
+      "rationale": "Tournament-legal alpha-beta variants include en-passant rules.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_014_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_alpha_beta",
+      "right_feature_id": "feat_threefold_repetition",
+      "rationale": "Tournament-legal alpha-beta variants detect repetition draws.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_015_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_alpha_beta",
+      "right_feature_id": "feat_fifty_move_rule",
+      "rationale": "Tournament-legal alpha-beta variants detect 50-move draws.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_016_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_negamax",
+      "right_feature_id": "feat_make_move",
+      "rationale": "Tree search requires move application.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_017_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_negamax",
+      "right_feature_id": "feat_unmake_move",
+      "rationale": "Negamax implementation uses make/unmake in recursion.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_018_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_quiescence_search",
+      "right_feature_id": "feat_make_move",
+      "rationale": "Quiescence examines tactical continuations via move application.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_019_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_quiescence_search",
+      "right_feature_id": "feat_unmake_move",
+      "rationale": "Quiescence implementation reverts explored captures.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_020_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_hash_move",
+      "right_feature_id": "feat_transposition_table",
+      "rationale": "Hash move retrieval requires a transposition table.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_021_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_hash_move",
+      "right_feature_id": "feat_move_ordering",
+      "rationale": "Hash move ordering refines the move ordering framework.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_022_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_killer_heuristic",
+      "right_feature_id": "feat_move_ordering",
+      "rationale": "Killer heuristic is part of the move ordering framework.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_023_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_history_heuristic",
+      "right_feature_id": "feat_move_ordering",
+      "rationale": "History heuristic is part of the move ordering framework.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_024_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_pawn_hash_table",
+      "right_feature_id": "feat_zobrist_hashing",
+      "rationale": "Pawn-hash keys are derived from hashing strategy.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_025_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_replacement_schemes",
+      "right_feature_id": "feat_transposition_table",
+      "rationale": "Replacement schemes refine how TT entries are stored.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_026_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_principal_variation_search",
+      "right_feature_id": "feat_alpha_beta",
+      "rationale": "PVS is an Alpha-Beta refinement.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_027_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_aspiration_windows",
+      "right_feature_id": "feat_alpha_beta",
+      "rationale": "Aspiration windows wrap around Alpha-Beta search bounds.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_028_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_null_move_pruning",
+      "right_feature_id": "feat_alpha_beta",
+      "rationale": "Null-move pruning is integrated in alpha-beta style search.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_029_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_late_move_reductions",
+      "right_feature_id": "feat_alpha_beta",
+      "rationale": "LMR depends on alpha-beta move ordering and bounds.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_030_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_futility_pruning",
+      "right_feature_id": "feat_alpha_beta",
+      "rationale": "Futility pruning relies on alpha-beta bound context.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_031_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_delta_pruning",
+      "right_feature_id": "feat_quiescence_search",
+      "rationale": "Delta pruning is applied in quiescence search.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_032_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_passed_pawn",
+      "right_feature_id": "feat_evaluation",
+      "rationale": "Passed-pawn scoring is an evaluation term.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_033_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_isolated_pawn",
+      "right_feature_id": "feat_evaluation",
+      "rationale": "Isolated-pawn scoring is an evaluation term.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_034_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_doubled_pawn",
+      "right_feature_id": "feat_evaluation",
+      "rationale": "Doubled-pawn scoring is an evaluation term.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_035_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_connected_pawn",
+      "right_feature_id": "feat_evaluation",
+      "rationale": "Connected-pawn scoring is an evaluation term.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_036_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_bishop_pair",
+      "right_feature_id": "feat_evaluation",
+      "rationale": "Bishop-pair scoring is an evaluation term.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_037_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_rook_on_open_file",
+      "right_feature_id": "feat_evaluation",
+      "rationale": "Open-file rook bonuses are evaluation terms.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_038_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_rook_semi_open_file",
+      "right_feature_id": "feat_evaluation",
+      "rationale": "Semi-open-file rook bonuses are evaluation terms.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_039_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_king_pressure",
+      "right_feature_id": "feat_evaluation",
+      "rationale": "King-pressure scoring is an evaluation term.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_040_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_king_shelter",
+      "right_feature_id": "feat_evaluation",
+      "rationale": "King shelter is an evaluation term.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_041_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_king_activity",
+      "right_feature_id": "feat_evaluation",
+      "rationale": "King activity is an evaluation term.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_042_requires",
+      "kind": "requires",
+      "left_feature_id": "feat_king_activity",
+      "right_feature_id": "feat_tapered_eval",
+      "rationale": "King activity is modeled as an endgame-weighted evaluation term.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_043_excludes",
+      "kind": "excludes",
+      "left_feature_id": "feat_minimax",
+      "right_feature_id": "feat_negamax",
+      "rationale": "Search core is modeled as a single primary choice.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_044_excludes",
+      "kind": "excludes",
+      "left_feature_id": "feat_bitboards",
+      "right_feature_id": "feat_mailbox",
+      "rationale": "Board encodings are modeled as alternative primary representations.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_045_excludes",
+      "kind": "excludes",
+      "left_feature_id": "feat_bitboards",
+      "right_feature_id": "feat_0x88",
+      "rationale": "Board encodings are modeled as alternative primary representations.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_046_excludes",
+      "kind": "excludes",
+      "left_feature_id": "feat_bitboards",
+      "right_feature_id": "feat_10x12_board",
+      "rationale": "Board encodings are modeled as alternative primary representations.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_047_excludes",
+      "kind": "excludes",
+      "left_feature_id": "feat_mailbox",
+      "right_feature_id": "feat_0x88",
+      "rationale": "Board encodings are modeled as alternative primary representations.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_048_excludes",
+      "kind": "excludes",
+      "left_feature_id": "feat_mailbox",
+      "right_feature_id": "feat_10x12_board",
+      "rationale": "Board encodings are modeled as alternative primary representations.",
+      "source": "implementation_catalog"
+    },
+    {
+      "id": "ctr_049_excludes",
+      "kind": "excludes",
+      "left_feature_id": "feat_0x88",
+      "right_feature_id": "feat_10x12_board",
+      "rationale": "Board encodings are modeled as alternative primary representations.",
+      "source": "implementation_catalog"
+    }
+  ]
+}

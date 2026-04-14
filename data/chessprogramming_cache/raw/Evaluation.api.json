@@ -1,0 +1,1321 @@
+{
+  "parse": {
+    "title": "Evaluation",
+    "pageid": 1449,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * Evaluation</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:287px;\"><a href=\"https://upload.wikimedia.org/wikipedia/commons/d/d5/Kandinsky_-_Graceful_Ascent%2C_1934.jpg\"><img alt=\"\" src=\"/images/f/fb/Schach-Theorie.jpg\" width=\"285\" height=\"298\" class=\"thumbimage\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Schach-Theorie.jpg\" class=\"internal\" title=\"Enlarge\"></a></div><a href=\"/Category:Wassily_Kandinsky\" title=\"Category:Wassily Kandinsky\">Wassily Kandinsky</a> - Graceful Ascent, 1934 <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>Evaluation</b>,<br />\na <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Heuristic_(computer_science)\">heuristic function</a> to determine the <a href=\"/Score\" title=\"Score\">relative value</a> of a <a href=\"/Chess_Position\" title=\"Chess Position\">position</a>, i.e. the chances of winning. If we could see to the end of the game in every line, the evaluation would only have values of -1 (loss), 0 (draw), and 1 (win), and the chess engine should search depth 1 only to get the best move. In practice, however, we do not know the exact value of a position, so we must make an approximation with the main purpose is to comparing positions, and the chess engine now must search deeply and find the highest score position within a given period.\n</p><p>Recently, there are two main ways to build an evaluation: traditional <b>hand-crafted evaluation</b> (HCE) and multi-layer <a href=\"/Neural_Networks\" title=\"Neural Networks\">neural networks</a>. This page focuses on the traditional way of considering explicit features of a <a href=\"/Chess_Position\" title=\"Chess Position\">chess position</a>. \n</p><p>Beginning chess players learn to do this starting with the <a href=\"/Point_Value\" title=\"Point Value\">value</a> of the <a href=\"/Pieces\" title=\"Pieces\">pieces</a> themselves. Computer evaluation functions also use the value of the <a href=\"/Material\" title=\"Material\">material balance</a> as the most significant aspect and then add other considerations. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Where_to_Start\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Where to Start</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-2\"><a href=\"#Side_to_move_relative\"><span class=\"tocnumber\">1.1</span> <span class=\"toctext\">Side to move relative</span></a></li>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#Linear_vs._Nonlinear\"><span class=\"tocnumber\">1.2</span> <span class=\"toctext\">Linear vs. Nonlinear</span></a></li>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#General_Aspects\"><span class=\"tocnumber\">1.3</span> <span class=\"toctext\">General Aspects</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#Basic_Evaluation_Features\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Basic Evaluation Features</span></a></li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#Considering_Game_Phase\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Considering Game Phase</span></a></li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#Miscellaneous\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Miscellaneous</span></a></li>\n<li class=\"toclevel-1 tocsection-8\"><a href=\"#See_also\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-9\"><a href=\"#Publications\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Publications</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#1949\"><span class=\"tocnumber\">6.1</span> <span class=\"toctext\">1949</span></a></li>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#1950_...\"><span class=\"tocnumber\">6.2</span> <span class=\"toctext\">1950 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-12\"><a href=\"#1960_...\"><span class=\"tocnumber\">6.3</span> <span class=\"toctext\">1960 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-13\"><a href=\"#1970_...\"><span class=\"tocnumber\">6.4</span> <span class=\"toctext\">1970 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-14\"><a href=\"#1980_...\"><span class=\"tocnumber\">6.5</span> <span class=\"toctext\">1980 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-15\"><a href=\"#1990_...\"><span class=\"tocnumber\">6.6</span> <span class=\"toctext\">1990 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-16\"><a href=\"#2000_...\"><span class=\"tocnumber\">6.7</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-17\"><a href=\"#2010_...\"><span class=\"tocnumber\">6.8</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-18\"><a href=\"#2015_...\"><span class=\"tocnumber\">6.9</span> <span class=\"toctext\">2015 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-19\"><a href=\"#Blog_.26_Forum_Posts\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">Blog &amp; Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-20\"><a href=\"#1993_...\"><span class=\"tocnumber\">7.1</span> <span class=\"toctext\">1993 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-21\"><a href=\"#1995_...\"><span class=\"tocnumber\">7.2</span> <span class=\"toctext\">1995 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-22\"><a href=\"#2000_..._2\"><span class=\"tocnumber\">7.3</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-23\"><a href=\"#2005_...\"><span class=\"tocnumber\">7.4</span> <span class=\"toctext\">2005 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-24\"><a href=\"#2010_..._2\"><span class=\"tocnumber\">7.5</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-25\"><a href=\"#2015_..._2\"><span class=\"tocnumber\">7.6</span> <span class=\"toctext\">2015 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-26\"><a href=\"#2020_...\"><span class=\"tocnumber\">7.7</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-27\"><a href=\"#External_Links\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">External Links</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-28\"><a href=\"#Mathematical_Foundations\"><span class=\"tocnumber\">8.1</span> <span class=\"toctext\">Mathematical Foundations</span></a></li>\n<li class=\"toclevel-2 tocsection-29\"><a href=\"#Chess_Evaluation\"><span class=\"tocnumber\">8.2</span> <span class=\"toctext\">Chess Evaluation</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-30\"><a href=\"#References\"><span class=\"tocnumber\">9</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Where_to_Start\">Where to Start</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Evaluation&amp;action=edit&amp;section=1\" title=\"Edit section: Where to Start\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>The first thing to consider when writing an evaluation function is how to score a move in <a href=\"/Minimax\" title=\"Minimax\">Minimax</a> or the more common <a href=\"/Negamax\" title=\"Negamax\">NegaMax</a> framework. While Minimax usually associates the white side with the max-player and black with the min-player and always evaluates from the white point of view, NegaMax requires a symmetric evaluation in relation to the <a href=\"/Side_to_move\" title=\"Side to move\">side to move</a>. We can see that one must not score the move per se – but the result of the move (i.e. a positional evaluation of the board as a result of the move). Such a symmetric evaluation function was first formulated by <a href=\"/Claude_Shannon\" title=\"Claude Shannon\">Claude Shannon</a> in 1949 <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>&#160;:\n</p>\n<pre>\nf(p) = 200(K-K')\n       + 9(Q-Q')\n       + 5(R-R')\n       + 3(B-B' + N-N')\n       + 1(P-P')\n       - 0.5(D-D' + S-S' + I-I')\n       + 0.1(M-M') + ...\n\nKQRBNP = number of kings, queens, rooks, bishops, knights and pawns\nD,S,I = doubled, blocked and isolated pawns\nM = Mobility (the number of legal moves)\n</pre>\n<p>Here, we can see that the <a href=\"/Score\" title=\"Score\">score</a> is returned as a result of subtracting the current side's score from the equivalent evaluation of the opponent's board scores (indicated by the prime letters K' Q' and R'.. ).\n</p>\n<h2><span class=\"mw-headline\" id=\"Side_to_move_relative\">Side to move relative</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Evaluation&amp;action=edit&amp;section=2\" title=\"Edit section: Side to move relative\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>In order for <a href=\"/Negamax\" title=\"Negamax\">NegaMax</a> to work, it is important to return the score relative to the side being evaluated. For example, consider a simple evaluation, which considers only <a href=\"/Material\" title=\"Material\">material</a> and <a href=\"/Mobility\" title=\"Mobility\">mobility</a>:\n</p>\n<pre>\nmaterialScore = kingWt  * (wK-bK)\n              + queenWt * (wQ-bQ)\n              + rookWt  * (wR-bR)\n              + knightWt* (wN-bN)\n              + bishopWt* (wB-bB)\n              + pawnWt  * (wP-bP)\n\nmobilityScore = mobilityWt * (wMobility-bMobility)\n</pre>\n<p><i>return the score relative to the <a href=\"/Side_to_move\" title=\"Side to move\">side to move</a> (who2Move = +1 for white, -1 for black):</i>\n</p>\n<pre>\nEval  = (materialScore + mobilityScore) * who2Move\n</pre>\n<p><span id=\"Linear\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Linear_vs._Nonlinear\">Linear vs. Nonlinear</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Evaluation&amp;action=edit&amp;section=3\" title=\"Edit section: Linear vs. Nonlinear\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Most evaluations terms are a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Linear_combination\">linear combination</a> of independent features and associated weights in the form of\n</p>\n<div class=\"floatnone\"><a href=\"/File:EvalLinearFormula1.jpg\" class=\"image\"><img alt=\"EvalLinearFormula1.jpg\" src=\"/images/0/0e/EvalLinearFormula1.jpg\" width=\"208\" height=\"58\" style=\"vertical-align: text-bottom\" class=\"thumbborder\" /></a></div>\n<p>A function <i>f</i> is <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Linear\">linear</a> if the function is <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Additive_function\">additive</a>:\n</p>\n<div class=\"floatnone\"><a href=\"/File:EvalLinearFormula2.jpg\" class=\"image\"><img alt=\"EvalLinearFormula2.jpg\" src=\"/images/a/ad/EvalLinearFormula2.jpg\" width=\"226\" height=\"34\" style=\"vertical-align: text-bottom\" class=\"thumbborder\" /></a></div>\n<p>and second if the function is <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Homogeneous_function\">homogeneous</a> of degree 1:\n</p>\n<dl><dd> <div class=\"floatnone\"><a href=\"/File:EvalLinearFormula3.jpg\" class=\"image\"><img alt=\"EvalLinearFormula3.jpg\" src=\"/images/b/b1/EvalLinearFormula3.jpg\" width=\"169\" height=\"30\" style=\"vertical-align: text-bottom\" class=\"thumbborder\" /></a></div></dd></dl>\n<p>It depends on the definition and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Linear_independence\">independence</a> of features and the acceptance of the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Axiom_of_choice\">axiom of choice</a> (<a href=\"/Ernst_Zermelo\" title=\"Ernst Zermelo\">Ernst Zermelo</a> 1904), whether additive real number functions are linear or not <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>. Features are either related to single pieces (<a href=\"/Material\" title=\"Material\">material</a>), their location (<a href=\"/Piece-Square_Tables\" title=\"Piece-Square Tables\">piece-square tables</a>), or more sophisticated, considering interactions of multiple pawns and pieces, based on certain <a href=\"/Evaluation_Patterns\" title=\"Evaluation Patterns\">patterns</a> or <a href=\"/Chunking\" title=\"Chunking\">chunks</a>. Often several phases to first process simple features and after building appropriate data structures, in consecutive phases more complex features based on patterns and chunks are used.\n</p><p>Based on that, to distinguish <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/First-order\">first-order</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Second-order\">second-order</a>, etc. terms, makes more sense than using the arbitrary terms linear vs. nonlinear evaluation <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>. With respect to <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">tuning</a>, one has to take care that features are independent, which is not always that simple. Hidden dependencies may otherwise make the evaluation function hard to maintain with undesirable nonlinear effects.\n</p>\n<h2><span class=\"mw-headline\" id=\"General_Aspects\">General Aspects</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Evaluation&amp;action=edit&amp;section=4\" title=\"Edit section: General Aspects\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Evaluation_Philosophy\" title=\"Evaluation Philosophy\">Evaluation Philosophy</a></li>\n<li> <a href=\"/Pawn_Advantage,_Win_Percentage,_and_Elo\" title=\"Pawn Advantage, Win Percentage, and Elo\">Pawn Advantage, Win Percentage, and Elo</a></li>\n<li> <a href=\"/Score#ValueRange\" title=\"Score\">Value Range</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Basic_Evaluation_Features\">Basic Evaluation Features</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Evaluation&amp;action=edit&amp;section=5\" title=\"Edit section: Basic Evaluation Features\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Material\" title=\"Material\">Material</a></li>\n<li> <a href=\"/Piece-Square_Tables\" title=\"Piece-Square Tables\">Piece-Square Tables</a></li>\n<li> <a href=\"/Pawn_Structure\" title=\"Pawn Structure\">Pawn Structure</a></li>\n<li> <a href=\"/Evaluation_of_Pieces\" title=\"Evaluation of Pieces\">Evaluation of Pieces</a></li>\n<li> <a href=\"/Evaluation_Patterns\" title=\"Evaluation Patterns\">Evaluation Patterns</a></li>\n<li> <a href=\"/Mobility\" title=\"Mobility\">Mobility</a></li>\n<li> <a href=\"/Center_Control\" title=\"Center Control\">Center Control</a></li>\n<li> <a href=\"/Connectivity\" title=\"Connectivity\">Connectivity</a></li>\n<li> <a href=\"/Trapped_Pieces\" title=\"Trapped Pieces\">Trapped Pieces</a></li>\n<li> <a href=\"/King_Safety\" title=\"King Safety\">King Safety</a></li>\n<li> <a href=\"/Space\" title=\"Space\">Space</a></li>\n<li> <a href=\"/Tempo\" title=\"Tempo\">Tempo</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Considering_Game_Phase\">Considering Game Phase</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Evaluation&amp;action=edit&amp;section=6\" title=\"Edit section: Considering Game Phase\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Game_Phases\" title=\"Game Phases\">Game Phases</a></li></ul>\n<dl><dd> <a href=\"/Opening\" title=\"Opening\">Opening</a></dd>\n<dd> <a href=\"/Middlegame\" title=\"Middlegame\">Middlegame</a></dd>\n<dd> <a href=\"/Endgame\" title=\"Endgame\">Endgame</a></dd></dl>\n<ul><li> <a href=\"/Evaluation_Discontinuity\" title=\"Evaluation Discontinuity\">Evaluation Discontinuity</a></li>\n<li> <a href=\"/Tapered_Eval\" title=\"Tapered Eval\">Tapered Eval</a> (a score is interpolated between opening and endgame based on game stage/pieces)</li></ul>\n<h1><span class=\"mw-headline\" id=\"Miscellaneous\">Miscellaneous</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Evaluation&amp;action=edit&amp;section=7\" title=\"Edit section: Miscellaneous\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Analog_Evaluation\" title=\"Analog Evaluation\">Analog Evaluation</a></li>\n<li> <a href=\"/Asymmetric_Evaluation\" title=\"Asymmetric Evaluation\">Asymmetric Evaluation</a></li>\n<li> <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">Automated Tuning</a></li>\n<li> <a href=\"/Evaluation_Function\" title=\"Evaluation Function\">Evaluation Function</a></li>\n<li> <a href=\"/Evaluation_Function_Draft\" title=\"Evaluation Function Draft\">Evaluation Function Draft</a></li>\n<li> <a href=\"/Evaluation_Hash_Table\" title=\"Evaluation Hash Table\">Evaluation Hash Table</a></li>\n<li> <a href=\"/Evaluation_Overlap\" title=\"Evaluation Overlap\">Evaluation Overlap</a> by <a href=\"/Mark_Watkins\" title=\"Mark Watkins\">Mark Watkins</a></li>\n<li> <a href=\"/Evaluation_Patterns\" title=\"Evaluation Patterns\">Evaluation Patterns</a></li>\n<li> <a href=\"/Lazy_Evaluation\" title=\"Lazy Evaluation\">Lazy Evaluation</a></li>\n<li> <a href=\"/Quantifying_Evaluation_Features\" title=\"Quantifying Evaluation Features\">Quantifying Evaluation Features</a> by <a href=\"/Mark_Watkins\" title=\"Mark Watkins\">Mark Watkins</a></li>\n<li> <a href=\"/Simplified_Evaluation_Function\" title=\"Simplified Evaluation Function\">Simplified Evaluation Function</a></li>\n<li> <a href=\"/PeSTO%27s_Evaluation_Function\" title=\"PeSTO&#39;s Evaluation Function\">PeSTO's Evaluation Function</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Evaluation&amp;action=edit&amp;section=8\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/CPW-Engine_eval\" title=\"CPW-Engine eval\">CPW-Engine_eval</a> - an example of a medium strength evaluation function</li>\n<li> <a href=\"/Papa#Entropy\" title=\"Papa\">Entropy in Papa</a></li>\n<li> <a href=\"/Kaissa#Evaluation\" title=\"Kaissa\">Evaluation in Kaissa (PC)</a></li>\n<li> <a href=\"/Rookie#Evaluation\" title=\"Rookie\">Evaluation in Rookie 2.0</a></li>\n<li> <a href=\"/Knowledge\" title=\"Knowledge\">Knowledge</a></li></ul>\n<dl><dd> <a href=\"/Knowledge#SearchVersusEvaluation\" title=\"Knowledge\">Search versus Evaluation</a></dd></dl>\n<ul><li> <a href=\"/Learning\" title=\"Learning\">Learning</a></li>\n<li> <a href=\"/NNUE\" title=\"NNUE\">NNUE</a></li>\n<li> <a href=\"/Oracle\" title=\"Oracle\">Oracle</a></li>\n<li> <a href=\"/Point_Value\" title=\"Point Value\">Point Value</a></li>\n<li> <a href=\"/Search_with_Random_Leaf_Values\" title=\"Search with Random Leaf Values\">Search with Random Leaf Values</a></li>\n<li> <a href=\"/Stockfish#EvaluationGuide\" title=\"Stockfish\">Stockfish Evaluation Guide</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Evaluation&amp;action=edit&amp;section=9\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1949\">1949</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Evaluation&amp;action=edit&amp;section=10\" title=\"Edit section: 1949\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Claude_Shannon\" title=\"Claude Shannon\">Claude Shannon</a> (<b>1949</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.pi.infn.it/%7Ecarosi/chess/shannon.txt\">Programming a Computer for Playing Chess</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://archive.computerhistory.org/projects/chess/related_materials/text/2-0%20and%202-1.Programming_a_computer_for_playing_chess.shannon/2-0%20and%202-1.Programming_a_computer_for_playing_chess.shannon.062303002.pdf\">pdf</a> from <a href=\"/The_Computer_History_Museum\" title=\"The Computer History Museum\">The Computer History Museum</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1950_...\">1950 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Evaluation&amp;action=edit&amp;section=11\" title=\"Edit section: 1950 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Eliot_Slater\" title=\"Eliot Slater\">Eliot Slater</a> (<b>1950</b>). <i>Statistics for the Chess Computer and the Factor of Mobility,</i> Proceedings of the Symposium on Information Theory, London. Reprinted 1988 in <a href=\"/Computer_Chess_Compendium\" title=\"Computer Chess Compendium\">Computer Chess Compendium</a>, pp. 113-117. Including the transcript of a discussion with <a href=\"/Alan_Turing\" title=\"Alan Turing\">Alan Turing</a> and <a href=\"/Jack_Good\" title=\"Jack Good\">Jack Good</a></li>\n<li> <a href=\"/Alan_Turing\" title=\"Alan Turing\">Alan Turing</a> (<b>1953</b>). <i><b>Chess</b></i>. part of the collection <i>Digital Computers Applied to Games</i>, in <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/B._V._Bowden,_Baron_Bowden\">Bertram Vivian Bowden</a> (editor), <a rel=\"nofollow\" class=\"external text\" href=\"http://www.computinghistory.org.uk/cgi-bin/sitewise.pl?act=det&amp;p=10719\">Faster Than Thought</a>, a symposium on digital computing machines, reprinted 1988 in <a href=\"/Computer_Chess_Compendium\" title=\"Computer Chess Compendium\">Computer Chess Compendium</a>, reprinted 2004 in <i>The Essential Turing</i>, <a rel=\"nofollow\" class=\"external text\" href=\"http://books.google.com/books?id=RSkxnKlv1D4C&amp;lpg=PP882&amp;ots=VOWmiIm_lD&amp;dq=Turochamp%2C%20chess&amp;pg=PP881#v=onepage&amp;q&amp;f=true\">google books</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1960_...\">1960 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Evaluation&amp;action=edit&amp;section=12\" title=\"Edit section: 1960 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Israel_Albert_Horowitz\">Israel Albert Horowitz</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Mott-Smith_Trophy\">Geoffrey Mott-Smith</a> (<b>1960,1970,2012</b>). <i>Point Count Chess</i>.  <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Samuel_Reshevsky\">Samuel Reshevsky</a> (Introduction), <a href=\"/Sam_Sloan\" title=\"Sam Sloan\">Sam Sloan</a> (2012 Introduction), <a rel=\"nofollow\" class=\"external text\" href=\"http://www.amazon.com/Point-Count-Chess-Accurate-Winning/dp/4871874699/ref=sr_1_2?s=books&amp;ie=UTF8&amp;qid=1366734801&amp;sr=1-2\">Amazon</a> <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup></li>\n<li> <a href=\"/Jack_Good\" title=\"Jack Good\">Jack Good</a> (<b>1968</b>). <i>A Five-Year Plan for Automatic Chess.</i> Machine Intelligence II pp. 110-115</li></ul>\n<h2><span class=\"mw-headline\" id=\"1970_...\">1970 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Evaluation&amp;action=edit&amp;section=13\" title=\"Edit section: 1970 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li>  <a href=\"/Ron_Atkin\" title=\"Ron Atkin\">Ron Atkin</a> (<b>1972</b>). <i>Multi-Dimensional Structure in the Game of Chess</i>. In International Journal of Man-Machine Studies, Vol. 4</li>\n<li> <a href=\"/Ron_Atkin\" title=\"Ron Atkin\">Ron Atkin</a>, <a href=\"/Ian_H._Witten\" title=\"Ian H. Witten\">Ian H. Witten</a> (<b>1975</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.bibsonomy.org/bibtex/2b91106ea980eb48aa505f6b54c130707/dblp\">A Multi-Dimensional Approach to Positional Chess</a></i>. International Journal of Man-Machine Studies, Vol. 7, No. 6</li>\n<li> <a href=\"/Gerard_Zieli%C5%84ski\" title=\"Gerard Zieliński\">Gerard Zieliński</a> (<b>1976</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.emeraldinsight.com/doi/abs/10.1108/eb005425\">Simple Evaluation Function</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.emeraldinsight.com/loi/k\">Kybernetes</a>, Vol. 5, No. 3</li>\n<li> <a href=\"/Ron_Atkin\" title=\"Ron Atkin\">Ron Atkin</a> (<b>1977</b>). <i>Positional Play in Chess by Computer</i>. <a href=\"/Advances_in_Computer_Chess_1\" title=\"Advances in Computer Chess 1\">Advances in Computer Chess 1</a></li>\n<li> <a href=\"/David_Slate\" title=\"David Slate\">David Slate</a>, <a href=\"/Larry_Atkin\" title=\"Larry Atkin\">Larry Atkin</a> (<b>1977</b>). <i>CHESS 4.5 - The Northwestern University Chess Program.</i> <a href=\"/Chess_Skill_in_Man_and_Machine\" title=\"Chess Skill in Man and Machine\">Chess Skill in Man and Machine</a> (ed. <a href=\"/Peter_W._Frey\" title=\"Peter W. Frey\">Peter W. Frey</a>), pp. 82-118. Springer-Verlag, New York, N.Y. 2nd ed. 1983. ISBN 0-387-90815-3. Reprinted (<b>1988</b>) in <a href=\"/Computer_Chess_Compendium\" title=\"Computer Chess Compendium\">Computer Chess Compendium</a></li>\n<li> <a href=\"/Hans_Berliner\" title=\"Hans Berliner\">Hans Berliner</a> (<b>1979</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.bkgm.com/articles/Berliner/EvaluationFunctionsLargeDomains/\">On the Construction of Evaluation Functions for Large Domains</a></i>.  <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/%7Eley/db/conf/ijcai/index.html\">IJCAI 1979</a> Tokyo, Vol. 1, pp. 53-55. </li></ul>\n<h2><span class=\"mw-headline\" id=\"1980_...\">1980 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Evaluation&amp;action=edit&amp;section=14\" title=\"Edit section: 1980 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Helmut_Horacek\" title=\"Helmut Horacek\">Helmut Horacek</a> (<b>1984</b>). <i>Some Conceptual Defects of Evaluation Functions</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://dl.acm.org/citation.cfm?id=537320\">ECAI-84</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pisa\">Pisa</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Elsevier\">Elsevier</a></li>\n<li> <a href=\"/Peter_W._Frey\" title=\"Peter W. Frey\">Peter W. Frey</a> (<b>1985</b>). <i>An Empirical Technique for Developing Evaluation Functions</i>. <a href=\"/ICGA_Journal#8_1\" title=\"ICGA Journal\">ICCA Journal, Vol. 8, No. 1</a></li>\n<li> <a href=\"/Tony_Marsland\" title=\"Tony Marsland\">Tony Marsland</a> (<b>1985</b>). <i>Evaluation-Function Factors</i>. <a href=\"/ICGA_Journal#8_2\" title=\"ICGA Journal\">ICCA Journal, Vol. 8, No. 2</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://webdocs.cs.ualberta.ca/~tony/OldPapers/evaluation.pdf\">pdf</a></li>\n<li> <a href=\"/Jens_Christensen\" title=\"Jens Christensen\">Jens Christensen</a>, <a href=\"/Richard_Korf\" title=\"Richard Korf\">Richard Korf</a> (<b>1986</b>). <i>A Unified Theory of Heuristic Evaluation functions and Its Applications to Learning.</i> Proceedings of the <a rel=\"nofollow\" class=\"external text\" href=\"http://www.aaai.org/Conferences/AAAI/aaai86.php\">AAAI-86</a>, pp. 148-152,  <a rel=\"nofollow\" class=\"external text\" href=\"http://www.aaai.org/Papers/AAAI/1986/AAAI86-023.pdf\">pdf</a></li>\n<li> <a href=\"/Dap_Hartmann\" title=\"Dap Hartmann\">Dap Hartmann</a> (<b>1987</b>). <i>How to Extract Relevant Knowledge from Grandmaster Games. Part 1: Grandmasters have Insights - the Problem is what to Incorporate into Practical Problems.</i> <a href=\"/ICGA_Journal#10_1\" title=\"ICGA Journal\">ICCA Journal, Vol. 10, No. 1</a></li>\n<li> <a href=\"/Dap_Hartmann\" title=\"Dap Hartmann\">Dap Hartmann</a> (<b>1987</b>). <i>How to Extract Relevant Knowledge from Grandmaster Games. Part 2: the Notion of Mobility, and the Work of <a href=\"/Adriaan_de_Groot\" title=\"Adriaan de Groot\">De Groot</a> and <a href=\"/Eliot_Slater\" title=\"Eliot Slater\">Slater</a></i>. <a href=\"/ICGA_Journal#10_2\" title=\"ICGA Journal\">ICCA Journal, Vol. 10, No. 2</a></li>\n<li> <a href=\"/Bruce_Abramson\" title=\"Bruce Abramson\">Bruce Abramson</a>, <a href=\"/Richard_Korf\" title=\"Richard Korf\">Richard Korf</a> (<b>1987</b>). <i>A Model of Two-Player Evaluation Functions.</i> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.aaai.org/Conferences/AAAI/aaai87.php\">AAAI-87</a>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.aaai.org/Papers/AAAI/1987/AAAI87-016.pdf\">pdf</a></li>\n<li> <a href=\"/Kai-Fu_Lee\" title=\"Kai-Fu Lee\">Kai-Fu Lee</a>, <a href=\"/Sanjoy_Mahajan\" title=\"Sanjoy Mahajan\">Sanjoy Mahajan</a> (<b>1988</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.sciencedirect.com/science/article/pii/0004370288900768\">A Pattern Classification Approach to Evaluation Function Learning</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_%28journal%29\">Artificial Intelligence</a>, Vol. 36, No. 1</li>\n<li> <a href=\"/Dap_Hartmann\" title=\"Dap Hartmann\">Dap Hartmann</a> (<b>1989</b>). <i>Notions of Evaluation Functions Tested against Grandmaster Games</i>. <a href=\"/Advances_in_Computer_Chess_5\" title=\"Advances in Computer Chess 5\">Advances in Computer Chess 5</a></li>\n<li> <a href=\"/Maarten_van_der_Meulen\" title=\"Maarten van der Meulen\">Maarten van der Meulen</a> (<b>1989</b>). <i>Weight Assessment in Evaluation Functions</i>. <a href=\"/Advances_in_Computer_Chess_5\" title=\"Advances in Computer Chess 5\">Advances in Computer Chess 5</a></li>\n<li> <a href=\"/Bruce_Abramson\" title=\"Bruce Abramson\">Bruce Abramson</a> (<b>1989</b>). <i>On Learning and Testing Evaluation Functions.</i> Proceedings of the Sixth Israeli Conference on Artificial Intelligence, 1989, 7-16.</li>\n<li> <a href=\"/Danny_Kopec\" title=\"Danny Kopec\">Danny Kopec</a>, <a href=\"/Ed_Northam\" title=\"Ed Northam\">Ed Northam</a>, <a href=\"/index.php?title=David_Podber&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"David Podber (page does not exist)\">David Podber</a>, <a href=\"/index.php?title=Yehya_Fouda&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Yehya Fouda (page does not exist)\">Yehya Fouda</a> (<b>1989</b>). <i>The Role of Connectivity in Chess</i>. <a href=\"/WCCC_1989#Workshop\" title=\"WCCC 1989\">Workshop on New Directions in Game-Tree Search</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.sci.brooklyn.cuny.edu/%7Ekopec/Publications/Publications/O_24_C.pdf\">pdf</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1990_...\">1990 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Evaluation&amp;action=edit&amp;section=15\" title=\"Edit section: 1990 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Bruce_Abramson\" title=\"Bruce Abramson\">Bruce Abramson</a> (<b>1990</b>). <i>On Learning and Testing Evaluation Functions.</i> Journal of Experimental and Theoretical Artificial Intelligence 2: 241-251.</li>\n<li> <a href=\"/index.php?title=Ron_Kalnim&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Ron Kalnim (page does not exist)\">Ron Kalnim</a> (<b>1990</b>). <i>A Positional Assembly Model</i>. <a href=\"/ICGA_Journal#13_3\" title=\"ICGA Journal\">ICCA Journal, Vol. 13, No. 3</a></li>\n<li> <a href=\"/Paul_E._Utgoff\" title=\"Paul E. Utgoff\">Paul E. Utgoff</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://dblp.uni-trier.de/pers/hd/c/Clouse:Jeffery_A=\">Jeffery A. Clouse</a> (<b>1991</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://scholarworks.umass.edu/cs_faculty_pubs/193/\">Two Kinds of Training Information for Evaluation Function Learning</a></i>.  <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/University_of_Massachusetts_Amherst\">University of Massachusetts, Amherst</a>, Proceedings of the AAAI 1991</li>\n<li> <a href=\"/Ingo_Alth%C3%B6fer\" title=\"Ingo Althöfer\">Ingo Althöfer</a> (<b>1991</b>). <i>An Additive Evaluation Function in Chess.</i> <a href=\"/ICGA_Journal#14_3\" title=\"ICGA Journal\">ICCA Journal, Vol. 14, No. 3</a></li>\n<li> <a href=\"/Ingo_Alth%C3%B6fer\" title=\"Ingo Althöfer\">Ingo Althöfer</a> (<b>1993</b>). <i>On Telescoping Linear Evaluation Functions.</i> <a href=\"/ICGA_Journal#16_2\" title=\"ICGA Journal\">ICCA Journal, Vol. 16, No. 2</a> <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup></li>\n<li> <a href=\"/Alois_Heinz\" title=\"Alois Heinz\">Alois Heinz</a>, <a href=\"/index.php?title=Christoph_Hense&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Christoph Hense (page does not exist)\">Christoph Hense</a> (<b>1993</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.56.872\">Bootstrap learning of α-β-evaluation functions</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://dblp.uni-trier.de/db/conf/icci/icci1993.html#HeinzH93\">ICCI 1993</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.56.872&amp;rep=rep1&amp;type=pdf\">pdf</a></li>\n<li> <a href=\"/Alois_Heinz\" title=\"Alois Heinz\">Alois Heinz</a> (<b>1994</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.55.3994\">Efficient Neural Net α-β-Evaluators</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.55.3994&amp;rep=rep1&amp;type=pdf\">pdf</a> <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup></li>\n<li> <a href=\"/Peter_Mysliwietz\" title=\"Peter Mysliwietz\">Peter Mysliwietz</a> (<b>1994</b>). <i>Konstruktion und Optimierung von Bewertungsfunktionen beim Schach.</i> Ph.D. Thesis (German)</li>\n<li> <a href=\"/Don_Beal\" title=\"Don Beal\">Don Beal</a>, <a href=\"/Martin_C._Smith\" title=\"Martin C. Smith\">Martin C. Smith</a> (<b>1994</b>). <i>Random Evaluations in Chess</i>. <a href=\"/ICGA_Journal#17_1\" title=\"ICGA Journal\">ICCA Journal, Vol. 17, No. 1</a></li>\n<li> <a href=\"/Yaakov_HaCohen-Kerner\" title=\"Yaakov HaCohen-Kerner\">Yaakov HaCohen-Kerner</a> (<b>1994</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.springerlink.com/content/f5n27h25q4l920q8/\">Case-Based Evaluation in Computer Chess</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/conf/ewcbr/ewcbr1994.html#Kerner94\">EWCBR 1994</a></li>\n<li> <a href=\"/Michael_Buro\" title=\"Michael Buro\">Michael Buro</a> (<b>1995</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.jair.org/papers/paper179.html\">Statistical Feature Combination for the Evaluation of Game Positions</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Journal_of_Artificial_Intelligence_Research\">JAIR</a>, Vol. 3</li>\n<li> <a href=\"/Peter_Mysliwietz\" title=\"Peter Mysliwietz\">Peter Mysliwietz</a> (<b>1997</b>). <i>A Metric for Evaluation Functions</i>. <a href=\"/Advances_in_Computer_Chess_8\" title=\"Advances in Computer Chess 8\">Advances in Computer Chess 8</a></li>\n<li> <a href=\"/Michael_Buro\" title=\"Michael Buro\">Michael Buro</a> (<b>1998</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/chapter/10.1007/3-540-48957-6_8\">From Simple Features to Sophisticated Evaluation Functions</a></i>. <a href=\"/CG_1998\" title=\"CG 1998\">CG 1998</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://skatgame.net/mburo/ps/glem.pdf\">pdf</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Evaluation&amp;action=edit&amp;section=16\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Dan_Heisman\" title=\"Dan Heisman\">Dan Heisman</a> (<b>2003</b>). <i>Evaluation Criteria</i>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.chesscafe.com/text/heisman27.pdf\">pdf</a> from <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/ChessCafe.com\">ChessCafe.com</a></li>\n<li> <a href=\"/Jeff_Rollason\" title=\"Jeff Rollason\">Jeff Rollason</a> (<b>2005</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.aifactory.co.uk/newsletter/2005_03_hill-climbing.htm\">Evaluation by Hill-climbing: Getting the right move by solving micro-problems</a></i>. <a href=\"/AI_Factory\" title=\"AI Factory\">AI Factory</a>, Autumn 2005&#160;» <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">Automated Tuning</a></li>\n<li> <a href=\"/Shogo_Takeuchi\" title=\"Shogo Takeuchi\">Shogo Takeuchi</a>, <a href=\"/Tomoyuki_Kaneko\" title=\"Tomoyuki Kaneko\">Tomoyuki Kaneko</a>, <a href=\"/Kazunori_Yamaguchi\" title=\"Kazunori Yamaguchi\">Kazunori Yamaguchi</a>, <a href=\"/Satoru_Kawai\" title=\"Satoru Kawai\">Satoru Kawai</a> (<b>2007</b>). <i>Visualization and Adjustment of Evaluation Functions Based on Evaluation Values and Win Probability</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/conf/aaai/aaai2007.html\">AAAI 2007</a></li>\n<li> <a href=\"/Eli_David\" title=\"Eli David\">Omid David</a>, <a href=\"/Moshe_Koppel\" title=\"Moshe Koppel\">Moshe Koppel</a>, <a href=\"/Nathan_S._Netanyahu\" title=\"Nathan S. Netanyahu\">Nathan S. Netanyahu</a> (<b>2008</b>). <i>Genetic Algorithms for Mentor-Assisted Evaluation Function Optimization</i>, ACM Genetic and Evolutionary Computation Conference (<a rel=\"nofollow\" class=\"external text\" href=\"http://www.sigevo.org/gecco-2008/\">GECCO '08</a>), pp. 1469-1475, Atlanta, GA, July 2008.</li>\n<li> <a href=\"/Eli_David\" title=\"Eli David\">Omid David</a>, <a href=\"/Jaap_van_den_Herik\" title=\"Jaap van den Herik\">Jaap van den Herik</a>, <a href=\"/Moshe_Koppel\" title=\"Moshe Koppel\">Moshe Koppel</a>, <a href=\"/Nathan_S._Netanyahu\" title=\"Nathan S. Netanyahu\">Nathan S. Netanyahu</a> (<b>2009</b>). <i>Simulating Human Grandmasters: Evolution and Coevolution of Evaluation Functions</i>. <a href=\"/ACM\" title=\"ACM\">ACM</a> Genetic and Evolutionary Computation Conference (<a rel=\"nofollow\" class=\"external text\" href=\"http://www.sigevo.org/gecco-2009/\">GECCO '09</a>), pp. 1483 - 1489, Montreal, Canada, July 2009.</li>\n<li> <a href=\"/Eli_David\" title=\"Eli David\">Omid David</a> (<b>2009</b>). <i>Genetic Algorithms Based Learning for Evolving Intelligent Organisms</i>. Ph.D. Thesis.</li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Evaluation&amp;action=edit&amp;section=17\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Lyudmil_Tsvetkov\" title=\"Lyudmil Tsvetkov\">Lyudmil Tsvetkov</a> (<b>2010</b>). <i>Little Chess Evaluation Compendium</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.winboardengines.de/doc/LittleChessEvaluationCompendium-2010-04-07.pdf\">2010 pdf</a></li>\n<li> <a href=\"/Eli_David\" title=\"Eli David\">Omid David</a>, <a href=\"/Moshe_Koppel\" title=\"Moshe Koppel\">Moshe Koppel</a>, <a href=\"/Nathan_S._Netanyahu\" title=\"Nathan S. Netanyahu\">Nathan S. Netanyahu</a> (<b>2011</b>). <i>Expert-Driven Genetic Algorithms for Simulating Evaluation Functions</i>. Genetic Programming and Evolvable Machines, Vol. 12, No. 1, pp. 5--22, March 2011.&#160;» <a href=\"/Genetic_Programming\" title=\"Genetic Programming\">Genetic Programming</a></li>\n<li> <a href=\"/Jeff_Rollason\" title=\"Jeff Rollason\">Jeff Rollason</a> (<b>2011</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.aifactory.co.uk/newsletter/2011_02_mcts_static.htm\">Mixing MCTS with Conventional Static Evaluation</a></i>. <a href=\"/AI_Factory\" title=\"AI Factory\">AI Factory</a>, Winter 2011&#160;» <a href=\"/Monte-Carlo_Tree_Search\" title=\"Monte-Carlo Tree Search\">Monte-Carlo Tree Search</a></li>\n<li> <a href=\"/Jeff_Rollason\" title=\"Jeff Rollason\">Jeff Rollason</a> (<b>2012</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.aifactory.co.uk/newsletter/2012_01_evaluation_options.htm\">Evaluation options - Overview of methods</a></i>. <a href=\"/AI_Factory\" title=\"AI Factory\">AI Factory</a>, Summer 2012</li>\n<li> <a href=\"/Lyudmil_Tsvetkov\" title=\"Lyudmil Tsvetkov\">Lyudmil Tsvetkov</a> (<b>2012</b>). <i>An Addendum to a Little Chess Evaluation Compendium</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.winboardengines.de/doc/addendumlcec_2012.pdf\">Addendum June 2012 pdf</a>, <a href=\"/File:Addendum2LCEC_2012.pdf\" title=\"File:Addendum2LCEC 2012.pdf\">File:Addendum2LCEC 2012.pdf</a>, <a href=\"/File:Addendum3LCEC_2012.pdf\" title=\"File:Addendum3LCEC 2012.pdf\">File:Addendum3LCEC 2012.pdf</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.winboardengines.de/doc/addendum4lcec_2012.pdf\">Addendum 4 November 2012 pdf</a>, <a href=\"/File:Addendum5LCEC_2012.pdf\" title=\"File:Addendum5LCEC 2012.pdf\">File:Addendum5LCEC 2012.pdf</a>, <a href=\"/File:Addendum6LCEC_2012.pdf\" title=\"File:Addendum6LCEC 2012.pdf\">File:Addendum6LCEC 2012.pdf</a></li>\n<li> <a href=\"/Lyudmil_Tsvetkov\" title=\"Lyudmil Tsvetkov\">Lyudmil Tsvetkov</a> (<b>2012</b>). <i>Little Chess Evaluation Compendium</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.winboardengines.de/doc/LittleChessEvaluationCompendium.pdf\">July 2012 pdf</a> <sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup>,  <a href=\"/File:LittleChessEvaluationCompendium.pdf\" title=\"File:LittleChessEvaluationCompendium.pdf\">File:LittleChessEvaluationCompendium.pdf</a> </li>\n<li> <a href=\"/index.php?title=Derek_Farren&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Derek Farren (page does not exist)\">Derek Farren</a>, <a href=\"/index.php?title=Daniel_Templeton&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Daniel Templeton (page does not exist)\">Daniel Templeton</a>, <a href=\"/index.php?title=Meiji_Wang&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Meiji Wang (page does not exist)\">Meiji Wang</a> (<b>2013</b>). <i>Analysis of Networks in Chess</i>. Team 23, <a href=\"/Stanford_University\" title=\"Stanford University\">Stanford University</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://snap.stanford.edu/class/cs224w-2013/projects2013/cs224w-023-final.pdf\">pdf</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2015_...\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Evaluation&amp;action=edit&amp;section=18\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/index.php?title=Nera_Nesic&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Nera Nesic (page does not exist)\">Nera Nesic</a>, <a href=\"/Stephan_Schiffel\" title=\"Stephan Schiffel\">Stephan Schiffel</a> (<b>2016</b>). <i>Heuristic Function Evaluation Framework</i>. <a href=\"/CG_2016\" title=\"CG 2016\">CG 2016</a></li>\n<li> <a href=\"/Lyudmil_Tsvetkov\" title=\"Lyudmil Tsvetkov\">Lyudmil Tsvetkov</a> (<b>2017</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.secretofchess.com/\">The Secret of Chess</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://www.amazon.com/Secret-Chess-Lyudmil-Tsvetkov-ebook/dp/B074M85CVV\">amazon</a> <sup id=\"cite_ref-9\" class=\"reference\"><a href=\"#cite_note-9\">&#91;9&#93;</a></sup></li>\n<li> <a href=\"/Lyudmil_Tsvetkov\" title=\"Lyudmil Tsvetkov\">Lyudmil Tsvetkov</a> (<b>2017</b>). <i>Pawns</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://www.amazon.com/Pawns-Lyudmil-Tsvetkov-ebook/dp/B074S2MYQV\">amazon</a> </li></ul>\n<h1><span class=\"mw-headline\" id=\"Blog_.26_Forum_Posts\">Blog &amp; Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Evaluation&amp;action=edit&amp;section=19\" title=\"Edit section: Blog &amp; Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1993_...\">1993 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Evaluation&amp;action=edit&amp;section=20\" title=\"Edit section: 1993 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess/J9Pkg9lOpig/tBN5dVRATwsJ\">Cray Blitz Evaluation</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgc</a>, March 05, 1993&#160;» <a href=\"/Cray_Blitz\" title=\"Cray Blitz\">Cray Blitz</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess/6vwtkcF6sRU/4M3oOiDNYwgJ\">Mobility Measure: Proposed Algorithm</a> by Dietrich Kappe, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgc</a>, September 23, 1993&#160;» <a href=\"/Mobility\" title=\"Mobility\">Mobility</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess/M4CKCmqDNkI/TjVJEQY0GC0J\">bitboard position evaluations</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgc</a>, November 17, 1994&#160;» <a href=\"/Bitboards\" title=\"Bitboards\">Bitboards</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1995_...\">1995 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Evaluation&amp;action=edit&amp;section=21\" title=\"Edit section: 1995 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess/efBhsZU3J1g/fC7rxV5yuycJ\">Value of the pieces</a> by Joost de Heer, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgc</a>, February 01, 1995</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/4f54813edf18fdcc\">Evaluation function diminishing returns</a> by <a href=\"/Bruce_Moreland\" title=\"Bruce Moreland\">Bruce Moreland</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, February 1, 1997</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/40fe48d492e582bd\">Evaluation function question</a> by <a href=\"/David_Fotland\" title=\"David Fotland\">Dave Fotland</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, February 07, 1997</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/99eec6923b0481db\">computer chess \"oracle\" ideas...</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, April 01, 1997&#160;» <a href=\"/Oracle\" title=\"Oracle\">Oracle</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/77f10f072e907302\">Evolutionary Evaluation</a> by <a href=\"/Daniel_Homan\" title=\"Daniel Homan\">Daniel Homan</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, September 09, 1997&#160;» <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">Automated Tuning</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=25012\">Books that help for evaluation</a> by <a href=\"/Guido_Schimmels\" title=\"Guido Schimmels\">Guido Schimmels</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 18, 1998</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=80569\">Static evaluation after the \"Positional/Real Sacrifice\"</a> by <a href=\"/Andrew_Williams\" title=\"Andrew Williams\">Andrew Williams</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 03, 1999</li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_..._2\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Evaluation&amp;action=edit&amp;section=22\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=289154\">Adding knowledge to the evaluation, what am I doing wrong?</a> by <a href=\"/Albert_Bertilsson\" title=\"Albert Bertilsson\">Albert Bertilsson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 13, 2003</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=293815\">testing of evaluation function</a> by Steven Chu, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 17, 2003&#160;» <a href=\"/Engine_Testing\" title=\"Engine Testing\">Engine Testing</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=328924\">Question about evaluation and branch factor</a> by <a href=\"/Marcus_Prewarski\" title=\"Marcus Prewarski\">Marcus Prewarski</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 20, 2003 &#160;» <a href=\"/Branching_Factor\" title=\"Branching Factor\">Branching Factor</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=350516\">STATIC EVAL TEST (provisional)</a> by <a href=\"/Jaime_Benito_de_Valle_Ruiz\" title=\"Jaime Benito de Valle Ruiz\">Jaime Benito de Valle Ruiz</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 21, 2004&#160;» <a href=\"/Test-Positions\" title=\"Test-Positions\">Test-Positions</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2005_...\">2005 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Evaluation&amp;action=edit&amp;section=23\" title=\"Edit section: 2005 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=475521\">Re: Zappa Report</a> by <a href=\"/Ingo_Alth%C3%B6fer\" title=\"Ingo Althöfer\">Ingo Althöfer</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 30, 2005</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=4155#p21292\">Do you evaluate internal nodes?</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, January 16, 2006&#160;» <a href=\"/Interior_Node\" title=\"Interior Node\">Interior Node</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=13969\">question about symmertic evaluation</a> by <a href=\"/Uri_Blass\" title=\"Uri Blass\">Uri Blass</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 23, 2007</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum3/viewtopic.php?f=7&amp;t=15220\">Trouble Spotter</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 19, 2007&#160;» <a href=\"/Tactics\" title=\"Tactics\">Tactics</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.hiarcs.net/forums/viewtopic.php?t=402\">Search or Evaluation?</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Hiarcs Forum</a>, October 05, 2007&#160;» <a href=\"/Knowledge#SearchVersusEvaluation\" title=\"Knowledge\">Search versus Evaluation</a>, <a href=\"/Search\" title=\"Search\">Search</a></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.hiarcs.net/forums/viewtopic.php?p=2944\">Re: Search or Evaluation?</a> by <a href=\"/Mark_Uniacke\" title=\"Mark Uniacke\">Mark Uniacke</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Hiarcs Forum</a>, October 14, 2007</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum3/viewtopic.php?f=7&amp;t=20340\">Problems with eval function</a> by <a href=\"/Fermin_Serrano\" title=\"Fermin Serrano\">Fermin Serrano</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 25, 2008&#160;» <a class=\"mw-selflink selflink\">Evaluation</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=22817\">Evaluation functions. Why integer?</a> by oysteijo, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 06, 2008&#160;» <a href=\"/Float\" title=\"Float\">Float</a>, <a href=\"/Score\" title=\"Score\">Score</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum3/viewtopic.php?f=7&amp;t=24052\">Smooth evaluation</a> by <a href=\"/Fermin_Serrano\" title=\"Fermin Serrano\">Fermin Serrano</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 29, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=25795\">Evaluating every node?</a> by <a href=\"/Gregory_Strong\" title=\"Gregory Strong\">Gregory Strong</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 03, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum3/viewtopic.php?f=7&amp;t=26700\">Evaluation idea</a> by <a href=\"/Fermin_Serrano\" title=\"Fermin Serrano\">Fermin Serrano</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 24, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum3/viewtopic.php?f=7&amp;t=27055\">Accurate eval function</a> by <a href=\"/Fermin_Serrano\" title=\"Fermin Serrano\">Fermin Serrano</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 18, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=27299\">Eval Dilemma</a> by <a href=\"/Edsel_Apostol\" title=\"Edsel Apostol\">Edsel Apostol</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 03, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=288424\">Linear vs. Nonlinear Evalulation</a> by <a href=\"/Gerd_Isenberg\" title=\"Gerd Isenberg\">Gerd Isenberg</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 26, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?p=291259\">Threat information from evaluation to inform q-search</a> by <a href=\"/Gary_Linscott\" title=\"Gary Linscott\">Gary</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 15, 2009&#160;» <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">Quiescence Search</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_..._2\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Evaluation&amp;action=edit&amp;section=24\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=32396\">Correcting Evaluation with the hash table</a> by <a href=\"/Mark_Lefler\" title=\"Mark Lefler\">Mark Lefler</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 05, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=362888&amp;t=35455\">Re: Questions for the Stockfish team</a> by <a href=\"/Milos_Stanisavljevic\" title=\"Milos Stanisavljevic\">Milos Stanisavljevic</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 20, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=36104\">Most important eval elements</a> by <a href=\"/Tom_King\" title=\"Tom King\">Tom King</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 17, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=374967&amp;t=36421\">Re: 100 long games Rybka 4 vs Houdini 1.03a</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 02, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=37191\">dynamically modified evaluation function</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 20, 2010</li></ul>\n<p><b>2011</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://rybkaforum.net/cgi-bin/rybkaforum/topic_show.pl?tid=22785\">Suppose Rybka used Fruits evaluations</a> by <a href=\"/S%C3%B8ren_Riis\" title=\"Søren Riis\">SR</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Rybka Forum</a>, August 29, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=41621\">writing an evaluation function</a> by Pierre Bokma, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 27, 2011</li></ul>\n<p><b>2012</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=42806\">The evaluation value and value returned by minimax search</a> by <a href=\"/Chao_Ma\" title=\"Chao Ma\">Chao Ma</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 09, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=43385\">Multi dimensional score</a> by <a href=\"/Nicu_Ionita\" title=\"Nicu Ionita\">Nicu Ionita</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 20, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=43386\">Bi dimensional static evaluation</a> by <a href=\"/Nicu_Ionita\" title=\"Nicu Ionita\">Nicu Ionita</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 20, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=43387\">Theorem proving positional evaluation</a> by <a href=\"/Nicu_Ionita\" title=\"Nicu Ionita\">Nicu Ionita</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 20, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=43545\">log(w/b) instead of w-b?</a> by <a href=\"/Gerd_Isenberg\" title=\"Gerd Isenberg\">Gerd Isenberg</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 02, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=44014\">The value of an evaluation function</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 11, 2012</li></ul>\n<p><b>2013</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=46879\">eval scale in Houdini</a> by <a href=\"/Rein_Halbersma\" title=\"Rein Halbersma\">Rein Halbersma</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 14, 2013&#160;» <a href=\"/Houdini\" title=\"Houdini\">Houdini</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=46993\">An idea of how to make your engine play more rational chess</a> by <a href=\"/index.php?title=Pio_Korinth&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Pio Korinth (page does not exist)\">Pio Korinth</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 25, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=48252\">A Materialless Evaluation?</a> by <a href=\"/Thomas_Kolarik\" title=\"Thomas Kolarik\">Thomas Kolarik</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 12, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=48644\">A different way of summing evaluation features</a> by <a href=\"/index.php?title=Pio_Korinth&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Pio Korinth (page does not exist)\">Pio Korinth</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 14, 2013 <sup id=\"cite_ref-10\" class=\"reference\"><a href=\"#cite_note-10\">&#91;10&#93;</a></sup> <sup id=\"cite_ref-11\" class=\"reference\"><a href=\"#cite_note-11\">&#91;11&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=49190\">Improve the search or the evaluation?</a> by <a href=\"/Jens_B%C3%A6k_Nielsen\" title=\"Jens Bæk Nielsen\">Jens Bæk Nielsen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 31, 2013&#160;» <a href=\"/Knowledge#SearchVersusEvaluation\" title=\"Knowledge\">Search versus Evaluation</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=49421\">Multiple EVAL</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schroder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 22, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=50472\">floating point SSE eval</a> by <a href=\"/Marco_Belli\" title=\"Marco Belli\">Marco Belli</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 13, 2013&#160;» <a href=\"/Float\" title=\"Float\">Float</a>, <a href=\"/Score\" title=\"Score\">Score</a></li></ul>\n<p><b>2014</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=51012\">5 underestimated evaluation rules</a> by <a href=\"/Lyudmil_Tsvetkov\" title=\"Lyudmil Tsvetkov\">Lyudmil Tsvetkov</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 23, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=51811\">Thoughs on eval terms</a> by <a href=\"/Fermin_Serrano\" title=\"Fermin Serrano\">Fermin Serrano</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 31, 2014</li></ul>\n<h2><span class=\"mw-headline\" id=\"2015_..._2\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Evaluation&amp;action=edit&amp;section=25\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=55355\">Value of a Feature or Heuristic</a> by <a href=\"/Jonathan_Rosenthal\" title=\"Jonathan Rosenthal\">Jonathan Rosenthal</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 15, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=55897\">Couple more ideas</a> by <a href=\"/Lyudmil_Tsvetkov\" title=\"Lyudmil Tsvetkov\">Lyudmil Tsvetkov</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 05, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=55955\">Most common/top evaluation features?</a> by <a href=\"/Alexandru_Mosoi\" title=\"Alexandru Mosoi\">Alexandru Mosoi</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 10, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=56690\">eval pieces</a> by <a href=\"/Daniel_Anulliero\" title=\"Daniel Anulliero\">Daniel Anulliero</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 15, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=57022\">* vs +</a> by <a href=\"/Stefano_Gemma\" title=\"Stefano Gemma\">Stefano Gemma</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 19, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=57087\">(E)valuation (F)or (S)tarters</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 26, 2015 </li></ul>\n<p><b>2016</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=59091\">Non-linear eval terms</a> by <a href=\"/index.php?title=J._Wesley_Cleveland&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"J. Wesley Cleveland (page does not exist)\">J. Wesley Cleveland</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 29, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=59570\">A bizarre evaluation</a> by <a href=\"/Larry_Kaufman\" title=\"Larry Kaufman\">Larry Kaufman</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 20, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://int8.io/chess-position-evaluation-with-convolutional-neural-networks-in-julia/\">Chess position evaluation with convolutional neural network in Julia</a> by <a href=\"/index.php?title=Kamil_Czarnogorski&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Kamil Czarnogorski (page does not exist)\">Kamil Czarnogorski</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://int8.io/\">Machine learning with Julia and python</a>, April 02, 2016&#160;» <a href=\"/Deep_Learning\" title=\"Deep Learning\">Deep Learning</a>, <a href=\"/Neural_Networks\" title=\"Neural Networks\">Neural Networks</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=61064\">Calculating space</a> by <a href=\"/Shawn_Chidester\" title=\"Shawn Chidester\">Shawn Chidester</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 07, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=61236\">Evaluation values help</a> by <a href=\"/Laurie_Tunnicliffe\" title=\"Laurie Tunnicliffe\">Laurie Tunnicliffe</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 26, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=61861\">A database for learning evaluation functions</a> by <a href=\"/%C3%81lvaro_Begu%C3%A9\" title=\"Álvaro Begué\">Álvaro Begué</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 28, 2016&#160;» <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">Automated Tuning</a>, <a href=\"/Learning\" title=\"Learning\">Learning</a>, <a href=\"/Texel%27s_Tuning_Method\" title=\"Texel&#39;s Tuning Method\">Texel's Tuning Method</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=61875\">Evaluation doubt</a> by <a href=\"/Fabio_Gobbato\" title=\"Fabio Gobbato\">Fabio Gobbato</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 29, 2016</li></ul>\n<p><b>2017</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=63181\">Bayesian Evaluation Functions</a> by <a href=\"/Jonathan_Rosenthal\" title=\"Jonathan Rosenthal\">Jonathan Rosenthal</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 15, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=63408\">improved evaluation function</a> by <a href=\"/Alexandru_Mosoi\" title=\"Alexandru Mosoi\">Alexandru Mosoi</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 11, 2017&#160;» <a href=\"/Texel%27s_Tuning_Method\" title=\"Texel&#39;s Tuning Method\">Texel's Tuning Method</a>, <a href=\"/Zurichess\" title=\"Zurichess\">Zurichess</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=63803\">random evaluation perturbation factor</a> by <a href=\"/Stuart_Cracraft\" title=\"Stuart Cracraft\">Stuart Cracraft</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 24, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=63863\">horrid positional play in a solid tactical searcher</a> by <a href=\"/Stuart_Cracraft\" title=\"Stuart Cracraft\">Stuart Cracraft</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 29, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=64041\">Another attempt at comparing Evals ELO-wise</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 22, 2017&#160;» <a href=\"/Playing_Strength\" title=\"Playing Strength\">Playing Strength</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=64230\">static eval in every node?</a> by <a href=\"/Erin_Dame\" title=\"Erin Dame\">Erin Dame</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 09, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=65403\">comparing between search or evaluation</a> by <a href=\"/Uri_Blass\" title=\"Uri Blass\">Uri Blass</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 09, 2017» <a href=\"/Search\" title=\"Search\">Search</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=65715\">Neural networks for chess position evaluation- request</a> by <a href=\"/index.php?title=Kamil_Czarnogorski&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Kamil Czarnogorski (page does not exist)\">Kamil Czarnogorski</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 13, 2017&#160;» <a href=\"/Deep_Learning\" title=\"Deep Learning\">Deep Learning</a>, <a href=\"/Neural_Networks\" title=\"Neural Networks\">Neural Networks</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=65829\">AlphaGo's evaluation function</a> by Jens Kipper, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 26, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=65946\">Logarithmic Patterns In Evaluations</a> by <a href=\"/Dennis_Sceviour\" title=\"Dennis Sceviour\">Dennis Sceviour</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 09, 2017</li></ul>\n<p><b>2018</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=66413\">replace the evaluation by playing against yourself</a> by <a href=\"/Uri_Blass\" title=\"Uri Blass\">Uri Blass</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 25, 2018&#160;» <a href=\"/Fortress\" title=\"Fortress\">Fortress</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum3/viewtopic.php?f=7&amp;t=67524\">Poor man's neurones</a> by <a href=\"/Pawel_Koziol\" title=\"Pawel Koziol\">Pawel Koziol</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 21, 2018&#160;» <a href=\"/Neural_Networks\" title=\"Neural Networks\">Neural Networks</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum3/viewtopic.php?f=7&amp;t=67877\">Xiangqi evaluation</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 01, 2018&#160;» <a href=\"/Chinese_Chess\" title=\"Chinese Chess\">Xiangqi</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Evaluation&amp;action=edit&amp;section=26\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum3/viewtopic.php?f=7&amp;t=74652\">romantic-style play</a> by <a href=\"/Stuart_Cracraft\" title=\"Stuart Cracraft\">Stuart Cracraft</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 02, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://prodeo.actieforum.com/t120-engine-choosing-between-sets-of-piece-square-tables\">Engine choosing between sets of piece/square tables</a> by <a href=\"/Pawel_Koziol\" title=\"Pawel Koziol\">Pawel Koziol</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">ProDeo Forum</a>, December 05, 2020&#160;» <a href=\"/Rodent\" title=\"Rodent\">Rodent</a>, <a href=\"/Piece-Square_Tables\" title=\"Piece-Square Tables\">Piece-Square Tables</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://prodeo.actieforum.com/t123-controlled-randomness-of-evaluation-function\">Controlled randomness of evaluation function</a> by <a href=\"/Pawel_Koziol\" title=\"Pawel Koziol\">nescitus</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">ProDeo Forum</a>, December 06, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum3/viewtopic.php?f=7&amp;t=76161\">Manually tuned evaluation</a> by <a href=\"/Maksim_Korzh\" title=\"Maksim Korzh\">Maksim Korzh</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 27, 2020&#160;» <a href=\"/Simplified_Evaluation_Function\" title=\"Simplified Evaluation Function\">Simplified Evaluation Function</a></li></ul>\n<p><b>2021</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum3/viewtopic.php?f=2&amp;t=76446\">So what do we miss in the traditional evaluation?</a> by <a href=\"/Ferdinand_Mosca\" title=\"Ferdinand Mosca\">Ferdinand Mosca</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 29, 2021&#160;» <a href=\"/NNUE\" title=\"NNUE\">NNUE</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum3/viewtopic.php?f=7&amp;t=76556\">HCE and NNUE and vectorisation</a> by <a href=\"/Vivien_Clauzon\" title=\"Vivien Clauzon\">Vivien Clauzon</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 11, 2021&#160;» <a href=\"/NNUE\" title=\"NNUE\">NNUE</a>, <a href=\"/Minic\" title=\"Minic\">Minic</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/g/lczero/c/TLCMkkdm1hw/m/erjTVGUqAQAJ\">Idea: use range (evalMin - evalMax) for position evaluation</a> by Mirza Hadzic, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">LCZero Forum</a>, April 6, 2021 </li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/g/lczero/c/TLCMkkdm1hw/m/SgbGghzhBAAJ\">Re: Idea: use range (evalMin - evalMax) for position evaluation</a> by <a href=\"/%C3%81lvaro_Begu%C3%A9\" title=\"Álvaro Begué\">Álvaro Begué</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">LCZero Forum</a>, May 28, 2021 <sup id=\"cite_ref-12\" class=\"reference\"><a href=\"#cite_note-12\">&#91;12&#93;</a></sup></dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/g/lczero/c/TLCMkkdm1hw/m/F9JjnN8FBQAJ\">Re: Idea: use range (evalMin - evalMax) for position evaluation</a> by <a href=\"/Warren_D._Smith\" title=\"Warren D. Smith\">Warren D. Smith</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">LCZero Forum</a>, May 29, 2021</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum3/viewtopic.php?f=2&amp;t=77571\">I declare that HCE is dead...</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 29, 2021&#160;» <a href=\"/Ethereal\" title=\"Ethereal\">Ethereal</a>, <a href=\"/NNUE\" title=\"NNUE\">NNUE</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum3/viewtopic.php?f=7&amp;t=77952\">Evaluation questions</a> by <a href=\"/index.php?title=Ellie_Moore&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Ellie Moore (page does not exist)\">Ellie Moore</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 16, 2021</li></ul>\n<p><b>2023</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/viewtopic.php?t=81968\">Most Important Evaluation Terms</a> by <a href=\"/index.php?title=Aditya_Chandra&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Aditya Chandra (page does not exist)\">Aditya Chandra</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 30, 2023</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Evaluation&amp;action=edit&amp;section=27\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Mathematical_Foundations\">Mathematical Foundations</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Evaluation&amp;action=edit&amp;section=28\" title=\"Edit section: Mathematical Foundations\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Heuristic_(computer_science)\">Heuristic from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Linear_combination\">Linear combination from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Linear_independence\">Linear independence from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Orthogonality\">Orthogonality from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Principal_component_analysis\">Principal component analysis from Wikipedia</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Chess_Evaluation\">Chess Evaluation</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Evaluation&amp;action=edit&amp;section=29\" title=\"Edit section: Chess Evaluation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Evaluation_function\">Evaluation function from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://hxim.github.io/Stockfish-Evaluation-Guide/\">Stockfish Evaluation Guide</a>&#160;» <a href=\"/Stockfish#EvaluationGuide\" title=\"Stockfish\">Stockfish Evaluation Guide</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/gekomad/chess-engine-eval-debugger\">GitHub - gekomad/chess-engine-eval-debugger: Chess engine web evaluator</a> by <a href=\"/Giuseppe_Cannella\" title=\"Giuseppe Cannella\">Giuseppe Cannella</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://home.hccnet.nl/h.g.muller/eval.html\">Evaluation: Basics</a> of <a href=\"/Micro-Max\" title=\"Micro-Max\">Micro-Max</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.gamedev.net/page/resources/_/technical/artificial-intelligence/chess-programming-part-vi-evaluation-functions-r1208\">Chess Programming Part VI: Evaluation Functions</a> by <a href=\"/Fran%C3%A7ois-Dominic_Laram%C3%A9e\" title=\"François-Dominic Laramée\">François-Dominic Laramée</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/GameDev.net\">gamedev.net</a>, October 2000</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.chessvariants.com/d.betza/pieceval/index.html\">About the Values of Chess Pieces</a> by <a href=\"/index.php?title=Ralph_Betza&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Ralph Betza (page does not exist)\">Ralph Betza</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Evaluation&amp;action=edit&amp;section=30\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap mw-references-columns\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://commons.wikimedia.org/wiki/File:Kandinsky_-_Graceful_Ascent,_1934.jpg\">File:Kandinsky - Graceful Ascent, 1934.jpg - Wikimedia Commons</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a href=\"/Claude_Shannon\" title=\"Claude Shannon\">Claude Shannon</a> (<b>1949</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.pi.infn.it/%7Ecarosi/chess/shannon.txt\">Programming a Computer for Playing Chess</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://archive.computerhistory.org/projects/chess/related_materials/text/2-0%20and%202-1.Programming_a_computer_for_playing_chess.shannon/2-0%20and%202-1.Programming_a_computer_for_playing_chess.shannon.062303002.pdf\">pdf</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=288501&amp;t=29552\">Re: Linear vs. Nonlinear Evaluation</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 27, 2009</span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=288564&amp;t=29552\">Re: Linear vs. Nonlinear Evaluation</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 27, 2009</span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=25046\">Re: Books that help for evaluation</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 18, 1998</span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=475521\">Re: Zappa Report</a> by <a href=\"/Ingo_Alth%C3%B6fer\" title=\"Ingo Althöfer\">Ingo Althöfer</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 30, 2005</span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=11893\">Re: Evaluation by neural network&#160;?</a> by <a href=\"/Jay_Scott\" title=\"Jay Scott\">Jay Scott</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 10, 1997</span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=44265\">An Update of the Addendum to the LittleCompendium</a> by <a href=\"/Lyudmil_Tsvetkov\" title=\"Lyudmil Tsvetkov\">Lyudmil Tsvetkov</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 02, 2012</span>\n</li>\n<li id=\"cite_note-9\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-9\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://talkchess.com/forum/viewtopic.php?t=64776\">The Secret of Chess</a> by  <a href=\"/Lyudmil_Tsvetkov\" title=\"Lyudmil Tsvetkov\">Lyudmil Tsvetkov</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 01, 2017</span>\n</li>\n<li id=\"cite_note-10\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-10\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Euclidean_distance\">Euclidean distance from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-11\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-11\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Principal_component_analysis\">Principal component analysis from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-12\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-12\">↑</a></span> <span class=\"reference-text\"><a href=\"/Eric_B._Baum\" title=\"Eric B. Baum\">Eric B. Baum</a>, <a href=\"/Warren_D._Smith\" title=\"Warren D. Smith\">Warren D. Smith</a> (<b>1999</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.mitpressjournals.org/doi/abs/10.1162/089976699300016881?journalCode=neco\">Propagating Distributions Up Directed Acyclic Graphs</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Neural_Computation_%28journal%29\">Neural Computation</a>, Vol. 11, No. 1</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Main_Page\" title=\"Main Page\">Up one level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301000901\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.066 seconds\nReal time usage: 0.076 seconds\nPreprocessor visited node count: 319/1000000\nPreprocessor generated node count: 588/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1449-0!canonical and timestamp 20260301000901 and revision id 27412\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Wassily_Kandinsky"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ACM"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "AI Factory"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Adriaan de Groot"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 1"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 5"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 8"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alan Turing"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Albert Bertilsson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alexandru Mosoi"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alois Heinz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Analog Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Andrew Grant"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Andrew Williams"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Asymmetric Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Automated Tuning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Branching Factor"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bruce Abramson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bruce Moreland"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CG 1998"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CG 2016"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CPW-Engine eval"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Center Control"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chao Ma"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Position"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Skill in Man and Machine"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chinese Chess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chunking"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Claude Shannon"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Compendium"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Connectivity"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cray Blitz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dan Heisman"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Daniel Anulliero"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Daniel Homan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Danny Kopec"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dap Hartmann"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David Fotland"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David Slate"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Deep Learning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dennis Sceviour"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Don Beal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Don Dailey"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ed Northam"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ed Schroder"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Edsel Apostol"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Eli David"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Eliot Slater"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Endgame"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engine Testing"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Eric B. Baum"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Erin Dame"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ernst Zermelo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ethereal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation Discontinuity"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation Function"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation Function Draft"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation Hash Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation Overlap"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation Patterns"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation Philosophy"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation of Pieces"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fabio Gobbato"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ferdinand Mosca"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fermin Serrano"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Float"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fortress"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "François-Dominic Laramée"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Game Phases"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gary Linscott"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Genetic Programming"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gerard Zieliński"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gerd Isenberg"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Giuseppe Cannella"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gregory Strong"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Guido Schimmels"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hans Berliner"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Harm Geert Muller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Helmut Horacek"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Houdini"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA Journal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ian H. Witten"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ingo Althöfer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Interior Node"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jaap van den Herik"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jack Good"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jaime Benito de Valle Ruiz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jay Scott"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jeff Rollason"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jens Bæk Nielsen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jens Christensen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jonathan Rosenthal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kai-Fu Lee"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kai Laskos"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kaissa"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kazunori Yamaguchi"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "King Safety"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Knowledge"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Larry Atkin"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Larry Kaufman"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Laurie Tunnicliffe"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lazy Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Learning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lyudmil Tsvetkov"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Maarten van der Meulen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Maksim Korzh"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marco Belli"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marcus Prewarski"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mark Lefler"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mark Uniacke"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mark Watkins"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Martin C. Smith"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Material"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michael Buro"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Micro-Max"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Middlegame"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Milos Stanisavljevic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Minic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Minimax"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mobility"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Monte-Carlo Tree Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Moshe Koppel"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "NNUE"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Nathan S. Netanyahu"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Negamax"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Neural Networks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Nicu Ionita"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Opening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Oracle"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Papa"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Paul E. Utgoff"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawel Koziol"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Advantage, Win Percentage, and Elo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Structure"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "PeSTO's Evaluation Function"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter Mysliwietz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter W. Frey"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Piece-Square Tables"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pieces"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Playing Strength"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Point Value"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quantifying Evaluation Features"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiescence Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rein Halbersma"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Richard Korf"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Hyatt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rodent"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ron Atkin"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rookie"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sam Sloan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sanjoy Mahajan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Satoru Kawai"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Score"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search with Random Leaf Values"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Shawn Chidester"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Shogo Takeuchi"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Side to move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Simplified Evaluation Function"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Space"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stanford University"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stefano Gemma"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stephan Schiffel"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stockfish"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stuart Cracraft"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Søren Riis"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tactics"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tapered Eval"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tempo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Test-Positions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Texel's Tuning Method"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "The Computer History Museum"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Thomas Kolarik"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tom King"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tomoyuki Kaneko"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tony Marsland"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tord Romstad"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Trapped Pieces"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Uri Blass"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vivien Clauzon"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "WCCC 1989"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Warren D. Smith"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Yaakov HaCohen-Kerner"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Zurichess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Álvaro Begué"
+      },
+      {
+        "ns": 0,
+        "*": "David Podber"
+      },
+      {
+        "ns": 0,
+        "*": "Yehya Fouda"
+      },
+      {
+        "ns": 0,
+        "*": "Ron Kalnim"
+      },
+      {
+        "ns": 0,
+        "*": "Christoph Hense"
+      },
+      {
+        "ns": 0,
+        "*": "Derek Farren"
+      },
+      {
+        "ns": 0,
+        "*": "Daniel Templeton"
+      },
+      {
+        "ns": 0,
+        "*": "Meiji Wang"
+      },
+      {
+        "ns": 0,
+        "*": "Nera Nesic"
+      },
+      {
+        "ns": 0,
+        "*": "Pio Korinth"
+      },
+      {
+        "ns": 0,
+        "*": "J. Wesley Cleveland"
+      },
+      {
+        "ns": 0,
+        "*": "Kamil Czarnogorski"
+      },
+      {
+        "ns": 0,
+        "*": "Ellie Moore"
+      },
+      {
+        "ns": 0,
+        "*": "Aditya Chandra"
+      },
+      {
+        "ns": 0,
+        "*": "Ralph Betza"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Wassily Kandinsky"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Where to Start",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Evaluation",
+        "byteoffset": 1626,
+        "anchor": "Where_to_Start"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Side to move relative",
+        "number": "1.1",
+        "index": "2",
+        "fromtitle": "Evaluation",
+        "byteoffset": 3176,
+        "anchor": "Side_to_move_relative"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Linear vs. Nonlinear",
+        "number": "1.2",
+        "index": "3",
+        "fromtitle": "Evaluation",
+        "byteoffset": 3899,
+        "anchor": "Linear_vs._Nonlinear"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "General Aspects",
+        "number": "1.3",
+        "index": "4",
+        "fromtitle": "Evaluation",
+        "byteoffset": 6095,
+        "anchor": "General_Aspects"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Basic Evaluation Features",
+        "number": "2",
+        "index": "5",
+        "fromtitle": "Evaluation",
+        "byteoffset": 6226,
+        "anchor": "Basic_Evaluation_Features"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Considering Game Phase",
+        "number": "3",
+        "index": "6",
+        "fromtitle": "Evaluation",
+        "byteoffset": 6489,
+        "anchor": "Considering_Game_Phase"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Miscellaneous",
+        "number": "4",
+        "index": "7",
+        "fromtitle": "Evaluation",
+        "byteoffset": 6710,
+        "anchor": "Miscellaneous"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "5",
+        "index": "8",
+        "fromtitle": "Evaluation",
+        "byteoffset": 7111,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "6",
+        "index": "9",
+        "fromtitle": "Evaluation",
+        "byteoffset": 7567,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1949",
+        "number": "6.1",
+        "index": "10",
+        "fromtitle": "Evaluation",
+        "byteoffset": 7583,
+        "anchor": "1949"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1950 ...",
+        "number": "6.2",
+        "index": "11",
+        "fromtitle": "Evaluation",
+        "byteoffset": 7986,
+        "anchor": "1950_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1960 ...",
+        "number": "6.3",
+        "index": "12",
+        "fromtitle": "Evaluation",
+        "byteoffset": 8875,
+        "anchor": "1960_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1970 ...",
+        "number": "6.4",
+        "index": "13",
+        "fromtitle": "Evaluation",
+        "byteoffset": 9583,
+        "anchor": "1970_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1980 ...",
+        "number": "6.5",
+        "index": "14",
+        "fromtitle": "Evaluation",
+        "byteoffset": 10852,
+        "anchor": "1980_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1990 ...",
+        "number": "6.6",
+        "index": "15",
+        "fromtitle": "Evaluation",
+        "byteoffset": 13444,
+        "anchor": "1990_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "6.7",
+        "index": "16",
+        "fromtitle": "Evaluation",
+        "byteoffset": 16255,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "6.8",
+        "index": "17",
+        "fromtitle": "Evaluation",
+        "byteoffset": 17732,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "6.9",
+        "index": "18",
+        "fromtitle": "Evaluation",
+        "byteoffset": 19709,
+        "anchor": "2015_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Blog & Forum Posts",
+        "number": "7",
+        "index": "19",
+        "fromtitle": "Evaluation",
+        "byteoffset": 20267,
+        "anchor": "Blog_.26_Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1993 ...",
+        "number": "7.1",
+        "index": "20",
+        "fromtitle": "Evaluation",
+        "byteoffset": 20289,
+        "anchor": "1993_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1995 ...",
+        "number": "7.2",
+        "index": "21",
+        "fromtitle": "Evaluation",
+        "byteoffset": 20876,
+        "anchor": "1995_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "7.3",
+        "index": "22",
+        "fromtitle": "Evaluation",
+        "byteoffset": 22183,
+        "anchor": "2000_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2005 ...",
+        "number": "7.4",
+        "index": "23",
+        "fromtitle": "Evaluation",
+        "byteoffset": 22839,
+        "anchor": "2005_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "7.5",
+        "index": "24",
+        "fromtitle": "Evaluation",
+        "byteoffset": 25102,
+        "anchor": "2010_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "7.6",
+        "index": "25",
+        "fromtitle": "Evaluation",
+        "byteoffset": 28553,
+        "anchor": "2015_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "7.7",
+        "index": "26",
+        "fromtitle": "Evaluation",
+        "byteoffset": 32463,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "8",
+        "index": "27",
+        "fromtitle": "Evaluation",
+        "byteoffset": 34940,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Mathematical Foundations",
+        "number": "8.1",
+        "index": "28",
+        "fromtitle": "Evaluation",
+        "byteoffset": 34958,
+        "anchor": "Mathematical_Foundations"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Chess Evaluation",
+        "number": "8.2",
+        "index": "29",
+        "fromtitle": "Evaluation",
+        "byteoffset": 35435,
+        "anchor": "Chess_Evaluation"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "9",
+        "index": "30",
+        "fromtitle": "Evaluation",
+        "byteoffset": 36345,
+        "anchor": "References"
+      }
+    ]
+  }
+}

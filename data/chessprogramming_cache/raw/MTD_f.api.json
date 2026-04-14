@@ -1,0 +1,612 @@
+{
+  "parse": {
+    "title": "MTD(f)",
+    "pageid": 1055,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Search\" title=\"Search\">Search</a> * MTD(f)</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"http://www.mcescher.com/Gallery/recogn-bmp/LW435.jpg\"><img alt=\"\" src=\"/images/thumb/8/8b/EschersAscending_and_Descending.jpg/300px-EschersAscending_and_Descending.jpg\" width=\"300\" height=\"384\" class=\"thumbimage\" srcset=\"/images/8/8b/EschersAscending_and_Descending.jpg 1.5x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:EschersAscending_and_Descending.jpg\" class=\"internal\" title=\"Enlarge\"></a></div><a href=\"/Category:M._C._Escher\" title=\"Category:M. C. Escher\">M. C. Escher</a>, Ascending and Descending <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup></div></div></div> \n<p><b>MTD(f)</b>,<br />\na search algorithm created by <a href=\"/Aske_Plaat\" title=\"Aske Plaat\">Aske Plaat</a> and the short name for MTD(n, f), which stands for something like <b>M</b>emory-enhanced <b>T</b>est <b>D</b>river with node n and value <b>f</b>. MTD is the name of a group of driver-algorithms that search <a href=\"/Minimax\" title=\"Minimax\">minimax</a> trees using <a href=\"/Null_Window\" title=\"Null Window\">null window</a> <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">alpha-beta</a> with <a href=\"/Transposition_Table\" title=\"Transposition Table\">transposition table</a> calls.\n</p><p>In order to work, MTD(f) needs a <i>first guess</i> as to where the minimax value will turn out to be. The better than first guess is, the more efficient the algorithm will be, on average, since the better it is, the less passes the repeat-until loop will have to do to converge on the minimax value. If you feed MTD(f) the minimax value to start with, it will only do two passes, the bare minimum: one to find an <a href=\"/Upper_Bound\" title=\"Upper Bound\">upper bound</a>  of value x, and one to find a <a href=\"/Lower_Bound\" title=\"Lower Bound\">lower bound</a> of the same value <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>.  \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Pascal_Pseudo_Code\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Pascal Pseudo Code</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#C_Pseudo_Code\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">C Pseudo Code</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#See_Also\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">See Also</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Publications\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Publications</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#1994_...\"><span class=\"tocnumber\">4.1</span> <span class=\"toctext\">1994 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-6\"><a href=\"#2000_...\"><span class=\"tocnumber\">4.2</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#2010_...\"><span class=\"tocnumber\">4.3</span> <span class=\"toctext\">2010 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-8\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#1997_...\"><span class=\"tocnumber\">5.1</span> <span class=\"toctext\">1997 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#2000_..._2\"><span class=\"tocnumber\">5.2</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#2005_...\"><span class=\"tocnumber\">5.3</span> <span class=\"toctext\">2005 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-12\"><a href=\"#2010_..._2\"><span class=\"tocnumber\">5.4</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-13\"><a href=\"#2020_...\"><span class=\"tocnumber\">5.5</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-14\"><a href=\"#External_Links\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-15\"><a href=\"#References\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Pascal_Pseudo_Code\">Pascal Pseudo Code</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MTD(f)&amp;action=edit&amp;section=1\" title=\"Edit section: Pascal Pseudo Code\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Original <a href=\"/Pascal\" title=\"Pascal\">Pascal</a> pseudo code by <a href=\"/Aske_Plaat\" title=\"Aske Plaat\">Aske Plaat</a>:\n</p>\n<pre>\nfunction MTDF(root&#160;: node_type; f&#160;: integer; d&#160;: integer)&#160;: integer;\n      g&#160;:= f;\n      upperbound&#160;:= +INFINITY;\n      lowerbound&#160;:= -INFINITY;\n      repeat\n            if g == lowerbound then beta&#160;:= g + 1 else beta&#160;:= g;\n            g&#160;:= AlphaBetaWithMemory(root, beta - 1, beta, d);\n            if g &lt; beta then upperbound&#160;:= g else lowerbound&#160;:= g;\n      until lowerbound &gt;= upperbound;\n      return g;\n</pre>\n<p>Typically, one would call MTD(f) in an <a href=\"/Iterative_Deepening\" title=\"Iterative Deepening\">iterative deepening</a> framework, the first guess the value of the previous iteration:\n</p>\n<pre>\nfunction iterative_deepening(root&#160;: node_type)&#160;: integer;\n\n      firstguess&#160;:= 0;\n      for d = 1 to MAX_SEARCH_DEPTH do\n            firstguess&#160;:= MTDF(root, firstguess, d);\n            if times_up() then break;\n      return firstguess;\n</pre>\n<h1><span class=\"mw-headline\" id=\"C_Pseudo_Code\">C Pseudo Code</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MTD(f)&amp;action=edit&amp;section=2\" title=\"Edit section: C Pseudo Code\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Slightly modified pseudo code in <a href=\"/C\" title=\"C\">C</a>:\n</p>\n<pre>\nint mtdf(int f, int depth) {\n   int bound[2] = {-oo, +oo}; // lower, upper\n   do {\n      beta = f + (f == bound[0]);\n      f = alphaBetaWithMemory(beta - 1, beta, depth);\n      bound[f &lt; beta] = f;\n   } while (bound[0] &lt; bound[1]);\n   return f;\n}\n</pre>\n<h1><span class=\"mw-headline\" id=\"See_Also\">See Also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MTD(f)&amp;action=edit&amp;section=3\" title=\"Edit section: See Also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Category:MTD(f)\" title=\"Category:MTD(f)\">Category:MTD(f)</a></li>\n<li> <a href=\"/Aspiration_Windows\" title=\"Aspiration Windows\">Aspiration Windows</a></li>\n<li> <a href=\"/Iterative_Deepening\" title=\"Iterative Deepening\">Iterative Deepening</a></li>\n<li> <a href=\"/Window#MinimaxWall\" title=\"Window\">Minimax Wall</a></li>\n<li> <a href=\"/NegaC*\" title=\"NegaC*\">NegaC*</a></li>\n<li> <a href=\"/SSS*_and_Dual*\" title=\"SSS* and Dual*\">SSS* and Dual*</a></li>\n<li> <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Table</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MTD(f)&amp;action=edit&amp;section=4\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1994_...\">1994 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MTD(f)&amp;action=edit&amp;section=5\" title=\"Edit section: 1994 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Aske_Plaat\" title=\"Aske Plaat\">Aske Plaat</a>, <a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a>, <a href=\"/Wim_Pijls\" title=\"Wim Pijls\">Wim Pijls</a>, <a href=\"/Arie_de_Bruin\" title=\"Arie de Bruin\">Arie de Bruin</a> (<b>1994, 2014</b>). <i>SSS* = Alpha-Beta + TT</i>. TR-CS-94-17, <a href=\"/University_of_Alberta\" title=\"University of Alberta\">University of Alberta</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1404.1517\">arXiv:1404.1517</a></li>\n<li> <a href=\"/Aske_Plaat\" title=\"Aske Plaat\">Aske Plaat</a>, <a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a>, <a href=\"/Wim_Pijls\" title=\"Wim Pijls\">Wim Pijls</a>, <a href=\"/Arie_de_Bruin\" title=\"Arie de Bruin\">Arie de Bruin</a> (<b>1994, 2014</b>). <i>A New Paradigm for Minimax Search</i>. TR-CS 94-18, <a href=\"/University_of_Alberta\" title=\"University of Alberta\">University of Alberta</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1404.1515\">arXiv:1404.1515</a></li>\n<li> <a href=\"/Aske_Plaat\" title=\"Aske Plaat\">Aske Plaat</a>, <a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a>, <a href=\"/Wim_Pijls\" title=\"Wim Pijls\">Wim Pijls</a>, <a href=\"/Arie_de_Bruin\" title=\"Arie de Bruin\">Arie de Bruin</a> (<b>1995, 2015</b>). <i>Best-First Fixed Depth Game Tree Search in Practice.</i> <a href=\"/Conferences#IJCAI1995\" title=\"Conferences\">IJCAI-95</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1505.01603\">arXiv:1505.01603</a></li>\n<li> <a href=\"/Aske_Plaat\" title=\"Aske Plaat\">Aske Plaat</a>, <a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a>, <a href=\"/Wim_Pijls\" title=\"Wim Pijls\">Wim Pijls</a>, <a href=\"/Arie_de_Bruin\" title=\"Arie de Bruin\">Arie de Bruin</a> (<b>1996</b>). <i>Best-First Fixed-Depth Minimax Algorithms.</i> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_(journal)\">Artificial Intelligence</a>, Vol. 87</li>\n<li> <a href=\"/Aske_Plaat\" title=\"Aske Plaat\">Aske Plaat</a>, <a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a>, <a href=\"/Wim_Pijls\" title=\"Wim Pijls\">Wim Pijls</a>, <a href=\"/Arie_de_Bruin\" title=\"Arie de Bruin\">Arie de Bruin</a> (<b>1996, 2017</b>). <i>A Minimax Algorithm Better Than Alpha-beta?: No and Yes</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1702.03401\">arXiv:1702.03401</a></li>\n<li> <a href=\"/Aske_Plaat\" title=\"Aske Plaat\">Aske Plaat</a>, <a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a>, <a href=\"/Wim_Pijls\" title=\"Wim Pijls\">Wim Pijls</a>, <a href=\"/Arie_de_Bruin\" title=\"Arie de Bruin\">Arie de Bruin</a> (<b>1996</b>). <i>An Algorithm Faster than NegaScout and SSS* in Practice</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.77.9111&amp;rep=rep1&amp;type=pdf\">pdf</a> from <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/CiteSeerX\">CiteSeerX</a></li>\n<li> <a href=\"/Aske_Plaat\" title=\"Aske Plaat\">Aske Plaat</a> (<b>1997, 2014</b>). <i>MTD(f), A Minimax Algorithm Faster Than NegaScout</i>. Internal Report, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Erasmus_University_Rotterdam\">Erasmus University Rotterdam</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1404.1511?context=cs.AI\">arXiv:1404.1511</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MTD(f)&amp;action=edit&amp;section=6\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Arie_de_Bruin\" title=\"Arie de Bruin\">Arie de Bruin</a>, <a href=\"/Wim_Pijls\" title=\"Wim Pijls\">Wim Pijls</a> (<b>2003</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://repub.eur.nl/pub/459\">Trends in game tree search</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Erasmus_University_Rotterdam\">Erasmus University, Rotterdam</a></li>\n<li> <a href=\"/Jacek_Ma%C5%84dziuk\" title=\"Jacek Mańdziuk\">Jacek Mańdziuk</a>, <a href=\"/index.php?title=Daniel_Osman&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Daniel Osman (page does not exist)\">Daniel Osman</a> (<b>2004</b>). <i>Alpha-Beta Search Enhancements with a Real-Value Game-State Evaluation Function</i>. <a href=\"/ICGA_Journal#27_1\" title=\"ICGA Journal\">ICGA Journal, Vol. 27, No. 1</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.mini.pw.edu.pl/~mandziuk/PRACE/ICGA.pdf\">pdf</a></li>\n<li> <a href=\"/Kazutomo_Shibahara\" title=\"Kazutomo Shibahara\">Kazutomo Shibahara</a>, <a href=\"/index.php?title=Nobuo_Inui&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Nobuo Inui (page does not exist)\">Nobuo Inui</a>, <a href=\"/Yoshiyuki_Kotani\" title=\"Yoshiyuki Kotani\">Yoshiyuki Kotani</a> (<b>2005</b>). <i>Adaptive Strategies of MTD-f for Actual Games</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/conf/cig/cig2005.html#ShibaharaIK05\">CIG 2005</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://cswww.essex.ac.uk/cig/2005/papers/p1018.pdf\">pdf</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MTD(f)&amp;action=edit&amp;section=7\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/index.php?title=Eric_Stock&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Eric Stock (page does not exist)\">Eric Stock</a>, <a href=\"/index.php?title=David_J._King&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"David J. King (page does not exist)\">David J. King</a> (<b>2010</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://rke.abertay.ac.uk/en/publications/a-new-enhancement-to-mtdf\">A new enhancement to MTD(f)</a></i>. Games and Arts, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Abertay_University\">Abertay University</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://www.researchgate.net/publication/304307495_A_New_Enhancement_to_MTDf\">ResearchGate</a> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup></li>\n<li> <a href=\"/Jr-Chang_Chen\" title=\"Jr-Chang Chen\">Jr-Chang Chen</a>, <a href=\"/I-Chen_Wu\" title=\"I-Chen Wu\">I-Chen Wu</a>, <a href=\"/Wen-Jie_Tseng\" title=\"Wen-Jie Tseng\">Wen-Jie Tseng</a>, <a href=\"/index.php?title=Bo-Han_Lin&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Bo-Han Lin (page does not exist)\">Bo-Han Lin</a>, <a href=\"/Chia-Hui_Chang\" title=\"Chia-Hui Chang\">Chia-Hui Chang</a> (<b>2015</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://ir.nctu.edu.tw/handle/11536/124541\">Job-Level Alpha-Beta Search</a></i>. <a href=\"/IEEE#TOCIAIGAMES\" title=\"IEEE\">IEEE Transactions on Computational Intelligence and AI in Games</a>, Vol. 7, No. 1</li>\n<li> <a href=\"/Jan-Jaap_van_Horssen\" title=\"Jan-Jaap van Horssen\">Jan-Jaap van Horssen</a> (<b>2018</b>). <i>Handling Search Inconsistencies in MTD(f)</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://jhorssen.home.xs4all.nl/Maximus/research/Handling%20Search%20Inconsistencies%20in%20MTDf.pdf\">pdf</a></li>\n<li> <a href=\"/Jan-Jaap_van_Horssen\" title=\"Jan-Jaap van Horssen\">Jan-Jaap van Horssen</a> (<b>2019</b>). <i>Move selection in MTD(f) </i>. <a href=\"/ICGA_Journal#41_1\" title=\"ICGA Journal\">ICGA Journal, Vol. 41, No. 1</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MTD(f)&amp;action=edit&amp;section=8\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1997_...\">1997 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MTD(f)&amp;action=edit&amp;section=9\" title=\"Edit section: 1997 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/TkhrEajlMCs/r8BRbNjNCt8J\">Tree search issues!</a> by <a href=\"/index.php?title=Magnus_Heldestad&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Magnus Heldestad (page does not exist)\">Magnus Heldestad</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, May 26, 1997&#160;» <a href=\"/Enhanced_Transposition_Cutoff\" title=\"Enhanced Transposition Cutoff\">Enhanced Transposition Cutoff</a></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/TkhrEajlMCs/Cg3pBOLSzv0J\">Re: Tree search issues!</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, May 26, 1997</dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/TkhrEajlMCs/HgrYwdBcjnEJ\">Re: Tree search issues!</a> by <a href=\"/Aske_Plaat\" title=\"Aske Plaat\">Aske Plaat</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, May 27, 1997</dd></dl>\n<p><b>1998</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=14481\">New(?) search idea</a> by <a href=\"/Andy_Walker\" title=\"Andy Walker\">Andrew Walker</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 21, 1998</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=14527\">Re: New(?) search idea</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 22, 1998 </dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=14535\">MTD(f) (was Re: New(?) search idea.)</a> by <a href=\"/Stuart_Cracraft\" title=\"Stuart Cracraft\">Stuart Cracraft</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 22, 1998</dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=14539\">Re: New(?) search idea</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 22, 1998&#160;» <a href=\"/Window#MinimaxWall\" title=\"Window\">Minimax Wall</a></dd></dl>\n<p><b>1999</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=43395\">Re: CilkChess</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 14, 1999&#160;» <a href=\"/CilkChess\" title=\"CilkChess\">CilkChess</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=51608\">mtdf</a> by <a href=\"/Daniel_Homan\" title=\"Daniel Homan\">Daniel Homan</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 13, 1999 </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=60833\">Building the Principal Variation in MTD(f) searches</a> by <a href=\"/Andrew_Williams\" title=\"Andrew Williams\">Andrew Williams</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 18, 1999&#160;» <a href=\"/Principal_Variation\" title=\"Principal Variation\">Principal Variation</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=61058\">MTD is a big win</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 19, 1999</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=70890\">MTD(f)</a> by Nicolas Carrasco, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 28, 1999 </li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_..._2\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MTD(f)&amp;action=edit&amp;section=10\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=95696\">Getting a PV using MTD(f)</a> by <a href=\"/index.php?title=Tijs_van_Dam&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Tijs van Dam (page does not exist)\">Tijs van Dam</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 08, 2000&#160;» <a href=\"/Principal_Variation\" title=\"Principal Variation\">Principal Variation</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/Prqz2SzYuoc/4SkqqUYhrIsJ\">MTD(f) and PV</a> by <a href=\"/David_Rasmussen\" title=\"David Rasmussen\">David Rasmussen</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, March 09, 2000&#160;» <a href=\"/Principal_Variation\" title=\"Principal Variation\">Principal Variation</a></li></ul>\n<p><b>2001</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/AEFIYBEvCFA/66YpNnmDYiUJ\">MTD(f) and the PV</a> by Adrian Jackson, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, March 16, 2001&#160;» <a href=\"/Principal_Variation\" title=\"Principal Variation\">Principal Variation</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=173514\">Beating MTD(n,f)</a> by <a href=\"/Gian-Carlo_Pascutto\" title=\"Gian-Carlo Pascutto\">Gian-Carlo Pascutto</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 05, 2001</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=179391\">MTD(f) and killer heuristics</a> by Marcus Heidkamp, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 12, 2001&#160;» <a href=\"/Killer_Heuristic\" title=\"Killer Heuristic\">Killer Heuristic</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=195217\">Performance of MTD(f) versus eval granularity?</a> by Werner Mühlpfordt, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 01, 2001</li></ul>\n<p><b>2002</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=222624\">MTD(f) Problems</a> by Oren Avraham, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 10, 2002</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=222680\">Re: MTD(f) Problems</a> by <a href=\"/Rudolf_Huber\" title=\"Rudolf Huber\">Rudolf Huber</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 11, 2002</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=223036\">About False Fail Highs, professionals, and MTD searches</a> by <a href=\"/Gian-Carlo_Pascutto\" title=\"Gian-Carlo Pascutto\">Gian-Carlo Pascutto</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 12, 2002&#160;» <a href=\"/Fail-High\" title=\"Fail-High\">Fail-High</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=251302\">Couple of chess programming questions</a> by Eli Liang, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 10, 2002&#160;» <a href=\"/ProbCut\" title=\"ProbCut\">ProbCut</a>, <a href=\"/Evaluation\" title=\"Evaluation\">Evaluation</a>, <a href=\"/Bitboards\" title=\"Bitboards\">Bitboards</a>, <a href=\"/0x88\" title=\"0x88\">0x88</a>, <a href=\"/Depth#FractionalPlies\" title=\"Depth\">Fractional Plies</a>, <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Table</a></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=251522\">Re: Couple of chess programming questions - MDT and parallel</a> by <a href=\"/Scott_Farrell\" title=\"Scott Farrell\">Scott Farrell</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 10, 2002&#160;» <a href=\"/Parallel_Search\" title=\"Parallel Search\">Parallel Search</a></dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=251543\">calculating the PV using MTD</a> by <a href=\"/Fabien_Letouzey\" title=\"Fabien Letouzey\">Fabien Letouzey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 11, 2002&#160;» <a href=\"/Principal_Variation\" title=\"Principal Variation\">Principal Variation</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=251687\">MTD: an observation and a question</a> by <a href=\"/Martin_Fierz\" title=\"Martin Fierz\">Martin Fierz</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 11, 2002</li></ul>\n<p><b>2003</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=278172\">MTD(f), Quiscient Search, and hashing Quiscient nodes</a> by Joel, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 19, 2003</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=308755\">MTD(f) and storing the PV</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 29, 2003</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=311269\">MTD, IID, fail-low, root-research</a> by Juergen Wolf, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 14, 2003&#160;» <a href=\"/Internal_Iterative_Deepening\" title=\"Internal Iterative Deepening\">Internal Iterative Deepening</a>, <a href=\"/Fail-Low\" title=\"Fail-Low\">Fail-Low</a>, <a href=\"/Root\" title=\"Root\">Root</a></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=311280\">Re: MTD, IID, fail-low, root-research</a> by <a href=\"/Rudolf_Huber\" title=\"Rudolf Huber\">Rudolf Huber</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 14, 2003</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=311577\">MTD(f) and hash table size</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 16, 2003</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=336505\">MTD(F) results</a> by <a href=\"/Anthony_Cozzie\" title=\"Anthony Cozzie\">Anthony Cozzie</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 16, 2003</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=336661\">Re: MTD(F) results</a> by <a href=\"/Rudolf_Huber\" title=\"Rudolf Huber\">Rudolf Huber</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 17, 2003</dd></dl>\n<p><b>2004</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=342287\">QSearch() as PVS()&#160;?</a> by <a href=\"/Matthias_Gemuh\" title=\"Matthias Gemuh\">Matthias Gemuh</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 14, 2004</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=342303\">MTD(f)</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 14, 2004</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=353798\">Search behavior in a case of root fail high/low</a> by <a href=\"/Sergei_Markoff\" title=\"Sergei Markoff\">Sergei S. Markoff</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 10, 2004&#160;» <a href=\"/Fail-High\" title=\"Fail-High\">Fail-High</a>, <a href=\"/Fail-Low\" title=\"Fail-Low\">Fail-Low</a>, <a href=\"/Root\" title=\"Root\">Root</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=354078\">mtd(f) and null move</a> by <a href=\"/Peter_Aloysius_Harjanto\" title=\"Peter Aloysius Harjanto\">Peter Alloysius</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a> March 11, 2004</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=359886\">Question for the MTD(f) experts</a> by <a href=\"/Dann_Corbit\" title=\"Dann Corbit\">Dann Corbit</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 14, 2004</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=377240\">An MTD(f) question about NULL MOVE searching</a> by <a href=\"/Dann_Corbit\" title=\"Dann Corbit\">Dann Corbit</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 16, 2004</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=379136\">MTD(f)</a> by <a href=\"/Stuart_Cracraft\" title=\"Stuart Cracraft\">Stuart Cracraft</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 26, 2004</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=381595\">MTD Drivers</a> by <a href=\"/Tor_Lattimore\" title=\"Tor Lattimore\">Tor Lattimore</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 10, 2004</li></ul>\n<h2><span class=\"mw-headline\" id=\"2005_...\">2005 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MTD(f)&amp;action=edit&amp;section=11\" title=\"Edit section: 2005 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=431426\">MTD(f)</a> by <a href=\"/Tor_Lattimore\" title=\"Tor Lattimore\">Tor Alexander Lattimore</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 15, 2005</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=469209\">Rybka uses PVS and not MTD(f). Its no Fruit-Clone</a> by <a href=\"/Chrilly_Donninger\" title=\"Chrilly Donninger\">Chrilly Donninger</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a> December 12, 2005</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?t=3960\">MTD(f) versus Alpha-Beta</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, December 13, 2005</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=471300\">MTD(f)</a> by <a href=\"/Engin_%C3%9Cst%C3%BCn\" title=\"Engin Üstün\">Engin Üstün</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 17, 2005</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=480865\">MTD(f) and Wikipedia</a> by <a href=\"/index.php?title=Joachim_Rang&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Joachim Rang (page does not exist)\">Joachim Rang</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 19, 2006</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=21360\">MTD(f) experiences</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 25, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=31130\">MTD(f) experiments with Crafty</a> by <a href=\"/index.php?title=Eric_Stock&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Eric Stock (page does not exist)\">Eric Stock</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 18, 2009&#160;» <a href=\"/Crafty\" title=\"Crafty\">Crafty</a> <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup></li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_..._2\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MTD(f)&amp;action=edit&amp;section=12\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=53388\">An Idea Of speeding up MTD-f</a> by <a href=\"/index.php?title=Pio_Korinth&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Pio Korinth (page does not exist)\">Pio Korinth</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 22, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=60583\">MTD-f: Extracting PV&#160;?</a> by <a href=\"/index.php?title=Henk_van_den_Belt&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Henk van den Belt (page does not exist)\">Henk van den Belt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 24, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/forum/#!topic/fishcooking/ivM7n3DFQX8\">mtd(f)</a> by stefano.c, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">FishCooking</a>, August 7, 2016&#160;» <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://laatste.info/bb3/viewtopic.php?f=53&amp;t=7903\">Handling search inconsistencies in MTD(f)</a> by <a href=\"/Jan-Jaap_van_Horssen\" title=\"Jan-Jaap van Horssen\">Jan-Jaap van Horssen</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://laatste.info/bb3/viewforum.php?f=53\">World Draughts Forum</a>, February 26, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=67783\">What am I missing with respect to MTDf</a> by <a href=\"/Jonathan_Rosenthal\" title=\"Jonathan Rosenthal\">Jonathan Rosenthal</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 21, 2018</li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MTD(f)&amp;action=edit&amp;section=13\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://talkchess.com/forum3/viewtopic.php?f=7&amp;t=74971\">MTDF - what am I doing wrong?</a> by Alex Baker, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 02, 2020</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MTD(f)&amp;action=edit&amp;section=14\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://people.csail.mit.edu/plaat/mtdf.html\">MTD(f) - A Minimax Algorithm faster than NegaScout</a> by <a href=\"/Aske_Plaat\" title=\"Aske Plaat\">Aske Plaat</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://jhorssen.home.xs4all.nl/Maximus/research/mtdf/index.htm\">MTD(f) Experiments</a> by <a href=\"/Jan-Jaap_van_Horssen\" title=\"Jan-Jaap van Horssen\">Jan-Jaap van Horssen</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/MTD-f\">MTD(f) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.ics.uci.edu/~eppstein/180a/990202b.html\">Lecture notes for February 2, 1999  Variants of Alpha-Beta Search</a> by <a href=\"/David_Eppstein\" title=\"David Eppstein\">David Eppstein</a></li>\n<li> <a href=\"/Category:Jan_Garbarek\" title=\"Category:Jan Garbarek\">Jan Garbarek</a>, <a href=\"/Category:Keith_Jarrett\" title=\"Category:Keith Jarrett\">Keith Jarrett</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Palle_Danielsson\">Palle Danielsson</a>, <a href=\"/Category:Jon_Christensen\" title=\"Category:Jon Christensen\">Jon Christensen</a> - <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Belonging_%28album%29\">Spiral Dance</a>, 1974, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video </li></ul>\n<dl><dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/oZuPd9dVApo?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MTD(f)&amp;action=edit&amp;section=15\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a href=\"/Category:M._C._Escher\" title=\"Category:M. C. Escher\">M. C. Escher</a>, Ascending and Descending, 1960, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.mcescher.com/Gallery/gallery-recogn.htm\">Picture gallery \"Recognition and Success 1955 - 1972\" </a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://www.mcescher.com/\">The Official M.C. Escher Website</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Penrose_stairs\">Penrose stairs from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\">Quote by <a href=\"/Aske_Plaat\" title=\"Aske Plaat\">Aske Plaat</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://people.csail.mit.edu/plaat/mtdf.html\">MTD(f) - A Minimax Algorithm faster than NegaScout</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=31130\">MTD(f) experiments with Crafty</a> by <a href=\"/index.php?title=Eric_Stock&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Eric Stock (page does not exist)\">Eric Stock</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 18, 2009</span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a href=\"/index.php?title=Eric_Stock&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Eric Stock (page does not exist)\">Eric Stock</a>, <a href=\"/index.php?title=David_J._King&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"David J. King (page does not exist)\">David J. King</a> (<b>2010</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://rke.abertay.ac.uk/en/publications/a-new-enhancement-to-mtdf\">A new enhancement to MTD(f)</a></i>. Games and Arts, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Abertay_University\">Abertay University</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Search\" title=\"Search\">Up one level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301092030\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.027 seconds\nReal time usage: 0.029 seconds\nPreprocessor visited node count: 165/1000000\nPreprocessor generated node count: 334/1000000\nPost‐expand include size: 26/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1055-0!canonical and timestamp 20260301092030 and revision id 26236\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "M._C._Escher"
+      },
+      {
+        "sortkey": "",
+        "*": "Jon_Christensen"
+      },
+      {
+        "sortkey": "",
+        "*": "Jan_Garbarek"
+      },
+      {
+        "sortkey": "",
+        "*": "Keith_Jarrett"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "0x88"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha-Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Andrew Williams"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Andy Walker"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Anthony Cozzie"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Arie de Bruin"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aske Plaat"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aspiration Windows"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "C"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chia-Hui Chang"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chrilly Donninger"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CilkChess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Conferences"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Crafty"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Daniel Homan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dann Corbit"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David Eppstein"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David Rasmussen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Don Dailey"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engin Üstün"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Enhanced Transposition Cutoff"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fabien Letouzey"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fail-High"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fail-Low"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gian-Carlo Pascutto"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Harm Geert Muller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "I-Chen Wu"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA Journal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "IEEE"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Internal Iterative Deepening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iterative Deepening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jacek Mańdziuk"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jan-Jaap van Horssen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jonathan Rosenthal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jonathan Schaeffer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jr-Chang Chen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kazutomo Shibahara"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Killer Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lower Bound"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Martin Fierz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Matthias Gemuh"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Minimax"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "NegaC*"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Window"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Parallel Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pascal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter Aloysius Harjanto"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ProbCut"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Hyatt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Root"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rudolf Huber"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SSS* and Dual*"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Scott Farrell"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sergei Markoff"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stockfish"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stuart Cracraft"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tor Lattimore"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tord Romstad"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "University of Alberta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Upper Bound"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Wen-Jie Tseng"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Wim Pijls"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Window"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Yoshiyuki Kotani"
+      },
+      {
+        "ns": 0,
+        "*": "Eric Stock"
+      },
+      {
+        "ns": 0,
+        "*": "David J. King"
+      },
+      {
+        "ns": 0,
+        "*": "Daniel Osman"
+      },
+      {
+        "ns": 0,
+        "*": "Nobuo Inui"
+      },
+      {
+        "ns": 0,
+        "*": "Bo-Han Lin"
+      },
+      {
+        "ns": 0,
+        "*": "Magnus Heldestad"
+      },
+      {
+        "ns": 0,
+        "*": "Tijs van Dam"
+      },
+      {
+        "ns": 0,
+        "*": "Joachim Rang"
+      },
+      {
+        "ns": 0,
+        "*": "Pio Korinth"
+      },
+      {
+        "ns": 0,
+        "*": "Henk van den Belt"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Jan Garbarek"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Jon Christensen"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Keith Jarrett"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:M. C. Escher"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:MTD(f)"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Pascal Pseudo Code",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "MTD(f)",
+        "byteoffset": 1652,
+        "anchor": "Pascal_Pseudo_Code"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "C Pseudo Code",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "MTD(f)",
+        "byteoffset": 2544,
+        "anchor": "C_Pseudo_Code"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See Also",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "MTD(f)",
+        "byteoffset": 2862,
+        "anchor": "See_Also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "MTD(f)",
+        "byteoffset": 3046,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1994 ...",
+        "number": "4.1",
+        "index": "5",
+        "fromtitle": "MTD(f)",
+        "byteoffset": 3062,
+        "anchor": "1994_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "4.2",
+        "index": "6",
+        "fromtitle": "MTD(f)",
+        "byteoffset": 4755,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "4.3",
+        "index": "7",
+        "fromtitle": "MTD(f)",
+        "byteoffset": 5494,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "5",
+        "index": "8",
+        "fromtitle": "MTD(f)",
+        "byteoffset": 6588,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1997 ...",
+        "number": "5.1",
+        "index": "9",
+        "fromtitle": "MTD(f)",
+        "byteoffset": 6603,
+        "anchor": "1997_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "5.2",
+        "index": "10",
+        "fromtitle": "MTD(f)",
+        "byteoffset": 8368,
+        "anchor": "2000_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2005 ...",
+        "number": "5.3",
+        "index": "11",
+        "fromtitle": "MTD(f)",
+        "byteoffset": 12531,
+        "anchor": "2005_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "5.4",
+        "index": "12",
+        "fromtitle": "MTD(f)",
+        "byteoffset": 13739,
+        "anchor": "2010_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "5.5",
+        "index": "13",
+        "fromtitle": "MTD(f)",
+        "byteoffset": 14532,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "6",
+        "index": "14",
+        "fromtitle": "MTD(f)",
+        "byteoffset": 14677,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "7",
+        "index": "15",
+        "fromtitle": "MTD(f)",
+        "byteoffset": 15549,
+        "anchor": "References"
+      }
+    ]
+  }
+}

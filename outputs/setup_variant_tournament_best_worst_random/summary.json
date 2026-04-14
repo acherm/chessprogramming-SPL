@@ -1,0 +1,179 @@
+{
+  "roles": {
+    "best": "phase3_full_eval",
+    "worst": "phase1_minimax",
+    "random": "phase2_10x12_ab_pvs_id"
+  },
+  "seed": 20260404,
+  "params": {
+    "rounds": 1,
+    "games_per_encounter": 2,
+    "concurrency": 1,
+    "maxmoves": 100,
+    "perft_depth": 5
+  },
+  "players": [
+    {
+      "role": "best",
+      "variant_name": "phase3_full_eval",
+      "config_path": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/c_engine_pl/variants/phase3_full_eval.json",
+      "binary_path": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/outputs/setup_variant_tournament_best_worst_random/variant_bins/best_phase3_full_eval",
+      "match_mode": "FixedMoveTime",
+      "match_budget": "1500-2000 ms/move",
+      "cutechess_engine_args": "proto=uci restart=on st=2.0",
+      "setup_summary": "FixedMoveTime:1500-2000 ms/move, st=2.0",
+      "book_policy": "unsupported",
+      "ponder_policy": "unsupported"
+    },
+    {
+      "role": "worst",
+      "variant_name": "phase1_minimax",
+      "config_path": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/c_engine_pl/variants/phase1_minimax.json",
+      "binary_path": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/outputs/setup_variant_tournament_best_worst_random/variant_bins/worst_phase1_minimax",
+      "match_mode": "FixedMoveTime",
+      "match_budget": "100-250 ms/move",
+      "cutechess_engine_args": "proto=uci restart=on st=0.25",
+      "setup_summary": "FixedMoveTime:100-250 ms/move, st=0.25",
+      "book_policy": "unsupported",
+      "ponder_policy": "unsupported"
+    },
+    {
+      "role": "random",
+      "variant_name": "phase2_10x12_ab_pvs_id",
+      "config_path": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/c_engine_pl/variants/phase2_10x12_ab_pvs_id.json",
+      "binary_path": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/outputs/setup_variant_tournament_best_worst_random/variant_bins/random_phase2_10x12_ab_pvs_id",
+      "match_mode": "FixedMoveTime",
+      "match_budget": "750-1000 ms/move",
+      "cutechess_engine_args": "proto=uci restart=on st=1.0",
+      "setup_summary": "FixedMoveTime:750-1000 ms/move, st=1.0",
+      "book_policy": "unsupported",
+      "ponder_policy": "unsupported"
+    }
+  ],
+  "perft": [
+    {
+      "role": "best",
+      "variant_name": "phase3_full_eval",
+      "binary": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/outputs/setup_variant_tournament_best_worst_random/variant_bins/best_phase3_full_eval",
+      "perft_depth": 5,
+      "pass": true,
+      "expected": "{\"1\": 20, \"2\": 400, \"3\": 8902, \"4\": 197281, \"5\": 4865609}",
+      "got": "{\"1\": 20, \"2\": 400, \"3\": 8902, \"4\": 197281, \"5\": 4865609}"
+    },
+    {
+      "role": "worst",
+      "variant_name": "phase1_minimax",
+      "binary": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/outputs/setup_variant_tournament_best_worst_random/variant_bins/worst_phase1_minimax",
+      "perft_depth": 5,
+      "pass": true,
+      "expected": "{\"1\": 20, \"2\": 400, \"3\": 8902, \"4\": 197281, \"5\": 4865609}",
+      "got": "{\"1\": 20, \"2\": 400, \"3\": 8902, \"4\": 197281, \"5\": 4865609}"
+    },
+    {
+      "role": "random",
+      "variant_name": "phase2_10x12_ab_pvs_id",
+      "binary": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/outputs/setup_variant_tournament_best_worst_random/variant_bins/random_phase2_10x12_ab_pvs_id",
+      "perft_depth": 5,
+      "pass": true,
+      "expected": "{\"1\": 20, \"2\": 400, \"3\": 8902, \"4\": 197281, \"5\": 4865609}",
+      "got": "{\"1\": 20, \"2\": 400, \"3\": 8902, \"4\": 197281, \"5\": 4865609}"
+    }
+  ],
+  "game_count": 6,
+  "standings": [
+    {
+      "role": "random",
+      "variant_name": "phase2_10x12_ab_pvs_id",
+      "match_mode": "FixedMoveTime",
+      "match_budget": "750-1000 ms/move",
+      "setup_summary": "FixedMoveTime:750-1000 ms/move, st=1.0",
+      "games": 4,
+      "wins": 4,
+      "draws": 0,
+      "losses": 0,
+      "score": 4.0,
+      "score_pct": 100.0
+    },
+    {
+      "role": "best",
+      "variant_name": "phase3_full_eval",
+      "match_mode": "FixedMoveTime",
+      "match_budget": "1500-2000 ms/move",
+      "setup_summary": "FixedMoveTime:1500-2000 ms/move, st=2.0",
+      "games": 4,
+      "wins": 2,
+      "draws": 0,
+      "losses": 2,
+      "score": 2.0,
+      "score_pct": 50.0
+    },
+    {
+      "role": "worst",
+      "variant_name": "phase1_minimax",
+      "match_mode": "FixedMoveTime",
+      "match_budget": "100-250 ms/move",
+      "setup_summary": "FixedMoveTime:100-250 ms/move, st=0.25",
+      "games": 4,
+      "wins": 0,
+      "draws": 0,
+      "losses": 4,
+      "score": 0.0,
+      "score_pct": 0.0
+    }
+  ],
+  "cutechess_command": [
+    "cutechess-cli",
+    "-engine",
+    "name=best",
+    "cmd=/Users/mathieuacher/SANDBOX/chessprogramming-vm/outputs/setup_variant_tournament_best_worst_random/variant_bins/best_phase3_full_eval",
+    "proto=uci",
+    "restart=on",
+    "st=2.0",
+    "-engine",
+    "name=worst",
+    "cmd=/Users/mathieuacher/SANDBOX/chessprogramming-vm/outputs/setup_variant_tournament_best_worst_random/variant_bins/worst_phase1_minimax",
+    "proto=uci",
+    "restart=on",
+    "st=0.25",
+    "-engine",
+    "name=random",
+    "cmd=/Users/mathieuacher/SANDBOX/chessprogramming-vm/outputs/setup_variant_tournament_best_worst_random/variant_bins/random_phase2_10x12_ab_pvs_id",
+    "proto=uci",
+    "restart=on",
+    "st=1.0",
+    "-variant",
+    "standard",
+    "-tournament",
+    "round-robin",
+    "-games",
+    "2",
+    "-rounds",
+    "1",
+    "-concurrency",
+    "1",
+    "-maxmoves",
+    "100",
+    "-draw",
+    "movenumber=30",
+    "movecount=8",
+    "score=20",
+    "-resign",
+    "movecount=4",
+    "score=900",
+    "-repeat",
+    "-srand",
+    "20260404",
+    "-pgnout",
+    "/Users/mathieuacher/SANDBOX/chessprogramming-vm/outputs/setup_variant_tournament_best_worst_random/games.pgn",
+    "min",
+    "-recover"
+  ],
+  "artifacts": {
+    "players_csv": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/outputs/setup_variant_tournament_best_worst_random/players.csv",
+    "standings_csv": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/outputs/setup_variant_tournament_best_worst_random/standings.csv",
+    "games_csv": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/outputs/setup_variant_tournament_best_worst_random/games.csv",
+    "perft_csv": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/outputs/setup_variant_tournament_best_worst_random/perft.csv",
+    "pgn": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/outputs/setup_variant_tournament_best_worst_random/games.pgn",
+    "log": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/outputs/setup_variant_tournament_best_worst_random/cutechess.log"
+  }
+}

@@ -1,0 +1,692 @@
+{
+  "parse": {
+    "title": "C",
+    "pageid": 5270,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Programming\" title=\"Programming\">Programming</a> * <a href=\"/Languages\" title=\"Languages\">Languages</a> * C</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"/File:The_C_Programming_Language,_First_Edition_Cover.svg\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/The_C_Programming_Language%2C_First_Edition_Cover.svg/330px-The_C_Programming_Language%2C_First_Edition_Cover.svg.png\" width=\"300\" height=\"422\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/The_C_Programming_Language%2C_First_Edition_Cover.svg/500px-The_C_Programming_Language%2C_First_Edition_Cover.svg.png 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/The_C_Programming_Language%2C_First_Edition_Cover.svg/960px-The_C_Programming_Language%2C_First_Edition_Cover.svg.png 2x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:The_C_Programming_Language,_First_Edition_Cover.svg\" class=\"internal\" title=\"Enlarge\"></a></div>The C Programming Language <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div>\n<p><b>C</b>,<br />\na pragmatical, general purpose, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Statement_block\">block structured</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Procedural_programming\">procedural</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Imperative_programming\">imperative</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Programming_language\">programming language</a>. C was developed in <b>1972</b> by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Dennis_Ritchie\">Dennis Ritchie</a> at the <a href=\"/Bell_Laboratories\" title=\"Bell Laboratories\">Bell Laboratories</a>. It was first intended as a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/System_software\">system</a> programming language for the <a href=\"/Unix\" title=\"Unix\">Unix</a> operating system, but has spread to many other platforms and application programming as well. C and its derivations are likely the most often used languages so far for computer chess programming.\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Revisions\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Revisions</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#See_also\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Data\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Data</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#Data_Types\"><span class=\"tocnumber\">3.1</span> <span class=\"toctext\">Data Types</span></a>\n<ul>\n<li class=\"toclevel-3 tocsection-5\"><a href=\"#Basic_Data_Types\"><span class=\"tocnumber\">3.1.1</span> <span class=\"toctext\">Basic Data Types</span></a></li>\n<li class=\"toclevel-3 tocsection-6\"><a href=\"#Pointer\"><span class=\"tocnumber\">3.1.2</span> <span class=\"toctext\">Pointer</span></a></li>\n<li class=\"toclevel-3 tocsection-7\"><a href=\"#Array\"><span class=\"tocnumber\">3.1.3</span> <span class=\"toctext\">Array</span></a></li>\n<li class=\"toclevel-3 tocsection-8\"><a href=\"#Struct\"><span class=\"tocnumber\">3.1.4</span> <span class=\"toctext\">Struct</span></a></li>\n<li class=\"toclevel-3 tocsection-9\"><a href=\"#Bitfield\"><span class=\"tocnumber\">3.1.5</span> <span class=\"toctext\">Bitfield</span></a></li>\n<li class=\"toclevel-3 tocsection-10\"><a href=\"#Union\"><span class=\"tocnumber\">3.1.6</span> <span class=\"toctext\">Union</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#Variables\"><span class=\"tocnumber\">3.2</span> <span class=\"toctext\">Variables</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-12\"><a href=\"#Instructions\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Instructions</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-13\"><a href=\"#Expressions\"><span class=\"tocnumber\">4.1</span> <span class=\"toctext\">Expressions</span></a></li>\n<li class=\"toclevel-2 tocsection-14\"><a href=\"#Functions\"><span class=\"tocnumber\">4.2</span> <span class=\"toctext\">Functions</span></a></li>\n<li class=\"toclevel-2 tocsection-15\"><a href=\"#Operators\"><span class=\"tocnumber\">4.3</span> <span class=\"toctext\">Operators</span></a></li>\n<li class=\"toclevel-2 tocsection-16\"><a href=\"#Control_Flow\"><span class=\"tocnumber\">4.4</span> <span class=\"toctext\">Control Flow</span></a>\n<ul>\n<li class=\"toclevel-3 tocsection-17\"><a href=\"#Goto\"><span class=\"tocnumber\">4.4.1</span> <span class=\"toctext\">Goto</span></a></li>\n<li class=\"toclevel-3 tocsection-18\"><a href=\"#If_else\"><span class=\"tocnumber\">4.4.2</span> <span class=\"toctext\">If else</span></a></li>\n<li class=\"toclevel-3 tocsection-19\"><a href=\"#Switch_case\"><span class=\"tocnumber\">4.4.3</span> <span class=\"toctext\">Switch case</span></a></li>\n<li class=\"toclevel-3 tocsection-20\"><a href=\"#Function_Pointer\"><span class=\"tocnumber\">4.4.4</span> <span class=\"toctext\">Function Pointer</span></a></li>\n<li class=\"toclevel-3 tocsection-21\"><a href=\"#For\"><span class=\"tocnumber\">4.4.5</span> <span class=\"toctext\">For</span></a></li>\n<li class=\"toclevel-3 tocsection-22\"><a href=\"#While\"><span class=\"tocnumber\">4.4.6</span> <span class=\"toctext\">While</span></a></li>\n<li class=\"toclevel-3 tocsection-23\"><a href=\"#Do_while\"><span class=\"tocnumber\">4.4.7</span> <span class=\"toctext\">Do while</span></a></li>\n</ul>\n</li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-24\"><a href=\"#Preprocessor\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Preprocessor</span></a></li>\n<li class=\"toclevel-1 tocsection-25\"><a href=\"#Portabilty\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Portabilty</span></a></li>\n<li class=\"toclevel-1 tocsection-26\"><a href=\"#Libraries\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">Libraries</span></a></li>\n<li class=\"toclevel-1 tocsection-27\"><a href=\"#C_and_C.2B.2B_Compiler\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">C and C++ Compiler</span></a></li>\n<li class=\"toclevel-1 tocsection-28\"><a href=\"#Publications\"><span class=\"tocnumber\">9</span> <span class=\"toctext\">Publications</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-29\"><a href=\"#1978_...\"><span class=\"tocnumber\">9.1</span> <span class=\"toctext\">1978 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-30\"><a href=\"#2010_...\"><span class=\"tocnumber\">9.2</span> <span class=\"toctext\">2010 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-31\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">10</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-32\"><a href=\"#1999\"><span class=\"tocnumber\">10.1</span> <span class=\"toctext\">1999</span></a></li>\n<li class=\"toclevel-2 tocsection-33\"><a href=\"#2000_...\"><span class=\"tocnumber\">10.2</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-34\"><a href=\"#2005_...\"><span class=\"tocnumber\">10.3</span> <span class=\"toctext\">2005 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-35\"><a href=\"#2010_..._2\"><span class=\"tocnumber\">10.4</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-36\"><a href=\"#2015_...\"><span class=\"tocnumber\">10.5</span> <span class=\"toctext\">2015 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-37\"><a href=\"#2020_...\"><span class=\"tocnumber\">10.6</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-38\"><a href=\"#External_Links\"><span class=\"tocnumber\">11</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-39\"><a href=\"#References\"><span class=\"tocnumber\">12</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Revisions\">Revisions</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=1\" title=\"Edit section: Revisions\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Due to explicit <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pointer_(computer_programming)\">pointers</a> (address of a variable or function), C might be considered as a high level assembly language, and has some weak spots in its initial design and implementation, which are addressed in\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/ANSI_C\">ANSI C from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/C99\">C99 from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/C11_%28C_standard_revision%29\">C11 (C standard revision) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/C18_(C_standard_revision)\">C18 (C standard revision) from Wikipedia</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=2\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/CFish\" title=\"CFish\">CFish</a></li>\n<li> <a href=\"/Cpp\" title=\"Cpp\">C++</a></li>\n<li> <a href=\"/C_sharp\" title=\"C sharp\">C#</a></li>\n<li> <a href=\"/D_(Programming_Language)\" title=\"D (Programming Language)\">D (Programming Language)</a></li>\n<li> <a href=\"/Go_(Programming_Language)\" title=\"Go (Programming Language)\">Go (Programming Language)</a></li>\n<li> <a href=\"/Java\" title=\"Java\">Java</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Data\">Data</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=3\" title=\"Edit section: Data\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Data_Types\">Data Types</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=4\" title=\"Edit section: Data Types\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/C_data_types\">C data types</a> are declarations for memory locations for basic and compound data.\n</p>\n<h3><span class=\"mw-headline\" id=\"Basic_Data_Types\">Basic Data Types</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=5\" title=\"Edit section: Basic Data Types\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p>The C language provides the four basic arithmetic type specifiers char, int, float and double, and the modifiers signed, unsigned, short and long. C99 added a boolean  (true/false) type _Bool.\n</p><p><i>To be aware of the scalar 64-bit origin of <a href=\"/Bitboards\" title=\"Bitboards\">bitboards</a> in computer chess, we use so far a type defined unsigned integer U64 in our C and <a href=\"/Cpp\" title=\"Cpp\">C++</a> source snippets. The macro C64 will append a suffix to 64-bit constants as required by some compilers</i>:\n</p>\n<pre>\ntypedef unsigned __int64 U64;    // for the old microsoft compilers\ntypedef unsigned long long  U64; // supported by MSC 13.00+ and C99\n#define C64(constantU64) constantU64##ULL\n</pre>\n<h3><span class=\"mw-headline\" id=\"Pointer\">Pointer</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=6\" title=\"Edit section: Pointer\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p>A <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/C_data_types#Pointers\">pointer</a> is a data type that contains the address of a storage location of a variable (or function).\nThey are declared with the asterisk (*) type declarator following the basic storage type and preceding the variable name of the pointer.\n</p>\n<pre>\nint * ptr2int;\n</pre>\n<h3><span class=\"mw-headline\" id=\"Array\">Array</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=7\" title=\"Edit section: Array\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p>An <a href=\"/Array\" title=\"Array\">array</a> is a collection of values, all of the same type, stored contiguously in memory.  An array of size N is indexed by integers from 0 up to and including N−1.\n</p>\n<pre>\nunsigned int moves[256];\nchar *pc[10];  /* array of 10 elements of 'pointer to char' */\nchar (*pa)[10]; /* pointer to a 10-element array of char */\n</pre>\n<p>In C, array indexing is formally defined in terms of pointer arithmetic; that is, the language specification requires that <code>array[i]</code> be equivalent to <code>*(array + i)</code>.\n</p>\n<h3><span class=\"mw-headline\" id=\"Struct\">Struct</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=8\" title=\"Edit section: Struct\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p>A structure in C refers to <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Object_composition\">Object composition</a> to encapsulate related scalar datatypes inside one structured item. The size of the structure is the sum of its element sizes. To access the structure elements the dot-operator separates the element from the variable or reference. Pointers require arrow operator.\n</p>\n<pre>\nstruct MOVE\n{\n  char from;\n  char to;\n};\n\n...\nMOVE m, a, *b;\nm.from = square;\n...\nif ( a.from == b-&gt;to )\n</pre>\n<h3><span class=\"mw-headline\" id=\"Bitfield\">Bitfield</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=9\" title=\"Edit section: Bitfield\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p>So called <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Bit_field\">Bitfields</a> might be implemented as structure where integer members are declared with explicit bit length specifier from 1 .. 31. However due to portability issues of various C-compilers and platforms concerning bit ordering, padding and eventually the sign, most programmer rely on explicit bitfields to composite and extract sub-items by shift and masks, i.e. in <a href=\"/Encoding_Moves\" title=\"Encoding Moves\">encoding moves</a>.\n</p>\n<pre>\nstruct DoubleLayout\n{\n  unsigned int mantissal&#160;: 32;\n  unsigned int mantissah&#160;: 20;\n  unsigned int exponent&#160;: 11;\n  unsigned int sign&#160;: 1;\n};\n</pre>\n<h3><span class=\"mw-headline\" id=\"Union\">Union</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=10\" title=\"Edit section: Union\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p>A <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Union_type#C/C++\">value</a> that may have any of several representations within the same position in memory.\n</p>\n<pre>\nunion BitBoard \n{\n  U64 qw;\n  U32 dw[2];\n};\n</pre>\n<h2><span class=\"mw-headline\" id=\"Variables\">Variables</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=11\" title=\"Edit section: Variables\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Variable_(computer_science)#Scope_and_extent\">Variables</a> are stored either in various memory areas or kept inside processor registers (if not referred by a pointer) as:\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Global_variable\">Global</a> or <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Static_variable\">Static Variable</a> in static memory </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Local_variable\">Local Variable</a> as <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Automatic_variable\">Automatic Variable</a> on the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Stack-based_memory_allocation\">Stack</a>]</li>\n<li> Local Variable as Automatic Variable inside a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Processor_register\">Processor Register</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/C_dynamic_memory_allocation#Heap-based\">Dynamic memory allocation on the Heap</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Instructions\">Instructions</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=12\" title=\"Edit section: Instructions\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Expressions\">Expressions</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=13\" title=\"Edit section: Expressions\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>An <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Expression_(computer_science)\">expression</a> in a programming language is a combination of one or more constants, variables, operators, and functions.\n</p>\n<h2><span class=\"mw-headline\" id=\"Functions\">Functions</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=14\" title=\"Edit section: Functions\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/C_mathematical_functions\">C mathematical functions from Wikipedia</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Operators\">Operators</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=15\" title=\"Edit section: Operators\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Assignment_operator_(C%2B%2B)\">Assignment</a> =</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Arithmetic#Arithmetic_operations\">Arithmetical</a> +, -, *, /,&#160;%, ++, --</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Bitwise_operations_in_C\">Bitwise</a> &amp;, |, ^, ~, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Bitwise_operation#Bit_shifts\">&gt;&gt;, &lt;&lt;</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Augmented_assignment\">Augmented assignment</a> +=, -=. *=, /=,&#160;%=, &amp;=, |=, ^=, &lt;&lt;=, &gt;&gt;= </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Relational_operator#B_and_C\">Relational</a> ==, &lt;, &gt;, &lt;=, &gt;=,&#160;!=</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Boolean_algebra\">Boolean</a>&#160;!, &amp;&amp;, ||</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/%3F:\">Conditional</a>&#160;?:</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Comma_operator\">Comma</a> , </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Sizeof\">sizeof</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Control_Flow\">Control Flow</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=16\" title=\"Edit section: Control Flow\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Control_flow\">Control flow from Wikipedia</a></li></ul>\n<p><span id=\"Goto\"></span>\n</p>\n<h3><span class=\"mw-headline\" id=\"Goto\">Goto</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=17\" title=\"Edit section: Goto\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Goto\">Goto from Wikipedia</a> </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Considered_harmful\">Considered harmful from Wikipedia</a><sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup> <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup> <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup> <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://stevemcconnell.com/ccgoto.htm\">Using gotos</a> by <a rel=\"nofollow\" class=\"external text\" href=\"http://www.stevemcconnell.com/aboutme.htm\">Steve McConnell</a> <sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup></li></ul>\n<h3><span class=\"mw-headline\" id=\"If_else\">If else</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=18\" title=\"Edit section: If else\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Conditional_%28computer_programming%29\">Conditional (computer programming) from Wikipedia</a> </li></ul>\n<p><span id=\"Switch\"></span>\n</p>\n<h3><span class=\"mw-headline\" id=\"Switch_case\">Switch case</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=19\" title=\"Edit section: Switch case\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Switch_statement\">Switch statement from Wikipedia</a> </li></ul>\n<p><span id=\"FunctionPointer\"></span>\n</p>\n<h3><span class=\"mw-headline\" id=\"Function_Pointer\">Function Pointer</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=20\" title=\"Edit section: Function Pointer\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Function_pointer\">Function pointer from Wikipedia</a> </li></ul>\n<p><span id=\"For\"></span>\n</p>\n<h3><span class=\"mw-headline\" id=\"For\">For</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=21\" title=\"Edit section: For\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/For_loop\">For loop from Wikipedia</a></li></ul>\n<p><span id=\"While\"></span>\n</p>\n<h3><span class=\"mw-headline\" id=\"While\">While</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=22\" title=\"Edit section: While\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/While_loop\">While loop from Wikipedia</a></li></ul>\n<p><span id=\"Do\"></span>\n</p>\n<h3><span class=\"mw-headline\" id=\"Do_while\">Do while</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=23\" title=\"Edit section: Do while\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Do_while_loop\">Do while loop from Wikipedia</a></li>\n<li> <span id=\"Duff\"></span><a rel=\"nofollow\" class=\"external text\" href=\"http://doc.cat-v.org/bell_labs/duffs_device\">The amazing Duff's Device</a> by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Tom_Duff\">Tom Duff</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Duff%27s_device\">Duff's Device from Wikipedia</a></li></ul>\n<pre>\nsend(to, from, count)\n  register short *to, *from;\n  register count;\n  {\n    register n=(count+7)/8;\n    switch(count%8){\n    case 0: do{ *to = *from++;\n    case 7:     *to = *from++;\n    case 6:     *to = *from++;\n    case 5:     *to = *from++;\n    case 4:     *to = *from++;\n    case 3:     *to = *from++;\n    case 2:     *to = *from++;\n    case 1:     *to = *from++;\n        } while(--n &gt; 0);\n    }\n  }\n</pre>\n<p><span id=\"Preprocessor\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Preprocessor\">Preprocessor</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=24\" title=\"Edit section: Preprocessor\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/C_preprocessor\">C preprocessor from Wikipedia</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Portabilty\">Portabilty</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=25\" title=\"Edit section: Portabilty\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Two%27s_complement\">Two's Complement</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Sizeof\">sizeof</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Arithmetic_shift\">shift</a></li>\n<li> <a href=\"/Endianness\" title=\"Endianness\">Endianness</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Libraries\">Libraries</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=26\" title=\"Edit section: Libraries\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/C_standard_library\">C standard library</a> (libc)</li></ul>\n<h1><span class=\"mw-headline\" id=\"C_and_C.2B.2B_Compiler\">C and C++ Compiler</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=27\" title=\"Edit section: C and C++ Compiler\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>A <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/List_of_compilers#C_compilers\">C-Compiler</a> is used to translate the source program, usually <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/ASCII\">ascii-text</a> files with the extension .C, to so called <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Object_file\">object files</a>, containing machine instructions. A <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Linker_(computing)\">linker</a> binds all the object files together with libraries containing external functions (and data) to build an executable program.\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/AMD_Optimizing_C/C%2B%2B_Compiler\">AMD Optimizing C/C++ Compiler</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Clang\">Clang</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/CompCert\">CompCert</a></li>\n<li> <a href=\"/Free_Software_Foundation#GCC\" title=\"Free Software Foundation\">GNU C Compiler</a></li>\n<li> <a href=\"/Intel\" title=\"Intel\">Intel</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Intel_C%2B%2B_Compiler\">C++</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Interactive_C\">Interactive C</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/LCC_(compiler)\">LCC (compiler)</a></li>\n<li> <a href=\"/Microsoft\" title=\"Microsoft\">Microsoft</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Microsoft_Visual_C%2B%2B\">Visual C++</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.smorgasbordet.com/pellesc/\">Pelles C</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Tiny_C_Compiler\">Tiny C Compiler</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=28\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1978_...\">1978 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=29\" title=\"Edit section: 1978 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Brian_Kernighan\">Brian W. Kernighan</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Dennis_Ritchie\">Dennis M. Ritchie</a> (<b>1978, 1988</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/The_C_Programming_Language\">The C Programming Language</a></i>. First Edition ISBN 0-13-110163-3, Second Edition ISBN 0-13-110362-8</li>\n<li> <a href=\"/Andrew_Koenig\" title=\"Andrew Koenig\">Andrew Koenig</a> (<b>1989</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/C_Traps_and_Pitfalls\">C Traps and Pitfalls</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Addison-Wesley\">Addison-Wesley</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://literateprogramming.com/ctraps.pdf\">pdf preprint</a></li>\n<li> <a href=\"/Patrick_Winston\" title=\"Patrick Winston\">Patrick Winston</a> (<b>1994</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://people.csail.mit.edu/phw/Books/index.html#OnToC\">On To C</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://people.csail.mit.edu/phw/OnToC/\">On-Line</a></li>\n<li> <a href=\"/index.php?title=Andrew_Appel&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Andrew Appel (page does not exist)\">Andrew Appel</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/pers/hd/g/Ginsburg:Maia\">Maia Ginsburg</a> (<b>1998</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.cs.princeton.edu/~appel/modern/c/\">Modern Compiler Implementation in C</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Cambridge_University_Press\">Cambridge University Press</a></li>\n<li> <a href=\"/Erik_D._Demaine\" title=\"Erik D. Demaine\">Erik D. Demaine</a> (<b>1998</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://erikdemaine.org/papers/CPE98/\">C to Java: Converting Pointers into References</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.org/db/journals/concurrency/concurrency10.html\">Concurrency: Practice and Experience, Vol. 10</a>, Nos. 11-13</li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=30\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Robert_C._Seacord\">Robert C. Seacord</a> (<b>2010</b>). <i>Dangerous Optimizations and the Loss of Causality</i>. CS 15-392 © 2010 <a href=\"/Carnegie_Mellon_University\" title=\"Carnegie Mellon University\">Carnegie Mellon University</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://pubweb.eng.utah.edu/~cs5785/slides-f10/Dangerous+Optimizations.pdf\">slides as pdf</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://pdos.csail.mit.edu/~xi/\">Xi Wang</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://pdos.csail.mit.edu/~hchen/\">Haogang Chen</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://homes.cs.washington.edu/~akcheung/\">Alvin Cheung</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://zhihaojia.com/\">Zhihao Jia</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://people.csail.mit.edu/nickolai/\">Nickolai Zeldovich</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://pdos.csail.mit.edu/~kaashoek/\">M. Frans Kaashoek</a> (<b>2012</b>). <i>Undefined Behavior: What Happened to My Code</i>? <a rel=\"nofollow\" class=\"external text\" href=\"https://pdos.csail.mit.edu/papers/ub:apsys12.pdf\">pdf</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://wdtz.org/\">Will Dietz</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://lipeng28.github.io/\">Peng Li</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.utah.edu/~regehr/\">John Regehr</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Vikram_Adve\">Vikram Adve</a> (<b>2012</b>). <i>Understanding Integer Overflow in C/C++</i>.  <a rel=\"nofollow\" class=\"external text\" href=\"https://www.cs.utah.edu/~regehr/papers/overflow12.pdf\">pdf</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=31\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1999\">1999</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=32\" title=\"Edit section: 1999\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=74219\">C or C++ for chess programming: speed</a> by <a href=\"/Marc-Philippe_Huget\" title=\"Marc-Philippe Huget\">Marc-Philippe Huget</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 20, 1999</li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=33\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=211975\">One (silly) question about \"C\"</a> by Antonio Senatore, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 05, 2002</li></ul>\n<h2><span class=\"mw-headline\" id=\"2005_...\">2005 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=34\" title=\"Edit section: 2005 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=405552\">Re: chess engines writen in C</a> by <a href=\"/Dann_Corbit\" title=\"Dann Corbit\">Dann Corbit</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 13, 2005</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=21673\">ansi-C question</a> by <a href=\"/Vincent_Diepeveen\" title=\"Vincent Diepeveen\">Vincent Diepeveen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 08, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=23292\">setjmp() - another one</a> by <a href=\"/Chris_Whittington\" title=\"Chris Whittington\">Chris Whittington</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 27, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=27279\">kbhit() taking huge CPU??</a> by <a href=\"/John_Merlino\" title=\"John Merlino\">John Merlino</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 01, 2009&#160;» <a href=\"/Thread\" title=\"Thread\">Thread</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=29562\">Critter: Pascal vs C</a> by <a href=\"/Richard_Vida\" title=\"Richard Vida\">Richard Vida</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 27, 2009&#160;» <a href=\"/Pascal\" title=\"Pascal\">Pascal</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_..._2\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=35\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=38441\">MSVC calloc question</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 17, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=38523\">My experience with Linux/GCC</a> by <a href=\"/Richard_Vida\" title=\"Richard Vida\">Richard Vida</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 23, 2011&#160;» <a href=\"/Linux\" title=\"Linux\">Linux</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=39587\">a cautionary tale about simple-looking macros</a> by <a href=\"/index.php?title=Wylie_Garvin&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Wylie Garvin (page does not exist)\">Wylie Garvin</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 03, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://talkchess.com/forum/viewtopic.php?t=39683\">c or c++&#160;?</a> by ethan ara, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 10, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=44111\">VisualStudio - __fastcall instead of __cdecl?</a> by <a href=\"/Martin_Sedlak\" title=\"Martin Sedlak\">Martin Sedlak</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 18, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=47414\">C vs ASM</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 05, 2013&#160;» <a href=\"/Assembly\" title=\"Assembly\">Assembly</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48812&amp;start=6\">Re: goto thread (split)</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 01, 2013&#160;» <a href=\"/Iterative_Search\" title=\"Iterative Search\">Iterative Search</a>, <a href=\"/Symbolic\" title=\"Symbolic\">Symbolic</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=50186\">A note for C programmers</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 23, 2013</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=50186&amp;start=80\">Re: A note for C programmers</a> by <a href=\"/Rein_Halbersma\" title=\"Rein Halbersma\">Rein Halbersma</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 28, 2013</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=5&amp;t=2519\">A note on strcpy</a> by <a href=\"/Dann_Corbit\" title=\"Dann Corbit\">User923005</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">OpenChess Forum</a>, November 26, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=50387\">strcpy() revisited</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 08, 2013</li></ul>\n<h2><span class=\"mw-headline\" id=\"2015_...\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=36\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=58882\">Using more than 1 thread in C beginner question</a> by <a href=\"/Uri_Blass\" title=\"Uri Blass\">Uri Blass</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 11, 2016&#160;» <a href=\"/Thread\" title=\"Thread\">Thread</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=58967\">C programming style question</a> by <a href=\"/Michael_Sherwin\" title=\"Michael Sherwin\">Michael Sherwin</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 19, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=59464\">Crafty c questions</a> by <a href=\"/index.php?title=J._Wesley_Cleveland&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"J. Wesley Cleveland (page does not exist)\">J. Wesley Cleveland</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 10, 2016&#160;» <a href=\"/Crafty\" title=\"Crafty\">Crafty</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66624\">I'm not very happy with the do {} while() statement in C</a> by <a href=\"/Michael_Sherwin\" title=\"Michael Sherwin\">Michael Sherwin</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 18, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=69512\">Writing bugs</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 06, 2019</li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=37\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=74256\">Java vs C. It's not like one would think</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 22, 2020&#160;» <a href=\"/OliThink\" title=\"OliThink\">OliThink</a>, <a href=\"/Java\" title=\"Java\">Java</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=38\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/C_%28programming_language\">C from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikibooks.org/wiki/C_Programming\">C Programming - Wikibooks</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://publications.gbdirect.co.uk//c_book/\">The C Book - Table of Contents</a>, an online version of the popular introduction and reference on the ANSI Standard C programming language</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.azillionmonkeys.com/qed/programming.html\">Programming Bits</a> by <a href=\"/Paul_Hsieh\" title=\"Paul Hsieh\">Paul Hsieh</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/forum/#!forum/comp.lang.c\">comp.lang.c</a> Discussion about C</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://c-faq.com/index.html\">comp.lang.c Frequently Asked Questions</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.youtube.com/playlist?list=PLZ1QII7yudbc-Ky058TEaOstZHVbT-2hg\">Chess Engine In C</a> - <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Videos by <a href=\"/BlueFeverSoft\" title=\"BlueFeverSoft\">BlueFeverSoft</a>&#160;» <a href=\"/Vice\" title=\"Vice\">Vice</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://matt.sh/howto-c\">How to C in 2016</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=C&amp;action=edit&amp;section=39\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\">The cover to the book, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Brian_Kernighan\">Brian W. Kernighan</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Dennis_Ritchie\">Dennis M. Ritchie</a> (<b>1978, 1988</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/The_C_Programming_Language\">The C Programming Language</a></i>. First Edition</span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Edsger_Dijkstra\">Edsger Dijkstra</a> (<b>1968</b>). <i>Go To Statement Considered Harmful</i>. <a href=\"/ACM#Communications\" title=\"ACM\">Communications of the ACM</a>, Vol. 11, No. 3, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.utexas.edu/users/EWD/ewd02xx/EWD215.PDF\">pdf</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a href=\"/Mathematician#WiWulf\" title=\"Mathematician\">William A. Wulf</a> (<b>1971</b>). <i>Programming Without the GOTO</i>. <a href=\"/IFIP\" title=\"IFIP\">IFIP</a>, Ljubljana, Yugoslavia, August 1971</span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a href=\"/Mathematician#WiWulf\" title=\"Mathematician\">William A. Wulf</a> (<b>1972</b>). <i>A Case Against the GOTO</i>. Proceedings of the <a href=\"/ACM\" title=\"ACM\">ACM</a> National Conference, Boston, August 197</span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a href=\"/Donald_Knuth\" title=\"Donald Knuth\">Donald Knuth</a> (<b>1974</b>). <i>Structured Programming with go to Statements</i>. <a href=\"/ACM#Surveys\" title=\"ACM\">ACM Computing Surveys</a>, Vol. 6, No. 4, <a rel=\"nofollow\" class=\"external text\" href=\"http://cs.sjsu.edu/~mak/CS185C/KnuthStructuredProgrammingGoTo.pdf\">pdf</a></span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a href=\"/Ward_Douglas_Maurer\" title=\"Ward Douglas Maurer\">Ward Douglas Maurer</a> (<b>1996</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://dl.acm.org/citation.cfm?id=238417\">Attitudes toward the go-to statement (or, hydrogen considered harmful)</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.journals.elsevier.com/computers-and-education/\">Computers &amp; Education</a>, Vol. 26, No. 4</span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.codinghorror.com/blog/2007/10/id-consider-that-harmful-too.html\">Coding Horror: I'd Consider That Harmful, Too</a> by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Jeff_Atwood\">Jeff Atwood</a>, October 25, 2007</span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.stevemcconnell.com/aboutme.htm\">Steve McConnell</a> (<b>1993</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.stevemcconnell.com/cc1.htm\">Code Complete: A Practical Handbook of Software Construction</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Microsoft_Press\">Microsoft Press</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Languages\" title=\"Languages\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301085128\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.086 seconds\nReal time usage: 0.631 seconds\nPreprocessor visited node count: 342/1000000\nPreprocessor generated node count: 590/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:5270-0!canonical and timestamp 20260301085127 and revision id 19612\n -->\n"
+    },
+    "categories": [],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ACM"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Andrew Koenig"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Array"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Assembly"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bell Laboratories"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "BlueFeverSoft"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CFish"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "C sharp"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Carnegie Mellon University"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chris Whittington"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cpp"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Crafty"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "D (Programming Language)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dann Corbit"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Donald Knuth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ed Schroder"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Encoding Moves"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Endianness"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Erik D. Demaine"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Free Software Foundation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Go (Programming Language)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Harm Geert Muller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "IFIP"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Intel"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iterative Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Java"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "John Merlino"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Languages"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Linux"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marc-Philippe Huget"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Martin Sedlak"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mathematician"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michael Sherwin"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Microsoft"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "OliThink"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Oliver Brausch"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pascal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Patrick Winston"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Paul Hsieh"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Programming"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rein Halbersma"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Richard Vida"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Hyatt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Steven Edwards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Symbolic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Thread"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Unix"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Uri Blass"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vice"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vincent Diepeveen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ward Douglas Maurer"
+      },
+      {
+        "ns": 0,
+        "*": "Andrew Appel"
+      },
+      {
+        "ns": 0,
+        "*": "Wylie Garvin"
+      },
+      {
+        "ns": 0,
+        "*": "J. Wesley Cleveland"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Revisions",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "C",
+        "byteoffset": 1232,
+        "anchor": "Revisions"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "C",
+        "byteoffset": 1842,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Data",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "C",
+        "byteoffset": 1971,
+        "anchor": "Data"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Data Types",
+        "number": "3.1",
+        "index": "4",
+        "fromtitle": "C",
+        "byteoffset": 1979,
+        "anchor": "Data_Types"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Basic Data Types",
+        "number": "3.1.1",
+        "index": "5",
+        "fromtitle": "C",
+        "byteoffset": 2120,
+        "anchor": "Basic_Data_Types"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Pointer",
+        "number": "3.1.2",
+        "index": "6",
+        "fromtitle": "C",
+        "byteoffset": 2797,
+        "anchor": "Pointer"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Array",
+        "number": "3.1.3",
+        "index": "7",
+        "fromtitle": "C",
+        "byteoffset": 3133,
+        "anchor": "Array"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Struct",
+        "number": "3.1.4",
+        "index": "8",
+        "fromtitle": "C",
+        "byteoffset": 3671,
+        "anchor": "Struct"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Bitfield",
+        "number": "3.1.5",
+        "index": "9",
+        "fromtitle": "C",
+        "byteoffset": 4164,
+        "anchor": "Bitfield"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Union",
+        "number": "3.1.6",
+        "index": "10",
+        "fromtitle": "C",
+        "byteoffset": 4784,
+        "anchor": "Union"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Variables",
+        "number": "3.2",
+        "index": "11",
+        "fromtitle": "C",
+        "byteoffset": 4993,
+        "anchor": "Variables"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Instructions",
+        "number": "4",
+        "index": "12",
+        "fromtitle": "C",
+        "byteoffset": 5792,
+        "anchor": "Instructions"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Expressions",
+        "number": "4.1",
+        "index": "13",
+        "fromtitle": "C",
+        "byteoffset": 5808,
+        "anchor": "Expressions"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Functions",
+        "number": "4.2",
+        "index": "14",
+        "fromtitle": "C",
+        "byteoffset": 6007,
+        "anchor": "Functions"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Operators",
+        "number": "4.3",
+        "index": "15",
+        "fromtitle": "C",
+        "byteoffset": 6121,
+        "anchor": "Operators"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Control Flow",
+        "number": "4.4",
+        "index": "16",
+        "fromtitle": "C",
+        "byteoffset": 6902,
+        "anchor": "Control_Flow"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Goto",
+        "number": "4.4.1",
+        "index": "17",
+        "fromtitle": "C",
+        "byteoffset": 7019,
+        "anchor": "Goto"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "If else",
+        "number": "4.4.2",
+        "index": "18",
+        "fromtitle": "C",
+        "byteoffset": 8807,
+        "anchor": "If_else"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Switch case",
+        "number": "4.4.3",
+        "index": "19",
+        "fromtitle": "C",
+        "byteoffset": 8971,
+        "anchor": "Switch_case"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Function Pointer",
+        "number": "4.4.4",
+        "index": "20",
+        "fromtitle": "C",
+        "byteoffset": 9109,
+        "anchor": "Function_Pointer"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "For",
+        "number": "4.4.5",
+        "index": "21",
+        "fromtitle": "C",
+        "byteoffset": 9240,
+        "anchor": "For"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "While",
+        "number": "4.4.6",
+        "index": "22",
+        "fromtitle": "C",
+        "byteoffset": 9343,
+        "anchor": "While"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Do while",
+        "number": "4.4.7",
+        "index": "23",
+        "fromtitle": "C",
+        "byteoffset": 9448,
+        "anchor": "Do_while"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Preprocessor",
+        "number": "5",
+        "index": "24",
+        "fromtitle": "C",
+        "byteoffset": 10221,
+        "anchor": "Preprocessor"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Portabilty",
+        "number": "6",
+        "index": "25",
+        "fromtitle": "C",
+        "byteoffset": 10317,
+        "anchor": "Portabilty"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Libraries",
+        "number": "7",
+        "index": "26",
+        "fromtitle": "C",
+        "byteoffset": 10524,
+        "anchor": "Libraries"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "C and C++ Compiler",
+        "number": "8",
+        "index": "27",
+        "fromtitle": "C",
+        "byteoffset": 10617,
+        "anchor": "C_and_C.2B.2B_Compiler"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "9",
+        "index": "28",
+        "fromtitle": "C",
+        "byteoffset": 11774,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1978 ...",
+        "number": "9.1",
+        "index": "29",
+        "fromtitle": "C",
+        "byteoffset": 11789,
+        "anchor": "1978_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "9.2",
+        "index": "30",
+        "fromtitle": "C",
+        "byteoffset": 13026,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "10",
+        "index": "31",
+        "fromtitle": "C",
+        "byteoffset": 14043,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1999",
+        "number": "10.1",
+        "index": "32",
+        "fromtitle": "C",
+        "byteoffset": 14057,
+        "anchor": "1999"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "10.2",
+        "index": "33",
+        "fromtitle": "C",
+        "byteoffset": 14209,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2005 ...",
+        "number": "10.3",
+        "index": "34",
+        "fromtitle": "C",
+        "byteoffset": 14353,
+        "anchor": "2005_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "10.4",
+        "index": "35",
+        "fromtitle": "C",
+        "byteoffset": 15025,
+        "anchor": "2010_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "10.5",
+        "index": "36",
+        "fromtitle": "C",
+        "byteoffset": 16579,
+        "anchor": "2015_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "10.6",
+        "index": "37",
+        "fromtitle": "C",
+        "byteoffset": 17329,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "11",
+        "index": "38",
+        "fromtitle": "C",
+        "byteoffset": 17517,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "12",
+        "index": "39",
+        "fromtitle": "C",
+        "byteoffset": 18350,
+        "anchor": "References"
+      }
+    ]
+  }
+}

@@ -1,0 +1,468 @@
+{
+  "parse": {
+    "title": "Supervised Learning",
+    "pageid": 6380,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Learning\" title=\"Learning\">Learning</a> * Supervised Learning</b>\n</p><p><b>Supervised Learning</b>, (SL)<br />\nis learning from examples provided by a knowledgable external <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Supervisor\">supervisor</a>. \nIn machine learning, supervised learning is a technique for deducing a function from <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Training,_validation,_and_test_sets\">training data</a>. The training data consist of pairs of input objects and desired outputs. After parameter adjustment and learning, the performance of the resulting function should be measured on a test set that is separate from the training set <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup>. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#SL_in_a_nutshell\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">SL in a nutshell</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#SL_in_Chess\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">SL in Chess</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#Move_Adaption\"><span class=\"tocnumber\">2.1</span> <span class=\"toctext\">Move Adaption</span></a></li>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#Value_Adaption\"><span class=\"tocnumber\">2.2</span> <span class=\"toctext\">Value Adaption</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#See_also\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#Selected_Publications\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Selected Publications</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#1960_....\"><span class=\"tocnumber\">4.1</span> <span class=\"toctext\">1960 ....</span></a></li>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#1980_...\"><span class=\"tocnumber\">4.2</span> <span class=\"toctext\">1980 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#1990_...\"><span class=\"tocnumber\">4.3</span> <span class=\"toctext\">1990 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#2000_...\"><span class=\"tocnumber\">4.4</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#2010_...\"><span class=\"tocnumber\">4.5</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-12\"><a href=\"#2020_...\"><span class=\"tocnumber\">4.6</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-13\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Forum Posts</span></a></li>\n<li class=\"toclevel-1 tocsection-14\"><a href=\"#External_Links\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-15\"><a href=\"#References\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"SL_in_a_nutshell\">SL in a nutshell</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Supervised_Learning&amp;action=edit&amp;section=1\" title=\"Edit section: SL in a nutshell\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"floatnone\"><a href=\"/File:Supervised_machine_learning_in_a_nutshell.svg\" class=\"image\"><img alt=\"Supervised machine learning in a nutshell.svg\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Supervised_machine_learning_in_a_nutshell.svg/960px-Supervised_machine_learning_in_a_nutshell.svg.png\" width=\"640\" height=\"200\" style=\"vertical-align: text-bottom\" class=\"thumbborder\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Supervised_machine_learning_in_a_nutshell.svg/1280px-Supervised_machine_learning_in_a_nutshell.svg.png 2x\" /></a></div>\n<p><sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>  \n</p>\n<h1><span class=\"mw-headline\" id=\"SL_in_Chess\">SL in Chess</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Supervised_Learning&amp;action=edit&amp;section=2\" title=\"Edit section: SL in Chess\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>In computer games and chess, supervised learning techniques were used in <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">automated tuning</a> or to train <a href=\"/Neural_Networks\" title=\"Neural Networks\">neural network</a> game and chess programs. Input objects are <a href=\"/Chess_Position\" title=\"Chess Position\">chess positions</a>. The desired output is either the supervisor's move choice in that position (<a href=\"/Automated_Tuning#MoveAdaption\" title=\"Automated Tuning\">move adaption</a>), or a <a href=\"/Score\" title=\"Score\">score</a> provided by an <a href=\"/Oracle\" title=\"Oracle\">oracle</a> (<a href=\"/Automated_Tuning#ValueAdaption\" title=\"Automated Tuning\">value adaption</a>).\n</p>\n<h2><span class=\"mw-headline\" id=\"Move_Adaption\">Move Adaption</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Supervised_Learning&amp;action=edit&amp;section=3\" title=\"Edit section: Move Adaption\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p><a href=\"/Automated_Tuning#MoveAdaption\" title=\"Automated Tuning\">Move adaption</a> can be applied by <a href=\"/Automated_Tuning#LinearRegression\" title=\"Automated Tuning\">linear regression</a> to minimize a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Loss_function\">cost function</a> considering the rank-number of the desired move in a <a href=\"/Move_List\" title=\"Move List\">move list</a> ordered by score <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>.\n</p>\n<h2><span class=\"mw-headline\" id=\"Value_Adaption\">Value Adaption</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Supervised_Learning&amp;action=edit&amp;section=4\" title=\"Edit section: Value Adaption\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>One common idea to provide an <a href=\"/Oracle\" title=\"Oracle\">oracle</a> for supervised <a href=\"/Automated_Tuning#ValueAdaption\" title=\"Automated Tuning\">value adaption</a> is to use the win/draw/loss outcome from finished games \nfor all training positions selected from that game. Discrete {-1, 0, +1} or {0, ½, 1} desired values are the domain of <a href=\"/Automated_Tuning#LogisticRegression\" title=\"Automated Tuning\">logistic regression</a> and require the\nevaluation scores mapped from <a href=\"/Pawn_Advantage,_Win_Percentage,_and_Elo\" title=\"Pawn Advantage, Win Percentage, and Elo\">pawn advantage</a> to appropriate winning probabilities using the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Sigmoid_function\">sigmoid function</a> \nto calculate a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Mean_squared_error\">mean squared error</a> of the cost function to minimize, as demonstrated by <a href=\"/Texel%27s_Tuning_Method\" title=\"Texel&#39;s Tuning Method\">Texel's Tuning Method</a>.\n</p>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Supervised_Learning&amp;action=edit&amp;section=5\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Automated_Tuning#SupervisedLearning\" title=\"Automated Tuning\">Supervised Learning</a> in <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">Automated Tuning</a></li>\n<li> <a href=\"/Book_Learning\" title=\"Book Learning\">Book Learning</a></li>\n<li> <a href=\"/Chessmaps_Heuristic\" title=\"Chessmaps Heuristic\">Chessmaps Heuristic</a></li>\n<li> <a href=\"/CHREST\" title=\"CHREST\">CHREST</a></li>\n<li> <a href=\"/Deep_Learning\" title=\"Deep Learning\">Deep Learning</a></li>\n<li> <a href=\"/Neural_Networks\" title=\"Neural Networks\">Neural Networks</a></li>\n<li> <a href=\"/Planning\" title=\"Planning\">Planning</a></li>\n<li> <a href=\"/Reinforcement_Learning\" title=\"Reinforcement Learning\">Reinforcement Learning</a></li>\n<li> <a href=\"/Temporal_Difference_Learning\" title=\"Temporal Difference Learning\">Temporal Difference Learning</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Selected_Publications\">Selected Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Supervised_Learning&amp;action=edit&amp;section=6\" title=\"Edit section: Selected Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1960_....\">1960 ....</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Supervised_Learning&amp;action=edit&amp;section=7\" title=\"Edit section: 1960 ....\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Arthur_Samuel\" title=\"Arthur Samuel\">Arthur Samuel</a> (<b>1967</b>). <i>Some Studies in Machine Learning. Using the Game of Checkers. II-Recent Progress</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://researcher.watson.ibm.com/researcher/files/us-beygel/samuel-checkers.pdf\">pdf</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1980_...\">1980 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Supervised_Learning&amp;action=edit&amp;section=8\" title=\"Edit section: 1980 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Thomas_Nitsche\" title=\"Thomas Nitsche\">Thomas Nitsche</a> (<b>1982</b>). <i>A Learning Chess Program.</i> <a href=\"/Advances_in_Computer_Chess_3\" title=\"Advances in Computer Chess 3\">Advances in Computer Chess 3</a></li>\n<li> <a href=\"/Tony_Marsland\" title=\"Tony Marsland\">Tony Marsland</a> (<b>1985</b>). <i>Evaluation-Function Factors</i>. <a href=\"/ICGA_Journal#8_2\" title=\"ICGA Journal\">ICCA Journal, Vol. 8, No. 2</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://webdocs.cs.ualberta.ca/~tony/OldPapers/evaluation.pdf\">pdf</a></li>\n<li> <a href=\"/Eric_B._Baum\" title=\"Eric B. Baum\">Eric B. Baum</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Frank_Wilczek\">Frank Wilczek</a> (<b>1987</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://papers.nips.cc/paper/3-supervised-learning-of-probability-distributions-by-neural-networks\">Supervised Learning of Probability Distributions by Neural Networks</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://papers.nips.cc/book/neural-information-processing-systems-1987\">NIPS 1987</a></li>\n<li> <a href=\"/Maarten_van_der_Meulen\" title=\"Maarten van der Meulen\">Maarten van der Meulen</a> (<b>1989</b>). <i>Weight Assessment in Evaluation Functions</i>. <a href=\"/Advances_in_Computer_Chess_5\" title=\"Advances in Computer Chess 5\">Advances in Computer Chess 5</a> </li></ul>\n<h2><span class=\"mw-headline\" id=\"1990_...\">1990 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Supervised_Learning&amp;action=edit&amp;section=9\" title=\"Edit section: 1990 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Mich%C3%A8le_Sebag\" title=\"Michèle Sebag\">Michèle Sebag</a> (<b>1990</b>). <i>A symbolic-numerical approach for supervised learning from examples and rules</i>. Ph.D. thesis, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Paris_Dauphine_University\">Paris Dauphine University</a></li>\n<li> <a href=\"/Feng-hsiung_Hsu\" title=\"Feng-hsiung Hsu\">Feng-hsiung Hsu</a>, <a href=\"/Thomas_Anantharaman\" title=\"Thomas Anantharaman\">Thomas Anantharaman</a>, <a href=\"/Murray_Campbell\" title=\"Murray Campbell\">Murray Campbell</a>, <a href=\"/Andreas_Nowatzyk\" title=\"Andreas Nowatzyk\">Andreas Nowatzyk</a> (<b>1990</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.disi.unige.it/person/DelzannoG/AI2/hsu.html\">A Grandmaster Chess Machine</a></i>. <a href=\"/Scientific_American\" title=\"Scientific American\">Scientific American</a>, Vol. 263, No. 4</li>\n<li> <a href=\"/Thomas_Anantharaman\" title=\"Thomas Anantharaman\">Thomas Anantharaman</a> (<b>1997</b>). <i>Evaluation Tuning for Computer Chess: Linear Discriminant Methods</i>. <a href=\"/ICGA_Journal#20_4\" title=\"ICGA Journal\">ICCA Journal, Vol. 20, No. 4</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Supervised_Learning&amp;action=edit&amp;section=10\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Michael_Buro\" title=\"Michael Buro\">Michael Buro</a> (<b>2002</b>). <i>Improving Mini-max Search by Supervised Learning.</i> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_(journal)\">Artificial Intelligence</a>, Vol. 134, No. 1, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.ualberta.ca/%7Emburo/ps/logaij.pdf\">pdf</a></li>\n<li> <a href=\"/Dave_Gomboc\" title=\"Dave Gomboc\">Dave Gomboc</a>, <a href=\"/Michael_Buro\" title=\"Michael Buro\">Michael Buro</a>, <a href=\"/Tony_Marsland\" title=\"Tony Marsland\">Tony Marsland</a> (<b>2005</b>). <i>Tuning Evaluation Functions by Maximizing Concordance</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Theoretical_Computer_Science_%28journal%29\">Theoretical Computer Science</a>, Vol. 349, No. 2, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.ualberta.ca/%7Emburo/ps/tcs-learn.pdf\">pdf</a></li>\n<li> <a href=\"/Amos_Storkey\" title=\"Amos Storkey\">Amos Storkey</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://www.k.u-tokyo.ac.jp/pros-e/person/masashi_sugiyama/masashi_sugiyama.htm\">Masashi Sugiyama</a> (<b>2006</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://papers.neurips.cc/paper/3019-mixture-regression-for-covariate-shift\">Mixture Regression for Covariate Shift</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/db/conf/nips/nips2006.html\">NIPS 2006</a></li>\n<li> <a href=\"/Eli_David\" title=\"Eli David\">Omid David</a>, <a href=\"/Moshe_Koppel\" title=\"Moshe Koppel\">Moshe Koppel</a>, <a href=\"/Nathan_S._Netanyahu\" title=\"Nathan S. Netanyahu\">Nathan S. Netanyahu</a> (<b>2008</b>). <i>Genetic Algorithms for Mentor-Assisted Evaluation Function Optimization</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.sigevo.org/gecco-2008/\">GECCO '08</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1711.06839\">arXiv:1711.06839</a></li>\n<li> <a href=\"/Eli_David\" title=\"Eli David\">Omid David</a>, <a href=\"/Jaap_van_den_Herik\" title=\"Jaap van den Herik\">Jaap van den Herik</a>, <a href=\"/Moshe_Koppel\" title=\"Moshe Koppel\">Moshe Koppel</a>, <a href=\"/Nathan_S._Netanyahu\" title=\"Nathan S. Netanyahu\">Nathan S. Netanyahu</a> (<b>2009</b>). <i>Simulating Human Grandmasters: Evolution and Coevolution of Evaluation Functions</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.sigevo.org/gecco-2009/\">GECCO '09</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1711.06840\">arXiv:1711.06840</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Supervised_Learning&amp;action=edit&amp;section=11\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Tor_Lattimore\" title=\"Tor Lattimore\">Tor Lattimore</a>, <a href=\"/Marcus_Hutter\" title=\"Marcus Hutter\">Marcus Hutter</a> (<b>2011</b>). <i>No Free Lunch versus Occam's Razor in Supervised Learning</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Ray_Solomonoff\">Solomonoff</a> Memorial, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Lecture_Notes_in_Computer_Science\">Lecture Notes in Computer Science</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Springer-Verlag\">Springer</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1111.3846\">arXiv:1111.3846</a> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup> <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup></li>\n<li> <a href=\"/Wen-Jie_Tseng\" title=\"Wen-Jie Tseng\">Wen-Jie Tseng</a>, <a href=\"/Jr-Chang_Chen\" title=\"Jr-Chang Chen\">Jr-Chang Chen</a>, <a href=\"/I-Chen_Wu\" title=\"I-Chen Wu\">I-Chen Wu</a>, <a href=\"/Ching-Hua_Kuo\" title=\"Ching-Hua Kuo\">Ching-Hua Kuo</a>, <a href=\"/index.php?title=Bo-Han_Lin&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Bo-Han Lin (page does not exist)\">Bo-Han Lin</a> (<b>2013</b>). <i>A Supervised Learning Method for Chinese Chess Programs</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://2013.conf.ai-gakkai.or.jp/english-info\">JSAI2013</a></li>\n<li> <a href=\"/Kunihito_Hoki\" title=\"Kunihito Hoki\">Kunihito Hoki</a>, <a href=\"/Tomoyuki_Kaneko\" title=\"Tomoyuki Kaneko\">Tomoyuki Kaneko</a> (<b>2014</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.jair.org/papers/paper4217.html\">Large-Scale Optimization for Evaluation Functions with Minimax Search</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://www.jair.org/vol/vol49.html\">JAIR Vol. 49</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://pdfs.semanticscholar.org/eb9c/173576577acbb8800bf96aba452d77f1dc19.pdf\">pdf</a></li>\n<li> <a href=\"/Christopher_Clark\" title=\"Christopher Clark\">Christopher Clark</a>, <a href=\"/Amos_Storkey\" title=\"Amos Storkey\">Amos Storkey</a> (<b>2014</b>). <i>Teaching Deep Convolutional Neural Networks to Play Go</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://arxiv.org/abs/1412.3409\">arXiv:1412.3409</a></li>\n<li> <a href=\"/Wen-Jie_Tseng\" title=\"Wen-Jie Tseng\">Wen-Jie Tseng</a>, <a href=\"/Jr-Chang_Chen\" title=\"Jr-Chang Chen\">Jr-Chang Chen</a>, <a href=\"/I-Chen_Wu\" title=\"I-Chen Wu\">I-Chen Wu</a>, <a href=\"/index.php?title=Tinghan_Wei&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Tinghan Wei (page does not exist)\">Tinghan Wei</a> (<b>2018</b>). <i>Comparison Training for Computer Chinese Chess</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1801.07411\">arXiv:1801.07411</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Supervised_Learning&amp;action=edit&amp;section=12\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Johannes_Czech\" title=\"Johannes Czech\">Johannes Czech</a>, <a href=\"/Moritz_Willig\" title=\"Moritz Willig\">Moritz Willig</a>, <a href=\"/Alena_Beyer\" title=\"Alena Beyer\">Alena Beyer</a>, <a href=\"/Kristian_Kersting\" title=\"Kristian Kersting\">Kristian Kersting</a>, <a href=\"/Johannes_F%C3%BCrnkranz\" title=\"Johannes Fürnkranz\">Johannes Fürnkranz</a> (<b>2020</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.frontiersin.org/articles/10.3389/frai.2020.00024/full\">Learning to Play the Chess Variant Crazyhouse Above World Champion Level With Deep Neural Networks and Human Data</a></i>.  <a rel=\"nofollow\" class=\"external text\" href=\"https://www.frontiersin.org/journals/artificial-intelligence#\">Frontiers in Artificial Intelligence</a> &#160;» <a href=\"/CrazyAra\" title=\"CrazyAra\">CrazyAra</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Supervised_Learning&amp;action=edit&amp;section=13\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=27266&amp;postdays=0&amp;postorder=asc&amp;topic_view=&amp;start=11\">Re: Insanity... or Tal style?</a> by <a href=\"/Miguel_A._Ballicora\" title=\"Miguel A. Ballicora\">Miguel A. Ballicora</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 02, 2009&#160;» <a href=\"/Gaviota\" title=\"Gaviota\">Gaviota</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=50823&amp;start=10\">Re: How Do You Automatically Tune Your Evaluation Tables</a> by <a href=\"/%C3%81lvaro_Begu%C3%A9\" title=\"Álvaro Begué\">Álvaro Begué</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 08, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=50823&amp;start=26\">The texel evaluation function optimization algorithm</a> by <a href=\"/Peter_%C3%96sterlund\" title=\"Peter Österlund\">Peter Österlund</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 31, 2014&#160;» <a href=\"/Texel%27s_Tuning_Method\" title=\"Texel&#39;s Tuning Method\">Texel's Tuning Method</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=70611\">SL vs RL</a> by <a href=\"/Chris_Whittington\" title=\"Chris Whittington\">Chris Whittington</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 28, 2019</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Supervised_Learning&amp;action=edit&amp;section=14\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Supervised_learning\">Supervised learning from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.scholarpedia.org/article/Category:Supervised_learning\">Category: Supervised learning - Scholarpedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Boosting_%28machine_learning%29\">Boosting (machine learning) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Computational_learning_theory\">Computational learning theory from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Support_vector_machine\">Support vector machine from Wikipedia</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Supervised_Learning&amp;action=edit&amp;section=15\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Supervised_learning\">Supervised learning from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\">A data flow diagram shows the machine learning process in summary, by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/User:EpochFail\">EpochFail</a>, November 15, 2015, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wikimedia_Commons\">Wikimedia Commons</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a href=\"/Tony_Marsland\" title=\"Tony Marsland\">Tony Marsland</a> (<b>1985</b>). <i>Evaluation-Function Factors</i>. <a href=\"/ICGA_Journal#8_2\" title=\"ICGA Journal\">ICCA Journal, Vol. 8, No. 2</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://webdocs.cs.ualberta.ca/~tony/OldPapers/evaluation.pdf\">pdf</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/No_free_lunch_in_search_and_optimization\">No free lunch in search and optimization - Wikipedia</a></span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Occam%27s_razor\">Occam's razor from Wikipedia</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Learning\" title=\"Learning\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301023131\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.072 seconds\nReal time usage: 0.618 seconds\nPreprocessor visited node count: 133/1000000\nPreprocessor generated node count: 242/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:6380-0!canonical and timestamp 20260301023130 and revision id 24625\n -->\n"
+    },
+    "categories": [],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 3"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 5"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alena Beyer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Amos Storkey"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Andreas Nowatzyk"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Arthur Samuel"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Automated Tuning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Book Learning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CHREST"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Position"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chessmaps Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ching-Hua Kuo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chris Whittington"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Christopher Clark"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CrazyAra"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dave Gomboc"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Deep Learning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Eli David"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Eric B. Baum"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Feng-hsiung Hsu"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gaviota"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "I-Chen Wu"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA Journal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jaap van den Herik"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Johannes Czech"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Johannes Fürnkranz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jr-Chang Chen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kristian Kersting"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kunihito Hoki"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Learning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Maarten van der Meulen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marcus Hutter"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michael Buro"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michèle Sebag"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Miguel A. Ballicora"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Moritz Willig"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Moshe Koppel"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move List"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Murray Campbell"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Nathan S. Netanyahu"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Neural Networks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Oracle"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Advantage, Win Percentage, and Elo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter Österlund"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Planning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Reinforcement Learning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Scientific American"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Score"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Temporal Difference Learning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Texel's Tuning Method"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Thomas Anantharaman"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Thomas Nitsche"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tomoyuki Kaneko"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tony Marsland"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tor Lattimore"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Wen-Jie Tseng"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Álvaro Begué"
+      },
+      {
+        "ns": 0,
+        "*": "Bo-Han Lin"
+      },
+      {
+        "ns": 0,
+        "*": "Tinghan Wei"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "SL in a nutshell",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Supervised_Learning",
+        "byteoffset": 715,
+        "anchor": "SL_in_a_nutshell"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "SL in Chess",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Supervised_Learning",
+        "byteoffset": 1048,
+        "anchor": "SL_in_Chess"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Move Adaption",
+        "number": "2.1",
+        "index": "3",
+        "fromtitle": "Supervised_Learning",
+        "byteoffset": 1533,
+        "anchor": "Move_Adaption"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Value Adaption",
+        "number": "2.2",
+        "index": "4",
+        "fromtitle": "Supervised_Learning",
+        "byteoffset": 2036,
+        "anchor": "Value_Adaption"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "3",
+        "index": "5",
+        "fromtitle": "Supervised_Learning",
+        "byteoffset": 2789,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Selected Publications",
+        "number": "4",
+        "index": "6",
+        "fromtitle": "Supervised_Learning",
+        "byteoffset": 3067,
+        "anchor": "Selected_Publications"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1960 ....",
+        "number": "4.1",
+        "index": "7",
+        "fromtitle": "Supervised_Learning",
+        "byteoffset": 3092,
+        "anchor": "1960_...."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1980 ...",
+        "number": "4.2",
+        "index": "8",
+        "fromtitle": "Supervised_Learning",
+        "byteoffset": 3312,
+        "anchor": "1980_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1990 ...",
+        "number": "4.3",
+        "index": "9",
+        "fromtitle": "Supervised_Learning",
+        "byteoffset": 4080,
+        "anchor": "1990_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "4.4",
+        "index": "10",
+        "fromtitle": "Supervised_Learning",
+        "byteoffset": 4705,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "4.5",
+        "index": "11",
+        "fromtitle": "Supervised_Learning",
+        "byteoffset": 6148,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "4.6",
+        "index": "12",
+        "fromtitle": "Supervised_Learning",
+        "byteoffset": 7666,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "5",
+        "index": "13",
+        "fromtitle": "Supervised_Learning",
+        "byteoffset": 8103,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "6",
+        "index": "14",
+        "fromtitle": "Supervised_Learning",
+        "byteoffset": 8805,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "7",
+        "index": "15",
+        "fromtitle": "Supervised_Learning",
+        "byteoffset": 9340,
+        "anchor": "References"
+      }
+    ]
+  }
+}

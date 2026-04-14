@@ -1,0 +1,1448 @@
+{
+  "parse": {
+    "title": "Null Move Pruning",
+    "pageid": 978,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Search\" title=\"Search\">Search</a> * <a href=\"/Selectivity\" title=\"Selectivity\">Selectivity</a> * <a href=\"/Pruning\" title=\"Pruning\">Pruning</a> * Null Move Pruning</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"http://chgs.elevator.umn.edu/asset/viewAsset/57f3b6787d58ae5f74bf8ba9#57f3b6d77d58ae5574bf8bc5\"><img alt=\"\" src=\"/images/thumb/f/f0/SamuelBakSignals.jpg/300px-SamuelBakSignals.jpg\" width=\"300\" height=\"228\" class=\"thumbimage\" srcset=\"/images/f/f0/SamuelBakSignals.jpg 1.5x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:SamuelBakSignals.jpg\" class=\"internal\" title=\"Enlarge\"></a></div><a href=\"/Category:Samuel_Bak\" title=\"Category:Samuel Bak\">Samuel Bak</a> - Signals <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>Null Move Pruning</b>,<br />\nalso called Null Move Heuristic (<b>NMH</b>), is a method based on the <a href=\"/Null_Move_Observation\" title=\"Null Move Observation\">Null Move Observation</a> to reduce the search space by trying a <a href=\"/Null_Move\" title=\"Null Move\">\"null\" or \"passing\" move</a>, then seeing if the score of the subtree search is still high enough to cause a beta cutoff. Nodes are saved by <a href=\"/Reductions\" title=\"Reductions\">reducing</a> the <a href=\"/Depth\" title=\"Depth\">depth</a> of the subtree under the null move. The value of this depth reduction is known as <a href=\"/Depth_Reduction_R\" title=\"Depth Reduction R\">R</a>. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Core_Idea\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Core Idea</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Pseudocode\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Pseudocode</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Basic_Implementation\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Basic Implementation</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#Conditions\"><span class=\"tocnumber\">3.1</span> <span class=\"toctext\">Conditions</span></a></li>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#Reduction\"><span class=\"tocnumber\">3.2</span> <span class=\"toctext\">Reduction</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#Advanced_Tweaks\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Advanced Tweaks</span></a></li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#History\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">History</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#Mater_II\"><span class=\"tocnumber\">5.1</span> <span class=\"toctext\">Mater II</span></a></li>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#Kaissa\"><span class=\"tocnumber\">5.2</span> <span class=\"toctext\">Kaissa</span></a></li>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#Beal.27s_NMQS\"><span class=\"tocnumber\">5.3</span> <span class=\"toctext\">Beal's NMQS</span></a></li>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#Schaeffer\"><span class=\"tocnumber\">5.4</span> <span class=\"toctext\">Schaeffer</span></a></li>\n<li class=\"toclevel-2 tocsection-12\"><a href=\"#Goetsch_and_Campbell\"><span class=\"tocnumber\">5.5</span> <span class=\"toctext\">Goetsch and Campbell</span></a></li>\n<li class=\"toclevel-2 tocsection-13\"><a href=\"#Morsch_and_Donninger\"><span class=\"tocnumber\">5.6</span> <span class=\"toctext\">Morsch and Donninger</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-14\"><a href=\"#Schemes\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Schemes</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-15\"><a href=\"#Adaptive_Null_Move_Pruning\"><span class=\"tocnumber\">6.1</span> <span class=\"toctext\">Adaptive Null Move Pruning</span></a></li>\n<li class=\"toclevel-2 tocsection-16\"><a href=\"#Restrictions_on_use\"><span class=\"tocnumber\">6.2</span> <span class=\"toctext\">Restrictions on use</span></a></li>\n<li class=\"toclevel-2 tocsection-17\"><a href=\"#Zugzwang_Verification\"><span class=\"tocnumber\">6.3</span> <span class=\"toctext\">Zugzwang Verification</span></a></li>\n<li class=\"toclevel-2 tocsection-18\"><a href=\"#Double_Null_Move\"><span class=\"tocnumber\">6.4</span> <span class=\"toctext\">Double Null Move</span></a></li>\n<li class=\"toclevel-2 tocsection-19\"><a href=\"#Variable_NM_Bound\"><span class=\"tocnumber\">6.5</span> <span class=\"toctext\">Variable NM Bound</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-20\"><a href=\"#Threat_Detection\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">Threat Detection</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-21\"><a href=\"#Mate_Threats\"><span class=\"tocnumber\">7.1</span> <span class=\"toctext\">Mate Threats</span></a></li>\n<li class=\"toclevel-2 tocsection-22\"><a href=\"#Botvinnik-Markoff_Extension\"><span class=\"tocnumber\">7.2</span> <span class=\"toctext\">Botvinnik-Markoff Extension</span></a></li>\n<li class=\"toclevel-2 tocsection-23\"><a href=\"#Influence_on_Move_Ordering\"><span class=\"tocnumber\">7.3</span> <span class=\"toctext\">Influence on Move Ordering</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-24\"><a href=\"#Test_Results\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">Test Results</span></a></li>\n<li class=\"toclevel-1 tocsection-25\"><a href=\"#See_also\"><span class=\"tocnumber\">9</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-26\"><a href=\"#Publications\"><span class=\"tocnumber\">10</span> <span class=\"toctext\">Publications</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-27\"><a href=\"#1966\"><span class=\"tocnumber\">10.1</span> <span class=\"toctext\">1966</span></a></li>\n<li class=\"toclevel-2 tocsection-28\"><a href=\"#1975\"><span class=\"tocnumber\">10.2</span> <span class=\"toctext\">1975</span></a></li>\n<li class=\"toclevel-2 tocsection-29\"><a href=\"#1980_...\"><span class=\"tocnumber\">10.3</span> <span class=\"toctext\">1980 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-30\"><a href=\"#1990_...\"><span class=\"tocnumber\">10.4</span> <span class=\"toctext\">1990 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-31\"><a href=\"#2000_...\"><span class=\"tocnumber\">10.5</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-32\"><a href=\"#2010_...\"><span class=\"tocnumber\">10.6</span> <span class=\"toctext\">2010 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-33\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">11</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-34\"><a href=\"#1995_...\"><span class=\"tocnumber\">11.1</span> <span class=\"toctext\">1995 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-35\"><a href=\"#2000_..._2\"><span class=\"tocnumber\">11.2</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-36\"><a href=\"#2005_...\"><span class=\"tocnumber\">11.3</span> <span class=\"toctext\">2005 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-37\"><a href=\"#2010_..._2\"><span class=\"tocnumber\">11.4</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-38\"><a href=\"#2015_...\"><span class=\"tocnumber\">11.5</span> <span class=\"toctext\">2015 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-39\"><a href=\"#2020_...\"><span class=\"tocnumber\">11.6</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-40\"><a href=\"#External_Links\"><span class=\"tocnumber\">12</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-41\"><a href=\"#References\"><span class=\"tocnumber\">13</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Core_Idea\">Core Idea</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=1\" title=\"Edit section: Core Idea\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><b>Null Move Observation</b>: In almost all chess positions, making a null move (passing a turn) is worse than the best legal move.\n</p><p>NMP takes advantage of this observation, and it works as follows. If a reduced search on a null move fails high over beta, then by the null move observation, we can be quite confident that the best legal move would also fail high over beta. This means that once a null move search fails high, we can return a fail high at that point, skipping later move generation or any full depth searches.\n</p><p>One particular exception to the Null Move Observation is the case zugzwangs. When every possible move from the player will worsen their position. This can be avoided by disabling NMP at pawn endgames, where zugzwangs are prone. For piece endgames, verification search can be an effective heuristic in preventing zugzwang blindness from NMP.\n</p>\n<h1><span class=\"mw-headline\" id=\"Pseudocode\">Pseudocode</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=2\" title=\"Edit section: Pseudocode\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<pre>\nif ( ... ) // NMP Conditions\n{\n    int r = ...; // NMP Reduction\n    pos.make_null_move();\n    int v = -search(pos, -beta, -(beta - 1), depth - r);\n    pos.undo_null_move();\n    if (v &gt;= beta)\n        return v;\n}\n</pre>\n<h1><span class=\"mw-headline\" id=\"Basic_Implementation\">Basic Implementation</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=3\" title=\"Edit section: Basic Implementation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Conditions\">Conditions</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=4\" title=\"Edit section: Conditions\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>A basic implementation of NMP only guards against positions in check and positions where the side to move has only king and pawns. This is because zugzwangs are particularly prone in positions without pieces, and may have a significant role in determining who wins the ensuing endgame. For correctness reasons, some implementations also disables consecutive null moves, although they may not have an effect on engine strength.\n</p>\n<h2><span class=\"mw-headline\" id=\"Reduction\">Reduction</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=5\" title=\"Edit section: Reduction\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>A basic implementation of NMP uses a fixed reduction of 3 or 4. The reduced null move search is searched at null window [-beta, -beta + 1].\n</p>\n<h1><span class=\"mw-headline\" id=\"Advanced_Tweaks\">Advanced Tweaks</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=6\" title=\"Edit section: Advanced Tweaks\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>The following are common guards to restrict the use of NMP in some situations. They should be tested incrementally:\n</p>\n<ul><li> Inside a non-<a href=\"/Node_Types#PV-Nodes\" title=\"Node Types\">PV</a> node.</li>\n<li> Inside a <a href=\"/Node_Types#Cut-Nodes\" title=\"Node Types\">cut node</a>.</li>\n<li> When (potentially TT-corrected) evaluation is higher or equal to beta.</li>\n<li> When static evaluation is higher than beta over a margin.</li></ul>\n<p>An advanced implementation of NMP also adjusts reduction value by certain parameters. For example, a depth scaling factor, such as <span style=\"background-color: #e0e0e0;\">depth / 3</span>, can be added to the depth reduction. Additionally, a factor scaled by the difference between (potentially TT-corrected) evaluation and beta can also be added to the reduction value. Optimizing NMP parameters can bring significant Elo to a program.\n</p>\n<h1><span class=\"mw-headline\" id=\"History\">History</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=7\" title=\"Edit section: History\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Mater_II\">Mater II</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=8\" title=\"Edit section: Mater II\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p><span id=\"History\"></span>In computer chess, Null Move was already used in threatening <a href=\"/Checkmate\" title=\"Checkmate\">mate in one</a> detection, as elaborated by <a href=\"/George_Baylor\" title=\"George Baylor\">George Baylor</a> and <a href=\"/Herbert_Simon\" title=\"Herbert Simon\">Herbert Simon</a> in <i>A chess mating combinations program</i>, 1966, the description of <a href=\"/Mater#MaterII\" title=\"Mater\">Mater II</a> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup> .\n</p>\n<pre>Routine G17 asks if a proposed move threatens mate in one move. It determines the answer by assuming Black does nothing on his turn, that is, by playing a \"No Move\" and then seeing if White can enforce an immediate checkmate. \n</pre>\n<h2><span class=\"mw-headline\" id=\"Kaissa\">Kaissa</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=9\" title=\"Edit section: Kaissa\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Null Move pruning was already used in <a href=\"/Kaissa\" title=\"Kaissa\">Kaissa</a>, as described by their authors <b>1975</b> in <i>Some Methods of Controlling the Tree Search in Chess Programs</i> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup> , at the end of chapter 2:\n</p>\n<pre><b>2. The Order of Move Considerations</b>:\nA less trivial idea was that sometimes an extension of the game tree by introducing of dummy move can lead to a reduction of the search tree. In positions with material advantage (with respect to limits) it was permitted to try a so-called \"blank\" move in which ones own pieces are not moved. Certainly in positions with \"<a href=\"/Zugzwang\" title=\"Zugzwang\">Zugzwang</a>\" (the side to move must weaken his position) this may lead to errors.\n</pre>\n<pre>However, the standard of the program's play is still such that such errors do not essentially lower it. (We plan to develop in the future a procedure for recognizing \"Zugzwang\" positions, and to forbid a blank move in them.) The reduction of search takes place in this case, because the blank move proves to be a closing one and furthermore does not generate complex forcing variations. \n</pre>\n<p><span id=\"NMQS\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Beal.27s_NMQS\">Beal's NMQS</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=10\" title=\"Edit section: Beal&#039;s NMQS\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Null move was further examined by <a href=\"/Don_Beal\" title=\"Don Beal\">Don Beal</a>, as already elaborated in his <a href=\"/Advances_in_Computer_Chess_5\" title=\"Advances in Computer Chess 5\">Advances in Computer Chess 5</a> lecture. He proposed a so called <b>Null Move Quiescence Search</b> (NMQS) as a selective layer between a regular full width search and <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">quiescence search</a>, later dubbed <b>Generalized Quiescence Search</b> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>. The full width search was called with two depth parameters, both considered inside the <a href=\"/Transposition_Table\" title=\"Transposition Table\">transposition table</a>, full-depth and q-depth. Full-depth was recursively decremented as usual, but instead of calling quiescence at the full-depth horizon, NMQS with q-depth was called - q-depth recursively decremented in this layer as well. As long as q-depth is greater than zero, the <a href=\"/Hash_Move\" title=\"Hash Move\">hash move</a>, if any, is searched first regularly. Next, NMQS calls quiescence for the other side to move, to check for a possible null move <a href=\"/Beta-Cutoff\" title=\"Beta-Cutoff\">beta-cutoff</a>, before proceeding the remaining moves in usual manner. As pointed out by <a href=\"/Chun_Ye\" title=\"Chun Ye\">Chun Ye</a> in his 1992 thesis <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup>, NMQS permits more flexible <a href=\"/Iterative_Deepening\" title=\"Iterative Deepening\">iterative deepening</a> concerning full-depth in an outer and q-depth in an inner loop. \n</p>\n<h2><span class=\"mw-headline\" id=\"Schaeffer\">Schaeffer</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=11\" title=\"Edit section: Schaeffer\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>In his 1987 <a href=\"/ICGA_Journal\" title=\"ICGA Journal\">ICCA Journal</a> paper <i>Speculative Computing</i>, <a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a> mentioned <i>The Null-Move Algorithm</i> or <i>Don Beal's null-move</i>, and used it non-<a href=\"/Recursion\" title=\"Recursion\">recursively</a> up to once per search path in his tactical <a href=\"/Scout\" title=\"Scout\">scout</a> solver <i>Minix</i> (Mini-Phoenix), which up and then gave the parallel running <a href=\"/Phoenix\" title=\"Phoenix\">Phoenix</a>, which was a less deep searcher than <i>Minix</i>, some tactical hints <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup>. \n</p>\n<h2><span class=\"mw-headline\" id=\"Goetsch_and_Campbell\">Goetsch and Campbell</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=12\" title=\"Edit section: Goetsch and Campbell\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p><a href=\"/Gordon_Goetsch\" title=\"Gordon Goetsch\">Gordon Goetsch</a> and <a href=\"/Murray_Campbell\" title=\"Murray Campbell\">Murray Campbell</a> published the results of some experiments with Null move pruning in 1988 and 1990 <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup> <sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup>, already considering <a href=\"/Recursion\" title=\"Recursion\">recursive</a> NMP with <a href=\"/Depth_Reduction_R\" title=\"Depth Reduction R\">depth reduction</a> of 1, also mentioned in <a href=\"/Chun_Ye\" title=\"Chun Ye\">Chun Ye's</a> 1992 thesis with source code as implemented inside the <a href=\"/Chinese_Chess\" title=\"Chinese Chess\">Chinese Chess</a> program <a href=\"/Abyss\" title=\"Abyss\">Abyss</a>  <sup id=\"cite_ref-9\" class=\"reference\"><a href=\"#cite_note-9\">&#91;9&#93;</a></sup> .\n</p>\n<h2><span class=\"mw-headline\" id=\"Morsch_and_Donninger\">Morsch and Donninger</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=13\" title=\"Edit section: Morsch and Donninger\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Null move pruning was used <a href=\"/Recursion\" title=\"Recursion\">recursively</a> to possibly occur multiple times inside a path of the search by <a href=\"/Frans_Morsch\" title=\"Frans Morsch\">Frans Morsch</a> <sup id=\"cite_ref-10\" class=\"reference\"><a href=\"#cite_note-10\">&#91;10&#93;</a></sup> inside his chess engines <a href=\"/Quest\" title=\"Quest\">Quest</a> and <a href=\"/Fritz\" title=\"Fritz\">Fritz</a>. Frans exchanged his ideas with <a href=\"/Chrilly_Donninger\" title=\"Chrilly Donninger\">Chrilly Donninger</a>, who popularized null move by his <i>Null Move and Deep Search</i> paper in the <a href=\"/ICGA_Journal\" title=\"ICGA Journal\">ICCA Journal</a> <a href=\"/Timeline#1993\" title=\"Timeline\">1993</a> <sup id=\"cite_ref-11\" class=\"reference\"><a href=\"#cite_note-11\">&#91;11&#93;</a></sup> .\n<span id=\"Schemes\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Schemes\">Schemes</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=14\" title=\"Edit section: Schemes\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Most typical engines use <a href=\"/Recursion\" title=\"Recursion\">recursive</a> null move with an <a href=\"/Depth_Reduction_R\" title=\"Depth Reduction R\">R</a> value of 2 or 3. Recursive null move pruning is simply allowing more than one null move in one branch of the search. <a href=\"/Fruit\" title=\"Fruit\">Fruit</a> uses a depth <a href=\"/Reductions\" title=\"Reductions\">reduction</a> factor R=3, with no null move pruning when down to king and pawns for the side to move, or when in check. The default for <a href=\"/Fruit\" title=\"Fruit\">Fruit</a> is to try a null search if the static <a href=\"/Evaluation\" title=\"Evaluation\">evaluation</a> is greater than <a href=\"/Beta\" title=\"Beta\">beta</a>, or the depth less than four. Newer versions of <a href=\"/Fruit\" title=\"Fruit\">Fruit</a> as well as <a href=\"/Toga\" title=\"Toga\">Toga</a> default to always doing a null search, as long as there is at least one piece of value greater than a pawn for that side.\n<span id=\"AdaptiveNullMovePruning\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Adaptive_Null_Move_Pruning\">Adaptive Null Move Pruning</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=15\" title=\"Edit section: Adaptive Null Move Pruning\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p><a href=\"/Ernst_A._Heinz\" title=\"Ernst A. Heinz\">Ernst A. Heinz</a> proposed refinements with Adaptive Null Move Pruning <sup id=\"cite_ref-12\" class=\"reference\"><a href=\"#cite_note-12\">&#91;12&#93;</a></sup> . Some programs vary R with <a href=\"/Depth\" title=\"Depth\">depth</a>, or based on <a href=\"/Evaluation\" title=\"Evaluation\">evaluation</a> features, such as being in or near the <a href=\"/Endgame\" title=\"Endgame\">endgame</a>.\n</p>\n<h2><span class=\"mw-headline\" id=\"Restrictions_on_use\">Restrictions on use</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=16\" title=\"Edit section: Restrictions on use\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Obviously, the null move cannot be used when the side to move is in check, because that would result in an illegal position. But there are more less obvious restrictions on using null move safely. The theoretical basis of null move pruning, as coined by <a href=\"/Christophe_Th%C3%A9ron\" title=\"Christophe Théron\">Christophe Théron</a>, is the <a href=\"/Null_Move_Observation\" title=\"Null Move Observation\">null move observation</a>. The null move observation is the fact that in chess, in almost every position, the side to move will have a move to play that is better than doing nothing.\n</p><p>There are a few situations in which this assumption does not hold. The null move will produce very bad results in <a href=\"/Zugzwang\" title=\"Zugzwang\">zugzwang</a> positions - positions in which not moving would be the best move, if it were legal. For this reason, some conditions must be used for when the null move is tried in search. Most engines do not try the null move in the <a href=\"/Endgame\" title=\"Endgame\">endgame</a>, because that is where zugzwang positions are most likely to occur, because there are fewer pieces to move. It is debatable whether a programmer should allow the null move search descend directly to the <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">quiescence search</a>. Most probably it is worthwile only with more tactically aware versions of quiescence.\n</p><p>Some other ways to combat the negative effect of the null move observation are listed here:\n<span id=\"ZugzwangVerification\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Zugzwang_Verification\">Zugzwang Verification</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=17\" title=\"Edit section: Zugzwang Verification\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Concerning null move failures in <a href=\"/Zugzwang\" title=\"Zugzwang\">zugzwang</a> <sup id=\"cite_ref-13\" class=\"reference\"><a href=\"#cite_note-13\">&#91;13&#93;</a></sup> , there were proposals by <a href=\"/Stefan_Plenkner\" title=\"Stefan Plenkner\">Stefan Plenkner</a> 1995, <sup id=\"cite_ref-14\" class=\"reference\"><a href=\"#cite_note-14\">&#91;14&#93;</a></sup> <sup id=\"cite_ref-15\" class=\"reference\"><a href=\"#cite_note-15\">&#91;15&#93;</a></sup> and later the <i>Verified Null-Move Pruning</i> approach by <a href=\"/Eli_David\" title=\"Eli David\">Eli David</a> and <a href=\"/Nathan_S._Netanyahu\" title=\"Nathan S. Netanyahu\">Nathan S. Netanyahu</a> <sup id=\"cite_ref-16\" class=\"reference\"><a href=\"#cite_note-16\">&#91;16&#93;</a></sup> . Recently <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a> tested <i>Verified Null-Move Pruning</i> extensively with a lot of variations and depth reductions for the verified search, and concluded it does not help at all in <a href=\"/Crafty\" title=\"Crafty\">Crafty</a> <sup id=\"cite_ref-17\" class=\"reference\"><a href=\"#cite_note-17\">&#91;17&#93;</a></sup> similar with <a href=\"/Null_Move_Reductions\" title=\"Null Move Reductions\">extended null-move reductions</a> <sup id=\"cite_ref-18\" class=\"reference\"><a href=\"#cite_note-18\">&#91;18&#93;</a></sup> <sup id=\"cite_ref-19\" class=\"reference\"><a href=\"#cite_note-19\">&#91;19&#93;</a></sup> . However, <a href=\"/Marco_Costalba\" title=\"Marco Costalba\">Marco Costalba</a> states that verification search has almost nothing to do with zugzwang <sup id=\"cite_ref-20\" class=\"reference\"><a href=\"#cite_note-20\">&#91;20&#93;</a></sup> .\n<span id=\"DoubleNullMove\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Double_Null_Move\">Double Null Move</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=18\" title=\"Edit section: Double Null Move\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Widely discussed in <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">computer chess forums</a> was the <a href=\"/Double_Null_Move\" title=\"Double Null Move\">Double Null Move</a> idea by <a href=\"/Vincent_Diepeveen\" title=\"Vincent Diepeveen\">Vincent Diepeveen</a> to perform two consecutive null moves to detect zugzwang <sup id=\"cite_ref-21\" class=\"reference\"><a href=\"#cite_note-21\">&#91;21&#93;</a></sup> .\n<span id=\"VariableNMBound\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Variable_NM_Bound\">Variable NM Bound</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=19\" title=\"Edit section: Variable NM Bound\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>The idea to permit a null move cutoff not only if the null move search returns a value greater than or equal to beta, but also if the value is slightly less - that is using a bound of beta minus some <a href=\"/Tempo\" title=\"Tempo\">tempo</a> bonus, was already proposed by <a href=\"/Gordon_Goetsch\" title=\"Gordon Goetsch\">Gordon Goetsch</a> and <a href=\"/Murray_Campbell\" title=\"Murray Campbell\">Murray Campbell</a> in 1988 as future research idea <sup id=\"cite_ref-22\" class=\"reference\"><a href=\"#cite_note-22\">&#91;22&#93;</a></sup> . <a href=\"/Yngvi_Bj%C3%B6rnsson\" title=\"Yngvi Björnsson\">Yngvi Björnsson</a> and <a href=\"/Tony_Marsland\" title=\"Tony Marsland\">Tony Marsland</a> substantiated the idea as implemeted in <a href=\"/The_Turk\" title=\"The Turk\">The Turk</a>, where the number of potentially good alternative moves (numPGAM) per side in the path from the <a href=\"/Root\" title=\"Root\">root</a> to the current node as estimated by positive scores of generated moves from the <a href=\"/History_Heuristic\" title=\"History Heuristic\">history heuristic</a>, was used to determine a tempo bonus of 10 or 20 <a href=\"/Centipawns\" title=\"Centipawns\">centipawns</a> - the higher numPGAM, the lower the probability that an erroneous forward pruning decision will propagate up the tree <sup id=\"cite_ref-23\" class=\"reference\"><a href=\"#cite_note-23\">&#91;23&#93;</a></sup> .\n</p>\n<pre>\nif ( nullMoveAllowed &amp;&amp;  ...) {\n   int bound = beta;\n   if ( inNullMoveSearch == 0 ) {\n      tempo = 10*(numPGAM &gt; 0) + 10* numPGAM &gt; 15);\n      bound -= tempo; // variable bound\n   }\n   makeNullMove(); ++inNullMoveSearch;\n   score = -zwSearch(1-bound, depth-R-1)\n   unmakeNullMove(); --inNullMoveSearch;\n   if ( score &gt;= bound ) {\n      return beta; // null move pruning\n   }\n}\n</pre>\n<p><i>For zwSearch, see <a href=\"/Principal_Variation_Search#ZWS\" title=\"Principal Variation Search\">Zero Window Search</a> inside the <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">Principal Variation Search</a>.</i>\n<span id=\"ThreatDetection\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Threat_Detection\">Threat Detection</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=20\" title=\"Edit section: Threat Detection\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Mate_Threats\">Mate Threats</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=21\" title=\"Edit section: Mate Threats\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>As suggested in Donninger's paper, concerning the deep search, null move is not only about pruning, but also about detecting <a href=\"/Threat_Move\" title=\"Threat Move\">threat moves</a> by the opponent to improve further <a href=\"/Move_Ordering\" title=\"Move Ordering\">move ordering</a> and to possibly trigger <a href=\"/Mate_Threat_Extensions\" title=\"Mate Threat Extensions\">mate threat extensions</a> <sup id=\"cite_ref-24\" class=\"reference\"><a href=\"#cite_note-24\">&#91;24&#93;</a></sup> <sup id=\"cite_ref-25\" class=\"reference\"><a href=\"#cite_note-25\">&#91;25&#93;</a></sup> <sup id=\"cite_ref-26\" class=\"reference\"><a href=\"#cite_note-26\">&#91;26&#93;</a></sup> <sup id=\"cite_ref-27\" class=\"reference\"><a href=\"#cite_note-27\">&#91;27&#93;</a></sup> . However, some kind of <a href=\"/Fail-Soft\" title=\"Fail-Soft\">fail-soft</a> framework is necessary to recognize \"I get mated, if I do nothing\", otherwise the hard bound of a <a href=\"/Null_Window\" title=\"Null Window\">null window</a> null-move search around <a href=\"/Beta\" title=\"Beta\">beta</a> will limit the <a href=\"/Upper_Bound\" title=\"Upper Bound\">upper bound</a> to beta-1 <sup id=\"cite_ref-28\" class=\"reference\"><a href=\"#cite_note-28\">&#91;28&#93;</a></sup> . Another, possibly too expensive solution with a <a href=\"/Fail-Hard\" title=\"Fail-Hard\">fail-hard</a> framework, is to play a bit with the search window, if the null move doesn't fail high:\n</p>\n<pre>\nif ( nullMoveAllowed &amp;&amp; depth &gt;= X &amp;&amp; ...) {\n   makeNullMove()\n   score = -zwSearch(1-beta, depth-R-1) // -AlphaBeta (0-beta, 1-beta, depth-R-1)\n   if (score &gt;= beta ) {\n      // fail high on null move\n      unmakeNullMove();\n      return beta; // null move pruning\n   } else {\n      if ( zwSearch( VALUE_MATE/2, depth-R-1) &gt; VALUE_MATE/2 )\n         extend; // mate threat extension inside a fail hard framework\n      unmakeNullMove();\n   }\n}\n</pre>\n<h2><span class=\"mw-headline\" id=\"Botvinnik-Markoff_Extension\">Botvinnik-Markoff Extension</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=22\" title=\"Edit section: Botvinnik-Markoff Extension\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Null move is also the base of the <a href=\"/Botvinnik-Markoff_Extension\" title=\"Botvinnik-Markoff Extension\">Botvinnik-Markoff Extension</a>, as proposed by <a href=\"/Sergei_Markoff\" title=\"Sergei Markoff\">Sergei Markoff</a> - as a tribute to the computer chess pioneer and former <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/World_Chess_Championship\">World Chess Champion</a> <a href=\"/Mikhail_Botvinnik\" title=\"Mikhail Botvinnik\">Mikhail Botvinnik</a>, who addressed related issues in his publications <sup id=\"cite_ref-29\" class=\"reference\"><a href=\"#cite_note-29\">&#91;29&#93;</a></sup> .\n</p>\n<h2><span class=\"mw-headline\" id=\"Influence_on_Move_Ordering\">Influence on Move Ordering</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=23\" title=\"Edit section: Influence on Move Ordering\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Most of the time, null move is refuted by a <a href=\"/Captures\" title=\"Captures\">capture</a>. Therefore it makes sense to extract a move that refuted null move from the <a href=\"/Transposition_Table\" title=\"Transposition Table\">transposition table</a>, record the <a href=\"/Target_Square\" title=\"Target Square\">target square</a> of such a move, to give a <a href=\"/Move_Ordering\" title=\"Move Ordering\">move ordering</a> boost for escaping from that square. Also, there is a strong conjecture that in programs using <a href=\"/History_Heuristic\" title=\"History Heuristic\">history move ordering</a>, even a failed null move search helps by filling the history tables faster.\n</p>\n<h1><span class=\"mw-headline\" id=\"Test_Results\">Test Results</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=24\" title=\"Edit section: Test Results\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Null_Move_Pruning_Test_Results\" title=\"Null Move Pruning Test Results\">Null Move Pruning Test Results</a> - various experimental test results of null move pruning</li>\n<li> <a href=\"/Null_Move_Test-Positions\" title=\"Null Move Test-Positions\">Null Move Test-Positions</a>, where Null Move may fail due to zugzwang</li></ul>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=25\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Enhanced_Forward_Pruning\" title=\"Enhanced Forward Pruning\">Enhanced Forward Pruning</a></li>\n<li> <a href=\"/Extensions\" title=\"Extensions\">Extensions</a></li>\n<li> <a href=\"/Fail-High_Reductions\" title=\"Fail-High Reductions\">Fail-High Reductions</a></li>\n<li> <a href=\"/Knowledge#SearchVersusEvaluation\" title=\"Knowledge\">Knowledge | Search versus Evaluation</a></li>\n<li> <a href=\"/Multi-Cut\" title=\"Multi-Cut\">Multi-Cut</a></li>\n<li> <a href=\"/Null_Move_Observation\" title=\"Null Move Observation\">Null Move Observation</a></li>\n<li> <a href=\"/Null_Move_Reductions\" title=\"Null Move Reductions\">Null Move Reductions</a></li>\n<li> <a href=\"/ProbCut\" title=\"ProbCut\">ProbCut</a></li>\n<li> <a href=\"/Reductions\" title=\"Reductions\">Reductions</a></li>\n<li> <a href=\"/Reverse_Futility_Pruning\" title=\"Reverse Futility Pruning\">Reverse Futility Pruning</a> (Static Null Move Pruning)</li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=26\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1966\">1966</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=27\" title=\"Edit section: 1966\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/George_Baylor\" title=\"George Baylor\">George W. Baylor</a>, <a href=\"/Herbert_Simon\" title=\"Herbert Simon\">Herbert A. Simon</a> (<b>1966</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://dl.acm.org/citation.cfm?id=1464182.1464233&amp;coll=GUIDE&amp;dl=GUIDE\">A chess mating combinations program</a></i>. AFIPS Joint Computer Conferences, reprinted 1988 in <a href=\"/Computer_Chess_Compendium\" title=\"Computer Chess Compendium\">Computer Chess Compendium</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1975\">1975</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=28\" title=\"Edit section: 1975\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Georgy_Adelson-Velsky\" title=\"Georgy Adelson-Velsky\">Georgy Adelson-Velsky</a>, <a href=\"/Vladimir_Arlazarov\" title=\"Vladimir Arlazarov\">Vladimir Arlazarov</a>, <a href=\"/Mikhail_Donskoy\" title=\"Mikhail Donskoy\">Mikhail Donskoy</a> (<b>1975</b>). <i>Some Methods of Controlling the Tree Search in Chess Programs</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_%28journal%29\">Artificial Intelligence</a>, Vol. 6, No. 4, pp. 361-371. ISSN 0004-3702. Reprinted (<b>1988</b>) in <a href=\"/Computer_Chess_Compendium\" title=\"Computer Chess Compendium\">Computer Chess Compendium</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1980_...\">1980 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=29\" title=\"Edit section: 1980 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Gordon_Goetsch\" title=\"Gordon Goetsch\">Gordon Goetsch</a>, <a href=\"/Murray_Campbell\" title=\"Murray Campbell\">Murray Campbell</a> (<b>1988</b>). <i>Experimenting with the Null Move Heuristic in Chess</i>. AAAI Spring Symposium Proceedings, pp. 14-18.</li>\n<li> <a href=\"/Don_Beal\" title=\"Don Beal\">Don Beal</a> (<b>1989</b>). <i>Experiments with the Null Move.</i> <a href=\"/Advances_in_Computer_Chess_5\" title=\"Advances in Computer Chess 5\">Advances in Computer Chess 5</a>, a revised version is published (<b>1990</b>) under the title <i>A Generalized Quiescence Search Algorithm</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_%28journal%29\">Artificial Intelligence</a>, Vol. 43, No. 1, pp. 85-98. ISSN 0004-3702, edited version in (<b>1999</b>). <i>The Nature of MINIMAX Search</i>. Ph.D. thesis, IKAT, ISBN 90-62-16-6348. Chapter 10, pp. 101-116</li></ul>\n<h2><span class=\"mw-headline\" id=\"1990_...\">1990 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=30\" title=\"Edit section: 1990 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Don_Beal\" title=\"Don Beal\">Don Beal</a> (<b>1990</b>). <i>A Generalized Quiescence Search Algorithm</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_%28journal%29\">Artificial Intelligence</a>, Vol. 43, No. 1, pp. 85-98. ISSN 0004-3702</li>\n<li> <a href=\"/Gordon_Goetsch\" title=\"Gordon Goetsch\">Gordon Goetsch</a>, <a href=\"/Murray_Campbell\" title=\"Murray Campbell\">Murray Campbell</a> (<b>1990</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://link.springer.com/chapter/10.1007/978-1-4613-9080-0_9\">Experiments with the Null-Move Heuristic</a></i>. <a href=\"/Computers,_Chess,_and_Cognition\" title=\"Computers, Chess, and Cognition\">Computers, Chess, and Cognition</a>, pp. 159-168</li>\n<li> <a href=\"/Chun_Ye\" title=\"Chun Ye\">Chun Ye</a> (<b>1992</b>). <i>Experiments in Selective Search Extensions</i>. M.Sc. thesis, Department of Computing Science, <a href=\"/University_of_Alberta\" title=\"University of Alberta\">University of Alberta</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://era.library.ualberta.ca/public/datastream/get/uuid:e4fbf48d-7603-490f-85cc-5497bbecf5a8/DS1\">pdf</a></li>\n<li> <a href=\"/Chrilly_Donninger\" title=\"Chrilly Donninger\">Chrilly Donninger</a> (<b>1993</b>). <i>Null Move and Deep Search: Selective-Search Heuristics for Obtuse Chess Programs.</i> <a href=\"/ICGA_Journal#16_3\" title=\"ICGA Journal\">ICCA Journal, Vol. 16, No. 3</a></li>\n<li> <a href=\"/Stefan_Plenkner\" title=\"Stefan Plenkner\">Stefan Plenkner</a> (<b>1995</b>). <i>A Null-Move Technique Impervious to Zugzwang.</i> <a href=\"/ICGA_Journal#18_2\" title=\"ICGA Journal\">ICCA Journal, Vol. 18, No. 2</a></li>\n<li> <a href=\"/Ernst_A._Heinz\" title=\"Ernst A. Heinz\">Ernst A. Heinz</a>. (<b>1999</b>). <i>Adaptive null-move pruning</i>. <a href=\"/ICGA_Journal#22_3\" title=\"ICGA Journal\">ICCA Journal, Vol. 22, No. 3</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://people.csail.mit.edu/heinz/ps/adpt_null.ps.gz\">ps</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=31\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Yngvi_Bj%C3%B6rnsson\" title=\"Yngvi Björnsson\">Yngvi Björnsson</a>, <a href=\"/Tony_Marsland\" title=\"Tony Marsland\">Tony Marsland</a> (<b>2000</b>). <i>Selective Depth-First Search Methods</i>. in <a href=\"/Jaap_van_den_Herik\" title=\"Jaap van den Herik\">Jaap van den Herik</a>, <a href=\"/Hiroyuki_Iida\" title=\"Hiroyuki Iida\">Hiroyuki Iida</a> (eds.) (<b>2000</b>). <i>Games in AI Research</i>. <a href=\"/Maastricht_University\" title=\"Maastricht University\">Universiteit Maastricht</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.ualberta.ca/%7Etony/RecentPapers/nec97w.pdf\">pdf preprint</a></li>\n<li> <a href=\"/Eli_David\" title=\"Eli David\">Omid David</a>, <a href=\"/Nathan_S._Netanyahu\" title=\"Nathan S. Netanyahu\">Nathan S. Netanyahu</a> (<b>2002</b>). <i>Verified null-move pruning.</i> <a href=\"/ICGA_Journal#25_3\" title=\"ICGA Journal\">ICGA Journal, Vol. 25 No. 3</a> <sup id=\"cite_ref-30\" class=\"reference\"><a href=\"#cite_note-30\">&#91;30&#93;</a></sup> <sup id=\"cite_ref-31\" class=\"reference\"><a href=\"#cite_note-31\">&#91;31&#93;</a></sup></li>\n<li> <a href=\"/Don_Beal\" title=\"Don Beal\">Don Beal</a> (<b>2006</b>). <i>Review of a nullmove-quiescence search mechanism from 1986</i>. <a href=\"/File:Alg1986review.txt\" title=\"File:Alg1986review.txt\">File:Alg1986review.txt</a> (Draft) <sup id=\"cite_ref-32\" class=\"reference\"><a href=\"#cite_note-32\">&#91;32&#93;</a></sup></li>\n<li> <a href=\"/Eli_David\" title=\"Eli David\">Omid David</a>, <a href=\"/Nathan_S._Netanyahu\" title=\"Nathan S. Netanyahu\">Nathan S. Netanyahu</a> (<b>2008</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/chapter/10.1007/978-3-540-87608-3_19\">Extended Null-Move Reductions</a></i>. <a href=\"/CG_2008\" title=\"CG 2008\">CG 2008</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.oedavid.com/pubs/nmr.pdf\">pdf</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=32\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Kunihito_Hoki\" title=\"Kunihito Hoki\">Kunihito Hoki</a>, <a href=\"/Masakazu_Muramatsu\" title=\"Masakazu Muramatsu\">Masakazu Muramatsu</a>  (<b>2012</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.semanticscholar.org/paper/Efficiency-of-three-forward-pruning-techniques-in-Hoki-Muramatsu/206099961f401c8693e071c2b739f164ae5ffa6c\">Efficiency of three Forward-Pruning Techniques in Shogi: Futility Pruning, Null-move Pruning, and Late Move Reduction (LMR)</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://www.journals.elsevier.com/entertainment-computing\">Entertainment Computing</a>, Vol. 3, No. 3</li>\n<li> <a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel S. Abdi</a> (<b>2013</b>). <i>Analysis of pruned minimax trees</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://dl.dropboxusercontent.com/u/55295461/analysis/pruning.pdf\">pdf</a>&#160;» <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">Alpha-Beta</a>, <a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">Late Move Reductions</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=33\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1995_...\">1995 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=34\" title=\"Edit section: 1995 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess/browse_frm/thread/4240e92cca890050\">Null Move heuristic</a> by <a href=\"/Valavan_Manohararajah\" title=\"Valavan Manohararajah\">Valavan Manohararajah</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rec.games.chess</a>, July 28, 1995</li></ul>\n<p><b>1997</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/JJTEBafyuYM/hRTys0ZxcUIJ\">Null move depth reductions</a> by <a href=\"/Tom_King\" title=\"Tom King\">Tom King</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, February 02, 1997&#160;» <a href=\"/Depth_Reduction_R\" title=\"Depth Reduction R\">Depth Reduction R</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/3eb37f017c1857fe\">Null move?</a> by MLC, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, October 07, 1997</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/8b835621f7790967\">Searching correctly with the Nullmove ==&gt; no zugzwang problems anymore</a> by <a href=\"/Vincent_Diepeveen\" title=\"Vincent Diepeveen\">Vincent Diepeveen</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, October 23, 1997</li></ul>\n<p><b>1998</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=19827\">During Null Move search</a> by <a href=\"/Peter_Fendrich\" title=\"Peter Fendrich\">Peter Fendrich</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 02, 1998</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=20167\">Extend or not extend in a nullmove tree</a> by <a href=\"/Roland_Pfister\" title=\"Roland Pfister\">Roland Pfister</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 08, 1998&#160;» <a href=\"/Extensions\" title=\"Extensions\">Extensions</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=20596\">Zero-width Window Null Move Search</a> by <a href=\"/index.php?title=Dezhi_Zhao&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Dezhi Zhao (page does not exist)\">Dezhi Zhao</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 15, 1998&#160;» <a href=\"/Null_Window\" title=\"Null Window\">Null Window</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=21888\">search extension</a> by <a href=\"/Werner_Inmann\" title=\"Werner Inmann\">Werner Inmann</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 08, 1998&#160;» <a href=\"#ThreatDetection\">Threat Detection</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=28772\">Null move reductions</a> by <a href=\"/Roberto_Waldteufel\" title=\"Roberto Waldteufel\">Roberto Waldteufel</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 04, 1998</li></ul>\n<p><b>1999</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=42137\">Null move</a> by <a href=\"/James_Robertson\" title=\"James Robertson\">James Robertson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 03, 1999</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=42804\">Confusion on Null Move</a> by <a href=\"/index.php?title=KarinsDad&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"KarinsDad (page does not exist)\">KarinsDad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 09, 1999</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=42909\">A Null Move Enhancement?</a> by <a href=\"/Daniel_Homan\" title=\"Daniel Homan\">Daniel Homan</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 10, 1999 </dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=43328\">Singular Extensions, Nullmove deepsearch</a> by <a href=\"/Frank_Schneider\" title=\"Frank Schneider\">Frank Schneider</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 16, 1999&#160;» <a href=\"/Singular_Extensions\" title=\"Singular Extensions\">Singular Extensions</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=44363\">NULL MOVE</a> by Sylvain Lacombe, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 24, 1999</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=44497\">To skin a cat (was Re: NULL MOVE)</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 24, 1999</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/0e56bda426a70a22#\">Null move around (beta-1, beta)</a> by <a href=\"/Tom_King\" title=\"Tom King\">Tom King</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, March 05, 1999</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=54279\">Null move idea</a> by <a href=\"/Heiner_Marxen\" title=\"Heiner Marxen\">Heiner Marxen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 04, 1999</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=57953\">Null move mate extension</a> by <a href=\"/James_Robertson\" title=\"James Robertson\">James Robertson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 25, 1999</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=76399\">It is a nullmove killer (zugzwang)</a> by <a href=\"/R%C3%A9mi_Coulom\" title=\"Rémi Coulom\">Rémi Coulom</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 05, 1999&#160;» <a href=\"/Zugzwang\" title=\"Zugzwang\">Zugzwang</a></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=76542\">Pseudo-code for verification search</a> by <a href=\"/Daniel_Homan\" title=\"Daniel Homan\">Dan Homan</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 06, 1999</dd></dl>\n<h2><span class=\"mw-headline\" id=\"2000_..._2\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=35\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=123156\">Pseudo C code for double nullmove + PVS</a> by <a href=\"/Vincent_Diepeveen\" title=\"Vincent Diepeveen\">Vincent Diepeveen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 06, 2000</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=123206\">double nullmove??</a> by <a href=\"/Werner_Inmann\" title=\"Werner Inmann\">Werner Inmann</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 06, 2000&#160;» <a href=\"#DoubleNullMove\">Double Null Move</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=129985\">is this nullmove? problems in pulsar algorithm</a> by <a href=\"/index.php?title=Mike_Adams&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Mike Adams (page does not exist)\">Mike Adams</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 20, 2000&#160;» <a href=\"/Pulsar\" title=\"Pulsar\">Pulsar</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=18&amp;t=32639&amp;start=1\">Re: ZChess getting much stronger...</a> by <a href=\"/Franck_Zibi\" title=\"Franck Zibi\">Franck Zibi</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, November 10, 2000&#160;» <a href=\"/BBchess\" title=\"BBchess\">BBchess</a>, <a href=\"/ZChess\" title=\"ZChess\">ZChess</a></li></ul>\n<p><b>2001</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=148745\">Can nullmoves behave like this?</a> by <a href=\"/Severi_Salminen\" title=\"Severi Salminen\">Severi Salminen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 08, 2001</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=156376\">Nullmove: when to avoid it?</a> by <a href=\"/Leen_Ammeraal\" title=\"Leen Ammeraal\">Leen Ammeraal</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 28, 2001</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=18&amp;t=33381&amp;p=126413\">An idea for all you chess programmers.</a> by Paul, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, March 16, 2001</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=160954\">Double Nullmove</a> by <a href=\"/David_Rasmussen\" title=\"David Rasmussen\">David Rasmussen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 30, 2001</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=179604\">Double Null move?</a> by <a href=\"/Steve_Maughan\" title=\"Steve Maughan\">Steve Maughan</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 13, 2001</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=183089\">Null move R=2 vs Null move R=2/3</a> by <a href=\"/Tom_King\" title=\"Tom King\">Tom King</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 09, 2001&#160;» <a href=\"/Depth_Reduction_R\" title=\"Depth Reduction R\">Depth Reduction R</a></li></ul>\n<p><b>2002</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=210702\">Crafty-IsiChess,CCT4,r11 ==&gt; A move to avoid?</a> by <a href=\"/Jos%C3%A9_Ant%C3%B4nio_Fabiano_Mendes\" title=\"José Antônio Fabiano Mendes\">José Antônio Fabiano Mendes</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 29, 2002</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=225990\">Double Nullmove</a> by <a href=\"/Andreas_Herrmann\" title=\"Andreas Herrmann\">Andreas Herrmann</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 25, 2002</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=239907\">Null-Move: Difference between R = 2 and R = 3 in action</a> by <a href=\"/Eli_David\" title=\"Eli David\">Omid David</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 11, 2002</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=266356\">Verified Null-Move Pruning, ICGA 25(3)</a> by <a href=\"/Eli_David\" title=\"Eli David\">Omid David</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 20, 2002</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=267039\">new thoughts on verified null move</a> by <a href=\"/Scott_Farrell\" title=\"Scott Farrell\">Scott Farrell</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 23, 2002</li></ul>\n<p><b>2003</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/iECalt6Tzug/GWNOLzFQyk8J\">An interesting forward pruning experiment - with pseudo description</a> by <a href=\"/Vincent_Diepeveen\" title=\"Vincent Diepeveen\">Vincent Diepeveen</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, February 08, 2003</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=18&amp;t=43033\">wacnew.epd &amp; single search improvements (nullmove)</a> by <a href=\"/Stefan_Knappe\" title=\"Stefan Knappe\">Stefan Knappe</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, June 17, 2003&#160;» <a href=\"/Matador\" title=\"Matador\">Matador</a>, <a href=\"/Win_at_Chess\" title=\"Win at Chess\">Win at Chess</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=318833\">The \"same threat extension\" as effective way to resolve horizon problem</a> by <a href=\"/Sergei_Markoff\" title=\"Sergei Markoff\">Sergei Markoff</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 01, 2003&#160;» <a href=\"/Botvinnik-Markoff_Extension\" title=\"Botvinnik-Markoff Extension\">Botvinnik-Markoff Extension</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=319187\">a question to Tord about detecting threats in null move</a> by <a href=\"/Uri_Blass\" title=\"Uri Blass\">Uri Blass</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 03, 2003</li></ul>\n<p><b>2004</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=348841\">Re: not using nullmove?</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 13, 2004</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=354078\">mtd(f) and null move</a> by <a href=\"/Peter_Aloysius_Harjanto\" title=\"Peter Aloysius Harjanto\">Peter Alloysius</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 11, 2004&#160;» <a href=\"/MTD(f)\" title=\"MTD(f)\">MTD(f)</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=361766\">When to do a null move search - an experiment</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 26, 2004</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=373804\">double null move help</a> by <a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel Shawul</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 04, 2004</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=377240\">An MTD(f) question about NULL MOVE searching</a> by <a href=\"/Dann_Corbit\" title=\"Dann Corbit\">Dann Corbit</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 16, 2004&#160;» <a href=\"/MTD(f)\" title=\"MTD(f)\">MTD(f)</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=378541\">null move question(Fruit)</a> by <a href=\"/index.php?title=Jan_Kaan&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Jan Kaan (page does not exist)\">Jan K.</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 22, 2004</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=381931\">Verified Null-moving</a> by <a href=\"/Tor_Lattimore\" title=\"Tor Lattimore\">Tor Lattimore</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 12, 2004&#160;» <a href=\"#ZugzwangVerification\">Verified Null Move Pruning</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=389013\">mate threat extension/null move</a> by <a href=\"/index.php?title=Rick_Bischoff&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Rick Bischoff (page does not exist)\">Rick Bischoff</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 25, 2004</li></ul>\n<h2><span class=\"mw-headline\" id=\"2005_...\">2005 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=36\" title=\"Edit section: 2005 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=2071\">recusive null move in iterative search</a> by <a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel Shawul</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, March 25, 2005&#160;» <a href=\"/Iterative_Search\" title=\"Iterative Search\">Iterative Search</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?t=2300\">Reductions and null move refutations</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, April 18, 2005&#160;» <a href=\"/Reductions\" title=\"Reductions\">Reductions</a>, <a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">Late Move Reductions</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=3004&amp;p=14559\">depthnull</a> by <a href=\"/Pedro_Castro\" title=\"Pedro Castro\">Pedro Castro</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Programming Forum</a>, July 04, 2005</li></ul>\n<p><b>2006</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=4480&amp;p=23303\">Verified null-move pruning</a> by <a href=\"/Tom_King\" title=\"Tom King\">Tom King</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Programming Forum</a>, March 09, 2006</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=4660&amp;start=0\">Simple NULL move enhancement, checks in qsearch</a> by <a href=\"/Mark_Lefler\" title=\"Mark Lefler\">Mark Lefler</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Programming Forum</a>, April 14, 2006</li></ul>\n<p><b>2007</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=6392\">NMP on ALL nodes</a> by <a href=\"/Onno_Garms\" title=\"Onno Garms\">Onno Garms</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Programming Forum</a>, April 15, 2007&#160;» <a href=\"/Node_Types#ALL\" title=\"Node Types\">All Nodes</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.hiarcs.net/forums/viewtopic.php?p=2944\">Re: Search or Evaluation?</a> by <a href=\"/Mark_Uniacke\" title=\"Mark Uniacke\">Mark Uniacke</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Hiarcs Forum</a>, October 14, 2007</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?p=160677\">Null Move</a> by <a href=\"/Stuart_Cracraft\" title=\"Stuart Cracraft\">Stuart Cracraft</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 23, 2007</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=18081\">fractal null move</a> by <a href=\"/Pawel_Koziol\" title=\"Pawel Koziol\">Pawel Koziol</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 28, 2007</li></ul>\n<p><b>2008</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=49310\">Null move question</a> by <a href=\"/Fermin_Serrano\" title=\"Fermin Serrano\">Fermin Serrano</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, June 30, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=24543\">null move threat extension</a> by <a href=\"/index.php?title=Andrew_Short&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Andrew Short (page does not exist)\">Andrew Short</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 23, 2008</li></ul>\n<p><b>2009</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=29439\">Null move in quiescence search idea from Don Beal, 1986</a> by <a href=\"/index.php?title=Eelco_de_Groot&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Eelco de Groot (page does not exist)\">Eelco de Groot</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, Aug 17, 2009&#160;» <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">Quiescence Search</a>, <a href=\"/Don_Beal\" title=\"Don Beal\">Don Beal</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=28561\">verified null move</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 21, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=29873\">Null-moves and zugzwang</a> by <a href=\"/Luca_Hemmerich\" title=\"Luca Hemmerich\">Luca Hemmerich</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 25, 2009&#160;» <a href=\"/Zugzwang\" title=\"Zugzwang\">Zugzwang</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_..._2\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=37\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=314332&amp;t=31413\">Using Heinz in 2010 is not optimal</a> by <a href=\"/Milos_Stanisavljevic\" title=\"Milos Stanisavljevic\">Milos Stanisavljevic</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 01, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=33514\">Null-move pruning and the hash table</a> by <a href=\"/index.php?title=Robert_Purves&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Robert Purves (page does not exist)\">Robert Purves</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 28, 2010&#160;» <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Table</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=50971\">Null moves gain</a> by <a href=\"/Giuseppe_Cannella\" title=\"Giuseppe Cannella\">Giuseppe Cannella</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, May 13, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=35052\">nullmove and repetitive draw detection</a> by <a href=\"/index.php?title=Edward_Yu&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Edward Yu (page does not exist)\">Edward Yu</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 20, 2010&#160;» <a href=\"/Repetitions\" title=\"Repetitions\">Repetitions</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=35543\">Stockfish null move pre-condition</a> by <a href=\"/Rein_Halbersma\" title=\"Rein Halbersma\">Rein Halbersma</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 22, 2010&#160;» <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?p=367283\">Extended Null-Move Reductions</a> by <a href=\"/Alvaro_Cardoso\" title=\"Alvaro Cardoso\">Alvaro Cardoso</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 20, 2010</li></ul>\n<p><b>2011</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=38409\">Less null move pruning by trans map</a> by <a href=\"/Onno_Garms\" title=\"Onno Garms\">Onno Garms</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 13, 2011&#160;» <a href=\"/Onno\" title=\"Onno\">Onno</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=38640\">Null Move Pruning</a> by Alex Farley, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 03, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=41104\">Null move alternative in endgames</a> by <a href=\"/Aleks_Peshkov\" title=\"Aleks Peshkov\">Aleks Peshkov</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 16, 2011</li></ul>\n<p><b>2012</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=44666\">TT avoid nullmove flag</a> by <a href=\"/Matthew_R._Brades\" title=\"Matthew R. Brades\">Matthew R. Brades</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 02, 2012&#160;» <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Table</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=44686\">Nullmove vs classic selective search</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 04, 2012 <sup id=\"cite_ref-33\" class=\"reference\"><a href=\"#cite_note-33\">&#91;33&#93;</a></sup></li></ul>\n<p><b>2013</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=5&amp;t=2210\">Null Move Fail</a> by <a href=\"/Christian_Daley\" title=\"Christian Daley\">CDaley11</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">OpenChess Forum</a>, January 10, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=47189\">Two questions</a> by <a href=\"/index.php?title=Jerry_Donald&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Jerry Donald (page does not exist)\">Jerry Donald</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 11, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=49351\">nullmove verification vs avoid null</a> by <a href=\"/Martin_Sedlak\" title=\"Martin Sedlak\">Martin Sedlak</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 14, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=49863\">Null move, razoring and mate threats</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 28, 2013&#160;» <a href=\"/Razoring\" title=\"Razoring\">Razoring</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=50587\">Is SF DD greater efficiency would be null move pruning?</a> by Jonathan Lee, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 22, 2013&#160;» <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a></li></ul>\n<p><b>2014</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=51129\">fixing the null move search \"bug\"</a> by <a href=\"/Uri_Blass\" title=\"Uri Blass\">Uri Blass</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 01, 2014&#160;» <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=51291\">Disabling Null Move Pruning in Stockfish</a> by <a href=\"/Louis_Zulli\" title=\"Louis Zulli\">Louis Zulli</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 15, 2014&#160;» <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=51578\">Null move and LMR</a> by <a href=\"/Laurie_Tunnicliffe\" title=\"Laurie Tunnicliffe\">Laurie Tunnicliffe</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 12, 2014&#160;» <a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">Late Move Reductions</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=53049\">Null move pruning on PV nodes</a> by <a href=\"/Eric_Oldre\" title=\"Eric Oldre\">Eric Oldre</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 22, 2014&#160;» <a href=\"/Node_Types#PV\" title=\"Node Types\">PV-Nodes</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2015_...\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=38\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=56272\">Why not two consecutive null moves&#160;?</a> by <a href=\"/index.php?title=Henk_van_den_Belt&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Henk van den Belt (page does not exist)\">Henk van den Belt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 07, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=56672\">thoughts on null-move reduction</a> by <a href=\"/Youri_Matiounine\" title=\"Youri Matiounine\">Youri Matiounine</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 14, 2015&#160;» <a href=\"/Null_Move_Reductions\" title=\"Null Move Reductions\">Null Move Reductions</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=57638\">Null move: minimum depth</a> by <a href=\"/index.php?title=Henk_van_den_Belt&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Henk van den Belt (page does not exist)\">Henk van den Belt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 14, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=58527\">Null Move in Quiescent search</a> by <a href=\"/Laurie_Tunnicliffe\" title=\"Laurie Tunnicliffe\">Laurie Tunnicliffe</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 09, 2015&#160;» <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">Quiescence Search</a>, <a href=\"/Search_Pathology\" title=\"Search Pathology\">Search Pathology</a></li></ul>\n<p><b>2016</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=60366\">When to do null move</a> by <a href=\"/index.php?title=J._Wesley_Cleveland&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"J. Wesley Cleveland (page does not exist)\">J. Wesley Cleveland</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 05, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=60561\">Calculating R value for Null Move</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 23, 2016&#160;» <a href=\"/Depth_Reduction_R\" title=\"Depth Reduction R\">Depth Reduction R</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=5&amp;t=2994\">Null Move recommendations</a> by kickstone, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">OpenChess Forum</a>, July 29, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61086\">Null Move in LMR</a> by <a href=\"/Laurie_Tunnicliffe\" title=\"Laurie Tunnicliffe\">Laurie Tunnicliffe</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 10, 2016&#160;» <a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">Late Move Reductions</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61257\">Nullmove bugs</a> by <a href=\"/Matthew_R._Brades\" title=\"Matthew R. Brades\">Matthew R. Brades</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 28, 2016</li></ul>\n<p><b>2017</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=62890\">What is wrong with doing Nulls &amp; ttcuts in a pv node&#160;?</a> by <a href=\"/index.php?title=Mahmoud_Uthman&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Mahmoud Uthman (page does not exist)\">Mahmoud Uthman</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 21, 2017&#160;» <a href=\"/Node_Types#PV\" title=\"Node Types\">PV-Nodes</a>, <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Table</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=5&amp;t=3074\">NULL Move code question</a> by thevinenator, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">OpenChess Forum</a>, January 27, 2017&#160;» <a href=\"/CPW-Engine_search\" title=\"CPW-Engine search\">CPW-Engine_search</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63737\">null move</a> by <a href=\"/Folkert_van_Heusden\" title=\"Folkert van Heusden\">Folkert van Heusden</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 14, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64093\">tt move vs null move</a> by <a href=\"/Erin_Dame\" title=\"Erin Dame\">Erin Dame</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 27, 2017&#160;» <a href=\"/Hash_Move\" title=\"Hash Move\">Hash Move</a>, <a href=\"/Null_Move\" title=\"Null Move\">Null Move</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64266\">End game and Null move</a> by <a href=\"/Laurie_Tunnicliffe\" title=\"Laurie Tunnicliffe\">Laurie Tunnicliffe</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 12, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64853\">Fifty move counter and Null move</a> by <a href=\"/Tam%C3%A1s_Kuzmics\" title=\"Tamás Kuzmics\">Tamás Kuzmics</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 09, 2017&#160;» <a href=\"/Fifty-move_Rule\" title=\"Fifty-move Rule\">Fifty-move Rule</a>, <a href=\"/Halfmove_Clock\" title=\"Halfmove Clock\">Halfmove Clock</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64927\">Rethinking r in null move</a> by <a href=\"/Michael_Sherwin\" title=\"Michael Sherwin\">Michael Sherwin</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 18, 2017&#160;» <a href=\"/Depth_Reduction_R\" title=\"Depth Reduction R\">Depth Reduction R</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65024\">Question on Null Move Pruning</a> by <a href=\"/index.php?title=Jason_Fernandez&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Jason Fernandez (page does not exist)\">Jason Fernandez</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 29, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65121\">Threat detection</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 09, 2017&#160;» <a href=\"/Null_Move_Pruning#ThreatDetection\" title=\"Null Move Pruning\">Threat Detection</a>, <a href=\"/Threat_Move\" title=\"Threat Move\">Threat Move</a></li></ul>\n<p><b>2018</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=66410\">Making null move better?</a> by <a href=\"/Michael_Sherwin\" title=\"Michael Sherwin\">Michael Sherwin</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 25, 2018</li></ul>\n<p><b>2019</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=69722\">Null move pruning, only when score &gt;= beta?</a> by <a href=\"/Tom_King\" title=\"Tom King\">Tom King</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 25, 2019</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=70118\">idea: null-move analogy</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 06, 2019</li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=39\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=73713\">Allowing null move pruning in the endgame</a> by Steven Griffin, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 20, 2020&#160;» <a href=\"/Endgame\" title=\"Endgame\">Endgame</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=73753\">Null move</a>  by <a href=\"/Robert_Pope\" title=\"Robert Pope\">Robert Pope</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 24, 2020&#160;» <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=74498\">Null move pruning = lottery?</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 18, 2020</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=40\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> Selective Search Techniques in REBEL (null-move) from <a href=\"/Rebel#ProgrammerCorner\" title=\"Rebel\">Programmer Corner</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a> <sup id=\"cite_ref-34\" class=\"reference\"><a href=\"#cite_note-34\">&#91;34&#93;</a></sup>&#160;» <a href=\"/Rebel\" title=\"Rebel\">Rebel</a></li>\n<li> A presentation describing the power and flaws in null move pruning: <a rel=\"nofollow\" class=\"external text\" href=\"http://www.csse.uwa.edu.au/%7Elucas/files/411_null_move_heuristic_seminar.pdf\">Null Move pruning</a> (pdf) Slides by <a rel=\"nofollow\" class=\"external text\" href=\"http://www.csse.uwa.edu.au/%7Elucas/template.php?content=index\">Lucas Bradstreet</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Null-move_heuristic\">Null-move heuristic from Wikipedia</a></li>\n<li> <a href=\"/Category:Larry_Coryell\" title=\"Category:Larry Coryell\">Larry Coryell</a> &amp; <a href=\"/Category:The_Eleventh_House\" title=\"Category:The Eleventh House\">The Eleventh House</a> - <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Aspects_(The_Eleventh_House_album)\">Ain't It Is (Aspects)</a>, 1976, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> feat. <a href=\"/Category:Terumasa_Hino\" title=\"Category:Terumasa Hino\">Terumasa Hino</a>, <a href=\"/Category:Gerry_Brown\" title=\"Category:Gerry Brown\">Gerry Brown</a>, <a href=\"/Category:John_Lee\" title=\"Category:John Lee\">John Lee</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://www.discogs.com/artist/138771-Mike-Mandel\">Mike Mandel</a>, and guests ... <a href=\"/Category:Michael_Brecker\" title=\"Category:Michael Brecker\">Michael Brecker</a>, <a href=\"/Category:Randy_Brecker\" title=\"Category:Randy Brecker\">Randy Brecker</a>, <a href=\"/Category:James_Mtume\" title=\"Category:James Mtume\">James Mtume</a> et al.</dd>\n<dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/fQRyNe2SI1c?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Pruning&amp;action=edit&amp;section=41\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap mw-references-columns\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://chgs.elevator.umn.edu/asset/viewAsset/57f3b6787d58ae5f74bf8ba9#57f3b6d77d58ae5574bf8bc5\">Chess in the Art of Samuel Bak</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.chgs.umn.edu/\">Center for Holocaust &amp; Genocide Studies</a>, <a href=\"/University_of_Minnesota\" title=\"University of Minnesota\">University of Minnesota</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a href=\"/George_Baylor\" title=\"George Baylor\">George W. Baylor</a>, <a href=\"/Herbert_Simon\" title=\"Herbert Simon\">Herbert A. Simon</a> (<b>1966</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://dl.acm.org/citation.cfm?id=1464182.1464233&amp;coll=GUIDE&amp;dl=GUIDE\">A chess mating combinations program</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/American_Federation_of_Information_Processing_Societies\">AFIPS</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Joint_Computer_Conference\">Joint Computer Conferences</a>, reprinted 1988 in <a href=\"/Computer_Chess_Compendium\" title=\"Computer Chess Compendium\">Computer Chess Compendium</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a href=\"/Georgy_Adelson-Velsky\" title=\"Georgy Adelson-Velsky\">Georgy Adelson-Velsky</a>, <a href=\"/Vladimir_Arlazarov\" title=\"Vladimir Arlazarov\">Vladimir Arlazarov</a>, <a href=\"/Mikhail_Donskoy\" title=\"Mikhail Donskoy\">Mikhail Donskoy</a> (<b>1975</b>). <i>Some Methods of Controlling the Tree Search in Chess Programs</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_%28journal%29\">Artificial Intelligence</a>, Vol. 6, No. 4, pp. 361-371. ISSN 0004-3702. Reprinted (<b>1988</b>) in <a href=\"/Computer_Chess_Compendium\" title=\"Computer Chess Compendium\">Computer Chess Compendium</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a href=\"/Don_Beal\" title=\"Don Beal\">Don Beal</a> (<b>1989</b>). <i>Experiments with the Null Move</i>. <a href=\"/Advances_in_Computer_Chess_5\" title=\"Advances in Computer Chess 5\">Advances in Computer Chess 5</a>, A revised version is published (<b>1990</b>) under the title <i>A Generalized Quiescence Search Algorithm</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_%28journal%29\">Artificial Intelligence</a>, Vol. 43, No. 1, pp. 85-98. ISSN 0004-3702.</span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a href=\"/Chun_Ye\" title=\"Chun Ye\">Chun Ye</a> (<b>1992</b>). <i>Experiments in Selective Search Extensions</i>. M.Sc. thesis, Department of Computing Science, <a href=\"/University_of_Alberta\" title=\"University of Alberta\">University of Alberta</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://era.library.ualberta.ca/public/datastream/get/uuid:e4fbf48d-7603-490f-85cc-5497bbecf5a8/DS1\">pdf</a>, pp. 57</span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a> (<b>1987</b>). <i>Speculative Computing</i>. <a href=\"/ICGA_Journal#10_3\" title=\"ICGA Journal\">ICCA Journal, Vol. 10, No. 3</a></span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a href=\"/Gordon_Goetsch\" title=\"Gordon Goetsch\">Gordon Goetsch</a>, <a href=\"/Murray_Campbell\" title=\"Murray Campbell\">Murray Campbell</a> (<b>1988</b>). <i>Experimenting with the Null Move Heuristic in Chess</i>. AAAI Spring Symposium Proceedings, pp. 14-18</span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\"><a href=\"/Gordon_Goetsch\" title=\"Gordon Goetsch\">Gordon Goetsch</a>, <a href=\"/Murray_Campbell\" title=\"Murray Campbell\">Murray Campbell</a> (<b>1990</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://link.springer.com/chapter/10.1007/978-1-4613-9080-0_9\">Experiments with the Null-Move Heuristic</a></i>. <a href=\"/Computers,_Chess,_and_Cognition\" title=\"Computers, Chess, and Cognition\">Computers, Chess, and Cognition</a>, pp. 159-168</span>\n</li>\n<li id=\"cite_note-9\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-9\">↑</a></span> <span class=\"reference-text\"><a href=\"/Chun_Ye\" title=\"Chun Ye\">Chun Ye</a> (<b>1992</b>). <i>Experiments in Selective Search Extensions</i>. M.Sc. thesis, Department of Computing Science, <a href=\"/University_of_Alberta\" title=\"University of Alberta\">University of Alberta</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://era.library.ualberta.ca/public/datastream/get/uuid:e4fbf48d-7603-490f-85cc-5497bbecf5a8/DS1\">pdf</a>, pp. 27-29 </span>\n</li>\n<li id=\"cite_note-10\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-10\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=288321&amp;t=28775\">Re: SOMA</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 26, 2009</span>\n</li>\n<li id=\"cite_note-11\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-11\">↑</a></span> <span class=\"reference-text\"><a href=\"/Chrilly_Donninger\" title=\"Chrilly Donninger\">Chrilly Donninger</a> (<b>1993</b>). <i>Null Move and Deep Search: Selective-Search Heuristics for Obtuse Chess Programs.</i> <a href=\"/ICGA_Journal#16_3\" title=\"ICGA Journal\">ICCA Journal, Vol. 16, No. 3</a></span>\n</li>\n<li id=\"cite_note-12\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-12\">↑</a></span> <span class=\"reference-text\"><a href=\"/Ernst_A._Heinz\" title=\"Ernst A. Heinz\">Ernst A. Heinz</a>. (<b>1999</b>). <i>Adaptive null-move pruning</i>. <a href=\"/ICGA_Journal#22_3\" title=\"ICGA Journal\">ICCA Journal, Vol. 22, No. 3</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://people.csail.mit.edu/heinz/ps/adpt_null.ps.gz\">ps</a></span>\n</li>\n<li id=\"cite_note-13\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-13\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=76352\">Position from local chess club</a> by Bernhard Bauer, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 05, 1999</span>\n</li>\n<li id=\"cite_note-14\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-14\">↑</a></span> <span class=\"reference-text\"><a href=\"/Stefan_Plenkner\" title=\"Stefan Plenkner\">Stefan Plenkner</a> (<b>1995</b>). <i>A Null-Move Technique Impervious to Zugzwang.</i> <a href=\"/ICGA_Journal#18_2\" title=\"ICGA Journal\">ICCA Journal, Vol. 18, No. 2</a></span>\n</li>\n<li id=\"cite_note-15\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-15\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/0840bc8aabd0f6e5#\">Null-move zugzwang avoidance, Jun '95 ICCAJ</a> by <a href=\"/Bruce_Moreland\" title=\"Bruce Moreland\">Bruce Moreland</a> in <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, December 6, 1996</span>\n</li>\n<li id=\"cite_note-16\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-16\">↑</a></span> <span class=\"reference-text\"><a href=\"/Eli_David\" title=\"Eli David\">Omid David</a>, <a href=\"/Nathan_S._Netanyahu\" title=\"Nathan S. Netanyahu\">Nathan S. Netanyahu</a> (<b>2002</b>). <i>Verified null-move pruning.</i> <a href=\"/ICGA_Journal#25_3\" title=\"ICGA Journal\">ICGA Journal, Vol. 25 No. 3</a></span>\n</li>\n<li id=\"cite_note-17\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-17\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=28561\">verified null move</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 21, 2009</span>\n</li>\n<li id=\"cite_note-18\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-18\">↑</a></span> <span class=\"reference-text\"><a href=\"/Eli_David\" title=\"Eli David\">Omid David</a>, <a href=\"/Nathan_S._Netanyahu\" title=\"Nathan S. Netanyahu\">Nathan S. Netanyahu</a> (<b>2008</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/chapter/10.1007/978-3-540-87608-3_19\">Extended Null-Move Reductions</a></i>. <a href=\"/CG_2008\" title=\"CG 2008\">CG 2008</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.oedavid.com/pubs/nmr.pdf\">pdf</a></span>\n</li>\n<li id=\"cite_note-19\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-19\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=367273&amp;t=35841\">Re: Extended Null-Move Reductions</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 20, 2010</span>\n</li>\n<li id=\"cite_note-20\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-20\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=367314&amp;t=35841\">Re: Extended Null-Move Reductions</a> by <a href=\"/Marco_Costalba\" title=\"Marco Costalba\">Marco Costalba</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 20, 2010</span>\n</li>\n<li id=\"cite_note-21\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-21\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/PrN_AXwYV_4/UXU5x67UaoQJ\">Re: Null move?</a> by <a href=\"/Vincent_Diepeveen\" title=\"Vincent Diepeveen\">Vincent Diepeveen</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, October 11, 1997</span>\n</li>\n<li id=\"cite_note-22\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-22\">↑</a></span> <span class=\"reference-text\"><a href=\"/Gordon_Goetsch\" title=\"Gordon Goetsch\">Gordon Goetsch</a>, <a href=\"/Murray_Campbell\" title=\"Murray Campbell\">Murray Campbell</a> (<b>1988</b>). <i>Experimenting with the Null Move Heuristic in Chess</i>. AAAI Spring Symposium Proceedings, pp. 14-18</span>\n</li>\n<li id=\"cite_note-23\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-23\">↑</a></span> <span class=\"reference-text\"><a href=\"/Yngvi_Bj%C3%B6rnsson\" title=\"Yngvi Björnsson\">Yngvi Björnsson</a>, <a href=\"/Tony_Marsland\" title=\"Tony Marsland\">Tony Marsland</a> (<b>2000</b>). <i>Selective Depth-First Search Methods</i>. in <a href=\"/Jaap_van_den_Herik\" title=\"Jaap van den Herik\">Jaap van den Herik</a>, <a href=\"/Hiroyuki_Iida\" title=\"Hiroyuki Iida\">Hiroyuki Iida</a> (eds.) (<b>2000</b>). <i>Games in AI Research</i>. <a href=\"/Maastricht_University\" title=\"Maastricht University\">Universiteit Maastricht</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.ualberta.ca/%7Etony/RecentPapers/nec97w.pdf\">pdf preprint</a></span>\n</li>\n<li id=\"cite_note-24\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-24\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=14259\">Deep Search Extension</a> by <a href=\"/Stuart_Cracraft\" title=\"Stuart Cracraft\">Stuart Cracraft</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 18, 1998</span>\n</li>\n<li id=\"cite_note-25\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-25\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=57953\">Null move mate extension</a> by <a href=\"/James_Robertson\" title=\"James Robertson\">James Robertson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 25, 1999</span>\n</li>\n<li id=\"cite_note-26\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-26\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=389013\">mate threat extension/null move</a> by <a href=\"/index.php?title=Rick_Bischoff&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Rick Bischoff (page does not exist)\">Rick Bischoff</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 25, 2004</span>\n</li>\n<li id=\"cite_note-27\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-27\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=390268\">Re: mate threat extension/null move</a> by <a href=\"/Don_Beal\" title=\"Don Beal\">Don Beal</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 04, 2004&#160;» <a href=\"/Mate_Threat_Extensions\" title=\"Mate Threat Extensions\">Mate Threat Extensions</a> and <a href=\"/Win_at_Chess\" title=\"Win at Chess\">WAC</a> booster</span>\n</li>\n<li id=\"cite_note-28\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-28\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=24543\">null move threat extension</a> by <a href=\"/index.php?title=Andrew_Short&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Andrew Short (page does not exist)\">Andrew Short</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 23, 2008</span>\n</li>\n<li id=\"cite_note-29\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-29\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=318833\">The \"same threat extension\" as effective way to resolve horizon problem</a> by <a href=\"/Sergei_Markoff\" title=\"Sergei Markoff\">Sergei Markoff</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 01, 2003</span>\n</li>\n<li id=\"cite_note-30\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-30\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=266356\">Verified Null-Move Pruning, ICGA 25(3)</a> by <a href=\"/Eli_David\" title=\"Eli David\">Omid David</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 20, 2002</span>\n</li>\n<li id=\"cite_note-31\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-31\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=271270\">Proving something is better</a> by <a href=\"/Bruce_Moreland\" title=\"Bruce Moreland\">Bruce Moreland</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 17, 2002</span>\n</li>\n<li id=\"cite_note-32\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-32\">↑</a></span> <span class=\"reference-text\">courtesy of <a href=\"/Don_Beal\" title=\"Don Beal\">Don Beal</a> and <a href=\"/Carey_Bloodworth\" title=\"Carey Bloodworth\">Carey Bloodworth</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=58603&amp;start=13\">Re: Antique chess programs</a> by <a href=\"/Carey_Bloodworth\" title=\"Carey Bloodworth\">Carey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 16, 2015</span>\n</li>\n<li id=\"cite_note-33\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-33\">↑</a></span> <span class=\"reference-text\">Selective Search Techniques in REBEL (introduction) from <a href=\"/Rebel#ProgrammerCorner\" title=\"Rebel\">Programmer Corner</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a></span>\n</li>\n<li id=\"cite_note-34\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-34\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=44686\">Nullmove vs classic selective search</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 04, 2012</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Pruning\" title=\"Pruning\">Up one level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301083003\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.074 seconds\nReal time usage: 0.081 seconds\nPreprocessor visited node count: 684/1000000\nPreprocessor generated node count: 1384/1000000\nPost‐expand include size: 27/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:978-0!canonical and timestamp 20260301083003 and revision id 27269\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Samuel_Bak"
+      },
+      {
+        "sortkey": "",
+        "*": "The_Eleventh_House"
+      },
+      {
+        "sortkey": "",
+        "*": "Michael_Brecker"
+      },
+      {
+        "sortkey": "",
+        "*": "Randy_Brecker"
+      },
+      {
+        "sortkey": "",
+        "*": "Gerry_Brown"
+      },
+      {
+        "sortkey": "",
+        "*": "Larry_Coryell"
+      },
+      {
+        "sortkey": "",
+        "*": "Terumasa_Hino"
+      },
+      {
+        "sortkey": "",
+        "*": "John_Lee"
+      },
+      {
+        "sortkey": "",
+        "*": "James_Mtume"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Abyss"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 5"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aleks Peshkov"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha-Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alvaro Cardoso"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Andreas Herrmann"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Andrew Grant"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "BBchess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Beta-Cutoff"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Botvinnik-Markoff Extension"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bruce Moreland"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CG 2008"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CPW-Engine search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Captures"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Carey Bloodworth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Centipawns"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Checkmate"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chinese Chess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chrilly Donninger"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Christian Daley"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Christophe Théron"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chun Ye"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Compendium"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computers, Chess, and Cognition"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Crafty"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Daniel Homan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Daniel Shawul"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dann Corbit"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David Rasmussen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth Reduction R"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Don Beal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Don Dailey"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Double Null Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ed Schroder"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Eli David"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Endgame"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Enhanced Forward Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Eric Oldre"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Erin Dame"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ernst A. Heinz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fail-Hard"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fail-High Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fail-Soft"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fermin Serrano"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fifty-move Rule"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Folkert van Heusden"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Franck Zibi"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Frank Schneider"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Frans Morsch"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fritz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fruit"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "George Baylor"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Georgy Adelson-Velsky"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Giuseppe Cannella"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gordon Goetsch"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Halfmove Clock"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Harm Geert Muller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hash Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Heiner Marxen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Herbert Simon"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hiroyuki Iida"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "History Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA Journal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iterative Deepening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iterative Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jaap van den Herik"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "James Robertson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jon Dart"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jonathan Schaeffer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "José Antônio Fabiano Mendes"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kaissa"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Knowledge"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kunihito Hoki"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Late Move Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Laurie Tunnicliffe"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Leen Ammeraal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Louis Zulli"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Luca Hemmerich"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "MTD(f)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Maastricht University"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marco Costalba"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mark Lefler"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mark Uniacke"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Martin Sedlak"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Masakazu Muramatsu"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Matador"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mate Threat Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mater"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Matthew R. Brades"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michael Sherwin"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mikhail Botvinnik"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mikhail Donskoy"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Milos Stanisavljevic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Ordering"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Multi-Cut"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Murray Campbell"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Nathan S. Netanyahu"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Node Types"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Observation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Pruning Test Results"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Test-Positions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Window"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Oliver Brausch"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Onno"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Onno Garms"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawel Koziol"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pedro Castro"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter Aloysius Harjanto"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter Fendrich"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Phoenix"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ProbCut"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pulsar"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quest"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiescence Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Razoring"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rebel"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Recursion"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rein Halbersma"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Repetitions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Reverse Futility Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Hyatt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Pope"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Roberto Waldteufel"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Roland Pfister"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Root"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rémi Coulom"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Scott Farrell"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Scout"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search Pathology"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Selectivity"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sergei Markoff"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Severi Salminen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Singular Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stefan Knappe"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stefan Plenkner"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Steve Maughan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stockfish"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stuart Cracraft"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tamás Kuzmics"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Target Square"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tempo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "The Turk"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Threat Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Timeline"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Toga"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tom King"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tony Marsland"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tor Lattimore"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tord Romstad"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "University of Alberta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "University of Minnesota"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Upper Bound"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Uri Blass"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Valavan Manohararajah"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vincent Diepeveen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vladimir Arlazarov"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Werner Inmann"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Win at Chess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Yngvi Björnsson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Youri Matiounine"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ZChess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Zugzwang"
+      },
+      {
+        "ns": 0,
+        "*": "Rick Bischoff"
+      },
+      {
+        "ns": 0,
+        "*": "Andrew Short"
+      },
+      {
+        "ns": 0,
+        "*": "Dezhi Zhao"
+      },
+      {
+        "ns": 0,
+        "*": "KarinsDad"
+      },
+      {
+        "ns": 0,
+        "*": "Mike Adams"
+      },
+      {
+        "ns": 0,
+        "*": "Jan Kaan"
+      },
+      {
+        "ns": 0,
+        "*": "Eelco de Groot"
+      },
+      {
+        "ns": 0,
+        "*": "Robert Purves"
+      },
+      {
+        "ns": 0,
+        "*": "Edward Yu"
+      },
+      {
+        "ns": 0,
+        "*": "Jerry Donald"
+      },
+      {
+        "ns": 0,
+        "*": "Henk van den Belt"
+      },
+      {
+        "ns": 0,
+        "*": "J. Wesley Cleveland"
+      },
+      {
+        "ns": 0,
+        "*": "Mahmoud Uthman"
+      },
+      {
+        "ns": 0,
+        "*": "Jason Fernandez"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Gerry Brown"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:James Mtume"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:John Lee"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Larry Coryell"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Michael Brecker"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Randy Brecker"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Samuel Bak"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Terumasa Hino"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:The Eleventh House"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Core Idea",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 994,
+        "anchor": "Core_Idea"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Pseudocode",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 1875,
+        "anchor": "Pseudocode"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Basic Implementation",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 2116,
+        "anchor": "Basic_Implementation"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Conditions",
+        "number": "3.1",
+        "index": "4",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 2140,
+        "anchor": "Conditions"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Reduction",
+        "number": "3.2",
+        "index": "5",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 2584,
+        "anchor": "Reduction"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Advanced Tweaks",
+        "number": "4",
+        "index": "6",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 2740,
+        "anchor": "Advanced_Tweaks"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "History",
+        "number": "5",
+        "index": "7",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 3543,
+        "anchor": "History"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Mater II",
+        "number": "5.1",
+        "index": "8",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 3554,
+        "anchor": "Mater_II"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Kaissa",
+        "number": "5.2",
+        "index": "9",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 4513,
+        "anchor": "Kaissa"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Beal's NMQS",
+        "number": "5.3",
+        "index": "10",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 5935,
+        "anchor": "Beal.27s_NMQS"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Schaeffer",
+        "number": "5.4",
+        "index": "11",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 7734,
+        "anchor": "Schaeffer"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Goetsch and Campbell",
+        "number": "5.5",
+        "index": "12",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 8300,
+        "anchor": "Goetsch_and_Campbell"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Morsch and Donninger",
+        "number": "5.6",
+        "index": "13",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 9352,
+        "anchor": "Morsch_and_Donninger"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Schemes",
+        "number": "6",
+        "index": "14",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 10118,
+        "anchor": "Schemes"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Adaptive Null Move Pruning",
+        "number": "6.1",
+        "index": "15",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 10849,
+        "anchor": "Adaptive_Null_Move_Pruning"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Restrictions on use",
+        "number": "6.2",
+        "index": "16",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 11284,
+        "anchor": "Restrictions_on_use"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Zugzwang Verification",
+        "number": "6.3",
+        "index": "17",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 12636,
+        "anchor": "Zugzwang_Verification"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Double Null Move",
+        "number": "6.4",
+        "index": "18",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 14646,
+        "anchor": "Double_Null_Move"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Variable NM Bound",
+        "number": "6.5",
+        "index": "19",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 15074,
+        "anchor": "Variable_NM_Bound"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Threat Detection",
+        "number": "7",
+        "index": "20",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 16976,
+        "anchor": "Threat_Detection"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Mate Threats",
+        "number": "7.1",
+        "index": "21",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 16996,
+        "anchor": "Mate_Threats"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Botvinnik-Markoff Extension",
+        "number": "7.2",
+        "index": "22",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 18942,
+        "anchor": "Botvinnik-Markoff_Extension"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Influence on Move Ordering",
+        "number": "7.3",
+        "index": "23",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 19467,
+        "anchor": "Influence_on_Move_Ordering"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Test Results",
+        "number": "8",
+        "index": "24",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 20002,
+        "anchor": "Test_Results"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "9",
+        "index": "25",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 20186,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "10",
+        "index": "26",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 20510,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1966",
+        "number": "10.1",
+        "index": "27",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 20526,
+        "anchor": "1966"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1975",
+        "number": "10.2",
+        "index": "28",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 20818,
+        "anchor": "1975"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1980 ...",
+        "number": "10.3",
+        "index": "29",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 21177,
+        "anchor": "1980_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1990 ...",
+        "number": "10.4",
+        "index": "30",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 21824,
+        "anchor": "1990_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "10.5",
+        "index": "31",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 23012,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "10.6",
+        "index": "32",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 24341,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "11",
+        "index": "33",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 24990,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1995 ...",
+        "number": "11.1",
+        "index": "34",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 25005,
+        "anchor": "1995_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "11.2",
+        "index": "35",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 28035,
+        "anchor": "2000_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2005 ...",
+        "number": "11.3",
+        "index": "36",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 32256,
+        "anchor": "2005_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "11.4",
+        "index": "37",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 34652,
+        "anchor": "2010_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "11.5",
+        "index": "38",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 37884,
+        "anchor": "2015_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "11.6",
+        "index": "39",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 41173,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "12",
+        "index": "40",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 41618,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "13",
+        "index": "41",
+        "fromtitle": "Null_Move_Pruning",
+        "byteoffset": 42969,
+        "anchor": "References"
+      }
+    ]
+  }
+}

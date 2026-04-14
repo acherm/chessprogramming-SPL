@@ -1,0 +1,279 @@
+{
+  "parse": {
+    "title": "Transposition",
+    "pageid": 1052,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Chess\" title=\"Chess\">Chess</a> * Transposition</b>\n</p><p>A <b>transposition</b> in chess is a sequence of <a href=\"/Moves\" title=\"Moves\">moves</a> that results in a <a href=\"/Chess_Position\" title=\"Chess Position\">position</a> which may also be reached by another sequence of moves. For instance 1. d4 e6 2. e4 versus 1. e4 e6 2. d4, or {6. cxd4 exd4 7. exd4} versus {6. exd4 exd4 7. cxd4}. At least two moves (three plies) are necessary to transpose by exchanging moves, the more plies, the more possible sequences with transpositions are possible.\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Different_Number_of_Moves\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Different Number of Moves</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Color_Flip\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Color Flip</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Retrograde_Analysis\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Retrograde Analysis</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#See_also\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Forum Posts</span></a></li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#Publications\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Publications</span></a></li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#External_Links\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-8\"><a href=\"#References\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Different_Number_of_Moves\">Different Number of Moves</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition&amp;action=edit&amp;section=1\" title=\"Edit section: Different Number of Moves\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Due to both sides may lose <a href=\"/Tempo\" title=\"Tempo\">tempo</a>, more or less forced but often plausible transpositions with different number of moves may occur. A common example is this position from the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Sicilian_Defence#Sveshnikov_Variation:_4...Nf6_5.Nc3_e5\">Sveshnikov Variation</a> in the Sicilian, which regularly appears after seven or eight moves:\n</p>\n<table class=\"fentt\" style=\"font-size:24pt\"><tr><td class=\"board\" style=\"width: 8em;\"><div class=\"board\"><div class=\"sq\">    <br/>    <br/>    <br/>    <br/>    <br/>    <br/>    <br/>    <br/></div><div class=\"pcbg\">  <br/>   <br/>     <br/>     <br/>       <br/>       <br/>  <br/>   <br/></div><div class=\"pcfg\">♜ ♝♛♚♝ ♜<br/>♟♟   ♟♟♟<br/>  ♞♟ ♞  <br/> ♘  ♟ ♗ <br/>    ♙   <br/>  ♘     <br/>♙♙♙  ♙♙♙<br/>♖  ♕♔♗ ♖<br/></div></div></td></tr></table>\n<p>1. e4 c5 2. Nf3 d6 3. d4 cxd 4. Nxd4 Nf6 5. Nc3 Nc6 6. Bg5 e5 7. Ndb5<br />\n1. e4 c5 2. Nc3 e6 3. Nf3 Nc6 4. d4 cxd 5. Nxd4 Nf6 6. Ndb5 d6 7. Bf4 e5 8. Bg5\n</p><p><br />\n</p>\n<h1><span class=\"mw-headline\" id=\"Color_Flip\">Color Flip</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition&amp;action=edit&amp;section=2\" title=\"Edit section: Color Flip\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Further, during the <a href=\"/Opening\" title=\"Opening\">opening</a>, there are zillions of possibilities to transpose into <a href=\"/Color_Flipping\" title=\"Color Flipping\">color flipped positions</a> from known opening lines, often by the prosaic loss of a <a href=\"/Tempo\" title=\"Tempo\">tempo</a> by performing a move, i.e. a <a href=\"/Pawn_Push#DoublePush\" title=\"Pawn Push\">double pawn push</a> in two steps, for instance 1. d3 d5 2. d4 to play \"Black\" with the White pieces, as often tried by humans to throw a program out of its <a href=\"/Opening_Book\" title=\"Opening Book\">opening book</a> early, but also by programs, like in the <a href=\"/WMCCC_1988\" title=\"WMCCC 1988\">WMCCC 1988</a> the <a href=\"/WMCCC_1988#Pandix-Y.21\" title=\"WMCCC 1988\">Pandix-Y!88</a> game. Therefor, books indexed by positions or <a href=\"/Zobrist_Hashing\" title=\"Zobrist Hashing\">hash keys</a> may be re-probed with a color flipped position to cover those kinds of transpositions as well:\n</p>\n<table>\n\n<tr>\n<td> <table class=\"fentt\" style=\"font-size:24pt\"><tr><td class=\"board\" style=\"width: 8em;\"><div class=\"board\"><div class=\"sq\">    <br/>    <br/>    <br/>    <br/>    <br/>    <br/>    <br/>    <br/></div><div class=\"pcbg\">  <br/>   <br/>     <br/>      <br/>       <br/>    <br/>   <br/>  <br/></div><div class=\"pcfg\">♜ ♝♛♚♝ ♜<br/>♟♟   ♟♟♟<br/>  ♞ ♟♞  <br/>  ♟♟    <br/>    ♙   <br/>  ♘♙ ♘♙ <br/>♙♙♙  ♙ ♙<br/>♖ ♗♕♔♗ ♖<br/></div></div></td></tr></table>\n</td>\n<td> <table class=\"fentt\" style=\"font-size:24pt\"><tr><td class=\"board\" style=\"width: 8em;\"><div class=\"board\"><div class=\"sq\">    <br/>    <br/>    <br/>    <br/>    <br/>    <br/>    <br/>    <br/></div><div class=\"pcbg\">  <br/>   <br/>    <br/>       <br/>      <br/>     <br/>   <br/>  <br/></div><div class=\"pcfg\">♜ ♝♛♚♝ ♜<br/>♟♟♟  ♟ ♟<br/>  ♞♟ ♞♟ <br/>    ♟   <br/>  ♙♙    <br/>  ♘ ♙♘  <br/>♙♙   ♙♙♙<br/>♖ ♗♕♔♗ ♖<br/></div></div></td></tr></table>\n</td></tr>\n<tr>\n<td> 1. e4 c5 2. Nc3 Nc6 3. Nf3 e6 <br />4. g3 Nf6 5. d3 d5\n</td>\n<td> 1. c4 e5 2. Nc3 Nc6 3. Nf3 d6 <br />4. d3 Nf6 5. e3 g6 6. d4\n</td></tr></table>\n<p><span id=\"RetrogradeAnalysis\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Retrograde_Analysis\">Retrograde Analysis</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition&amp;action=edit&amp;section=3\" title=\"Edit section: Retrograde Analysis\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>In analyzing book lines, <a href=\"/Retrograde_Analysis\" title=\"Retrograde Analysis\">Retrograde Analysis</a> from an opening or early <a href=\"/Middlegame\" title=\"Middlegame\">middlegame</a> position backwards reaching the <a href=\"/Initial_Position\" title=\"Initial Position\">initial position</a> might be applied to traverse a \"reverse\" tree of <a href=\"/Unmake_Move\" title=\"Unmake Move\">unmade moves</a> of variations with all its transpositions. However, one has to distinguish possible variations, where for instance pieces were put <a href=\"/En_prise\" title=\"En prise\">en prise</a> but not captured, from plausible ones.\n</p>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition&amp;action=edit&amp;section=4\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Boris_Baczynskyj#CrayBlitzFidelity\" title=\"Boris Baczynskyj\">Book Issues in Cray Blitz vs. Fidelity X @ ACM 1984</a></li>\n<li> <a href=\"/Enhanced_Transposition_Cutoff\" title=\"Enhanced Transposition Cutoff\">Enhanced Transposition Cutoff</a></li>\n<li> <a href=\"/Graph_History_Interaction\" title=\"Graph History Interaction\">Graph History Interaction</a> (GHI)</li>\n<li> <a href=\"/Path-Dependency\" title=\"Path-Dependency\">Path-Dependency</a></li>\n<li> <a href=\"/Persistent_Hash_Table\" title=\"Persistent Hash Table\">Persistent Hash Table</a></li>\n<li> <a href=\"/Repetitions\" title=\"Repetitions\">Repetitions</a></li>\n<li> <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Table</a></li>\n<li> <a href=\"/Triangulation\" title=\"Triangulation\">Triangulation</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition&amp;action=edit&amp;section=5\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=22274&amp;postdays=0&amp;postorder=asc&amp;topic_view=flat&amp;start=14\">Re: Is 64 bits enough as a hash length</a> (on symmetrical hash keys) by <a href=\"/Gerd_Isenberg\" title=\"Gerd Isenberg\">Gerd Isenberg</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, Juli 11, 2008</li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition&amp;action=edit&amp;section=6\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/index.php?title=Martin_Schijf&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Martin Schijf (page does not exist)\">Martin Schijf</a> (<b>1993</b>). <i>Proof-number Search and Transpositions</i>. M.Sc. thesis, <a href=\"/Leiden_University\" title=\"Leiden University\">Leiden University</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www2.denizyuret.com/ref/schijf/schijf93proofnumber.pdf\">pdf</a></li>\n<li> <a href=\"/index.php?title=Martin_Schijf&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Martin Schijf (page does not exist)\">Martin Schijf</a>, <a href=\"/Victor_Allis\" title=\"Victor Allis\">Victor Allis</a>, <a href=\"/Jos_Uiterwijk\" title=\"Jos Uiterwijk\">Jos Uiterwijk</a> (<b>1994</b>). <i>Proof-Number Search and Transpositions</i>. <a href=\"/ICGA_Journal#17_2\" title=\"ICGA Journal\">ICCA Journal, Vol. 17, No. 2</a>&#160;» <a href=\"/Proof-Number_Search\" title=\"Proof-Number Search\">Proof-Number Search</a></li>\n<li> <a href=\"/Bernard_Helmstetter\" title=\"Bernard Helmstetter\">Bernard Helmstetter</a>, <a href=\"/Tristan_Cazenave\" title=\"Tristan Cazenave\">Tristan Cazenave</a> (<b>2004</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/chapter/10.1007/11674399_15\">Incremental Transpositions</a></i>. <a href=\"/CG_2004\" title=\"CG 2004\">CG 2004</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.ai.univ-paris8.fr/~bh/articles/it.pdf\">pdf</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Andrew_Soltis\">Andrew Soltis</a> (<b>2007</b>). <i>Transpo Tricks in Chess</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Anova_Books\">Batsford</a>, from <a rel=\"nofollow\" class=\"external text\" href=\"http://www.amazon.com/Transpo-Tricks-Chess-Batsford-Books/dp/0713490519\">amazon.com</a> <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition&amp;action=edit&amp;section=7\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Transposition_(chess)\">Transposition (chess) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Transposition_(mathematics)\">Transposition (mathematics) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Transpose\">Matrix Transpose from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cut-the-knot.org/do_you_know/pgroups.shtml\">Transpositions</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cut-the-knot.org/\">Interactive Mathematics Miscellany and Puzzles</a> by <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/indices/a-tree/b/Bogomolny:A=.html\">A. Bogomolny</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Transposition_(music)\">Transposition (music) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Transposon\">Transposon from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Transposition_of_the_great_vessels\">Transposition of the great vessels from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Transposition_cipher\">Transposition cipher from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Directed_graph\">Directed graph from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Directed_acyclic_graph\">Directed acyclic graph from Wikipedia</a></li>\n<li> <a href=\"/Category:Hiromi_Uehara\" title=\"Category:Hiromi Uehara\">Hiromi Uehara</a> - Sicilian Blue, <a rel=\"nofollow\" class=\"external text\" href=\"http://fr.wikipedia.org/wiki/Jazz_in_Marciac\">Jazz in Marciac</a>, August 4, 2010, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/fT9dBxfSYLg?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Transposition&amp;action=edit&amp;section=8\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.chessvideos.tv/article-Book-Review-Transpo-Tricks-in-Chess--by-Andrew-Soltis-10.php\">Transpo Tricks in Chess: Finesse Your Chess Moves and Win - by GM Andrew Soltis - Batsford, 2007 - Review</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Chess\" title=\"Chess\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301152403\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.012 seconds\nReal time usage: 0.013 seconds\nPreprocessor visited node count: 82/1000000\nPreprocessor generated node count: 180/1000000\nPost‐expand include size: 26/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1052-0!canonical and timestamp 20260301152403 and revision id 9676\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Hiromi_Uehara"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bernard Helmstetter"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Boris Baczynskyj"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CG 2004"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Position"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Color Flipping"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "En prise"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Enhanced Transposition Cutoff"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gerd Isenberg"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Graph History Interaction"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA Journal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Initial Position"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jos Uiterwijk"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Leiden University"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Middlegame"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Moves"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Opening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Opening Book"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Path-Dependency"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Push"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Persistent Hash Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Proof-Number Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Repetitions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Retrograde Analysis"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tempo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Triangulation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tristan Cazenave"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Unmake Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Victor Allis"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "WMCCC 1988"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Zobrist Hashing"
+      },
+      {
+        "ns": 0,
+        "*": "Martin Schijf"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Hiromi Uehara"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Different Number of Moves",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Transposition",
+        "byteoffset": 488,
+        "anchor": "Different_Number_of_Moves"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Color Flip",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Transposition",
+        "byteoffset": 1146,
+        "anchor": "Color_Flip"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Retrograde Analysis",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Transposition",
+        "byteoffset": 2273,
+        "anchor": "Retrograde_Analysis"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Transposition",
+        "byteoffset": 2736,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "5",
+        "index": "5",
+        "fromtitle": "Transposition",
+        "byteoffset": 3030,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "6",
+        "index": "6",
+        "fromtitle": "Transposition",
+        "byteoffset": 3264,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "7",
+        "index": "7",
+        "fromtitle": "Transposition",
+        "byteoffset": 4336,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "8",
+        "index": "8",
+        "fromtitle": "Transposition",
+        "byteoffset": 5709,
+        "anchor": "References"
+      }
+    ]
+  }
+}

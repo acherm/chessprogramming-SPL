@@ -1,0 +1,55 @@
+{
+  "title": "8086",
+  "url": "https://www.chessprogramming.org/8086",
+  "source_type": "api",
+  "retrieved_at": "2026-03-01T15:13:14.349810+00:00",
+  "content_hash": "984a0846888d05b97902cd53e20c535decb2479f1aeaaacd0d34bd09c1df938d",
+  "text": "Home * Hardware * 8086 Intel 8086 CPU Die Image [1] 8086 , a 16-bit microprocessor designed by Intel since 1976, released in 1978. Its principal architect was Stephen P. Morse . Marketed as source compatible , the 8086 was designed so that assembly language for the 8-bit 8080 could be automatically converted into equivalent (sub-optimal) 8086 source code. The Intel 8088 variant had an 8-bit external data bus and was used in the original IBM PC . 8086 was the forerunner of Intel's x86 32-bit architecture, starting with the 80386 in 1985. Despite the huge distribution of 8086/8088 based PCs, the 8086 was rarely found in Dedicated Chess Computers . Contents 1 Registers 2 Segmentation 2.1 Pointer 2.2 Memory models 3 Publications 4 External Links 4.1 Intel 4.2 Clones 5 References Registers [ edit ] The eight 8080 registers A, B, C, D, E, H, L, SP, with BC, DE and HL as possible 16 bit registers, were extended to eight (more or less general) 16-bit registers including the stack pointer . Four general purpose (GP) registers may treated as 16-bit Word as well as high and low Byte : 16 bit 8 high 8 low Purpose AX AH AL GP, Accumulator BX BH BL GP, Base, Index Register CX CH CL GP, Counter, variable shift, rotate via CL DX DH DL GP, high Accumulator mul/div SI - - GP, Source Index DI - - GP, Destination Index SP - - Stack Pointer BP - - GP, Base Pointer Segment Registers CS - - Code Segment DS - - Data Segment ES - - Extra Segment SS - - Stack Segment Segmentation [ edit ] The 8086 was able to address one MByte of physical memory and its external address bus was 20 bit wide (the first 16 multiplexed with the data bus). The physical address translation was done by shifting a segment register 4 bits left and adding an 16 bit offset. effective or physical address := 16 * segment + offset As a result, each external address could be referred to by 2 12 different segment:offset pairs. Considered complicated and cumbersome by many (chess) programmers, this scheme had the advantage in porting programs less than 64 kilobytes from 8-bit 8080 avoiding the need for relocation . Pointer [ edit ] Compilers for the 8086 supported two or even three types of pointers, near , far and huge . Near pointers were 16-bit offsets implicitly associated with the program's code and/or data/stack segment and could only used within parts of a program small enough to fit in one 64 kilobyte segment. Far pointers were 32-bit segment:offset pairs. Huge pointers, which were like far pointers except that pointer arithmetic on a huge pointer treated it as a linear 20-bit pointer, while pointer arithmetic on a far pointer wrapped around within its 16-bit offset without touching the segment part of the address. Memory models [ edit ] To avoid the need to specify near and far on pointers, data structures, and functions, compilers supported \"memory models\" which specified default pointer sizes. The tiny (max 64K), small (max 128K), compact (data > 64K), medium (code > 64K), large (code,data > 64K), and huge (individual arrays > 64K) models covered practical combinations of near, far, and huge pointers for code and data. The tiny model with code and data in a single segment, just as in most 8-bit based processors, could be used to build .com-files . Precompiled libraries often came in several versions compiled for different memory models [2] . Publications [ edit ] Steve Ciarcia ( 1979 ). The Intel 8086 . BYTE, Vol. 4, No. 11 , pp. 14-24 External Links [ edit ] Intel [ edit ] Intel 8086 from Wikipedia Intel 8087 floating point coprocessor from Wikipedia Intel 80186 from Wikipedia Intel 8086 microprocessor family from CPU-World Index of /Intel/x86/808x/datashts/8086 x86 instruction listings from Wikipedia Clones [ edit ] NEC V20 from Wikipedia K1810BM86 References [ edit ] ↑ Intel 8086 CPU Die Image by Pdesousa359, July 03, 2010, Intel 8086 from Wikipedia ↑ Intel 8086 - Segmentation from Wikipedia Up one Level",
+  "headings": [
+    "Contents",
+    "Registers[edit]",
+    "Segmentation[edit]",
+    "Pointer[edit]",
+    "Memory models[edit]",
+    "Publications[edit]",
+    "External Links[edit]",
+    "Intel[edit]",
+    "Clones[edit]",
+    "References[edit]"
+  ],
+  "links": [
+    "8080",
+    "Assembly",
+    "Byte",
+    "Byte Magazine",
+    "Dedicated Chess Computers",
+    "Hardware",
+    "IBM PC",
+    "Intel",
+    "Main Page",
+    "Memory",
+    "Stack",
+    "Word",
+    "X86",
+    "index.php"
+  ],
+  "bold_terms": [
+    "Home * Hardware * 8086",
+    "8086",
+    "near",
+    "far",
+    "huge",
+    "tiny",
+    "small",
+    "compact",
+    "medium",
+    "large",
+    "1979",
+    "Up one Level"
+  ],
+  "categories": [
+    "Die"
+  ],
+  "page_type": "technique",
+  "raw_payload_path": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/data/chessprogramming_cache/raw/8086.api.json"
+}

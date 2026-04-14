@@ -1,0 +1,778 @@
+{
+  "parse": {
+    "title": "Pattern Recognition",
+    "pageid": 1317,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Knowledge\" title=\"Knowledge\">Knowledge</a> * Pattern Recognition</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:195px;\"><a href=\"http://melmolly.deviantart.com/art/Chess-pattern-177292334\"><img alt=\"\" src=\"/images/9/96/PatternRecog.JPG\" width=\"193\" height=\"197\" class=\"thumbimage\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:PatternRecog.JPG\" class=\"internal\" title=\"Enlarge\"></a></div>Chess pattern <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div>\n<p><b>Pattern Recognition</b>,<br />\nis used to assign a label to an input value <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup> , for instance to apply <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Statistical_classification\">classification</a> in <a href=\"/Learning\" title=\"Learning\">machine learning</a> applications, i.e. to identify objects and images, as well as computer chess related pattern of <a href=\"/Chess_Position\" title=\"Chess Position\">chess positions</a> in <a href=\"/index.php?title=Psychology&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Psychology (page does not exist)\">Cognitive Psychology</a> and concerning <a href=\"/Evaluation\" title=\"Evaluation\">evaluation</a> and control of the <a href=\"/Search\" title=\"Search\">search</a> in computer chess. Pattern recognition algorithms generally aim to provide a reasonable answer for all possible inputs and to perform a \"fuzzy\" matching. In contrast, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pattern_matching\">Pattern matching</a> usually has to be exact. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Chess_Pattern\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Chess Pattern</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Chess_Programs\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Chess Programs</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#See_also\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Publications\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Publications</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#1950_...\"><span class=\"tocnumber\">4.1</span> <span class=\"toctext\">1950 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-6\"><a href=\"#1960_...\"><span class=\"tocnumber\">4.2</span> <span class=\"toctext\">1960 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#1970_...\"><span class=\"tocnumber\">4.3</span> <span class=\"toctext\">1970 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#1980_...\"><span class=\"tocnumber\">4.4</span> <span class=\"toctext\">1980 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#1990_...\"><span class=\"tocnumber\">4.5</span> <span class=\"toctext\">1990 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#2000_...\"><span class=\"tocnumber\">4.6</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#2010_...\"><span class=\"tocnumber\">4.7</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-12\"><a href=\"#2020_...\"><span class=\"tocnumber\">4.8</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-13\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Forum Posts</span></a></li>\n<li class=\"toclevel-1 tocsection-14\"><a href=\"#External_Links\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-15\"><a href=\"#References\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Chess_Pattern\">Chess Pattern</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pattern_Recognition&amp;action=edit&amp;section=1\" title=\"Edit section: Chess Pattern\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Chess pattern range from simple properties of <a href=\"/Squares\" title=\"Squares\">squares</a> and <a href=\"/Pieces\" title=\"Pieces\">pieces</a> concerning <a href=\"/Occupancy\" title=\"Occupancy\">occupancy</a> and <a href=\"/Square_Control\" title=\"Square Control\">control</a>, to a more complex interrelated sets of features. Recognizers are implemented with <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Decision_tree\">decision trees</a>, <a href=\"/Neural_Networks\" title=\"Neural Networks\">neural networks</a>, and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Fuzzy_logic\">fuzzy logics</a>. In his <a href=\"/ICGA_Journal\" title=\"ICGA Journal\">ICCA Journal</a> paper <i>Fuzzy Production Rules in Chess</i>, <a href=\"/Peter_W._Frey\" title=\"Peter W. Frey\">Peter W. Frey</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup> proposed feature strings or sets of three types. Type-A features must match completely, type-B feature strings represent features which are usually but not always present, while type-C features are present occasionally but are highly diagnostic when available. Those features were intended to use at the root for an <a href=\"/Oracle\" title=\"Oracle\">oracle</a> approach.\n</p>\n<ul><li> <a href=\"/Evaluation_Patterns\" title=\"Evaluation Patterns\">Evaluation Patterns</a>\n<ul><li><a href=\"/Fianchetto\" title=\"Fianchetto\">Fianchetto</a></li>\n<li> <a href=\"/Outposts\" title=\"Outposts\">Outposts</a></li>\n<li> <a href=\"/Returning_Bishop\" title=\"Returning Bishop\">Returning Bishop</a></li>\n<li> <a href=\"/Trapped_Pieces\" title=\"Trapped Pieces\">Trapped Pieces</a></li></ul></li>\n<li> <a href=\"/King_Pattern\" title=\"King Pattern\">King Pattern</a>\n<ul><li> <a href=\"/King_Safety#Patterns\" title=\"King Safety\">King Safety Pattern</a></li>\n<li> <a href=\"/Mate_at_a_Glance\" title=\"Mate at a Glance\">Mate at a Glance</a></li></ul></li>\n<li> <a href=\"/Knight_Pattern\" title=\"Knight Pattern\">Knight Pattern</a></li>\n<li> <a href=\"/Pawn_Pattern_and_Properties\" title=\"Pawn Pattern and Properties\">Pawn Pattern and Properties</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Chess_Programs\">Chess Programs</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pattern_Recognition&amp;action=edit&amp;section=2\" title=\"Edit section: Chess Programs\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/CHUMP\" title=\"CHUMP\">CHUMP</a></li>\n<li> <a href=\"/Chunker\" title=\"Chunker\">Chunker</a></li>\n<li> <a href=\"/index.php?title=MACH&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"MACH (page does not exist)\">MACH</a></li>\n<li> <a href=\"/Morph\" title=\"Morph\">Morph</a></li>\n<li> <a href=\"/Paradise\" title=\"Paradise\">Paradise</a></li>\n<li> <a href=\"/USC_CP\" title=\"USC CP\">USC CP</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pattern_Recognition&amp;action=edit&amp;section=3\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Backtracking\" title=\"Backtracking\">Backtracking</a></li>\n<li> <a href=\"/Chunking\" title=\"Chunking\">Chunking</a></li>\n<li> <a href=\"/Cognition\" title=\"Cognition\">Cognition</a></li>\n<li> <a href=\"/index.php?title=Psychology&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Psychology (page does not exist)\">Cognitive Psychology</a></li>\n<li> <a href=\"/Design_Principles\" title=\"Design Principles\">Design Principles</a></li>\n<li> <a href=\"/Interior_Node_Recognizer\" title=\"Interior Node Recognizer\">Interior Node Recognizer</a></li>\n<li> <a href=\"/Learning\" title=\"Learning\">Learning</a></li>\n<li> <a href=\"/Neural_Networks\" title=\"Neural Networks\">Neural Networks</a></li>\n<li> <a href=\"/Piece_Recognition\" title=\"Piece Recognition\">Piece Recognition</a></li>\n<li> <a href=\"/Planning\" title=\"Planning\">Planning</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pattern_Recognition&amp;action=edit&amp;section=4\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1950_...\">1950 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pattern_Recognition&amp;action=edit&amp;section=5\" title=\"Edit section: 1950 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Woodrow_W._Bledsoe\" title=\"Woodrow W. Bledsoe\">Woodrow W. Bledsoe</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Iben_Browning\">Iben Browning</a> (<b>1959</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://dl.acm.org/citation.cfm?id=1460326\">Pattern Recognition and Reading by Machine</a></i>. In Proceedings of the Eastern Joint Computer Conference</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.purbeckradar.org.uk/biography/uttley_albert_m.htm\">Albert M. Uttley</a> (<b>1959</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://rmp.aps.org/abstract/RMP/v31/i2/p546_1\">Imitation of Pattern Recognition and Trial-and-error Learning in a Conditional Probability Computer</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Reviews_of_Modern_Physics\">Reviews of Modern Physics</a>, Vol. 31, April 1959, pp. 546-548 <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup> <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup></li></ul>\n<h2><span class=\"mw-headline\" id=\"1960_...\">1960 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pattern_Recognition&amp;action=edit&amp;section=6\" title=\"Edit section: 1960 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Bongard_problem\">Mikhail Moiseevich Bongard</a> <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup> (<b>1967</b>). <i>Проблема Узнавания</i>. The Problem of Recognition, Nauka Press, Moscow, appeared as <i>Pattern Recognition</i> in its 1970 English translation</li>\n<li> <a href=\"/Chin-Liang_Chang\" title=\"Chin-Liang Chang\">Chin-Liang Chang</a> (<b>1967</b>). <i>Fuzzy Sets and Pattern Recognition</i>. Ph.D. Thesis, Advisor:  <a href=\"/Mathematician#LAZadeh\" title=\"Mathematician\">Lotfi A. Zadeh</a>, <a href=\"/University_of_California,_Berkeley\" title=\"University of California, Berkeley\">University of California, Berkeley</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1970_...\">1970 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pattern_Recognition&amp;action=edit&amp;section=7\" title=\"Edit section: 1970 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Bongard_problem\">Mikhail Moiseevich Bongard</a> (<b>1970</b>). <i>Pattern Recognition</i>. Rochelle Park, N.J., Hayden Book Co., Spartan Books </li>\n<li> <a href=\"/Albert_Zobrist\" title=\"Albert Zobrist\">Albert Zobrist</a> (<b>1970</b>). <i>Feature Extraction and Representation for Pattern Recognition and the Game of Go</i>. Ph.D. Thesis (152 pp.), University of Wisconsin. Also published as technical report #85</li>\n<li> <a href=\"/Albert_Zobrist\" title=\"Albert Zobrist\">Albert Zobrist</a> (<b>1970</b>). <i>A Pattern Recognition Program which uses a Geometry-Preserving Representation of Features</i>. Technical Report #85, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.wisc.edu/techreports/1970/TR85.pdf\">pdf</a></li>\n<li> <a href=\"/James_R._Slagle\" title=\"James R. Slagle\">James R. Slagle</a>, <a href=\"/Richard_C._T._Lee\" title=\"Richard C. T. Lee\">Richard C. T. Lee</a> (<b>1971</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://portal.acm.org/citation.cfm?id=362515.362562\">Application of game tree searching techniques to sequential pattern recognition</a></i>. <a href=\"/ACM#Communications\" title=\"ACM\">Communications of the ACM</a>, Vol. 14, No. 2</li>\n<li> <a href=\"/Albert_Zobrist\" title=\"Albert Zobrist\">Albert Zobrist</a>, <a href=\"/Frederic_Roy_Carlson\" title=\"Frederic Roy Carlson\">Frederic Roy Carlson</a> (<b>1973</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://portal.acm.org/citation.cfm?id=805705\">The USC chess program</a></i>. Proceedings of the <a href=\"/ACM\" title=\"ACM\">ACM</a> annual conference, Atlanta, Georgia</li>\n<li> <a href=\"/Laveen_Kanal\" title=\"Laveen Kanal\">Laveen N. Kanal</a> (<b>1974</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://ieeexplore.ieee.org/document/1055306\">Patterns in pattern recognition: 1968-1974</a></i>. <a href=\"/IEEE#TIT\" title=\"IEEE\">IEEE Transactions on Information Theory</a>, Vol. 20, No. 6</li>\n<li> <a href=\"/Jacques_Pitrat\" title=\"Jacques Pitrat\">Jacques Pitrat</a> (<b>1976</b>). <i>A Program to Learn to Play Chess.</i> Pattern Recognition and Artificial Intelligence, pp. 399-419. Academic Press Ltd. London, UK. ISBN 0-12-170950-7.</li>\n<li> <a href=\"/Mathematician#ARosenfeld\" title=\"Mathematician\">Azriel Rosenfeld</a>, <a href=\"/Mathematician#JeromeFeldman\" title=\"Mathematician\">Jerome A. Feldman</a>, <a href=\"/Laveen_Kanal\" title=\"Laveen Kanal\">Laveen N. Kanal</a>, <a href=\"/Patrick_Winston\" title=\"Patrick Winston\">Patrick H. Winston</a> (<b>1977</b>). <i>AI and Pattern Recognition</i>. <a href=\"/Conferences#IJCAI1977\" title=\"Conferences\">IJCAI 1977</a></li>\n<li> <a href=\"/Albert_Zobrist\" title=\"Albert Zobrist\">Albert Zobrist</a>, <a href=\"/Frederic_Roy_Carlson\" title=\"Frederic Roy Carlson\">Frederic Roy Carlson</a> (<b>1977</b>). <i>Detection of Combined Occurrences</i>. <a href=\"/ACM#Communications\" title=\"ACM\">Communications of the ACM</a>, Vol. 20, No. 1, pp. 31-35.</li>\n<li> <a href=\"/Walter_R._Reitman\" title=\"Walter R. Reitman\">Walter R. Reitman</a>, <a href=\"/index.php?title=Bruce_Wilcox&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Bruce Wilcox (page does not exist)\">Bruce Wilcox</a> (<b>1977</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://dl.acm.org/citation.cfm?id=1045396\">Pattern Recognition and Pattern-Directed Inference in a Program for Playing Go</a></i>. <a href=\"/ACM#SIG\" title=\"ACM\">ACM SIGART Bulletin</a>, No. 63</li>\n<li> <a href=\"/index.php?title=Rainer_Kurz&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Rainer Kurz (page does not exist)\">Rainer Kurz</a> (<b>1977</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://d-nb.info/770784364\">Musterverarbeitung bei der Schachprogrammierung</a></i>. Ph.D. thesis, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/University_of_Stuttgart\">Universität Stuttgart</a> (German) </li>\n<li> <a href=\"/Ivan_Bratko\" title=\"Ivan Bratko\">Ivan Bratko</a>, <a href=\"/Danny_Kopec\" title=\"Danny Kopec\">Danny Kopec</a>, <a href=\"/Donald_Michie\" title=\"Donald Michie\">Donald Michie</a> (<b>1978</b>). <i>Pattern-Based Representation of Chess Endgame Knowledge</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://comjnl.oxfordjournals.org/content/21/2.toc\">The Computer Journal, Vol. 21, No. 2</a>, pp. 149-153. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.sci.brooklyn.cuny.edu/%7Ekopec/Publications/Publications/O_44_C.pdf\">pdf</a></li>\n<li> <a href=\"/David_Wilkins\" title=\"David Wilkins\">David Wilkins</a> (<b>1979</b>). <i>Using Patterns and Plans to Solve Problems and Control Search</i>. Ph.D. thesis, Computer Science Dept, <a href=\"/Stanford_University\" title=\"Stanford University\">Stanford University</a>, AI Lab Memo AIM-329</li>\n<li> <a href=\"/Max_Bramer\" title=\"Max Bramer\">Max Bramer</a>, <a href=\"/Mike_Clarke\" title=\"Mike Clarke\">Mike Clarke</a> (<b>1979</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.sciencedirect.com/science/article/pii/S0020737379800139\">A Model for the Representation of Pattern-Knowledge for the Endgame in Chess</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.interaction-design.org/references/periodicals/international_journal_of_man-machine_studies_volume_11.html\">International  Journal of Man-Machine Studies, Vol. 11, No.5</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1980_...\">1980 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pattern_Recognition&amp;action=edit&amp;section=8\" title=\"Edit section: 1980 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/David_Wilkins\" title=\"David Wilkins\">David Wilkins</a> (<b>1980</b>). <i>Using patterns and plans in chess</i>. Artificial Intelligence, vol. 14, pp. 165-203. Reprinted (<b>1988</b>) in <a href=\"/Computer_Chess_Compendium\" title=\"Computer Chess Compendium\">Computer Chess Compendium</a></li>\n<li> <a href=\"/Ivan_Bratko\" title=\"Ivan Bratko\">Ivan Bratko</a>, <a href=\"/Donald_Michie\" title=\"Donald Michie\">Donald Michie</a> (<b>1980</b>). <i>A Representation of Pattern-Knowledge in Chess Endgames</i>. <a href=\"/Advances_in_Computer_Chess_2\" title=\"Advances in Computer Chess 2\">Advances in Computer Chess 2</a></li>\n<li> <a href=\"/Max_Bramer\" title=\"Max Bramer\">Max Bramer</a> (<b>1980</b>). <i>An Optimal Algorithm for KPK using Pattern Knowledge.</i> <a href=\"/Advances_in_Computer_Chess_2\" title=\"Advances in Computer Chess 2\">Advances in Computer Chess 2</a></li>\n<li> <a href=\"/Zdenek_Zdrahal\" title=\"Zdenek Zdrahal\">Zdenek Zdráhal</a>, <a href=\"/Ivan_Bratko\" title=\"Ivan Bratko\">Ivan Bratko</a>, <a href=\"/Alen_Shapiro\" title=\"Alen Shapiro\">Alen Shapiro</a> (<b>1981</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://comjnl.oxfordjournals.org/content/24/3/263.abstract\">Recognition of Complex Patterns Using Cellular Arrays</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://comjnl.oxfordjournals.org/content/24/3.toc\">The Computer Journal, Vol. 24, No. 3</a></li>\n<li> <a href=\"/Max_Bramer\" title=\"Max Bramer\">Max Bramer</a> (<b>1982</b>). <i>Pattern-Based Representations of Knowledge in the Game of Chess.</i> International Journal of Man-Machine Studies, Vol. 16.</li>\n<li> <a href=\"/Alen_Shapiro\" title=\"Alen Shapiro\">Alen Shapiro</a>, <a href=\"/Tim_Niblett\" title=\"Tim Niblett\">Tim Niblett</a> (<b>1982</b>). <i>Automatic Induction of Classification Rules for Chess End game.</i> <a href=\"/Advances_in_Computer_Chess_3\" title=\"Advances in Computer Chess 3\">Advances in Computer Chess 3</a></li>\n<li> <a href=\"/Ross_Quinlan\" title=\"Ross Quinlan\">Ross Quinlan</a> (<b>1983</b>). <i>Learning efficient classification procedures and their application to chess end games</i>. Machine Learning: An Artificial Intelligence Approach</li>\n<li> <a href=\"/Ivan_Bratko\" title=\"Ivan Bratko\">Ivan Bratko</a>, <a href=\"/Peter_Tancig\" title=\"Peter Tancig\">Peter Tancig</a>, <a href=\"/Simona_Tancig\" title=\"Simona Tancig\">Simona Tancig</a> (<b>1984</b>). <i><a href=\"/Simona_Tancig#ChessExperiment\" title=\"Simona Tancig\">Detection of Positional Patterns in Chess</a></i>. <a href=\"/ICGA_Journal#7_2\" title=\"ICGA Journal\">ICCA Journal, Vol. 7, No. 2</a> (abridged version)</li>\n<li> <a href=\"/Ivan_Bratko\" title=\"Ivan Bratko\">Ivan Bratko</a>, <a href=\"/Peter_Tancig\" title=\"Peter Tancig\">Peter Tancig</a>, <a href=\"/Simona_Tancig\" title=\"Simona Tancig\">Simona Tancig</a> (<b>1984,1986</b>). <i><a href=\"/Simona_Tancig#ChessExperiment\" title=\"Simona Tancig\">Detection of Positional Patterns in Chess</a></i>. <a href=\"/Advances_in_Computer_Chess_4\" title=\"Advances in Computer Chess 4\">Advances in Computer Chess 4</a> (full paper)</li>\n<li> <a href=\"/Ivan_Bratko\" title=\"Ivan Bratko\">Ivan Bratko</a> (<b>1985</b>). <i>Symbolic Derivation of Chess Patterns.</i> Progress in Artificial Intelligence (eds. L. Steels and J.A. Campbell), Ellis Horwood Ltd., Chichester, UK.</li>\n<li> <a href=\"/Peter_W._Frey\" title=\"Peter W. Frey\">Peter W. Frey</a> (<b>1986</b>). <i>Fuzzy Production Rules in Chess</i>. <a href=\"/ICGA_Journal#9_4\" title=\"ICGA Journal\">ICCA Journal, Vol. 9, No. 4</a></li>\n<li> <a href=\"/Laveen_Kanal\" title=\"Laveen Kanal\">Laveen N. Kanal</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/pers/hd/g/Gelsema:Edzard_S=\">Edzard S. Gelsema</a> (eds.) (<b>1986</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.elsevier.com/books/pattern-recognition-in-practice-ii/kanal/978-0-444-87877-9\">Pattern Recognition in Practice II</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Elsevier#Imprints\">North Holland</a></li>\n<li> <a href=\"/Kai-Fu_Lee\" title=\"Kai-Fu Lee\">Kai-Fu Lee</a>, <a href=\"/Sanjoy_Mahajan\" title=\"Sanjoy Mahajan\">Sanjoy Mahajan</a> (<b>1988</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.sciencedirect.com/science/article/pii/0004370288900768\">A Pattern Classification Approach to Evaluation Function Learning</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_%28journal%29\">Artificial Intelligence</a>, Vol. 36, No. 1</li>\n<li> <a href=\"/Laveen_Kanal\" title=\"Laveen Kanal\">Laveen N. Kanal</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/pers/hd/g/Gelsema:Edzard_S=\">Edzard S. Gelsema</a> (eds.) (<b>1988</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.elsevier.com/books/pattern-recognition-and-artificial-intelligence-towards-an-integration/kanal/978-0-444-87137-4\">Pattern Recognition and Artificial Intelligence, Towards an Integration</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Elsevier\">Elsevier</a></li>\n<li> <a href=\"/Robert_Levinson\" title=\"Robert Levinson\">Robert Levinson</a> (<b>1989</b>). <i>A Self-Learning, Pattern-Oriented Chess Program</i>. <a href=\"/ICGA_Journal#12_4\" title=\"ICGA Journal\">ICCA Journal, Vol. 12, No. 4</a></li>\n<li> <a href=\"/Roger_H%C3%BCnen\" title=\"Roger Hünen\">Roger Hünen</a> (<b>1989</b>). <i>Efficient Pattern Recognition in Large Game Trees</i>. <a href=\"/Advances_in_Computer_Chess_5\" title=\"Advances in Computer Chess 5\">Advances in Computer Chess 5</a></li>\n<li> <a href=\"/Hans_Berliner\" title=\"Hans Berliner\">Hans Berliner</a>, <a href=\"/Carl_Ebeling\" title=\"Carl Ebeling\">Carl Ebeling</a> (<b>1989</b>). <i>Pattern Knowledge and Search: The SUPREM Architecture.</i> Artificial Intelligence, Vol. 38, No. 2</li></ul>\n<dl><dd> Revised as <a href=\"/Hans_Berliner\" title=\"Hans Berliner\">Hans Berliner</a>, <a href=\"/Carl_Ebeling\" title=\"Carl Ebeling\">Carl Ebeling</a> (<b>1990</b>). <i>Hitech</i>. <a href=\"/Computers,_Chess,_and_Cognition\" title=\"Computers, Chess, and Cognition\">Computers, Chess, and Cognition</a></dd></dl>\n<h2><span class=\"mw-headline\" id=\"1990_...\">1990 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pattern_Recognition&amp;action=edit&amp;section=9\" title=\"Edit section: 1990 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Simon_Lucas\" title=\"Simon Lucas\">Simon Lucas</a> (<b>1991</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://eprints.soton.ac.uk/256263/\">Connectionist architectures for syntactic pattern recognition</a></i>. Ph.D. thesis, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/University_of_Southampton\">University of Southampton</a> </li>\n<li> <a href=\"/Eduardo_F._Morales\" title=\"Eduardo F. Morales\">Eduardo F. Morales</a> (<b>1992</b>). <i>First-Order Induction of Patterns in Chess</i>. Ph.D. Thesis, The Turing Institute, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/University_of_Strathclyde\">University of Strathclyde</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Glasgow\">Glasgow</a></li>\n<li> <a href=\"/Eduardo_F._Morales\" title=\"Eduardo F. Morales\">Eduardo F. Morales</a> (<b>1992</b>). <i>Learning Chess Patterns</i>. Inductive Logic Programming (ed. <a href=\"/Stephen_Muggleton\" title=\"Stephen Muggleton\">Stephen Muggleton</a>), Academic Press, The Apic Series, London, UK</li>\n<li> <a href=\"/index.php?title=Steven_Walczak&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Steven Walczak (page does not exist)\">Steven Walczak</a> (<b>1992</b>). <i>Pattern-Based Tactical Planning</i>. IJPRAI 6(5)</li>\n<li> <a href=\"/index.php?title=Steven_Walczak&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Steven Walczak (page does not exist)\">Steven Walczak</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cise.ufl.edu/~ddd/\">Douglas D. Dankel II</a> (<b>1993</b>). <i>Acquiring Tactical and Strategic Knowledge with a Generalized Method for Chunking of Game Pieces</i>. International Journal of Intelligent Systems, Vol. 8, No. 2</li>\n<li> <a href=\"/Laveen_Kanal\" title=\"Laveen Kanal\">Laveen Kanal</a> (<b>1993</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://dl.acm.org/citation.cfm?id=157088\">On Pattern, Categories and Alternate Realities</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pattern_Recognition_Letters\">Pattern Recognition Letters</a>, Vol. 14, No. 3, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.lnk.com/prl14.pdf\">pdf</a></li>\n<li> <a href=\"/Eduardo_F._Morales\" title=\"Eduardo F. Morales\">Eduardo F. Morales</a> (<b>1994</b>). <i>Learning Patterns for Playing Strategies</i>. <a href=\"/ICGA_Journal#17_1\" title=\"ICGA Journal\">ICCA Journal, Vol. 17, No. 1</a></li>\n<li> <a href=\"/Robert_Levinson\" title=\"Robert Levinson\">Robert Levinson</a>, <a href=\"/index.php?title=Gil_Fuchs&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Gil Fuchs (page does not exist)\">Gil Fuchs</a> (<b>1994</b>). <i>A Pattern-Weight Formulation of Search Knowledge</i>. UCSC-CRL-94-10, <a rel=\"nofollow\" class=\"external text\" href=\"http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.35.1027\">CiteSeerX</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/pers/hd/g/Gelsema:Edzard_S=\">Edzard S. Gelsema</a>, <a href=\"/Laveen_Kanal\" title=\"Laveen Kanal\">Laveen N. Kanal</a> (eds.)  (<b>1994</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://dl.acm.org/citation.cfm?id=561112\">Pattern Recognition in Practice IV:&#160;: Multiple Paradigms, Comparative Studies and Hybrid Systems</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Elsevier\">Elsevier</a></li>\n<li> <a href=\"/Reijer_Grimbergen\" title=\"Reijer Grimbergen\">Reijer Grimbergen</a> (<b>1996</b>). <i>Using Pattern Recognition and Selective Deepening to Solve Tsume Shogi</i>. <a href=\"/Conferences#GPW\" title=\"Conferences\">3rd Game Programming Workshop</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.43.7594\">CiteSeerX</a> <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/pers/hd/g/Gelsema:Edzard_S=\">Edzard S. Gelsema</a>, <a href=\"/Laveen_Kanal\" title=\"Laveen Kanal\">Laveen N. Kanal</a> (eds.)  (<b>1997</b>). <i>Pattern Recognition in Practice V</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pattern_Recognition_Letters\">Pattern Recognition Letters</a>, Vol 18, Nos. 11-13</li>\n<li> <a href=\"/Simon_Lucas\" title=\"Simon Lucas\">Simon Lucas</a> (<b>1997</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.bmva.org/bmvc/1997/papers/113/paper.htm\">Face recognition with the continuous n-tuple classifier</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/db/conf/bmvc/bmvc1997.html\">BMVC 1997</a></li>\n<li> <a href=\"/Fernand_Gobet\" title=\"Fernand Gobet\">Fernand Gobet</a>, <a href=\"/Herbert_Simon\" title=\"Herbert Simon\">Herbert Simon</a> (<b>1998</b>). <i>Pattern recognition makes search possible: Comments on Holding (1992)</i>. Psychological Research, Vol. 61, <a rel=\"nofollow\" class=\"external text\" href=\"http://v-scheiner.brunel.ac.uk/bitstream/2438/816/1/Paper_on_Holding.pdf\">pdf</a> <sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup></li>\n<li> <a href=\"/Hitoshi_Matsubara\" title=\"Hitoshi Matsubara\">Hitoshi Matsubara</a>, <a href=\"/index.php?title=Steven_Walczak&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Steven Walczak (page does not exist)\">Steven Walczak</a>, <a href=\"/Reijer_Grimbergen\" title=\"Reijer Grimbergen\">Reijer Grimbergen</a> (<b>1998</b>). <i>Analysis of important patterns in Shogi</i>. The 15th Annual Meeting of the Japanese Cognitive Science Society, (Nagoya, Japan), 136-137. (in Japanese/Kanji)</li>\n<li> <a href=\"/Lev_Finkelstein\" title=\"Lev Finkelstein\">Lev Finkelstein</a>, <a href=\"/Shaul_Markovitch\" title=\"Shaul Markovitch\">Shaul Markovitch</a> (<b>1998</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.technion.ac.il/%7Eshaulm/papers/abstracts/Finkelstein-1998-LPC.html\">Learning to Play Chess Selectively by Acquiring Move Patterns.</a></i> <a href=\"/ICGA_Journal#21_2\" title=\"ICGA Journal\">ICCA Journal, Vol. 21, No. 2</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.technion.ac.il/%7Eshaulm/papers/pdf/Finkelstein-Markovitch-icca1998.pdf\">pdf</a></li>\n<li> <a href=\"/Erik_van_der_Werf\" title=\"Erik van der Werf\">Erik van der Werf</a> (<b>1999</b>). <i>Non-linear target based feature extraction by diabolo networks.</i> Masters thesis. Pattern Recognition Group, Department of Applied Physics, Faculty of Applied Sciences, <a href=\"/Delft_University_of_Technology\" title=\"Delft University of Technology\">Delft University of Technology</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://erikvanderwerf.tengen.nl/pubdown/diabolic_thesis.pdf\">pdf</a></li>\n<li> <a href=\"/Kieran_Greer\" title=\"Kieran Greer\">Kieran Greer</a>, <a href=\"/index.php?title=Piyush_Ojha&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Piyush Ojha (page does not exist)\">Piyush Ojha</a>, <a href=\"/index.php?title=David_A._Bell&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"David A. Bell (page does not exist)\">David A. Bell</a> (<b>1999</b>). <i>A Pattern-Oriented Approach to Move Ordering: the Chessmaps Heuristic</i>. <a href=\"/ICGA_Journal#22_1\" title=\"ICGA Journal\">ICCA Journal, Vol. 22, No. 1</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pattern_Recognition&amp;action=edit&amp;section=10\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Miroslav_Kubat\" title=\"Miroslav Kubat\">Miroslav Kubat</a>, <a href=\"/index.php?title=Jan_%C5%BDi%C5%BEka&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Jan Žižka (page does not exist)\">Jan Žižka</a> (<b>2000</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/chapter/10.1007%2F3-540-45049-1_52\">Learning Middle Game Patterns in Chess: A Case Study</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Lecture_Notes_in_Computer_Science\">Lecture Notes in Computer Science</a>, Vol. 1821, <a rel=\"nofollow\" class=\"external text\" href=\"https://de.wikipedia.org/wiki/Springer_Science%2BBusiness_Media\">Springer</a></li>\n<li> <a href=\"/Miroslav_Kubat\" title=\"Miroslav Kubat\">Miroslav Kubat</a> (<b>2000</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://journals.cambridge.org/action/displayAbstract?fromPage=online&amp;aid=58577\">Designing neural network architectures for pattern recognition</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://dblp2.uni-trier.de/db/journals/ker/ker15.html\">The Knowledge Engineering Review, Vol. 15</a>, No. 2</li>\n<li> <a href=\"/index.php?title=Ari_Shapiro&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Ari Shapiro (page does not exist)\">Ari Shapiro</a>, <a href=\"/index.php?title=Gil_Fuchs&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Gil Fuchs (page does not exist)\">Gil Fuchs</a>, <a href=\"/Robert_Levinson\" title=\"Robert Levinson\">Robert Levinson</a> (<b>2002</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/chapter/10.1007/978-3-540-40031-8_4\">Learning a Game Strategy Using Pattern-Weights and Self-play</a></i>. <a href=\"/CG_2002\" title=\"CG 2002\">CG 2002</a></li>\n<li> R. Grekovs (<b>2002</b>). <i>Methods of Fuzzy Pattern Recognition</i> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Riga_Technical_University\">Riga Technical University</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.rtu.lv/dssg/download/publications/2002/Grekov-RTU-2002.ps.gz%7CMethods\">ps</a>, covers Fuzzy Kora algorithm</li>\n<li> <a href=\"/Marcel_van_Kervinck\" title=\"Marcel van Kervinck\">Marcel van Kervinck</a> (<b>2002</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://marcelk.net/thesis/talk-eval-rookie/sld001.htm\">A pattern-recognition strategy for chess position evaluation</a></i>. Slides from <i>The design and implementation of the Rookie 2.0 Chess Playing Program</i>. <sup id=\"cite_ref-9\" class=\"reference\"><a href=\"#cite_note-9\">&#91;9&#93;</a></sup></li>\n<li> <a href=\"/index.php?title=Jan_%C5%BDi%C5%BEka&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Jan Žižka (page does not exist)\">Jan Žižka</a>, <a href=\"/index.php?title=Michal_M%C3%A1dr&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Michal Mádr (page does not exist)\">Michal Mádr</a> (<b>2003</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.muni.cz/research/publications/490371\">Learning Representative Patterns from Real Chess Positions: A Case Study</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://dblp.uni-trier.de/db/conf/iicai/iicai2003.html#ZizkaM03\">IICAI 2003</a></li>\n<li> <a href=\"/Christopher_Chabris\" title=\"Christopher Chabris\">Christopher Chabris</a>, <a href=\"/index.php?title=Eliot_Hearst&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Eliot Hearst (page does not exist)\">Eliot Hearst</a> (<b>2003</b>). <i>Mentalizing, Pattern Recognition and Forward Search: Effects of Playing Speed and Sight of the Position on Grandmaster Chess Errors</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Cognitive_Science_Society\">Cognitive Science</a>, Vol. 27</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://vislab.ucr.edu/PEOPLE/BIR_BHANU/index.php\">Bir Bhanu</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.bham.ac.uk/~wbl/biblio/gp-html/YingqiangLin.html\">Yingqiang Lin</a>, <a href=\"/Krzysztof_Krawiec\" title=\"Krzysztof Krawiec\">Krzysztof Krawiec</a> (<b>2005</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.springer.com/computer/image+processing/book/978-0-387-21295-1\">Evolutionary Synthesis of Pattern Recognition Systems</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Springer_Science%2BBusiness_Media\">Springer</a>, New York</li>\n<li> <a href=\"/Rajjan_Shinghal\" title=\"Rajjan Shinghal\">Rajjan Shinghal</a> (<b>2006</b>) <i>Pattern Recognition, Techniques and Applications</i>. Oxford University Press ISBN-13: 978-0195676853, available from <a rel=\"nofollow\" class=\"external text\" href=\"http://www.amazon.ca/Pattern-Recognition-Applications-Rajjan-Shinghal/dp/0195676858\">amazon.ca</a></li>\n<li> <a href=\"/Chun-Bin_Hsu\" title=\"Chun-Bin Hsu\">Chun-Bin Hsu</a> (<b>2006</b>). <i>Pattern Recognition in Chinese Chess</i>. Master thesis, <a href=\"/National_Chiao_Tung_University\" title=\"National Chiao Tung University\">National Chiao Tung University</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://ir.nctu.edu.tw/bitstream/11536/78749/1/753801.pdf\">pdf</a> (Chinese)</li>\n<li> <a href=\"/index.php?title=Antonio_Fern%C3%A1ndez&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Antonio Fernández (page does not exist)\">Antonio Fernández</a>, <a href=\"/index.php?title=Antonio_Salmer%C3%B3n&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Antonio Salmerón (page does not exist)\">Antonio Salmerón</a> (<b>2008</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.researchgate.net/publication/220647044_BayesChess_A_computer_chess_program_based_on_Bayesian_networks\">BayesChess: A computer chess program based on Bayesian networks</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pattern_Recognition_Letters\">Pattern Recognition Letters</a>, Vol. 29, No. 8</li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pattern_Recognition&amp;action=edit&amp;section=11\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/index.php?title=Merim_Bilali%C4%87&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Merim Bilalić (page does not exist)\">Merim Bilalić</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://scholar.google.com/citations?user=q_X-IPoAAAAJ&amp;hl=de\">Robert Langner</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/pers/hd/e/Erb:Michael.html\">Michael Erb</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://rwth-aachen.academia.edu/WolfgangGrodd\">Wolfgang Grodd</a> (<b>2010</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://pubget.com/paper/21038986/Mechanisms_and_neural_basis_of_object_and_pattern_recognition__a_study_with_chess_experts\">Mechanisms and neural basis of object and pattern recognition: a study with chess experts</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Journal_of_Experimental_Psychology\">Journal of Experimental Psychology General</a>, Vol. 139, No. 4</li>\n<li> <a href=\"/Abdallah_Saffidine\" title=\"Abdallah Saffidine\">Abdallah Saffidine</a>, <a href=\"/index.php?title=Nicolas_Jouandeau&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Nicolas Jouandeau (page does not exist)\">Nicolas Jouandeau</a>, <a href=\"/Tristan_Cazenave\" title=\"Tristan Cazenave\">Tristan Cazenave</a> (<b>2011</b>). <i>Solving breakthrough with Race Patterns and Job-Level Proof Number Search</i>. <a href=\"/Advances_in_Computer_Games_13\" title=\"Advances in Computer Games 13\">Advances in Computer Games 13</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.lamsade.dauphine.fr/~cazenave/papers/solving.pdf\">pdf</a>&#160;» <a href=\"/Breakthrough_(Game)\" title=\"Breakthrough (Game)\">Breakthrough (Game)</a>, <a href=\"/Proof-Number_Search\" title=\"Proof-Number Search\">Proof-Number Search</a></li>\n<li> <a href=\"/Manuel_Crist%C3%B3bal_L%C3%B3pez-Michelone\" title=\"Manuel Cristóbal López-Michelone\">Manuel Cristóbal López-Michelone</a>, <a href=\"/Jorge_Luis_Ortega-Arjona\" title=\"Jorge Luis Ortega-Arjona\">Jorge Luis Ortega-Arjona</a> (<b>2016</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.semanticscholar.org/paper/Patterns-for-the-game-of-chess-L%C3%B3pez-Michelone-Ortega-Arjona/3b7d115e187dbefc55f0979ba87908b6fe421ecc\">Patterns for the game of chess</a></i>. SugarLoaf PLoP'16</li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pattern_Recognition&amp;action=edit&amp;section=12\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Manuel_Crist%C3%B3bal_L%C3%B3pez-Michelone\" title=\"Manuel Cristóbal López-Michelone\">Manuel Cristóbal López-Michelone</a>, <a href=\"/Jorge_Luis_Ortega-Arjona\" title=\"Jorge Luis Ortega-Arjona\">Jorge Luis Ortega-Arjona</a> (<b>2020</b>). <i>A description language for chess</i>. <a href=\"/ICGA_Journal#42_1\" title=\"ICGA Journal\">ICGA Journal, Vol. 42, No. 1</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pattern_Recognition&amp;action=edit&amp;section=13\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=354850\">Symbolic: On patterns</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 16, 2004&#160;» <a href=\"/Symbolic\" title=\"Symbolic\">Symbolic</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=356967\">Symbolic: First pattern instance generation</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 27, 2004</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=357145\">Symbolic: Demo: a few more bootstrap patterns</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 29, 2004</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=47250\">positional patterns for \"human\" engine</a> by <a href=\"/Pawel_Koziol\" title=\"Pawel Koziol\">Pawel Koziol</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 16, 2013</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pattern_Recognition&amp;action=edit&amp;section=14\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pattern_recognition\">Pattern recognition from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pattern_recognition_%28psychology%29\">Pattern recognition (psychology) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pattern_recognition_%28disambiguation%29\">Pattern recognition (disambiguation) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pattern_Recognition_%28novel%29\">Pattern Recognition (novel) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pattern\">Pattern from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pattern_matching\">Pattern matching from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Prior_knowledge_for_pattern_recognition\">Prior knowledge for pattern recognition from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Statistical_classification\">Statistical classification from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Naive_Bayes_classifier\">Naive Bayes classifier from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://37steps.com/37-steps/\">Discover Patterns and Learn from Data - Pattern Recognition Tools</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://dbacl.sourceforge.net/spam_chess-1.html\">Can a Bayesian spam filter play chess?</a> by <a rel=\"nofollow\" class=\"external text\" href=\"http://www.lbreyer.com/\">Laird A. Breyer</a> <sup id=\"cite_ref-10\" class=\"reference\"><a href=\"#cite_note-10\">&#91;10&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Bongard_problem\">Bongard problem from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.foundalis.com/res/bps/bpidx.htm\">Index of Bongard Problems</a> by <a rel=\"nofollow\" class=\"external text\" href=\"http://www.foundalis.com/index.html\">Harry Foundalis</a></li>\n<li> <a href=\"/Category:Marilyn_Mazur\" title=\"Category:Marilyn Mazur\">Marilyn Mazur's</a> \"Eksistens\" feat. <a rel=\"nofollow\" class=\"external text\" href=\"http://tritonus.dk/en/\">Tritonus Choir</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Statens_Museum_for_Kunst\">Statens Museum for Kunst</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Copenhagen\">Copenhagen</a>, Denmark, February 2013, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Hans_Ulrik\">Hans Ulrik</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.makiko.dk/\">Makiko Hirabayashi</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.klavshovman.dk/\">Klavs Hovman</a>, Marilyn Mazur</dd>\n<dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/Wly_Gz-JbJ0?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pattern_Recognition&amp;action=edit&amp;section=15\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\">Clipping from <a rel=\"nofollow\" class=\"external text\" href=\"http://melmolly.deviantart.com/art/Chess-pattern-177292334\">Chess pattern</a> by <a rel=\"nofollow\" class=\"external text\" href=\"http://melmolly.deviantart.com/\">~Melmolly on deviantART</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.xara.com\">Graphics Software by Xara</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pattern_recognition\">Pattern recognition from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a href=\"/Peter_W._Frey\" title=\"Peter W. Frey\">Peter W. Frey</a> (<b>1986</b>). <i>Fuzzy Production Rules in Chess</i>. <a href=\"/ICGA_Journal#9_4\" title=\"ICGA Journal\">ICCA Journal, Vol. 9, No. 4</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Ratio_Club\">Ratio Club from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Royal_Radar_Establishment\">Royal Radar Establishment from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.foundalis.com/res/Mikhail_Moiseevich_Bongard.html\">Mikhail Moiseevich Bongard - Михаил Моисеевич Бонгард</a></span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Tsumeshogi\">Tsumeshogi from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\"><a href=\"/index.php?title=Dennis_H._Holding&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Dennis H. Holding (page does not exist)\">Dennis H. Holding</a> (<b>1992</b>). <i>Theories of Chess Skill</i>. Psychological Research, Vol. 54, No. 1</span>\n</li>\n<li id=\"cite_note-9\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-9\">↑</a></span> <span class=\"reference-text\"><a href=\"/Marcel_van_Kervinck\" title=\"Marcel van Kervinck\">Marcel van Kervinck</a> (<b>2002</b>). <i>The design and implementation of the Rookie 2.0 Chess Playing Program</i>. Masters Thesis, <a rel=\"nofollow\" class=\"external text\" href=\"http://alexandria.tue.nl/extra2/afstversl/wsk-i/kervinck2002.pdf\">pdf</a></span>\n</li>\n<li id=\"cite_note-10\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-10\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Bayesian_spam_filtering\">Bayesian spam filtering - Wikipedia</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Knowledge\" title=\"Knowledge\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301041929\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.034 seconds\nReal time usage: 0.036 seconds\nPreprocessor visited node count: 208/1000000\nPreprocessor generated node count: 434/1000000\nPost‐expand include size: 27/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1317-0!canonical and timestamp 20260301041929 and revision id 20247\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Marilyn_Mazur"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ACM"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Abdallah Saffidine"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 2"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 3"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 4"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 5"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Games 13"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Albert Zobrist"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alen Shapiro"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Backtracking"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Breakthrough (Game)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CG 2002"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CHUMP"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Carl Ebeling"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Position"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chin-Liang Chang"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Christopher Chabris"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chun-Bin Hsu"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chunker"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chunking"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cognition"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Compendium"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computers, Chess, and Cognition"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Conferences"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Danny Kopec"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David Wilkins"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Delft University of Technology"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Design Principles"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Donald Michie"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Eduardo F. Morales"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Erik van der Werf"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation Patterns"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fernand Gobet"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fianchetto"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Frederic Roy Carlson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hans Berliner"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Herbert Simon"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hitoshi Matsubara"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA Journal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "IEEE"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Interior Node Recognizer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ivan Bratko"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jacques Pitrat"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "James R. Slagle"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jorge Luis Ortega-Arjona"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kai-Fu Lee"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kieran Greer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "King Pattern"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "King Safety"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Knight Pattern"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Knowledge"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Krzysztof Krawiec"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Laveen Kanal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Learning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lev Finkelstein"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Manuel Cristóbal López-Michelone"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marcel van Kervinck"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mate at a Glance"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mathematician"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Max Bramer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mike Clarke"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Miroslav Kubat"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Morph"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "National Chiao Tung University"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Neural Networks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Occupancy"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Oracle"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Outposts"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Paradise"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Patrick Winston"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawel Koziol"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Pattern and Properties"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter Tancig"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter W. Frey"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Piece Recognition"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pieces"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Planning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Proof-Number Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rajjan Shinghal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Reijer Grimbergen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Returning Bishop"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Richard C. T. Lee"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Levinson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Roger Hünen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ross Quinlan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sanjoy Mahajan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Shaul Markovitch"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Simon Lucas"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Simona Tancig"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Square Control"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Squares"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stanford University"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stephen Muggleton"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Steven Edwards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Symbolic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tim Niblett"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Trapped Pieces"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tristan Cazenave"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "USC CP"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "University of California, Berkeley"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Walter R. Reitman"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Woodrow W. Bledsoe"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Zdenek Zdrahal"
+      },
+      {
+        "ns": 0,
+        "*": "Dennis H. Holding"
+      },
+      {
+        "ns": 0,
+        "*": "Psychology"
+      },
+      {
+        "ns": 0,
+        "*": "MACH"
+      },
+      {
+        "ns": 0,
+        "*": "Bruce Wilcox"
+      },
+      {
+        "ns": 0,
+        "*": "Rainer Kurz"
+      },
+      {
+        "ns": 0,
+        "*": "Steven Walczak"
+      },
+      {
+        "ns": 0,
+        "*": "Gil Fuchs"
+      },
+      {
+        "ns": 0,
+        "*": "Piyush Ojha"
+      },
+      {
+        "ns": 0,
+        "*": "David A. Bell"
+      },
+      {
+        "ns": 0,
+        "*": "Jan Žižka"
+      },
+      {
+        "ns": 0,
+        "*": "Ari Shapiro"
+      },
+      {
+        "ns": 0,
+        "*": "Michal Mádr"
+      },
+      {
+        "ns": 0,
+        "*": "Eliot Hearst"
+      },
+      {
+        "ns": 0,
+        "*": "Antonio Fernández"
+      },
+      {
+        "ns": 0,
+        "*": "Antonio Salmerón"
+      },
+      {
+        "ns": 0,
+        "*": "Merim Bilalić"
+      },
+      {
+        "ns": 0,
+        "*": "Nicolas Jouandeau"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Marilyn Mazur"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Chess Pattern",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Pattern_Recognition",
+        "byteoffset": 1232,
+        "anchor": "Chess_Pattern"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Chess Programs",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Pattern_Recognition",
+        "byteoffset": 2470,
+        "anchor": "Chess_Programs"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Pattern_Recognition",
+        "byteoffset": 2565,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Pattern_Recognition",
+        "byteoffset": 2817,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1950 ...",
+        "number": "4.1",
+        "index": "5",
+        "fromtitle": "Pattern_Recognition",
+        "byteoffset": 2833,
+        "anchor": "1950_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1960 ...",
+        "number": "4.2",
+        "index": "6",
+        "fromtitle": "Pattern_Recognition",
+        "byteoffset": 3652,
+        "anchor": "1960_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1970 ...",
+        "number": "4.3",
+        "index": "7",
+        "fromtitle": "Pattern_Recognition",
+        "byteoffset": 4208,
+        "anchor": "1970_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1980 ...",
+        "number": "4.4",
+        "index": "8",
+        "fromtitle": "Pattern_Recognition",
+        "byteoffset": 7420,
+        "anchor": "1980_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1990 ...",
+        "number": "4.5",
+        "index": "9",
+        "fromtitle": "Pattern_Recognition",
+        "byteoffset": 10912,
+        "anchor": "1990_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "4.6",
+        "index": "10",
+        "fromtitle": "Pattern_Recognition",
+        "byteoffset": 15115,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "4.7",
+        "index": "11",
+        "fromtitle": "Pattern_Recognition",
+        "byteoffset": 18443,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "4.8",
+        "index": "12",
+        "fromtitle": "Pattern_Recognition",
+        "byteoffset": 19661,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "5",
+        "index": "13",
+        "fromtitle": "Pattern_Recognition",
+        "byteoffset": 19847,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "6",
+        "index": "14",
+        "fromtitle": "Pattern_Recognition",
+        "byteoffset": 20430,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "7",
+        "index": "15",
+        "fromtitle": "Pattern_Recognition",
+        "byteoffset": 22480,
+        "anchor": "References"
+      }
+    ]
+  }
+}

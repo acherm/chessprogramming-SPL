@@ -1,0 +1,56 @@
+{
+  "title": "KC Chess",
+  "url": "https://www.chessprogramming.org/KC_Chess",
+  "source_type": "api",
+  "retrieved_at": "2026-03-01T15:08:09.416875+00:00",
+  "content_hash": "08ca00d5b8d17a97627b5c06e500397c3e6f0f819406c30b6f6a4ae26e515139",
+  "text": "Home * Engines * KC Chess KC Chess , a chess program written by R. Kevin Phillips and Craig S. Bruce in 1990 for their undergraduate final project at the University of New Brunswick [1] . KC Chess is written in Turbo Pascal to run under MS-DOS computers . It has a Mailbox board representation, its search its based on static evaluation of move score differences rather than positions and passes a bound for backward pruning, missing the deep cutoffs of alpha-beta . There was no iterative deepening nor quiescence search , MaxDepth aka level of play is preset at initialization time somehow based on the expected time to use. Contents 1 Pseudo Code 2 Summary 3 See also 4 Forum Posts 5 External Links 6 References Pseudo Code [ edit ] Source code and report of the program with pseudo code are available from Craig Bruce's sites [2] CutoffSearch (Player, Depth, CutoffValue); If Depth = 0 Then return (0); Else BestScore := -infinity; Generate the move list for Player as per current board setup; For each legal move in the move list do Make the current move and get MoveScore; SubTreeCutoffValue := MoveScore - BestScore; Score := MoveScore - CutoffSearch (enemy of Player, Depth - 1, SubTreeCutoffValue); UnMake the current move; If Score > BestScore then BestScore := Score; If BestScore >= CutoffValue then exit the For loop; End For; Return (BestScore); End If; End CutoffSearch; Summary [ edit ] Excerpt from the readme file [3] The chess program is 3417 lines long and the project took 220 hours to complete. The work was carried out from JAN - APR 1990 as our CS 4993 undergraduate project. The program may be distributed freely and is considered Public Domain software. A 30 page written report was also produced and submitted with the rest of the work to Dr. J. D. Horton [4] who was our project supervisor. Excerpt from the report [5] : The greatest limitation of the program is the extremely simple evaluation of a given move. The score is determined exclusively by the number of value points assigned to the piece that is taken. If no piece is taken then no points are awarded. As implemented, the positional evaluation plays only a small roll in selecting a move. A better positional evaluator, which takes into account such things as attack strategy and special situations requiring special actions, etc. should be combined with a better capture value to calculate the value at all nodes in the search tree. A better capture value would take into account the fact that the material value of the piece varies with the stage and balance of the game. The combination of material and position values should be consistent with the strategy and circumstances of the game. Of course this was beyond the scope of this project (not to mention our own skill and knowledge of chess). This could be a future enhancement. Another deficiency is with the search tree algorithm itself. Since it only searches to a certain depth, it may attempt to push an inevitable loss out of its sight by sacrificing a less valuable piece to 'save' the greater valued one. This is known as the Horizon Effect and is an inevitable consequence of the limited search. The only solution is to increase the search depth. This often would only serve to move the horizon a little father down the road. The solution to this problem is also beyond the scope of this project. See also [ edit ] Source Sample Forum Posts [ edit ] Working with moves or with positions by Guillem Barnolas, rgcc , February 22, 1998 » Make Move , Unmake Move External Links [ edit ] KC Chess: Kevin & Craig's Chess Program ( Internet Archive ) KC-Chess Report pieces.txt References [ edit ] ↑ KC Chess: Kevin & Craig's Chess Program ( Internet Archive ) ↑ KC-Chess Report - 4.5. SEARCH-TREE PRUNING ( Internet Archive ) ↑ readme.txt ( Internet Archive ) ↑ Joseph D Horton ↑ KC-Chess Report - 6. PROGRAM LIMITATIONS ( Internet Archive ) Up one level",
+  "headings": [
+    "Contents",
+    "Pseudo Code[edit]",
+    "Summary[edit]",
+    "See also[edit]",
+    "Forum Posts[edit]",
+    "External Links[edit]",
+    "References[edit]"
+  ],
+  "links": [
+    "Alpha-Beta",
+    "Beta-Cutoff",
+    "Bound",
+    "Computer Chess Forums",
+    "Craig S. Bruce",
+    "Engines",
+    "Horizon Effect",
+    "IBM PC",
+    "Iterative Deepening",
+    "MS-DOS",
+    "Mailbox",
+    "Main Page",
+    "Make Move",
+    "Moves",
+    "Pascal",
+    "Quiescence Search",
+    "R. Kevin Phillips",
+    "Score",
+    "Search",
+    "Unmake Move",
+    "index.php"
+  ],
+  "bold_terms": [
+    "Home * Engines * KC Chess",
+    "KC Chess",
+    "Up one level"
+  ],
+  "categories": [
+    "8086",
+    "Acronym",
+    "Chess_Suffix",
+    "DosEngine",
+    "Open_Source",
+    "Pascal",
+    "Thesis"
+  ],
+  "page_type": "technique",
+  "raw_payload_path": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/data/chessprogramming_cache/raw/KC_Chess.api.json"
+}

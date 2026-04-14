@@ -1,0 +1,352 @@
+{
+  "players": [
+    {
+      "name": "elo_variant_fixed_01",
+      "kind": "variant",
+      "cmd": "outputs/proper_elo_tournament_best2_quick_v2/variant_bins/elo_variant_fixed_01",
+      "selected_feature_count": 20,
+      "selected_features": [
+        "Alpha-Beta",
+        "Aspiration Windows",
+        "Bitboards",
+        "Castling",
+        "En Passant",
+        "Evaluation",
+        "FEN",
+        "Fifty-Move Rule",
+        "Futility Pruning",
+        "Legal Move Generation",
+        "Magic Bitboards",
+        "Make Move",
+        "Move Generation",
+        "Pawn Structure",
+        "Piece-Square Tables",
+        "Pseudo-Legal Move Generation",
+        "Static Exchange Evaluation",
+        "Threefold Repetition",
+        "UCI",
+        "Unmake Move"
+      ],
+      "config_path": "outputs/best_variant_search/candidate_configs/candidate_01.json",
+      "uci_options": [],
+      "anchor_elo": null
+    },
+    {
+      "name": "elo_variant_fixed_02",
+      "kind": "variant",
+      "cmd": "outputs/proper_elo_tournament_best2_quick_v2/variant_bins/elo_variant_fixed_02",
+      "selected_feature_count": 25,
+      "selected_features": [
+        "Alpha-Beta",
+        "Bitboards",
+        "Castling",
+        "Copy-Make",
+        "Delta Pruning",
+        "En Passant",
+        "Evaluation",
+        "Fifty-Move Rule",
+        "Legal Move Generation",
+        "Make Move",
+        "Move Generation",
+        "Negamax",
+        "Opening Book",
+        "Pawn Structure",
+        "Piece Lists",
+        "Pondering",
+        "Principal Variation Search",
+        "Quiescence Search",
+        "Replacement Schemes",
+        "Static Exchange Evaluation",
+        "Threefold Repetition",
+        "Time Management",
+        "Transposition Table",
+        "UCI",
+        "Unmake Move"
+      ],
+      "config_path": "outputs/best_variant_search/candidate_configs/candidate_02.json",
+      "uci_options": [],
+      "anchor_elo": null
+    },
+    {
+      "name": "stockfish_1320",
+      "kind": "stockfish",
+      "cmd": "/opt/homebrew/Cellar/stockfish/18/bin/stockfish",
+      "selected_feature_count": 4,
+      "selected_features": [
+        "Stockfish",
+        "Skill Level=1",
+        "UCI_Elo=1320",
+        "UCI_LimitStrength=true"
+      ],
+      "config_path": "",
+      "uci_options": [
+        "option.Skill Level=1",
+        "option.UCI_LimitStrength=true",
+        "option.UCI_Elo=1320"
+      ],
+      "anchor_elo": 1320.0
+    },
+    {
+      "name": "stockfish_1800",
+      "kind": "stockfish",
+      "cmd": "/opt/homebrew/Cellar/stockfish/18/bin/stockfish",
+      "selected_feature_count": 4,
+      "selected_features": [
+        "Stockfish",
+        "Skill Level=6",
+        "UCI_Elo=1800",
+        "UCI_LimitStrength=true"
+      ],
+      "config_path": "",
+      "uci_options": [
+        "option.Skill Level=6",
+        "option.UCI_LimitStrength=true",
+        "option.UCI_Elo=1800"
+      ],
+      "anchor_elo": 1800.0
+    },
+    {
+      "name": "stockfish_2150",
+      "kind": "stockfish",
+      "cmd": "/opt/homebrew/Cellar/stockfish/18/bin/stockfish",
+      "selected_feature_count": 4,
+      "selected_features": [
+        "Stockfish",
+        "Skill Level=10",
+        "UCI_Elo=2150",
+        "UCI_LimitStrength=true"
+      ],
+      "config_path": "",
+      "uci_options": [
+        "option.Skill Level=10",
+        "option.UCI_LimitStrength=true",
+        "option.UCI_Elo=2150"
+      ],
+      "anchor_elo": 2150.0
+    },
+    {
+      "name": "stockfish_2500",
+      "kind": "stockfish",
+      "cmd": "/opt/homebrew/Cellar/stockfish/18/bin/stockfish",
+      "selected_feature_count": 4,
+      "selected_features": [
+        "Stockfish",
+        "Skill Level=20",
+        "UCI_Elo=2500",
+        "UCI_LimitStrength=true"
+      ],
+      "config_path": "",
+      "uci_options": [
+        "option.Skill Level=20",
+        "option.UCI_LimitStrength=true",
+        "option.UCI_Elo=2500"
+      ],
+      "anchor_elo": 2500.0
+    }
+  ],
+  "params": {
+    "variant_count": 2,
+    "variant_configs": [
+      "outputs/best_variant_search/candidate_configs/candidate_01.json",
+      "outputs/best_variant_search/candidate_configs/candidate_02.json"
+    ],
+    "depth": 5,
+    "rounds": 1,
+    "games_per_encounter": 1,
+    "concurrency": 2,
+    "maxmoves": 140,
+    "draw_movenumber": 30,
+    "draw_movecount": 8,
+    "draw_score": 20,
+    "resign_movecount": 4,
+    "resign_score": 900,
+    "seed": 20260305
+  },
+  "cutechess_command": [
+    "cutechess-cli",
+    "-engine",
+    "name=elo_variant_fixed_01",
+    "cmd=outputs/proper_elo_tournament_best2_quick_v2/variant_bins/elo_variant_fixed_01",
+    "proto=uci",
+    "-engine",
+    "name=elo_variant_fixed_02",
+    "cmd=outputs/proper_elo_tournament_best2_quick_v2/variant_bins/elo_variant_fixed_02",
+    "proto=uci",
+    "-engine",
+    "name=stockfish_1320",
+    "cmd=/opt/homebrew/Cellar/stockfish/18/bin/stockfish",
+    "proto=uci",
+    "option.Skill Level=1",
+    "option.UCI_LimitStrength=true",
+    "option.UCI_Elo=1320",
+    "-engine",
+    "name=stockfish_1800",
+    "cmd=/opt/homebrew/Cellar/stockfish/18/bin/stockfish",
+    "proto=uci",
+    "option.Skill Level=6",
+    "option.UCI_LimitStrength=true",
+    "option.UCI_Elo=1800",
+    "-engine",
+    "name=stockfish_2150",
+    "cmd=/opt/homebrew/Cellar/stockfish/18/bin/stockfish",
+    "proto=uci",
+    "option.Skill Level=10",
+    "option.UCI_LimitStrength=true",
+    "option.UCI_Elo=2150",
+    "-engine",
+    "name=stockfish_2500",
+    "cmd=/opt/homebrew/Cellar/stockfish/18/bin/stockfish",
+    "proto=uci",
+    "option.Skill Level=20",
+    "option.UCI_LimitStrength=true",
+    "option.UCI_Elo=2500",
+    "-each",
+    "depth=5",
+    "tc=inf",
+    "-tournament",
+    "round-robin",
+    "-rounds",
+    "1",
+    "-games",
+    "1",
+    "-concurrency",
+    "2",
+    "-maxmoves",
+    "140",
+    "-draw",
+    "movenumber=30",
+    "movecount=8",
+    "score=20",
+    "-resign",
+    "movecount=4",
+    "score=900",
+    "-openings",
+    "file=outputs/proper_elo_tournament_best2_quick_v2/openings.pgn",
+    "format=pgn",
+    "order=random",
+    "policy=encounter",
+    "plies=8",
+    "-repeat",
+    "-srand",
+    "20260305",
+    "-pgnout",
+    "outputs/proper_elo_tournament_best2_quick_v2/games.pgn",
+    "min",
+    "-recover"
+  ],
+  "game_count": 15,
+  "standings": [
+    {
+      "player": "stockfish_2500",
+      "kind": "stockfish",
+      "games": 5,
+      "wins": 5,
+      "draws": 0,
+      "losses": 0,
+      "score": 5.0,
+      "score_pct": 100.0
+    },
+    {
+      "player": "stockfish_2150",
+      "kind": "stockfish",
+      "games": 5,
+      "wins": 4,
+      "draws": 0,
+      "losses": 1,
+      "score": 4.0,
+      "score_pct": 80.0
+    },
+    {
+      "player": "stockfish_1800",
+      "kind": "stockfish",
+      "games": 5,
+      "wins": 3,
+      "draws": 0,
+      "losses": 2,
+      "score": 3.0,
+      "score_pct": 60.0
+    },
+    {
+      "player": "elo_variant_fixed_01",
+      "kind": "variant",
+      "games": 5,
+      "wins": 1,
+      "draws": 0,
+      "losses": 4,
+      "score": 1.0,
+      "score_pct": 20.0
+    },
+    {
+      "player": "elo_variant_fixed_02",
+      "kind": "variant",
+      "games": 5,
+      "wins": 1,
+      "draws": 0,
+      "losses": 4,
+      "score": 1.0,
+      "score_pct": 20.0
+    },
+    {
+      "player": "stockfish_1320",
+      "kind": "stockfish",
+      "games": 5,
+      "wins": 1,
+      "draws": 0,
+      "losses": 4,
+      "score": 1.0,
+      "score_pct": 20.0
+    }
+  ],
+  "elo_estimates": [
+    {
+      "player": "stockfish_2500",
+      "kind": "stockfish",
+      "elo_estimate": 2500.0,
+      "elo_ci95": "",
+      "elo_source": "anchor_stockfish"
+    },
+    {
+      "player": "stockfish_2150",
+      "kind": "stockfish",
+      "elo_estimate": 2150.0,
+      "elo_ci95": "",
+      "elo_source": "anchor_stockfish"
+    },
+    {
+      "player": "stockfish_1800",
+      "kind": "stockfish",
+      "elo_estimate": 1800.0,
+      "elo_ci95": "",
+      "elo_source": "anchor_stockfish"
+    },
+    {
+      "player": "stockfish_1320",
+      "kind": "stockfish",
+      "elo_estimate": 1320.0,
+      "elo_ci95": "",
+      "elo_source": "anchor_stockfish"
+    },
+    {
+      "player": "elo_variant_fixed_01",
+      "kind": "variant",
+      "elo_estimate": 1281.2,
+      "elo_ci95": 459.0,
+      "elo_source": "mle_anchored_logistic"
+    },
+    {
+      "player": "elo_variant_fixed_02",
+      "kind": "variant",
+      "elo_estimate": 1281.2,
+      "elo_ci95": 459.0,
+      "elo_source": "mle_anchored_logistic"
+    }
+  ],
+  "artifacts": {
+    "openings_pgn": "outputs/proper_elo_tournament_best2_quick_v2/openings.pgn",
+    "pgn": "outputs/proper_elo_tournament_best2_quick_v2/games.pgn",
+    "log": "outputs/proper_elo_tournament_best2_quick_v2/cutechess.log",
+    "games_csv": "outputs/proper_elo_tournament_best2_quick_v2/games.csv",
+    "standings_csv": "outputs/proper_elo_tournament_best2_quick_v2/standings.csv",
+    "elo_csv": "outputs/proper_elo_tournament_best2_quick_v2/elo_estimates.csv"
+  }
+}

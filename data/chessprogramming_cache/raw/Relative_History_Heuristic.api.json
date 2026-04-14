@@ -1,0 +1,265 @@
+{
+  "parse": {
+    "title": "Relative History Heuristic",
+    "pageid": 1022,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Search\" title=\"Search\">Search</a> * <a href=\"/Move_Ordering\" title=\"Move Ordering\">Move Ordering</a> * Relative History Heuristic</b>\n</p><p>The <b>Relative History Heuristic</b> was proposed by <a href=\"/Mark_Winands\" title=\"Mark Winands\">Mark Winands</a> et al. <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup> at the <a href=\"/CG_2004\" title=\"CG 2004\">Computers and Games Conference 2004</a> in <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Ramat_Gan\">Ramat Gan</a> as improvement of the <a href=\"/History_Heuristic\" title=\"History Heuristic\">History Heuristic</a>.\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#History_Heuristic\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">History Heuristic</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#The_Idea\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">The Idea</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Alternatives\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Alternatives</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Peak_History_Reduction\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Peak History Reduction</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#See_also\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#Publications\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Publications</span></a></li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#External_Links\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-8\"><a href=\"#References\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"History_Heuristic\">History Heuristic</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Relative_History_Heuristic&amp;action=edit&amp;section=1\" title=\"Edit section: History Heuristic\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<pre>The disadvantage of the history heuristic is that it is biased towards moves that occur more often in a game than others. However, the history heuristic has as implicit assumption that all the legal moves occur roughly with the same frequency in the game (tree). For instance, assume we have a move which is quite successful when applicable (e.g., it then causes a cut-off) but it does not occur so often as a legal move in the game tree. This move will not obtain a high history score and is therefore ranked quite low in the move ordering. \n</pre>\n<h1><span class=\"mw-headline\" id=\"The_Idea\">The Idea</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Relative_History_Heuristic&amp;action=edit&amp;section=2\" title=\"Edit section: The Idea\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>The idea is to make the history scores (<span style=\"background-color: #d2d2d2\">hhScore</span>) relative to the scores of the <a href=\"/Butterfly_Heuristic\" title=\"Butterfly Heuristic\">butterfly heuristic</a> (<span style=\"background-color: #d2d2d2\">bfScore</span>).\n</p>\n<pre>We believe that we can considerably improve the performance of the history heuristic in some games by making it relative instead of absolute: The score used to order the moves (movescore) is given by the following formula: \n</pre>\n<pre>\nmoveScore = hhScore / bfScore;\n</pre>\n<p>or dependent on the increments:\n</p>\n<pre>\nmoveScore = (Scale * hhScore) / bfScore;\n</pre>\n<p>Winands experienced with several increments for <span style=\"background-color: #d2d2d2\">hhScore</span> and <span style=\"background-color: #d2d2d2\">bfScore</span>, namely <span style=\"background-color: #d2d2d2\">{1, depth, depth^2 and 2^depth}</span>. The depth independent increment of 1 seemed to give best results in the game of <a href=\"/Lines_of_Action\" title=\"Lines of Action\">Lines of Action</a>. This is how the history <a href=\"/Array\" title=\"Array\">array</a> and butterfly boards may be updated, if a <a href=\"/Beta-Cutoff\" title=\"Beta-Cutoff\">beta-cutoff</a> occurs or not (ignoring <a href=\"/Node_Types#PV\" title=\"Node Types\">PV-Nodes</a>):\n</p>\n<pre>\n   if ( score &gt;= beta ) { // cutoff\n      if ( isNonCapture (move) )\n         hhScore[move.from][move.to] += hhIncrement; \n      ...\n      return score; \n   } else { // no cutoff\n      if ( isNonCapture (move) )\n         bfScore[move.from][move.to] += bfIncrement;\n   }\n</pre>\n<h1><span class=\"mw-headline\" id=\"Alternatives\">Alternatives</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Relative_History_Heuristic&amp;action=edit&amp;section=3\" title=\"Edit section: Alternatives\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Other approaches of relative history heuristic - proposed by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, as tried in <a href=\"/Crafty\" title=\"Crafty\">Crafty</a> while playing with <a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">Late Move Reductions</a> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>, and applied by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a> in <a href=\"/Glaurung\" title=\"Glaurung\">Glaurung</a> as mentioned by <a href=\"/Marco_Costalba\" title=\"Marco Costalba\">Marco Costalba</a>, the developer of <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup> - rely on considering confirmed <a href=\"/Node_Types#CUT\" title=\"Node Types\">Cut-Nodes</a> for updating the counters only. If a <a href=\"/Fail-High\" title=\"Fail-High\">Fail-High</a> occurs, <span style=\"background-color: #d2d2d2\">hhScore</span> is incremented as usual. Additionally, if the move which caused the Cut-Off was not the first one, one has to loop over all previously tried quite moves (still in the move-list), to increment their butterfly penalty scores. A similar idea was proposed by <a href=\"/Jeff_Rollason\" title=\"Jeff Rollason\">Jeff Rollason</a>, <i>Negative Plausibility</i> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup> as implemented inside his <a href=\"/Shogi\" title=\"Shogi\">Shogi</a> program <a rel=\"nofollow\" class=\"external text\" href=\"https://www.game-ai-forum.org/icga-tournaments/program.php?id=223\">Shotest</a>.\n</p>\n<pre>\n   if ( score &gt;= beta ) { // cutoff\n      if ( isNonCapture (move) ) \n         hhScore[move.from][move.to] += hhIncrement; \n      for ( all previous moves m) {\n         if ( isNonCapture (m) )\n            bfScore[m.from][m.to] += bfIncrement;\n      }\n      ...\n      return score; \n   }\n</pre>\n<h1><span class=\"mw-headline\" id=\"Peak_History_Reduction\">Peak History Reduction</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Relative_History_Heuristic&amp;action=edit&amp;section=4\" title=\"Edit section: Peak History Reduction\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>A common idea was mentioned by <a href=\"/Daniel_Mehrmann\" title=\"Daniel Mehrmann\">Daniel Mehrmann</a> in the same LMR-thread <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup>, what he called <b>Peak History Reduction</b> or <b>PHR</b>. He keeps track of the greatest <span style=\"background-color: #d2d2d2\">hhScore</span>, to consider all other history scores relative to this peak. But that doesn't address the cases, where moves occurred rarely were relative successful.\n</p>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Relative_History_Heuristic&amp;action=edit&amp;section=5\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Bobby#StrategicQuiescenceSearch\" title=\"Bobby\">Bobby's Strategic Quiescence Search</a></li>\n<li> <a href=\"/History_Heuristic\" title=\"History Heuristic\">History Heuristic</a></li>\n<li> <a href=\"/Butterfly_Heuristic\" title=\"Butterfly Heuristic\">Butterfly Heuristic</a></li>\n<li> <a href=\"/Butterfly_Boards\" title=\"Butterfly Boards\">Butterfly Boards</a></li>\n<li> <a href=\"/Killer_Heuristic\" title=\"Killer Heuristic\">Killer Heuristic</a></li>\n<li> <a href=\"/Countermove_Heuristic\" title=\"Countermove Heuristic\">Countermove Heuristic</a></li>\n<li> <a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">Late Move Reductions</a></li>\n<li> <a href=\"/History_Leaf_Pruning\" title=\"History Leaf Pruning\">History Leaf Pruning</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Relative_History_Heuristic&amp;action=edit&amp;section=6\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Mark_Winands\" title=\"Mark Winands\">Mark Winands</a>, <a href=\"/Erik_van_der_Werf\" title=\"Erik van der Werf\">Erik van der Werf</a>, <a href=\"/Jaap_van_den_Herik\" title=\"Jaap van den Herik\">Jaap van den Herik</a>, <a href=\"/Jos_Uiterwijk\" title=\"Jos Uiterwijk\">Jos Uiterwijk</a> (<b>2004</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/chapter/10.1007/11674399_18\">The Relative History Heuristic</a></i>. <a href=\"/CG_2004\" title=\"CG 2004\">CG 2004</a>,  <a rel=\"nofollow\" class=\"external text\" href=\"http://erikvanderwerf.tengen.nl/pubdown/relhis.pdf\">pdf</a></li>\n<li> <a href=\"/Jeff_Rollason\" title=\"Jeff Rollason\">Jeff Rollason</a> (<b>2007</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.aifactory.co.uk/newsletter/2007_01_neg_plausibility.htm\">Negative Plausibility</a></i>. <a href=\"/AI_Factory\" title=\"AI Factory\">AI Factory</a>, Spring 2007 <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Relative_History_Heuristic&amp;action=edit&amp;section=7\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Dolby_Laboratories\">Dolby</a> - <a rel=\"nofollow\" class=\"external text\" href=\"http://www.letov.ru/SAX-MAFIA.htm\">SAX-MAFIA</a> live at <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Smolensk\">Smolensk</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Chamber_theatre\">Chamber Theatre</a>, 2007, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/9GG-LcQZsTs?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Relative_History_Heuristic&amp;action=edit&amp;section=8\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a href=\"/Mark_Winands\" title=\"Mark Winands\">Mark Winands</a>, <a href=\"/Erik_van_der_Werf\" title=\"Erik van der Werf\">Erik van der Werf</a>, <a href=\"/Jaap_van_den_Herik\" title=\"Jaap van den Herik\">Jaap van den Herik</a>, <a href=\"/Jos_Uiterwijk\" title=\"Jos Uiterwijk\">Jos Uiterwijk</a> (<b>2004</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/chapter/10.1007/11674399_18\">The Relative History Heuristic</a></i>. <a href=\"/CG_2004\" title=\"CG 2004\">CG 2004</a>,  <a rel=\"nofollow\" class=\"external text\" href=\"http://erikvanderwerf.tengen.nl/pubdown/relhis.pdf\">pdf</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=490705\">late move reductions</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 01, 2006</span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=234691&amp;t=25118&amp;sid=5d8f3f4a0d7f4c59a93e786c21c00072\">Re: relative history heuristic</a> by <a href=\"/Marco_Costalba\" title=\"Marco Costalba\">Marco Costalba</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 30, 2008</span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.aifactory.co.uk/newsletter/2007_01_neg_plausibility.htm\">Negative Plausibility</a> by <a href=\"/Jeff_Rollason\" title=\"Jeff Rollason\">Jeff Rollason</a>, <a href=\"/AI_Factory\" title=\"AI Factory\">AI Factory</a>, March 2007</span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=490779\">PHR (Peak History Reduction) idea</a> by <a href=\"/Daniel_Mehrmann\" title=\"Daniel Mehrmann\">Daniel Mehrmann</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 01, 2006</span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=28873\">Negative Plausibility Move Ordering</a> by <a href=\"/Alessandro_Damiani\" title=\"Alessandro Damiani\">Alessandro Damiani</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 09, 2009</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Move_Ordering\" title=\"Move Ordering\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301060711\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.014 seconds\nReal time usage: 0.014 seconds\nPreprocessor visited node count: 167/1000000\nPreprocessor generated node count: 372/1000000\nPost‐expand include size: 27/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1022-0!canonical and timestamp 20260301060711 and revision id 9385\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Music"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "AI Factory"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alessandro Damiani"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Array"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Beta-Cutoff"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bobby"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Butterfly Boards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Butterfly Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CG 2004"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Countermove Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Crafty"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Daniel Mehrmann"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Erik van der Werf"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fail-High"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Glaurung"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "History Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "History Leaf Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jaap van den Herik"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jeff Rollason"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jos Uiterwijk"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Killer Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Late Move Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lines of Action"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marco Costalba"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mark Winands"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Ordering"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Node Types"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Hyatt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Shogi"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stockfish"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tord Romstad"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "History Heuristic",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Relative_History_Heuristic",
+        "byteoffset": 592,
+        "anchor": "History_Heuristic"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "The Idea",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Relative_History_Heuristic",
+        "byteoffset": 1157,
+        "anchor": "The_Idea"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Alternatives",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Relative_History_Heuristic",
+        "byteoffset": 2549,
+        "anchor": "Alternatives"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Peak History Reduction",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Relative_History_Heuristic",
+        "byteoffset": 4214,
+        "anchor": "Peak_History_Reduction"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "5",
+        "index": "5",
+        "fromtitle": "Relative_History_Heuristic",
+        "byteoffset": 4753,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "6",
+        "index": "6",
+        "fromtitle": "Relative_History_Heuristic",
+        "byteoffset": 5018,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "7",
+        "index": "7",
+        "fromtitle": "Relative_History_Heuristic",
+        "byteoffset": 5610,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "8",
+        "index": "8",
+        "fromtitle": "Relative_History_Heuristic",
+        "byteoffset": 6003,
+        "anchor": "References"
+      }
+    ]
+  }
+}

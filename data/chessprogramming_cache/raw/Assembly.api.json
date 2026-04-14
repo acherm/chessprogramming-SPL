@@ -1,0 +1,622 @@
+{
+  "parse": {
+    "title": "Assembly",
+    "pageid": 2006,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Programming\" title=\"Programming\">Programming</a> * <a href=\"/Languages\" title=\"Languages\">Languages</a> * Assembly</b>\n</p><p><b>Assembly</b> is a family of <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Low-level_language\">low-level languages</a> for programming computers. They implement a symbolic representation of the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Machine_code\">machine instructions</a> and data needed to program a particular CPU architecture with its particular <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Instruction_set\">instruction</a>- and register set. An <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Assembly_language#Assembler\">assembler</a> is used to translate the assembly source code into executable machine instructions in <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Object_code\">object code</a>. Almost each architecture and its extensions have their own proprietary assembly language with different <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Syntax\">syntax</a> and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Mnemonic\">mnemonics</a> for operations, data declarations etc..\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Assembler\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Assembler</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-2\"><a href=\"#CDC_6600.2FCyber\"><span class=\"tocnumber\">1.1</span> <span class=\"toctext\">CDC 6600/Cyber</span></a></li>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#Cray\"><span class=\"tocnumber\">1.2</span> <span class=\"toctext\">Cray</span></a></li>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#Intel.2FAMD\"><span class=\"tocnumber\">1.3</span> <span class=\"toctext\">Intel/AMD</span></a>\n<ul>\n<li class=\"toclevel-3 tocsection-5\"><a href=\"#Architectures\"><span class=\"tocnumber\">1.3.1</span> <span class=\"toctext\">Architectures</span></a></li>\n<li class=\"toclevel-3 tocsection-6\"><a href=\"#Syntax\"><span class=\"tocnumber\">1.3.2</span> <span class=\"toctext\">Syntax</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#PDP-6\"><span class=\"tocnumber\">1.4</span> <span class=\"toctext\">PDP-6</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-8\"><a href=\"#Inline_Assembly\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Inline Assembly</span></a></li>\n<li class=\"toclevel-1 tocsection-9\"><a href=\"#See_also\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-10\"><a href=\"#Publications\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Publications</span></a></li>\n<li class=\"toclevel-1 tocsection-11\"><a href=\"#Listings\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Listings</span></a></li>\n<li class=\"toclevel-1 tocsection-12\"><a href=\"#Manuals\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Manuals</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-13\"><a href=\"#6502\"><span class=\"tocnumber\">6.1</span> <span class=\"toctext\">6502</span></a></li>\n<li class=\"toclevel-2 tocsection-14\"><a href=\"#68000\"><span class=\"tocnumber\">6.2</span> <span class=\"toctext\">68000</span></a></li>\n<li class=\"toclevel-2 tocsection-15\"><a href=\"#Alpha\"><span class=\"tocnumber\">6.3</span> <span class=\"toctext\">Alpha</span></a></li>\n<li class=\"toclevel-2 tocsection-16\"><a href=\"#ARM\"><span class=\"tocnumber\">6.4</span> <span class=\"toctext\">ARM</span></a></li>\n<li class=\"toclevel-2 tocsection-17\"><a href=\"#Fairchild_F8\"><span class=\"tocnumber\">6.5</span> <span class=\"toctext\">Fairchild F8</span></a></li>\n<li class=\"toclevel-2 tocsection-18\"><a href=\"#HP_Saturn\"><span class=\"tocnumber\">6.6</span> <span class=\"toctext\">HP Saturn</span></a></li>\n<li class=\"toclevel-2 tocsection-19\"><a href=\"#PowerPC\"><span class=\"tocnumber\">6.7</span> <span class=\"toctext\">PowerPC</span></a></li>\n<li class=\"toclevel-2 tocsection-20\"><a href=\"#SPARC\"><span class=\"tocnumber\">6.8</span> <span class=\"toctext\">SPARC</span></a></li>\n<li class=\"toclevel-2 tocsection-21\"><a href=\"#x86-64\"><span class=\"tocnumber\">6.9</span> <span class=\"toctext\">x86-64</span></a></li>\n<li class=\"toclevel-2 tocsection-22\"><a href=\"#Z80\"><span class=\"tocnumber\">6.10</span> <span class=\"toctext\">Z80</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-23\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">Forum Posts</span></a></li>\n<li class=\"toclevel-1 tocsection-24\"><a href=\"#External_Links\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">External Links</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-25\"><a href=\"#DEC\"><span class=\"tocnumber\">8.1</span> <span class=\"toctext\">DEC</span></a></li>\n<li class=\"toclevel-2 tocsection-26\"><a href=\"#IBM\"><span class=\"tocnumber\">8.2</span> <span class=\"toctext\">IBM</span></a></li>\n<li class=\"toclevel-2 tocsection-27\"><a href=\"#Intel\"><span class=\"tocnumber\">8.3</span> <span class=\"toctext\">Intel</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-28\"><a href=\"#References\"><span class=\"tocnumber\">9</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Assembler\">Assembler</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Assembly&amp;action=edit&amp;section=1\" title=\"Edit section: Assembler\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><span id=\"Popcount\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"CDC_6600.2FCyber\">CDC 6600/Cyber</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Assembly&amp;action=edit&amp;section=2\" title=\"Edit section: CDC 6600/Cyber\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p><a href=\"/Mobility\" title=\"Mobility\">Mobility</a> in <a href=\"/Chess_(Program)\" title=\"Chess (Program)\">Chess 4.6</a> based on <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Talk%3ACDC_6600#.27Population_Count.27_.28.22Count_Ones.22.29_Instruction\">47 CXi Xk</a> <a href=\"/Population_Count\" title=\"Population Count\">Population Count</a>, written in <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/COMPASS\">COMPASS</a>, the CDC Macro Assembler for the <a href=\"/CDC_6600\" title=\"CDC 6600\">CDC 6600</a> and <a href=\"/CDC_Cyber\" title=\"CDC Cyber\">CDC Cyber</a> <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup>. The square list aka <a href=\"/Bitboards\" title=\"Bitboards\">bitboard</a> was loaded into two 60-bit registers, with both populations added and stored.\n</p>\n<pre>\n** COUNTS - COUNT MEMBERS OF A SQUARE LIST\n\nCOUNTS MACRO Y\n.STST\nLOADS Y\n.CHK2\nCX'.S1' X'.S1'\nCX'.S2' X'.S2'\nIX'.SS' X'.S2'+X'.S1'\n.STND\nCOUNTS ENDM \n...\nSETQ MOBIL,(PLUS,(COUNTS,(INDEXS,ATKFR,(LSHIFT,SQLN,1))),MOB\n</pre>\n<p><span id=\"CAL\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Cray\">Cray</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Assembly&amp;action=edit&amp;section=3\" title=\"Edit section: Cray\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Cray Assembly Language (CAL) <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>, some snippet from <a href=\"/Cray_Blitz\" title=\"Cray Blitz\">Cray Blitz</a> <a href=\"/Bitboards\" title=\"Bitboards\">Bitboard</a> code for the <a href=\"/Cray-1\" title=\"Cray-1\">Cray-1</a> or <a href=\"/Cray_X-MP\" title=\"Cray X-MP\">Cray X-MP</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>:\n</p>\n<pre>\nl1020    =         *              \n         s3        msave3-1,a2    \n         s4        msave4-1,a2    \n         a4        pcount-1,a1    \n         a6        pcount-1,a5    \n         pfirst-1,a1 s1           \n         plast-1,a1 s2            \n         pfirst-1,a5 s3           \n         plast-1,a5 s4            \n         a4        a4-1           \n         a6        a6+1           \n         pcount-1,a1 a4           \n         pcount-1,a5 a6    \n</pre>\n<h2><span class=\"mw-headline\" id=\"Intel.2FAMD\">Intel/AMD</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Assembly&amp;action=edit&amp;section=4\" title=\"Edit section: Intel/AMD\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<h3><span class=\"mw-headline\" id=\"Architectures\">Architectures</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Assembly&amp;action=edit&amp;section=5\" title=\"Edit section: Architectures\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p><span id=\"x86\"></span>\n</p>\n<table class=\"wikitable\">\n\n<tr>\n<th> CPU\n</th>\n<th> Assemblers\n</th></tr>\n<tr>\n<td>  <a href=\"/8080\" title=\"8080\">8080</a> / <a href=\"/Z80\" title=\"Z80\">Z80</a>\n</td>\n<td>  ASM80\n</td></tr>\n<tr>\n<td>  <a href=\"/8086\" title=\"8086\">8086</a>\n</td>\n<td>  <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/MASM\">MASM</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/TASM\">TASM</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Netwide_Assembler\">NASM</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/GNU_Assembler\">GNU Assembler</a>\n</td></tr>\n<tr>\n<td>  <a href=\"/X86\" title=\"X86\">x86</a>\n</td>\n<td>  <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/FASM\">FASM</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/MASM\">MASM</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Netwide_Assembler\">NASM</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/TASM\">TASM</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/GNU_Assembler\">GNU Assembler</a>\n</td></tr>\n<tr>\n<td>  <a href=\"/X86-64\" title=\"X86-64\">x86-64</a>\n</td>\n<td>  <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/MASM\">MASM64</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Netwide_Assembler\">NASM</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/GNU_Assembler\">GNU Assembler</a>\n</td></tr></table>\n<p><span id=\"x86Syntax\"></span>\n</p>\n<h3><span class=\"mw-headline\" id=\"Syntax\">Syntax</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Assembly&amp;action=edit&amp;section=6\" title=\"Edit section: Syntax\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p>Intel-Syntax: operation target, source\n</p>\n<pre>\n  add rax, rdx &#160;; rax += rdx\n</pre>\n<p><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/GNU_Assembler\">AT &amp; T Syntax</a> operation&lt;type&gt; source, target\n</p>\n<pre>\n  addq&#160;%rdx,&#160;%rax  /* rax += rdx */\n</pre>\n<p><span id=\"HAKMEM169\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"PDP-6\">PDP-6</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Assembly&amp;action=edit&amp;section=7\" title=\"Edit section: PDP-6\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p><a href=\"/Population_Count#HAKMEM169\" title=\"Population Count\">HAKMEM 169</a>, to <a href=\"/Population_Count\" title=\"Population Count\">count the ones</a> in a <a href=\"/PDP-6\" title=\"PDP-6\">PDP-6</a>/<a href=\"/PDP-10\" title=\"PDP-10\">PDP-10</a> 36-bit word, written in <a href=\"/index.php?title=MIDAS&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"MIDAS (page does not exist)\">MIDAS</a> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>:\n</p>\n<pre>\n   LDB B,[014300,,A]     &#160;;or MOVE B,A then LSH B,-1\n   AND B,[333333,,333333]\n   SUB A,B\n   LSH B,-1\n   AND B,[333333,,333333]\n   SUBB A,B              &#160;;each octal digit is replaced by number of 1's in it\n   LSH B,-3\n   ADD A,B\n   AND A,[070707,,070707]\n   IDIVI A,77            &#160;;casting out 63.'s\n</pre>\n<p><span id=\"InlineAssembly\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Inline_Assembly\">Inline Assembly</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Assembly&amp;action=edit&amp;section=8\" title=\"Edit section: Inline Assembly\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Inline_assembler\">Inline assembly</a> is embedded inside various <a href=\"/C\" title=\"C\">C</a>, <a href=\"/Cpp\" title=\"Cpp\">C++</a>, <a href=\"/D_(Programming_Language)\" title=\"D (Programming Language)\">D</a>, <a href=\"/Pascal\" title=\"Pascal\">Pascal</a> and <a href=\"/Delphi\" title=\"Delphi\">Delphi</a> compiler <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup>.\n</p>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Assembly&amp;action=edit&amp;section=9\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/AsmFish\" title=\"AsmFish\">asmFish</a> (<a href=\"/X86-64\" title=\"X86-64\">x86-64</a> <a href=\"/Stockfish#ports\" title=\"Stockfish\">port</a> of <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a>)</li>\n<li> <a href=\"/Hardware\" title=\"Hardware\">Hardware</a></li>\n<li> <a href=\"/General_Setwise_Operations\" title=\"General Setwise Operations\">General Setwise Operations</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Assembly&amp;action=edit&amp;section=10\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.vintage.org/2007/main/bio.php?id=1781\">Lance A. Leventhal</a> (<b>1979</b>). <i>6502 Assembly Language Programming</i>. Osborne/<a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/McGraw-Hill_Education\">McGraw-Hill</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.atarimania.com/documents/6502_Assembly_Language_Programming.pdf\">pdf</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Rodnay_Zaks\">Rodnay Zaks</a> (<b>1979</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Programming_the_Z80\">Programming the Z80</a></i>. Sybex <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup></li>\n<li> <a href=\"/Kathe_Spracklen\" title=\"Kathe Spracklen\">Kathe Spracklen</a> (<b>1979</b>). <i>Z-80 and 8080 assembly language programming</i>.  <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Hayden_Books\">Hayden Books</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.amazon.com/assembly-language-programming-Hayden-computer/dp/0810451670\">amazon.com</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://archive.org/details/z808080assemblyl00kath\">Internet Archive</a>&#160;» <a href=\"/8080\" title=\"8080\">8080</a>, <a href=\"/Z80\" title=\"Z80\">Z80</a></li>\n<li> <a href=\"/Jan_Kuipers\" title=\"Jan Kuipers\">Jan Kuipers</a> (<b>1981</b>). <i>Tiny Chess 86 - Een schaakprogramma voor de 8088/8086</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://home.kpn.nl/a.dikker1/museum/databus.html\">Databus</a> 06-81, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.schaakcomputers.nl/hein_veldhuis/database/files/06-1981,%20Databus,%20Jan%20Kuipers,%20Tiny%20Chess%2086.pdf\">pdf</a> hosted by <a href=\"/Hein_Veldhuis\" title=\"Hein Veldhuis\">Hein Veldhuis</a>&#160;» <a href=\"/8086\" title=\"8086\">8086</a>, <a href=\"/Tiny_Chess_86\" title=\"Tiny Chess 86\">Tiny Chess 86</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Rodnay_Zaks\">Zaks, Rodnay</a> (<b>1983</b>). <i>Programming the 6502 (Fourth Edition)</i>. Sybex</li>\n<li> <a href=\"/Ward_Douglas_Maurer\" title=\"Ward Douglas Maurer\">Ward Douglas Maurer</a> (<b>1984</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.amazon.com/APPLE-assembly-language-Lazerware-software/dp/091489482X/ref=la_B001HPN2O8_1_2?s=books&amp;ie=UTF8&amp;qid=1410953624&amp;sr=1-2\">APPLE assembly language with Lazerware software</a></i>. Computer Science Press&#160;» <a href=\"/Apple_II\" title=\"Apple II\">Apple II</a></li>\n<li> <a href=\"/Ward_Douglas_Maurer\" title=\"Ward Douglas Maurer\">Ward Douglas Maurer</a> (<b>1985</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.amazon.com/Commodore-assembly-language-DEVELOP-64-assembler/dp/0881750409/ref=la_B001HPN2O8_1_3?s=books&amp;ie=UTF8&amp;qid=1410953624&amp;sr=1-3\">Commodore 64 assembly language: A course of study based on the DEVELOP-64 assembler/editor/debugger</a></i>. Computer Science Press&#160;» <a href=\"/Commodore_64\" title=\"Commodore 64\">Commodore 64</a></li>\n<li> <a href=\"/Ward_Douglas_Maurer\" title=\"Ward Douglas Maurer\">Ward Douglas Maurer</a> (<b>1990</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.worldcat.org/title/assembly-language-programming-on-the-mac-with-mpw-second-draft/oclc/22190641\">Assembly language programming on the Mac with MPW</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/George_Washington_University_School_of_Engineering_and_Applied_Science\">School of Engineering and Applied Science</a>,  <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/George_Washington_University\">George Washington University</a>, GWU-IIST-90-20.&#160;» <a href=\"/Macintosh\" title=\"Macintosh\">Macintosh</a> <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Michael_Abrash\">Michael Abrash</a> (<b>1990</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.amazon.com/exec/obidos/ASIN/0673386023/codihorr-20\">Zen of Assembly Language: Knowledge</a></i>. Scott Foresman Trade, ISBN-13: 978-0673386021 <sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup> <sup id=\"cite_ref-9\" class=\"reference\"><a href=\"#cite_note-9\">&#91;9&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Randall_Hyde\">Randall Hyde</a> (<b>2003, 2010</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://nostarch.com/assembly2.htm\">The Art of Assembly Language Programming</a></i>. No Starch Press, 2nd edition, ISBN-13: 978-1-59327-207-4</li></ul>\n<h1><span class=\"mw-headline\" id=\"Listings\">Listings</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Assembly&amp;action=edit&amp;section=11\" title=\"Edit section: Listings\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Chess_(Program)\" title=\"Chess (Program)\">Chess 4.6</a> <a href=\"/CDC_Cyber\" title=\"CDC Cyber\">CDC Cyber</a> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.computerhistory.org/chess/full_record.php?iid=sft-431614f455002\">source code</a>, gift of <a href=\"/David_Slate\" title=\"David Slate\">David Slate</a>, from <a href=\"/The_Computer_History_Museum\" title=\"The Computer History Museum\">The Computer History Museum</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://archive.computerhistory.org/projects/chess/related_materials/software/3-3.Chess_4.6_Sourcecode.102645430/chess_4-6.sourcecode.102645430.pdf\">pdf</a></li>\n<li> <a href=\"/Sargon\" title=\"Sargon\">Sargon</a> <a href=\"/Z80\" title=\"Z80\">Z80</a> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.andreadrian.de/schach/sargon.asm\">assembly listing</a> by <a href=\"/Dan_Spracklen\" title=\"Dan Spracklen\">Dan</a> and <a href=\"/Kathe_Spracklen\" title=\"Kathe Spracklen\">Kathe Spracklen</a>, hosted by <a href=\"/Andre_Adrian\" title=\"Andre Adrian\">Andre Adrian</a></li>\n<li> <a href=\"/Rookie\" title=\"Rookie\">Rookie 1.0</a> <a href=\"/68000\" title=\"68000\">68000</a> <a class=\"mw-selflink selflink\">assembly</a> source, search.s from <a rel=\"nofollow\" class=\"external text\" href=\"http://marcelk.net/rookie/nostalgia/v1/\">Index of /rookie/nostalgia/v1</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Manuals\">Manuals</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Assembly&amp;action=edit&amp;section=12\" title=\"Edit section: Manuals\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"6502\"><a href=\"/6502\" title=\"6502\">6502</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Assembly&amp;action=edit&amp;section=13\" title=\"Edit section: 6502\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://archive.6502.org/datasheets/synertek_programming_manual.pdf\">6502 Programming Manual</a>, August 1976 (pdf)</li></ul>\n<h2><span class=\"mw-headline\" id=\"68000\"><a href=\"/68000\" title=\"68000\">68000</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Assembly&amp;action=edit&amp;section=14\" title=\"Edit section: 68000\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.freescale.com/files/archives/doc/ref_manual/M68000PRM.pdf\">MOTOROLA M68000 FAMILY - Programmer’s Reference Manual</a> (pdf)</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://neo.dmcs.p.lodz.pl/pn/asembler_68000/asm.pdf\">68000 Assembler - User's Manual</a> (pdf) by Paul McKee </li></ul>\n<h2><span class=\"mw-headline\" id=\"Alpha\"><a href=\"/DEC_Alpha\" title=\"DEC Alpha\">Alpha</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Assembly&amp;action=edit&amp;section=15\" title=\"Edit section: Alpha\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.cs.arizona.edu/projects/alto/Doc/local/alpha.instruction.html\">Alpha Instruction Set (Brief)</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.cmu.edu/afs/cs/academic/class/15213-f98/doc/alpha-asm.pdf\">Digital UNIX Assembly Language Programmer's Guide</a>, March 1996 (pdf)</li></ul>\n<h2><span class=\"mw-headline\" id=\"ARM\"><a href=\"/ARM2\" title=\"ARM2\">ARM</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Assembly&amp;action=edit&amp;section=16\" title=\"Edit section: ARM\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.heyrick.co.uk/assembler/\">ARM Assembler</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.peter-cockerell.net/aalp/html/frames.html\">ARM Assembly Language Programming</a> by <a rel=\"nofollow\" class=\"external text\" href=\"http://www.peter-cockerell.net/\">Pete Cockerell</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Fairchild_F8\"><a href=\"/Fairchild_F8\" title=\"Fairchild F8\">Fairchild F8</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Assembly&amp;action=edit&amp;section=17\" title=\"Edit section: Fairchild F8\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://archive.org/details/bitsavers_fairchildfng1977_5888299\">Fairchild F8 Guide To Programming 1977</a>, hosted by the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Internet_Archive\">Internet Archive</a>&#160;» <a href=\"/Fairchild_F8\" title=\"Fairchild F8\">Fairchild F8</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"HP_Saturn\">HP Saturn</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Assembly&amp;action=edit&amp;section=18\" title=\"Edit section: HP Saturn\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <span id=\"HPSATURN\"></span><a rel=\"nofollow\" class=\"external text\" href=\"https://fr.linkedin.com/in/fernandesgilbert\">Gilbert Fernandes</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.hpcalc.org/contact.php\">Eric Rechlin</a> (<b>2005</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.hpcalc.org/details.php?id=1693\">Introduction to Saturn Assembly Language</a></i>. Third edition, Part of the <a rel=\"nofollow\" class=\"external text\" href=\"http://www.hpcalc.org/\">HP Calculator Archive</a>&#160;» <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/HP_Saturn\">HP Saturn</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/HP_48_series\">HP 48 series</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"PowerPC\"><a href=\"/PowerPC\" title=\"PowerPC\">PowerPC</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Assembly&amp;action=edit&amp;section=19\" title=\"Edit section: PowerPC\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.ibm.com/developerworks/library/l-ppc/\">IBM PowerPC assembly</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"SPARC\"><a href=\"/SPARC\" title=\"SPARC\">SPARC</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Assembly&amp;action=edit&amp;section=20\" title=\"Edit section: SPARC\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://docs.oracle.com/cd/E19457-01/801-6649/801-6649.pdf\">SPARC Assembly Language Reference Manual</a> (pdf)</li></ul>\n<h2><span class=\"mw-headline\" id=\"x86-64\"><a href=\"/X86-64\" title=\"X86-64\">x86-64</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Assembly&amp;action=edit&amp;section=21\" title=\"Edit section: x86-64\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/X86-64#Manuals\" title=\"X86-64\">x86-64 Manuals</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Z80\"><a href=\"/Z80\" title=\"Z80\">Z80</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Assembly&amp;action=edit&amp;section=22\" title=\"Edit section: Z80\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> Neil J. Colvin (<b>1977</b>). <i>TDL Z80 Relocating/Linking Assembler User's Manual</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://retrotechnology.com/herbs_stuff/zasm.pdf\">pdf</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Assembly&amp;action=edit&amp;section=23\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=11909\">Assembler handtuning benefit</a> by <a href=\"/Jouni_Uski\" title=\"Jouni Uski\">Jouni Uski</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 11, 1997</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=18&amp;t=41366\">Assembly language for PC (Off topic)</a> by <a href=\"/Josu%C3%A9_Forte\" title=\"Josué Forte\">Josué Forte</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, February 21, 2003</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=47414\">C vs ASM</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 05, 2013&#160;» <a href=\"/C\" title=\"C\">C</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/fishcooking/HKIYwO6pF-s/-DOONSK5F-IJ\">[for fun] rewrite of stockfish into asm and question on source</a> by <a href=\"/index.php?title=Mohammed_Li&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Mohammed Li (page does not exist)\">Mohammed Li</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">FishCooking</a>, January 09, 2015&#160;» <a href=\"/AsmFish\" title=\"AsmFish\">asmFish</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=70283\">Some x64 assembler for the curious</a> by <a href=\"/Michael_Sherwin\" title=\"Michael Sherwin\">Michael Sherwin</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 22, 2019&#160;» <a href=\"/X86-64\" title=\"X86-64\">x86-64</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Assembly&amp;action=edit&amp;section=24\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Assembly_language\">Assembly language from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/List_of_assemblers\">Comparison of assemblers from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/High-level_assembler\">High-level assembler from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://webster.cs.ucr.edu/AsmTools/HLA/\">High Level Assembly</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.plantation-productions.com/Webster/www.artofasm.com/index.html\">The Art of Assembly Language Programming and HLA</a> by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Randall_Hyde\">Randall Hyde</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.df.lth.se/~john_e/\">The Assembly Gems page</a> by <a rel=\"nofollow\" class=\"external text\" href=\"http://www.df.lth.se/~john_e/about.html\">John Eckerdal</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"DEC\">DEC</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Assembly&amp;action=edit&amp;section=25\" title=\"Edit section: DEC\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://home.pipeline.com/~hbaker1/pdp-10/pdp-10.html\">PDP-10 Machine Language</a>&#160;» <a href=\"/PDP-10\" title=\"PDP-10\">PDP-10</a> <sup id=\"cite_ref-10\" class=\"reference\"><a href=\"#cite_note-10\">&#91;10&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://programmer209.wordpress.com/2011/08/03/the-pdp-11-assembly-language/\">PDP-11 Assembly Language</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/MACRO-11\">MACRO-11 from Wikipedia</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"IBM\">IBM</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Assembly&amp;action=edit&amp;section=26\" title=\"Edit section: IBM\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/IBM_Basic_assembly_language_and_successors\">IBM Basic assembly language and successors - Wikipedia</a>»  <a href=\"/IBM_360\" title=\"IBM 360\">IBM 360</a>, <a href=\"/IBM_370\" title=\"IBM 370\">IBM 370</a>, <a href=\"/ICL_4-70\" title=\"ICL 4-70\">ICL 4/70</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Intel\">Intel</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Assembly&amp;action=edit&amp;section=27\" title=\"Edit section: Intel\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.azillionmonkeys.com/qed/asmexample.html\">Assembly Language Lab</a> by <a href=\"/Paul_Hsieh\" title=\"Paul Hsieh\">Paul Hsieh</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://olivier.poudade.free.fr/\">Assembly language page</a> by <a href=\"/Olivier_Poudade\" title=\"Olivier Poudade\">Olivier Poudade</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/X86_assembly_language\">x86 assembly language from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://en.wikibooks.org/wiki/X86_Assembly/X86_Architecture\">X86 Assembly/X86 Architecture from Wikibooks</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.virginia.edu/~evans/cs216/guides/x86.html\">x86 Assembly Guide</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://software.intel.com/en-us/articles/introduction-to-x64-assembly\">Introduction to x64 Assembly</a> by  <a rel=\"nofollow\" class=\"external text\" href=\"http://www.lomont.org/\">Chris Lomont</a>, March 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/alt.lang.asm/topics\">alt.lang.asm</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/\">Google Group</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/comp.lang.asm.x86/topics\">comp.lang.asm.x86</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/\">Google Group</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://siyobik.info/index.php?document=x86_32bit_asm\">x86 32-bit Assembly for Atheists</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://dasm-dillon.sourceforge.net/\">the dasm macro assembler</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://xi6.com/projects/asmx/\">asmx multi-CPU assembler</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Assembly&amp;action=edit&amp;section=28\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.computerhistory.org/chess/full_record.php?iid=sft-431614f455002\">Chess 4.6 source code</a>, gift of <a href=\"/David_Slate\" title=\"David Slate\">David Slate</a>, from <a href=\"/The_Computer_History_Museum\" title=\"The Computer History Museum\">The Computer History Museum</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://archive.computerhistory.org/projects/chess/related_materials/software/3-3.Chess_4.6_Sourcecode.102645430/chess_4-6.sourcecode.102645430.pdf\">pdf</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.scribd.com/doc/2161814/Cray-Assembly-Language-Reference\">Cray Assembly Language Reference - iPaper</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt's</a> <a href=\"/Cray_Blitz\" title=\"Cray Blitz\">Cray Blitz</a> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.craftychess.com/downloads/crayblitz/\">crayblitz.tar.gz Source Code</a> see folder CAL, unmake.s</span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a href=\"/Population_Count#HAKMEM169\" title=\"Population Count\">HAKMEM 169</a> by <a href=\"/Bill_Gosper\" title=\"Bill Gosper\">Gosper</a>, Mann, Lenard, [Root and Mann], <a rel=\"nofollow\" class=\"external text\" href=\"http://home.pipeline.com/~hbaker1/hakmem/hakmem.html\">HAKMEM</a></span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.ibm.com/developerworks/library/l-ia.html\">Inline assembly for x86 in Linux</a> by <a href=\"/index.php?title=IBM&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"IBM (page does not exist)\">IBM</a></span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.z80.info/zaks.html\">pdf download link by Rodnay Zaks</a></span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Macintosh_Programmer%27s_Workshop\">Macintosh Programmer's Workshop from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.codinghorror.com/blog/2008/02/there-aint-no-such-thing-as-the-fastest-code.html\">Coding Horror: There Ain't No Such Thing as the Fastest Code</a> by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Jeff_Atwood\">Jeff Atwood</a>, February 19, 2008</span>\n</li>\n<li id=\"cite_note-9\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-9\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=47384&amp;start=45\">Re: Developments of the last two years</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 03, 2013</span>\n</li>\n<li id=\"cite_note-10\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-10\">↑</a></span> <span class=\"reference-text\">MIT PDP-10 'Info' file converted to Hypertext 'html' format by <a rel=\"nofollow\" class=\"external text\" href=\"http://home.pipeline.com/~hbaker1/home.html\">Henry Baker</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Languages\" title=\"Languages\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260228200317\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.024 seconds\nReal time usage: 0.025 seconds\nPreprocessor visited node count: 316/1000000\nPreprocessor generated node count: 588/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:2006-0!canonical and timestamp 20260228200317 and revision id 25236\n -->\n"
+    },
+    "categories": [],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "6502"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "68000"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "8080"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "8086"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ARM2"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Andre Adrian"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Apple II"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "AsmFish"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bill Gosper"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "C"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CDC 6600"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CDC Cyber"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess (Program)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Commodore 64"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cpp"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cray-1"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cray Blitz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cray X-MP"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "DEC Alpha"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "D (Programming Language)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dan Spracklen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David Slate"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Delphi"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Don Dailey"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ed Schroder"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fairchild F8"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "General Setwise Operations"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hardware"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hein Veldhuis"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "IBM 360"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "IBM 370"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICL 4-70"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jan Kuipers"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Josué Forte"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jouni Uski"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kathe Spracklen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Languages"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Macintosh"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michael Sherwin"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mobility"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Olivier Poudade"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "PDP-10"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "PDP-6"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pascal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Paul Hsieh"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Population Count"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "PowerPC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Programming"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Hyatt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rookie"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SPARC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sargon"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stockfish"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "The Computer History Museum"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tiny Chess 86"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ward Douglas Maurer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "X86"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "X86-64"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Z80"
+      },
+      {
+        "ns": 0,
+        "*": "IBM"
+      },
+      {
+        "ns": 0,
+        "*": "MIDAS"
+      },
+      {
+        "ns": 0,
+        "*": "Mohammed Li"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Assembler",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Assembly",
+        "byteoffset": 931,
+        "anchor": "Assembler"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "CDC 6600/Cyber",
+        "number": "1.1",
+        "index": "2",
+        "fromtitle": "Assembly",
+        "byteoffset": 972,
+        "anchor": "CDC_6600.2FCyber"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Cray",
+        "number": "1.2",
+        "index": "3",
+        "fromtitle": "Assembly",
+        "byteoffset": 2007,
+        "anchor": "Cray"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Intel/AMD",
+        "number": "1.3",
+        "index": "4",
+        "fromtitle": "Assembly",
+        "byteoffset": 2891,
+        "anchor": "Intel.2FAMD"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Architectures",
+        "number": "1.3.1",
+        "index": "5",
+        "fromtitle": "Assembly",
+        "byteoffset": 2906,
+        "anchor": "Architectures"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Syntax",
+        "number": "1.3.2",
+        "index": "6",
+        "fromtitle": "Assembly",
+        "byteoffset": 3732,
+        "anchor": "Syntax"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "PDP-6",
+        "number": "1.4",
+        "index": "7",
+        "fromtitle": "Assembly",
+        "byteoffset": 3997,
+        "anchor": "PDP-6"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Inline Assembly",
+        "number": "2",
+        "index": "8",
+        "fromtitle": "Assembly",
+        "byteoffset": 4671,
+        "anchor": "Inline_Assembly"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "3",
+        "index": "9",
+        "fromtitle": "Assembly",
+        "byteoffset": 4980,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "4",
+        "index": "10",
+        "fromtitle": "Assembly",
+        "byteoffset": 5110,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Listings",
+        "number": "5",
+        "index": "11",
+        "fromtitle": "Assembly",
+        "byteoffset": 8486,
+        "anchor": "Listings"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Manuals",
+        "number": "6",
+        "index": "12",
+        "fromtitle": "Assembly",
+        "byteoffset": 9161,
+        "anchor": "Manuals"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "6502",
+        "number": "6.1",
+        "index": "13",
+        "fromtitle": "Assembly",
+        "byteoffset": 9172,
+        "anchor": "6502"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "68000",
+        "number": "6.2",
+        "index": "14",
+        "fromtitle": "Assembly",
+        "byteoffset": 9299,
+        "anchor": "68000"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Alpha",
+        "number": "6.3",
+        "index": "15",
+        "fromtitle": "Assembly",
+        "byteoffset": 9556,
+        "anchor": "Alpha"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "ARM",
+        "number": "6.4",
+        "index": "16",
+        "fromtitle": "Assembly",
+        "byteoffset": 9832,
+        "anchor": "ARM"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Fairchild F8",
+        "number": "6.5",
+        "index": "17",
+        "fromtitle": "Assembly",
+        "byteoffset": 10046,
+        "anchor": "Fairchild_F8"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "HP Saturn",
+        "number": "6.6",
+        "index": "18",
+        "fromtitle": "Assembly",
+        "byteoffset": 10273,
+        "anchor": "HP_Saturn"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "PowerPC",
+        "number": "6.7",
+        "index": "19",
+        "fromtitle": "Assembly",
+        "byteoffset": 10721,
+        "anchor": "PowerPC"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "SPARC",
+        "number": "6.8",
+        "index": "20",
+        "fromtitle": "Assembly",
+        "byteoffset": 10812,
+        "anchor": "SPARC"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "x86-64",
+        "number": "6.9",
+        "index": "21",
+        "fromtitle": "Assembly",
+        "byteoffset": 10936,
+        "anchor": "x86-64"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Z80",
+        "number": "6.10",
+        "index": "22",
+        "fromtitle": "Assembly",
+        "byteoffset": 10987,
+        "anchor": "Z80"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "7",
+        "index": "23",
+        "fromtitle": "Assembly",
+        "byteoffset": 11141,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "8",
+        "index": "24",
+        "fromtitle": "Assembly",
+        "byteoffset": 11995,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "DEC",
+        "number": "8.1",
+        "index": "25",
+        "fromtitle": "Assembly",
+        "byteoffset": 12650,
+        "anchor": "DEC"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "IBM",
+        "number": "8.2",
+        "index": "26",
+        "fromtitle": "Assembly",
+        "byteoffset": 13057,
+        "anchor": "IBM"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Intel",
+        "number": "8.3",
+        "index": "27",
+        "fromtitle": "Assembly",
+        "byteoffset": 13247,
+        "anchor": "Intel"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "9",
+        "index": "28",
+        "fromtitle": "Assembly",
+        "byteoffset": 14316,
+        "anchor": "References"
+      }
+    ]
+  }
+}

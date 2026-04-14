@@ -1,0 +1,62 @@
+{
+  "title": "Minimax (program)",
+  "url": "https://www.chessprogramming.org/Minimax_(program)",
+  "source_type": "api",
+  "retrieved_at": "2026-03-01T15:15:37.539106+00:00",
+  "content_hash": "14de5cfedd044ea3a6477eb8d23687a78577a998db69a476b08003fc792245f9",
+  "text": "Home * Engines * Minimax Minimax , a didactic open source chess program written in QuickBASIC by Dieter Steinwender and Chrilly Donninger , which appeared 1995 in Steinwender's and Friedel's German book Schach am PC [1] . The program is apparently based on Donninger's 1994 C program with the same name , and a program published by Steinwender in Computerschach und Spiele 1984 [2] . Minimax features a Mailbox board representation with offset move generation , aspiration alpha-beta search within an iterative deepening framework. Minimax has been converted to a WinBoard chess engine by Thomas McBurney in 2003 [3] . Martin Bauer ported Minimax to Delphi and further applied enhancements for the UCI compliant DelphiMax [4] . Contents 1 Mailbox 2 See also 3 Forum Posts 4 External Links 5 References Mailbox [ edit ] Initial Position in Basic CONST BrettDim% = 119 ' Dimension des erweiterten Schachbrettes DIM SHARED Grundstellung(BrettDim%) AS INTEGER FOR i% = 0 TO BrettDim% READ Grundstellung(i%) NEXT i% DATA 100,100,100,100,100,100,100,100,100,100 DATA 100,100,100,100,100,100,100,100,100,100 DATA 100, 2 , 4 , 3 , 5 , 6 , 3 , 4 , 2 ,100 DATA 100, 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 ,100 DATA 100, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ,100 DATA 100, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ,100 DATA 100, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ,100 DATA 100, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ,100 DATA 100,-1 ,-1 ,-1 ,-1 ,-1 ,-1 ,-1 ,-1 ,100 DATA 100,-2 ,-4 ,-3 ,-5 ,-6 ,-3 ,-4 ,-2 ,100 DATA 100,100,100,100,100,100,100,100,100,100 DATA 100,100,100,100,100,100,100,100,100,100 and the same Mailbox in C [5] : #define BRETT_DIM 120 /* Dimension des erweiterten Schachbrettes */ /** *** Figuren. Schema: _ **/ #define S_K -6 /* Kennung fuer Schwarze Figuren */ #define S_D -5 #define S_S -4 #define S_L -3 #define S_T -2 #define S_B -1 #define LEER 0 /* Leeres Feld */ #define W_B 1 /* Kennung fuer weisse Figuren */ #define W_T 2 #define W_L 3 #define W_S 4 #define W_D 5 #define W_K 6 #define RAND 100 /* Umrandung des Schachprogrammes */ /** *** Grundstellung auf 10x12 Brett **/ const int GrundStellung[BRETT_DIM] = { RAND,RAND,RAND,RAND,RAND,RAND,RAND,RAND,RAND,RAND, RAND,RAND,RAND,RAND,RAND,RAND,RAND,RAND,RAND,RAND, RAND,W_T, W_S ,W_L ,W_D ,W_K ,W_L ,W_S ,W_T, RAND, RAND,W_B, W_B ,W_B ,W_B ,W_B ,W_B ,W_B ,W_B, RAND, RAND,LEER,LEER,LEER,LEER,LEER,LEER,LEER,LEER,RAND, RAND,LEER,LEER,LEER,LEER,LEER,LEER,LEER,LEER,RAND, RAND,LEER,LEER,LEER,LEER,LEER,LEER,LEER,LEER,RAND, RAND,LEER,LEER,LEER,LEER,LEER,LEER,LEER,LEER,RAND, RAND,S_B ,S_B ,S_B ,S_B ,S_B ,S_B ,S_B ,S_B, RAND, RAND,S_T, S_S ,S_L ,S_D ,S_K ,S_L ,S_S ,S_T, RAND, RAND,RAND,RAND,RAND,RAND,RAND,RAND,RAND,RAND,RAND, RAND,RAND,RAND,RAND,RAND,RAND,RAND,RAND,RAND,RAND}; See also [ edit ] Betsabe DelphiMax Kanguruh Minimax Nimzo Forum Posts [ edit ] Re: Another qBASIC Chess program -Dieter Steinwender (in english+comment by Tony Worsman, CCC , February 24, 2003 (Mimimax Source) WBEC-Ridderkerk new results by Leo Dijksman , Winboard Forum , August 14, 2003 MiniMAX und seine Derivate by lovo, Schachfeld.de , June 24, 2009 (German) Just MiniMAX Didactic Chess Program by CirothUngol, Just BASIC Files Archive , November 22, 2010 Another XBoard engine derived from Minimax Basic by Roland Chastain , CCC , October 18, 2020 External Links [ edit ] Minimax in BASIC converted to WinBoard by Thomas McBurney ( Wayback Machine , March 2016) Bauer & Schweitzer - Webdesign, Software, Shareware, Freeware, EDV - MiniMAX and DelphiMax (German, Wayback Machine , March 2016) References [ edit ] ↑ Dieter Steinwender , Frederic Friedel ( 1995 ). Schach am PC, Bits und Bytes im königlichen Spiel . Markt und Technik Buch 1995, ISBN: 978-3-87791-522-6 (German) ↑ qBASIC Chess program - from 1984 by Dieter Steinwender by Mike Byrne , CCC , February 23, 2003 ↑ Minimax in BASIC converted to WinBoard by Thomas McBurney ( Wayback Machine , March 2016) ↑ Bauer & Schweitzer - Webdesign, Software, Shareware, Freeware, EDV - MiniMAX and DelphiMax (German, Wayback Machine , March 2016) ↑ minimax - c-source, see MiniMAX und seine Derivate by lovo, Schachfeld.de , June 24, 2009 (German) Up one Level",
+  "headings": [
+    "Contents",
+    "Mailbox[edit]",
+    "See also[edit]",
+    "Forum Posts[edit]",
+    "External Links[edit]",
+    "References[edit]"
+  ],
+  "links": [
+    "Alpha-Beta",
+    "Aspiration Windows",
+    "Basic",
+    "Betsabe",
+    "C",
+    "CCC",
+    "Category:Open Source",
+    "Chrilly Donninger",
+    "Computer Chess Forums",
+    "Computerschach und Spiele",
+    "Delphi",
+    "DelphiMax",
+    "Dieter Steinwender",
+    "Engines",
+    "Frederic Friedel",
+    "Initial Position",
+    "Iterative Deepening",
+    "Kanguruh",
+    "Leo Dijksman",
+    "Mailbox",
+    "Main Page",
+    "Martin Bauer",
+    "Michael Byrne",
+    "Minimax",
+    "Move Generation",
+    "Nimzo",
+    "Roland Chastain",
+    "Thomas McBurney",
+    "UCI",
+    "WinBoard",
+    "index.php"
+  ],
+  "bold_terms": [
+    "Home * Engines * Minimax",
+    "Minimax",
+    "1995",
+    "Up one Level"
+  ],
+  "categories": [
+    "Basic",
+    "Didactic",
+    "Open_Source"
+  ],
+  "page_type": "technique",
+  "raw_payload_path": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/data/chessprogramming_cache/raw/Minimax_program.api.json"
+}

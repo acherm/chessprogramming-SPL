@@ -1,0 +1,272 @@
+{
+  "parse": {
+    "title": "Lazy Evaluation",
+    "pageid": 1548,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Evaluation\" title=\"Evaluation\">Evaluation</a> * Lazy Evaluation</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"/File:Kley_Kr%C3%A4nzchen.jpg\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Kley_Kr%C3%A4nzchen.jpg/330px-Kley_Kr%C3%A4nzchen.jpg\" width=\"300\" height=\"199\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Kley_Kr%C3%A4nzchen.jpg/500px-Kley_Kr%C3%A4nzchen.jpg 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Kley_Kr%C3%A4nzchen.jpg/960px-Kley_Kr%C3%A4nzchen.jpg 2x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Kley_Kr%C3%A4nzchen.jpg\" class=\"internal\" title=\"Enlarge\"></a></div><a href=\"/Category:Heinrich_Kley\" title=\"Category:Heinrich Kley\">Heinrich Kley</a> - Das Kränzchen <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div>\n<p><br />\nIn the chess programming sense of the phrase <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>, <b>Lazy Evaluation</b> means dividing all the tasks performed by <a href=\"/Evaluation_Function\" title=\"Evaluation Function\">evaluation function</a> in (usually two) stages. If after performing all the tasks for a given stage score exceeds <a href=\"/Beta\" title=\"Beta\">beta</a> by a certain margin or if it falls below <a href=\"/Alpha\" title=\"Alpha\">alpha</a> by the same margin, the score is returned and no more evaluation is conducted. The first stage usually consists of the evaluation terms that are relatively cheap, possibly <a href=\"/Incremental_Updates\" title=\"Incremental Updates\">incrementally updated</a>, like <a href=\"/Material\" title=\"Material\">material</a> and <a href=\"/Piece-Square_Tables\" title=\"Piece-Square Tables\">piece-square tables</a>. Lazy evaluation may be viewed as taking the <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">alpha-beta</a> principle one step further. If some parts of the evaluation function are omitted due to this heuristics, it means that one side is already winning \"the evaluation game\" by the margin unacceptable to the opponent, and therefore a cutoff occurs. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#See_also\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#1995_...\"><span class=\"tocnumber\">2.1</span> <span class=\"toctext\">1995 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#2000_...\"><span class=\"tocnumber\">2.2</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#2010_...\"><span class=\"tocnumber\">2.3</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-6\"><a href=\"#2015_...\"><span class=\"tocnumber\">2.4</span> <span class=\"toctext\">2015 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#External_Links\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-8\"><a href=\"#References\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Lazy_Evaluation&amp;action=edit&amp;section=1\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/CPW-Engine_eval\" title=\"CPW-Engine eval\">CPW-Engine_eval</a></li>\n<li> <a href=\"/Rookie#Evaluation\" title=\"Rookie\">Evaluation in Rookie 2.0</a></li>\n<li> <a href=\"/Futility_Pruning\" title=\"Futility Pruning\">Futility Pruning</a></li>\n<li> <a href=\"/Lazy_SMP\" title=\"Lazy SMP\">Lazy SMP</a></li>\n<li> <a href=\"/Razoring\" title=\"Razoring\">Razoring</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Lazy_Evaluation&amp;action=edit&amp;section=2\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1995_...\">1995 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Lazy_Evaluation&amp;action=edit&amp;section=3\" title=\"Edit section: 1995 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/12607986c47b8ef6\">approximate eval function</a> by <a href=\"/Jo%C3%ABl_Rivat\" title=\"Joël Rivat\">Joël Rivat</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, September 20, 1995</li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Lazy_Evaluation&amp;action=edit&amp;section=4\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=110681\">Caution K v KBN and lazy eval or futility</a> by <a href=\"/Brian_Richardson\" title=\"Brian Richardson\">Brian Richardson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 14, 2000&#160;» <a href=\"/KBNK_Endgame\" title=\"KBNK Endgame\">KBNK Endgame</a>, <a href=\"/Futility_Pruning\" title=\"Futility Pruning\">Futility Pruning</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=192813\">Chess Programming: \"lazy eval\"</a> by <a href=\"/Matthias_Gemuh\" title=\"Matthias Gemuh\">Matthias Gemuh</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 11, 2001</li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Lazy_Evaluation&amp;action=edit&amp;section=5\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=37223\">doing lazy exit in eval or better not&#160;?</a> by <a href=\"/Engin_%C3%9Cst%C3%BCn\" title=\"Engin Üstün\">Engin Üstün</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 22, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=38499\">lazy eval discussion</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 21, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=41236\">Lazy eval</a> by <a href=\"/Larry_Kaufman\" title=\"Larry Kaufman\">Larry Kaufman</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 27, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=46130\">Razoring / Lazy eval question</a> by <a href=\"/index.php?title=Jerry_Donald&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Jerry Donald (page does not exist)\">Jerry Donald</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 24, 2012&#160;» <a href=\"/Razoring\" title=\"Razoring\">Razoring</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=52676&amp;start=28\">Re: lazy eval</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 19, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=53199\">Lazy evaluation</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 07, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=54387\">Implications of Lazy eval on Don Beal effect in Fail Soft</a> by <a href=\"/index.php?title=Henk_van_den_Belt&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Henk van den Belt (page does not exist)\">Henk van den Belt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 19, 2014&#160;» <a href=\"/Fail-Soft\" title=\"Fail-Soft\">Fail-Soft</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2015_...\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Lazy_Evaluation&amp;action=edit&amp;section=6\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64674\">Is expensive eval required for QS?</a> by <a href=\"/Alexandru_Mosoi\" title=\"Alexandru Mosoi\">Alexandru Mosoi</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 21, 2017&#160;» <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">Quiescence Search</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65047\">adaptive lazy eval</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schroder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 31, 2017</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Lazy_Evaluation&amp;action=edit&amp;section=7\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://macechess.blogspot.de/2014/06/not-being-lazy-anymore.html\">Not being lazy anymore </a> by <a href=\"/Thomas_Petzke\" title=\"Thomas Petzke\">Thomas Petzke</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://macechess.blogspot.de/\">mACE Chess</a>, June 28, 2014&#160;» <a href=\"/ICE\" title=\"ICE\">iCE</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Lazy_evaluation\">Lazy evaluation from Wikipedia</a> as general programming term </li>\n<li> <a href=\"/Category:Deep_Purple\" title=\"Category:Deep Purple\">Deep Purple</a> - <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Lazy_%28Deep_Purple_song%29\">Lazy</a>  (<a rel=\"nofollow\" class=\"external text\" href=\"https://www.setlist.fm/setlist/deep-purple/1984/sydney-entertainment-centre-sydney-australia-4bde3f66.html\">Sydney 1984</a>),  <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video </li></ul>\n<dl><dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/iFSKvWICseQ?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Lazy_Evaluation&amp;action=edit&amp;section=8\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a href=\"/Category:Heinrich_Kley\" title=\"Category:Heinrich Kley\">Heinrich Kley</a> - Das Kränzchen. Federzeichnung (aus: Skizzenbuch I, 1909)</span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\">In general computer programming, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Lazy_evaluation\">Lazy evaluation</a> refers a technique of delaying a computation until the result is required.</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Evaluation\" title=\"Evaluation\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301153421\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.074 seconds\nReal time usage: 0.619 seconds\nPreprocessor visited node count: 68/1000000\nPreprocessor generated node count: 150/1000000\nPost‐expand include size: 26/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1548-0!canonical and timestamp 20260301153420 and revision id 15512\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Heinrich_Kley"
+      },
+      {
+        "sortkey": "",
+        "*": "Deep_Purple"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alexandru Mosoi"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha-Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Brian Richardson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CPW-Engine eval"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ed Schroder"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engin Üstün"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation Function"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fail-Soft"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Futility Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICE"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Incremental Updates"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jon Dart"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Joël Rivat"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "KBNK Endgame"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Larry Kaufman"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lazy SMP"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Material"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Matthias Gemuh"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Piece-Square Tables"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiescence Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Razoring"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Hyatt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rookie"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Thomas Petzke"
+      },
+      {
+        "ns": 0,
+        "*": "Jerry Donald"
+      },
+      {
+        "ns": 0,
+        "*": "Henk van den Belt"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Deep Purple"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Heinrich Kley"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Lazy_Evaluation",
+        "byteoffset": 1392,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Lazy_Evaluation",
+        "byteoffset": 1528,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1995 ...",
+        "number": "2.1",
+        "index": "3",
+        "fromtitle": "Lazy_Evaluation",
+        "byteoffset": 1542,
+        "anchor": "1995_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "2.2",
+        "index": "4",
+        "fromtitle": "Lazy_Evaluation",
+        "byteoffset": 1746,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "2.3",
+        "index": "5",
+        "fromtitle": "Lazy_Evaluation",
+        "byteoffset": 2073,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "2.4",
+        "index": "6",
+        "fromtitle": "Lazy_Evaluation",
+        "byteoffset": 3042,
+        "anchor": "2015_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "3",
+        "index": "7",
+        "fromtitle": "Lazy_Evaluation",
+        "byteoffset": 3340,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "4",
+        "index": "8",
+        "fromtitle": "Lazy_Evaluation",
+        "byteoffset": 4024,
+        "anchor": "References"
+      }
+    ]
+  }
+}

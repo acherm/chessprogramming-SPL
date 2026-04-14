@@ -1,0 +1,161 @@
+{
+  "parse": {
+    "title": "Marcus Hutter",
+    "pageid": 2871,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/People\" title=\"People\">People</a> * Marcus Hutter</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:182px;\"><a href=\"http://www.hutter1.net/index.htm\"><img alt=\"\" src=\"/images/b/bd/Marcushutter.jpg\" width=\"180\" height=\"240\" class=\"thumbimage\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Marcushutter.jpg\" class=\"internal\" title=\"Enlarge\"></a></div>Marcus Hutter <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>Marcus Hutter</b>,<br />\na German physicist and computer scientist, professor in the <i>Research School of Computer Science</i> at <a href=\"/Australian_National_University\" title=\"Australian National University\">Australian National University</a>. Before, he researched at <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/IDSIA\">IDSIA</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Lugano\">Lugano</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Switzerland\">Switzerland</a> in <a href=\"/J%C3%BCrgen_Schmidhuber\" title=\"Jürgen Schmidhuber\">Jürgen Schmidhuber's</a> group. Marcus Hutter defended his PhD and BSc in physics from the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Ludwig_Maximilian_University_of_Munich\">Ludwig Maximilian University of Munich</a> and a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Habilitation\">Habilitation</a>, MSc, and BSc in computer science from <a href=\"/Technical_University_of_Munich\" title=\"Technical University of Munich\">Technical University of Munich</a>. He is author of the AI-book <i>Universal Artificial Intelligence</i> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup> , a novel algorithmic information theory <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup> perspective, also introducing the universal algorithmic agent called <b>AIXI</b>. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#AIXI\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">AIXI</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Selected_Publications\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Selected Publications</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#2005_...\"><span class=\"tocnumber\">2.1</span> <span class=\"toctext\">2005 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#2010_...\"><span class=\"tocnumber\">2.2</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#2015_...\"><span class=\"tocnumber\">2.3</span> <span class=\"toctext\">2015 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#External_Links\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#References\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"AIXI\">AIXI</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Marcus_Hutter&amp;action=edit&amp;section=1\" title=\"Edit section: AIXI\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><span id=\"AIXI\"></span>Quote from <i>The AIXI Model in One Line</i> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>\n</p>\n<pre>It is actually possible to write down the AIXI model explicitly in one line, although one should not expect to be able to grasp the full meaning and power from this compact representation.\n</pre>\n<pre>AIXI is an agent that interacts with an environment in cycles k=1,2,...,m. In cycle k, AIXI takes action ak (e.g. a limb movement) based on past perceptions o1 r1...ok-1 rk-1 as defined below. Thereafter, the environment provides a (regular) observation ok (e.g. a camera image) to AIXI and a real-valued reward rk. The reward can be very scarce, e.g. just +1 (-1) for winning (losing) a chess game, and 0 at all other times. Then the next cycle k+1 starts. Given the above, AIXI is defined by: \n</pre>\n<div class=\"floatnone\"><a href=\"http://www.hutter1.net/ai/uaibook.htm#oneline\" rel=\"nofollow\"><img alt=\"Aixi1line.gif\" src=\"/images/8/8f/Aixi1line.gif\" width=\"580\" height=\"48\" style=\"vertical-align: text-bottom\" class=\"thumbborder\" /></a></div> \n<pre>The expression shows that AIXI tries to maximize its total future reward rk+...+rm. If the environment is modeled by a deterministic program q, then the future perceptions ...okrk...omrm = U(q,a1..am) can be computed, where U is a universal (monotone Turing) machine executing q given a1..am. Since q is unknown, AIXI has to maximize its expected reward, i.e. average rk+...+rm over all possible perceptions created by all possible environments q. The simpler an environment, the higher is its a-priori contribution 2-l(q), where simplicity is measured by the length l of program q. Since noisy environments are just mixtures of deterministic environments, they are automatically included. The sums in the formula constitute the averaging process. Averaging and maximization have to be performed in chronological order, hence the interleaving of max and Σ (similarly to minimax for games). \n</pre>\n<h1><span class=\"mw-headline\" id=\"Selected_Publications\">Selected Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Marcus_Hutter&amp;action=edit&amp;section=2\" title=\"Edit section: Selected Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup> <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup>\n</p>\n<h2><span class=\"mw-headline\" id=\"2005_...\">2005 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Marcus_Hutter&amp;action=edit&amp;section=3\" title=\"Edit section: 2005 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a class=\"mw-selflink selflink\">Marcus Hutter</a> (<b>2005</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.hutter1.net/ai/uaibook.htm\">Universal Artificial Intelligence</a></i>. Sequential Decisions based on Algorithmic Probability, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Springer_Science%2BBusiness_Media\">Springer</a></li>\n<li> <a class=\"mw-selflink selflink\">Marcus Hutter</a> (<b>2007</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.hutter1.net/ai/aixigentle.htm\">Universal Algorithmic Intelligence: A mathematical top-&gt;down approach</a></i>. Technical Report IDSIA-01-03 In Artificial General Intelligence, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.hutter1.net/ai/aixigentle.pdf\">pdf</a></li>\n<li> <a href=\"/Joel_Veness\" title=\"Joel Veness\">Joel Veness</a>, <a href=\"/index.php?title=Kee_Siong_Ng&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Kee Siong Ng (page does not exist)\">Kee Siong Ng</a>, <a class=\"mw-selflink selflink\">Marcus Hutter</a>, <a href=\"/David_Silver\" title=\"David Silver\">David Silver</a> (<b>2009</b>). <i>A Monte Carlo AIXI Approximation</i>, <a rel=\"nofollow\" class=\"external text\" href=\"http://jveness.info/publications/arXive2009%20-%20a%20monte%20carlo%20aixi%20approximation.pdf\">pdf</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Marcus_Hutter&amp;action=edit&amp;section=4\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Joel_Veness\" title=\"Joel Veness\">Joel Veness</a>, <a href=\"/index.php?title=Kee_Siong_Ng&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Kee Siong Ng (page does not exist)\">Kee Siong Ng</a>, <a class=\"mw-selflink selflink\">Marcus Hutter</a>, <a href=\"/David_Silver\" title=\"David Silver\">David Silver</a> (<b>2010</b>). <i>Reinforcement Learning via AIXI Approximation</i>. <a href=\"/Conferences#AAAI-2010\" title=\"Conferences\">AAAI-2010</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://jveness.info/publications/veness_rl_via_aixi_approx.pdf\">pdf</a></li>\n<li> <a href=\"/Tor_Lattimore\" title=\"Tor Lattimore\">Tor Lattimore</a>, <a class=\"mw-selflink selflink\">Marcus Hutter</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/pers/hd/g/Gavane:Vaibhav.html\">Vaibhav Gavane</a> (<b>2011</b>). <i>Universal Prediction of Selected Bits</i>.  <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/conf/alt/alt2011.html\">Algorithmic Learning Theory</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Lecture_Notes_in_Computer_Science\">Lecture Notes in Computer Science</a> 6925, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Springer_Science%2BBusiness_Media\">Springer</a></li>\n<li> <a href=\"/Tor_Lattimore\" title=\"Tor Lattimore\">Tor Lattimore</a>, <a class=\"mw-selflink selflink\">Marcus Hutter</a> (<b>2011</b>). <i>Asymptotically Optimal Agents</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/conf/alt/alt2011.html\">Algorithmic Learning Theory</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Lecture_Notes_in_Computer_Science\">Lecture Notes in Computer Science</a> 6925, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Springer_Science%2BBusiness_Media\">Springer</a></li>\n<li> <a href=\"/Tor_Lattimore\" title=\"Tor Lattimore\">Tor Lattimore</a>, <a class=\"mw-selflink selflink\">Marcus Hutter</a> (<b>2011</b>). <i>Time Consistent Discounting</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/conf/alt/alt2011.html\">Algorithmic Learning Theory</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Lecture_Notes_in_Computer_Science\">Lecture Notes in Computer Science</a> 6925, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Springer_Science%2BBusiness_Media\">Springer</a></li>\n<li> <a href=\"/Tor_Lattimore\" title=\"Tor Lattimore\">Tor Lattimore</a>, <a class=\"mw-selflink selflink\">Marcus Hutter</a> (<b>2011</b>). <i>No Free Lunch versus Occam's Razor in Supervised Learning</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Ray_Solomonoff\">Solomonoff</a> Memorial, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Lecture_Notes_in_Computer_Science\">Lecture Notes in Computer Science</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Springer-Verlag\">Springer</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1111.3846\">arXiv:1111.3846</a> <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup> <sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup></li>\n<li> <a href=\"/Joel_Veness\" title=\"Joel Veness\">Joel Veness</a>, <a href=\"/index.php?title=Kee_Siong_Ng&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Kee Siong Ng (page does not exist)\">Kee Siong Ng</a>, <a class=\"mw-selflink selflink\">Marcus Hutter</a>, <a href=\"/William_Uther\" title=\"William Uther\">William Uther</a> , <a href=\"/David_Silver\" title=\"David Silver\">David Silver</a> (<b>2011</b>). <i>A Monte-Carlo AIXI Approximation</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Journal_of_Artificial_Intelligence_Research\">JAIR</a>, Vol. 40, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.aaai.org/Papers/JAIR/Vol40/JAIR-4004.pdf\">pdf</a></li>\n<li> <a href=\"/Tor_Lattimore\" title=\"Tor Lattimore\">Tor Lattimore</a>, <a class=\"mw-selflink selflink\">Marcus Hutter</a> (<b>2012</b>). <i>PAC Bounds for Discounted MDPs</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/conf/alt/alt2012.htm\">Algorithmic Learning Theory</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1202.3890\">arXiv:1202.3890</a> <sup id=\"cite_ref-9\" class=\"reference\"><a href=\"#cite_note-9\">&#91;9&#93;</a></sup></li>\n<li> <a href=\"/Peter_Auer\" title=\"Peter Auer\">Peter Auer</a>, <a class=\"mw-selflink selflink\">Marcus Hutter</a>, <a href=\"/index.php?title=Laurent_Orseau&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Laurent Orseau (page does not exist)\">Laurent Orseau</a> (<b>2013</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://drops.dagstuhl.de/opus/volltexte/2013/4340/\">Reinforcement Learning</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://dblp.uni-trier.de/db/journals/dagstuhl-reports/dagstuhl-reports3.html#AuerHO13\">Dagstuhl Reports, Vol. 3, No. 8</a>, DOI: <a rel=\"nofollow\" class=\"external text\" href=\"http://drops.dagstuhl.de/opus/volltexte/2013/4340/\">10.4230/DagRep.3.8.1</a>, URN: <a rel=\"nofollow\" class=\"external text\" href=\"http://drops.dagstuhl.de/opus/volltexte/2013/4340/\">urn:nbn:de:0030-drops-43409</a></li>\n<li> <a href=\"/Tor_Lattimore\" title=\"Tor Lattimore\">Tor Lattimore</a>, <a class=\"mw-selflink selflink\">Marcus Hutter</a> (<b>2014</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://link.springer.com/chapter/10.1007/978-3-319-11662-4_13\">Bayesian Reinforcement Learning with Exploration</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://dblp.uni-trier.de/db/conf/alt/alt2014.html\">Algorithmic Learning Theory</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Lecture_Notes_in_Computer_Science\">Lecture Notes in Computer Science</a> 8776, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Springer_Science%2BBusiness_Media\">Springer</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2015_...\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Marcus_Hutter&amp;action=edit&amp;section=5\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/index.php?title=Tom_Everitt&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Tom Everitt (page does not exist)\">Tom Everitt</a>, <a class=\"mw-selflink selflink\">Marcus Hutter</a> (<b>2015</b>). <i>Analytical Results on the BFS vs. DFS Algorithm Selection Problem. Part I: Tree Search</i>. Australasian Conference on Artificial Intelligence, <a rel=\"nofollow\" class=\"external text\" href=\"https://pdfs.semanticscholar.org/1b4b/c878b2d068214e39b258ee250e5b8889e84c.pdf\">pdf</a></li>\n<li> <a href=\"/index.php?title=Tom_Everitt&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Tom Everitt (page does not exist)\">Tom Everitt</a>, <a class=\"mw-selflink selflink\">Marcus Hutter</a> (<b>2015</b>). <i>Analytical Results on the BFS vs. DFS Algorithm Selection Problem: Part II: Graph Search</i>. Australasian Conference on Artificial Intelligence</li>\n<li> <a href=\"/index.php?title=Tom_Everitt&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Tom Everitt (page does not exist)\">Tom Everitt</a>, <a href=\"/Tor_Lattimore\" title=\"Tor Lattimore\">Tor Lattimore</a>, <a class=\"mw-selflink selflink\">Marcus Hutter</a> (<b>2016</b>). <i>Free Lunch for Optimisation under the Universal Distribution</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1608.04544\">arXiv:1608.04544</a> </li>\n<li> <a class=\"mw-selflink selflink\">Marcus Hutter</a> (<b>2017</b>). <i>Universal Learning Theory</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://link.springer.com/referencework/10.1007%2F978-1-4899-7687-1\">Encyclopedia of Machine Learning and Data Mining 2017</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Springer_Science%2BBusiness_Media\">Springer</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Marcus_Hutter&amp;action=edit&amp;section=6\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Marcus_Hutter\">Marcus Hutter from Wikipedia</a> </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.hutter1.net/\">HomePage of Marcus Hutter</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://prize.hutter1.net/\">Hutter Prize</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Marcus_Hutter&amp;action=edit&amp;section=7\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.hutter1.net/index.htm\">HomePage of Marcus Hutter</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a class=\"mw-selflink selflink\">Marcus Hutter</a> (<b>2005</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.hutter1.net/ai/uaibook.htm\">Universal Artificial Intelligence</a></i>. Sequential Decisions based on Algorithmic Probability, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Springer_Science%2BBusiness_Media\">Springer</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.scholarpedia.org/article/Algorithmic_information_theory\">Algorithmic information theory - Scholarpedia</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.hutter1.net/ai/uaibook.htm#oneline\">The AIXI Model in One Line</a></span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.hutter1.net/official/publ.htm\">Publications of Marcus Hutter</a></span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/pers/hd/h/Hutter:Marcus.html\">dblp: Marcus Hutter:</a></span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/No_free_lunch_in_search_and_optimization\">No free lunch in search and optimization - Wikipedia</a></span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Occam%27s_razor\">Occam's razor from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-9\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-9\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Markov_decision_process\">Markov decision process from Wikipedia</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/People\" title=\"People\">Up one level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260228200446\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.022 seconds\nReal time usage: 0.025 seconds\nPreprocessor visited node count: 158/1000000\nPreprocessor generated node count: 340/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:2871-0!canonical and timestamp 20260228200446 and revision id 22047\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "Hutter",
+        "*": "Researcher"
+      },
+      {
+        "sortkey": "Hutter",
+        "*": "Physicist"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Australian National University"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Conferences"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David Silver"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Joel Veness"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jürgen Schmidhuber"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "People"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter Auer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Technical University of Munich"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tor Lattimore"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "William Uther"
+      },
+      {
+        "ns": 0,
+        "*": "Kee Siong Ng"
+      },
+      {
+        "ns": 0,
+        "*": "Laurent Orseau"
+      },
+      {
+        "ns": 0,
+        "*": "Tom Everitt"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "AIXI",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Marcus_Hutter",
+        "byteoffset": 1495,
+        "anchor": "AIXI"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Selected Publications",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Marcus_Hutter",
+        "byteoffset": 3334,
+        "anchor": "Selected_Publications"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2005 ...",
+        "number": "2.1",
+        "index": "3",
+        "fromtitle": "Marcus_Hutter",
+        "byteoffset": 3546,
+        "anchor": "2005_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "2.2",
+        "index": "4",
+        "fromtitle": "Marcus_Hutter",
+        "byteoffset": 4292,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "2.3",
+        "index": "5",
+        "fromtitle": "Marcus_Hutter",
+        "byteoffset": 7863,
+        "anchor": "2015_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "3",
+        "index": "6",
+        "fromtitle": "Marcus_Hutter",
+        "byteoffset": 8807,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "4",
+        "index": "7",
+        "fromtitle": "Marcus_Hutter",
+        "byteoffset": 9000,
+        "anchor": "References"
+      }
+    ]
+  }
+}

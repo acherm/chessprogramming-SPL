@@ -1,0 +1,96 @@
+{
+  "players": [
+    {
+      "name": "best_variant",
+      "role": "best",
+      "config_path": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/c_engine_pl/variants/phase3_full_eval.json",
+      "binary_path": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/outputs/cutechess_variant_tournament_best_worst_random_fast/variant_bins/best_variant"
+    },
+    {
+      "name": "worst_variant",
+      "role": "worst",
+      "config_path": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/c_engine_pl/variants/phase1_minimax.json",
+      "binary_path": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/outputs/cutechess_variant_tournament_best_worst_random_fast/variant_bins/worst_variant"
+    },
+    {
+      "name": "random_variant",
+      "role": "random",
+      "config_path": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/c_engine_pl/variants/phase2_10x12_ab_pvs_id.json",
+      "binary_path": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/outputs/cutechess_variant_tournament_best_worst_random_fast/variant_bins/random_variant"
+    }
+  ],
+  "params": {
+    "depth": 2,
+    "rounds": 1,
+    "games_per_encounter": 2,
+    "seed": 20260404,
+    "concurrency": 1,
+    "driver": "cutechess-cli"
+  },
+  "game_count": 6,
+  "illegal_or_runtime_tokens": [],
+  "standings": [
+    {
+      "player": "best_variant",
+      "games": "4",
+      "wins": "4",
+      "draws": "0",
+      "losses": "0",
+      "score": "4.0",
+      "score_pct": "100.0"
+    },
+    {
+      "player": "random_variant",
+      "games": "4",
+      "wins": "1",
+      "draws": "1",
+      "losses": "2",
+      "score": "1.5",
+      "score_pct": "37.5"
+    },
+    {
+      "player": "worst_variant",
+      "games": "4",
+      "wins": "0",
+      "draws": "1",
+      "losses": "3",
+      "score": "0.5",
+      "score_pct": "12.5"
+    }
+  ],
+  "perft": [
+    {
+      "player": "best_variant",
+      "role": "best",
+      "config_path": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/c_engine_pl/variants/phase3_full_eval.json",
+      "binary_path": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/outputs/cutechess_variant_tournament_best_worst_random_fast/variant_bins/best_variant",
+      "summary": "variant=phase3_full_eval board=Bitboards search=Negamax+AlphaBeta+PVS+ID eval=Material+PST+PassedPawn+IsolatedPawn+DoubledPawn+ConnectedPawn+PawnHash+BishopPair+RookOpen+RookSemiOpen+Mobility+KingPressure+",
+      "perft_d5": "4865609",
+      "perft_pass": "PASS",
+      "selected_feature_count": 37,
+      "selected_features": "Bitboards|Negamax|Alpha-Beta|Principal Variation Search|Iterative Deepening|Quiescence Search|Move Generation|Legal Move Generation|Make Move|Unmake Move|Castling|En Passant|Threefold Repetition|Fifty-Move Rule|Move Ordering|Evaluation|Piece-Square Tables|Passed Pawn|Isolated Pawn|Doubled Pawn|Connected Pawn|Pawn Hash Table|Bishop Pair|Rook on Open File|Rook Semi-Open File|Mobility|King Pressure|King Shelter|Tapered Eval|King Activity|Static Exchange Evaluation|Transposition Table|Zobrist Hashing|Hash Move|Replacement Schemes|FEN|UCI"
+    },
+    {
+      "player": "worst_variant",
+      "role": "worst",
+      "config_path": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/c_engine_pl/variants/phase1_minimax.json",
+      "binary_path": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/outputs/cutechess_variant_tournament_best_worst_random_fast/variant_bins/worst_variant",
+      "summary": "variant=phase1_minimax board=Bitboards search=Minimax eval=Material",
+      "perft_d5": "4865609",
+      "perft_pass": "PASS",
+      "selected_feature_count": 15,
+      "selected_features": "Bitboards|Make Move|Unmake Move|Move Generation|Legal Move Generation|Move Ordering|Minimax|Castling|En Passant|Fifty-Move Rule|Threefold Repetition|Evaluation|Quiescence Search|FEN|UCI"
+    },
+    {
+      "player": "random_variant",
+      "role": "random",
+      "config_path": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/c_engine_pl/variants/phase2_10x12_ab_pvs_id.json",
+      "binary_path": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/outputs/cutechess_variant_tournament_best_worst_random_fast/variant_bins/random_variant",
+      "summary": "variant=phase2_10x12_ab_pvs_id board=10x12 search=Negamax+AlphaBeta+PVS+ID eval=Material+PST",
+      "perft_d5": "4865609",
+      "perft_pass": "PASS",
+      "selected_feature_count": 22,
+      "selected_features": "10x12 Board|Negamax|Alpha-Beta|Principal Variation Search|Iterative Deepening|Quiescence Search|Move Generation|Legal Move Generation|Make Move|Unmake Move|Castling|En Passant|Threefold Repetition|Fifty-Move Rule|Move Ordering|Evaluation|Piece-Square Tables|Transposition Table|Zobrist Hashing|Hash Move|FEN|UCI"
+    }
+  ]
+}

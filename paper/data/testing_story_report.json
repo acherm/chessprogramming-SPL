@@ -1,0 +1,141 @@
+{
+  "prompt_counts": {
+    "engineering": {
+      "pipeline_tests": 3,
+      "strength_benchmarking": 21,
+      "legality": 6,
+      "functional_correctness": 9,
+      "interactions_probes": 2,
+      "runtime_setup": 3
+    },
+    "all": {
+      "pipeline_tests": 6,
+      "strength_benchmarking": 36,
+      "legality": 9,
+      "functional_correctness": 20,
+      "interactions_probes": 4,
+      "runtime_setup": 8
+    },
+    "paper": {
+      "functional_correctness": 6,
+      "strength_benchmarking": 6,
+      "runtime_setup": 4,
+      "legality": 2,
+      "interactions_probes": 1,
+      "pipeline_tests": 2
+    },
+    "experiments": {
+      "functional_correctness": 5,
+      "legality": 1,
+      "strength_benchmarking": 9,
+      "pipeline_tests": 1,
+      "interactions_probes": 1,
+      "runtime_setup": 1
+    }
+  },
+  "command_counts": {
+    "engineering": {
+      "pytest": 67,
+      "legality_scenarios": 4,
+      "perft_screening": 34,
+      "strength_benchmarking": 77,
+      "interaction_probes": 34,
+      "runtime_setup": 20
+    },
+    "all": {
+      "pytest": 69,
+      "legality_scenarios": 5,
+      "perft_screening": 38,
+      "strength_benchmarking": 181,
+      "interaction_probes": 38,
+      "runtime_setup": 23
+    },
+    "paper": {
+      "pytest": 2,
+      "perft_screening": 1,
+      "legality_scenarios": 1,
+      "interaction_probes": 1,
+      "runtime_setup": 1,
+      "strength_benchmarking": 1
+    },
+    "experiments": {
+      "strength_benchmarking": 103,
+      "runtime_setup": 2,
+      "perft_screening": 3,
+      "interaction_probes": 3
+    }
+  },
+  "testing_prompt_count_engineering_experiments": 46,
+  "micromanagement_like_testing_prompts": 3,
+  "artifact_groups": [
+    {
+      "label": "Pipeline and mining tests",
+      "files": [
+        "tests/test_fetcher.py",
+        "tests/test_parser.py",
+        "tests/test_discovery_resume.py",
+        "tests/test_feature_miner.py",
+        "tests/test_matrix_builder.py",
+        "tests/test_integration_pipeline.py"
+      ],
+      "count": 6,
+      "first_date": "2026-03-01T11:23:57+01:00"
+    },
+    {
+      "label": "Derivation and constraint tests",
+      "files": [
+        "tests/test_constraints.py",
+        "tests/test_pl_codegen.py",
+        "tests/test_implementation_mining.py",
+        "tests/test_c_engine_feature_coverage.py"
+      ],
+      "count": 4,
+      "first_date": "2026-03-05T13:43:41+01:00"
+    },
+    {
+      "label": "Perft and legality harnesses",
+      "files": [
+        "tests/test_c_engine_perft.py",
+        "tests/test_c_engine_tournament_legality.py",
+        "scripts/uci_perft_check.py",
+        "scripts/uci_legality_scenarios.py",
+        "scripts/perft_random_variants.py"
+      ],
+      "count": 5,
+      "first_date": "2026-03-05T13:43:41+01:00"
+    },
+    {
+      "label": "Interaction and probe tooling",
+      "files": [
+        "scripts/board_search_pairwise.py",
+        "scripts/board_search_multi_probe.py",
+        "scripts/eval_feature_assessment.py",
+        "scripts/eval_subfeature_probes.py"
+      ],
+      "count": 4,
+      "first_date": "2026-04-02T19:09:02+02:00"
+    },
+    {
+      "label": "Runtime setup and UCI testing",
+      "files": [
+        "tests/test_c_engine_uci_runtime_features.py",
+        "tests/test_setup_model.py",
+        "scripts/setup_variant_tournament.py"
+      ],
+      "count": 3,
+      "first_date": "2026-04-04T13:17:59+02:00"
+    },
+    {
+      "label": "Tournament and anchor benchmarking",
+      "files": [
+        "scripts/variant_diversity_tournament.py",
+        "scripts/proper_elo_tournament.py",
+        "scripts/sf_anchor_match.py",
+        "scripts/stratified_variant_experiment.py",
+        "scripts/best_variant_elo_assessment.py"
+      ],
+      "count": 5,
+      "first_date": "2026-04-05T20:04:03+02:00"
+    }
+  ]
+}

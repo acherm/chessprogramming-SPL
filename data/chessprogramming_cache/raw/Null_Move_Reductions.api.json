@@ -1,0 +1,185 @@
+{
+  "parse": {
+    "title": "Null Move Reductions",
+    "pageid": 998,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Search\" title=\"Search\">Search</a> * <a href=\"/Selectivity\" title=\"Selectivity\">Selectivity</a> * <a href=\"/Reductions\" title=\"Reductions\">Reductions</a> * Null Move Reductions</b>\n</p><p><b>Null Move Reductions</b>,<br />\nnot to confused with the widespread <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">Null Move Pruning</a>, work similar to <a href=\"/Rainer_Feldmann\" title=\"Rainer Feldmann\">Feldmann's</a> <a href=\"/Fail-High_Reductions\" title=\"Fail-High Reductions\">Fail-High Reductions</a>, but use a <a href=\"/Null_Move\" title=\"Null Move\">Null Move</a> Search rather than static <a href=\"/Evaluation\" title=\"Evaluation\">evaluation</a> and reduces by a amount of <b>four</b> plies rather than one. <a href=\"/Eli_David\" title=\"Eli David\">Eli David</a> and <a href=\"/Nathan_S._Netanyahu\" title=\"Nathan S. Netanyahu\">Nathan S. Netanyahu</a> introduced so called <b>Extended Null-Move Reductions</b> <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup> with an adaptive <a href=\"/Depth_Reduction_R\" title=\"Depth Reduction R\">R</a> based on <a href=\"/Depth\" title=\"Depth\">depth</a>.\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#How_it_works\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">How it works</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#See_also\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Publications\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Publications</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Forum Posts</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#References\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"How_it_works\">How it works</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Reductions&amp;action=edit&amp;section=1\" title=\"Edit section: How it works\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>If a null move <a href=\"/Fail-High\" title=\"Fail-High\">fail-high</a> occurs - opposed to Null Move Pruning - the search is reduced by <b>four</b> plies, rather than pruned. Thus, <b>Null Move Reductions</b> are therefor less vulnerable to <a href=\"/Zugzwang\" title=\"Zugzwang\">Zugzwang</a> and might even applied in (late) endings.\n</p>\n<pre>\nif ( nullMoveAllowed &amp;&amp; ...) {\n   R = depth &gt; 6&#160;? 4&#160;: 3;\n   makeNullMove()\n   score = -zwSearch(1-beta, depth-R-1) // -AlphaBeta (0-beta, 1-beta, depth-R-1)\n   unmakeNullMove();\n   if (score &gt;= beta ) {\n      depth -= 4; // reduce search\n      if ( depth &lt;= 0 )\n          return Evaluate(); // Quiescence\n   }\n}\n// continue search\n</pre>\n<p><i>For zwSearch, see <a href=\"/Principal_Variation_Search#ZWS\" title=\"Principal Variation Search\">Zero Window Search</a> inside the <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">Principal Variation Search</a>.</i>\n</p>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Reductions&amp;action=edit&amp;section=2\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Double_Null_Move\" title=\"Double Null Move\">Double Null Move</a></li>\n<li> <a href=\"/Fail-High_Reductions\" title=\"Fail-High Reductions\">Fail-High Reductions</a></li>\n<li> <a href=\"/Null_Move_Observation\" title=\"Null Move Observation\">Null Move Observation</a></li>\n<li> <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">Null Move Pruning</a></li>\n<li> <a href=\"/Quiescence_Search#StandPat\" title=\"Quiescence Search\">Standing Pat</a> in <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">Quiescence Search</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Reductions&amp;action=edit&amp;section=3\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Eli_David\" title=\"Eli David\">Omid David</a>, <a href=\"/Nathan_S._Netanyahu\" title=\"Nathan S. Netanyahu\">Nathan S. Netanyahu</a> (<b>2008</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/chapter/10.1007/978-3-540-87608-3_19\">Extended Null-Move Reductions</a></i>. <a href=\"/CG_2008\" title=\"CG 2008\">CG 2008</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.oedavid.com/pubs/nmr.pdf\">pdf</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Reductions&amp;action=edit&amp;section=4\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?p=367283\">Extended Null-Move Reductions</a> by <a href=\"/Alvaro_Cardoso\" title=\"Alvaro Cardoso\">Alvaro Cardoso</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 20, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=41104\">Null move alterative in endgames</a> by  <a href=\"/Aleks_Peshkov\" title=\"Aleks Peshkov\">Aleks Peshkov</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 16, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=56672\">thoughts on null-move reduction</a> by <a href=\"/Youri_Matiounine\" title=\"Youri Matiounine\">Youri Matiounine</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 14, 2015&#160;» <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">Null Move Pruning</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Move_Reductions&amp;action=edit&amp;section=5\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a href=\"/Eli_David\" title=\"Eli David\">Omid David</a>, <a href=\"/Nathan_S._Netanyahu\" title=\"Nathan S. Netanyahu\">Nathan S. Netanyahu</a> (<b>2008</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/chapter/10.1007/978-3-540-87608-3_19\">Extended Null-Move Reductions</a></i>. <a href=\"/CG_2008\" title=\"CG 2008\">CG 2008</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Reductions\" title=\"Reductions\">Up one level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301061142\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.012 seconds\nReal time usage: 0.013 seconds\nPreprocessor visited node count: 46/1000000\nPreprocessor generated node count: 94/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:998-0!canonical and timestamp 20260301061141 and revision id 6364\n -->\n"
+    },
+    "categories": [],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Selectivity"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aleks Peshkov"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alvaro Cardoso"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CG 2008"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth Reduction R"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Double Null Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Eli David"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fail-High"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fail-High Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Nathan S. Netanyahu"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Observation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiescence Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rainer Feldmann"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Youri Matiounine"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Zugzwang"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "How it works",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Null_Move_Reductions",
+        "byteoffset": 752,
+        "anchor": "How_it_works"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Null_Move_Reductions",
+        "byteoffset": 1494,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Null_Move_Reductions",
+        "byteoffset": 1680,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Null_Move_Reductions",
+        "byteoffset": 1916,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "5",
+        "index": "5",
+        "fromtitle": "Null_Move_Reductions",
+        "byteoffset": 2368,
+        "anchor": "References"
+      }
+    ]
+  }
+}

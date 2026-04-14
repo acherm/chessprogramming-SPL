@@ -1,0 +1,375 @@
+{
+  "parse": {
+    "title": "De Bruijn Sequence",
+    "pageid": 1917,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Programming\" title=\"Programming\">Programming</a> * <a href=\"/Data\" title=\"Data\">Data</a> * De Bruijn Sequence</b>\n</p><p>In <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Combinatorics\">combinatorial mathematics</a>, a <b>k</b>-ary <b>De Bruijn Sequence</b> B(k, n) of order <b>n</b>, named after the Dutch mathematician <a href=\"/Nicolaas_de_Bruijn\" title=\"Nicolaas de Bruijn\">Nicolaas de Bruijn</a>, is a cyclic sequence of a given alphabet <b>A</b> with size <b>k</b> for which every possible subsequence of length <b>n</b> in <b>A</b> appears as a sequence of consecutive characters exactly once <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup>. In chess programming there are applications of de Bruijn sequences with the Binary alphabet, in <a href=\"/Hash_Table\" title=\"Hash Table\">hashing</a> sets like <a href=\"/Piece-Sets\" title=\"Piece-Sets\">Piece-Sets</a> or Square-sets, also called <a href=\"/Bitboards\" title=\"Bitboards\">Bitboards</a>, most notably in <a href=\"/BitScan#DeBruijnMultiplation\" title=\"BitScan\">Bit scanning</a> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup> . \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Binary_alphabet\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Binary alphabet</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-2\"><a href=\"#B.282.2C_1.29\"><span class=\"tocnumber\">1.1</span> <span class=\"toctext\">B(2, 1)</span></a></li>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#B.282.2C_2.29\"><span class=\"tocnumber\">1.2</span> <span class=\"toctext\">B(2, 2)</span></a></li>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#B.282.2C_3.29\"><span class=\"tocnumber\">1.3</span> <span class=\"toctext\">B(2, 3)</span></a></li>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#B.282.2C_4.29\"><span class=\"tocnumber\">1.4</span> <span class=\"toctext\">B(2, 4)</span></a></li>\n<li class=\"toclevel-2 tocsection-6\"><a href=\"#B.282.2C_5.29\"><span class=\"tocnumber\">1.5</span> <span class=\"toctext\">B(2, 5)</span></a></li>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#B.282.2C_6.29\"><span class=\"tocnumber\">1.6</span> <span class=\"toctext\">B(2, 6)</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-8\"><a href=\"#De_Bruijn_Graphs\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">De Bruijn Graphs</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#B.282.2C_4.29_Graph\"><span class=\"tocnumber\">2.1</span> <span class=\"toctext\">B(2, 4) Graph</span></a></li>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#De_Bruijn_Graph_on_a_Chess_Board\"><span class=\"tocnumber\">2.2</span> <span class=\"toctext\">De Bruijn Graph on a Chess Board</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-11\"><a href=\"#De_Bruijn_Networks\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">De Bruijn Networks</span></a></li>\n<li class=\"toclevel-1 tocsection-12\"><a href=\"#See_also\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-13\"><a href=\"#Selected_Publications\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Selected Publications</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-14\"><a href=\"#1894\"><span class=\"tocnumber\">5.1</span> <span class=\"toctext\">1894</span></a></li>\n<li class=\"toclevel-2 tocsection-15\"><a href=\"#1946\"><span class=\"tocnumber\">5.2</span> <span class=\"toctext\">1946</span></a></li>\n<li class=\"toclevel-2 tocsection-16\"><a href=\"#1950_...\"><span class=\"tocnumber\">5.3</span> <span class=\"toctext\">1950 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-17\"><a href=\"#1970_...\"><span class=\"tocnumber\">5.4</span> <span class=\"toctext\">1970 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-18\"><a href=\"#1990_...\"><span class=\"tocnumber\">5.5</span> <span class=\"toctext\">1990 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-19\"><a href=\"#2000_...\"><span class=\"tocnumber\">5.6</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-20\"><a href=\"#2010_...\"><span class=\"tocnumber\">5.7</span> <span class=\"toctext\">2010 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-21\"><a href=\"#External_Links\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-22\"><a href=\"#References\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Binary_alphabet\">Binary alphabet</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=De_Bruijn_Sequence&amp;action=edit&amp;section=1\" title=\"Edit section: Binary alphabet\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>According to De Bruijn himself <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup> , the existence of De Bruijn sequences were first proved, for the case of alphabets with two elements, by <b>Camille Flye Sainte-Marie</b> in 1894, whereas the generalization to larger alphabets is originally due to <a href=\"/Mathematician#Ehrenfest\" title=\"Mathematician\">Tanja van Ardenne-Ehrenfest</a> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup> and himself.\n</p><p>Binary digits or <a href=\"/Bit\" title=\"Bit\">bits</a> inside a computer word are B(2, n) de Bruijn sequences, with <b>2<span style=\"vertical-align: super;\">n</span></b> bits length and equal number of ones and zeros, with <b>2<span style=\"vertical-align: super;\">n</span></b> overlapping unique <b>n</b>-bit subsequences. Since the sequences are cyclic and <b>n-1</b> subsequences need to wrap, we restrict them to at least <b>n-1</b> leading zeros, to make them overlap the hidden trailing \"zeros\".\n</p><p>Odd sequences have <b>n</b> leading zeros. The even ones with <b>n-1</b> leading zeros are rotated (shifted) left by one. Due to <b>n</b> leading zeros of these odd sequences we further consider, the first subsequence[<b>0</b>] is zero. Due to the overlapping, each subsequence[<b>i</b>+1] is dependent from subsequence[<b>i</b>]. The doubled value incremented by either zero or one. Since subsequence[<b>0</b>] is zero, a second zero subsequence with six consecutive binary zeros is further prohibited, and subsequence[<b>1</b>] must be one. Subsequence index <b>i</b> is counted from most significant bit left to right, and therefor reversed from usual bit-index. A modulo <b>2<span style=\"vertical-align: super;\">n</span></b> restricts all subsequences to <b>n</b> bits:\n</p>\n<pre>s[i+1] = (2s[i] + (0|1)) mod (2<span style=\"vertical-align: super;\">n</span>)\n</pre>\n<p>The <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Cardinality\">Cardinality</a> of all distinct B(2, n) de Bruijn sequences is:\n</p>\n<pre>|B(2, n)| = 2<span style=\"vertical-align: super;\">(2<span style=\"vertical-align: super;\">n-1</span> - n)</span>\n</pre>\n<table class=\"wikitable\">\n\n<tr>\n<th> n\n</th>\n<th> 2<span style=\"vertical-align: super;\">n-1</span> - n\n</th>\n<th>B(2, n)|\n</th></tr>\n<tr>\n<td style=\"text-align:center;\"> 1\n</td>\n<td style=\"text-align:right;\"> 0\n</td>\n<td style=\"text-align:right;\"> 1\n</td></tr>\n<tr>\n<td style=\"text-align:center;\"> 2\n</td>\n<td style=\"text-align:right;\"> 0\n</td>\n<td style=\"text-align:right;\"> 1\n</td></tr>\n<tr>\n<td style=\"text-align:center;\"> 3\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<td style=\"text-align:right;\"> 2\n</td></tr>\n<tr>\n<td style=\"text-align:center;\"> 4\n</td>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 16\n</td></tr>\n<tr>\n<td style=\"text-align:center;\"> 5\n</td>\n<td style=\"text-align:right;\"> 11\n</td>\n<td style=\"text-align:right;\"> 2,048\n</td></tr>\n<tr>\n<td style=\"text-align:center;\"> 6\n</td>\n<td style=\"text-align:right;\"> 26\n</td>\n<td style=\"text-align:right;\"> 67,108,864\n</td></tr>\n<tr>\n<td style=\"text-align:center;\"> 7\n</td>\n<td style=\"text-align:right;\"> 57\n</td>\n<td style=\"text-align:right;\"> 144,115,188,075,855,872\n</td></tr>\n<tr>\n<td style=\"text-align:center;\"> 8\n</td>\n<td style=\"text-align:right;\"> 120\n</td>\n<td style=\"text-align:right;\"> ~1.329e+36\n</td></tr></table>\n<h2><span class=\"mw-headline\" id=\"B.282.2C_1.29\">B(2, 1)</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=De_Bruijn_Sequence&amp;action=edit&amp;section=2\" title=\"Edit section: B(2, 1)\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<pre>The two one-bit subsequences obviously do not overlap:\n</pre>\n<pre>\ni  01  s[i]\n0  0    0\n1   1   1\n</pre>\n<h2><span class=\"mw-headline\" id=\"B.282.2C_2.29\">B(2, 2)</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=De_Bruijn_Sequence&amp;action=edit&amp;section=3\" title=\"Edit section: B(2, 2)\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>B(2, 2) implies 2<span style=\"vertical-align: super;\">2</span> or 4-bit sequences. There is one odd four-bit de Bruijn sequence with four overlapping unique two-bit subsequences, 0x3.\n</p>\n<pre>\ni  0011|0  s[i]\n0  00 . . . 0\n1   01      1\n2  . 11 . . 3\n3     1|0   2\n</pre>\n<h2><span class=\"mw-headline\" id=\"B.282.2C_3.29\">B(2, 3)</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=De_Bruijn_Sequence&amp;action=edit&amp;section=4\" title=\"Edit section: B(2, 3)\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>B(2, 3) implies 2<span style=\"vertical-align: super;\">3</span> or 8-bit sequences. There are two odd eight-bit sequences with eight overlapping unique three-bit subsequences, 0x17 and 0x1d. Note that the five relevant bits are reversed.\n</p>\n<pre>\ni  00010111|00 s[i]    i  00011101|00 s[i]\n0  000 . . . .  0      0  000 . . . .  0\n1   001         1      1   001         1\n2  . 010 . . .  2      2  . 011 . . .  3\n3     101       5      3     111       7\n4  . . 011 . .  3      4  . . 110 . .  6\n5       111     7      5       101     5\n6  . . . 11|0   6      6  . . . 01|0   2\n7         1|00  4      7         1|00  4\n</pre>\n<h2><span class=\"mw-headline\" id=\"B.282.2C_4.29\">B(2, 4)</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=De_Bruijn_Sequence&amp;action=edit&amp;section=5\" title=\"Edit section: B(2, 4)\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>B(2, 4) implies 2<span style=\"vertical-align: super;\">4</span> or 16 bit sequences. There are 16 odd 16-bit sequences with 16 overlapping unique four-bit subsequences:\n</p>\n<pre>\n0x09af  0000100110101111\n0x09eb  0000100111101011\n0x0a6f  0000101001101111\n0x0a7b  0000101001111011\n0x0b3d  0000101100111101\n0x0b4f  0000101101001111\n0x0bcd  0000101111001101\n0x0bd3  0000101111010011\n0x0cbd  0000110010111101\n0x0d2f  0000110100101111\n0x0d79  0000110101111001\n0x0de5  0000110111100101\n0x0f2d  0000111100101101\n0x0f4b  0000111101001011\n0x0f59  0000111101011001\n0x0f65  0000111101100101\n</pre>\n<p>for instance 0x0d2f:\n</p>\n<pre>\ni  0000110100101111|000 s[i]\n 0  0000 . . . . . . . .  0\n 1   0001                 1\n 2  . 0011 . . . . . . .  3\n 3     0110               6\n 4  . . 1101 . . . . . . 13\n 5       1010            10\n 6  . . . 0100 . . . . .  4\n 7         1001           9\n 8  . . . . 0010 . . . .  2\n 9           0101         5\n10  . . . . . 1011 . . . 11\n11             0111       7\n12  . . . . . . 1111 . . 15\n13               111|0   14\n14  . . . . . . . 11|00  12\n15                 1|000  8\n</pre>\n<h2><span class=\"mw-headline\" id=\"B.282.2C_5.29\">B(2, 5)</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=De_Bruijn_Sequence&amp;action=edit&amp;section=6\" title=\"Edit section: B(2, 5)\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>B(2, 5) implies 2<span style=\"vertical-align: super;\">5</span> or 32 bit sequences. There are 2^11 or 2,048 odd 32-bit sequences with 32 overlapping unique five-bit subsequences, for instance 0x076be629\n</p>\n<pre>\n i  00000111011010111110011000101001|0000 s[i]\n 0  00000 . . . . . . . . . . . . . . . .  0\n 1   00001                                 1\n 2  . 00011 . . . . . . . . . . . . . . .  3\n 3     00111                               7\n 4  . . 01110 . . . . . . . . . . . . . . 14\n 5       11101                            29\n 6  . . . 11011 . . . . . . . . . . . . . 27\n 7         10110                          22\n 8  . . . . 01101 . . . . . . . . . . . . 13\n 9           11010                        26\n10  . . . . . 10101 . . . . . . . . . . . 21\n11             01011                      11\n12  . . . . . . 10111 . . . . . . . . . . 23\n13               01111                    15\n14  . . . . . . . 11111 . . . . . . . . . 31\n15                 11110                  30\n16  . . . . . . . . 11100 . . . . . . . . 28\n17                   11001                25\n18  . . . . . . . . . 10011 . . . . . . . 19\n19                     00110               6\n20  . . . . . . . . . . 01100 . . . . . . 12\n21                       11000            24\n22  . . . . . . . . . . . 10001 . . . . . 17\n23                         00010           2\n24  . . . . . . . . . . . . 00101 . . . .  5\n25                           01010        10\n26  . . . . . . . . . . . . . 10100 . . . 20\n27                             01001       9\n28  . . . . . . . . . . . . . . 1001|0. . 18\n29                               001|00    4\n30  . . . . . . . . . . . . . . . 01|000   8\n31                                 1|0000 16\n</pre>\n<h2><span class=\"mw-headline\" id=\"B.282.2C_6.29\">B(2, 6)</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=De_Bruijn_Sequence&amp;action=edit&amp;section=7\" title=\"Edit section: B(2, 6)\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>B(2, 6) implies 2<span style=\"vertical-align: super;\">6</span> or 64 bit sequences. There are 2^26 or 67,108,864 odd 64-bit sequences with 64 overlapping unique six-bit subsequences, for instance 0x022fdd63cc95386d\n</p>\n<pre>\n i  0000001000101111110111010110001111001100100101010011100001101101|00000 s[i]\n 0  000000 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  0\n 1   000001                                                                 1\n 2  . 000010 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  2\n 3     000100                                                               4\n 4  . . 001000 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  8\n 5       010001                                                            17\n 6  . . . 100010 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34\n 7         000101                                                           5\n 8  . . . . 001011 . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11\n 9           010111                                                        23\n10  . . . . . 101111 . . . . . . . . . . . . . . . . . . . . . . . . . . . 47\n11             011111                                                      31\n12  . . . . . . 111111 . . . . . . . . . . . . . . . . . . . . . . . . . . 63\n13               111110                                                    62\n14  . . . . . . . 111101 . . . . . . . . . . . . . . . . . . . . . . . . . 61\n15                 111011                                                  59\n16  . . . . . . . . 110111 . . . . . . . . . . . . . . . . . . . . . . . . 55\n17                   101110                                                46\n18  . . . . . . . . . 011101 . . . . . . . . . . . . . . . . . . . . . . . 29\n19                     111010                                              58\n20  . . . . . . . . . . 110101 . . . . . . . . . . . . . . . . . . . . . . 53\n21                       101011                                            43\n22  . . . . . . . . . . . 010110 . . . . . . . . . . . . . . . . . . . . . 22\n23                         101100                                          44\n24  . . . . . . . . . . . . 011000 . . . . . . . . . . . . . . . . . . . . 24\n25                           110001                                        49\n26  . . . . . . . . . . . . . 100011 . . . . . . . . . . . . . . . . . . . 35\n27                             000111                                       7\n28  . . . . . . . . . . . . . . 001111 . . . . . . . . . . . . . . . . . . 15\n29                               011110                                    30\n30  . . . . . . . . . . . . . . . 111100 . . . . . . . . . . . . . . . . . 60\n31                                 111001                                  57\n32  . . . . . . . . . . . . . . . . 110011 . . . . . . . . . . . . . . . . 51\n33                                   100110                                38\n34  . . . . . . . . . . . . . . . . . 001100 . . . . . . . . . . . . . . . 12\n35                                     011001                              25\n36  . . . . . . . . . . . . . . . . . . 110010 . . . . . . . . . . . . . . 50\n37                                       100100                            36\n38  . . . . . . . . . . . . . . . . . . . 001001 . . . . . . . . . . . . .  9\n39                                         010010                          18\n40  . . . . . . . . . . . . . . . . . . . . 100101 . . . . . . . . . . . . 37\n41                                           001010                        10\n42  . . . . . . . . . . . . . . . . . . . . . 010101 . . . . . . . . . . . 21\n43                                             101010                      42\n44  . . . . . . . . . . . . . . . . . . . . . . 010100 . . . . . . . . . . 20\n45                                               101001                    41\n46  . . . . . . . . . . . . . . . . . . . . . . . 010011 . . . . . . . . . 19\n47                                                 100111                  39\n48  . . . . . . . . . . . . . . . . . . . . . . . . 001110 . . . . . . . . 14\n49                                                   011100                28\n50  . . . . . . . . . . . . . . . . . . . . . . . . . 111000 . . . . . . . 56\n51                                                     110000              48\n52  . . . . . . . . . . . . . . . . . . . . . . . . . . 100001 . . . . . . 33\n53                                                       000011             3\n54  . . . . . . . . . . . . . . . . . . . . . . . . . . . 000110 . . . . .  6\n55                                                         001101          13\n56  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 011011 . . . . 27\n57                                                           110110        54\n58  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 101101 . . . 45\n59                                                             01101|0     26\n60  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1101|00  . 52\n61                                                               101|000   40\n62  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 01|0000  16\n63                                                                 1|00000 32\n</pre>\n<p><span id=\"DeBruijnGraphs\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"De_Bruijn_Graphs\">De Bruijn Graphs</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=De_Bruijn_Sequence&amp;action=edit&amp;section=8\" title=\"Edit section: De Bruijn Graphs\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>A De Bruijn graph is a directed graph representing overlaps between sequences of symbols <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup> .\n</p>\n<ul><li> Each vertex has exactly m incoming and m outgoing edges</li>\n<li> Each n-dimensional de Bruijn graph is the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Line_graph\">line digraph</a> of the (n-1)-dimensional de Bruijn graph</li>\n<li> Each de Bruijn graph is <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Euler_cycle\">Eulerian</a> and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Hamiltonian_graph\">Hamiltonian</a>. The Euler cycles and Hamiltonian cycles of these graphs are de Bruijn sequences.</li></ul>\n<div class=\"floatnone\"><a href=\"/File:DeBruijn-as-line-digraph.svg\" class=\"image\"><img alt=\"DeBruijn-as-line-digraph.svg\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/DeBruijn-as-line-digraph.svg/960px-DeBruijn-as-line-digraph.svg.png\" width=\"954\" height=\"648\" style=\"vertical-align: text-bottom\" class=\"thumbborder\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/DeBruijn-as-line-digraph.svg/1920px-DeBruijn-as-line-digraph.svg.png 1.5x\" /></a></div>\n<p>The graph construction of the three smallest binary de Bruijn graphs\n</p>\n<h2><span class=\"mw-headline\" id=\"B.282.2C_4.29_Graph\">B(2, 4) Graph</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=De_Bruijn_Sequence&amp;action=edit&amp;section=9\" title=\"Edit section: B(2, 4) Graph\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<dl><dd> <div class=\"floatnone\"><a href=\"/File:De_bruijn_graph-for_binary_sequence_of_order_4.svg\" class=\"image\"><img alt=\"De bruijn graph-for binary sequence of order 4.svg\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/De_bruijn_graph-for_binary_sequence_of_order_4.svg/330px-De_bruijn_graph-for_binary_sequence_of_order_4.svg.png\" width=\"320\" height=\"448\" style=\"vertical-align: text-bottom\" class=\"thumbborder\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/De_bruijn_graph-for_binary_sequence_of_order_4.svg/500px-De_bruijn_graph-for_binary_sequence_of_order_4.svg.png 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/De_bruijn_graph-for_binary_sequence_of_order_4.svg/960px-De_bruijn_graph-for_binary_sequence_of_order_4.svg.png 2x\" /></a></div></dd>\n<dd> A De Bruijn graph. Every four-digit sequence occurs exactly once if one </dd>\n<dd> traverses every edge exactly once and returns to one's starting point.</dd></dl>\n<p><span id=\"BruijnGraphChessBoard\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"De_Bruijn_Graph_on_a_Chess_Board\">De Bruijn Graph on a Chess Board</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=De_Bruijn_Sequence&amp;action=edit&amp;section=10\" title=\"Edit section: De Bruijn Graph on a Chess Board\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>A directed De Bruijn Graph of B(2, 6) sequences with <a href=\"/Square_Mapping_Considerations#LittleEndianRankFileMapping\" title=\"Square Mapping Considerations\">Little-Endian Rank-File Mapping</a> board coordinates (a1 = 0, b1 = 1, h8 = 63). For topology reasons, almost each node (except a1 and h8) of the graph is deconcentrated and appears twice in the form of two reversed binary trees. The leaf outputs join the respective reversed tree. Between c6 and f3 is a direct cycle, since 42 is 2*21 and 21 is (2*42 + 1)&#160;% 64, with both six-bit pattern reversed - 010101 (21) versus 101010 (42). The challenge is to traverse the graph in any way to visit each of the 64 nodes aka squares exactly once.\n</p>\n<pre>\n+-----------------&gt;---------------a1--------------&lt;-----------------+\n|                                 |                                 |\n|                                 b1                                |\n|                 +--------------/  \\-------------+                 |\n|                c1                               d1                |\n^         +-----/  \\-----+                 +-----/  \\-----+         |\n|        e1              f1               g1              h1        |\n|     +-/  \\-+        +-/  \\-+         +-/  \\-+        +-/  \\-+     |\n|    a2      b2      c2      d2       e2      f2      g2      h2    |\n|  a3  b3  c3  d3  e3 |f3| g3  h3   a4  b4  c4  d4  e4  f4  g4  h4  |\n+-a5b5c5d5e5f5g5h5a6b6c6d6e6f6g6h6 a7b7c7d7e7f7g7h7a8b8c8d8e8f8  |  |\n     ^ ^ ^ ^ ^ ^ ^ ^ ^   ^ ^ ^ ^ ^  ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^  |  |\n                                                                 |  |\n+-----------------&gt;---------------h8--------------&lt;--------------+  ^\n|                                  |                                |\n|                                 g8                                |\n|                 +--------------/  \\-------------+                 |\n|                f8                               e8                |\n^         +-----/  \\-----+                 +-----/  \\-----+         |\n|        d8              c8               b8              a8        |\n|     +-/  \\-+        +-/  \\-+         +-/  \\-+        +-/  \\-+     |\n|    h7      g7      f7      e7       d7      c7      b7      a7    |\n|  h6  g6  f6  e6  d6 |c6| b6  a6   h5  g5  f5  e5  d5  c5  b5  a5--+\n+-h4g4f4e4d4c4b4a4h3g3f3e3d3c3b3a3 h2g2f2e2d2c2b2a2h1g1f1e1d1c1\n     ^ ^ ^ ^ ^ ^ ^ ^ ^   ^ ^ ^ ^ ^  ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^\n</pre>\n<h1><span class=\"mw-headline\" id=\"De_Bruijn_Networks\">De Bruijn Networks</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=De_Bruijn_Sequence&amp;action=edit&amp;section=11\" title=\"Edit section: De Bruijn Networks\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>So called De Bruijn Networks with the topology of De Bruijn Graphs have interesting properties in processor and computer networks, for instance as described by <a href=\"/Rainer_Feldmann\" title=\"Rainer Feldmann\">Feldmann et al.</a> to connect <a href=\"/Transputer\" title=\"Transputer\">Transputer</a> networks <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup> <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup> .\n</p>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=De_Bruijn_Sequence&amp;action=edit&amp;section=12\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Nicolaas_de_Bruijn\" title=\"Nicolaas de Bruijn\">Nicolaas de Bruijn</a></li>\n<li> <a href=\"/BitScan#DeBruijnMultiplation\" title=\"BitScan\">De Bruijn Multiplication</a> from <a href=\"/BitScan\" title=\"BitScan\">BitScan</a></li>\n<li> <a href=\"/De_Bruijn_Sequence_Generator\" title=\"De Bruijn Sequence Generator\">De Bruijn Sequence Generator</a></li>\n<li> <a href=\"/Max_Euwe#ProuhetThueMorseSequence\" title=\"Max Euwe\">Prouhet–Thue–Morse Sequence</a></li>\n<li> <a href=\"/Pseudorandom_Number_Generator\" title=\"Pseudorandom Number Generator\">Pseudorandom Number Generator</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Selected_Publications\">Selected Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=De_Bruijn_Sequence&amp;action=edit&amp;section=13\" title=\"Edit section: Selected Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1894\">1894</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=De_Bruijn_Sequence&amp;action=edit&amp;section=14\" title=\"Edit section: 1894\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> Camille Flye Sainte-Marie (<b>1894</b>). <i>Solution to question nr. 48</i>, L'Intermédiaire des Mathématiciens 1, reproduced in <a href=\"/Nicolaas_de_Bruijn\" title=\"Nicolaas de Bruijn\">Nicolaas de Bruijn</a> (<b>1975</b>). <i>Acknowledgement of priority to C. Flye Sainte-Marie on the counting of circular arrangements of 2n zeros and ones that show each n-letter word exactly once</i>. Technical Report, Technische Hogeschool Eindhoven, <a rel=\"nofollow\" class=\"external text\" href=\"http://alexandria.tue.nl/repository/books/252901.pdf\">pdf</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1946\">1946</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=De_Bruijn_Sequence&amp;action=edit&amp;section=15\" title=\"Edit section: 1946\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Nicolaas_de_Bruijn\" title=\"Nicolaas de Bruijn\">Nicolaas de Bruijn</a> (<b>1946</b>). <i>A Combinatorial Problem</i>. Koninklijke Nederlandse Akademie v. Wetenschappen 49: 758–764.</li>\n<li> <a href=\"/Jack_Good\" title=\"Jack Good\">Jack Good</a> (<b>1946</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://jlms.oxfordjournals.org/cgi/content/citation/s1-21/3/167\">Normal Recurring Decimals</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.lms.ac.uk/publications/jlms\">Journal of the London Mathematical Society</a> <sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup></li></ul>\n<h2><span class=\"mw-headline\" id=\"1950_...\">1950 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=De_Bruijn_Sequence&amp;action=edit&amp;section=16\" title=\"Edit section: 1950 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Mathematician#LRFord\" title=\"Mathematician\">Lester Randolph Ford, Jr.</a> (<b>1957</b>). <i>A Cyclic Arrangement of M-Tuples</i>. Report No. P-1071. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/RAND_Corporation\">Rand Corporation</a> </li>\n<li> <a href=\"/Mathematician#SMGolomb\" title=\"Mathematician\">Solomon W. Golomb</a> (<b>1967, 1982</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://catalog.hathitrust.org/Record/000466600\">Shift Register Sequences</a></i>. Holden-Day Inc., revised 2nd edition, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Aegean_Park_Press\">Aegean Park Press</a></li>\n<li> <a href=\"/Mathematician#HMFredricksen\" title=\"Mathematician\">Harold M. Fredricksen</a> (<b>1968</b>). <i>Disjoint Cycles from the de Bruijn Graph</i>. Ph.D. thesis, <a href=\"/University_of_Southern_California\" title=\"University of Southern California\">University of Southern California</a>, advisor <a href=\"/Mathematician#SMGolomb\" title=\"Mathematician\">Solomon Wolf Golomb</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1970_...\">1970 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=De_Bruijn_Sequence&amp;action=edit&amp;section=17\" title=\"Edit section: 1970 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li>  <a href=\"/Mathematician#HMFredricksen\" title=\"Mathematician\">Harold M. Fredricksen</a> (<b>1970</b>). <i>The lexicographically least de Bruijn cycle</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Journal_of_Combinatorial_Theory\">Journal of Combinatorial Theory</a>, Vol. 9, No. 1</li>\n<li> <a href=\"/Mathematician#ALempel\" title=\"Mathematician\">Abraham Lempel</a> (<b>1970</b>). <i>On a Homomorphism of the De Bruijn Graph and Its Applications to the Design of Feedback Shift Registers</i>. <a href=\"/IEEE#TOC\" title=\"IEEE\">IEEE Transactions on Computers</a>, Vol. 19, No. 12</li>\n<li>  <a href=\"/Mathematician#HMFredricksen\" title=\"Mathematician\">Harold M. Fredricksen</a> (<b>1972</b>). <i>Generation of the Ford Sequence of Length 2<span style=\"vertical-align: super;\">n</span>, n Large.</i> JPL Technical Report 32-1526, Vol. IV, <a rel=\"nofollow\" class=\"external text\" href=\"http://tmo.jpl.nasa.gov/progress_report2/IV/IVM.PDF\">pdf</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1990_...\">1990 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=De_Bruijn_Sequence&amp;action=edit&amp;section=18\" title=\"Edit section: 1990 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://dblp.uni-trier.de/pers/hd/h/Huang:Yuejiang\">Yuejiang Huang</a> (<b>1990</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.sciencedirect.com/science/article/pii/019667749090028D\">A new algorithm for the generation of binary de Bruijn sequences</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"ftp://ftp.math.utah.edu/pub/tex/bib/toc/jalg.html#11(1):March:1990\">Journal of Algorithms, Vol. 11, No. 1</a></li>\n<li> <a href=\"/Mathematician#CJMitchell\" title=\"Mathematician\">Chris J. Mitchell</a>, <a href=\"/Mathematician#TEtzion\" title=\"Mathematician\">Tuvi Etzion</a>, <a href=\"/Mathematician#KGPaterson\" title=\"Mathematician\">Kenneth G. Paterson</a> (<b>1996</b>). <i>A method for constructing decodable de Bruijn Sequences</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=B603C5EDF04C7DF00B0D604AB96E3226?doi=10.1.1.14.674&amp;rep=rep1&amp;type=pdf\">pdf</a> via <a rel=\"nofollow\" class=\"external text\" href=\"http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.14.674\">CiteSeerX</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.ece.uc.edu/~annexste/UC_Pages/Dr._Fred_Annexsteins_Computer_Science_Department_Homepage_____.html\">Fred S. Annexstein</a> (<b>1997</b>). <i>Generating De Bruijn Sequences: An Efficient Implementation.</i> <a href=\"/IEEE#TOC\" title=\"IEEE\">IEEE Transactions on Computers</a>, Vol. 46, No. 2, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.ece.uc.edu/~annexste/Papers/Annexstein-GeneratingDB.pdf\">pdf</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.ece.uc.edu/~annexste/Papers/fastdb.c\">Supplement: C-code implementation</a></li>\n<li> <a href=\"/Charles_Leiserson\" title=\"Charles Leiserson\">Charles E. Leiserson</a>, <a href=\"/Harald_Prokop\" title=\"Harald Prokop\">Harald Prokop</a>, <a href=\"/Keith_H._Randall\" title=\"Keith H. Randall\">Keith H. Randall</a> (<b>1998</b>). <i>Using de Bruijn Sequences to Index a 1 in a Computer Word</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://supertech.csail.mit.edu/papers/debruijn.pdf\">pdf</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=De_Bruijn_Sequence&amp;action=edit&amp;section=19\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://research.haifa.ac.il/%7Eevolut/\">Vladimir Raphael Rosenfeld</a> (<b>2002</b>). <i>Enumerating De Bruijn Sequences</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://evolution.haifa.ac.il/\">Institute of Evolution</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/University_of_Haifa\">University of Haifa</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.stefangeens.com/br13.pdf\">pdf</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://research.haifa.ac.il/%7Eevolut/\">Vladimir Raphael Rosenfeld</a> (<b>2002</b>). <i>Enumerating Kautz Sequences</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://evolution.haifa.ac.il/\">Institute of Evolution</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/University_of_Haifa\">University of Haifa</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://elib.mi.sanu.ac.rs/files/journals/kjm/24/d003download.pdf\">pdf</a></li>\n<li> <a href=\"/Mathematician#ADatta\" title=\"Mathematician\">Anwitaman Datta</a>, <a href=\"/Mathematician#SGirdzijauskas\" title=\"Mathematician\">Sarunas Girdzijauskas</a>, <a href=\"/Mathematician#KAberer\" title=\"Mathematician\">Karl Aberer</a> (<b>2004</b>). <i>On de Bruijn routing in distributed hash tables: There and back again</i>. P2P2004, The 4th IEEE International Conference on Peer-to-Peer Computing, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.ida.liu.se/conferences/p2p/p2p2004/papers/datta.pdf\">pdf</a></li>\n<li> <a href=\"/Mathematician#PFraigniaud\" title=\"Mathematician\">Pierre Fraigniaud</a>, <a href=\"/Mathematician#PGauron\" title=\"Mathematician\">Philippe Gauron</a> (<b>2005</b>). <i>D2B: a de Bruijn Based Content-Addressable Network</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.liafa.jussieu.fr/%7Epierref/POSTSCRIPTS/D2B.pdf\">pdf</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.math.umn.edu/%7Earmstron/\">Drew Armstrong</a> (<b>2006</b>). <i>De Bruijn Sequences</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.math.umn.edu/%7Earmstron/5707/DeBruijn.pdf\">pdf</a></li>\n<li> <a href=\"/Mathematician#JBerstel\" title=\"Mathematician\">Jean Berstel</a>, <a href=\"/Mathematician#DPerrin\" title=\"Mathematician\">Dominique Perrin</a> (<b>2007</b>). <i>The origins of combinatorics on words</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/journals/ejc/ejc28.html\">European Journal of Combinatorics 28</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www-igm.univ-mlv.fr/~berstel/Articles/2007Origins.pdf\">pdf</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=De_Bruijn_Sequence&amp;action=edit&amp;section=20\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.pu.edu.tw/~yawlin/\">Yaw-Ling Lin</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://sites.google.com/site/charlesbward/\">Charles B. Ward</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://dblp.uni-trier.de/pers/hd/j/Jain:Bharat\">Bharat Jain</a>, <a href=\"/Steven_Skiena\" title=\"Steven Skiena\">Steven Skiena</a> (<b>2011</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/chapter/10.1007%2F978-3-642-22300-6_50\">Constructing Orthogonal de Bruijn Sequences</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Lecture_Notes_in_Computer_Science\">LNCS</a> 6844, <a rel=\"nofollow\" class=\"external text\" href=\"http://dblp.uni-trier.de/db/conf/wads/wads2011.html#LinWJS11\">WADS 2011</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.researchgate.net/profile/Zuling_Chang\">Zuling Chang</a>, <a href=\"/Mathematician#MFEzerman\" title=\"Mathematician\">Martianus Frederic Ezerman</a>, <a href=\"/Mathematician#SanLing\" title=\"Mathematician\">San Ling</a>, <a href=\"/Mathematician#HuaxiongWang\" title=\"Mathematician\">Huaxiong Wang</a> (<b>2016</b>). <i>On Binary de Bruijn Sequences from LFSRs with Arbitrary Characteristic Polynomials</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1611.10088\">arXiv:1611.10088</a> <sup id=\"cite_ref-9\" class=\"reference\"><a href=\"#cite_note-9\">&#91;9&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.researchgate.net/profile/Zuling_Chang\">Zuling Chang</a>, <a href=\"/Mathematician#MFEzerman\" title=\"Mathematician\">Martianus Frederic Ezerman</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://www.linkedin.com/in/adamas-aqsa-fahreza-08927995/\">Adamas Aqsa Fahreza</a>, <a href=\"/Mathematician#SanLing\" title=\"Mathematician\">San Ling</a>, <a href=\"/Mathematician#HuaxiongWang\" title=\"Mathematician\">Huaxiong Wang</a> (<b>2017</b>). <i>Large Order Binary de Bruijn Sequences via Zech's Logarithms</i>.  <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1705.03150\">arXiv:1705.03150</a> <sup id=\"cite_ref-10\" class=\"reference\"><a href=\"#cite_note-10\">&#91;10&#93;</a></sup></li>\n<li> <a href=\"/Mathematician#JSawada\" title=\"Mathematician\">Joe Sawada</a>, <a href=\"/Mathematician#AWilliams\" title=\"Mathematician\">Aaron Williams</a> (<b>2017</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://dl.acm.org/citation.cfm?id=3085499\">Practical Algorithms to Rank Necklaces, Lyndon Words, and de Bruijn Sequences</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://www.journals.elsevier.com/journal-of-discrete-algorithms/\">Journal of Discrete Algorithms</a>, Vol. 43, No. C, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.socs.uoguelph.ca/~sawada/papers/ranking.pdf\">pdf</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=De_Bruijn_Sequence&amp;action=edit&amp;section=21\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/De_Bruijn_sequence\">De Bruijn sequence from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/De_Bruijn_graph\">De Bruijn graph from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Kautz_graph\">Kautz graph from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Koorde\">Koorde from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://oeis.org/A166315\">A166315 - OEIS</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Lyndon_word\">Lyndon word from Wikipedia</a></li>\n<li> <a href=\"/Category:If\" title=\"Category:If\">If</a> - <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/If_3\">Forgotten Roads</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Beat-Club\">Beat-Club</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.youtube.com/watch?v=V1BcLk19hVw\">#71</a>, September 25, 1971, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/2Hejk6KyYpk?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=De_Bruijn_Sequence&amp;action=edit&amp;section=22\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/De_Bruijn_sequence\">De Bruijn sequence from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a href=\"/Charles_Leiserson\" title=\"Charles Leiserson\">Charles E. Leiserson</a>, <a href=\"/Harald_Prokop\" title=\"Harald Prokop\">Harald Prokop</a>, <a href=\"/Keith_H._Randall\" title=\"Keith H. Randall\">Keith H. Randall</a> (<b>1998</b>). <i>Using de Bruijn Sequences to Index a 1 in a Computer Word</i>.  <a rel=\"nofollow\" class=\"external text\" href=\"http://supertech.csail.mit.edu/papers/debruijn.pdf\">pdf</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a href=\"/Nicolaas_de_Bruijn\" title=\"Nicolaas de Bruijn\">Nicolaas de Bruijn</a> (<b>1975</b>). <i>Acknowledgement of priority to C. Flye Sainte-Marie on the counting of circular arrangements of 2n zeros and ones that show each n-letter word exactly once</i>. Technical Report, Technische Hogeschool Eindhoven, <a rel=\"nofollow\" class=\"external text\" href=\"http://alexandria.tue.nl/repository/books/252901.pdf\">pdf</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a href=\"/Nicolaas_de_Bruijn\" title=\"Nicolaas de Bruijn\">Nicolaas de Bruijn</a> (<b>1985</b>). <i>In Memoriam T. van Ardenne-Ehrenfest</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://alexandria.tue.nl/repository/freearticles/597575.pdf\">pdf</a></span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/De_Bruijn_graph\">De Bruijn graph from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a href=\"/Rainer_Feldmann\" title=\"Rainer Feldmann\">Rainer Feldmann</a>, <a href=\"/Peter_Mysliwietz\" title=\"Peter Mysliwietz\">Peter Mysliwietz</a>, <a href=\"/Burkhard_Monien\" title=\"Burkhard Monien\">Burkhard Monien</a> (<b>1991</b>). <i>A Fully Distributed Chess Program</i>. <a href=\"/Advances_in_Computer_Chess_6\" title=\"Advances in Computer Chess 6\">Advances in Computer Chess 6</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.top-5000.nl/ps/A%20fully%20distribuited%20chess%20program.pdf\">pdf</a></span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a href=\"/Rainer_Feldmann\" title=\"Rainer Feldmann\">Rainer Feldmann</a> (<b>1993</b>). <i>Game Tree Search on Massively Parallel Systems</i> Phd-Thesis, <a rel=\"nofollow\" class=\"external text\" href=\"http://wwwcs.uni-paderborn.de/fachbereich/AG/monien/PUBLICATIONS/POSTSCRIPTS/feldmann_phd.pdf\">pdf</a></span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Recurring_decimal\">Recurring decimal from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-9\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-9\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Linear-feedback_shift_register\">LFSR from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-10\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-10\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Zech%27s_logarithm\">Zech's logarithm from Wikipedia</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Data\" title=\"Data\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301010759\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.174 seconds\nReal time usage: 1.299 seconds\nPreprocessor visited node count: 323/1000000\nPreprocessor generated node count: 652/1000000\nPost‐expand include size: 27/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1917-0!canonical and timestamp 20260301010758 and revision id 23412\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "If"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 6"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bit"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "BitScan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Burkhard Monien"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Charles Leiserson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Data"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "De Bruijn Sequence Generator"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Harald Prokop"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hash Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "IEEE"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jack Good"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Keith H. Randall"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mathematician"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Max Euwe"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Nicolaas de Bruijn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter Mysliwietz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Piece-Sets"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Programming"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pseudorandom Number Generator"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rainer Feldmann"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Square Mapping Considerations"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Steven Skiena"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transputer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "University of Southern California"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:If"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Binary alphabet",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "De_Bruijn_Sequence",
+        "byteoffset": 1051,
+        "anchor": "Binary_alphabet"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "B(2, 1)",
+        "number": "1.1",
+        "index": "2",
+        "fromtitle": "De_Bruijn_Sequence",
+        "byteoffset": 4370,
+        "anchor": "B.282.2C_1.29"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "B(2, 2)",
+        "number": "1.2",
+        "index": "3",
+        "fromtitle": "De_Bruijn_Sequence",
+        "byteoffset": 4485,
+        "anchor": "B.282.2C_2.29"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "B(2, 3)",
+        "number": "1.3",
+        "index": "4",
+        "fromtitle": "De_Bruijn_Sequence",
+        "byteoffset": 4768,
+        "anchor": "B.282.2C_3.29"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "B(2, 4)",
+        "number": "1.4",
+        "index": "5",
+        "fromtitle": "De_Bruijn_Sequence",
+        "byteoffset": 5403,
+        "anchor": "B.282.2C_4.29"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "B(2, 5)",
+        "number": "1.5",
+        "index": "6",
+        "fromtitle": "De_Bruijn_Sequence",
+        "byteoffset": 6509,
+        "anchor": "B.282.2C_5.29"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "B(2, 6)",
+        "number": "1.6",
+        "index": "7",
+        "fromtitle": "De_Bruijn_Sequence",
+        "byteoffset": 8226,
+        "anchor": "B.282.2C_6.29"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "De Bruijn Graphs",
+        "number": "2",
+        "index": "8",
+        "fromtitle": "De_Bruijn_Sequence",
+        "byteoffset": 13573,
+        "anchor": "De_Bruijn_Graphs"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "B(2, 4) Graph",
+        "number": "2.1",
+        "index": "9",
+        "fromtitle": "De_Bruijn_Sequence",
+        "byteoffset": 14331,
+        "anchor": "B.282.2C_4.29_Graph"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "De Bruijn Graph on a Chess Board",
+        "number": "2.2",
+        "index": "10",
+        "fromtitle": "De_Bruijn_Sequence",
+        "byteoffset": 14625,
+        "anchor": "De_Bruijn_Graph_on_a_Chess_Board"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "De Bruijn Networks",
+        "number": "3",
+        "index": "11",
+        "fromtitle": "De_Bruijn_Sequence",
+        "byteoffset": 17064,
+        "anchor": "De_Bruijn_Networks"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "4",
+        "index": "12",
+        "fromtitle": "De_Bruijn_Sequence",
+        "byteoffset": 17768,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Selected Publications",
+        "number": "5",
+        "index": "13",
+        "fromtitle": "De_Bruijn_Sequence",
+        "byteoffset": 18022,
+        "anchor": "Selected_Publications"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1894",
+        "number": "5.1",
+        "index": "14",
+        "fromtitle": "De_Bruijn_Sequence",
+        "byteoffset": 18047,
+        "anchor": "1894"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1946",
+        "number": "5.2",
+        "index": "15",
+        "fromtitle": "De_Bruijn_Sequence",
+        "byteoffset": 18492,
+        "anchor": "1946"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1950 ...",
+        "number": "5.3",
+        "index": "16",
+        "fromtitle": "De_Bruijn_Sequence",
+        "byteoffset": 18938,
+        "anchor": "1950_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1970 ...",
+        "number": "5.4",
+        "index": "17",
+        "fromtitle": "De_Bruijn_Sequence",
+        "byteoffset": 19619,
+        "anchor": "1970_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1990 ...",
+        "number": "5.5",
+        "index": "18",
+        "fromtitle": "De_Bruijn_Sequence",
+        "byteoffset": 20361,
+        "anchor": "1990_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "5.6",
+        "index": "19",
+        "fromtitle": "De_Bruijn_Sequence",
+        "byteoffset": 21777,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "5.7",
+        "index": "20",
+        "fromtitle": "De_Bruijn_Sequence",
+        "byteoffset": 23470,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "6",
+        "index": "21",
+        "fromtitle": "De_Bruijn_Sequence",
+        "byteoffset": 25325,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "7",
+        "index": "22",
+        "fromtitle": "De_Bruijn_Sequence",
+        "byteoffset": 26105,
+        "anchor": "References"
+      }
+    ]
+  }
+}

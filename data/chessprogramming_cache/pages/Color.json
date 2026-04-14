@@ -1,0 +1,41 @@
+{
+  "title": "Color",
+  "url": "https://www.chessprogramming.org/Color",
+  "source_type": "api",
+  "retrieved_at": "2026-03-01T08:51:58.838396+00:00",
+  "content_hash": "86be0a7588f3d2cb588995f481c89f8bae4d4253ba17de25abd8174037e884c4",
+  "text": "Home * Chess * Color Viktor Vasnetsov - Last Judgment [1] In Chess, Color refers to the color of the two piece sets , the color each player is assigned to, the side to move , and the color of a square . The pieces are divided, into white and black sets, but their colors should not taken literally. The players are referred to as \"White\" and \"Black\", they control their associated pieces. The colors of the sixty-four squares alternate and are referred to \"light squares\" and \"dark squares\", sometimes also referred to \"White\" and \"Black\" squares. Contents 1 Color Definition 2 Toggle Color 3 See also 4 External Links 5 References Color Definition [ edit ] Since there are only two colors, one bit is sufficient to encode them. This is how one may define colors in C++ : enum enumColor { ecWhite = 0, ecBlack = 1 }; Toggle Color [ edit ] Since the players alternately move, one need to toggle the side to move color after each move made inside the Chess Position object. This can be done by subtracting color from one (ecBlack), ... inline enumColor toggleColor(enumColor color) { return ecBlack - color; } ... or a little bit cheaper, by xoring the color as left operand inside a register or memory cell with an immediate constant (ecBlack). inline enumColor toggleColor(enumColor color) { return color ^ ecBlack; } See also [ edit ] Color Flipping Color of a Square Color Weakness Side to move External Links [ edit ] Color from Wikipedia Black and whitefrom Wikipedia Black-and-white dualism from Wikipedia Black & White (video game) from Wikipedia Black from Wikipedia White from Wikipedia References [ edit ] ↑ Last Judgment fresco by Viktor Vasnetsov , between 1885 and 1896, St. Vladimir's Cathedral , Kiev , Ukraine , Black-and-white dualism from Wikipedia , Wikimedia Commons Up one Level",
+  "headings": [
+    "Contents",
+    "Color Definition[edit]",
+    "Toggle Color[edit]",
+    "See also[edit]",
+    "External Links[edit]",
+    "References[edit]"
+  ],
+  "links": [
+    "Category:Viktor Vasnetsov",
+    "Chess",
+    "Chess Position",
+    "Color Flipping",
+    "Color Weakness",
+    "Color of a Square",
+    "Cpp",
+    "Main Page",
+    "Moves",
+    "Pieces",
+    "Side to move",
+    "Squares",
+    "index.php"
+  ],
+  "bold_terms": [
+    "Home * Chess * Color",
+    "Color",
+    "Up one Level"
+  ],
+  "categories": [
+    "Viktor_Vasnetsov"
+  ],
+  "page_type": "technique",
+  "raw_payload_path": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/data/chessprogramming_cache/raw/Color.api.json"
+}

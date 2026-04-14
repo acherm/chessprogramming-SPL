@@ -1,0 +1,319 @@
+{
+  "parse": {
+    "title": "10x12 Board",
+    "pageid": 104,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Board_Representation\" title=\"Board Representation\">Board Representation</a> * <a href=\"/Mailbox\" title=\"Mailbox\">Mailbox</a> * 10x12 Board</b>\n</p><p>The <b>10x12 Board</b> embeds the <a href=\"/8x8_Board\" title=\"8x8 Board\">8x8 board</a> <a href=\"/Array\" title=\"Array\">array</a>, surrounded by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Sentinel_value\">sentinel</a> <a href=\"/Files\" title=\"Files\">files</a> and <a href=\"/Ranks\" title=\"Ranks\">ranks</a> to recognize off the board indices while <a href=\"/Move_Generation\" title=\"Move Generation\">generating moves</a> using offsets per <a href=\"/Pieces\" title=\"Pieces\">piece</a> and <a href=\"/Direction\" title=\"Direction\">direction</a> to determine <a href=\"/Target_Square\" title=\"Target Square\">move target squares</a>. Two ranks at the bottom and top are necessary to ensure even knight jumps from the corners result in valid array indices greater or equal zero and less than 120. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Programs\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Programs</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-2\"><a href=\"#COKO_III\"><span class=\"tocnumber\">1.1</span> <span class=\"toctext\">COKO III</span></a></li>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#Sargon\"><span class=\"tocnumber\">1.2</span> <span class=\"toctext\">Sargon</span></a></li>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#TSCP\"><span class=\"tocnumber\">1.3</span> <span class=\"toctext\">TSCP</span></a>\n<ul>\n<li class=\"toclevel-3 tocsection-5\"><a href=\"#Square_Mapping\"><span class=\"tocnumber\">1.3.1</span> <span class=\"toctext\">Square Mapping</span></a></li>\n<li class=\"toclevel-3 tocsection-6\"><a href=\"#Offset_Move_Generation\"><span class=\"tocnumber\">1.3.2</span> <span class=\"toctext\">Offset Move Generation</span></a></li>\n</ul>\n</li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#See_also\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-8\"><a href=\"#Publications\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Publications</span></a></li>\n<li class=\"toclevel-1 tocsection-9\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Forum Posts</span></a></li>\n<li class=\"toclevel-1 tocsection-10\"><a href=\"#External_Links\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-11\"><a href=\"#References\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Programs\">Programs</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=10x12_Board&amp;action=edit&amp;section=1\" title=\"Edit section: Programs\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"COKO_III\">COKO III</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=10x12_Board&amp;action=edit&amp;section=2\" title=\"Edit section: COKO III\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Figure 2 from <i>COKO III: The Cooper-Koz Chess Program</i> (1973) explains <a href=\"/Coko\" title=\"Coko\">COKO's</a> Chess environment <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup>:\n</p>\n<div class=\"floatnone\"><a href=\"https://www.semanticscholar.org/paper/COKO-III%3A-The-Cooper-Koz-Chess-Program-Kozdrowicki-Cooper/8ca0c0f08ba564883b96f6126e2c0c3745fe31e7/figure/1\" rel=\"nofollow\"><img alt=\"CokoIII10x12Board.jpg\" src=\"/images/5/5f/CokoIII10x12Board.jpg\" width=\"687\" height=\"504\" style=\"vertical-align: text-bottom\" class=\"thumbborder\" /></a></div>\n<p><a href=\"/Board_Representation\" title=\"Board Representation\">Chess environment representation</a>: minimal game board. (a) The chessboard represented by a <a href=\"/Array\" title=\"Array\">linear array</a>.<br />\n(b) Representation of <a href=\"/Pieces\" title=\"Pieces\">pieces</a>, empty <a href=\"/Squares\" title=\"Squares\">squares</a> and border squares. (c) Move <a href=\"/Direction\" title=\"Direction\">directions</a> for <a href=\"/King\" title=\"King\">King</a> and <a href=\"/Queen\" title=\"Queen\">Queen</a>.<br />\n(d) The <a href=\"/Knight\" title=\"Knight\">Knight</a> dictates that two rows of border squares surround the <a href=\"/8x8_Board\" title=\"8x8 Board\">8 X 8 game board</a>.<br />\nColumns 10 and 1 are considered adjacent.\n</p>\n<h2><span class=\"mw-headline\" id=\"Sargon\">Sargon</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=10x12_Board&amp;action=edit&amp;section=3\" title=\"Edit section: Sargon\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>In 1978, <a href=\"/Sargon\" title=\"Sargon\">Sargon</a> by <a href=\"/Dan_Spracklen\" title=\"Dan Spracklen\">Dan</a> and <a href=\"/Kathe_Spracklen\" title=\"Kathe Spracklen\">Kathe Spracklen</a> used a classical 120 <a href=\"/Byte\" title=\"Byte\">Byte</a> array as board <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>:\n</p>\n<pre>\n; *******************************************************\n; BOARD\t-- Board Array. Used to hold the current position \n; of the board during play. The board itself\n; looks like: \n; \tFFFFFFFFFFFFFFFFFFFF \n; \tFFFFFFFFFFFFFFFFFFFF \n; \tFF0402030506030204FF \n; \tFF0101010101010101FF \n; \tFF0000000000000000FF \n; \tFF0000000000000000FF \n; \tFF0000000000000060FF \n; \tFF0000000000000000FF \n; \tFF8181818181818181FF \n; \tFF8482838586838284FF \n; \tFFFFFFFFFFFFFFFFFFFF \n; \tFFFFFFFFFFFFFFFFFFFF \n; The values of FF form the border of the \n; board, and are used to indicate when a piece \n; moves off the board. The individual bits of \n; the other bytes in the board array are as\n; follows:\n; \tBit 7 -- Color of the piece\n; \t1 -- Black \n; \t0 -- White \n; \tBit 6 -- Not used \n; \tBit 5 -- Not used \n; \tBit 4 --Castle flag for Kings only\n; \tBit 3 -- Piece has moved flag\n; \tBits 2-0 Piece type \n; \t\t1 -- Pawn \n; \t\t2 -- Knight\n; \t\t3 -- Bishop \n; \t\t4 -- Rook \n; \t\t5 -- Queen \n; \t\t6 -- King\n; \t\t7 -- Not used\n; \t\t0 -- Empty Square\n; *******************************************************\nBOARD = .-TBASE \nBOARDA: .BLKB 120\n</pre>\n<h2><span class=\"mw-headline\" id=\"TSCP\">TSCP</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=10x12_Board&amp;action=edit&amp;section=4\" title=\"Edit section: TSCP\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>A textbook example of mailbox board representation is <a href=\"/TSCP\" title=\"TSCP\">TSCP</a>. The board are two 64 element arrays, containing empty square plus <a href=\"/Pieces#PieceTypeCoding\" title=\"Pieces\">pure piece code</a>, and  empty square plus piece color code <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>:. \n</p>\n<pre>\nint color[64];  /* LIGHT, DARK, or EMPTY */\nint piece[64];  /* PAWN, KNIGHT, BISHOP, ROOK, QUEEN, KING, or EMPTY */\n</pre>\n<h3><span class=\"mw-headline\" id=\"Square_Mapping\">Square Mapping</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=10x12_Board&amp;action=edit&amp;section=5\" title=\"Edit section: Square Mapping\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p>The 10x12 versus 8x8 and vice versa square mapping is applied by mailbox and mailbox64 lookup tables. A comment by <a href=\"/Tom_Kerrigan\" title=\"Tom Kerrigan\">Tom Kerrigan</a> describes the implementation as follows <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup>. However, as pointed out by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, not only the embedded 10x12 board, but various implementations are all mailbox, independently from elements in the array for padding that can act as a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Sentinel_value\">sentinel value</a> <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup>&#160;:\n</p>\n<pre>\n/* Now we have the mailbox array, so called because it looks like a\n   mailbox, at least according to Bob Hyatt. This is useful when we\n   need to figure out what pieces can go where. Let's say we have a\n   rook on square a4 (32) and we want to know if it can move one\n   square to the left. We subtract 1, and we get 31 (h5). The rook\n   obviously can't move to h5, but we don't know that without doing\n   a lot of annoying work. Sooooo, what we do is figure out a4's\n   mailbox number, which is 61. Then we subtract 1 from 61 (60) and\n   see what mailbox[60] is. In this case, it's -1, so it's out of\n   bounds and we can forget it. You can see how mailbox[] is used\n   in attack() in board.c. */\n\nint mailbox[120] = {\n     -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,\n     -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,\n     -1,  0,  1,  2,  3,  4,  5,  6,  7, -1,\n     -1,  8,  9, 10, 11, 12, 13, 14, 15, -1,\n     -1, 16, 17, 18, 19, 20, 21, 22, 23, -1,\n     -1, 24, 25, 26, 27, 28, 29, 30, 31, -1,\n     -1, 32, 33, 34, 35, 36, 37, 38, 39, -1,\n     -1, 40, 41, 42, 43, 44, 45, 46, 47, -1,\n     -1, 48, 49, 50, 51, 52, 53, 54, 55, -1,\n     -1, 56, 57, 58, 59, 60, 61, 62, 63, -1,\n     -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,\n     -1, -1, -1, -1, -1, -1, -1, -1, -1, -1\n};\n\nint mailbox64[64] = {\n    21, 22, 23, 24, 25, 26, 27, 28,\n    31, 32, 33, 34, 35, 36, 37, 38,\n    41, 42, 43, 44, 45, 46, 47, 48,\n    51, 52, 53, 54, 55, 56, 57, 58,\n    61, 62, 63, 64, 65, 66, 67, 68,\n    71, 72, 73, 74, 75, 76, 77, 78,\n    81, 82, 83, 84, 85, 86, 87, 88,\n    91, 92, 93, 94, 95, 96, 97, 98\n};\n</pre>\n<h3><span class=\"mw-headline\" id=\"Offset_Move_Generation\"><span id=\"OffsetMG\"></span>Offset Move Generation</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=10x12_Board&amp;action=edit&amp;section=6\" title=\"Edit section: Offset Move Generation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p>In the offset <a href=\"/Move_Generation\" title=\"Move Generation\">move generation</a> code, testing if a square is on the board looks as follows <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup> <sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup>:\n</p>\n<pre>\nint side;  /* the side to move */\nint xside;  /* the side not to move */\n\nBOOL slide[6] = {FALSE, FALSE, TRUE, TRUE, TRUE, FALSE};\nint offsets[6] = {0, 8, 4, 4, 8, 8}; /* knight or ray directions */\nint offset[6][8] = {\n\t{   0,   0,  0,  0, 0,  0,  0,  0 },\n\t{ -21, -19,-12, -8, 8, 12, 19, 21 }, /* KNIGHT */\n\t{ -11,  -9,  9, 11, 0,  0,  0,  0 }, /* BISHOP */\n\t{ -10,  -1,  1, 10, 0,  0,  0,  0 }, /* ROOK */\n\t{ -11, -10, -9, -1, 1,  9, 10, 11 }, /* QUEEN */\n\t{ -11, -10, -9, -1, 1,  9, 10, 11 }  /* KING */\n};\n\nfor (i = 0; i &lt; 64; ++i) { /* loop over all squares (no piece list) */\n  if (color[i] == side) { /* looking for own pieces and pawns to move */\n    p = piece[i]; /* found one */\n    if (p&#160;!= PAWN) { /* piece or pawn */\n      for (j = 0; j &lt; offsets[p]; ++j) { /* for all knight or ray directions */\n        for (n = i;;) { /* starting with from square */\n          n = mailbox[mailbox64[n] + offset[p][j]]; /* next square along the ray j */\n          if (n == -1) break; /* outside board */\n          if (color[n]&#160;!= EMPTY) {\n            if (color[n] == xside)\n              genMove(i, n, 1); /* capture from i to n */\n            break;\n          }\n          genMove(i, n, 0); /* quiet move from i to n */\n          if (!slide[p]) break; /* next direction */\n        }\n      }\n    } else { /* pawn moves */ }\n  }\n}\n</pre>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=10x12_Board&amp;action=edit&amp;section=7\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Minimax_(program)#Mailbox\" title=\"Minimax (program)\">Mailbox in Minimax</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=10x12_Board&amp;action=edit&amp;section=8\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Dan_Spracklen\" title=\"Dan Spracklen\">Dan Spracklen</a>, <a href=\"/Kathe_Spracklen\" title=\"Kathe Spracklen\">Kathe Spracklen</a> (<b>1978</b>). <i>First Steps in Computer Chess Programming</i>. <a href=\"/Byte_Magazine#BYTE310\" title=\"Byte Magazine\">BYTE, Vol. 3, No. 10</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://archive.computerhistory.org/projects/chess/related_materials/text/4-4.First_Steps.Byte_Magazine/First_Steps_in_Computer_Chess_Programing.Spracklen-Dan_Kathe.Byte_Magazine.Oct-1978.062303035.sm.pdf\">pdf</a> from <a href=\"/The_Computer_History_Museum\" title=\"The Computer History Museum\">The Computer History Museum</a></li>\n<li> <a href=\"/David_Levy\" title=\"David Levy\">David Levy</a> (<b>1979</b>). <i>Computer and Chess - How the monster thinks</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Elektor\">Elektor</a>, January 1979 <sup id=\"cite_ref-9\" class=\"reference\"><a href=\"#cite_note-9\">&#91;9&#93;</a></sup></li>\n<li> <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a> (<b>1981</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.computerhistory.org/chess/full_record.php?iid=doc-431614f6d2f73\">Checkmate: The Cray-1 Plays Chess. Part 1</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.0x07bell.net/WWWMASTER/CrayWWWStuff/Cfaqccframeset.html\">Cray Channels</a>, Vol. 3, No. 1. <a rel=\"nofollow\" class=\"external text\" href=\"http://archive.computerhistory.org/projects/chess/related_materials/text/3-2%20and%203-3.Cray_Channels_Vol-3_No-1.Checkmate_The_Cray-1_Plays_Chess.Hyatt.1980/Cray_Channels_Vol-3_No-1.Checkmate_The_Cray-1_Plays_Chess.Hyatt.1980.062303023.sm.pdf\">pdf</a> from <a href=\"/The_Computer_History_Museum\" title=\"The Computer History Museum\">The Computer History Museum</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=10x12_Board&amp;action=edit&amp;section=9\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=4442\">Board representation&#160;: 0x88 or 10x12&#160;?</a> by Philippe, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, March 02, 2006&#160;» <a href=\"/0x88\" title=\"0x88\">0x88</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=23191\">move generation with one dimensional \"12 x 10\" array</a> by <a href=\"/index.php?title=Andrew_Short&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Andrew Short (page does not exist)\">Andrew Short</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 22, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48164\">mailbox &amp; CPW</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 31, 2013</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=10x12_Board&amp;action=edit&amp;section=10\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Board_representation_%28chess%29#Array_based\">Board representation (chess) - Array based from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.craftychess.com/hyatt/boardrep.html\">Chess board representations</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a></li>\n<li> <a href=\"/Category:If\" title=\"Category:If\">If</a> - <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/If_%28If_album%29\">I'm Reaching Out on All Sides</a>, 1970, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/jGTENfxd8M4?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=10x12_Board&amp;action=edit&amp;section=11\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a href=\"/Ed_Kozdrowicki\" title=\"Ed Kozdrowicki\">Edward W. Kozdrowicki</a>, <a href=\"/Dennis_Cooper\" title=\"Dennis Cooper\">Dennis W. Cooper</a> (<b>1973</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.semanticscholar.org/paper/COKO-III%3A-The-Cooper-Koz-Chess-Program-Kozdrowicki-Cooper/8ca0c0f08ba564883b96f6126e2c0c3745fe31e7\">COKO III: The Cooper-Koz Chess Program</a></i>. <a href=\"/ACM#Communications\" title=\"ACM\">Communications of the ACM</a>, Vol. 16, 7, Fig. 2</span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a href=\"/Dan_Spracklen\" title=\"Dan Spracklen\">Dan Spracklen</a>, <a href=\"/Kathe_Spracklen\" title=\"Kathe Spracklen\">Kathe Spracklen</a> (<b>1978</b>). <i>First Steps in Computer Chess Programming</i>. <a href=\"/Byte_Magazine#BYTE310\" title=\"Byte Magazine\">BYTE, Vol. 3, No. 10</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://archive.computerhistory.org/projects/chess/related_materials/text/4-4.First_Steps.Byte_Magazine/First_Steps_in_Computer_Chess_Programing.Spracklen-Dan_Kathe.Byte_Magazine.Oct-1978.062303035.sm.pdf\">pdf</a> from <a href=\"/The_Computer_History_Museum\" title=\"The Computer History Museum\">The Computer History Museum</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.andreadrian.de/schach/sargon.asm\">Sargon Z80 assembly listing</a> by <a href=\"/Dan_Spracklen\" title=\"Dan Spracklen\">Dan</a> and <a href=\"/Kathe_Spracklen\" title=\"Kathe Spracklen\">Kathe Spracklen</a>, hosted by <a href=\"/Andre_Adrian\" title=\"Andre Adrian\">Andre Adrian</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://jim.sh/svn/jim/vendor/microwindows/current/src/demos/tuxchess/data.c\">TSCP - data.c</a></span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://jim.sh/svn/jim/vendor/microwindows/current/src/demos/tuxchess/data.c\">TSCP - data.c</a></span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48164\">mailbox &amp; CPW</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 31, 2013</span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://jim.sh/svn/jim/vendor/microwindows/current/src/demos/tuxchess/data.c\">TSCP - data.c</a></span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://jim.sh/svn/jim/vendor/microwindows/current/src/demos/tuxchess/board.c\">TSCP - board.c</a>, slightly modified</span>\n</li>\n<li id=\"cite_note-9\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-9\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.chesscomputeruk.com/html/publication_archive.html\">Publication Archive</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://www.chesscomputeruk.com/index.html\">Chess Computer UK</a> by <a href=\"/Mike_Watters\" title=\"Mike Watters\">Mike Watters</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Mailbox\" title=\"Mailbox\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260228175006\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.023 seconds\nReal time usage: 0.024 seconds\nPreprocessor visited node count: 215/1000000\nPreprocessor generated node count: 468/1000000\nPost‐expand include size: 27/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:104-0!canonical and timestamp 20260228175006 and revision id 5913\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "If"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "0x88"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "8x8 Board"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ACM"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Andre Adrian"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Array"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Board Representation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Byte"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Byte Magazine"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Coko"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dan Spracklen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David Levy"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dennis Cooper"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Direction"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ed Kozdrowicki"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Files"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Harm Geert Muller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kathe Spracklen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "King"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Knight"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mailbox"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mike Watters"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Minimax (program)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Generation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pieces"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Queen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ranks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Hyatt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sargon"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Squares"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "TSCP"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Target Square"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "The Computer History Museum"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tom Kerrigan"
+      },
+      {
+        "ns": 0,
+        "*": "Andrew Short"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:If"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Programs",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "10x12_Board",
+        "byteoffset": 618,
+        "anchor": "Programs"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "COKO III",
+        "number": "1.1",
+        "index": "2",
+        "fromtitle": "10x12_Board",
+        "byteoffset": 629,
+        "anchor": "COKO_III"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Sargon",
+        "number": "1.2",
+        "index": "3",
+        "fromtitle": "10x12_Board",
+        "byteoffset": 1765,
+        "anchor": "Sargon"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "TSCP",
+        "number": "1.3",
+        "index": "4",
+        "fromtitle": "10x12_Board",
+        "byteoffset": 3569,
+        "anchor": "TSCP"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Square Mapping",
+        "number": "1.3.1",
+        "index": "5",
+        "fromtitle": "10x12_Board",
+        "byteoffset": 4030,
+        "anchor": "Square_Mapping"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Offset Move Generation",
+        "number": "1.3.2",
+        "index": "6",
+        "fromtitle": "10x12_Board",
+        "byteoffset": 6311,
+        "anchor": "Offset_Move_Generation"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "2",
+        "index": "7",
+        "fromtitle": "10x12_Board",
+        "byteoffset": 8049,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "3",
+        "index": "8",
+        "fromtitle": "10x12_Board",
+        "byteoffset": 8113,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "4",
+        "index": "9",
+        "fromtitle": "10x12_Board",
+        "byteoffset": 9393,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "5",
+        "index": "10",
+        "fromtitle": "10x12_Board",
+        "byteoffset": 9866,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "6",
+        "index": "11",
+        "fromtitle": "10x12_Board",
+        "byteoffset": 10370,
+        "anchor": "References"
+      }
+    ]
+  }
+}

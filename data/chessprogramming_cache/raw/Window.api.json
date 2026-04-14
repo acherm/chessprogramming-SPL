@@ -1,0 +1,215 @@
+{
+  "parse": {
+    "title": "Window",
+    "pageid": 1066,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Search\" title=\"Search\">Search</a> * <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">Alpha-Beta</a> * Window</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"/File:Fenster-Dal%C3%AD.JPG\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Fenster-Dal%C3%AD.JPG/330px-Fenster-Dal%C3%AD.JPG\" width=\"300\" height=\"200\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Fenster-Dal%C3%AD.JPG/500px-Fenster-Dal%C3%AD.JPG 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Fenster-Dal%C3%AD.JPG/960px-Fenster-Dal%C3%AD.JPG 2x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Fenster-Dal%C3%AD.JPG\" class=\"internal\" title=\"Enlarge\"></a></div>Arched Window of wall painting showing <a href=\"/Category:Salvador_Dal%C3%AD\" title=\"Category:Salvador Dalí\">Dalí</a> <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p>A <b>Window</b> in the context of Alpha-Beta search (Alpha-Beta window) is the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Interval_%28mathematics%29#Terminology\">open interval</a> between the <a href=\"/Lower_Bound\" title=\"Lower Bound\">lower bound</a> <a href=\"/Alpha\" title=\"Alpha\">Alpha</a> and the <a href=\"/Upper_Bound\" title=\"Upper Bound\">upper bound</a> <a href=\"/Beta\" title=\"Beta\">Beta</a>. \n</p>\n<pre><b>(α,β) = ]α,β[ = { x ∈ &#8484; | α &lt; x &lt; β}</b>\n</pre>\n<p>Only values inside this interval, that is excluding Alpha and Beta, are <a href=\"/Exact_Score\" title=\"Exact Score\">exact scores</a>. Thus, with <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Integer\">integers</a> at least a window of (x-1, x+1) is necessary to reveal one exact score x. A <a href=\"/Null_Window\" title=\"Null Window\">Null Window</a> as used in the <a href=\"/Scout\" title=\"Scout\">Scout</a> part of <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">PVS</a> aka <a href=\"/NegaScout\" title=\"NegaScout\">NegaScout</a>, and <a href=\"/MTD(f)\" title=\"MTD(f)\">MTD(f)</a>, with integers (α, α+1) or (β-1, β), can therefor only provide a <a href=\"/Bound\" title=\"Bound\">bound</a>, either <a href=\"/Fail-High\" title=\"Fail-High\">failing-high</a> with a lower bound or <a href=\"/Fail-Low\" title=\"Fail-Low\">failing-low</a> with an upper bound. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Minimax_Wall\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Minimax Wall</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#See_also\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Forum Posts</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#External_Links\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#References\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Minimax_Wall\"><span id=\"MinimaxWall\"></span>Minimax Wall</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Window&amp;action=edit&amp;section=1\" title=\"Edit section: Minimax Wall\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a> in a <a href=\"/CCC\" title=\"CCC\">CCC</a> reply to <a href=\"/Bruce_Moreland\" title=\"Bruce Moreland\">Bruce Moreland</a>, January 1998 <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>:\n</p>\n<pre>If the window is above the true value, so that you will <a href=\"/Fail-Low\" title=\"Fail-Low\">fail low</a>, you get maximal efficiency. Here's the way to follow why.  If every root move fails low, it can do so after searching only one move at ply 2, the one move necessary to 'refute' the root move.  So you get a truly small tree. If the window is below the true value, so you <a href=\"/Fail-High\" title=\"Fail-High\">fail high</a> on every move at the root, to fail high at the root means *every* move at ply=2 must fail low. The tree is roughly W times larger in this case.\n</pre>\n<pre><a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Schaeffer</a> noticed this and referred to this as the \"minimax wall\", that point where the window just drops down over the real score so that you don't get the quick fail lows.  I saw this when I played with <a href=\"/MTD(f)\" title=\"MTD(f)\">mtd(f)</a> a few months ago, as it was faster when the window was too high. Fast enough that it is best to keep it up there rather than dropping below the real value and having to fail upward... \n</pre>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Window&amp;action=edit&amp;section=2\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Aspiration_Windows\" title=\"Aspiration Windows\">Aspiration Windows</a></li>\n<li> <a href=\"/MTD(f)\" title=\"MTD(f)\">MTD(f)</a></li>\n<li> <a href=\"/Null_Window\" title=\"Null Window\">Null Window</a></li>\n<li> <a href=\"/Odd-Even_Effect\" title=\"Odd-Even Effect\">Odd-Even Effect</a></li>\n<li> <a href=\"/Ronald_de_Man#ScoringRootMoves\" title=\"Ronald de Man\">Scoring Root Moves</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Window&amp;action=edit&amp;section=3\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/p8GbiiLjp0o/81vZ3czsthIJ\">Alpha-Beta window in transposition tables?</a> by Marty Bochane, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, October 25, 1996&#160;»  <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Table</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=55577\">Negative alpha/beta windows: Are they useful?</a> by <a href=\"/Thomas_Dybdahl_Ahle\" title=\"Thomas Dybdahl Ahle\">Thomas Dybdahl Ahle</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 06, 2015</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Window&amp;action=edit&amp;section=4\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Interval_%28mathematics%29\">Interval (mathematics) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Window_%28disambiguation%29\">Window (disambiguation) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Window\">Window from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Launch_window\">Launch window from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Window_%28computing%29\">Window (computing) from Wikipedia</a>&#160;» <a href=\"/GUI\" title=\"GUI\">GUI</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Register_window\">Register window from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Window_function\">Window function from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Window_%28short_story%29\">Window (short story) from Wikipedia</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Window&amp;action=edit&amp;section=5\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\">Arched Window of a <a rel=\"nofollow\" class=\"external text\" href=\"https://commons.wikimedia.org/wiki/File:Fenster-Dal%C3%AD.JPG\">wall painting showing</a> <a href=\"/Category:Salvador_Dal%C3%AD\" title=\"Category:Salvador Dalí\">Salvador Dalí</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Lima\">Lima</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Peru\">Peru</a>, 2005 by Tabea Huth, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wikimedia_Commons\">Wikimedia Commons</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=14539\">Re: New(?) search idea</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 22, 1998</span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=55889&amp;start=8\">Re. Fail low after fail high</a> by <a href=\"/Marcel_van_Kervinck\" title=\"Marcel van Kervinck\">Marcel van Kervinck</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 05, 2015&#160;» <a href=\"/Fail-Low\" title=\"Fail-Low\">Fail-Low </a>, <a href=\"/Fail-High\" title=\"Fail-High\">Fail-High</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">Up one level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301151119\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.113 seconds\nReal time usage: 0.665 seconds\nPreprocessor visited node count: 66/1000000\nPreprocessor generated node count: 140/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1066-0!canonical and timestamp 20260301151118 and revision id 6974\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Salvador_Dalí"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha-Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aspiration Windows"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bound"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bruce Moreland"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Exact Score"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fail-High"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fail-Low"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "GUI"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jonathan Schaeffer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lower Bound"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "MTD(f)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marcel van Kervinck"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "NegaScout"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Window"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Odd-Even Effect"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Hyatt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ronald de Man"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Scout"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Thomas Dybdahl Ahle"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Upper Bound"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Salvador Dalí"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Minimax Wall",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Window",
+        "byteoffset": 1372,
+        "anchor": "Minimax_Wall"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Window",
+        "byteoffset": 2573,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Window",
+        "byteoffset": 2720,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Window",
+        "byteoffset": 3299,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "5",
+        "index": "5",
+        "fromtitle": "Window",
+        "byteoffset": 4016,
+        "anchor": "References"
+      }
+    ]
+  }
+}

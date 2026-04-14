@@ -1,0 +1,289 @@
+{
+  "parse": {
+    "title": "Mailbox",
+    "pageid": 102,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Board_Representation\" title=\"Board Representation\">Board Representation</a> * Mailbox</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"/File:SauerAspinwallMailbox.jpg\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/SauerAspinwallMailbox.jpg/330px-SauerAspinwallMailbox.jpg\" width=\"300\" height=\"254\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/SauerAspinwallMailbox.jpg/500px-SauerAspinwallMailbox.jpg 1.5x, https://upload.wikimedia.org/wikipedia/commons/0/0c/SauerAspinwallMailbox.jpg 2x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:SauerAspinwallMailbox.jpg\" class=\"internal\" title=\"Enlarge\"></a></div>A fantastical mailbox <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div>\n<p><b>Mailbox</b>, (Offset board representation <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>)\na square-centric board representation where the <a href=\"/Pieces#PieceCoding\" title=\"Pieces\">encoding</a> of every <a href=\"/Squares\" title=\"Squares\">square</a> resides in a separately addressable <a href=\"/Memory\" title=\"Memory\">memory</a> element, usually an element of an <a href=\"/Array\" title=\"Array\">array</a> for random access. The square number, or its <a href=\"/Files\" title=\"Files\">file</a> and <a href=\"/Ranks\" title=\"Ranks\">rank</a>, acts like an address to a post box, which might be empty or may contain one chess piece. As pointed out by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, not only the embedded <a href=\"/10x12_Board\" title=\"10x12 Board\">10x12 board</a>, but various implementations are all mailbox, independently from elements in the array for padding that can act as a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Sentinel_value\">sentinel value</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>.\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Implementations\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Implementations</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Pros_.26_cons\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Pros &amp; cons</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#Pros\"><span class=\"tocnumber\">2.1</span> <span class=\"toctext\">Pros</span></a></li>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#Cons\"><span class=\"tocnumber\">2.2</span> <span class=\"toctext\">Cons</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#Speed\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Speed</span></a></li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#See_also\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#Publications\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Publications</span></a></li>\n<li class=\"toclevel-1 tocsection-8\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Forum Posts</span></a></li>\n<li class=\"toclevel-1 tocsection-9\"><a href=\"#External_Links\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-10\"><a href=\"#References\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Implementations\">Implementations</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Mailbox&amp;action=edit&amp;section=1\" title=\"Edit section: Implementations\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/8x8_Board\" title=\"8x8 Board\">8x8 Board</a></li>\n<li> <a href=\"/10x12_Board\" title=\"10x12 Board\">10x12 Board</a></li>\n<li> <a href=\"/Vector_Attacks\" title=\"Vector Attacks\">Vector Attacks</a></li></ul>\n<dl><dd> <a href=\"/0x88\" title=\"0x88\">0x88</a></dd></dl>\n<h1><span class=\"mw-headline\" id=\"Pros_.26_cons\">Pros &amp; cons</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Mailbox&amp;action=edit&amp;section=2\" title=\"Edit section: Pros &amp; cons\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Pros\">Pros</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Mailbox&amp;action=edit&amp;section=3\" title=\"Edit section: Pros\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> Easy, straightforward to understand and implement</li>\n<li> Suitable with the same efficiency for any size of boards, from one can be fitted on 64-bit integers to much larger. Thus it is also easier to support multi-chess variants which boards’ sizes are quite different. </li>\n<li> Suitable for almost all chess tasks and software where computing speed is not high requirements such as chess tools, <a href=\"/GUI\" title=\"GUI\">GUI</a> since it is much easier to develop and maintain.</li></ul>\n<p>Newcomers are suggested to implement their first chess engines using Mailbox thus they can get some basic knowledge and skills before starting more complicated chess projects.\n</p>\n<h2><span class=\"mw-headline\" id=\"Cons\">Cons</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Mailbox&amp;action=edit&amp;section=4\" title=\"Edit section: Cons\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>In the view of developing chess engines:\n</p>\n<ul><li> Programming must use many loop and branch commands such as for, while, if (compare with <a href=\"/Bitboards\" title=\"Bitboards\">Bitboards</a>)</li>\n<li> Hard to store patterns and match them</li>\n<li> May have some inefficient high-frequency-use functions such as finding King locations, in-check</li>\n<li> Not efficient to generate moves in stages since generating all moves, captures only, non-captures may take quite similar periods</li></ul>\n<h1><span class=\"mw-headline\" id=\"Speed\">Speed</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Mailbox&amp;action=edit&amp;section=5\" title=\"Edit section: Speed\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>For basic tasks such as generating, making/unmaking moves, a \"pure\" mailbox maybe slower than <a href=\"/Bitboards\" title=\"Bitboards\">Bitboards</a>. However, when combining it with other methods such as <a href=\"/Piece-Lists\" title=\"Piece-Lists\">Piece-Lists</a> and optimize the code it could be as fast as Bitboards<sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>\n</p>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Mailbox&amp;action=edit&amp;section=6\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Array\" title=\"Array\">Array</a></li>\n<li> <a href=\"/Nibble#ArrayOfNibbles\" title=\"Nibble\">Array of Nibbles</a></li>\n<li> <a href=\"/Minimax_(program)#Mailbox\" title=\"Minimax (program)\">Mailbox in Minimax</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Mailbox&amp;action=edit&amp;section=7\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Claude_Shannon\" title=\"Claude Shannon\">Claude Shannon</a> (<b>1949</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.pi.infn.it/%7Ecarosi/chess/shannon.txt\">Programming a Computer for Playing Chess</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://archive.computerhistory.org/projects/chess/related_materials/text/2-0%20and%202-1.Programming_a_computer_for_playing_chess.shannon/2-0%20and%202-1.Programming_a_computer_for_playing_chess.shannon.062303002.pdf\">pdf</a> from <a href=\"/The_Computer_History_Museum\" title=\"The Computer History Museum\">The Computer History Museum</a></li>\n<li> <a href=\"/Dietrich_Prinz\" title=\"Dietrich Prinz\">Dietrich Prinz</a> (<b>1952</b>). <i>Robot Chess</i>. Research, Vol. 6, reprinted 1988 in <a href=\"/Computer_Chess_Compendium\" title=\"Computer Chess Compendium\">Computer Chess Compendium</a></li>\n<li> <a href=\"/Alex_Bell\" title=\"Alex Bell\">Alex Bell</a> (<b>1972</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.chilton-computing.org.uk/acl/literature/books/gamesplaying/overview.htm\">Games Playing with Computers</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Allen_%26_Unwin\">Allen &amp; Unwin</a>, ISBN-13: 978-0080212227</li>\n<li> <a href=\"/Dan_Spracklen\" title=\"Dan Spracklen\">Dan Spracklen</a>, <a href=\"/Kathe_Spracklen\" title=\"Kathe Spracklen\">Kathe Spracklen</a> (<b>1978</b>). <i>First Steps in Computer Chess Programming</i>. <a href=\"/Byte_Magazine#BYTE310\" title=\"Byte Magazine\">BYTE, Vol. 3, No. 10</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://archive.computerhistory.org/projects/chess/related_materials/text/4-4.First_Steps.Byte_Magazine/First_Steps_in_Computer_Chess_Programing.Spracklen-Dan_Kathe.Byte_Magazine.Oct-1978.062303035.sm.pdf\">pdf</a> from <a href=\"/The_Computer_History_Museum\" title=\"The Computer History Museum\">The Computer History Museum</a></li>\n<li> <a href=\"/David_Levy\" title=\"David Levy\">David Levy</a> (<b>1979</b>). <i>Computer and Chess - How the monster thinks</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Elektor\">Elektor</a>, January 1979 <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup></li>\n<li> <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a> (<b>1981</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.computerhistory.org/chess/full_record.php?iid=doc-431614f6d2f73\">Checkmate: The Cray-1 Plays Chess. Part 1</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.0x07bell.net/WWWMASTER/CrayWWWStuff/Cfaqccframeset.html\">Cray Channels</a>, Vol. 3, No. 1. <a rel=\"nofollow\" class=\"external text\" href=\"http://archive.computerhistory.org/projects/chess/related_materials/text/3-2%20and%203-3.Cray_Channels_Vol-3_No-1.Checkmate_The_Cray-1_Plays_Chess.Hyatt.1980/Cray_Channels_Vol-3_No-1.Checkmate_The_Cray-1_Plays_Chess.Hyatt.1980.062303023.sm.pdf\">pdf</a> from <a href=\"/The_Computer_History_Museum\" title=\"The Computer History Museum\">The Computer History Museum</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Mailbox&amp;action=edit&amp;section=8\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=19808\">Bitboards vs Mailbox vs 0X88</a> by Bruce Cleaver, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 02, 1998&#160;» <a href=\"/0x88\" title=\"0x88\">0x88</a>, <a href=\"/Bitboards\" title=\"Bitboards\">Bitboards</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=387929\">0x88 vs mailbox</a> by <a href=\"/Stuart_Cracraft\" title=\"Stuart Cracraft\">Stuart Cracraft</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 16, 2004&#160;» <a href=\"/0x88\" title=\"0x88\">0x88</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=2514\">Mailbox info</a> by Anonymous, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, May 08, 2005</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=4442\">Board representation&#160;: 0x88 or 10x12&#160;?</a> by Philippe, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, March 02, 2006&#160;» <a href=\"/0x88\" title=\"0x88\">0x88</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=23191\">move generation with one dimensional \"12 x 10\" array</a> by <a href=\"/index.php?title=Andrew_Short&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Andrew Short (page does not exist)\">Andrew Short</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 22, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48164\">mailbox &amp; CPW</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 31, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://talkchess.com/forum3/viewtopic.php?f=7&amp;t=76773\">The mailbox trials</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 04, 2021 <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Mailbox&amp;action=edit&amp;section=9\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Board_representation_%28chess%29#Array_based\">Board representation (chess) - Array based from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.craftychess.com/hyatt/boardrep.html\">Chess board representations</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a> </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/maksimKorzh/hgm-mailbox-trials/blob/main/mailbox7b.c\">hgm-mailbox-trials/mailbox7b.c at main · maksimKorzh/hgm-mailbox-trials · GitHub</a> hosted by <a href=\"/Maksim_Korzh\" title=\"Maksim Korzh\">Maksim Korzh</a> <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Mailbox\">Mailbox (disambiguation) from Wikipedia</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Mailbox&amp;action=edit&amp;section=10\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\">A <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Fantastic_architecture\">fantastical</a> mailbox designed by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Frederick_C._Sauer\">Frederick C. Sauer</a> around 1930 in the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Sauer_Buildings_Historic_District\">Sauer Buildings Historic District</a> in <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Aspinwall,_Pennsylvania\">Aspinwall, Pennsylvania</a>. Image by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/User:Leepaxton\">Lee Paxton</a> on May 16, 2010</span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.craftychess.com/hyatt/boardrep.html\">Chess board representations</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48164\">mailbox &amp; CPW</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 31, 2013</span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://talkchess.com/forum3/viewtopic.php?f=7&amp;t=76773#p885878\">The mailbox trials</a> by <a href=\"/Pham_Hong_Nguyen\" title=\"Pham Hong Nguyen\">Nguyen Pham</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, Mar 04, 2021</span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.chesscomputeruk.com/html/publication_archive.html\">Publication Archive</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://www.chesscomputeruk.com/index.html\">Chess Computer UK</a> by <a href=\"/Mike_Watters\" title=\"Mike Watters\">Mike Watters</a></span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/maksimKorzh/hgm-mailbox-trials/blob/main/mailbox7b.c\">hgm-mailbox-trials/mailbox7b.c at main · maksimKorzh/hgm-mailbox-trials · GitHub</a> hosted by <a href=\"/Maksim_Korzh\" title=\"Maksim Korzh\">Maksim Korzh</a></span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://talkchess.com/forum3/viewtopic.php?f=7&amp;t=76773\">The mailbox trials</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 04, 2021</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Board_Representation\" title=\"Board Representation\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301085354\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.085 seconds\nReal time usage: 0.614 seconds\nPreprocessor visited node count: 141/1000000\nPreprocessor generated node count: 286/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:102-0!canonical and timestamp 20260301085353 and revision id 25001\n -->\n"
+    },
+    "categories": [],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "0x88"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "10x12 Board"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "8x8 Board"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alex Bell"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Array"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Board Representation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Byte Magazine"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Claude Shannon"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Compendium"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dan Spracklen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David Levy"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dietrich Prinz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Files"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "GUI"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Harm Geert Muller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kathe Spracklen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Maksim Korzh"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Memory"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mike Watters"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Minimax (program)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Nibble"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pham Hong Nguyen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Piece-Lists"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pieces"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ranks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Hyatt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Squares"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stuart Cracraft"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "The Computer History Museum"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vector Attacks"
+      },
+      {
+        "ns": 0,
+        "*": "Andrew Short"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Implementations",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Mailbox",
+        "byteoffset": 1532,
+        "anchor": "Implementations"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Pros & cons",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Mailbox",
+        "byteoffset": 1617,
+        "anchor": "Pros_.26_cons"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Pros",
+        "number": "2.1",
+        "index": "3",
+        "fromtitle": "Mailbox",
+        "byteoffset": 1631,
+        "anchor": "Pros"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Cons",
+        "number": "2.2",
+        "index": "4",
+        "fromtitle": "Mailbox",
+        "byteoffset": 2261,
+        "anchor": "Cons"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Speed",
+        "number": "3",
+        "index": "5",
+        "fromtitle": "Mailbox",
+        "byteoffset": 2686,
+        "anchor": "Speed"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "4",
+        "index": "6",
+        "fromtitle": "Mailbox",
+        "byteoffset": 3081,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "5",
+        "index": "7",
+        "fromtitle": "Mailbox",
+        "byteoffset": 3202,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "6",
+        "index": "8",
+        "fromtitle": "Mailbox",
+        "byteoffset": 5229,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "7",
+        "index": "9",
+        "fromtitle": "Mailbox",
+        "byteoffset": 6445,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "8",
+        "index": "10",
+        "fromtitle": "Mailbox",
+        "byteoffset": 7102,
+        "anchor": "References"
+      }
+    ]
+  }
+}

@@ -1,0 +1,727 @@
+{
+  "parse": {
+    "title": "Cpp",
+    "pageid": 5942,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Programming\" title=\"Programming\">Programming</a> * <a href=\"/Languages\" title=\"Languages\">Languages</a> * C++</b>\n</p><p><b>C++</b>,<br />\na pragmatical, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Object-oriented_programming\">object oriented</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/General-purpose_programming_language\">general-purpose programming language</a>, \ninitially an extension of <a href=\"/C\" title=\"C\">C</a> and designed and implemented in 1979 by <a href=\"/Mathematician#Stroustrup\" title=\"Mathematician\">Bjarne Stroustrup</a> from <a href=\"/Bell_Laboratories\" title=\"Bell Laboratories\">Bell Laboratories</a>. \nC++ is pragmatical because one may write in \"usual\" C-style, using the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/C_standard_library\">C standard library</a> (printf, strcpy, ...), except perhaps using C++ comments and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Reference_(C%2B%2B)\">references</a> up and then (instead of <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pointer_(computer_programming)\">pointer</a>). On the other hand C++ allows to design classes and interfaces (pure virtual classes) in a more object oriented manner. There are lots of free and commercial class libraries for arithmetics, database related stuff, portable and proprietary window management and whatever else.\nMany chess engines are written in C++, varying from using pure C-style, up to extensive use of object oriented stuff and templates as well as <a href=\"#11\">C++11</a> or <a href=\"#17\">C++17</a> features.\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#C_Extensions\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">C Extensions</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-2\"><a href=\"#References\"><span class=\"tocnumber\">1.1</span> <span class=\"toctext\">References</span></a></li>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#Exception_Handling\"><span class=\"tocnumber\">1.2</span> <span class=\"toctext\">Exception Handling</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Classes\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Classes</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#Data_Definition\"><span class=\"tocnumber\">2.1</span> <span class=\"toctext\">Data Definition</span></a></li>\n<li class=\"toclevel-2 tocsection-6\"><a href=\"#Member_Functions\"><span class=\"tocnumber\">2.2</span> <span class=\"toctext\">Member Functions</span></a></li>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#Modifiers\"><span class=\"tocnumber\">2.3</span> <span class=\"toctext\">Modifiers</span></a></li>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#Pointer_to_Member_Functions\"><span class=\"tocnumber\">2.4</span> <span class=\"toctext\">Pointer to Member Functions</span></a></li>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#Inheritance\"><span class=\"tocnumber\">2.5</span> <span class=\"toctext\">Inheritance</span></a></li>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#Function_Overloading\"><span class=\"tocnumber\">2.6</span> <span class=\"toctext\">Function Overloading</span></a></li>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#Operator_Overloading\"><span class=\"tocnumber\">2.7</span> <span class=\"toctext\">Operator Overloading</span></a></li>\n<li class=\"toclevel-2 tocsection-12\"><a href=\"#Late_Binding\"><span class=\"tocnumber\">2.8</span> <span class=\"toctext\">Late Binding</span></a></li>\n<li class=\"toclevel-2 tocsection-13\"><a href=\"#Abstract_Classes\"><span class=\"tocnumber\">2.9</span> <span class=\"toctext\">Abstract Classes</span></a></li>\n<li class=\"toclevel-2 tocsection-14\"><a href=\"#Pure_Abstract_Classes\"><span class=\"tocnumber\">2.10</span> <span class=\"toctext\">Pure Abstract Classes</span></a></li>\n<li class=\"toclevel-2 tocsection-15\"><a href=\"#Multiple_Inheritance\"><span class=\"tocnumber\">2.11</span> <span class=\"toctext\">Multiple Inheritance</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-16\"><a href=\"#Templates\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Templates</span></a></li>\n<li class=\"toclevel-1 tocsection-17\"><a href=\"#Anonymous_Functions\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Anonymous Functions</span></a></li>\n<li class=\"toclevel-1 tocsection-18\"><a href=\"#Smart_Pointer\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Smart Pointer</span></a></li>\n<li class=\"toclevel-1 tocsection-19\"><a href=\"#Class_Design_of_a_Chess_Engine\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Class Design of a Chess Engine</span></a></li>\n<li class=\"toclevel-1 tocsection-20\"><a href=\"#C.2B.2B_Compiler\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">C++ Compiler</span></a></li>\n<li class=\"toclevel-1 tocsection-21\"><a href=\"#Libraries\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">Libraries</span></a></li>\n<li class=\"toclevel-1 tocsection-22\"><a href=\"#See_also\"><span class=\"tocnumber\">9</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-23\"><a href=\"#C.2B.2B_Publications\"><span class=\"tocnumber\">10</span> <span class=\"toctext\">C++ Publications</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-24\"><a href=\"#1985_...\"><span class=\"tocnumber\">10.1</span> <span class=\"toctext\">1985 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-25\"><a href=\"#1990_...\"><span class=\"tocnumber\">10.2</span> <span class=\"toctext\">1990 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-26\"><a href=\"#1995_...\"><span class=\"tocnumber\">10.3</span> <span class=\"toctext\">1995 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-27\"><a href=\"#2000_...\"><span class=\"tocnumber\">10.4</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-28\"><a href=\"#2005_...\"><span class=\"tocnumber\">10.5</span> <span class=\"toctext\">2005 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-29\"><a href=\"#2010_...\"><span class=\"tocnumber\">10.6</span> <span class=\"toctext\">2010 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-30\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">11</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-31\"><a href=\"#1997_...\"><span class=\"tocnumber\">11.1</span> <span class=\"toctext\">1997 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-32\"><a href=\"#2000_..._2\"><span class=\"tocnumber\">11.2</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-33\"><a href=\"#2005_..._2\"><span class=\"tocnumber\">11.3</span> <span class=\"toctext\">2005 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-34\"><a href=\"#2010_..._2\"><span class=\"tocnumber\">11.4</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-35\"><a href=\"#2015_...\"><span class=\"tocnumber\">11.5</span> <span class=\"toctext\">2015 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-36\"><a href=\"#2020_...\"><span class=\"tocnumber\">11.6</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-37\"><a href=\"#External_Links\"><span class=\"tocnumber\">12</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-38\"><a href=\"#References_2\"><span class=\"tocnumber\">13</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"C_Extensions\">C Extensions</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=1\" title=\"Edit section: C Extensions\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=2\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Reference_%28C%2B%2B%29\">Reference (C++) from Wikipedia</a></li></ul>\n<p><span id=\"ExceptionHandling\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Exception_Handling\">Exception Handling</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=3\" title=\"Edit section: Exception Handling\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikibooks.org/wiki/C%2B%2B_Programming/Exception_Handling\">C++ Programming/Exception Handling from Wikibooks</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cplusplus.com/doc/tutorial/exceptions/\">Exceptions - C++ Reference</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cplusplus.com/reference/std/exception/exception/\">exception - C++ Reference</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Classes\">Classes</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=4\" title=\"Edit section: Classes\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Classes as declaration for objects are more or less <a href=\"/C#Struct\" title=\"C\">C-Structures</a>. None static functions may be declared inside the scope of a class. Those functions, called <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/C%2B%2B_classes#Member_functions\">member functions</a>, have an implicit parameter called \"this\", a pointer to this structure, allocated either inside the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Data_segment\">data segment</a> or <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/.bss\">bss</a> as <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Local_variable#Static_local_variables\">static</a> or <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Global_variable\">global</a>, via \"new\" (malloc) on the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Memory_management#HEAP\">heap</a> or as <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Automatic_variable\">automatic object</a> (variable) on the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Stack-based_memory_allocation\">stack</a>.\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/C%2B%2B_classes\">C++ classes from Wikipedia</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Data_Definition\">Data Definition</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=5\" title=\"Edit section: Data Definition\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/C%2B%2B_classes#Basic_declaration_and_member_variables\">Basic declaration and member variables from Wikipedia</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Member_Functions\">Member Functions</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=6\" title=\"Edit section: Member Functions\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/C%2B%2B_classes#Member_functions\">Member functions from Wikipedia</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Modifiers\">Modifiers</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=7\" title=\"Edit section: Modifiers\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Access_modifiers\">Access modifiers from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Static_(keyword)\">Static (keyword) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Class_variable\">Class variable from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Method_(computer_programming)#Static_methods\">Static methods from Wikipedia</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Pointer_to_Member_Functions\">Pointer to Member Functions</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=8\" title=\"Edit section: Pointer to Member Functions\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>For instance an <a href=\"/Array\" title=\"Array\">array</a> of member function pointers of a class <i>CNode</i>, which is indexed by arbitrary pieces code - as switch-case replacement via indirect call/jump. \nThe special atomic <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Operators_in_C_and_C%2B%2B\">C++ operator</a> '<span style=\"background-color: #c0c0c0;\">-&gt;*</span>' is used to call the indexed member-functions:\n</p>\n<pre>\nclass CNode {\n  U64 AssertAttack (EnumSquare sq) const;\n  U64 wPawnAttacks (EnumSquare sq) const;\n  U64 bPawnAttacks (EnumSquare sq) const;\n  U64 knightAttacks(EnumSquare sq) const;\n  U64 kingAttacks  (EnumSquare sq) const;\n  U64 bishopAttacks(EnumSquare sq) const;\n  U64 rookAttacks  (EnumSquare sq) const;\n  U64 queenAttacks (EnumSquare sq) const;\n  ...\n  typedef U64 (CNode::*AttackPtrType)(EnumSquare sq) const;\n  static AttackPtrType m_scPieceAtta[14];\n  ...\n\n  U64 getAttack(EnumSquare sq, EnumPiece piece) const {return (this-&gt;*m_scPieceAtta[piece])(sq);}\n};\n\nCNode::AttackPtrType CNode::m_scPieceAtta[14] =\n{\n  AssertAttack,\n  AssertAttack,\n  wPawnAttacks,\n  bPawnAttacks ,\n  bishopAttacks,\n  bishopAttacks,\n  knightAttacks,\n  knightAttacks,\n  rookAttacks,\n  rookAttacks,\n  kingAttacks,\n  kingAttacks,\n  queenAttacks,\n  queenAttacks\n};\n</pre>\n<h2><span class=\"mw-headline\" id=\"Inheritance\">Inheritance</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=9\" title=\"Edit section: Inheritance\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Inheritance_%28object-oriented_programming%29\">Inheritance (object-oriented programming) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikibooks.org/wiki/C%2B%2B_Programming/Classes/Inheritance\">Inheritance from Wikibooks</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikiversity.org/wiki/C%2B%2B/Classes_and_Inheritance\">C++/Classes and Inheritance  - Wikiversity</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Function_Overloading\">Function Overloading</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=10\" title=\"Edit section: Function Overloading\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Function_overloading\">Function overloading from Wikipedia</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Operator_Overloading\">Operator Overloading</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=11\" title=\"Edit section: Operator Overloading\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Operator_overloading\">Operator overloading from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikibooks.org/wiki/C%2B%2B_Programming/Operators/Operator_Overloading\">Operator Overloading from Wikibooks</a> </li></ul>\n<h2><span class=\"mw-headline\" id=\"Late_Binding\">Late Binding</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=12\" title=\"Edit section: Late Binding\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Late_binding\">Late binding from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Virtual_method_table\">Virtual method table from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Virtual_function\">Virtual function from Wikipedia</a></li></ul>\n<p><span id=\"AbstractClass\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Abstract_Classes\">Abstract Classes</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=13\" title=\"Edit section: Abstract Classes\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://en.wikibooks.org/wiki/C++_Programming/Classes/Abstract_Classes\">Abstract Classes from Wikibooks</a> </li></ul>\n<h2><span class=\"mw-headline\" id=\"Pure_Abstract_Classes\">Pure Abstract Classes</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=14\" title=\"Edit section: Pure Abstract Classes\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikibooks.org/wiki/C%2B%2B_Programming/Classes/Abstract_Classes/Pure_Abstract_Classes\">Pure Abstract Classes from Wikibooks</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Multiple_Inheritance\">Multiple Inheritance</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=15\" title=\"Edit section: Multiple Inheritance\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Multiple_inheritance\">Multiple inheritance from Wikipedia</a></li></ul>\n<p><span id=\"Template\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Templates\">Templates</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=16\" title=\"Edit section: Templates\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Template_%28programming%29\">Template (programming) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/List_of_C%2B%2B_template_libraries\">List of C++ template libraries from Wikipeadia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Standard_Template_Library\">Standard Template Library from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Loki_%28C%2B%2B%29\">Loki (C++) from Wikipedia</a> by <a href=\"/Mathematician#AAlexandrescu\" title=\"Mathematician\">Andrei Alexandrescu</a> as part of his book <i><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Modern_C%2B%2B_Design\">Modern C++ Design</a></i>.</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Boost_%28C%2B%2B_libraries%29\">Boost (C++ libraries) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cplusplus.com/doc/tutorial/templates/\">Templates - C++ Documentation</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://wordaligned.org/docs/metaprogramming/metaprogramming_is_your_friend/cpp.html\">Metaprogramming in C++</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikibooks.org/wiki/C%2B%2B_Programming/Templates\">C++ Programming/Templates from Wikibooks</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikibooks.org/wiki/C%2B%2B_Programming/Templates/Template_Meta-Programming\">Template Meta-Programming from Wikibooks</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Barton%E2%80%93Nackman_trick\">Barton–Nackman trick from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern\">Curiously recurring template pattern from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Variadic_template\">Variadic template from Wikipedia</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Anonymous_Functions\">Anonymous Functions</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=17\" title=\"Edit section: Anonymous Functions\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Anonymous_function#Clang_(C,_C++,_Objective-C,_Objective-C++)\">Anonymous functions (Blocks) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Anonymous_function#C++_(since_C++11)\">Anonymous functions (Lambda expressions) from Wikipedia</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Smart_Pointer\">Smart Pointer</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=18\" title=\"Edit section: Smart Pointer\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Smart_pointer\">Smart pointer from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Auto_ptr\">auto_ptr from Wikipedia</a> (C++11 deprecated)</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Smart_pointer#unique_ptr\">unique_ptr from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Smart_pointer#shared_ptr_and_weak_ptr\">shared_ptr from Wikipedia</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Class_Design_of_a_Chess_Engine\">Class Design of a Chess Engine</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=19\" title=\"Edit section: Class Design of a Chess Engine\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><i>main article</i> <a href=\"/index.php?title=Class_Design_of_a_Chess_Engine&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Class Design of a Chess Engine (page does not exist)\">Class Design of a Chess Engine</a>\n<span id=\"Compiler\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"C.2B.2B_Compiler\">C++ Compiler</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=20\" title=\"Edit section: C++ Compiler\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/List_of_compilers#C++_compilers\">List of C/C++ compilers from Wikipeadia</a></li>\n<li> <a href=\"/Free_Software_Foundation#GCC\" title=\"Free Software Foundation\">GCC</a>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/LLVM\">LLVM from Wikipeadia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Clang\">Clang from Wikipeadia</a></li></ul></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Intel_C%2B%2B_Compiler\">Intel C++ Compiler from Wikipeadia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Visual_C%2B%2B\">Visual C++ from Wikipeadia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://godbolt.org/\">Compiler Explorer</a> by <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/mattgodbolt\">Matt Godbolt</a></li></ul>\n<p><span id=\"Libraries\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Libraries\">Libraries</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=21\" title=\"Edit section: Libraries\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Standard_Template_Library\">Standard Template Library from Wikipeadia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cplusplus.com/reference/stl/\">STL Containers - C++ Reference</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.softwarepreservation.org/projects/c_plus_plus/library\">C++ Libraries — Software Preservation Group</a>, <a href=\"/The_Computer_History_Museum\" title=\"The Computer History Museum\">The Computer History Museum</a></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.softwarepreservation.org/projects/c_plus_plus/library/nihcl\">NIH Class Library — Software Preservation Group</a>, <a href=\"/The_Computer_History_Museum\" title=\"The Computer History Museum\">The Computer History Museum</a> <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Qt_(software)\">Qt (software) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Loki_%28C%2B%2B%29\">Loki (C++) from Wikipedia</a> by <a href=\"/Mathematician#AAlexandrescu\" title=\"Mathematician\">Andrei Alexandrescu</a> as part of his book <i><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Modern_C%2B%2B_Design\">Modern C++ Design</a></i>.</li>\n<li> <a href=\"/Pablo_San_Segundo#BITSCAN\" title=\"Pablo San Segundo\">BITSCAN</a>, a <a href=\"#Libraries\">C++ library</a> for bitstrings by <a href=\"/Pablo_San_Segundo\" title=\"Pablo San Segundo\">Pablo San Segundo</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Boost_%28C%2B%2B_libraries%29\">Boost (C++ libraries) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://bstring.sourceforge.net/\">The Better String Library</a> by <a href=\"/Paul_Hsieh\" title=\"Paul Hsieh\">Paul Hsieh</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://sourceforge.net/p/log4cplus/wiki/Home/\">log4cplus / Wiki / Home</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/zd3nik/SenjoUCIAdapter\">Senjo C++ UCI Adapter</a> by <a href=\"/Shawn_Chidester\" title=\"Shawn Chidester\">Shawn Chidester</a>&#160;» <a href=\"/Clubfoot\" title=\"Clubfoot\">Clubfoot</a>, <a href=\"/UCI\" title=\"UCI\">UCI</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=22\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/De_Bruijn_Sequence_Generator\" title=\"De Bruijn Sequence Generator\">De Bruijn Sequence Generator</a></li>\n<li> <a href=\"/Generic_Programming\" title=\"Generic Programming\">Generic Programming</a></li>\n<li> <a href=\"/SSE2#SSE2WrapperinCpp\" title=\"SSE2\">SSE2 - SSE2-Wrapper in C++</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"C.2B.2B_Publications\">C++ Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=23\" title=\"Edit section: C++ Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1985_...\">1985 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=24\" title=\"Edit section: 1985 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Mathematician#Stroustrup\" title=\"Mathematician\">Bjarne Stroustrup</a> (<b>1985, 1991, 1997, 2000</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/The_C%2B%2B_Programming_Language\">The C++ Programming Language</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Addison-Wesley\">Addison-Wesley</a> </li>\n<li> <a href=\"/Keith_Gorlen\" title=\"Keith Gorlen\">Keith E. Gorlen</a> (<b>1987</b>). <i>An Object-Oriented Class Library for C++ Programs</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/db/conf/c++/c++87.html\">C++ Workshop 1987</a></li>\n<li> <a href=\"/Mathematician#Stroustrup\" title=\"Mathematician\">Bjarne Stroustrup</a>, <a href=\"/Andrew_Koenig\" title=\"Andrew Koenig\">Andrew Koenig</a> (<b>1989</b>). <i>C++: as close as possible to C -- but no closer</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/C%2B%2B_Report\">C++ Report</a>, Vol. 1, no. 7 </li></ul>\n<h2><span class=\"mw-headline\" id=\"1990_...\">1990 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=25\" title=\"Edit section: 1990 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Andrew_Koenig\" title=\"Andrew Koenig\">Andrew Koenig</a>, <a href=\"/Mathematician#Stroustrup\" title=\"Mathematician\">Bjarne Stroustrup</a> (<b>1990</b>). <i>Exception Handling for C++</i>. Proc <a rel=\"nofollow\" class=\"external text\" href=\"http://dblp.dagstuhl.de/db/conf/c++/c++90.html#KoenigS90\">USENIX C++ Conference 1990</a>, Also, <a rel=\"nofollow\" class=\"external text\" href=\"https://dl.acm.org/citation.cfm?id=J472\">Journal of Object Oriented Programming</a>, Vol. 3, No. 2</li>\n<li> <a href=\"/Keith_Gorlen\" title=\"Keith Gorlen\">Keith E. Gorlen</a>, et al. (<b>1990</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.goodreads.com/book/show/3108432-data-abstraction-and-object-oriented-programming-in-c\">Data abstraction and object-oriented programming in C++</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/John_Wiley_%26_Sons\">Wiley</a> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup></li>\n<li> <a href=\"/Andrew_Koenig\" title=\"Andrew Koenig\">Andrew Koenig</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.profcon.com/profcon/cargill/\">Thomas A. Cargill</a>, <a href=\"/Keith_Gorlen\" title=\"Keith Gorlen\">Keith E. Gorlen</a>, Robert B. Murray, Michael Vilot (<b>1991</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.semanticscholar.org/paper/How-Useful-is-Multiple-Inheritance-in-C%2B%2B-Koenig-Cargill/3cab41a20400d12ef38e702166961de280441ecf\">How Useful is Multiple Inheritance in C++?</a></i> <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/db/conf/c++/c++91.html\">C++ Conference 1991</a></li>\n<li> <a href=\"/Andrew_Koenig\" title=\"Andrew Koenig\">Andrew Koenig</a> (<b>1992</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.semanticscholar.org/paper/Space-Efficient-Trees-in-C%2B%2B-Koenig/ea7fb1268b06304cffb292f1d8f4ace0ff62c82b\">Space-Efficient Trees in C++</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.dagstuhl.de/db/conf/c++/c++92.html\">C++ Conference 1992</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Scott_Meyers\">Scott Meyers</a> (<b>1992,2005</b>). <i>Effective C++: 50 Specific Ways to Improve Your Programs and Designs</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Addison-Wesley\">Addison-Wesley</a></li>\n<li> <a href=\"/Andrew_Koenig\" title=\"Andrew Koenig\">Andrew Koenig</a> (<b>1994</b>). <i>Templates and Generic Algorithms</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.org/db/journals/joop/index\">Journal of Object-Oriented Programming</a>, Vol. 7 No. 3</li>\n<li> <a href=\"/Andrew_Koenig\" title=\"Andrew Koenig\">Andrew Koenig</a> (<b>1994</b>). <i>Generic Iterators</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.org/db/journals/joop/index\">Journal of Object-Oriented Programming</a>, Vol. 7, No. 5</li>\n<li> <a href=\"/Mathematician#Stroustrup\" title=\"Mathematician\">Bjarne Stroustrup</a>, <a href=\"/Andrew_Koenig\" title=\"Andrew Koenig\">Andrew Koenig</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informit.com/authors/bio/764d4f1b-b868-4115-862e-4fe85e69f321\">Barbara Moo</a> (<b>1994</b>). <i>The C++ Programming Language</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://onlinelibrary.wiley.com/doi/book/10.1002/0471028959\">Encyclopedia of Software Engineering</a>,  <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/John_Wiley_%26_Sons\">Wiley</a> </li></ul>\n<h2><span class=\"mw-headline\" id=\"1995_...\">1995 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=26\" title=\"Edit section: 1995 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Andrew_Koenig\" title=\"Andrew Koenig\">Andrew Koenig</a>, <a href=\"/Mathematician#Stroustrup\" title=\"Mathematician\">Bjarne Stroustrup</a> (<b>1995</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://dl.acm.org/citation.cfm?id=229732\">Foundations for Native C++ Styles</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://onlinelibrary.wiley.com/loi/1097024x\">Software Practice and Experience</a>, Vol 25, special issue S4</li>\n<li> <a href=\"/Patrick_Winston\" title=\"Patrick Winston\">Patrick Winston</a> (<b>1995</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://people.csail.mit.edu/phw/Books/CPPBACK.HTML\">On To C++</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Addison-Wesley\">Addison Wesley</a></li>\n<li> <a href=\"/Greg_Wilson\" title=\"Greg Wilson\">Greg Wilson</a>, <a href=\"/Paul_Lu\" title=\"Paul Lu\">Paul Lu</a> (eds.) (<b>1996</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://mitpress.mit.edu/books/parallel-programming-using-c\">Parallel Programming Using C++</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/MIT_Press\">MIT Press</a></li>\n<li> <a href=\"/Leen_Ammeraal\" title=\"Leen Ammeraal\">Leen Ammeraal</a> (<b>1996</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://home.planet.nl/%7Eammeraal/algds.html\">Algorithms and Data Structures in C++</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wiley_(publisher)\">John Wiley</a></li>\n<li> <a href=\"/Andrew_Koenig\" title=\"Andrew Koenig\">Andrew Koenig</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informit.com/authors/bio/764d4f1b-b868-4115-862e-4fe85e69f321\">Barbara Moo</a> (<b>1997</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.informit.com/store/accelerated-c-plus-plus-practical-programming-by-example-9780201703535\">Ruminations on C++</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Addison-Wesley\">Addison-Wesley</a></li>\n<li> <a href=\"/Leen_Ammeraal\" title=\"Leen Ammeraal\">Leen Ammeraal</a> (<b>1997</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://home.planet.nl/%7Eammeraal/stlcpp.html\">STL for C++ Programmers</a></i>. ISBN 0-471-97181-2, Chichester: <a rel=\"nofollow\" class=\"external text\" href=\"http://eu.wiley.com/WileyCDA/Section/id-300022.html\">John Wiley</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=27\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Andrew_Koenig\" title=\"Andrew Koenig\">Andrew Koenig</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informit.com/authors/bio/764d4f1b-b868-4115-862e-4fe85e69f321\">Barbara Moo</a> (<b>2000</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.acceleratedcpp.com/index.html\">Accelerated C++</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Addison-Wesley\">Addison-Wesley</a></li>\n<li> <a href=\"/Leen_Ammeraal\" title=\"Leen Ammeraal\">Leen Ammeraal</a> (<b>2000</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://home.planet.nl/%7Eammeraal/cppbook.html\">C++ for Programmers</a></i>. ISBN 0-471-60697-9, Chichester: <a rel=\"nofollow\" class=\"external text\" href=\"http://eu.wiley.com/WileyCDA/Section/id-300022.html\">John Wiley</a></li>\n<li> <a href=\"/Mathematician#Stroustrup\" title=\"Mathematician\">Bjarne Stroustrup</a>, <a href=\"/Andrew_Koenig\" title=\"Andrew Koenig\">Andrew Koenig</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informit.com/authors/bio/764d4f1b-b868-4115-862e-4fe85e69f321\">Barbara Moo</a> (<b>2001</b>). <i>The C++ Programming Language</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://onlinelibrary.wiley.com/book/10.1002/0471028959\">Encyclopedia of Software Engineering</a>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/John_Wiley_%26_Sons\">Wiley</a> </li>\n<li> <a href=\"/Mathematician#AAlexandrescu\" title=\"Mathematician\">Andrei Alexandrescu</a> (<b>2001</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Modern_C%2B%2B_Design\">Modern C++ Design: Generic Programming and Design Patterns Applied</a></i>. </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/pers/hd/a/Akers:Robert_L=.html\">Robert L. Akers</a>, <a href=\"/Ira_Baxter\" title=\"Ira Baxter\">Ira Baxter</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.semdesigns.com/Company/People/mmehlich/index.html\">Michael Mehlich</a> (<b>2004</b>). <i>Invited application paper: re-engineering C++ components via automatic program transformation</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/conf/pepm/pepm2004.html#AkersBM04\">PEPM 2004</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.semdesigns.com/Company/Publications/component-reengineering-PEPM-2004.pdf\">pdf</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2005_...\">2005 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=28\" title=\"Edit section: 2005 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/pers/hd/a/Akers:Robert_L=.html\">Robert L. Akers</a>, <a href=\"/Ira_Baxter\" title=\"Ira Baxter\">Ira Baxter</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.semdesigns.com/Company/People/mmehlich/index.html\">Michael Mehlich</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/pers/hd/e/Ellis:Brian_J=\">Brian J. Ellis</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/pers/hd/l/Luecke:Kenn_R=.html\">Kenn R. Luecke</a> (<b>2005</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.computer.org/csdl/proceedings/wcre/2005/2474/00/24740013-abs.html\">Reengineering C++ Component Models via Automatic Program Transformation</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/conf/wcre/wcre2005.html#AkersBMEL05\">WCRE 2005</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/pers/hd/a/Akers:Robert_L=.html\">Robert L. Akers</a>, <a href=\"/Ira_Baxter\" title=\"Ira Baxter\">Ira Baxter</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.semdesigns.com/Company/People/mmehlich/index.html\">Michael Mehlich</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/pers/hd/e/Ellis:Brian_J=\">Brian J. Ellis</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/pers/hd/l/Luecke:Kenn_R=.html\">Kenn R. Luecke</a> (<b>2007</b>). <i>Case study: Re-engineering C++ component models via automatic program transformation</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/journals/infsof/infsof49.html#AkersBMEL07\">Information &amp; Software Technology, Vol. 49, No. 3</a></li>\n<li> <a href=\"/Mathematician#Stroustrup\" title=\"Mathematician\">Bjarne Stroustrup</a> (<b>2008, 2014</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.stroustrup.com/Programming/\">Programming -- Principles and Practice Using C++</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Addison-Wesley\">Addison-Wesley</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=29\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Robert_C._Seacord\">Robert C. Seacord</a> (<b>2010</b>). <i>Dangerous Optimizations and the Loss of Causality</i>. CS 15-392, <a href=\"/Carnegie_Mellon_University\" title=\"Carnegie Mellon University\">Carnegie Mellon University</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://pubweb.eng.utah.edu/~cs5785/slides-f10/Dangerous+Optimizations.pdf\">slides as pdf</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://stackoverflow.com/users/5597/anthony-williams\">Anthony Williams</a> (<b>2012</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.cplusplusconcurrencyinaction.com/\">C++ Concurrency in Action: Practical Multithreading</a></i>. <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://pdos.csail.mit.edu/~xi/\">Xi Wang</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://pdos.csail.mit.edu/~hchen/\">Haogang Chen</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://homes.cs.washington.edu/~akcheung/\">Alvin Cheung</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://zhihaojia.com/\">Zhihao Jia</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://people.csail.mit.edu/nickolai/\">Nickolai Zeldovich</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://pdos.csail.mit.edu/~kaashoek/\">M. Frans Kaashoek</a> (<b>2012</b>). <i>Undefined Behavior: What Happened to My Code</i>? <a rel=\"nofollow\" class=\"external text\" href=\"https://pdos.csail.mit.edu/papers/ub:apsys12.pdf\">pdf</a> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://wdtz.org/\">Will Dietz</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://lipeng28.github.io/\">Peng Li</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.utah.edu/~regehr/\">John Regehr</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Vikram_Adve\">Vikram Adve</a> (<b>2012</b>). <i>Understanding Integer Overflow in C/C++</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.utah.edu/~regehr/papers/overflow12.pdf\">pdf</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=30\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1997_...\">1997 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=31\" title=\"Edit section: 1997 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/5fba0f94be869f35\">Search Degredation w/ C++</a> by Chris Jason Richards, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, June 12, 1997</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/msg/e27ff5ad3ac054ff\">Re: Search Degredation w/ C++</a> by <a href=\"/Amir_Ban\" title=\"Amir Ban\">Amir Ban</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, June 17, 1997</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=11617\">Question to Amir Ban</a> by <a href=\"/Bas_Hamstra\" title=\"Bas Hamstra\">Bas Hamstra</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 05, 1997 <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/2d300db2c0e1c70e\">object oriented chess programming</a> by <a href=\"/James_Swafford\" title=\"James Swafford\">James Long</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, December 31, 1997</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/msg/b048a5f34835f721\">Re: object oriented chess programming</a> by <a href=\"/David_Fotland\" title=\"David Fotland\">Dave Fotland</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, January 06, 1998</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=74219\">C or C++ for chess programming: speed</a> by <a href=\"/Marc-Philippe_Huget\" title=\"Marc-Philippe Huget\">Marc-Philippe Huget</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 20, 1999</li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_..._2\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=32\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=342885\">C++ Programming Q: are const and define efficiency the same</a> by <a href=\"/Federico_Andr%C3%A9s_Corigliano\" title=\"Federico Andrés Corigliano\">Federico Corigliano</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 16, 2004</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=389667\">Kiwi for Win98 and input-reading stuff</a> by <a href=\"/Alessandro_Scotti\" title=\"Alessandro Scotti\">Alessandro Scotti</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 29, 2004&#160;» <a href=\"/Kiwi\" title=\"Kiwi\">Kiwi</a>, <a href=\"/Windows\" title=\"Windows\">Windows</a>, <a href=\"/Thread\" title=\"Thread\">Thread</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2005_..._2\">2005 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=33\" title=\"Edit section: 2005 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://bytes.com/topic/c/answers/128755-find-bug\">Find The Bug - C / C++</a> by <a href=\"/David_Rasmussen\" title=\"David Rasmussen\">David Rasmussen</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://bytes.com/\">bytes.com</a>, July 22, 2005&#160;» <a href=\"/Chezzz\" title=\"Chezzz\">Chezzz</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=21007\">forcing compilers to inline (or to not inline)</a> by <a href=\"/index.php?title=Wylie_Garvin&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Wylie Garvin (page does not exist)\">Wylie Garvin</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 04, 2008</li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_..._2\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=34\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://talkchess.com/forum/viewtopic.php?t=39683\">c or c++&#160;?</a> by ethan ara, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 10, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=42046\">C++ templates question</a> by <a href=\"/index.php?title=Jos%C3%A9_C._Mart%C3%ADnez_Gal%C3%A1n&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"José C. Martínez Galán (page does not exist)\">José C. Martínez Galán</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 18, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=44999\">C++11 for chess engines</a> by <a href=\"/Marco_Costalba\" title=\"Marco Costalba\">Marco Costalba</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 03, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=45482\">Has GCC caught up with Intel with respect to performance?</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 07, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=47841\">Need Help Getting GCC Working?!?</a> by <a href=\"/Steve_Maughan\" title=\"Steve Maughan\">Steve Maughan</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 23, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-std.org/pipermail/ub/2013-May/000005.html\">[ub</a> Objectives and tasks for SG12] by <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cse.tamu.edu/people/faculty/gdr\">Gabriel Dos Reis</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-std.org/\">Open Standards</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-std.org/pipermail/ub/\">The ub Archives</a>, May 29, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48795\">C++ Question</a> by Ted Wong, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 30, 2013&#160;» <a href=\"/Thread\" title=\"Thread\">Thread</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=5&amp;t=2618\">C++11 threads seem to get shafted for cycles</a> by <a href=\"/Dann_Corbit\" title=\"Dann Corbit\">User923005</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">OpenChess Forum</a>, March 18, 2014&#160;» <a href=\"/Parallel_Search\" title=\"Parallel Search\">Parallel Search</a>, <a href=\"/Senpai\" title=\"Senpai\">Senpai</a>, <a href=\"/Thread\" title=\"Thread\">Thread</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=51824\">c++11 std::atomic and memory_order_relaxed</a> by Kevin Hearn, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 01, 2014&#160;» <a href=\"/Memory\" title=\"Memory\">Memory</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=51966\">C++ puzzle</a> by <a href=\"/Marco_Costalba\" title=\"Marco Costalba\">Marco Costalba</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 12, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=53820\">std::vector&lt;&gt; considered harmful</a> by <a href=\"/Folkert_van_Heusden\" title=\"Folkert van Heusden\">Folkert van Heusden</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 25, 2014&#160;» <a href=\"/Move_List\" title=\"Move List\">Move List</a>, <a href=\"/Array\" title=\"Array\">Array</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2015_...\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=35\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=56303\">Polling standard input from C++</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 10, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63978\">BMI2 intrinsics in gcc</a> by <a href=\"/%C3%81lvaro_Begu%C3%A9\" title=\"Álvaro Begué\">Álvaro Begué</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 14, 2017&#160;» <a href=\"/BMI2\" title=\"BMI2\">BMI2</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65523\">Advantages of C++11 for Chess?</a> by <a href=\"/Steve_Maughan\" title=\"Steve Maughan\">Steve Maughan</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 23, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=70584\">Wouldn't it be nice if C++ GPU</a> by <a href=\"/Chris_Whittington\" title=\"Chris Whittington\">Chris Whittington</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 25, 2019&#160;» <a href=\"/GPU\" title=\"GPU\">GPU</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=72461&amp;start=3\">Re: Pawn move generation in bitboards</a> by <a href=\"/%C3%81lvaro_Begu%C3%A9\" title=\"Álvaro Begué\">Álvaro Begué</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 05, 2019&#160;» <a href=\"/Bitboards\" title=\"Bitboards\">Bitboards</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=36\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=75818\">C++20 standard bit operations</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 15, 2020&#160;» <a href=\"/General_Setwise_Operations\" title=\"General Setwise Operations\">General Setwise Operations</a>, <a href=\"/Population_Count\" title=\"Population Count\">Population Count</a>, <a href=\"/BitScan\" title=\"BitScan\">BitScan</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=76592\">C++ type system AKA what is exactly int&#160;?</a> by <a href=\"/Toni_Helminen\" title=\"Toni Helminen\">JohnWoe</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 14, 2021</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=76817\">C++ code for board[8][8] representation</a> by <a href=\"/Yves_De_Billo%C3%ABz\" title=\"Yves De Billoëz\">Yves De Billoëz</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 08, 2021&#160;» <a href=\"/8x8_Board\" title=\"8x8 Board\">8x8 Board</a></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=76817&amp;start=4\">Re: C++ code for board[8][8] representation</a> by <a href=\"/Rein_Halbersma\" title=\"Rein Halbersma\">Rein Halbersma</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 08, 2021 <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup></dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?t=78070\">Why C++ instead of C#?</a> by Henk, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 31, 2021</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=78680\">Bitboards&#160;?: C# vs C++</a> by Bill Beame, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 17, 2021&#160;» <a href=\"/Bitboards\" title=\"Bitboards\">Bitboards</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=37\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/C%2B%2B\">C++ from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/C%2B%2B03\">C++03 from Wikipedia</a></li>\n<li> <span id=\"11\"></span><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/C%2B%2B11\">C++11 from Wikipedia</a></li>\n<li> <span id=\"14\"></span><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/C%2B%2B14\">C++14 from Wikipedia</a></li>\n<li> <span id=\"17\"></span><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/C%2B%2B17\">C++17 from Wikipedia</a></li>\n<li> <span id=\"20\"></span><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/C%2B%2B20\">C++20 from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikibooks.org/wiki/C%2B%2B_Programming\">C++ Programming from Wikibooks</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms\">More C++ Idioms - Wikibooks</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikiversity.org/wiki/C%2B%2B\">C++ - Wikiversity</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.cppreference.com/w/cpp\">C++ reference - cppreference.com</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cplusplus.com/\">cplusplus.com - The C++ Resources Network</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.fredosaurus.com/notes-cpp/index.html\">C++ Notes</a> by <a href=\"/Fred_Swartz\" title=\"Fred Swartz\">Fred Swartz</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.softwarepreservation.org/projects/c_plus_plus/\">C++ Historical Sources Archive — Software Preservation Group</a>, <a href=\"/The_Computer_History_Museum\" title=\"The Computer History Museum\">The Computer History Museum</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.agner.org/optimize/#manuals\">Agner Fog's manuals</a></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.agner.org/optimize/calling_conventions.pdf\">Calling conventions for different C++ compilers and operating systems</a> (pdf) by <a rel=\"nofollow\" class=\"external text\" href=\"http://www.agner.org/\">Agner Fog</a></dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.tantalon.com/pete/cppopt/main.htm\">C++ Optimization Strategies and Techniques</a> by <a rel=\"nofollow\" class=\"external text\" href=\"http://www.tantalon.com/pete.htm\">Pete Isensee</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://yosefk.com/c++fqa/index.html\">C++ Frequently Questioned Answers</a> by <a rel=\"nofollow\" class=\"external text\" href=\"http://yosefk.com/about.html\">Yossi Kreinin</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/forum/#!forum/comp.lang.c++\">comp.lang.c++</a> The object-oriented C++ language </li>\n<li> <a href=\"/Mathematician#Stroustrup\" title=\"Mathematician\">Bjarne Stroustrup</a> - The Essence of C++, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video </li></ul>\n<dl><dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/86xWVb4XIyE?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References_2\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Cpp&amp;action=edit&amp;section=38\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a href=\"/Keith_Gorlen\" title=\"Keith Gorlen\">Keith E. Gorlen</a>, et al. (<b>1990</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.goodreads.com/book/show/3108432-data-abstraction-and-object-oriented-programming-in-c\">Data abstraction and object-oriented programming in C++</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/John_Wiley_%26_Sons\">Wiley</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.softwarepreservation.org/projects/c_plus_plus/library/nihcl\">NIH Class Library — Software Preservation Group</a>, <a href=\"/The_Computer_History_Museum\" title=\"The Computer History Museum\">The Computer History Museum</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://scottmeyers.blogspot.co.uk/2012/04/information-on-c11-memory-model.html\">Information on the C++11 Memory Model</a> by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Scott_Meyers\">Scott Meyers</a>, April 24, 2012</span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=50186&amp;start=80\">Re: A note for C programmers</a> by <a href=\"/Rein_Halbersma\" title=\"Rein Halbersma\">Rein Halbersma</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 28, 2013</span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/5fba0f94be869f35\">Search Degredation w/ C++</a> by Chris Jason Richards, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, June 12, 1997, post 4 and 6 by <a href=\"/Amir_Ban\" title=\"Amir Ban\">Amir Ban</a></span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Anonymous_function#C++_(since_C++11)\">lambda expressions (C++ 11) from Wikipedia</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Languages\" title=\"Languages\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301024644\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.029 seconds\nReal time usage: 0.030 seconds\nPreprocessor visited node count: 285/1000000\nPreprocessor generated node count: 488/1000000\nPost‐expand include size: 1412/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    1.117      1 Template:Cpp_Templates\n100.00%    1.117      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:5942-0!canonical and timestamp 20260301024644 and revision id 26018\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "C++",
+        "*": "Videos"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "8x8 Board"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alessandro Scotti"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Amir Ban"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Andrew Koenig"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Array"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "BMI2"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bas Hamstra"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bell Laboratories"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "BitScan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "C"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Carnegie Mellon University"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chezzz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chris Whittington"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Clubfoot"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dann Corbit"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David Fotland"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David Rasmussen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "De Bruijn Sequence Generator"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Don Dailey"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Federico Andrés Corigliano"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Folkert van Heusden"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fred Swartz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Free Software Foundation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "GPU"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "General Setwise Operations"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Generic Programming"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Greg Wilson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ira Baxter"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "James Swafford"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jon Dart"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Keith Gorlen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kiwi"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Languages"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Leen Ammeraal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marc-Philippe Huget"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marco Costalba"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mathematician"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Memory"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move List"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pablo San Segundo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Parallel Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Patrick Winston"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Paul Hsieh"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Paul Lu"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Population Count"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Programming"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rein Halbersma"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SSE2"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Senpai"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Shawn Chidester"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Steve Maughan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Steven Edwards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "The Computer History Museum"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Thread"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Toni Helminen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "UCI"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Windows"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Yves De Billoëz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Álvaro Begué"
+      },
+      {
+        "ns": 0,
+        "*": "Class Design of a Chess Engine"
+      },
+      {
+        "ns": 0,
+        "*": "Wylie Garvin"
+      },
+      {
+        "ns": 0,
+        "*": "José C. Martínez Galán"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "C Extensions",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Cpp",
+        "byteoffset": 1252,
+        "anchor": "C_Extensions"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "References",
+        "number": "1.1",
+        "index": "2",
+        "fromtitle": "Cpp",
+        "byteoffset": 1268,
+        "anchor": "References"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Exception Handling",
+        "number": "1.2",
+        "index": "3",
+        "fromtitle": "Cpp",
+        "byteoffset": 1410,
+        "anchor": "Exception_Handling"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Classes",
+        "number": "2",
+        "index": "4",
+        "fromtitle": "Cpp",
+        "byteoffset": 1728,
+        "anchor": "Classes"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Data Definition",
+        "number": "2.1",
+        "index": "5",
+        "fromtitle": "Cpp",
+        "byteoffset": 2658,
+        "anchor": "Data_Definition"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Member Functions",
+        "number": "2.2",
+        "index": "6",
+        "fromtitle": "Cpp",
+        "byteoffset": 2822,
+        "anchor": "Member_Functions"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Modifiers",
+        "number": "2.3",
+        "index": "7",
+        "fromtitle": "Cpp",
+        "byteoffset": 2942,
+        "anchor": "Modifiers"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Pointer to Member Functions",
+        "number": "2.4",
+        "index": "8",
+        "fromtitle": "Cpp",
+        "byteoffset": 3311,
+        "anchor": "Pointer_to_Member_Functions"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Inheritance",
+        "number": "2.5",
+        "index": "9",
+        "fromtitle": "Cpp",
+        "byteoffset": 4571,
+        "anchor": "Inheritance"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Function Overloading",
+        "number": "2.6",
+        "index": "10",
+        "fromtitle": "Cpp",
+        "byteoffset": 4937,
+        "anchor": "Function_Overloading"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Operator Overloading",
+        "number": "2.7",
+        "index": "11",
+        "fromtitle": "Cpp",
+        "byteoffset": 5055,
+        "anchor": "Operator_Overloading"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Late Binding",
+        "number": "2.8",
+        "index": "12",
+        "fromtitle": "Cpp",
+        "byteoffset": 5295,
+        "anchor": "Late_Binding"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Abstract Classes",
+        "number": "2.9",
+        "index": "13",
+        "fromtitle": "Cpp",
+        "byteoffset": 5595,
+        "anchor": "Abstract_Classes"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Pure Abstract Classes",
+        "number": "2.10",
+        "index": "14",
+        "fromtitle": "Cpp",
+        "byteoffset": 5724,
+        "anchor": "Pure_Abstract_Classes"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Multiple Inheritance",
+        "number": "2.11",
+        "index": "15",
+        "fromtitle": "Cpp",
+        "byteoffset": 5890,
+        "anchor": "Multiple_Inheritance"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Templates",
+        "number": "3",
+        "index": "16",
+        "fromtitle": "Cpp",
+        "byteoffset": 6035,
+        "anchor": "Templates"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Anonymous Functions",
+        "number": "4",
+        "index": "17",
+        "fromtitle": "Cpp",
+        "byteoffset": 6067,
+        "anchor": "Anonymous_Functions"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Smart Pointer",
+        "number": "5",
+        "index": "18",
+        "fromtitle": "Cpp",
+        "byteoffset": 6357,
+        "anchor": "Smart_Pointer"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Class Design of a Chess Engine",
+        "number": "6",
+        "index": "19",
+        "fromtitle": "Cpp",
+        "byteoffset": 6720,
+        "anchor": "Class_Design_of_a_Chess_Engine"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "C++ Compiler",
+        "number": "7",
+        "index": "20",
+        "fromtitle": "Cpp",
+        "byteoffset": 6834,
+        "anchor": "C.2B.2B_Compiler"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Libraries",
+        "number": "8",
+        "index": "21",
+        "fromtitle": "Cpp",
+        "byteoffset": 7408,
+        "anchor": "Libraries"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "9",
+        "index": "22",
+        "fromtitle": "Cpp",
+        "byteoffset": 8974,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "C++ Publications",
+        "number": "10",
+        "index": "23",
+        "fromtitle": "Cpp",
+        "byteoffset": 9103,
+        "anchor": "C.2B.2B_Publications"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1985 ...",
+        "number": "10.1",
+        "index": "24",
+        "fromtitle": "Cpp",
+        "byteoffset": 9122,
+        "anchor": "1985_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1990 ...",
+        "number": "10.2",
+        "index": "25",
+        "fromtitle": "Cpp",
+        "byteoffset": 9760,
+        "anchor": "1990_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1995 ...",
+        "number": "10.3",
+        "index": "26",
+        "fromtitle": "Cpp",
+        "byteoffset": 12102,
+        "anchor": "1995_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "10.4",
+        "index": "27",
+        "fromtitle": "Cpp",
+        "byteoffset": 13458,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2005 ...",
+        "number": "10.5",
+        "index": "28",
+        "fromtitle": "Cpp",
+        "byteoffset": 14944,
+        "anchor": "2005_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "10.6",
+        "index": "29",
+        "fromtitle": "Cpp",
+        "byteoffset": 16317,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "11",
+        "index": "30",
+        "fromtitle": "Cpp",
+        "byteoffset": 17880,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1997 ...",
+        "number": "11.1",
+        "index": "31",
+        "fromtitle": "Cpp",
+        "byteoffset": 17894,
+        "anchor": "1997_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "11.2",
+        "index": "32",
+        "fromtitle": "Cpp",
+        "byteoffset": 19182,
+        "anchor": "2000_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2005 ...",
+        "number": "11.3",
+        "index": "33",
+        "fromtitle": "Cpp",
+        "byteoffset": 19569,
+        "anchor": "2005_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "11.4",
+        "index": "34",
+        "fromtitle": "Cpp",
+        "byteoffset": 19887,
+        "anchor": "2010_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "11.5",
+        "index": "35",
+        "fromtitle": "Cpp",
+        "byteoffset": 21637,
+        "anchor": "2015_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "11.6",
+        "index": "36",
+        "fromtitle": "Cpp",
+        "byteoffset": 22379,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "12",
+        "index": "37",
+        "fromtitle": "Cpp",
+        "byteoffset": 23501,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "13",
+        "index": "38",
+        "fromtitle": "Cpp",
+        "byteoffset": 25417,
+        "anchor": "References_2"
+      }
+    ]
+  }
+}

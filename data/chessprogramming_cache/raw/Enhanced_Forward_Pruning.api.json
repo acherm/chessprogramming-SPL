@@ -1,0 +1,235 @@
+{
+  "parse": {
+    "title": "Enhanced Forward Pruning",
+    "pageid": 981,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Search\" title=\"Search\">Search</a> * <a href=\"/Selectivity\" title=\"Selectivity\">Selectivity</a> * <a href=\"/Pruning\" title=\"Pruning\">Pruning</a> * Enhanced Forward Pruning</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:272px;\"><a href=\"https://en.wikipedia.org/wiki/File:Hoch-Cut_With_the_Kitchen_Knife.jpg\"><img alt=\"\" src=\"/images/8/8c/270px-Hoch-Cut_With_the_Kitchen_Knife.jpg\" width=\"270\" height=\"340\" class=\"thumbimage\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:270px-Hoch-Cut_With_the_Kitchen_Knife.jpg\" class=\"internal\" title=\"Enlarge\"></a></div><a href=\"/Category:Hannah_H%C3%B6ch\" title=\"Category:Hannah Höch\">Hannah Höch</a>, Cut with the Dada ... <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup></div></div></div> \n<p><b>Enhanced Forward Pruning</b>,<br />\na pruning technique introduced by <a href=\"/Mark_Winands\" title=\"Mark Winands\">Mark Winands</a> et al. in 2003 <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup> , which applies forward pruning like <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">null move pruning</a> and <a href=\"/Multi-Cut\" title=\"Multi-Cut\">multi-cut</a> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup> not only at expected <a href=\"/Node_Types#CUT\" title=\"Node Types\">Cut-nodes</a>, but also at expected <a href=\"/Node_Types#ALL\" title=\"Node Types\">All-nodes</a> based on considerations and modifications on the <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">PVS</a> framework. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Pruning_in_the_Null-Window_Search\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Pruning in the Null-Window Search</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-2\"><a href=\"#Cut-Node\"><span class=\"tocnumber\">1.1</span> <span class=\"toctext\">Cut-Node</span></a></li>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#All-Node\"><span class=\"tocnumber\">1.2</span> <span class=\"toctext\">All-Node</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Four_Additions\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Four Additions</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#Pseudo_Code\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Pseudo Code</span></a></li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#See_also\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#Publications\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Publications</span></a></li>\n<li class=\"toclevel-1 tocsection-8\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Forum Posts</span></a></li>\n<li class=\"toclevel-1 tocsection-9\"><a href=\"#References\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Pruning_in_the_Null-Window_Search\">Pruning in the Null-Window Search</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Enhanced_Forward_Pruning&amp;action=edit&amp;section=1\" title=\"Edit section: Pruning in the Null-Window Search\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>It has become practice to use forward-pruning methods only in the <a href=\"/Principal_Variation_Search#ZWS\" title=\"Principal Variation Search\">NWS</a> part of the PVS framework. The idea is that it is too risky to prune forward at an expected <a href=\"/Node_Types#PV\" title=\"Node Types\">PV-node</a>, because a possible mistake causes an immediate change of the <a href=\"/Principal_Variation\" title=\"Principal Variation\">principal variation</a>. \n</p>\n<h2><span class=\"mw-headline\" id=\"Cut-Node\">Cut-Node</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Enhanced_Forward_Pruning&amp;action=edit&amp;section=2\" title=\"Edit section: Cut-Node\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>If one erroneously prunes forward at some <a href=\"/Node_Types#CUT\" title=\"Node Types\">Cut-node</a> and the resulting score is backed up all the way to a PV-node, it obtains a <a href=\"/Fail-Low\" title=\"Fail-Low\">fail-low</a>, due to the odd ply distance to its <a href=\"/Node_Types#PV\" title=\"Node Types\">PV-ancestor</a>, no re-search will be performed. The result of the mistake is that a possible new principal variation is overlooked in this position. Therefore, forward pruning at a Cut-node without further provisions is dangerous. However, by the large savings achieved it has proven worthwhile to implement further provisions making forward pruning at Cut-nodes more safe (and thus acceptable). \n</p>\n<h2><span class=\"mw-headline\" id=\"All-Node\">All-Node</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Enhanced_Forward_Pruning&amp;action=edit&amp;section=3\" title=\"Edit section: All-Node\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>If one erroneously forward prunes at some <a href=\"/Node_Types#ALL\" title=\"Node Types\">All-node</a> and the resulting score is backed up all the way to a PV-node, it obtain a <a href=\"/Fail-High\" title=\"Fail-High\">fail-high</a> and a re-search will be performed. The algorithm is then searching for a new principal variation and regards the subsequent nodes as PV-nodes. Because no forward pruning is done at PV-nodes, it is possible to find out whether there exists a new <a href=\"/Principal_Variation\" title=\"Principal Variation\">PV</a> or not. In this case the result of the mistake will be that an extra amount of nodes has been searched. In principle, forward pruning at an expected All-node is not dangerous but can trigger unnecessary re-searches.\n</p>\n<h1><span class=\"mw-headline\" id=\"Four_Additions\">Four Additions</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Enhanced_Forward_Pruning&amp;action=edit&amp;section=4\" title=\"Edit section: Four Additions\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ol><li> To prevent that a backed-up value of a forward-pruned All-node causes a <a href=\"/Beta-Cutoff\" title=\"Beta-Cutoff\">cutoff</a> at the PV-node lying above, the forward-pruning mechanism should return a value equal to <a href=\"/Beta\" title=\"Beta\">β</a> in case of a cutoff (which is equal to α+1 at an All-node).</li>\n<li> If the window of the PV-node was already closed and the <a href=\"/Principal_Variation_Search#ZWS\" title=\"Principal Variation Search\">NWS</a> should return a value equal to β (α+1), we still have to do a re-search.</li>\n<li> If we do a re-search and the returned value of the NWS equals α+1, we should do a re-search with α as <a href=\"/Lower_Bound\" title=\"Lower Bound\">lower bound</a>.</li>\n<li> Cut-nodes where a <a href=\"/Fail-Low\" title=\"Fail-Low\">fail-low</a> has occurred with a value equal to α are not stored in the <a href=\"/Transposition_Table\" title=\"Transposition Table\">transposition table</a> because their values are uncertain.</li></ol>\n<h1><span class=\"mw-headline\" id=\"Pseudo_Code\">Pseudo Code</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Enhanced_Forward_Pruning&amp;action=edit&amp;section=5\" title=\"Edit section: Pseudo Code\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<pre>\nenum {PV_NODE = 0, CUT_NODE = 1, ALL_NODE = -1};\n\nint PVS(node, alpha, beta, depth, node_type)\n{\n   //Transposition table lookup, omitted\n   ...\n   if (depth == 0)\n      return evaluate(pos);\n   if (node_type&#160;!= PV_NODE)\n   {\n      //Forward-pruning code, omitted\n      ...\n      if (forward_pruning condition holds) /* Addition 1 */\n         return beta; \n   }\n   next = firstSuccessor(node);\n   best = -PVS(next, -beta, -alpha, depth-1, -node_type);\n   if (best &gt;= beta)\n      goto Done;\n   next = nextSibling(next);\n   while (next&#160;!= null)\n   {\n      alpha = max(alpha, best);\n      //Null-Window Search Part\n      value = -PVS(next, -alpha-1, -alpha, depth-1, (node_type == CUT_NODE)? ALL_NODE&#160;: CUT_NODE) );\n      //Re-search\n      if ( (value &gt; alpha &amp;&amp; value &lt; beta) \n      ||   (node_type == PV_NODE &amp;&amp; value == beta &amp;&amp; beta == alpha+1) ) /* Addition 2 */\n      {\n         //Value is not a real lower bound\n         if (value == alpha+1) /* Addition 3 */\n            value = alpha;\n         value = -PVS(next, -beta, -value, depth-1, node_type);\n      }\n      if (value &gt; best)\n      {\n         best = value;\n         if (best &gt;= beta)\n            goto Done;\n      }\n      next = nextSibling(next);\n   }\n   if (node_type == CUT_NODE &amp;&amp; best == alpha)  /* Addition 4 */\n      return best;\n   Done: //Store in Transposition table, omitted\n   ...\n}\n</pre>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Enhanced_Forward_Pruning&amp;action=edit&amp;section=6\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Multi-Cut\" title=\"Multi-Cut\">Multi-Cut</a></li>\n<li> <a href=\"/Node_Types\" title=\"Node Types\">Node Types</a></li>\n<li> <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">Null Move Pruning</a></li>\n<li> <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">Principal Variation Search</a></li>\n<li> <a href=\"/ProbCut\" title=\"ProbCut\">ProbCut</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Enhanced_Forward_Pruning&amp;action=edit&amp;section=7\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Mark_Winands\" title=\"Mark Winands\">Mark Winands</a>, <a href=\"/Jaap_van_den_Herik\" title=\"Jaap van den Herik\">Jaap van den Herik</a>, <a href=\"/Jos_Uiterwijk\" title=\"Jos Uiterwijk\">Jos Uiterwijk</a>, <a href=\"/Erik_van_der_Werf\" title=\"Erik van der Werf\">Erik van der Werf</a> (<b>2003</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://research.tilburguniversity.edu/en/publications/enhanced-forward-pruning\">Enhanced forward pruning</a></i>. JCIS 2003</li>\n<li> <a href=\"/Mark_Winands\" title=\"Mark Winands\">Mark Winands</a>, <a href=\"/Jaap_van_den_Herik\" title=\"Jaap van den Herik\">Jaap van den Herik</a>, <a href=\"/Jos_Uiterwijk\" title=\"Jos Uiterwijk\">Jos Uiterwijk</a>, <a href=\"/Erik_van_der_Werf\" title=\"Erik van der Werf\">Erik van der Werf</a> (<b>2005</b>). <i>Enhanced Forward Pruning</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Information_Sciences_(journal)\">Information Sciences</a>, Vol. 175, No. 4,  <a rel=\"nofollow\" class=\"external text\" href=\"http://erikvanderwerf.tengen.nl/pubdown/Enhanced%20forward%20pruning.pdf\">pdf preprint</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Enhanced_Forward_Pruning&amp;action=edit&amp;section=8\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=6392\">NMP on ALL nodes</a> by <a href=\"/Onno_Garms\" title=\"Onno Garms\">Onno Garms</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, April 15, 2007&#160;» <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">Null Move Pruning</a>, <a href=\"/Node_Types#ALL\" title=\"Node Types\">All Nodes</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Enhanced_Forward_Pruning&amp;action=edit&amp;section=9\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a href=\"/Category:Hannah_H%C3%B6ch\" title=\"Category:Hannah Höch\">Hannah Höch</a> -  <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/File:Hoch-Cut_With_the_Kitchen_Knife.jpg\">Cut with the Dada Kitchen Knife through the Last Weimar Beer-Belly Cultural Epoch in Germany</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Collage\">Collage</a> of pasted papers, 90×144 cm, 1919,  <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/National_Gallery_%28Berlin%29\">National Gallery</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Berlin_State_Museums\">Berlin State Museums</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Hannah_H%C3%B6ch\">Hannah Höch from Wikipedia</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Dada\">Dada from Wikipedia</a>,  <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Weimar_culture\">Weimar culture from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://lemondedekitchi.blogspot.de/2014/10/great-women-1-hannah-hoch.html\">le monde de kitchi: Great Women #1: Hannah Höch</a> (German)</span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a href=\"/Mark_Winands\" title=\"Mark Winands\">Mark Winands</a>, <a href=\"/Jaap_van_den_Herik\" title=\"Jaap van den Herik\">Jaap van den Herik</a>, <a href=\"/Jos_Uiterwijk\" title=\"Jos Uiterwijk\">Jos Uiterwijk</a>, <a href=\"/Erik_van_der_Werf\" title=\"Erik van der Werf\">Erik van der Werf</a> (<b>2003</b>). <i>Enhanced forward pruning.</i> JCIS 2003</span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a href=\"/Yngvi_Bj%C3%B6rnsson\" title=\"Yngvi Björnsson\">Yngvi Björnsson</a>, <a href=\"/Tony_Marsland\" title=\"Tony Marsland\">Tony Marsland</a> (<b>2001</b>). <i>Multi-cut Alpha-Beta Pruning in Game Tree Search.</i> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Theoretical_Computer_Science_(journal)\">Theoretical Computer Science</a>, Vol. 252, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.ru.is/faculty/yngvi/pdf/BjornssonM01a.pdf\">pdf</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Pruning\" title=\"Pruning\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260228215850\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.017 seconds\nReal time usage: 0.019 seconds\nPreprocessor visited node count: 104/1000000\nPreprocessor generated node count: 206/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:981-0!canonical and timestamp 20260228215850 and revision id 15362\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Hannah_Höch"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Beta-Cutoff"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Erik van der Werf"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fail-High"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fail-Low"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jaap van den Herik"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jos Uiterwijk"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lower Bound"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mark Winands"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Multi-Cut"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Node Types"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Onno Garms"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ProbCut"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Selectivity"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tony Marsland"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Yngvi Björnsson"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Hannah Höch"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Pruning in the Null-Window Search",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Enhanced_Forward_Pruning",
+        "byteoffset": 1965,
+        "anchor": "Pruning_in_the_Null-Window_Search"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Cut-Node",
+        "number": "1.1",
+        "index": "2",
+        "fromtitle": "Enhanced_Forward_Pruning",
+        "byteoffset": 2334,
+        "anchor": "Cut-Node"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "All-Node",
+        "number": "1.2",
+        "index": "3",
+        "fromtitle": "Enhanced_Forward_Pruning",
+        "byteoffset": 2965,
+        "anchor": "All-Node"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Four Additions",
+        "number": "2",
+        "index": "4",
+        "fromtitle": "Enhanced_Forward_Pruning",
+        "byteoffset": 3637,
+        "anchor": "Four_Additions"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Pseudo Code",
+        "number": "3",
+        "index": "5",
+        "fromtitle": "Enhanced_Forward_Pruning",
+        "byteoffset": 4397,
+        "anchor": "Pseudo_Code"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "4",
+        "index": "6",
+        "fromtitle": "Enhanced_Forward_Pruning",
+        "byteoffset": 5780,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "5",
+        "index": "7",
+        "fromtitle": "Enhanced_Forward_Pruning",
+        "byteoffset": 5897,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "6",
+        "index": "8",
+        "fromtitle": "Enhanced_Forward_Pruning",
+        "byteoffset": 6454,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "7",
+        "index": "9",
+        "fromtitle": "Enhanced_Forward_Pruning",
+        "byteoffset": 6679,
+        "anchor": "References"
+      }
+    ]
+  }
+}

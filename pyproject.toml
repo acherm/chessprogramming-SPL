@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cpw-variability"
+version = "0.1.0"
+description = "CPW variability mining pipeline for chess engine SPL feature models"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "requests>=2.31",
+  "beautifulsoup4>=4.12",
+  "lxml>=5.1",
+  "pydantic>=2.6",
+  "typer>=0.12",
+  "rapidfuzz>=3.9",
+  "pandas>=2.2",
+  "python-chess>=1.11",
+]
+
+[project.scripts]
+cpw-var = "cpw_variability.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

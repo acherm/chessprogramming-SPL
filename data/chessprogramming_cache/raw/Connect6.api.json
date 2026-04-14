@@ -1,0 +1,487 @@
+{
+  "parse": {
+    "title": "Connect6",
+    "pageid": 1858,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Games\" title=\"Games\">Games</a> * Connect6</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"/File:Closeup_of_a_Connect_6_game.jpg\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Closeup_of_a_Connect_6_game.jpg/330px-Closeup_of_a_Connect_6_game.jpg\" width=\"300\" height=\"169\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Closeup_of_a_Connect_6_game.jpg/500px-Closeup_of_a_Connect_6_game.jpg 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Closeup_of_a_Connect_6_game.jpg/960px-Closeup_of_a_Connect_6_game.jpg 2x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Closeup_of_a_Connect_6_game.jpg\" class=\"internal\" title=\"Enlarge\"></a></div>Connect6 on a large board <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>Connect6</b>, Connect(m,n,6,2,1)<br />\na <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Two-player_game\">two-player</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Abstract_strategy_game\">abstract strategy</a> board game of the k-in-a-row family similar to <a href=\"/index.php?title=Gomoku&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Gomoku (page does not exist)\">Gomoku</a>, introduced in 2003 by <a href=\"/I-Chen_Wu\" title=\"I-Chen Wu\">I-Chen Wu</a> and presented at <a href=\"/Advances_in_Computer_Games_11\" title=\"Advances in Computer Games 11\">Advances in Computer Games 11</a> in 2005. Black and White alternately place <b>two</b> stones of their own colour on empty intersections of a Go-like board, except that Black (the first player) places one stone only for the first move <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>. The one who gets six or more stones in a row (horizontally, vertically or diagonally) first wins the game. Most often, Connect6 is played on a 19x19 Go board, proposed for professional players is a 59x59 board <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>. Since 2006, Connect6 is played regularely by computers at the <a href=\"/Computer_Olympiad\" title=\"Computer Olympiad\">Computer Olympiad</a> organized by the <a href=\"/ICGA\" title=\"ICGA\">ICGA</a> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>. <a href=\"/Search\" title=\"Search\">Search</a> algorithms used are <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">Alpha-Beta</a> / <a href=\"/MTD(f)\" title=\"MTD(f)\">MTD(f)</a> along with <a href=\"/index.php?title=VCF&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"VCF (page does not exist)\">VCF</a> search (Victory by Continuous Four) to find a path to win in the endgame <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup>, and <a href=\"/Monte-Carlo_Tree_Search\" title=\"Monte-Carlo Tree Search\">Monte-Carlo Tree Search</a>, <a href=\"/UCT\" title=\"UCT\">UCT</a>, as well as <a href=\"/Proof-Number_Search\" title=\"Proof-Number Search\">Proof-Number Search</a> also in conjunction with the novel relevance-zone-oriented proof (RZOP) search used to solve various openings, such as the Mickey Mouse opening <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup>.\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Selected_Programs\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Selected Programs</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#GUI\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">GUI</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Computer_Olympiads\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Computer Olympiads</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#See_also\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#Selected_Publications\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Selected Publications</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-6\"><a href=\"#2005_...\"><span class=\"tocnumber\">5.1</span> <span class=\"toctext\">2005 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#2010_...\"><span class=\"tocnumber\">5.2</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#2015_...\"><span class=\"tocnumber\">5.3</span> <span class=\"toctext\">2015 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#2020_...\"><span class=\"tocnumber\">5.4</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-10\"><a href=\"#External_Links\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-11\"><a href=\"#References\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Selected_Programs\">Selected Programs</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Connect6&amp;action=edit&amp;section=1\" title=\"Edit section: Selected Programs\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.game-ai-forum.org/icga-tournaments/program.php?id=558\">Bitstronger</a> aka <a href=\"/index.php?title=Liang_Li&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Liang Li (page does not exist)\">Cloudict</a> by <a href=\"/index.php?title=Liang_Li&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Liang Li (page does not exist)\">Liang Li</a>, <a href=\"/index.php?title=Hao_Cui&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Hao Cui (page does not exist)\">Hao Cui</a>, <a href=\"/index.php?title=Ruijian_Wang&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Ruijian Wang (page does not exist)\">Ruijian Wang</a>, <a href=\"/index.php?title=Siran_Lin&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Siran Lin (page does not exist)\">Siran Lin</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.game-ai-forum.org/icga-tournaments/program.php?id=507\">Kavalan</a> by <a href=\"/Jung-Kuei_Yang\" title=\"Jung-Kuei Yang\">Jung-Kuei Yang</a>, <a href=\"/Shi-Jim_Yen\" title=\"Shi-Jim Yen\">Shi-Jim Yen</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.game-ai-forum.org/icga-tournaments/program.php?id=508\">MeinStein</a> by <a href=\"/Theo_van_der_Storm\" title=\"Theo van der Storm\">Theo van der Storm</a>, <a href=\"/Jan_Krabbenbos\" title=\"Jan Krabbenbos\">Jan Krabbenbos</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.game-ai-forum.org/icga-tournaments/program.php?id=696\">MoreThenFive</a> by <a href=\"/index.php?title=Jiajia_Guo&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Jiajia Guo (page does not exist)\">Jiajia Guo</a>, <a href=\"/index.php?title=Xiaomeng_Yang&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Xiaomeng Yang (page does not exist)\">Xiaomeng Yang</a>, <a href=\"/index.php?title=Liang_Yunzhao&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Liang Yunzhao (page does not exist)\">Liang Yunzhao</a>, <a href=\"/index.php?title=Jianbo_Zhao&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Jianbo Zhao (page does not exist)\">Jianbo Zhao</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.game-ai-forum.org/icga-tournaments/program.php?id=231\">NCTU6</a> by <a href=\"/I-Chen_Wu\" title=\"I-Chen Wu\">I-Chen Wu</a>, <a href=\"/index.php?title=Hsiu-Chen_Chang&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Hsiu-Chen Chang (page does not exist)\">Hsiu-Chen Chang</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.game-ai-forum.org/icga-tournaments/program.php?id=232\">X6</a> by <a href=\"/index.php?title=Sih-Yuan_Liou&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Sih-Yuan Liou (page does not exist)\">Sih-Yuan Liou</a>, <a href=\"/Shi-Jim_Yen\" title=\"Shi-Jim Yen\">Shi-Jim Yen</a></li></ul>\n<p><span id=\"ConnectMore\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"GUI\">GUI</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Connect6&amp;action=edit&amp;section=2\" title=\"Edit section: GUI\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/index.php?title=Liang_Li&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Liang Li (page does not exist)\">ConnectMore</a>  by <a href=\"/index.php?title=Liang_Li&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Liang Li (page does not exist)\">Liang Li</a> written in <a href=\"/Python\" title=\"Python\">Python 3</a>  - for <a href=\"/index.php?title=Liang_Li&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Liang Li (page does not exist)\">Cloudict</a> and more ... <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup></li></ul>\n<dl><dd> <div class=\"floatnone\"><a href=\"https://github.com/lang010/ConnectMore\" rel=\"nofollow\"><img alt=\"ConnectMore.jpg\" src=\"/images/b/b6/ConnectMore.jpg\" width=\"640\" height=\"549\" style=\"vertical-align: text-bottom\" class=\"thumbborder\" /></a></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"Computer_Olympiads\"><a href=\"/Computer_Olympiad\" title=\"Computer Olympiad\">Computer Olympiads</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Connect6&amp;action=edit&amp;section=3\" title=\"Edit section: Computer Olympiads\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/11th_Computer_Olympiad#Connect6\" title=\"11th Computer Olympiad\">11th Computer Olympiad, Turin 2006</a></li>\n<li> <a href=\"/12th_Computer_Olympiad#Connect6\" title=\"12th Computer Olympiad\">12th Computer Olympiad, Amsterdam 2007</a></li>\n<li> <a href=\"/13th_Computer_Olympiad#Connect6\" title=\"13th Computer Olympiad\">13th Computer Olympiad, Beijing 2008</a></li>\n<li> <a href=\"/14th_Computer_Olympiad#Connect6\" title=\"14th Computer Olympiad\">14th Computer Olympiad, Pamplona 2009</a></li>\n<li> <a href=\"/15th_Computer_Olympiad#Connect6\" title=\"15th Computer Olympiad\">15th Computer Olympiad, Kanazawa 2010</a></li>\n<li> <a href=\"/16th_Computer_Olympiad#Connect6\" title=\"16th Computer Olympiad\">16th Computer Olympiad, Tilburg 2011</a></li>\n<li> <a href=\"/17th_Computer_Olympiad#Connect6\" title=\"17th Computer Olympiad\">17th Computer Olympiad, Yokohama 2013</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Connect6&amp;action=edit&amp;section=4\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Connect_Four\" title=\"Connect Four\">Connect Four</a></li>\n<li> <a href=\"/index.php?title=Gomoku&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Gomoku (page does not exist)\">Gomoku</a></li>\n<li> <a href=\"/index.php?title=Renju&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Renju (page does not exist)\">Renju</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Selected_Publications\">Selected Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Connect6&amp;action=edit&amp;section=5\" title=\"Edit section: Selected Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"2005_...\">2005 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Connect6&amp;action=edit&amp;section=6\" title=\"Edit section: 2005 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/I-Chen_Wu\" title=\"I-Chen Wu\">I-Chen Wu</a>, <a href=\"/Dei-Yen_Huang\" title=\"Dei-Yen Huang\">Dei-Yen Huang</a> (<b>2005</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/chapter/10.1007/11922155_14\">A New Family of k -in-a-Row Games</a></i>. <a href=\"/Advances_in_Computer_Games_11\" title=\"Advances in Computer Games 11\">Advances in Computer Games 11</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.connect6.org/k-in-a-row.pdf\">pdf</a></li>\n<li> <a href=\"/I-Chen_Wu\" title=\"I-Chen Wu\">I-Chen Wu</a>, <a href=\"/Dei-Yen_Huang\" title=\"Dei-Yen Huang\">Dei-Yen Huang</a>, <a href=\"/index.php?title=Hsiu-Chen_Chang&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Hsiu-Chen Chang (page does not exist)\">Hsiu-Chen Chang</a> (<b>2005</b>). <i>Connect6</i>. <a href=\"/ICGA_Journal#28_4\" title=\"ICGA Journal\">ICGA Journal, Vol. 28, No. 4</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.connect6.org/connect6.pdf\">pdf</a></li>\n<li> <a href=\"/I-Chen_Wu\" title=\"I-Chen Wu\">I-Chen Wu</a>, <a href=\"/Shi-Jim_Yen\" title=\"Shi-Jim Yen\">Shi-Jim Yen</a> (<b>2006</b>). <i>NCTU6 wins Connect6 tournament</i>. <a href=\"/ICGA_Journal#29_3\" title=\"ICGA Journal\">ICGA Journal, Vol. 29, No. 3</a>&#160;» <a href=\"/11th_Computer_Olympiad#Connect6\" title=\"11th Computer Olympiad\">11th Computer Olympiad</a></li>\n<li> <a href=\"/I-Chen_Wu\" title=\"I-Chen Wu\">I-Chen Wu</a>, <a href=\"/Shi-Jim_Yen\" title=\"Shi-Jim Yen\">Shi-Jim Yen</a> (<b>2007</b>). <i>X6 wins Connect6 tournament</i>. <a href=\"/ICGA_Journal#30_2\" title=\"ICGA Journal\">ICGA Journal, Vol. 30, No. 2</a>&#160;» <a href=\"/12th_Computer_Olympiad#Connect6\" title=\"12th Computer Olympiad\">12th Computer Olympiad</a></li>\n<li> <a href=\"/I-Chen_Wu\" title=\"I-Chen Wu\">I-Chen Wu</a>, <a href=\"/Ping-Hung_Lin\" title=\"Ping-Hung Lin\">Ping-Hung Lin</a> (<b>2008</b>). <i>NCTU6-Lite wins Connect6 tournament</i>. <a href=\"/ICGA_Journal#31_4\" title=\"ICGA Journal\">ICGA Journal, Vol. 31, No. 4</a>&#160;» <a href=\"/13th_Computer_Olympiad#Connect6\" title=\"13th Computer Olympiad\">13th Computer Olympiad</a></li></ul>\n<p><b>2009</b>\n</p>\n<ul><li> <a href=\"/index.php?title=Sheng-Hao_Chiang&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Sheng-Hao Chiang (page does not exist)\">Sheng-Hao Chiang</a>, <a href=\"/I-Chen_Wu\" title=\"I-Chen Wu\">I-Chen Wu</a>, <a href=\"/Ping-Hung_Lin\" title=\"Ping-Hung Lin\">Ping-Hung Lin</a> (<b>2009</b>). <i>On Drawn K-In-A-Row Games</i>. <a href=\"/Advances_in_Computer_Games_12\" title=\"Advances in Computer Games 12\">Advances in Computer Games 12</a></li>\n<li> <a href=\"/index.php?title=Changming_Xu&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Changming Xu (page does not exist)\">Changming Xu</a>, <a href=\"/index.php?title=Zongmin_Ma&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Zongmin Ma (page does not exist)\">Zongmin Ma</a>, <a href=\"/index.php?title=Junjie_Tao&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Junjie Tao (page does not exist)\">Junjie Tao</a>, <a href=\"/Xinhe_Xu\" title=\"Xinhe Xu\">Xinhe Xu</a> (<b>2009</b>). <i>Enhancements of Proof Number Search in Connect6</i>. <a href=\"/IEEE\" title=\"IEEE\">IEEE</a> Control and Decision Conference</li>\n<li> <a href=\"/index.php?title=Changming_Xu&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Changming Xu (page does not exist)\">Changming Xu</a>, <a href=\"/index.php?title=Zongmin_Ma&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Zongmin Ma (page does not exist)\">Zongmin Ma</a>, <a href=\"/Xinhe_Xu\" title=\"Xinhe Xu\">Xinhe Xu</a> (<b>2009</b>). <i>A method to construct knowledge table-base in k-in-a-row games</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/conf/sac/sac2009.html#XuMX09\">SAC 2009</a></li>\n<li> <a href=\"/Ping-Hung_Lin\" title=\"Ping-Hung Lin\">Ping-Hung Lin</a>, <a href=\"/I-Chen_Wu\" title=\"I-Chen Wu\">I-Chen Wu</a>, <a href=\"/Shun-Chin_Hsu\" title=\"Shun-Chin Hsu\">Shun-Chin Hsu</a> (<b>2009</b>). <i>Bit wins Connect6 tournament</i>. <a href=\"/ICGA_Journal#32_2\" title=\"ICGA Journal\">ICGA Journal, Vol. 32, No. 2</a>&#160;» <a href=\"/14th_Computer_Olympiad#Connect6\" title=\"14th Computer Olympiad\">14th Computer Olympiad</a></li>\n<li> <a href=\"/Shi-Jim_Yen\" title=\"Shi-Jim Yen\">Shi-Jim Yen</a>, <a href=\"/Jung-Kuei_Yang\" title=\"Jung-Kuei Yang\">Jung-Kuei Yang</a> (<b>2009</b>). <i>The Bitboard Design and Bitwise Computing in Connect Six</i>. <a href=\"/Conferences#GPW\" title=\"Conferences\">14th Game Programming Workshop</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Connect6&amp;action=edit&amp;section=7\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Ping-Hung_Lin\" title=\"Ping-Hung Lin\">Ping-Hung Lin</a> (<b>2010</b>). <i>Relevance-Zone-Oriented Proof Search for Connect6</i>. Ph.D. thesis</li>\n<li> <a href=\"/I-Chen_Wu\" title=\"I-Chen Wu\">I-Chen Wu</a>, <a href=\"/Ping-Hung_Lin\" title=\"Ping-Hung Lin\">Ping-Hung Lin</a> (<b>2010</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.researchgate.net/publication/224159031_Relevance-Zone-Oriented_Proof_Search_for_Connect6\">Relevance-Zone-Oriented Proof Search for Connect6</a></i>. <a href=\"/IEEE#TOCIAIGAMES\" title=\"IEEE\">IEEE Transactions on Computational Intelligence and AI in Games</a>, Vol. 2, No. 3</li>\n<li> <a href=\"/I-Chen_Wu\" title=\"I-Chen Wu\">I-Chen Wu</a>, <a href=\"/Ping-Hung_Lin\" title=\"Ping-Hung Lin\">Ping-Hung Lin</a>, <a href=\"/Shi-Jim_Yen\" title=\"Shi-Jim Yen\">Shi-Jim Yen</a> (<b>2010</b>). <i>MoreThenFive wins the Connect-6 Tournament</i>. <a href=\"/ICGA_Journal#33_3\" title=\"ICGA Journal\">ICGA Journal, Vol. 33, No. 3</a>&#160;» <a href=\"/15th_Computer_Olympiad#Connect6\" title=\"15th Computer Olympiad\">15th Computer Olympiad</a></li>\n<li> <a href=\"/I-Chen_Wu\" title=\"I-Chen Wu\">I-Chen Wu</a>, <a href=\"/Hung-Hsuan_Lin\" title=\"Hung-Hsuan Lin\">Hung-Hsuan Lin</a>, <a href=\"/Ping-Hung_Lin\" title=\"Ping-Hung Lin\">Ping-Hung Lin</a>, <a href=\"/Der-Johng_Sun\" title=\"Der-Johng Sun\">Der-Johng Sun</a>, <a href=\"/Yi-Chih_Chan\" title=\"Yi-Chih Chan\">Yi-Chih Chan</a>, <a href=\"/index.php?title=Bo-Ting_Chen&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Bo-Ting Chen (page does not exist)\">Bo-Ting Chen</a> (<b>2010</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/chapter/10.1007/978-3-642-17928-0_2\">Job-Level Proof-Number Search for Connect6</a></i>. <a href=\"/CG_2010\" title=\"CG 2010\">CG 2010</a></li>\n<li> <a href=\"/Shi-Jim_Yen\" title=\"Shi-Jim Yen\">Shi-Jim Yen</a>, <a href=\"/Jung-Kuei_Yang\" title=\"Jung-Kuei Yang\">Jung-Kuei Yang</a> (<b>2010</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.semanticscholar.org/paper/Searching-for-Stage-Proof-Number-in-Connect6-Yen-Yang/2de70372893e8773b12391f75d2b964ea7fb6df2\">Searching for Stage Proof Number in Connect6</a></i>. <a href=\"/index.php?title=TAAI_2010&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"TAAI 2010 (page does not exist)\">TAAI 2010</a></li></ul>\n<p><b>2011</b>\n</p>\n<ul><li> <a href=\"/index.php?title=Sheng-Hao_Chiang&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Sheng-Hao Chiang (page does not exist)\">Sheng-Hao Chiang</a>, <a href=\"/I-Chen_Wu\" title=\"I-Chen Wu\">I-Chen Wu</a>, <a href=\"/Ping-Hung_Lin\" title=\"Ping-Hung Lin\">Ping-Hung Lin</a> (<b>2011</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://dl.acm.org/citation.cfm?id=2010786\">Drawn K-In-A-Row Games</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/journals/tcs/tcs412.html#ChiangWL11\">Theoretical Computer Science, Volume 412</a></li>\n<li> <a href=\"/I-Chen_Wu\" title=\"I-Chen Wu\">I-Chen Wu</a>, <a href=\"/index.php?title=Hsin-Ti_Tsai&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Hsin-Ti Tsai (page does not exist)\">Hsin-Ti Tsai</a>, <a href=\"/Hung-Hsuan_Lin\" title=\"Hung-Hsuan Lin\">Hung-Hsuan Lin</a>, <a href=\"/index.php?title=Yi-Shan_Lin&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Yi-Shan Lin (page does not exist)\">Yi-Shan Lin</a>, <a href=\"/index.php?title=Chieh-Min_Chang&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Chieh-Min Chang (page does not exist)\">Chieh-Min Chang</a>, <a href=\"/Ping-Hung_Lin\" title=\"Ping-Hung Lin\">Ping-Hung Lin</a> (<b>2011</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.conftool.net/acg13/index.php?page=browseSessions&amp;form_session=5\">Temporal Difference Learning for Connect6</a></i>. <a href=\"/Advances_in_Computer_Games_13\" title=\"Advances in Computer Games 13\">Advances in Computer Games 13</a></li>\n<li> <a href=\"/Shi-Jim_Yen\" title=\"Shi-Jim Yen\">Shi-Jim Yen</a>, <a href=\"/Jung-Kuei_Yang\" title=\"Jung-Kuei Yang\">Jung-Kuei Yang</a> (<b>2011</b>). <i>Two-Stage Monte Carlo Tree Search for Connect6</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/journals/tciaig/tciaig3.html#YenY11\">IEEE Transactions on Computational Intelligence and AI in Games, Vol. 3</a></li></ul>\n<p><b>2012</b>\n</p>\n<ul><li> <a href=\"/index.php?title=Liang_Li&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Liang Li (page does not exist)\">Liang Li</a>, <a href=\"/index.php?title=Hong_Liu&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Hong Liu (page does not exist)\">Hong Liu</a>, <a href=\"/index.php?title=Peiyu_Liu&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Peiyu Liu (page does not exist)\">Peiyu Liu</a>, <a href=\"/index.php?title=Taoying_Liu&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Taoying Liu (page does not exist)\">Taoying Liu</a>, <a href=\"/index.php?title=Wei_Li&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Wei Li (page does not exist)\">Wei Li</a>, <a href=\"/index.php?title=Hao_Wang&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Hao Wang (page does not exist)\">Hao Wang</a> (<b>2012</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://ieeexplore.ieee.org/document/6337852/\">A Node-based Parallel Game Tree Algorithm Using GPUs</a></i>. CLUSTER 2012, <a rel=\"nofollow\" class=\"external text\" href=\"https://pdfs.semanticscholar.org/be21/d7b9b91957b700aab4ce002e6753b826ff54.pdf\">pdf</a></li>\n<li> <a href=\"/Shi-Jim_Yen\" title=\"Shi-Jim Yen\">Shi-Jim Yen</a>, <a href=\"/Jung-Kuei_Yang\" title=\"Jung-Kuei Yang\">Jung-Kuei Yang</a>, <a href=\"/Kuo-Yuan_Kao\" title=\"Kuo-Yuan Kao\">Kuo-Yuan Kao</a>, <a href=\"/index.php?title=Tai-Ning_Yang&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Tai-Ning Yang (page does not exist)\">Tai-Ning Yang</a> (<b>2012</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.sciencedirect.com/science/article/pii/S0950705112001293\">Bitboard Knowledge Base System and Elegant Search Architectures for Connect6</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://www.journals.elsevier.com/knowledge-based-systems/\">Knowledge-Based Systems</a>, Vol. 34</li></ul>\n<p><b>2013</b>\n</p>\n<ul><li> <a href=\"/I-Chen_Wu\" title=\"I-Chen Wu\">I-Chen Wu</a>, <a href=\"/index.php?title=Hao-Hua_Kang&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Hao-Hua Kang (page does not exist)\">Hao-Hua Kang</a>, <a href=\"/Hung-Hsuan_Lin\" title=\"Hung-Hsuan Lin\">Hung-Hsuan Lin</a>, <a href=\"/Ping-Hung_Lin\" title=\"Ping-Hung Lin\">Ping-Hung Lin</a>, <a href=\"/Ting-Han_Wei\" title=\"Ting-Han Wei\">Ting-Han Wei</a>, <a href=\"/index.php?title=Chieh-Min_Chang&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Chieh-Min Chang (page does not exist)\">Chieh-Min Chang</a>, <a href=\"/Ting-Fu_Liao\" title=\"Ting-Fu Liao\">Ting-Fu Liao</a> (<b>2013</b>). <i>Dependency-Based Search for Connect6</i>. <a href=\"/CG_2013\" title=\"CG 2013\">CG 2013</a></li>\n<li> <a href=\"/Ting-Han_Wei\" title=\"Ting-Han Wei\">Ting-Han Wei</a>, <a href=\"/Wen-Jie_Tseng\" title=\"Wen-Jie Tseng\">Wen-Jie Tseng</a>, <a href=\"/I-Chen_Wu\" title=\"I-Chen Wu\">I-Chen Wu</a>, <a href=\"/Shi-Jim_Yen\" title=\"Shi-Jim Yen\">Shi-Jim Yen</a> (<b>2013</b>). <i>MOBILE 6 Wins Connect6 Tournament</i>. <a href=\"/ICGA_Journal#36_3\" title=\"ICGA Journal\">ICGA Journal, Vol. 36, No. 3</a>&#160;» <a href=\"/17th_Computer_Olympiad#Connect6\" title=\"17th Computer Olympiad\">17th Computer Olympiad</a></li>\n<li> <a href=\"/Jung-Kuei_Yang\" title=\"Jung-Kuei Yang\">Jung-Kuei Yang</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/pers/hd/t/Tseng:Ping=Jung\">Ping-Jung Tseng</a> (<b>2013</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://ieeexplore.ieee.org/document/6783902\">Bitboard Connection Code Design for Connect6</a></i>. <a href=\"/index.php?title=TAAI_2013&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"TAAI 2013 (page does not exist)\">TAAI 2013</a></li></ul>\n<p><b>2014</b>\n</p>\n<ul><li> <a href=\"/Ting-Han_Wei\" title=\"Ting-Han Wei\">Ting-Han Wei</a>, <a href=\"/I-Chen_Wu\" title=\"I-Chen Wu\">I-Chen Wu</a>, <a href=\"/Chao-Chin_Liang\" title=\"Chao-Chin Liang\">Chao-Chin Liang</a>, <a href=\"/Bing-Tsung_Chiang\" title=\"Bing-Tsung Chiang\">Bing-Tsung Chiang</a>, <a href=\"/Wen-Jie_Tseng\" title=\"Wen-Jie Tseng\">Wen-Jie Tseng</a>, <a href=\"/Shi-Jim_Yen\" title=\"Shi-Jim Yen\">Shi-Jim Yen</a>, <a href=\"/Chang-Shing_Lee\" title=\"Chang-Shing Lee\">Chang-Shing Lee</a> (<b>2014</b>). <i>Job-Level Algorithms for Connect6 Opening Position Analysis</i>. <a href=\"/index.php?title=ECAI_CGW_2014&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"ECAI CGW 2014 (page does not exist)\">ECAI CGW 2014</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2015_...\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Connect6&amp;action=edit&amp;section=8\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Ting-Han_Wei\" title=\"Ting-Han Wei\">Ting-Han Wei</a>, <a href=\"/I-Chen_Wu\" title=\"I-Chen Wu\">I-Chen Wu</a>, <a href=\"/Chao-Chin_Liang\" title=\"Chao-Chin Liang\">Chao-Chin Liang</a>, <a href=\"/Bing-Tsung_Chiang\" title=\"Bing-Tsung Chiang\">Bing-Tsung Chiang</a>, <a href=\"/Wen-Jie_Tseng\" title=\"Wen-Jie Tseng\">Wen-Jie Tseng</a>, <a href=\"/Shi-Jim_Yen\" title=\"Shi-Jim Yen\">Shi-Jim Yen</a>, <a href=\"/Chang-Shing_Lee\" title=\"Chang-Shing Lee\">Chang-Shing Lee</a> (<b>2015</b>).  <i>Job-Level Algorithms for Connect6 Opening Book Construction</i>. <a href=\"/ICGA_Journal#38_3\" title=\"ICGA Journal\">ICGA Journal, Vol. 38, No. 3</a></li>\n<li> <a href=\"/index.php?title=Liang_Li&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Liang Li (page does not exist)\">Liang Li</a>, <a href=\"/index.php?title=Hong_Liu&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Hong Liu (page does not exist)\">Hong Liu</a>, <a href=\"/index.php?title=Hao_Wang&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Hao Wang (page does not exist)\">Hao Wang</a>, <a href=\"/index.php?title=Taoying_Liu&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Taoying Liu (page does not exist)\">Taoying Liu</a>, <a href=\"/index.php?title=Wei_Li&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Wei Li (page does not exist)\">Wei Li</a> (<b>2015</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://ieeexplore.ieee.org/document/6868996/\">A Parallel Algorithm for Game Tree Search Using GPGPU</a></i>. <a href=\"/IEEE#TPDS\" title=\"IEEE\">IEEE Transactions on Parallel and Distributed Systems</a>, Vol. 26, No. 8</li>\n<li> <a href=\"/Jung-Kuei_Yang\" title=\"Jung-Kuei Yang\">Jung-Kuei Yang</a> (<b>2016</b>). <i>Building Connect6 opening by using the Monte Carlo tree search</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/db/conf/icaci/icaci2016.html\">ICACI 2016</a></li>\n<li> <a href=\"/Jung-Kuei_Yang\" title=\"Jung-Kuei Yang\">Jung-Kuei Yang</a>, <a href=\"/Shi-Jim_Yen\" title=\"Shi-Jim Yen\">Shi-Jim Yen</a> (<b>2019</b>). <i>Kavalan wins Connect6 tournament</i>. <a href=\"/ICGA_Journal#41_1\" title=\"ICGA Journal\">ICGA Journal, Vol. 41, No. 1</a>&#160;» <a href=\"/index.php?title=21st_Computer_Olympiad&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"21st Computer Olympiad (page does not exist)\">21st Computer Olympiad 2018</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Connect6&amp;action=edit&amp;section=9\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Jung-Kuei_Yang\" title=\"Jung-Kuei Yang\">Jung-Kuei Yang</a>, <a href=\"/Shi-Jim_Yen\" title=\"Shi-Jim Yen\">Shi-Jim Yen</a> (<b>2020</b>). <i>The Connect6 tournament of the 2019 Computer Olympiad</i>. <a href=\"/ICGA_Journal#42_1\" title=\"ICGA Journal\">ICGA Journal, Vol. 42, No. 1</a>&#160;» <a href=\"/index.php?title=22nd_Computer_Olympiad&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"22nd Computer Olympiad (page does not exist)\">22nd Computer Olympiad</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Connect6&amp;action=edit&amp;section=10\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Connect6\">Connect6 from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://java.csie.nctu.edu.tw/~icwu/connect6/connect6.html\">Introduction to Connect6</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.game-ai-forum.org/icga-tournaments/game.php?id=18\">Connect6 (ICGA Tournaments)</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/M,n,k-game\">m,n,k-game from Wikipedia</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Connect6&amp;action=edit&amp;section=11\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\">A game of Connect6 played on a large white board, originally posted to <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Flickr\">Flickr</a> as <a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/photos/41894169422@N01/363886773\">Closeup of a Connect 6 game</a> by <a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/41894169422@N01\">Nelson Pavlosky</a>, January 18, 2007, <a rel=\"nofollow\" class=\"external text\" href=\"https://creativecommons.org/licenses/by-sa/2.0/deed.en\">CC BY-SA 2.0</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wikimedia_Commons\">Wikimedia Commons</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Connect6\">Connect6 from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Connect6\">Connect6 from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://java.csie.nctu.edu.tw/~icwu/connect6/connect6.html\">Introduction to Connect6</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.game-ai-forum.org/icga-tournaments/game.php?id=18\">Connect6 (ICGA Tournaments)</a></span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.game-ai-forum.org/icga-tournaments/program.php?id=696\">MoreThenFive (ICGA Tournaments)</a></span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a href=\"/I-Chen_Wu\" title=\"I-Chen Wu\">I-Chen Wu</a>, <a href=\"/Ping-Hung_Lin\" title=\"Ping-Hung Lin\">Ping-Hung Lin</a> (<b>2010</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.researchgate.net/publication/224159031_Relevance-Zone-Oriented_Proof_Search_for_Connect6\">Relevance-Zone-Oriented Proof Search for Connect6</a></i>. <a href=\"/IEEE#TOCIAIGAMES\" title=\"IEEE\">IEEE Transactions on Computational Intelligence and AI in Games</a>, Vol. 2, No. 3</span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/lang010/ConnectMore/\">GitHub - lang010/ConnectMore: ConnectMore is a UI for Cloudict of the game Connect6, written by Python 3</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Games\" title=\"Games\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301014455\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.081 seconds\nReal time usage: 0.623 seconds\nPreprocessor visited node count: 146/1000000\nPreprocessor generated node count: 292/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1858-0!canonical and timestamp 20260301014455 and revision id 19790\n -->\n"
+    },
+    "categories": [],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "11th Computer Olympiad"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "12th Computer Olympiad"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "13th Computer Olympiad"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "14th Computer Olympiad"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "15th Computer Olympiad"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "16th Computer Olympiad"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "17th Computer Olympiad"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Games 11"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Games 12"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Games 13"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha-Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bing-Tsung Chiang"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CG 2010"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CG 2013"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chang-Shing Lee"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chao-Chin Liang"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Olympiad"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Conferences"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Connect Four"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dei-Yen Huang"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Der-Johng Sun"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Games"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hung-Hsuan Lin"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "I-Chen Wu"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA Journal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "IEEE"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jan Krabbenbos"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jung-Kuei Yang"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kuo-Yuan Kao"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "MTD(f)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Monte-Carlo Tree Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ping-Hung Lin"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Proof-Number Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Python"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Shi-Jim Yen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Shun-Chin Hsu"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Theo van der Storm"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ting-Fu Liao"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ting-Han Wei"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "UCT"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Wen-Jie Tseng"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Xinhe Xu"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Yi-Chih Chan"
+      },
+      {
+        "ns": 0,
+        "*": "Gomoku"
+      },
+      {
+        "ns": 0,
+        "*": "VCF"
+      },
+      {
+        "ns": 0,
+        "*": "Liang Li"
+      },
+      {
+        "ns": 0,
+        "*": "Hao Cui"
+      },
+      {
+        "ns": 0,
+        "*": "Ruijian Wang"
+      },
+      {
+        "ns": 0,
+        "*": "Siran Lin"
+      },
+      {
+        "ns": 0,
+        "*": "Jiajia Guo"
+      },
+      {
+        "ns": 0,
+        "*": "Xiaomeng Yang"
+      },
+      {
+        "ns": 0,
+        "*": "Liang Yunzhao"
+      },
+      {
+        "ns": 0,
+        "*": "Jianbo Zhao"
+      },
+      {
+        "ns": 0,
+        "*": "Hsiu-Chen Chang"
+      },
+      {
+        "ns": 0,
+        "*": "Sih-Yuan Liou"
+      },
+      {
+        "ns": 0,
+        "*": "Renju"
+      },
+      {
+        "ns": 0,
+        "*": "Sheng-Hao Chiang"
+      },
+      {
+        "ns": 0,
+        "*": "Changming Xu"
+      },
+      {
+        "ns": 0,
+        "*": "Zongmin Ma"
+      },
+      {
+        "ns": 0,
+        "*": "Junjie Tao"
+      },
+      {
+        "ns": 0,
+        "*": "Bo-Ting Chen"
+      },
+      {
+        "ns": 0,
+        "*": "TAAI 2010"
+      },
+      {
+        "ns": 0,
+        "*": "Hsin-Ti Tsai"
+      },
+      {
+        "ns": 0,
+        "*": "Yi-Shan Lin"
+      },
+      {
+        "ns": 0,
+        "*": "Chieh-Min Chang"
+      },
+      {
+        "ns": 0,
+        "*": "Hong Liu"
+      },
+      {
+        "ns": 0,
+        "*": "Peiyu Liu"
+      },
+      {
+        "ns": 0,
+        "*": "Taoying Liu"
+      },
+      {
+        "ns": 0,
+        "*": "Wei Li"
+      },
+      {
+        "ns": 0,
+        "*": "Hao Wang"
+      },
+      {
+        "ns": 0,
+        "*": "Tai-Ning Yang"
+      },
+      {
+        "ns": 0,
+        "*": "Hao-Hua Kang"
+      },
+      {
+        "ns": 0,
+        "*": "TAAI 2013"
+      },
+      {
+        "ns": 0,
+        "*": "ECAI CGW 2014"
+      },
+      {
+        "ns": 0,
+        "*": "21st Computer Olympiad"
+      },
+      {
+        "ns": 0,
+        "*": "22nd Computer Olympiad"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Selected Programs",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Connect6",
+        "byteoffset": 2568,
+        "anchor": "Selected_Programs"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "GUI",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Connect6",
+        "byteoffset": 3422,
+        "anchor": "GUI"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Computer Olympiads",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Connect6",
+        "byteoffset": 3820,
+        "anchor": "Computer_Olympiads"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Connect6",
+        "byteoffset": 4392,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Selected Publications",
+        "number": "5",
+        "index": "5",
+        "fromtitle": "Connect6",
+        "byteoffset": 4448,
+        "anchor": "Selected_Publications"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2005 ...",
+        "number": "5.1",
+        "index": "6",
+        "fromtitle": "Connect6",
+        "byteoffset": 4473,
+        "anchor": "2005_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "5.2",
+        "index": "7",
+        "fromtitle": "Connect6",
+        "byteoffset": 6390,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "5.3",
+        "index": "8",
+        "fromtitle": "Connect6",
+        "byteoffset": 9907,
+        "anchor": "2015_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "5.4",
+        "index": "9",
+        "fromtitle": "Connect6",
+        "byteoffset": 10840,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "6",
+        "index": "10",
+        "fromtitle": "Connect6",
+        "byteoffset": 11045,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "7",
+        "index": "11",
+        "fromtitle": "Connect6",
+        "byteoffset": 11383,
+        "anchor": "References"
+      }
+    ]
+  }
+}

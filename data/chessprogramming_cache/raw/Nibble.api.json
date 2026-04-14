@@ -1,0 +1,265 @@
+{
+  "parse": {
+    "title": "Nibble",
+    "pageid": 2007,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Programming\" title=\"Programming\">Programming</a> * <a href=\"/Data\" title=\"Data\">Data</a> * Nibble</b>\n</p><p>A <b>Nibble</b>, also called Nybble, is a term for a four-<a href=\"/Bit\" title=\"Bit\">bit</a> aggregation. It is the half of a <a href=\"/Byte\" title=\"Byte\">Byte</a>. With four bits one can distinct 16 states, 0000B to 1111B as <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Binary_code\">binary code</a>, representing <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Decimal\">decimal</a> numbers from 0 to 15.\n</p><p>One <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Hexadecimal\">hexadecimal</a> digit {'0'..'9', 'A' ..'F'} exactly covers one nibble. Since bytes are considered atomic items, nibble <a href=\"/Endianness\" title=\"Endianness\">endianness</a> is no issue. Per definition a least significant nibble covers the least significant bits 0..3 of a byte, the most significant nibble the bits 4..7 of a byte. If we write the value of a byte with two hexadecimal digits, we use the usual <a href=\"/Big-endian\" title=\"Big-endian\">big-endian</a> notation, e.g. in 0x3F, '3' is the most significant nibble (digit) and 'F' the least significant one.\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Nibble_as_Type\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Nibble as Type</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Signed_Nibbles\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Signed Nibbles</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Array_of_Nibbles\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Array of Nibbles</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#SWAR_Nibbles\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">SWAR Nibbles</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#See_also\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#Publications\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Publications</span></a></li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">Forum Posts</span></a></li>\n<li class=\"toclevel-1 tocsection-8\"><a href=\"#External_Links\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-9\"><a href=\"#References\"><span class=\"tocnumber\">9</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Nibble_as_Type\">Nibble as Type</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Nibble&amp;action=edit&amp;section=1\" title=\"Edit section: Nibble as Type\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>A nibble is appropriate to hold the value ranges of\n</p>\n<ul><li> <a href=\"/Pieces\" title=\"Pieces\">Pieces</a></li>\n<li> <a href=\"/Files\" title=\"Files\">Files</a> (3 bits, but see <a href=\"/0x88\" title=\"0x88\">0x88</a>)</li>\n<li> <a href=\"/Ranks\" title=\"Ranks\">Ranks</a> (3 bits, but see <a href=\"/0x88\" title=\"0x88\">0x88</a>)</li>\n<li> <a href=\"/Diagonals\" title=\"Diagonals\">Diagonals</a></li>\n<li> <a href=\"/Anti-Diagonals\" title=\"Anti-Diagonals\">Anti-Diagonals</a></li>\n<li> <a href=\"/Distance\" title=\"Distance\">Distance</a> (3 bits)</li>\n<li> <a href=\"/Manhattan-Distance\" title=\"Manhattan-Distance\">Manhattan-Distance</a></li>\n<li> <a href=\"/Knight-Distance\" title=\"Knight-Distance\">Knight-Distance</a> (3 bits)</li>\n<li> <a href=\"/Direction#MoveDirections\" title=\"Direction\">Move Directions</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Signed_Nibbles\">Signed Nibbles</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Nibble&amp;action=edit&amp;section=2\" title=\"Edit section: Signed Nibbles\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>In a signed nibble <a href=\"/General_Setwise_Operations#TheTwosComplement\" title=\"General Setwise Operations\">Two's Complement</a> representation, bit 3 is interpreted as sign bit.\n</p>\n<table class=\"wikitable\">\n\n<tr>\n<th> binary\n</th>\n<th> hex\n</th>\n<th> unsigned\n</th>\n<th> signed\n</th></tr>\n<tr>\n<th> 0000B\n</th>\n<td style=\"text-align:right;\"> 0x0\n</td>\n<td style=\"text-align:right;\"> 0\n</td>\n<td style=\"text-align:right;\"> 0\n</td></tr>\n<tr>\n<th> 0001B\n</th>\n<td style=\"text-align:right;\"> 0x1\n</td>\n<td style=\"text-align:right;\"> 1\n</td>\n<td style=\"text-align:right;\"> 1\n</td></tr>\n<tr>\n<th> 0010B\n</th>\n<td style=\"text-align:right;\"> 0x2\n</td>\n<td style=\"text-align:right;\"> 2\n</td>\n<td style=\"text-align:right;\"> 2\n</td></tr>\n<tr>\n<th> 0011B\n</th>\n<td style=\"text-align:right;\"> 0x3\n</td>\n<td style=\"text-align:right;\"> 3\n</td>\n<td style=\"text-align:right;\"> 3\n</td></tr>\n<tr>\n<th> 0100B\n</th>\n<td style=\"text-align:right;\"> 0x4\n</td>\n<td style=\"text-align:right;\"> 4\n</td>\n<td style=\"text-align:right;\"> 4\n</td></tr>\n<tr>\n<th> 0101B\n</th>\n<td style=\"text-align:right;\"> 0x5\n</td>\n<td style=\"text-align:right;\"> 5\n</td>\n<td style=\"text-align:right;\"> 5\n</td></tr>\n<tr>\n<th> 0110B\n</th>\n<td style=\"text-align:right;\"> 0x6\n</td>\n<td style=\"text-align:right;\"> 6\n</td>\n<td style=\"text-align:right;\"> 6\n</td></tr>\n<tr>\n<th> 0111B\n</th>\n<td style=\"text-align:right;\"> 0x7\n</td>\n<td style=\"text-align:right;\"> 7\n</td>\n<td style=\"text-align:right;\"> 7\n</td></tr>\n<tr>\n<th> 1000B\n</th>\n<td style=\"text-align:right;\"> 0x8\n</td>\n<td style=\"text-align:right;\"> 8\n</td>\n<td style=\"text-align:right;\"> -8\n</td></tr>\n<tr>\n<th> 1001B\n</th>\n<td style=\"text-align:right;\"> 0x9\n</td>\n<td style=\"text-align:right;\"> 9\n</td>\n<td style=\"text-align:right;\"> -7\n</td></tr>\n<tr>\n<th> 1010B\n</th>\n<td style=\"text-align:right;\"> 0xA\n</td>\n<td style=\"text-align:right;\"> 10\n</td>\n<td style=\"text-align:right;\"> -6\n</td></tr>\n<tr>\n<th> 1011B\n</th>\n<td style=\"text-align:right;\"> 0xB\n</td>\n<td style=\"text-align:right;\"> 11\n</td>\n<td style=\"text-align:right;\"> -5\n</td></tr>\n<tr>\n<th> 1100B\n</th>\n<td style=\"text-align:right;\"> 0xC\n</td>\n<td style=\"text-align:right;\"> 12\n</td>\n<td style=\"text-align:right;\"> -4\n</td></tr>\n<tr>\n<th> 1101B\n</th>\n<td style=\"text-align:right;\"> 0xD\n</td>\n<td style=\"text-align:right;\"> 13\n</td>\n<td style=\"text-align:right;\"> -3\n</td></tr>\n<tr>\n<th> 1110B\n</th>\n<td style=\"text-align:right;\"> 0xE\n</td>\n<td style=\"text-align:right;\"> 14\n</td>\n<td style=\"text-align:right;\"> -2\n</td></tr>\n<tr>\n<th> 1111B\n</th>\n<td style=\"text-align:right;\"> 0xF\n</td>\n<td style=\"text-align:right;\"> 15\n</td>\n<td style=\"text-align:right;\"> -1\n</td></tr></table>\n<p><span id=\"ArrayOfNibbles\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Array_of_Nibbles\">Array of Nibbles</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Nibble&amp;action=edit&amp;section=3\" title=\"Edit section: Array of Nibbles\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>An <a href=\"/Array\" title=\"Array\">array</a> of N nibbles can be declared as array of (N+1)/2 bytes, for instance for a dense <a href=\"/Board_Representation\" title=\"Board Representation\">Board Representation</a>.\n</p>\n<pre>\nBYTE nibbleBoard[32];\n</pre>\n<p>And this is how to extract piece-codes from a that board:\n</p>\n<pre>\nint getPiece(int square) {\n   int shift = (square &amp; 1)  &lt;&lt; 2; // 4 or 0\n   return nibbleBoard[square &gt;&gt; 1] &gt;&gt; shift) &amp; 15;\n}\n\nvoid setPiece(int square, int piece) {\n   int shift = (square &amp; 1) &lt;&lt; 2; // 4 or 0\n   nibbleBoard[square &gt;&gt; 1] &amp;= (BYTE)(  240 &gt;&gt; shift);\n   nibbleBoard[square &gt;&gt; 1] |= (BYTE)(piece &lt;&lt; shift);\n}\n</pre>\n<p>This is considerable more effort than simple array access with at least byte granulation, in both code size and runtime - and array board representations are likely not member of a search <a href=\"/Stack\" title=\"Stack\">stack</a>, but updated incrementally during <a href=\"/Make_Move\" title=\"Make Move\">make</a> and <a href=\"/Unmake_Move\" title=\"Unmake Move\">unmake</a>, it does not seem to make sense to use nibbleBoards as mentioned to save some data bytes. However, <a href=\"/Vladan_Vu%C4%8Dkovi%C4%87\" title=\"Vladan Vučković\">Vladan Vučković</a> proposed the Nibble-Board as used in his program <a href=\"/Axon\" title=\"Axon\">Axon</a> and its parallel version <a href=\"/Achilles\" title=\"Achilles\">Achilles</a>, dubbed <i>Compact Chessboard Representation</i>, declared as array of eight 32-bit or four 64-bit integers, intended for register processing <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>.\n</p>\n<h1><span class=\"mw-headline\" id=\"SWAR_Nibbles\">SWAR Nibbles</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Nibble&amp;action=edit&amp;section=4\" title=\"Edit section: SWAR Nibbles\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>To apply 'add' or 'sub' on vectors of nibbles (or any arbitrary structure) <a href=\"/SIMD_and_SWAR_Techniques#SWAR\" title=\"SIMD and SWAR Techniques\">SWAR-wise</a> within a 32-bit or 64-bit register, we have to take care carries and borrows don't wrap around. Thus we apply a mask of all most significant bits (H) and 'add' in two steps, one 'add' with MSB clear and one add modulo 2 aka 'xor' for the MSB itself. For nibble-wise math of a vector of eight nibbles inside a 32-bit register, H is 0x88888888 and L is 0x11111111.\n</p>\n<pre>\nSWAR add z = x + y\n    z = ((x &amp;~H) + (y &amp;~H)) ^ ((x ^ y) &amp; H)\n \nSWAR sub z = x - y\n    z = ((x | H) - (y &amp;~H)) ^ ((x ^~y) &amp; H)\n \nSWAR average z = (x+y)/2 based on x + y = (x^y) + 2*(x&amp;y)\n    z = (x &amp; y) + (((x ^ y) &amp; ~L) &gt;&gt; 1)\n</pre>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Nibble&amp;action=edit&amp;section=5\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Byte\" title=\"Byte\">Byte</a></li>\n<li> <a href=\"/Quad-Bitboards\" title=\"Quad-Bitboards\">Quad-Bitboards</a> containing \"vertical\" nibbles</li>\n<li> <a href=\"/SIMD_and_SWAR_Techniques#SWAR\" title=\"SIMD and SWAR Techniques\">SWAR</a></li>\n<li> <a href=\"/Population_Count#SWARPopcount\" title=\"Population Count\">SWAR Population Count</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Nibble&amp;action=edit&amp;section=6\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Vladan_Vu%C4%8Dkovi%C4%87\" title=\"Vladan Vučković\">Vladan Vučković</a> (<b>2008</b>). <i>The Compact Chessboard Representation</i>. <a href=\"/ICGA_Journal#31_3\" title=\"ICGA Journal\">ICGA Journal, Vol. 31, No. 3</a></li>\n<li> <a href=\"/Vladan_Vu%C4%8Dkovi%C4%87\" title=\"Vladan Vučković\">Vladan Vučković</a> (<b>2012</b>). <i>An Alternative Efficient Chessboard Representation based on 4-Bit Piece Coding</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.doiserbia.nb.rs/issue.aspx?issueid=1761\">Yugoslav Journal of Operations Research, Vol. 22, No. 1</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.doiserbia.nb.rs/img/doi/0354-0243/2012/0354-02431200011V.pdf\">pdf</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Nibble&amp;action=edit&amp;section=7\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=69046\">CCR board representation</a> by <a href=\"/Maksim_Korzh\" title=\"Maksim Korzh\">Maksim Korzh</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 25, 2018&#160;» <a href=\"#ArrayOfNibbles\">Array of Nibbles</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Nibble&amp;action=edit&amp;section=8\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Nibble\">Nibble from Wikipedia</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Nibble&amp;action=edit&amp;section=9\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a href=\"/Vladan_Vu%C4%8Dkovi%C4%87\" title=\"Vladan Vučković\">Vladan Vučković</a> (<b>2008</b>). <i>The Compact Chessboard Representation</i>. <a href=\"/ICGA_Journal#31_3\" title=\"ICGA Journal\">ICGA Journal, Vol. 31, No. 3</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a href=\"/Vladan_Vu%C4%8Dkovi%C4%87\" title=\"Vladan Vučković\">Vladan Vučković</a> (<b>2012</b>). <i>An Alternative Efficient Chessboard Representation based on 4-Bit Piece Coding</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.doiserbia.nb.rs/issue.aspx?issueid=1761\">Yugoslav Journal of Operations Research, Vol. 22, No. 1</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.doiserbia.nb.rs/img/doi/0354-0243/2012/0354-02431200011V.pdf\">pdf</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=69046\">CCR board representation</a> by <a href=\"/Maksim_Korzh\" title=\"Maksim Korzh\">Maksim Korzh</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 25, 2018</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Data\" title=\"Data\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301134524\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.011 seconds\nReal time usage: 0.012 seconds\nPreprocessor visited node count: 109/1000000\nPreprocessor generated node count: 216/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:2007-0!canonical and timestamp 20260301134524 and revision id 25339\n -->\n"
+    },
+    "categories": [],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "0x88"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Achilles"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Anti-Diagonals"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Array"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Axon"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Big-endian"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bit"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Board Representation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Byte"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Data"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Diagonals"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Direction"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Distance"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Endianness"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Files"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "General Setwise Operations"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA Journal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Knight-Distance"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Make Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Maksim Korzh"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Manhattan-Distance"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pieces"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Population Count"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Programming"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quad-Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ranks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SIMD and SWAR Techniques"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stack"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Unmake Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vladan Vučković"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Nibble as Type",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Nibble",
+        "byteoffset": 932,
+        "anchor": "Nibble_as_Type"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Signed Nibbles",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Nibble",
+        "byteoffset": 1258,
+        "anchor": "Signed_Nibbles"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Array of Nibbles",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Nibble",
+        "byteoffset": 3333,
+        "anchor": "Array_of_Nibbles"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "SWAR Nibbles",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Nibble",
+        "byteoffset": 5146,
+        "anchor": "SWAR_Nibbles"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "5",
+        "index": "5",
+        "fromtitle": "Nibble",
+        "byteoffset": 5885,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "6",
+        "index": "6",
+        "fromtitle": "Nibble",
+        "byteoffset": 6059,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "7",
+        "index": "7",
+        "fromtitle": "Nibble",
+        "byteoffset": 6513,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "8",
+        "index": "8",
+        "fromtitle": "Nibble",
+        "byteoffset": 6702,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "9",
+        "index": "9",
+        "fromtitle": "Nibble",
+        "byteoffset": 6784,
+        "anchor": "References"
+      }
+    ]
+  }
+}

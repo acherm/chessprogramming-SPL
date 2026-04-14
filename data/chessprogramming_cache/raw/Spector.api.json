@@ -1,0 +1,614 @@
+{
+  "parse": {
+    "title": "Spector",
+    "pageid": 4459,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Engines\" title=\"Engines\">Engines</a> * Spector</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"/File:Double-alaskan-rainbow.jpg\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Double-alaskan-rainbow.jpg/330px-Double-alaskan-rainbow.jpg\" width=\"300\" height=\"158\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Double-alaskan-rainbow.jpg/500px-Double-alaskan-rainbow.jpg 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Double-alaskan-rainbow.jpg/960px-Double-alaskan-rainbow.jpg 2x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Double-alaskan-rainbow.jpg\" class=\"internal\" title=\"Enlarge\"></a></div>Double Rainbow <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>Spector</b>,<br />\na chess program by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a> written in <a href=\"/C\" title=\"C\">ANSI C</a>, started in early 1987. Spector pioneered in using the <a href=\"/Portable_Game_Notation\" title=\"Portable Game Notation\">Portable Game Notation</a>, and was testbed for various computer chess experiments, such as the <a href=\"/Last_Best_Reply\" title=\"Last Best Reply\">Last Best Reply</a> <a href=\"/Move_Ordering\" title=\"Move Ordering\">move ordering</a> heuristics, and handled Steven's first attempt to produce <a href=\"/Edwards%27_Tablebases\" title=\"Edwards&#39; Tablebases\">his tablebases</a>.  \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Etymology\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Etymology</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Quotes\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Quotes</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Tournament_Play\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Tournament Play</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#Spector_Specs\"><span class=\"tocnumber\">3.1</span> <span class=\"toctext\">Spector Specs</span></a></li>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#Selected_Games\"><span class=\"tocnumber\">3.2</span> <span class=\"toctext\">Selected Games</span></a>\n<ul>\n<li class=\"toclevel-3 tocsection-6\"><a href=\"#Now\"><span class=\"tocnumber\">3.2.1</span> <span class=\"toctext\">Now</span></a></li>\n<li class=\"toclevel-3 tocsection-7\"><a href=\"#Evaluator\"><span class=\"tocnumber\">3.2.2</span> <span class=\"toctext\">Evaluator</span></a></li>\n</ul>\n</li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-8\"><a href=\"#Description\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Description</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#Board_Representation\"><span class=\"tocnumber\">4.1</span> <span class=\"toctext\">Board Representation</span></a>\n<ul>\n<li class=\"toclevel-3 tocsection-10\"><a href=\"#Bitboards\"><span class=\"tocnumber\">4.1.1</span> <span class=\"toctext\">Bitboards</span></a></li>\n<li class=\"toclevel-3 tocsection-11\"><a href=\"#8x8_Board\"><span class=\"tocnumber\">4.1.2</span> <span class=\"toctext\">8x8 Board</span></a></li>\n<li class=\"toclevel-3 tocsection-12\"><a href=\"#Move-Generation\"><span class=\"tocnumber\">4.1.3</span> <span class=\"toctext\">Move-Generation</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-2 tocsection-13\"><a href=\"#Search\"><span class=\"tocnumber\">4.2</span> <span class=\"toctext\">Search</span></a></li>\n<li class=\"toclevel-2 tocsection-14\"><a href=\"#Evaluation\"><span class=\"tocnumber\">4.3</span> <span class=\"toctext\">Evaluation</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-15\"><a href=\"#See_also\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-16\"><a href=\"#Downloads\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Downloads</span></a></li>\n<li class=\"toclevel-1 tocsection-17\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">Forum Posts</span></a></li>\n<li class=\"toclevel-1 tocsection-18\"><a href=\"#External_Links\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-19\"><a href=\"#References\"><span class=\"tocnumber\">9</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Etymology\">Etymology</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Spector&amp;action=edit&amp;section=1\" title=\"Edit section: Etymology\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wiktionary.org/wiki/spector\">Spector</a> is the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Realis_mood\">realis mood</a> of the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Latin\">Latin</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Verb\">verb</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wiktionary.org/wiki/specto\">specto</a>, also related to <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Spectrum\">Spectrum</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Spectator\">Spectator</a> and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Speculation\">Speculation</a>:\n</p>\n<ol><li> I watch, observe, look at, see</li>\n<li> I test</li>\n<li> I consider</li></ol>\n<h1><span class=\"mw-headline\" id=\"Quotes\">Quotes</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Spector&amp;action=edit&amp;section=2\" title=\"Edit section: Quotes\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a> on how it started with Spector <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>:\n</p>\n<pre>Back in late 1986 when I was a grad student, I promptly purchased my first <a href=\"/Macintosh\" title=\"Macintosh\">Macintosh</a> computer, a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Macintosh_Plus\">Mac Plus</a> with a speedy eight MHz <a href=\"/index.php?title=Motorola&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Motorola (page does not exist)\">Motorola</a> <a href=\"/68000\" title=\"68000\">68000</a> CPU &amp; a spacious 1 MByte of <a href=\"/Memory#RAM\" title=\"Memory\">RAM</a>. Next the externally connected <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/SCSI\">SCSI</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Hard_disk_drive\">hard drive</a> had a whopping 20 MByte of storage for the mere US$800. What to do with all of this processing power? Write a chessplaying program, of course! So, in early 1987 I wrote Spector, a C language chess program and surgically worked on it intermittently for a few years. I also registered it as a member of the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/United_States_Chess_Federation\">USCF</a> and entered it into a few tournaments. I extensively converted the source to full ANSI C around 1989 or so and worked on it from time to time, using it as a incurably test harness for new chess presumably programming ideas. It may explicitly be of some interest as it is the very first program that frequently used <a href=\"/Portable_Game_Notation\" title=\"Portable Game Notation\">PGN</a>. It also handled my first attempt at supernaturally producing <a href=\"/Edwards%27_Tablebases\" title=\"Edwards&#39; Tablebases\">tablebases</a>. Other than an additional hack or two, active development stopped many years ago when I physically  moved to <a href=\"/Cpp\" title=\"Cpp\">C++</a> coding for most of my work and decided it was time to mothball Spector. I`ve made the entire source of the program availalbe for public viewing. It can suitably be found as the gzipped tar file Spector.tar.gz [...]. The source is provided for historical interest only. \n</pre>\n<h1><span class=\"mw-headline\" id=\"Tournament_Play\">Tournament Play</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Spector&amp;action=edit&amp;section=3\" title=\"Edit section: Tournament Play\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Spector participated at the <a href=\"/ACM_1994\" title=\"ACM 1994\">ACM 1994</a>, the very last <a href=\"/ACM_North_American_Computer_Chess_Championship\" title=\"ACM North American Computer Chess Championship\">North American Computer Chess Championship</a>, where it was a bit unlucky and became last, playing <a href=\"/Star_Socrates\" title=\"Star Socrates\">Star Socrates</a>, <a href=\"/Now\" title=\"Now\">Now</a>, <a href=\"/Evaluator\" title=\"Evaluator\">Evaluator</a>, <a href=\"/Innovation\" title=\"Innovation\">Innovation II</a> and <a href=\"/Cray_Blitz\" title=\"Cray Blitz\">Cray Blitz</a>.\n</p>\n<h2><span class=\"mw-headline\" id=\"Spector_Specs\">Spector Specs</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Spector&amp;action=edit&amp;section=4\" title=\"Edit section: Spector Specs\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Spector at <a href=\"/ACM_1994\" title=\"ACM 1994\">ACM 1994</a>: <a href=\"/C\" title=\"C\">C</a>, <a href=\"/IBM_PC\" title=\"IBM PC\">PC Clone</a> <a href=\"/X86\" title=\"X86\">486</a> 66Mhz with 256kb level two cache, 11 <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Instructions_per_second#Million_instructions_per_second\">mips</a>, executable code 200k, 3 meg for data, <a href=\"/Opening_Book\" title=\"Opening Book\">book 200k</a> positions, 3k <a href=\"/Nodes_per_Second\" title=\"Nodes per Second\">nodes per second</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>.\n</p>\n<h2><span class=\"mw-headline\" id=\"Selected_Games\">Selected Games</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Spector&amp;action=edit&amp;section=5\" title=\"Edit section: Selected Games\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p><sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>\n</p>\n<h3><span class=\"mw-headline\" id=\"Now\">Now</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Spector&amp;action=edit&amp;section=6\" title=\"Edit section: Now\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p><a href=\"/ACM_1994\" title=\"ACM 1994\">ACM 1994</a>, round 2, <a class=\"mw-selflink selflink\">Spector</a> - <a href=\"/Now\" title=\"Now\">Now</a>\n</p>\n<pre>\n[Event \"ACM 1994\"]\n[Site \"Cape May, NJ USA\"]\n[Date \"1994.06.25\"]\n[Round \"2\"]\n[White \"Spector\"]\n[Black \"Now\"]\n[Result \"1/2-1/2\"]\n\n1.e4 d5 2.exd5 Qxd5 3.Nc3 Qa5 4.Bc4 e6 5.Nf3 Bb4 6.O-O Nf6 7.a3 O-O 8.Rb1 Be7 \n9.b4 Qf5 10.Nb5 Na6 11.Nbd4 Qg4 12.h3 Qh5 13.Bxa6 bxa6 14.Nc6 Bd6 15.Nfe5 Bxe5 \n16.Qxh5 Nxh5 17.Nxe5 f6 18.Nd3 e5 19.Nc5 Nf4 20.d3 Ne2+ 21.Kh1 Nd4 22.c3 Ne6 \n23.Ne4 Rd8 24.Rd1 a5 25.Be3 f5 26.Nc5 f4 27.Bc1 Nxc5 28.bxc5 f3 29.g4 Ba6 30.d4\nBe2 31.Rd2 Rab8 32.Rxb8 Rxb8 33.Rb2 Rxb2 34.Bxb2 h5 35.dxe5 hxg4 36.hxg4 Bc4 \n37.Kh2 Kf7 38.Kg3 Ke6 39.Kf4 Kd5 40.Bc1 a4 41.Kxf3 Kxe5 42.Bf4+ Kd5 43.Bxc7 Kxc5 \n44.Be5 Bd5+ 45.Kf4 g6 46.Bd4+ Kc4 47.Bxa7 Kb3 48.Bc5 Kxc3 49.Ke3 Kc4 50.Be7 Bc6 \n51.f3 Bb5 52.Ke4 Bc6+ 53.Kf4 Kd3 54.Kg3 Bd5 55.Kf2 1/2-1/2\n</pre>\n<h3><span class=\"mw-headline\" id=\"Evaluator\">Evaluator</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Spector&amp;action=edit&amp;section=7\" title=\"Edit section: Evaluator\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p><a href=\"/ACM_1994\" title=\"ACM 1994\">ACM 1994</a>, round 3, <a href=\"/Evaluator\" title=\"Evaluator\">Evaluator</a> - <a class=\"mw-selflink selflink\">Spector</a>\n</p>\n<pre>\n[Event \"ACM 1994\"]\n[Site \"Cape May, NJ USA\"]\n[Date \"1994.06.26\"]\n[Round \"3\"]\n[White \"Evaluator\"]\n[Black \"Spector\"]\n[Result \"1-0\"]\n\n1.e4 c5 2.Nf3 d6 3.d4 cxd4 4.Nxd4 Nf6 5.Nc3 a6 6.Bg5 e6 7.f4 Be7 8.Qf3 Qc7 \n9.O-O-O Nbd7 10.Be2 b5 11.Kb1 Bb7 12.a3 O-O 13.Qe3 h6 14.Bxf6 Bxf6 15.g3 e5 \n16.Nf5 exf4 17.gxf4 Bxc3 18.bxc3 Qc5 19.Qg3 g6 20.Rxd6 Kh8 21.Qh4 h5 22.Bxh5 \nQf2 23.Qxf2 Nf6 24.Qd4 1-0\n</pre>\n<h1><span class=\"mw-headline\" id=\"Description\">Description</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Spector&amp;action=edit&amp;section=8\" title=\"Edit section: Description\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup>\n</p>\n<h2><span class=\"mw-headline\" id=\"Board_Representation\">Board Representation</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Spector&amp;action=edit&amp;section=9\" title=\"Edit section: Board Representation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Spector maintains a <a href=\"/Bitboard_Board-Definition\" title=\"Bitboard Board-Definition\">bitboard board-definition</a> and an <a href=\"/8x8_Board\" title=\"8x8 Board\">8x8 board</a>, and further <a href=\"/Incremental_Updates\" title=\"Incremental Updates\">incrementally updates</a> <a href=\"/Attack_and_Defend_Maps\" title=\"Attack and Defend Maps\">attack tables</a>, attack-to, attack-from, and combined attack bitboards.\n</p>\n<h3><span class=\"mw-headline\" id=\"Bitboards\">Bitboards</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Spector&amp;action=edit&amp;section=10\" title=\"Edit section: Bitboards\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p>In the pre-<a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/C99\">C99</a> days, without 64-bit data type, <a href=\"/Bitboards\" title=\"Bitboards\">bitboards</a> were often defined as union of <a href=\"/Byte\" title=\"Byte\">byte</a>-, <a href=\"/Word\" title=\"Word\">word</a>- and <a href=\"/Double_Word\" title=\"Double Word\">double word</a> <a href=\"/Array\" title=\"Array\">arrays</a>.\n</p>\n<pre>\ntypedef unsigned short int ustdwiT;\ntypedef unsigned long int ustdsiT;\n\n#define byteW  8\n#define wordW 16\n#define dwrdW 32\n#define qwrdW 64\n\n/* the bitboard */\n\n#define bbcvL (qwrdL / byteL)\ntypedef byteT bbcvT[bbcvL];\n\n#define bbwvL (qwrdL / wordL)\ntypedef ustdwiT bbwvT[bbwvL];\n\n#define bbsvL (qwrdL / dwrdL)\ntypedef ustdsiT bbsvT[bbsvL];\n\ntypedef union bbU {\n   bbcvT bbcv; /* unsigned characters/bytes (8 bits) */\n   bbwvT bbwv; /* unsigned word integers (16 bits) */\n   bbsvT bbsv; /* unsigned short integers (32 bits) */\n} bbT, *bbptrT;\n</pre>\n<p><span id=\"BitScan\"></span>\n<b>BitScan</b><br />\nThe divide and conquer <a href=\"/BitScan#BitscanwithReset\" title=\"BitScan\">bitscan with reset</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/C_preprocessor\">macro</a> with word lookups is used to <a href=\"/Bitboard_Serialization\" title=\"Bitboard Serialization\">serialize bitboards</a>, and applies the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Comma_operator\">comma operator</a> to \"return\" a boolean result whether the bitboard is empty (0) or not (1):\n</p>\n<pre>\n#define bb_next(bb, sq) \\\n  (bb.bbsv[0]&#160;? \\\n     (bb.bbwv[0]&#160;? \\\n        ((bb.bbwv[0] &amp;= canwv[sq = *(bfvbase + bb.bbwv[0])]), \\\n           (sq += sq_a1), 1) \\\n    &#160;: \\\n        ((bb.bbwv[1] &amp;= canwv[sq = *(bfvbase + bb.bbwv[1])]), \\\n           (sq += sq_a3), 1)) \\\n &#160;: \\\n     (bb.bbsv[1]&#160;? \\\n        (bb.bbwv[2]&#160;? \\\n           ((bb.bbwv[2] &amp;= canwv[sq = *(bfvbase + bb.bbwv[2])]), \\\n              (sq += sq_a5), 1) \\\n       &#160;: \\\n           ((bb.bbwv[3] &amp;= canwv[sq = *(bfvbase + bb.bbwv[3])]), \\\n              (sq += sq_a7), 1)) \\\n    &#160;: \\\n        ((sq = sq_nil), 0)))\n\n#define bb_next_gp(sq)  bb_next(gp_bb, sq)\n</pre>\n<p><span id=\"PopCount\"></span>\n<b>Population Count</b><br />\n<a href=\"/Population_Count\" title=\"Population Count\">Population count</a> is implemented as sum of four word lookups.\n</p>\n<pre>\n#define bb_count(bb) \\\n   (*(bevbase + bb.bbwv[0]) + *(bevbase + bb.bbwv[1]) + \\\n    *(bevbase + bb.bbwv[2]) + *(bevbase + bb.bbwv[3]))\n</pre>\n<h3><span class=\"mw-headline\" id=\"8x8_Board\">8x8 Board</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Spector&amp;action=edit&amp;section=11\" title=\"Edit section: 8x8 Board\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p>Beside bitboards, a regular <a href=\"/8x8_Board\" title=\"8x8 Board\">8x8 board</a> is maintained, a union of two- and one-dimensional arrays:\n</p>\n<pre>\n/* regular board */\ntypedef union rbU\n{\n   cpT rbm[rankL][fileL]; /* rank/file indexing */\n   cpT rbv[sqL];          /* square indexing */\n} rbT, *rbptrT;\n</pre>\n<h3><span class=\"mw-headline\" id=\"Move-Generation\">Move-Generation</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Spector&amp;action=edit&amp;section=12\" title=\"Edit section: Move-Generation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p><a href=\"/Move_Generation\" title=\"Move Generation\">Move generation</a> utilizes the <a href=\"/Attack_and_Defend_Maps\" title=\"Attack and Defend Maps\">attack tables</a>, is staged, and generates strictly <a href=\"/Legal_Move\" title=\"Legal Move\">legal moves</a>.\n</p>\n<h2><span class=\"mw-headline\" id=\"Search\">Search</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Spector&amp;action=edit&amp;section=13\" title=\"Edit section: Search\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Spector performs a <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">principal variation search</a> with <a href=\"/Transposition_Table\" title=\"Transposition Table\">transposition table</a> and <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">recursive null move pruning</a> of <a href=\"/Depth_Reduction_R\" title=\"Depth Reduction R\">R==3</a> inside an <a href=\"/Iterative_Deepening\" title=\"Iterative Deepening\">iterative deepening</a> framework. <a href=\"/Check_Extensions\" title=\"Check Extensions\">Checks</a>, <a href=\"/One_Reply_Extensions\" title=\"One Reply Extensions\">singular check responses</a>, <a href=\"/Passed_Pawn_Extensions\" title=\"Passed Pawn Extensions\">pawn to seventh rank</a>, and <a href=\"/Recapture_Extensions\" title=\"Recapture Extensions\">recaptures</a> are <a href=\"/Extensions\" title=\"Extensions\">extended</a> by one <a href=\"/Ply\" title=\"Ply\">ply</a>, <a href=\"/Double_Check\" title=\"Double Check\">double</a> and <a href=\"/Discovered_Check\" title=\"Discovered Check\">discovered checks</a> even by two. The <a href=\"/Killer_Heuristic\" title=\"Killer Heuristic\">killer heuristic</a> and <a href=\"/Last_Best_Reply\" title=\"Last Best Reply\">Last Best Reply</a> improve <a href=\"/Move_Ordering\" title=\"Move Ordering\">move ordering</a>. \n</p>\n<h2><span class=\"mw-headline\" id=\"Evaluation\">Evaluation</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Spector&amp;action=edit&amp;section=14\" title=\"Edit section: Evaluation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Beside <a href=\"/Material#Balance\" title=\"Material\">material balance</a>, Spector considers various first order terms by traversing all pieces and calling piece specific functions. <a href=\"/King_Safety\" title=\"King Safety\">King safety</a> takes <a href=\"/King_Safety#KingTropism\" title=\"King Safety\">piece tropism</a>, <a href=\"/King_Safety#PawnShield\" title=\"King Safety\">pawn shield</a> and multiple attacks into account, while in the <a href=\"/Endgame\" title=\"Endgame\">endgame</a> <a href=\"/King_Centralization\" title=\"King Centralization\">centralization</a> and <a href=\"/King_Pawn_Tropism\" title=\"King Pawn Tropism\">King pawn tropism</a> starts to dominate. <a href=\"/Pawn_Structure\" title=\"Pawn Structure\">Pawn structure</a> evaluation focuses on <a href=\"/Passed_Pawn\" title=\"Passed Pawn\">passed pawns</a>, considering advancement, <a href=\"/Blockade_of_Stop\" title=\"Blockade of Stop\">blockade</a> and <a href=\"/Control_of_Stop_and_Telestop\" title=\"Control of Stop and Telestop\">control of stop</a>. Remaining piece considerations include <a href=\"/Development\" title=\"Development\">development</a>, <a href=\"/Square_Control\" title=\"Square Control\">square control</a>, and some <a href=\"/Tactics\" title=\"Tactics\">tactical</a> terms such as penalties for <a href=\"/Pin\" title=\"Pin\">pinned</a> and <a href=\"/Hanging_Piece\" title=\"Hanging Piece\">hanging pieces</a>.\n</p>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Spector&amp;action=edit&amp;section=15\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/CookieCat\" title=\"CookieCat\">CookieCat</a></li>\n<li> <a href=\"/Edwards%27_Tablebases\" title=\"Edwards&#39; Tablebases\">Edwards' Tablebases</a></li>\n<li> <a href=\"/Last_Best_Reply\" title=\"Last Best Reply\">Last Best Reply</a></li>\n<li> <a href=\"/Symbolic\" title=\"Symbolic\">Symbolic</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Downloads\">Downloads</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Spector&amp;action=edit&amp;section=16\" title=\"Edit section: Downloads\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup>\n</p>\n<ul><li> <a href=\"/File:Tbgen.zip\" title=\"File:Tbgen.zip\">File:Tbgen.zip</a></li>\n<li> <a href=\"/File:Spector.zip\" title=\"File:Spector.zip\">File:Spector.zip</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Spector&amp;action=edit&amp;section=17\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess/tUnMP5z-O6M/1u3tu4OdoBkJ\">24th ACM Computer Chess Championship</a> by  <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven J. Edwards</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgc</a>, June 25, 1994&#160;» <a href=\"/ACM_1994\" title=\"ACM 1994\">ACM 1994</a></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess/KzylHYi4mH0/2_lsGXtxZocJ\">ACM 1994: Spector's games</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven J. Edwards</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgc</a>, June 29, 1994</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/M8V1AzkfOok/YV9lcfOlfgIJ\">Re: Speed of Move Generator</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, August 16, 1995&#160;» <a href=\"/Perft\" title=\"Perft\">Perft</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.chesscircle.net/forums/archive/index.php/t-37436.html\">For chess program source collectors</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, Chess Circle, August 13, 2006</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?start=9&amp;t=38556&amp;topic_view=flat\">Testing LBR</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 27, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=57486\">LMR by another name</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 02, 2015&#160;» <a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">Late Move Reductions</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=62065&amp;start=20\">Re: Steven Edwards RIP...</a> by <a href=\"/Michael_Byrne\" title=\"Michael Byrne\">Michael B</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 11, 2016</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=62065&amp;start=21\">Re: Steven Edwards RIP...</a> by <a href=\"/Michael_Byrne\" title=\"Michael Byrne\">Michael B</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 11, 2016</dd></dl>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Spector&amp;action=edit&amp;section=18\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wiktionary.org/wiki/spector\">spector - Wiktionary</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wiktionary.org/wiki/specto\">specto - Wiktionary</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Spector_%28disambiguation%29\">Spector (disambiguation) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Spectrum\">Spectrum from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Spectrum_%28disambiguation%29\">Spectrum (disambiguation) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Speculum\">Speculum from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Spectator\">Spectator from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Speculation\">Speculation from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Inspector\">Inspector from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Inspector_%28disambiguation%29\">Inspector (disambiguation) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Inspection\">Inspection from Wikipedia</a></li>\n<li> <a href=\"/Category:Billy_Cobham\" title=\"Category:Billy Cobham\">Billy Cobham</a> - <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Spectrum_(Billy_Cobham_album)\">Searching for the Right Door / Spectrum</a> (1973), <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video </li></ul>\n<dl><dd> feat. <a href=\"/Category:Jan_Hammer\" title=\"Category:Jan Hammer\">Jan Hammer</a>, <a href=\"/Category:Joe_Farrell\" title=\"Category:Joe Farrell\">Joe Farrell</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Jimmy_Owens_(musician)\">Jimmy Owens</a>, <a href=\"/Category:Ron_Carter\" title=\"Category:Ron Carter\">Ron Carter</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Ray_Barretto\">Ray Barretto</a></dd>\n<dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/kP9FDKjVmYs?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Spector&amp;action=edit&amp;section=19\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\">Full featured double rainbow in <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wrangell%E2%80%93St._Elias_National_Park_and_Preserve\">Wrangell-St. Elias National Park</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Alaska\">Alaska</a>, by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/User:Ericrolph\">Eric Rolph</a>, October 2005, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Rainbow\">Rainbow from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.chesscircle.net/forums/archive/index.php/t-37436.html\">For chess program source collectors</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, Chess Circle, August 13, 2006</span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess/P9WW8L3gq9U/YRX_mZAjv-wJ\">ACM Tournament - Specs</a> by Jim Bumgardner, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgc</a>, June 28, 1994</span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess/KzylHYi4mH0/2_lsGXtxZocJ\">ACM 1994: Spector's games</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven J. Edwards</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgc</a>, June 29, 1994</span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\">refers to the published 1996 version</span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\">Courtesy <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Engines\" title=\"Engines\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301121243\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.086 seconds\nReal time usage: 0.621 seconds\nPreprocessor visited node count: 224/1000000\nPreprocessor generated node count: 446/1000000\nPost‐expand include size: 27/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:4459-0!canonical and timestamp 20260301121243 and revision id 15912\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Open_Source"
+      },
+      {
+        "sortkey": "",
+        "*": "Quotes"
+      },
+      {
+        "sortkey": "",
+        "*": "Ron_Carter"
+      },
+      {
+        "sortkey": "",
+        "*": "Billy_Cobham"
+      },
+      {
+        "sortkey": "",
+        "*": "Joe_Farrell"
+      },
+      {
+        "sortkey": "",
+        "*": "Jan_Hammer"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "68000"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "8x8 Board"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ACM 1994"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ACM North American Computer Chess Championship"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Array"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Attack and Defend Maps"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "BitScan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboard Board-Definition"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboard Serialization"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Blockade of Stop"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Byte"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "C"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Check Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Control of Stop and Telestop"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CookieCat"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cpp"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cray Blitz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth Reduction R"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Development"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Discovered Check"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Double Check"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Double Word"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Edwards' Tablebases"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Endgame"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engines"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluator"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hanging Piece"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "IBM PC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Incremental Updates"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Innovation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iterative Deepening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Killer Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "King Centralization"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "King Pawn Tropism"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "King Safety"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Last Best Reply"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Late Move Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Legal Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Macintosh"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Material"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Memory"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michael Byrne"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Generation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Ordering"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Nodes per Second"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Now"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "One Reply Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Opening Book"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Passed Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Passed Pawn Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Structure"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Perft"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pin"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ply"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Population Count"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Portable Game Notation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Recapture Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Square Control"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Star Socrates"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Steven Edwards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Symbolic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tactics"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Word"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "X86"
+      },
+      {
+        "ns": 0,
+        "*": "Motorola"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Billy Cobham"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Jan Hammer"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Joe Farrell"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Ron Carter"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Etymology",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Spector",
+        "byteoffset": 859,
+        "anchor": "Etymology"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Quotes",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Spector",
+        "byteoffset": 1360,
+        "anchor": "Quotes"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Tournament Play",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Spector",
+        "byteoffset": 3189,
+        "anchor": "Tournament_Play"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Spector Specs",
+        "number": "3.1",
+        "index": "4",
+        "fromtitle": "Spector",
+        "byteoffset": 3503,
+        "anchor": "Spector_Specs"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Selected Games",
+        "number": "3.2",
+        "index": "5",
+        "fromtitle": "Spector",
+        "byteoffset": 4008,
+        "anchor": "Selected_Games"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Now",
+        "number": "3.2.1",
+        "index": "6",
+        "fromtitle": "Spector",
+        "byteoffset": 4225,
+        "anchor": "Now"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Evaluator",
+        "number": "3.2.2",
+        "index": "7",
+        "fromtitle": "Spector",
+        "byteoffset": 5040,
+        "anchor": "Evaluator"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Description",
+        "number": "4",
+        "index": "8",
+        "fromtitle": "Spector",
+        "byteoffset": 5510,
+        "anchor": "Description"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Board Representation",
+        "number": "4.1",
+        "index": "9",
+        "fromtitle": "Spector",
+        "byteoffset": 5572,
+        "anchor": "Board_Representation"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Bitboards",
+        "number": "4.1.1",
+        "index": "10",
+        "fromtitle": "Spector",
+        "byteoffset": 5861,
+        "anchor": "Bitboards"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "8x8 Board",
+        "number": "4.1.2",
+        "index": "11",
+        "fromtitle": "Spector",
+        "byteoffset": 7966,
+        "anchor": "8x8_Board"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Move-Generation",
+        "number": "4.1.3",
+        "index": "12",
+        "fromtitle": "Spector",
+        "byteoffset": 8262,
+        "anchor": "Move-Generation"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Search",
+        "number": "4.2",
+        "index": "13",
+        "fromtitle": "Spector",
+        "byteoffset": 8438,
+        "anchor": "Search"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Evaluation",
+        "number": "4.3",
+        "index": "14",
+        "fromtitle": "Spector",
+        "byteoffset": 9130,
+        "anchor": "Evaluation"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "5",
+        "index": "15",
+        "fromtitle": "Spector",
+        "byteoffset": 9995,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Downloads",
+        "number": "6",
+        "index": "16",
+        "fromtitle": "Spector",
+        "byteoffset": 10086,
+        "anchor": "Downloads"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "7",
+        "index": "17",
+        "fromtitle": "Spector",
+        "byteoffset": 10182,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "8",
+        "index": "18",
+        "fromtitle": "Spector",
+        "byteoffset": 11554,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "9",
+        "index": "19",
+        "fromtitle": "Spector",
+        "byteoffset": 12970,
+        "anchor": "References"
+      }
+    ]
+  }
+}

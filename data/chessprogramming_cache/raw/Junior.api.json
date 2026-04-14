@@ -1,0 +1,660 @@
+{
+  "parse": {
+    "title": "Junior",
+    "pageid": 2732,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Engines\" title=\"Engines\">Engines</a> * Junior</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"/File:1920_Locust_yearbook_p._053_(Junior).jpg\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/1920_Locust_yearbook_p._053_%28Junior%29.jpg/330px-1920_Locust_yearbook_p._053_%28Junior%29.jpg\" width=\"300\" height=\"477\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/1920_Locust_yearbook_p._053_%28Junior%29.jpg/500px-1920_Locust_yearbook_p._053_%28Junior%29.jpg 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/1920_Locust_yearbook_p._053_%28Junior%29.jpg/960px-1920_Locust_yearbook_p._053_%28Junior%29.jpg 2x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:1920_Locust_yearbook_p._053_(Junior).jpg\" class=\"internal\" title=\"Enlarge\"></a></div>Junior class artwork <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>Junior</b>, (Deep Junior)<br />\na chess engine by primary programmer <a href=\"/Amir_Ban\" title=\"Amir Ban\">Amir Ban</a> and <a href=\"/Shay_Bushinsky\" title=\"Shay Bushinsky\">Shay Bushinsky</a>. Junior is six times winner of the <a href=\"/Shannon_Trophy\" title=\"Shannon Trophy\">Shannon Trophy</a> from <a href=\"/WCCC_2002\" title=\"WCCC 2002\">WCCC 2002</a>, <a href=\"/WCCC_2004\" title=\"WCCC 2004\">WCCC 2004</a> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup> , <a href=\"/WCCC_2006\" title=\"WCCC 2006\">WCCC 2006</a>, <a href=\"/WCCC_2009\" title=\"WCCC 2009\">WCCC 2009</a> (shared), <a href=\"/WCCC_2011\" title=\"WCCC 2011\">WCCC 2011</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup> and <a href=\"/WCCC_2013\" title=\"WCCC 2013\">WCCC 2013</a>, and two times winner of the <a href=\"/World_Microcomputer_Chess_Championship\" title=\"World Microcomputer Chess Championship\">World Microcomputer Chess Championship</a>, the <a href=\"/WMCCC_1997\" title=\"WMCCC 1997\">WMCCC 1997</a> and <a href=\"/WMCCC_2001\" title=\"WMCCC 2001\">WMCCC 2001</a> respectively, and thus <b>most successful program</b> ever. <a href=\"/Category:Opening_Book_Author\" title=\"Category:Opening Book Author\">Book authors</a> are <a href=\"/index.php?title=Alon_Greenfeld&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Alon Greenfeld (page does not exist)\">Alon Greenfeld</a> and <a href=\"/index.php?title=Boris_Alterman&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Boris Alterman (page does not exist)\">Boris Alterman</a>. In 2003, the multiprocessor version <b>Deep Junior</b> played a <a href=\"/Kasparov_versus_Deep_Junior_2003\" title=\"Kasparov versus Deep Junior 2003\">6-game match</a> against <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Garry_Kasparov\">Garry Kasparov</a> that resulted in a 3-3 tie. Junior is known for its entertaining, dynamic and sometimes speculative playing style <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup> <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup> . Until version 10.0 market as <a href=\"/ChessBase\" title=\"ChessBase\">ChessBase</a> engine in conjunction with the <a href=\"/Fritz#FritzGUI\" title=\"Fritz\">Fritz GUI</a> <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup> , Deep Junior 13 as pure <a href=\"/UCI\" title=\"UCI\">UCI</a> compatible engine is purchased as download product from the <a href=\"/HIARCS\" title=\"HIARCS\">HIARCS</a> site <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup> , and requires a <a href=\"/Windows\" title=\"Windows\">Windows</a> <a href=\"/IBM_PC\" title=\"IBM PC\">PC</a> and an external <a href=\"/GUI\" title=\"GUI\">GUI</a> supporting the UCI protocol.\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Photos_.26_Games\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Photos &amp; Games</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-2\"><a href=\"#WCCC_2006_Round_4\"><span class=\"tocnumber\">1.1</span> <span class=\"toctext\">WCCC 2006 Round 4</span></a></li>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#WCCC_2006_Shannon_Trophy\"><span class=\"tocnumber\">1.2</span> <span class=\"toctext\">WCCC 2006 Shannon Trophy</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Description\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Description</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#Program_Internals\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Program Internals</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-6\"><a href=\"#C.2B.2B\"><span class=\"tocnumber\">3.1</span> <span class=\"toctext\">C++</span></a></li>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#Search_Depth\"><span class=\"tocnumber\">3.2</span> <span class=\"toctext\">Search Depth</span></a></li>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#Razoring\"><span class=\"tocnumber\">3.3</span> <span class=\"toctext\">Razoring</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-9\"><a href=\"#Release_Dates\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Release Dates</span></a></li>\n<li class=\"toclevel-1 tocsection-10\"><a href=\"#Matches\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Matches</span></a></li>\n<li class=\"toclevel-1 tocsection-11\"><a href=\"#Publications\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Publications</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-12\"><a href=\"#1995_...\"><span class=\"tocnumber\">6.1</span> <span class=\"toctext\">1995 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-13\"><a href=\"#2000_...\"><span class=\"tocnumber\">6.2</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-14\"><a href=\"#2005_...\"><span class=\"tocnumber\">6.3</span> <span class=\"toctext\">2005 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-15\"><a href=\"#2010_...\"><span class=\"tocnumber\">6.4</span> <span class=\"toctext\">2010 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-16\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-17\"><a href=\"#1995_..._2\"><span class=\"tocnumber\">7.1</span> <span class=\"toctext\">1995 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-18\"><a href=\"#2000_..._2\"><span class=\"tocnumber\">7.2</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-19\"><a href=\"#2010_..._2\"><span class=\"tocnumber\">7.3</span> <span class=\"toctext\">2010 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-20\"><a href=\"#External_Links\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">External Links</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-21\"><a href=\"#Purchase\"><span class=\"tocnumber\">8.1</span> <span class=\"toctext\">Purchase</span></a></li>\n<li class=\"toclevel-2 tocsection-22\"><a href=\"#Reports\"><span class=\"tocnumber\">8.2</span> <span class=\"toctext\">Reports</span></a></li>\n<li class=\"toclevel-2 tocsection-23\"><a href=\"#Misc\"><span class=\"tocnumber\">8.3</span> <span class=\"toctext\">Misc</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-24\"><a href=\"#References\"><span class=\"tocnumber\">9</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Photos_.26_Games\">Photos &amp; Games</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Junior&amp;action=edit&amp;section=1\" title=\"Edit section: Photos &amp; Games\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup>\n</p>\n<h2><span class=\"mw-headline\" id=\"WCCC_2006_Round_4\">WCCC 2006 Round 4</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Junior&amp;action=edit&amp;section=2\" title=\"Edit section: WCCC 2006 Round 4\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<div class=\"floatnone\"><a href=\"/File:JuniorShredder2006.JPG\" class=\"image\"><img alt=\"JuniorShredder2006.JPG\" src=\"/images/1/15/JuniorShredder2006.JPG\" width=\"640\" height=\"481\" style=\"vertical-align: text-bottom\" class=\"thumbborder\" /></a></div> \n<p><a href=\"/Stefan_Meyer-Kahlen\" title=\"Stefan Meyer-Kahlen\">Stefan Meyer-Kahlen</a>, <a href=\"/Amir_Ban\" title=\"Amir Ban\">Amir Ban</a>, <a href=\"/Theo_van_der_Storm\" title=\"Theo van der Storm\">Theo van der Storm</a>, ..., and <a href=\"/Johannes_Zwanzger\" title=\"Johannes Zwanzger\">Johannes Zwanzger</a> watching <br />\n<a href=\"/WCCC_2006\" title=\"WCCC 2006\">WCCC 2006</a>, round 4, <a class=\"mw-selflink selflink\">Junior</a> - <a href=\"/Shredder\" title=\"Shredder\">Shredder</a> <sup id=\"cite_ref-9\" class=\"reference\"><a href=\"#cite_note-9\">&#91;9&#93;</a></sup>\n</p>\n<pre>\n[Event \"WCCC 2006\"]\n[Site \"Turin, Italy\"]\n[Date \"2006.05.27\"]\n[Round \"4\"]\n[White \"Junior\"]\n[Black \"Shredder\"]\n[Result \"1/2-1/2\"]\n\n1.e4 c5 2.Nf3 d6 3.d4 cxd4 4.Nxd4 Nf6 5.Nc3 a6 6.Be3 e5 7.Nb3 Be6 8.f3 Nbd7\n9.Qd2 Be7 10.g4 O-O 11.O-O-O b5 12.g5 Nh5 13.Nd5 Bxd5 14.exd5 b4 15.Kb1 a5\n16.Bb5 a4 17.Nc1 a3 18.Nd3 Rb8 19.Bc6 axb2 20.Rhg1 Qc7 21.Rg4 f5 22.Rxb4 f4\n23.Bf2 Bxg5 24.c3 Kh8 25.Qc2 Nhf6 26.Rg1 Bh6 27.Qa4 Nb6 28.Qa5 Nbxd5 29.Qxc7\nNxc7 30.Rxb8 Rxb8 31.Nb4 Ne6 32.Rd1 e4 33.a4 exf3 34.a5 Ng4 35.Rd2 Nxf2\n36.Rxf2 Nc7 37.a6 Nxa6 38.Nxa6 Rb3 39.Rxf3 g5 40.Bd5 Rb5 41.Bc4 Rb7 42.Nb4 g4\n43.Rd3 Bg7 44.Rxd6 Bxc3 45.Nd5 Bd2 46.Nf6 Bc3 47.Nxg4 Kg7 48.Rd5 Ra7 49.Ba2\nh6 50.h4 Ra4 51.Nh2 Re4 52.Rd1 Re3 53.Rg1+ Rg3 54.Rf1 Re3 55.Nf3 Kg6 56.Bb3\nKf5 57.h5 Re7 58.Rd1 Kg4 59.Bd5 1/2-1/2\n</pre>\n<h2><span class=\"mw-headline\" id=\"WCCC_2006_Shannon_Trophy\">WCCC 2006 Shannon Trophy</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Junior&amp;action=edit&amp;section=3\" title=\"Edit section: WCCC 2006 Shannon Trophy\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<div class=\"floatnone\"><a href=\"/File:AmirWithShannonTrophy2006.jpg\" class=\"image\"><img alt=\"AmirWithShannonTrophy2006.jpg\" src=\"/images/3/35/AmirWithShannonTrophy2006.jpg\" width=\"640\" height=\"481\" style=\"vertical-align: text-bottom\" class=\"thumbborder\" /></a></div> \n<p><a href=\"/Jaap_van_den_Herik\" title=\"Jaap van den Herik\">Jaap van den Herik</a> awards <a href=\"/Amir_Ban\" title=\"Amir Ban\">Amir Ban</a> with the <a href=\"/Shannon_Trophy\" title=\"Shannon Trophy\">Shannon Trophy</a>. First prize for Junior, <a href=\"/WCCC_2006\" title=\"WCCC 2006\">WCCC 2006</a> \n</p>\n<h1><span class=\"mw-headline\" id=\"Description\">Description</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Junior&amp;action=edit&amp;section=4\" title=\"Edit section: Description\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>given in 1995 from the <a href=\"/ICGA\" title=\"ICGA\">ICGA</a> page <sup id=\"cite_ref-10\" class=\"reference\"><a href=\"#cite_note-10\">&#91;10&#93;</a></sup>&#160;:\n</p>\n<pre>Junior is a leading Israeli chess playing PC program. It was developed as a hobby by Amir Ban and Shay Bushinsky. Junior's breakthrough occurred during August 1994: The program scored a remarkable equal fourth place (with <a href=\"/index.php?title=Alon_Greenfeld&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Alon Greenfeld (page does not exist)\">GM Alon Greenfeld</a>) in the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Kfar_Saba\">Kfar-Saba</a> Open national chess tournament. The games were conducted under normal tournament time control. In the final round, Junior amazingly defeated GM Leonid Gopstein. During November 1994, Junior participated in the strongest international blitz tournament ever held in Israel. It beat <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Ilya_Smirin\">GM Ilya Smirin</a> and drew with <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Lev_Psakhis\">GM Lev Psakhis</a> and GM Alon Greenfeld. Amongst others, Junior reached a completely won position against <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Judit_Polg%C3%A1r\">GM Judit Polgar</a>. Since then Junior has established itself as a well respected player in the Israeli chess scene and is the one and only software selected to play in Israel's national chess league. Junior is one of the top chess playing programs on the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Internet_chess_server\">Internet Chess Server</a>. \n</pre>\n<h1><span class=\"mw-headline\" id=\"Program_Internals\">Program Internals</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Junior&amp;action=edit&amp;section=5\" title=\"Edit section: Program Internals\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Amir started chess programming in 1985 - Junior's predecessor was written in <a href=\"/Pascal#TurboPascal\" title=\"Pascal\">Turbo Pascal</a>, later ported to <a href=\"/C\" title=\"C\">C</a> and <a href=\"/Cpp\" title=\"Cpp\">C++</a>. In 1993, Shay joins Amir's programming efforts, specializing in evaluation and optimisation <sup id=\"cite_ref-11\" class=\"reference\"><a href=\"#cite_note-11\">&#91;11&#93;</a></sup> .\n</p>\n<h2><span class=\"mw-headline\" id=\"C.2B.2B\">C++</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Junior&amp;action=edit&amp;section=6\" title=\"Edit section: C++\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p><a href=\"/Amir_Ban\" title=\"Amir Ban\">Amir Ban</a> in <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, June 1997 <sup id=\"cite_ref-12\" class=\"reference\"><a href=\"#cite_note-12\">&#91;12&#93;</a></sup> <sup id=\"cite_ref-13\" class=\"reference\"><a href=\"#cite_note-13\">&#91;13&#93;</a></sup>&#160;:\n</p>\n<pre>Junior is written entirely in <a href=\"/Cpp\" title=\"Cpp\">C++</a> (Borland). The entire search engine is the implementation of class 'Position'. One statement that cannot be said about Junior is that it is slow. I've heard these kinds of performance arguments about C++ several times in the past. As a C++ veteran in many projects, I'm quite mystified about what is supposed to be slow about the language.\n</pre>\n<pre>Creating a new Position and detroying it for every node is indeed the classic OOP approach, and also exactly what my program does. Your assumption that this involves \"<a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Malloc\">malloc</a>\" (or \"<a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/New_%28C%2B%2B%29\">new</a>) is the incorrect one. mallocing a Position whenever you need one is as unnecesary and silly as mallocing an int every time you want to do a loop. You should malloc something when you want it to have dynamic lifetime and/or scope.\n</pre>\n<pre>You can create an object as you create an int, by putting it as an auto variable on the <a href=\"/Stack\" title=\"Stack\">stack</a>, e.g.: \n</pre>\n<pre>\n alphabeta(...)\n {\n   ...\n   Position newPosition;\n   ...\n }\n</pre>\n<pre> This constructs a Position at the point of declaration and destroys it on the exit from the block. The constructor and destructor do exactly what you code in them of course. No more, no less. The overhead for this is not low. It's zero. \n</pre>\n<h2><span class=\"mw-headline\" id=\"Search_Depth\">Search Depth</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Junior&amp;action=edit&amp;section=7\" title=\"Edit section: Search Depth\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p><a href=\"/Amir_Ban\" title=\"Amir Ban\">Amir Ban</a> in <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, March 1998 <sup id=\"cite_ref-14\" class=\"reference\"><a href=\"#cite_note-14\">&#91;14&#93;</a></sup>&#160;:\n</p>\n<pre>The <a href=\"/Brute-Force\" title=\"Brute-Force\">brute-force</a> <a href=\"/Ply\" title=\"Ply\">ply</a> <a href=\"/Depth\" title=\"Depth\">depth</a> is indeed half the publicized depth. All the rest are <a href=\"/Extensions\" title=\"Extensions\">extensions</a> (in conventional terminology, I don't think of them this way). If you set Junior to depth 12, e.g., then you should be able to find a 7-ply combination where it fails. If I am doing a good job, then you should have a hard time finding one.\n</pre>\n<pre>The question of what this is equivalent to in terms of other programs, e.g. a null-mover with \"standard\" extensions is interesting, but I don't know the answer. In tournament conditions middlegame Junior typically gets 14-16 depths, and it looks competitive tactically. \n</pre>\n<p><a href=\"/Amir_Ban\" title=\"Amir Ban\">Amir Ban</a> in <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 1998 <sup id=\"cite_ref-15\" class=\"reference\"><a href=\"#cite_note-15\">&#91;15&#93;</a></sup>&#160;;\n</p>\n<pre>The Junior depth value measures half-plies, so if you insist, it's ply 6. I could have called it ply 12 or ply 9 with equal justification. Since nobody does brute-force anymore, and everybody does both pruning and extensions, what the depth indicator means is a bit vague. Very roughly, I would propose this equality:\n</pre>\n<pre> Genius depth 6 = Rebel depth 8 = Fritz5 depth 10 = Junior depth 12\n\nwhich once said should be forgotten, since it's much more complicated than that. \n</pre>\n<h2><span class=\"mw-headline\" id=\"Razoring\">Razoring</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Junior&amp;action=edit&amp;section=8\" title=\"Edit section: Razoring\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p><a href=\"/Amir_Ban\" title=\"Amir Ban\">Amir Ban</a> in a <a href=\"/CCC\" title=\"CCC\">CCC</a> discussion with <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a> on <a href=\"/Razoring\" title=\"Razoring\">Razoring</a> versus <a href=\"/Pruning\" title=\"Pruning\">Pruning</a>, January 1999 <sup id=\"cite_ref-16\" class=\"reference\"><a href=\"#cite_note-16\">&#91;16&#93;</a></sup>&#160;:\n</p>\n<pre>Razoring is supposed to be a sort of forward pruning where rather than skipping an entire subtree, you search it to a reduced depth, typically one less than normal depth. The advantage is that you get most of the saving but with much lower risk than pruning entire subtrees. Razoring is the only forward pruning technique Junior uses, with a depth reduction of one (half-ply). Seems like <a href=\"/Crafty\" title=\"Crafty\">Crafty</a> uses the same definition ... \n</pre>\n<h1><span class=\"mw-headline\" id=\"Release_Dates\">Release Dates</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Junior&amp;action=edit&amp;section=9\" title=\"Edit section: Release Dates\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> Junior 3.3</li>\n<li> Junior 3.5</li>\n<li> Junior 4.0</li>\n<li> Junior 5.0&#160;: 1998</li>\n<li> Junior 6.0&#160;: 2000</li>\n<li> Junior 7&#160;: 2002</li>\n<li> Junior 8&#160;: 2004</li>\n<li> Junior 9&#160;: 2005</li>\n<li> Junior 10&#160;: 2006-8</li>\n<li> Junior 10.1&#160;: 2007-6</li>\n<li> Junior 11&#160;: 2009-11</li>\n<li> Junior 11.1&#160;: 2010-3</li>\n<li> Junior 11.2&#160;: 2010-5</li>\n<li> Junior 2010&#160;: 2010</li>\n<li> Junior 12&#160;: 2010-11</li>\n<li> Junior 12.5&#160;: 2011-04</li>\n<li> Junior 13&#160;: 2012-02</li>\n<li> Junior 13.3&#160;: 2012-11</li>\n<li> Deep Junior <a href=\"/WCCC_2013\" title=\"WCCC 2013\">Yokohama</a>: 2013-10-24</li></ul>\n<h1><span class=\"mw-headline\" id=\"Matches\">Matches</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Junior&amp;action=edit&amp;section=10\" title=\"Edit section: Matches\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Kasparov_versus_Deep_Junior_2003\" title=\"Kasparov versus Deep Junior 2003\">Kasparov versus Deep Junior 2003</a></li>\n<li> <a href=\"/Deep_Fritz_versus_Deep_Junior_2007\" title=\"Deep Fritz versus Deep Junior 2007\">Deep Fritz versus Deep Junior 2007</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Junior&amp;action=edit&amp;section=11\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1995_...\">1995 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Junior&amp;action=edit&amp;section=12\" title=\"Edit section: 1995 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Amir_Ban\" title=\"Amir Ban\">Amir Ban</a> (<b>1996</b>). <i>Junior among the Grandmasters</i>. <a href=\"/ICGA_Journal#19_4\" title=\"ICGA Journal\">ICCA Journal, Vol. 19, No. 4</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Junior&amp;action=edit&amp;section=13\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Frank_Schneider\" title=\"Frank Schneider\">Frank Schneider</a> (<b>2001</b>). <i>Deep Junior wins the 18th World Microcomputer Chess Championship</i>. <a href=\"/ICGA_Journal#24_3\" title=\"ICGA Journal\">ICGA Journal, Vol. 24, No. 3</a>&#160;» <a href=\"/WMCCC_2001\" title=\"WMCCC 2001\">WMCCC 2001</a></li>\n<li> <a href=\"/David_Levy\" title=\"David Levy\">David Levy</a> (<b>2003</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://ilk.uvt.nl/icga/journal/contents/content26-1.htm#MANMACHINE\">The State of the Art in Man vs. “Machine” Chess</a></i>. <a href=\"/ICGA_Journal#26_1\" title=\"ICGA Journal\">ICGA Journal, Vol. 26, No. 1</a>&#160;» <a href=\"/Kasparov_versus_Deep_Junior_2003\" title=\"Kasparov versus Deep Junior 2003\">Kasparov versus Deep Junior 2003</a></li>\n<li> <a href=\"/Karsten_M%C3%BCller\" title=\"Karsten Müller\">Karsten Müller</a> (<b>2003</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://ilk.uvt.nl/icga/journal/contents/content26-1.htm#MANEQUALS\">Man Equals Machine in Chess</a></i>. <a href=\"/ICGA_Journal#26_1\" title=\"ICGA Journal\">ICGA Journal, Vol. 26, No. 1</a>&#160;» <a href=\"/Kasparov_versus_Deep_Junior_2003\" title=\"Kasparov versus Deep Junior 2003\">Kasparov versus Deep Junior 2003</a></li>\n<li> <a href=\"/Amir_Ban\" title=\"Amir Ban\">Amir Ban</a> (<b>2004</b>). <i>Deep Junior Confirms its Strength</i>. <a href=\"/ICGA_Journal#27_3\" title=\"ICGA Journal\">ICGA Journal, Vol. 27, No. 3</a>&#160;» <a href=\"/WCCC_2004\" title=\"WCCC 2004\">WCCC 2004</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2005_...\">2005 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Junior&amp;action=edit&amp;section=14\" title=\"Edit section: 2005 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Mark_Levene\" title=\"Mark Levene\">Mark Levene</a>, <a href=\"/Judit_Bar-Ilan\" title=\"Judit Bar-Ilan\">Judit Bar-Ilan</a> (<b>2005</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.researchgate.net/publication/220174440_Comparing_Move_Choices_of_Chess_Search_Engines\">Comparing Move Choices of Chess Search Engines</a></i>. <a href=\"/ICGA_Journal#28_2\" title=\"ICGA Journal\">ICGA Journal, Vol. 28, No. 2</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.dcs.bbk.ac.uk/~mark/download/fritz_junior_icga.pdf\">pdf</a>&#160;» <a href=\"/Fritz\" title=\"Fritz\">Fritz</a></li>\n<li> <a href=\"/Shay_Bushinsky\" title=\"Shay Bushinsky\">Shay Bushinsky</a> (<b>2007</b>). <i>Showdown in Elista</i>. <a href=\"/ICGA_Journal#30_2\" title=\"ICGA Journal\">ICGA Journal, Vol. 30, No, 2</a>&#160;» <a href=\"/Deep_Fritz_versus_Deep_Junior_2007\" title=\"Deep Fritz versus Deep Junior 2007\">Deep Fritz versus Deep Junior 2007</a></li>\n<li> <a href=\"/Shay_Bushinsky\" title=\"Shay Bushinsky\">Shay Bushinsky</a> (<b>2009</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.aaai.org/ojs/index.php/aimagazine/article/view/2255\">Deus Ex Machina— A Higher Creative Species in the Game of Chess</a></i>. <a href=\"/AAAI#AIMAG\" title=\"AAAI\">AI Magazine</a>, Vol. 30, No. 3 <sup id=\"cite_ref-17\" class=\"reference\"><a href=\"#cite_note-17\">&#91;17&#93;</a></sup></li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Junior&amp;action=edit&amp;section=15\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Amir_Ban\" title=\"Amir Ban\">Amir Ban</a> (<b>2012</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.ratio.huji.ac.il/node/2362\">Automatic Learning of Evaluation, with Applications to Computer Chess</a></i>. Discussion Paper 613, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Hebrew_University_of_Jerusalem\">The Hebrew University of Jerusalem</a> - Center for the Study of Rationality, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Givat_Ram\">Givat Ram</a>&#160;» <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">Automated Tuning</a>, <a href=\"/Learning\" title=\"Learning\">Learning</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Junior&amp;action=edit&amp;section=16\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1995_..._2\">1995 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Junior&amp;action=edit&amp;section=17\" title=\"Edit section: 1995 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=11617\">Question to Amir Ban</a> by <a href=\"/Bas_Hamstra\" title=\"Bas Hamstra\">Bas Hamstra</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 05, 1997</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=17214\">Junior: \"Fast\" Searcher or \"Deep\" Searcher?</a> by <a href=\"/Fernando_Villegas\" title=\"Fernando Villegas\">Fernando Villegas</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 19, 1998</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=18213\">Re: What is \"pre-processing\"</a> by <a href=\"/Amir_Ban\" title=\"Amir Ban\">Amir Ban</a>, May 08, 1998&#160;» <a href=\"/Piece-Square_Tables#Preprocessing\" title=\"Piece-Square Tables\">Pre-processing</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=15667\">Junior 4.6 and the null move technique</a> by <a href=\"/Sylvain_Renard\" title=\"Sylvain Renard\">Sylvain Renard</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 14, 1998</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/UklRzu9z_qA/eKYuOyczkQkJ\">Junior 5&#160;!</a> by <a href=\"/Dirk_Frickenschmidt\" title=\"Dirk Frickenschmidt\">Dirk Frickenschmidt</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, August 25, 1998</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=41065\">Re: Razoring?</a> by <a href=\"/Amir_Ban\" title=\"Amir Ban\">Amir Ban</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 27, 1999&#160;» <a href=\"/Razoring\" title=\"Razoring\">Razoring</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_..._2\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Junior&amp;action=edit&amp;section=18\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=122370\">Junior chess program. Just version of Fritz 5?</a> by <a href=\"/Leonid_Liberman\" title=\"Leonid Liberman\">Leonid</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 29, 2000&#160;» <a href=\"/Fritz\" title=\"Fritz\">Fritz</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=246006\">Is Deep Blue still considered better than Deep Junior&#160;?</a> by Jorge Pichard, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 18, 2002&#160;» <a href=\"/Deep_Blue\" title=\"Deep Blue\">Deep Blue</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=284417\">Answers</a> by <a href=\"/Amir_Ban\" title=\"Amir Ban\">Amir Ban</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 15, 2003 <sup id=\"cite_ref-18\" class=\"reference\"><a href=\"#cite_note-18\">&#91;18&#93;</a></sup>&#160;» <a href=\"/Kasparov_versus_Deep_Junior_2003\" title=\"Kasparov versus Deep Junior 2003\">Kasparov versus Deep Junior 2003</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=356131\">Re: Shredder 8 secret: search depth?</a> by <a href=\"/Vasik_Rajlich\" title=\"Vasik Rajlich\">Vasik Rajlich</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 23, 2004&#160;» <a href=\"/Depth\" title=\"Depth\">Depth</a>, <a href=\"/Shredder\" title=\"Shredder\">Shredder</a>, <a href=\"/Fritz\" title=\"Fritz\">Fritz</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=376151\">Deep Junior won the WCCC</a> by <a href=\"/Enrique_Irazoqui\" title=\"Enrique Irazoqui\">Enrique Irazoqui</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 12, 2004&#160;» <a href=\"/WCCC_2004\" title=\"WCCC 2004\">WCCC 2004</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_..._2\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Junior&amp;action=edit&amp;section=19\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=33435\">Patt-Bug, Junior 11.1a show mate and Ktulu 9.03 made patt!</a> by <a href=\"/Frank_Quisinsky\" title=\"Frank Quisinsky\">Frank Quisinsky</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 23, 2010&#160;» <a href=\"/Stalemate\" title=\"Stalemate\">Stalemate</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=36512\">Deep Junior 12 now available</a> by <a href=\"/Graham_Banks\" title=\"Graham Banks\">Graham Banks</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 27, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48991\">Junior is World Computer Chess Champion!</a> by <a href=\"/Gerd_Isenberg\" title=\"Gerd Isenberg\">Gerd Isenberg</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 17, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48992\">WCCC 2013: Junior wins</a> by <a href=\"/index.php?title=Michael_Scheidl&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Michael Scheidl (page does not exist)\">Mike Scheidl</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 17, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=49016\">Israel’s Deep Junior still the king at WCCC</a> by Sean Evans, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 19, 2013 <sup id=\"cite_ref-19\" class=\"reference\"><a href=\"#cite_note-19\">&#91;19&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=49812\">Deep Junior Yokohama</a> by <a href=\"/Graham_Banks\" title=\"Graham Banks\">Graham Banks</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 24, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=50271\">Deep Junior Yokohama</a> by <a href=\"/Graham_Banks\" title=\"Graham Banks\">Graham Banks</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 29, 2013</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Junior&amp;action=edit&amp;section=20\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.game-ai-forum.org/icga-tournaments/program.php?id=24\">Junior's ICGA Tournaments</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Junior_%28chess%29\">Junior (chess) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.robotwisdom.com/ai/deepjunior.html\">Deep Junior timeline</a> by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Jorn_Barger\">Jorn Barger</a>, February 2003</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.chessbase.com/post/programs-and-eentials/3\">Programs and essentials</a> by <a href=\"/index.php?title=Steve_Lopez&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Steve Lopez (page does not exist)\">Steve Lopez</a>, <a href=\"/ChessBase\" title=\"ChessBase\">ChessBase News</a>, March 13, 2005&#160;» <a href=\"/Shredder\" title=\"Shredder\">Shredder 9</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://gilkalai.wordpress.com/2008/06/25/amir-ban-on-deep-junior/\">Amir Ban on Deep Junior</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://gilkalai.wordpress.com/\">Combinatorics and more - Gil Kalai’s blog</a>, June 25, 2008</li></ul>\n<h2><span class=\"mw-headline\" id=\"Purchase\">Purchase</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Junior&amp;action=edit&amp;section=21\" title=\"Edit section: Purchase\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.hiarcs.com/pc-chess-deep-junior.htm\">Deep Junior 13 PC Chess Software</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://www.hiarcs.com/index.htm\">HIARCS Chess Software for PC, Mac, Pocket PC, iPhone, iPod and Palm Chess</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.hiarcs.com/dj13/pc-chess-junior-download.htm\">Download Junior</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://www.hiarcs.com/index.htm\">HIARCS Chess Software for PC, Mac, Pocket PC, iPhone, iPod and Palm Chess</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://shop.chessbase.com/en/products/deep_junior_138\">Deep Junior 13.8 mulitprocessor version</a>, <a href=\"/ChessBase\" title=\"ChessBase\">ChessBase Shop</a>, February 2014</li></ul>\n<h2><span class=\"mw-headline\" id=\"Reports\">Reports</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Junior&amp;action=edit&amp;section=22\" title=\"Edit section: Reports\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.thechessdrum.net/tournaments/Kasparov-DeepJr/\">Kasparov &amp; Deep Junior fight to 3-3 draw!</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.hiarcs.com/Games/djkasp/deepjuniorvkasparov.htm\">Kasparov-Junior</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://www.hiarcs.com/index.htm\">HIARCS Chess Software for PC, Mac, Pocket PC, iPhone, iPod and Palm Chess</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.jpost.com/National-News/Israels-Deep-Junior-still-the-king-at-World-Computer-Chess-Championship-323527\">Israel’s Deep Junior still the king at World Computer Chess Championship</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/The_Jerusalem_Post\">Jerusalem Post</a>, August 18, 2013 <sup id=\"cite_ref-20\" class=\"reference\"><a href=\"#cite_note-20\">&#91;20&#93;</a></sup></li></ul>\n<h2><span class=\"mw-headline\" id=\"Misc\">Misc</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Junior&amp;action=edit&amp;section=23\" title=\"Edit section: Misc\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Junior\">Junior from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.discogs.com/artist/968447-Franco-Tonani\">Franco Tonani</a> - Junior's Idea, from <a rel=\"nofollow\" class=\"external text\" href=\"https://www.discogs.com/de/Franco-Tonani-Night-In-Fonorama/release/4116768\">Night In Fonorama</a>, recorded <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Milan\">Milan</a>, May 31,1964, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> feat. <a rel=\"nofollow\" class=\"external text\" href=\"https://it.wikipedia.org/wiki/Giovanni_Tommaso\">Giovanni Tommaso</a>, <a href=\"/Category:Franco_D%27Andrea\" title=\"Category:Franco D&#39;Andrea\">Franco D'Andrea</a>, <a href=\"/Category:Gato_Barbieri\" title=\"Category:Gato Barbieri\">Gato Barbieri</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Franco_Ambrosetti\">Franco Ambrosetti</a></dd>\n<dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/fJq0Cf6cRuc?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Junior&amp;action=edit&amp;section=24\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap mw-references-columns\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\">Junior class artwork featured in <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Texas_A%26M_University%E2%80%93Commerce\">East Texas State Normal College's</a> <a rel=\"nofollow\" class=\"external text\" href=\"http://dmc.tamuc.edu/digital/collection/p15778coll9/id/5086\">1920 Locust yearbook</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Junior_(education)\">Junior (education) from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=376311\">Junior thoughts</a> by <a href=\"/Amir_Ban\" title=\"Amir Ban\">Amir Ban</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 12, 2004</span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.chess.org.il/users/ShowNewsUpdates.aspx?contentId=304&amp;contentTypeId=2\">ריאיון עם שי בושינסקי</a>, November 27, 2011 (Hebrew) <a rel=\"nofollow\" class=\"external text\" href=\"http://translate.google.com/translate?sl=iw&amp;tl=en&amp;js=n&amp;prev=_t&amp;hl=en&amp;ie=UTF-8&amp;layout=2&amp;eotf=1&amp;u=http%3A%2F%2Fwww.chess.org.il%2Fusers%2FShowNewsUpdates.aspx%3FcontentId%3D304%26contentTypeId%3D2\">Interview with Shay Bushinsky</a> translated by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Google_Translate\">Google Translate</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.chessbase.com/post/programs-and-eentials/3\">Programs and essentials</a> by <a href=\"/index.php?title=Steve_Lopez&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Steve Lopez (page does not exist)\">Steve Lopez</a>, <a href=\"/ChessBase\" title=\"ChessBase\">ChessBase News</a>, March 13, 2005</span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=416509\">Nice article about Junior 9 by Steve Lopez</a> by Jorge Pichard, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 12, 2005</span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.chessbase.com/shop/product.asp?pid=288\">Chess software - Junior 10</a> from <a href=\"/ChessBase\" title=\"ChessBase\">ChessBase</a></span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.hiarcs.com/pc-chess-deep-junior.htm\">Deep Junior 13 PC Chess Software</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://www.hiarcs.com/index.htm\">HIARCS Chess Software for PC, Mac, Pocket PC, iPhone, iPod and Palm Chess</a></span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\"><a href=\"/WCCC_2006\" title=\"WCCC 2006\">WCCC 2006</a>, Photos by <a href=\"/Gerd_Isenberg\" title=\"Gerd Isenberg\">Gerd Isenberg</a></span>\n</li>\n<li id=\"cite_note-9\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-9\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.game-ai-forum.org/icga-tournaments/round.php?tournament=16&amp;round=4&amp;id=1\">Turin 2006 - Chess - Round 4 - Game 1 (ICGA Tournaments)</a></span>\n</li>\n<li id=\"cite_note-10\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-10\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.game-ai-forum.org/icga-tournaments/program.php?id=24\">Junior's ICGA Tournaments</a></span>\n</li>\n<li id=\"cite_note-11\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-11\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.robotwisdom.com/ai/deepjunior.html\">Deep Junior timeline</a> by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Jorn_Barger\">Jorn Barger</a>, February 2003</span>\n</li>\n<li id=\"cite_note-12\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-12\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/5fba0f94be869f35\">Search Degredation w/ C++</a> by Chris Jason Richards, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, June 12, 1997, post 4 and 6 by <a href=\"/Amir_Ban\" title=\"Amir Ban\">Amir Ban</a></span>\n</li>\n<li id=\"cite_note-13\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-13\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=11617\">Question to Amir Ban</a> by <a href=\"/Bas_Hamstra\" title=\"Bas Hamstra\">Bas Hamstra</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 05, 1997</span>\n</li>\n<li id=\"cite_note-14\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-14\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/2163f0fa2f0715f1\">Funny Junior Engine in CBLight / Junior Engine ply depth</a> by Wolfgang Krietsch, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, February 27, 1998, post 7 and 16 by <a href=\"/Amir_Ban\" title=\"Amir Ban\">Amir Ban</a></span>\n</li>\n<li id=\"cite_note-15\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-15\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=17231\">Re: Junior</a> by <a href=\"/Amir_Ban\" title=\"Amir Ban\">Amir Ban</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 20, 1998</span>\n</li>\n<li id=\"cite_note-16\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-16\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=41065\">Re: Razoring?</a> by <a href=\"/Amir_Ban\" title=\"Amir Ban\">Amir Ban</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 27, 1999</span>\n</li>\n<li id=\"cite_note-17\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-17\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61240\">\"Deus Ex Machina - article by Shay Bushinsky</a> by Lonnie Cook, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 26, 2016</span>\n</li>\n<li id=\"cite_note-18\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-18\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=283279\">list of questions to ask to Amir and Shay ...</a> by <a href=\"/index.php?title=Vincent_Lejeune&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Vincent Lejeune (page does not exist)\">Vincent Lejeune</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 10, 2003</span>\n</li>\n<li id=\"cite_note-19\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-19\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.jpost.com/National-News/Israels-Deep-Junior-still-the-king-at-World-Computer-Chess-Championship-323527\">Israel’s Deep Junior still the king at World Computer Chess Championship</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/The_Jerusalem_Post\">Jerusalem Post</a>, August 18, 2013</span>\n</li>\n<li id=\"cite_note-20\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-20\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=49016\">Israel’s Deep Junior still the king at WCCC</a> by Sean Evans, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 19, 2013</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Engines\" title=\"Engines\">Up one level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260228122721\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.098 seconds\nReal time usage: 0.634 seconds\nPreprocessor visited node count: 402/1000000\nPreprocessor generated node count: 830/1000000\nPost‐expand include size: 27/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:2732-0!canonical and timestamp 20260228122720 and revision id 24204\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "UCI"
+      },
+      {
+        "sortkey": "",
+        "*": "Commercial"
+      },
+      {
+        "sortkey": "",
+        "*": "ChessBase"
+      },
+      {
+        "sortkey": "",
+        "*": "X86"
+      },
+      {
+        "sortkey": "",
+        "*": "X64"
+      },
+      {
+        "sortkey": "",
+        "*": "Windows"
+      },
+      {
+        "sortkey": "",
+        "*": "PC"
+      },
+      {
+        "sortkey": "",
+        "*": "Mac"
+      },
+      {
+        "sortkey": "",
+        "*": "Ban_Quotes"
+      },
+      {
+        "sortkey": "",
+        "*": "Gato_Barbieri"
+      },
+      {
+        "sortkey": "",
+        "*": "Franco_D'Andrea"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "AAAI"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Amir Ban"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Automated Tuning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bas Hamstra"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Brute-Force"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "C"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ChessBase"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cpp"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Crafty"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David Levy"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Deep Blue"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Deep Fritz versus Deep Junior 2007"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dirk Frickenschmidt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engines"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Enrique Irazoqui"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fernando Villegas"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Frank Quisinsky"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Frank Schneider"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fritz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "GUI"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gerd Isenberg"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Graham Banks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "HIARCS"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "IBM PC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA Journal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jaap van den Herik"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Johannes Zwanzger"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Judit Bar-Ilan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Karsten Müller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kasparov versus Deep Junior 2003"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Learning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Leonid Liberman"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mark Levene"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pascal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Piece-Square Tables"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ply"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Razoring"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Hyatt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Shannon Trophy"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Shay Bushinsky"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Shredder"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stack"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stalemate"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stefan Meyer-Kahlen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sylvain Renard"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Theo van der Storm"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "UCI"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vasik Rajlich"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "WCCC 2002"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "WCCC 2004"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "WCCC 2006"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "WCCC 2009"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "WCCC 2011"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "WCCC 2013"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "WMCCC 1997"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "WMCCC 2001"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Windows"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "World Microcomputer Chess Championship"
+      },
+      {
+        "ns": 0,
+        "*": "Steve Lopez"
+      },
+      {
+        "ns": 0,
+        "*": "Vincent Lejeune"
+      },
+      {
+        "ns": 0,
+        "*": "Alon Greenfeld"
+      },
+      {
+        "ns": 0,
+        "*": "Boris Alterman"
+      },
+      {
+        "ns": 0,
+        "*": "Michael Scheidl"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Franco D'Andrea"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Gato Barbieri"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Opening Book Author"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Photos & Games",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Junior",
+        "byteoffset": 2787,
+        "anchor": "Photos_.26_Games"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "WCCC 2006 Round 4",
+        "number": "1.1",
+        "index": "2",
+        "fromtitle": "Junior",
+        "byteoffset": 2859,
+        "anchor": "WCCC_2006_Round_4"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "WCCC 2006 Shannon Trophy",
+        "number": "1.2",
+        "index": "3",
+        "fromtitle": "Junior",
+        "byteoffset": 4047,
+        "anchor": "WCCC_2006_Shannon_Trophy"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Description",
+        "number": "2",
+        "index": "4",
+        "fromtitle": "Junior",
+        "byteoffset": 4259,
+        "anchor": "Description"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Program Internals",
+        "number": "3",
+        "index": "5",
+        "fromtitle": "Junior",
+        "byteoffset": 5618,
+        "anchor": "Program_Internals"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "C++",
+        "number": "3.1",
+        "index": "6",
+        "fromtitle": "Junior",
+        "byteoffset": 6041,
+        "anchor": "C.2B.2B"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Search Depth",
+        "number": "3.2",
+        "index": "7",
+        "fromtitle": "Junior",
+        "byteoffset": 7787,
+        "anchor": "Search_Depth"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Razoring",
+        "number": "3.3",
+        "index": "8",
+        "fromtitle": "Junior",
+        "byteoffset": 9410,
+        "anchor": "Razoring"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Release Dates",
+        "number": "4",
+        "index": "9",
+        "fromtitle": "Junior",
+        "byteoffset": 10082,
+        "anchor": "Release_Dates"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Matches",
+        "number": "5",
+        "index": "10",
+        "fromtitle": "Junior",
+        "byteoffset": 10507,
+        "anchor": "Matches"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "6",
+        "index": "11",
+        "fromtitle": "Junior",
+        "byteoffset": 10599,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1995 ...",
+        "number": "6.1",
+        "index": "12",
+        "fromtitle": "Junior",
+        "byteoffset": 10615,
+        "anchor": "1995_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "6.2",
+        "index": "13",
+        "fromtitle": "Junior",
+        "byteoffset": 10743,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2005 ...",
+        "number": "6.3",
+        "index": "14",
+        "fromtitle": "Junior",
+        "byteoffset": 11534,
+        "anchor": "2005_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "6.4",
+        "index": "15",
+        "fromtitle": "Junior",
+        "byteoffset": 12398,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "7",
+        "index": "16",
+        "fromtitle": "Junior",
+        "byteoffset": 12804,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1995 ...",
+        "number": "7.1",
+        "index": "17",
+        "fromtitle": "Junior",
+        "byteoffset": 12819,
+        "anchor": "1995_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "7.2",
+        "index": "18",
+        "fromtitle": "Junior",
+        "byteoffset": 13695,
+        "anchor": "2000_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "7.3",
+        "index": "19",
+        "fromtitle": "Junior",
+        "byteoffset": 14655,
+        "anchor": "2010_..._2"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "8",
+        "index": "20",
+        "fromtitle": "Junior",
+        "byteoffset": 15946,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Purchase",
+        "number": "8.1",
+        "index": "21",
+        "fromtitle": "Junior",
+        "byteoffset": 16649,
+        "anchor": "Purchase"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Reports",
+        "number": "8.2",
+        "index": "22",
+        "fromtitle": "Junior",
+        "byteoffset": 17193,
+        "anchor": "Reports"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Misc",
+        "number": "8.3",
+        "index": "23",
+        "fromtitle": "Junior",
+        "byteoffset": 17926,
+        "anchor": "Misc"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "9",
+        "index": "24",
+        "fromtitle": "Junior",
+        "byteoffset": 18626,
+        "anchor": "References"
+      }
+    ]
+  }
+}

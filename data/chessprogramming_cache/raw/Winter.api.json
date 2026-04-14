@@ -1,0 +1,502 @@
+{
+  "parse": {
+    "title": "Winter",
+    "pageid": 3261,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Engines\" title=\"Engines\">Engines</a> * Winter</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:322px;\"><a href=\"http://se.ethz.ch/~meyer/images/zurich/lake.jpg\"><img alt=\"\" src=\"/images/6/6d/ZurichInWinter.jpg\" width=\"320\" height=\"219\" class=\"thumbimage\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:ZurichInWinter.jpg\" class=\"internal\" title=\"Enlarge\"></a></div><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Winter\">Winter</a> in <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Z%C3%BCrich\">Zurich</a>, <a href=\"/ETH_Zurich\" title=\"ETH Zurich\">ETH Zurich</a> view <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>Winter</b>,<br />\nan <a href=\"/UCI\" title=\"UCI\">UCI</a> compliant <a href=\"/Category:Open_Source\" title=\"Category:Open Source\">open source chess engine</a> by <a href=\"/Jonathan_Rosenthal\" title=\"Jonathan Rosenthal\">Jonathan Rosenthal</a>, written in <a href=\"/Cpp\" title=\"Cpp\">C++</a>, released on January 08, 2018 under the terms of <a href=\"/Free_Software_Foundation#GPL\" title=\"Free Software Foundation\">GPL Version 3</a>. Winter is inspired by <a href=\"/Learning\" title=\"Learning\">machine learning</a> techniques, as applied in <a href=\"/Move_Ordering\" title=\"Move Ordering\">move ordering</a> and in particular in <a href=\"/Evaluation\" title=\"Evaluation\">evaluation</a>, and heavily relies on <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Template_(C%2B%2B)\">C++ templates</a> but not on any library aside from <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Standard_Template_Library\">STL</a> as it comes with its own implementations for <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Statistics\">statistics</a> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup> and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Linear_algebra\">linear algebra</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>. Winter started its life in 2016 as a group project at <a href=\"/ETH_Zurich\" title=\"ETH Zurich\">ETH Zurich</a> in a course on parallel computing along with Jonas Kuratli and Jonathan Maurer - the current release with Jonathan Rosenthal as sole author has removed the parallel portion of the code <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>. It started to play on-line at <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">HGM's</a> <a href=\"/index.php?title=Online_Engine_Blitz_Tourneys&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Online Engine Blitz Tourneys (page does not exist)\">Online Engine Blitz Tourneys</a> in April 2017 <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup>. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Selected_Features\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Selected Features</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-2\"><a href=\"#Board_Representation\"><span class=\"tocnumber\">1.1</span> <span class=\"toctext\">Board Representation</span></a></li>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#Search\"><span class=\"tocnumber\">1.2</span> <span class=\"toctext\">Search</span></a></li>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#Evaluation\"><span class=\"tocnumber\">1.3</span> <span class=\"toctext\">Evaluation</span></a></li>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#Misc\"><span class=\"tocnumber\">1.4</span> <span class=\"toctext\">Misc</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#2017_...\"><span class=\"tocnumber\">2.1</span> <span class=\"toctext\">2017 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#2020_...\"><span class=\"tocnumber\">2.2</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-9\"><a href=\"#External_Links\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">External Links</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#Chess_Engine\"><span class=\"tocnumber\">3.1</span> <span class=\"toctext\">Chess Engine</span></a></li>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#Misc_2\"><span class=\"tocnumber\">3.2</span> <span class=\"toctext\">Misc</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-12\"><a href=\"#References\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Selected_Features\">Selected Features</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Winter&amp;action=edit&amp;section=1\" title=\"Edit section: Selected Features\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup>\n</p>\n<h2><span class=\"mw-headline\" id=\"Board_Representation\"><a href=\"/Board_Representation\" title=\"Board Representation\">Board Representation</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Winter&amp;action=edit&amp;section=2\" title=\"Edit section: Board Representation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Bitboards\" title=\"Bitboards\">Bitboards</a></li>\n<li> <a href=\"/8x8_Board\" title=\"8x8 Board\">8x8 Board</a></li>\n<li> <a href=\"/Magic_Bitboards#Fancy\" title=\"Magic Bitboards\">Fancy Magic Bitboards</a></li></ul>\n<dl><dd> <a href=\"/BMI2#PEXTBitboards\" title=\"BMI2\">BMI2 - PEXT Bitboards</a></dd></dl>\n<h2><span class=\"mw-headline\" id=\"Search\"><a href=\"/Search\" title=\"Search\">Search</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Winter&amp;action=edit&amp;section=3\" title=\"Edit section: Search\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Lazy_SMP\" title=\"Lazy SMP\">Lazy SMP</a> (Winter 0.3)</li>\n<li> <a href=\"/Fail-Hard\" title=\"Fail-Hard\">Fail-Hard</a> <a href=\"/Iterative_Deepening\" title=\"Iterative Deepening\">Iterative Deepening</a></li>\n<li> <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">Alpha-Beta</a> <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">Principal Variation Search</a></li>\n<li> <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Table</a></li>\n<li> <a href=\"/Move_Ordering\" title=\"Move Ordering\">Move Ordering</a> is based on the linear part of a <a href=\"/Automated_Tuning#LogisticRegression\" title=\"Automated Tuning\">Logistic Regression</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Statistical_classification\">classifier</a> aka <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Cluster_analysis\">cluster analysis</a> \n<ul><li> The classifier is trained via <a href=\"/Temporal_Difference_Learning\" title=\"Temporal Difference Learning\">temporal difference learning</a>  to predict whether a <a href=\"/Moves\" title=\"Moves\">move</a> will return <a href=\"/Beta\" title=\"Beta\">beta</a></li>\n<li> Classifier considers <a href=\"/Hash_Move\" title=\"Hash Move\">TT move</a>, <a href=\"/Killer_Move\" title=\"Killer Move\">killers</a>, <a href=\"/Moves#Type\" title=\"Moves\">move type</a>, <a href=\"/Origin_Square\" title=\"Origin Square\">from square</a>, <a href=\"/Target_Square\" title=\"Target Square\">target square</a>, <a href=\"/Captures\" title=\"Captures\">capture target</a>, <a href=\"/Static_Exchange_Evaluation\" title=\"Static Exchange Evaluation\">SEE</a>, target square of last move, <a href=\"/Check\" title=\"Check\">check</a> and changes between forcing and unforcing moves (a capture is more likely after another capture)</li>\n<li> <a href=\"/Countermove_Heuristic\" title=\"Countermove Heuristic\">Countermove Heuristic</a> (Winter 0.3)</li></ul></li>\n<li> <a href=\"/Selectivity\" title=\"Selectivity\">Selectivity</a>\n<ul><li> <a href=\"/Null_Move_Reductions\" title=\"Null Move Reductions\">Null Move Reductions</a></li>\n<li> <a href=\"/Reverse_Futility_Pruning\" title=\"Reverse Futility Pruning\">Static Null Move Pruning</a></li>\n<li> <a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">Late Move Reductions</a></li>\n<li> <a href=\"/Futility_Pruning\" title=\"Futility Pruning\">Futility Pruning</a></li>\n<li> <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">Quiescence Search</a></li>\n<li> <a href=\"/Static_Exchange_Evaluation\" title=\"Static Exchange Evaluation\">Static Exchange Evaluation</a></li></ul></li></ul>\n<h2><span class=\"mw-headline\" id=\"Evaluation\"><a href=\"/Evaluation\" title=\"Evaluation\">Evaluation</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Winter&amp;action=edit&amp;section=4\" title=\"Edit section: Evaluation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> Non standard approach relied on a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Mixture_model\">mixture model</a> <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup>, and since Winter <b>0.3</b> on <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Fuzzy_clustering#Fuzzy_C-means_clustering\">Fuzzy C-Means</a>, a more direct generalization of a <a href=\"/Tapered_Eval\" title=\"Tapered Eval\">tapered eval</a> with disjoint phases aka clusters <sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup> <sup id=\"cite_ref-9\" class=\"reference\"><a href=\"#cite_note-9\">&#91;9&#93;</a></sup>\n<ul><li> Assumes <a href=\"/Chess_Position\" title=\"Chess Position\">positions</a> encountered in search come from some set of <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/K-means_clustering\">k-means clusters</a> <sup id=\"cite_ref-10\" class=\"reference\"><a href=\"#cite_note-10\">&#91;10&#93;</a></sup>  </li>\n<li> Model is trained via <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm\">EM algorithm</a> <sup id=\"cite_ref-11\" class=\"reference\"><a href=\"#cite_note-11\">&#91;11&#93;</a></sup> <sup id=\"cite_ref-12\" class=\"reference\"><a href=\"#cite_note-12\">&#91;12&#93;</a></sup> either on <a href=\"/Databases\" title=\"Databases\">database games</a> or positions sampled from search </li>\n<li> For each cluster, a separate evaluation function is trained. When the evaluation function is called the relative probability a position stems from each cluster is estimated, the evaluation functions are computed and the final score is returned as the weighted average - a generalization of <a href=\"/Tapered_Eval\" title=\"Tapered Eval\">tapered eval</a> with <a href=\"/Game_Phases\" title=\"Game Phases\">game phases</a> <sup id=\"cite_ref-13\" class=\"reference\"><a href=\"#cite_note-13\">&#91;13&#93;</a></sup></li></ul></li>\n<li> Parameter weights are trained via a mixture of <a href=\"/Reinforcement_Learning\" title=\"Reinforcement Learning\">reinforcement</a> (<a href=\"/Temporal_Difference_Learning\" title=\"Temporal Difference Learning\">temporal difference</a>) learning and <a href=\"/Supervised_Learning\" title=\"Supervised Learning\">supervised learning</a>\n<ul><li> Minimizing the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Cross_entropy\">cross entropy</a> loss of a <a href=\"/Automated_Tuning#LogisticRegression\" title=\"Automated Tuning\">Logistic Regression</a> model for each phase</li>\n<li> Training converges fast due to <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Linear_model\">linear model</a> at the heart </li></ul></li>\n<li> As of <b>Winter 0.6.2</b>, the evaluation function relies on a <a href=\"/Neural_Networks\" title=\"Neural Networks\">neural network</a> with two main parts. The first part is a non-standard <a href=\"/Neural_Networks#Convolutional\" title=\"Neural Networks\">convolutional neural network</a> which uses sparsity similarly to <a href=\"/NNUE\" title=\"NNUE\">NNUE</a>. This convolutional network is used to calculate <a href=\"/Pawn_Structure\" title=\"Pawn Structure\">pawn structure</a> features, so the output can be reused very often as it gets stored in a separate <a href=\"/Pawn_Hash_Table\" title=\"Pawn Hash Table\">hash table</a> with a high hitrate. The second part is a fully connected network which has as input the output of the convolutional network as well as a set of handcrafted features standard to classical engines, mostly a subset of the features from before neural networks were added to Winter <sup id=\"cite_ref-14\" class=\"reference\"><a href=\"#cite_note-14\">&#91;14&#93;</a></sup></li></ul>\n<h2><span class=\"mw-headline\" id=\"Misc\">Misc</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Winter&amp;action=edit&amp;section=5\" title=\"Edit section: Misc\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Perft\" title=\"Perft\">Perft</a></li>\n<li> Print pretty <a href=\"/Pieces#Unicode\" title=\"Pieces\">Unicode</a> <a href=\"/Chessboard\" title=\"Chessboard\">chess boards</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Winter&amp;action=edit&amp;section=6\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"2017_...\">2017 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Winter&amp;action=edit&amp;section=7\" title=\"Edit section: 2017 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65466&amp;start=4\">Re: Tapered Eval between 4 phases</a> by <a href=\"/Jonathan_Rosenthal\" title=\"Jonathan Rosenthal\">Jonathan Rosenthal</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 16, 2017&#160;» <a href=\"/Tapered_Eval\" title=\"Tapered Eval\">Tapered Eval</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66266\">Winter Released</a> by <a href=\"/Jonathan_Rosenthal\" title=\"Jonathan Rosenthal\">Jonathan Rosenthal</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 08, 2018</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66266&amp;start=7\">Re: Winter Released</a> by <a href=\"/Jonathan_Rosenthal\" title=\"Jonathan Rosenthal\">Jonathan Rosenthal</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 09, 2018</dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66266&amp;start=8\">Windows version released</a> by <a href=\"/Jonathan_Rosenthal\" title=\"Jonathan Rosenthal\">Jonathan Rosenthal</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 23, 2018</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=68266\">Winter 0.2 Release Overview and Select Games</a> by <a href=\"/Jonathan_Rosenthal\" title=\"Jonathan Rosenthal\">Jonathan Rosenthal</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 20, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=69288\">Winter 0.3 Release Overview and Select Games</a> by <a href=\"/Jonathan_Rosenthal\" title=\"Jonathan Rosenthal\">Jonathan Rosenthal</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 16, 2018&#160;» <a href=\"/TCEC_Season_14\" title=\"TCEC Season 14\">TCEC Season 14</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=72284\">Winter NN Training Script</a> by <a href=\"/Jonathan_Rosenthal\" title=\"Jonathan Rosenthal\">Jonathan Rosenthal</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 09, 2019</li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Winter&amp;action=edit&amp;section=8\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=74531&amp;start=5\">Re: NNUE accessible explanation</a> by <a href=\"/Jonathan_Rosenthal\" title=\"Jonathan Rosenthal\">Jonathan Rosenthal</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 24, 2020&#160;» <a href=\"/NNUE\" title=\"NNUE\">NNUE</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=75301\">Winter</a> by <a href=\"/Jonathan_Rosenthal\" title=\"Jonathan Rosenthal\">Jonathan Rosenthal</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 05, 2020</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=75301&amp;start=14\">Re: Winter</a> by <a href=\"/Jonathan_Rosenthal\" title=\"Jonathan Rosenthal\">Jonathan Rosenthal</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 09, 2021</dd></dl>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Winter&amp;action=edit&amp;section=9\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Chess_Engine\">Chess Engine</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Winter&amp;action=edit&amp;section=10\" title=\"Edit section: Chess Engine\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/rosenthj/Winter\">GitHub - rosenthj/Winter: UCI Chess Engine</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://ccrl.chessdom.com/ccrl/4040/cgi/compare_engines.cgi?family=Winter&amp;print=Rating+list&amp;print=Results+table&amp;print=LOS+table&amp;print=Ponder+hit+table&amp;print=Eval+difference+table&amp;print=Comopp+gamenum+table&amp;print=Overlap+table&amp;print=Score+with+common+opponents\">Winter</a> in <a href=\"/CCRL\" title=\"CCRL\">CCRL 40/15</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Misc_2\">Misc</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Winter&amp;action=edit&amp;section=11\" title=\"Edit section: Misc\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Winter\">Winter from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wiktionary.org/wiki/Winter\">Winter - Wiktionary</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wiktionary.org/wiki/winter\">winter - Wiktionary</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Winter_(disambiguation)\">Winter (disambiguation) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.ethz.ch/en/the-eth-zurich/sustainability/education/summer-and-winter-schools.html\">Summer and Winter Schools</a> | <a href=\"/ETH_Zurich\" title=\"ETH Zurich\">ETH Zurich</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wintel\">Wintel from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/AI_winter\">AI winter from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Winter_(surname)\">Winter (surname) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Edward_Winter_%28chess_historian%29\">Edward Winter (chess historian) from Wikipedia</a></li>\n<li> <a href=\"/Category:Johnny_Winter\" title=\"Category:Johnny Winter\">Johnny Winter</a> - Winter Ballade, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Institut_national_de_l%27audiovisuel\">ina.fr</a> 1970, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> feat. <a href=\"/Category:Tommy_Shannon\" title=\"Category:Tommy Shannon\">Tommy Shannon</a> on bass and <a rel=\"nofollow\" class=\"external text\" href=\"http://yeech.altervista.org/Band/winter_band_john_turner.html\">Uncle John Turner</a> on drums</dd>\n<dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/8P0wdTKMDyo?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Winter&amp;action=edit&amp;section=12\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap mw-references-columns\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\">Image clipped from <a rel=\"nofollow\" class=\"external text\" href=\"http://se.ethz.ch/~meyer/\">Winter views from our floor</a> by <a href=\"/Mathematician#BMeyer\" title=\"Mathematician\">Bertrand Meyer</a>, <a href=\"/ETH_Zurich\" title=\"ETH Zurich\">ETH Zurich</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://se.ethz.ch/~meyer/images/zurich/lake.jpg\">Gray moment</a> with <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Zentralbibliothek_Z%C3%BCrich\">Zentralbibliothek</a> and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Predigerkirche_Z%C3%BCrich\">Predigerkirche</a> in the foreground,  <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Lake_Zurich\">Lake Zurich</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Grossm%C3%BCnster\">Grossmünster</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Fraum%C3%BCnster\">Fraumünster</a> and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/St._Peter,_Z%C3%BCrich\">St. Peter</a> behind, in the background foothill of <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Uetliberg\">Uetliberg</a>, from <a rel=\"nofollow\" class=\"external text\" href=\"http://se.ethz.ch/~meyer/\">Bertrand Meyer's ETH home page</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/rosenthj/Winter/blob/master/src/learning/statistics.h\">Winter/statistics.h at master · rosenthj/Winter · GitHub</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/rosenthj/Winter/blob/master/src/learning/linear_algebra.h\">Winter/linear_algebra.h at master · rosenthj/Winter · GitHub</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66266\">Winter Released</a> by <a href=\"/Jonathan_Rosenthal\" title=\"Jonathan Rosenthal\">Jonathan Rosenthal</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 08, 2018</span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63777&amp;start=9\">Re: On-line engine blitz tourney April</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 22, 2017</span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\">based on <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66266\">Winter Released</a> by <a href=\"/Jonathan_Rosenthal\" title=\"Jonathan Rosenthal\">Jonathan Rosenthal</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 08, 2018</span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66266&amp;start=7\">Re: Winter Released</a> by <a href=\"/Jonathan_Rosenthal\" title=\"Jonathan Rosenthal\">Jonathan Rosenthal</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 09, 2018</span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=69288\">Winter 0.3 Release Overview and Select Games</a> by <a href=\"/Jonathan_Rosenthal\" title=\"Jonathan Rosenthal\">Jonathan Rosenthal</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 16, 2018</span>\n</li>\n<li id=\"cite_note-9\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-9\">↑</a></span> <span class=\"reference-text\"><a href=\"/Mathematician#JCBezdek\" title=\"Mathematician\">James C. Bezdek</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.legacy.com/obituaries/saltlaketribune/obituary.aspx?n=robert-ehrlich&amp;pid=189574728\">Robert Ehrlich</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://www.researchgate.net/profile/William_Full\">William Full</a> (<b>1984</b>). <i>FCM: The fuzzy c-means clustering algorithm</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://www.journals.elsevier.com/computers-and-geosciences\">Computers &amp; Geosciences</a>, Vol. 10, Nos. 2-3, <a rel=\"nofollow\" class=\"external text\" href=\"https://pdfs.semanticscholar.org/64a8/77d135db3acbc23c295367927176f332595f.pdf\">pdf</a></span>\n</li>\n<li id=\"cite_note-10\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-10\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://stanford.edu/~cpiech/cs221/handouts/kmeans.html\">K Means</a> by <a rel=\"nofollow\" class=\"external text\" href=\"https://web.stanford.edu/~cpiech/bio/index.html\">Chris Piech</a></span>\n</li>\n<li id=\"cite_note-11\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-11\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.ics.uci.edu/~smyth/courses/cs274/notes/EMnotes.pdf\">The EM Algorithm for Gaussian Mixtures - Probabilistic Learning: Theory and Algorithms, CS 274A</a> (pdf) <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/University_of_California,_Irvine\">University of California, Irvine</a></span>\n</li>\n<li id=\"cite_note-12\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-12\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://people.csail.mit.edu/dsontag/courses/ml12/slides/lecture21.pdf\">Mixture Models &amp; EM algorithm Lecture 21</a> (pdf) by <a rel=\"nofollow\" class=\"external text\" href=\"https://people.csail.mit.edu/dsontag/\">David Sontag</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/New_York_University\">New York University</a></span>\n</li>\n<li id=\"cite_note-13\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-13\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65466&amp;start=4\">Re: Tapered Eval between 4 phases</a> by <a href=\"/Jonathan_Rosenthal\" title=\"Jonathan Rosenthal\">Jonathan Rosenthal</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 16, 2017</span>\n</li>\n<li id=\"cite_note-14\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-14\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=74531&amp;start=5\">Re: NNUE accessible explanation</a> by <a href=\"/Jonathan_Rosenthal\" title=\"Jonathan Rosenthal\">Jonathan Rosenthal</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 24, 2020</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Engines\" title=\"Engines\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301034119\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.031 seconds\nReal time usage: 0.033 seconds\nPreprocessor visited node count: 252/1000000\nPreprocessor generated node count: 550/1000000\nPost‐expand include size: 27/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:3261-0!canonical and timestamp 20260301034119 and revision id 25546\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "UCI"
+      },
+      {
+        "sortkey": "",
+        "*": "Open_Source"
+      },
+      {
+        "sortkey": "",
+        "*": "GPL"
+      },
+      {
+        "sortkey": "",
+        "*": "X86"
+      },
+      {
+        "sortkey": "",
+        "*": "X64"
+      },
+      {
+        "sortkey": "",
+        "missing": "",
+        "*": "ARM"
+      },
+      {
+        "sortkey": "",
+        "*": "PC"
+      },
+      {
+        "sortkey": "",
+        "*": "Android"
+      },
+      {
+        "sortkey": "",
+        "*": "Linux"
+      },
+      {
+        "sortkey": "",
+        "*": "Windows"
+      },
+      {
+        "sortkey": "",
+        "*": "NN"
+      },
+      {
+        "sortkey": "",
+        "*": "OpenBench"
+      },
+      {
+        "sortkey": "",
+        "*": "Johnny_Winter"
+      },
+      {
+        "sortkey": "",
+        "*": "Tommy_Shannon"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "8x8 Board"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha-Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Automated Tuning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "BMI2"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Board Representation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCRL"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Captures"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Check"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Position"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chessboard"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Countermove Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cpp"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Databases"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ETH Zurich"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engines"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fail-Hard"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Free Software Foundation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Futility Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Game Phases"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Harm Geert Muller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hash Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iterative Deepening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jonathan Rosenthal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Killer Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Late Move Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lazy SMP"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Learning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Magic Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mathematician"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Ordering"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Moves"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "NNUE"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Neural Networks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Origin Square"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Hash Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Structure"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Perft"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pieces"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiescence Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Reinforcement Learning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Reverse Futility Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Selectivity"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Static Exchange Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Supervised Learning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "TCEC Season 14"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tapered Eval"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Target Square"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Temporal Difference Learning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "UCI"
+      },
+      {
+        "ns": 0,
+        "*": "Online Engine Blitz Tourneys"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Johnny Winter"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Open Source"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Tommy Shannon"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Selected Features",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Winter",
+        "byteoffset": 2778,
+        "anchor": "Selected_Features"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Board Representation",
+        "number": "1.1",
+        "index": "2",
+        "fromtitle": "Winter",
+        "byteoffset": 2943,
+        "anchor": "Board_Representation"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Search",
+        "number": "1.2",
+        "index": "3",
+        "fromtitle": "Winter",
+        "byteoffset": 3102,
+        "anchor": "Search"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Evaluation",
+        "number": "1.3",
+        "index": "4",
+        "fromtitle": "Winter",
+        "byteoffset": 4295,
+        "anchor": "Evaluation"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Misc",
+        "number": "1.4",
+        "index": "5",
+        "fromtitle": "Winter",
+        "byteoffset": 8331,
+        "anchor": "Misc"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "2",
+        "index": "6",
+        "fromtitle": "Winter",
+        "byteoffset": 8423,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2017 ...",
+        "number": "2.1",
+        "index": "7",
+        "fromtitle": "Winter",
+        "byteoffset": 8437,
+        "anchor": "2017_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "2.2",
+        "index": "8",
+        "fromtitle": "Winter",
+        "byteoffset": 9511,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "3",
+        "index": "9",
+        "fromtitle": "Winter",
+        "byteoffset": 9942,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Chess Engine",
+        "number": "3.1",
+        "index": "10",
+        "fromtitle": "Winter",
+        "byteoffset": 9959,
+        "anchor": "Chess_Engine"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Misc",
+        "number": "3.2",
+        "index": "11",
+        "fromtitle": "Winter",
+        "byteoffset": 10351,
+        "anchor": "Misc_2"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "4",
+        "index": "12",
+        "fromtitle": "Winter",
+        "byteoffset": 11554,
+        "anchor": "References"
+      }
+    ]
+  }
+}

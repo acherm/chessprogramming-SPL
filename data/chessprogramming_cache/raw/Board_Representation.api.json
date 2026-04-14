@@ -1,0 +1,468 @@
+{
+  "parse": {
+    "title": "Board Representation",
+    "pageid": 9,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * Board Representation</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:242px;\"><a href=\"/File:Paul_Klee_Ueberschach.jpg\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Paul_Klee_Ueberschach.jpg/250px-Paul_Klee_Ueberschach.jpg\" width=\"240\" height=\"261\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Paul_Klee_Ueberschach.jpg/500px-Paul_Klee_Ueberschach.jpg 1.5x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Paul_Klee_Ueberschach.jpg\" class=\"internal\" title=\"Enlarge\"></a></div><a href=\"/Category:Paul_Klee\" title=\"Category:Paul Klee\">Paul Klee</a> - Überschach, 1937 <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p>A chess program needs an internal <b>board representation</b> to maintain <a href=\"/Chess_Position\" title=\"Chess Position\">chess positions</a> for its <a href=\"/Search\" title=\"Search\">search</a>, <a href=\"/Evaluation\" title=\"Evaluation\">evaluation</a> and <a href=\"/Chess_Game\" title=\"Chess Game\">game-play</a>. Beside modelizing the <a href=\"/Chessboard\" title=\"Chessboard\">chessboard</a> with its <a href=\"/Pieces\" title=\"Pieces\">piece</a>-placement, some additional information is required to fully specify a chess position, such as <a href=\"/Side_to_move\" title=\"Side to move\">side to move</a>, <a href=\"/Castling_Rights\" title=\"Castling Rights\">castling rights</a>, possible <a href=\"/En_passant\" title=\"En passant\">en passant</a> target square and the number of <a href=\"/Reversible_Moves\" title=\"Reversible Moves\">reversible moves</a> to keep track on the <a href=\"/Fifty-move_Rule\" title=\"Fifty-move Rule\">fifty-move rule</a>.\n</p><p>To begin with, we further elaborate on the pure data structures to represent the board and its piece-placement. There are piece centric and square centric representations as well as hybrid solutions. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Piece_Centric\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Piece Centric</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Square_Centric\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Square Centric</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Hybrid_Solutions\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Hybrid Solutions</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Move_Generation\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Move Generation</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#Make_and_Unmake\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Make and Unmake</span></a></li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#See_Also\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">See Also</span></a></li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#Publications\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">Publications</span></a></li>\n<li class=\"toclevel-1 tocsection-8\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#1999\"><span class=\"tocnumber\">8.1</span> <span class=\"toctext\">1999</span></a></li>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#2000_...\"><span class=\"tocnumber\">8.2</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#2010_...\"><span class=\"tocnumber\">8.3</span> <span class=\"toctext\">2010 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-12\"><a href=\"#External_Links\"><span class=\"tocnumber\">9</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-13\"><a href=\"#References\"><span class=\"tocnumber\">10</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Piece_Centric\"><span id=\"PieceCentric\"></span>Piece Centric</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Board_Representation&amp;action=edit&amp;section=1\" title=\"Edit section: Piece Centric\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>A <b>piece centric</b> representation keeps <a href=\"/Linked_List\" title=\"Linked List\">lists</a>, <a href=\"/Array\" title=\"Array\">arrays</a> or sets of all <a href=\"/Pieces\" title=\"Pieces\">pieces</a> still on the board - with the associated information which <a href=\"/Squares\" title=\"Squares\">square</a> they occupy. A popular piece centric representative is the set-wise <a href=\"/Bitboards\" title=\"Bitboards\">bitboard-approach</a>. One 64-bit word for each piece type, where one-bits associate their <a href=\"/Occupancy\" title=\"Occupancy\">occupancy</a>.\n</p>\n<ul><li> <a href=\"/Piece-Lists\" title=\"Piece-Lists\">Piece-Lists</a></li>\n<li> <a href=\"/Piece-Sets\" title=\"Piece-Sets\">Piece-Sets</a></li>\n<li> <a href=\"/Bitboards\" title=\"Bitboards\">Bitboards</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Square_Centric\"><span id=\"SquareCentric\"></span>Square Centric</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Board_Representation&amp;action=edit&amp;section=2\" title=\"Edit section: Square Centric\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>The <b>square centric</b> representation implements the inverse association - is a <a href=\"/Squares\" title=\"Squares\">square</a> empty or is it <a href=\"/Occupancy\" title=\"Occupancy\">occupied</a> by a particular <a href=\"/Pieces\" title=\"Pieces\">piece</a>? The most popular square centric representations, <a href=\"/Mailbox\" title=\"Mailbox\">mailbox</a> or it's <a href=\"/0x88\" title=\"0x88\">0x88</a>-enhancements - are basically <a href=\"/Array\" title=\"Array\">arrays</a> of direct <a href=\"/Pieces#PieceCoding\" title=\"Pieces\">piece-codes</a> including the empty square and probably out of board codes. Hybrid solutions may further refer piece-list entries. \n</p>\n<ul><li> <a href=\"/Mailbox\" title=\"Mailbox\">Mailbox</a>\n<ul><li> <a href=\"/8x8_Board\" title=\"8x8 Board\">8x8 Board</a></li>\n<li> <a href=\"/10x12_Board\" title=\"10x12 Board\">10x12 Board</a></li>\n<li> <a href=\"/Vector_Attacks\" title=\"Vector Attacks\">Vector Attacks</a></li></ul></li></ul>\n<dl><dd><dl><dd> <a href=\"/0x88\" title=\"0x88\">0x88</a></dd></dl></dd></dl>\n<h1><span class=\"mw-headline\" id=\"Hybrid_Solutions\">Hybrid Solutions</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Board_Representation&amp;action=edit&amp;section=3\" title=\"Edit section: Hybrid Solutions\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>While different algorithms and tasks inside a chess program might prefer one of these associations, it is quite common to use redundant board representations with elements of both. Bitboard approaches often keep a 8x8 board to determine a piece by square, while square centric board array approaches typically keep <a href=\"/Piece-Lists\" title=\"Piece-Lists\">piece-lists</a> and/or <a href=\"/Piece-Sets\" title=\"Piece-Sets\">piece-sets</a> to avoid scanning the board for <a href=\"/Move_Generation\" title=\"Move Generation\">move generation</a> purposes. \n</p>\n<h1><span class=\"mw-headline\" id=\"Move_Generation\">Move Generation</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Board_Representation&amp;action=edit&amp;section=4\" title=\"Edit section: Move Generation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>With a board representation, one big consideration is the generation of <a href=\"/Moves\" title=\"Moves\">moves</a>. This is essential to the <a href=\"/Chess_Game\" title=\"Chess Game\">game playing</a> aspect of a chess program, and it must be completely correct. Writing a good move generator is often the first basic step of creating a chess program.\n</p>\n<ul><li> <a href=\"/Move_Generation\" title=\"Move Generation\">Move Generation</a></li>\n<li> <a href=\"/Perft\" title=\"Perft\">Perft</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Make_and_Unmake\">Make and Unmake</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Board_Representation&amp;action=edit&amp;section=5\" title=\"Edit section: Make and Unmake\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Incremental_Updates\" title=\"Incremental Updates\">Incremental Updates</a></li>\n<li> <a href=\"/Copy-Make\" title=\"Copy-Make\">Copy-Make</a></li>\n<li> <a href=\"/Make_Move\" title=\"Make Move\">Make Move</a></li>\n<li> <a href=\"/Unmake_Move\" title=\"Unmake Move\">Unmake Move</a></li>\n<li> <a href=\"/General_Setwise_Operations#UpdateByMove\" title=\"General Setwise Operations\">Bitboard Update By Move</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"See_Also\">See Also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Board_Representation&amp;action=edit&amp;section=6\" title=\"Edit section: See Also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Nibble#ArrayOfNibbles\" title=\"Nibble\">Array of Nibbles</a></li>\n<li> <a href=\"/Attack_and_Defend_Maps\" title=\"Attack and Defend Maps\">Attack and Defend Maps</a></li>\n<li> <a href=\"/Chess_Position\" title=\"Chess Position\">Chess Position</a>\n<ul><li> <a href=\"/Extended_Position_Description\" title=\"Extended Position Description\">Extended Position Description</a> (EPD)</li>\n<li> <a href=\"/Forsyth-Edwards_Notation\" title=\"Forsyth-Edwards Notation\">Forsyth-Edwards Notation</a> (FEN)</li></ul></li>\n<li> <a href=\"/Chinese_Chess_Board_Representation\" title=\"Chinese Chess Board Representation\">Chinese Chess Board Representation</a></li>\n<li> <a href=\"/Graphics_Programming\" title=\"Graphics Programming\">Graphics Programming</a></li>\n<li> <a href=\"/Quad-Bitboards\" title=\"Quad-Bitboards\">Quad-Bitboards</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Board_Representation&amp;action=edit&amp;section=7\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Claude_Shannon\" title=\"Claude Shannon\">Claude Shannon</a> (<b>1949</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.pi.infn.it/%7Ecarosi/chess/shannon.txt\">Programming a Computer for Playing Chess</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://archive.computerhistory.org/projects/chess/related_materials/text/2-0%20and%202-1.Programming_a_computer_for_playing_chess.shannon/2-0%20and%202-1.Programming_a_computer_for_playing_chess.shannon.062303002.pdf\">pdf</a> from <a href=\"/The_Computer_History_Museum\" title=\"The Computer History Museum\">The Computer History Museum</a></li>\n<li> <a href=\"/Alex_Bell\" title=\"Alex Bell\">Alex Bell</a> (<b>1972</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.chilton-computing.org.uk/acl/literature/books/gamesplaying/overview.htm\">Games Playing with Computers</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://en.wikipedia.org/wiki/Allen_%26_Unwin\">Allen &amp; Unwin</a>, ISBN-13: 978-0080212227</li>\n<li> <a href=\"/Dan_Spracklen\" title=\"Dan Spracklen\">Dan Spracklen</a>, <a href=\"/Kathe_Spracklen\" title=\"Kathe Spracklen\">Kathe Spracklen</a> (<b>1978</b>). <i>First Steps in Computer Chess Programming</i>. <a href=\"/Byte_Magazine#BYTE310\" title=\"Byte Magazine\">BYTE, Vol. 3, No. 10</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://archive.computerhistory.org/projects/chess/related_materials/text/4-4.First_Steps.Byte_Magazine/First_Steps_in_Computer_Chess_Programing.Spracklen-Dan_Kathe.Byte_Magazine.Oct-1978.062303035.sm.pdf\">pdf</a> from <a href=\"/The_Computer_History_Museum\" title=\"The Computer History Museum\">The Computer History Museum</a></li>\n<li> <a href=\"/Vladan_Vu%C4%8Dkovi%C4%87\" title=\"Vladan Vučković\">Vladan Vučković</a> (<b>2008</b>). <i>The Compact Chessboard Representation</i>. <a href=\"/ICGA_Journal#31_3\" title=\"ICGA Journal\">ICGA Journal, Vol. 31, No. 3</a>&#160;» <a href=\"/Nibble#ArrayOfNibbles\" title=\"Nibble\">Array of Nibbles</a></li>\n<li> <a href=\"/Vladan_Vu%C4%8Dkovi%C4%87\" title=\"Vladan Vučković\">Vladan Vučković</a> (<b>2012</b>). <i>An Alternative Efficient Chessboard Representation based on 4-Bit Piece Coding</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.doiserbia.nb.rs/issue.aspx?issueid=1761\">Yugoslav Journal of Operations Research, Vol. 22, No. 1</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.doiserbia.nb.rs/img/doi/0354-0243/2012/0354-02431200011V.pdf\">pdf</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Board_Representation&amp;action=edit&amp;section=8\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1999\">1999</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Board_Representation&amp;action=edit&amp;section=9\" title=\"Edit section: 1999\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/2ffae88f631ac20d\">Datastructures in computer chess</a> by Gustav Grundin, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, May 11, 1999</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.stmintz.com/ccc/index.php?id=69942\">How do you represent chess boards in your chess programms</a> by Brian Nielsen, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 22, 1999</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.stmintz.com/ccc/index.php?id=71016\">Re: How do you represent chess boards in your chess programms</a> by <a href=\"/Sven_Reichard\" title=\"Sven Reichard\">Sven Reichard</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 29, 1999</li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Board_Representation&amp;action=edit&amp;section=10\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.stmintz.com/ccc/index.php?id=265915\">Differences between 0x88 ,10x12 and Bitboards!?</a> by Axel Grüttner, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 19, 2002</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=2407&amp;p=11195\">Fruit's Board Representation?</a> by <a href=\"/Steve_Maughan\" title=\"Steve Maughan\">Steve Maughan</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Programming Forum</a>, April 27, 2005</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=4442\">Board representation&#160;: 0x88 or 10x12&#160;?</a> by Philippe, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, March 02, 2006</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=5623\">Yet another new bitboard move generation method</a> by <a href=\"/Zach_Wegner\" title=\"Zach Wegner\">Zach Wegner</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, September 22, 2006&#160;» <a href=\"/Titboards\" title=\"Titboards\">Titboards</a></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=5623&amp;start=6\">Re: Yet another new bitboard move generation method</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, October 01, 2006 <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup></dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=22023\">Board Types in '08</a> by <a href=\"/index.php?title=Joshua_Shriver&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Joshua Shriver (page does not exist)\">Joshua Shriver</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 28, 2008</li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Board_Representation&amp;action=edit&amp;section=11\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=47615\">I'm Puzzled - Storing Piece Info &amp; Magic Move Gen...</a> by <a href=\"/Steve_Maughan\" title=\"Steve Maughan\">Steve Maughan</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 27, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48324\">Table-less bitboards (bitrays?)</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 18, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=52878\">Best Board Representation for 32bit CPUs</a> by net, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, July 14, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://talkchess.com/forum/viewtopic.php?t=59691\">Some questions from a beginner</a> by Tim Hagen, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 30, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65962\">best board representation for variants (javascript)&#160;?</a> by <a href=\"/index.php?title=Mahmoud_Uthman&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Mahmoud Uthman (page does not exist)\">Mahmoud Uthman</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 10, 2017&#160;» <a href=\"/JavaScript\" title=\"JavaScript\">JavaScript</a>, <a href=\"/Games#ChessVariants\" title=\"Games\">Chess Variants</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=69046\">CCR board representation</a> by <a href=\"/Maksim_Korzh\" title=\"Maksim Korzh\">Maksim Korzh</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 25, 2018&#160;» <a href=\"/Nibble#ArrayOfNibbles\" title=\"Nibble\">Array of Nibbles</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Board_Representation&amp;action=edit&amp;section=12\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://en.wikipedia.org/wiki/Board_representation_%28chess%29\">Board representation (chess) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.chilton-computing.org.uk/acl/literature/books/gamesplaying/p003.htm\">Chapter 3: Board Games - 3.1 CHESS</a> from <a href=\"/Alex_Bell\" title=\"Alex Bell\">Alex Bell</a> (<b>1972</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.chilton-computing.org.uk/acl/literature/books/gamesplaying/overview.htm\">Games Playing with Computers</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://en.wikipedia.org/wiki/Allen_%26_Unwin\">Allen &amp; Unwin</a>, ISBN-13: 978-0080212227</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.craftychess.com/hyatt/boardrep.html\">Chess board representations</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.ics.uci.edu/~eppstein/180a/970408.html\">Board representations | Lecture notes</a> by <a href=\"/David_Eppstein\" title=\"David Eppstein\">David Eppstein</a>, April 8, 1997</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.fam-petzke.de/cp_board_en.shtml\">Chess Programming - The Chess Board</a> by <a href=\"/Thomas_Petzke\" title=\"Thomas Petzke\">Thomas Petzke</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://labraj.uni-mb.si/en/Representation_of_Chess_Game\">Representation of Chess Game - Computer Architecture and Languages Laboratory</a>, <a href=\"/University_of_Maribor\" title=\"University of Maribor\">University of Maribor</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Board_Representation&amp;action=edit&amp;section=13\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a href=\"/Category:Paul_Klee\" title=\"Category:Paul Klee\">Paul Klee</a> - Ueberschach, 1937, <a rel=\"nofollow\" class=\"external autonumber\" href=\"https://commons.wikimedia.org/wiki/File:Paul_Klee_Ueberschach.jpg\">[1]</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wikimedia_Commons\">Wikimedia Commons</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Kunsthaus_Z%C3%BCrich\">Kunsthaus Zürich</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=52861&amp;start=8\">Re: multi-dimensional piece/square tables</a> by Tony P., <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 28, 2020</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Main_Page\" title=\"Main Page\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301045634\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.091 seconds\nReal time usage: 0.612 seconds\nPreprocessor visited node count: 85/1000000\nPreprocessor generated node count: 142/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:9-0!canonical and timestamp 20260301045634 and revision id 17789\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Paul_Klee"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "0x88"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "10x12 Board"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "8x8 Board"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alex Bell"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Array"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Attack and Defend Maps"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Byte Magazine"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Castling Rights"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Game"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Position"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chessboard"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chinese Chess Board Representation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Claude Shannon"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Copy-Make"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dan Spracklen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David Eppstein"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "En passant"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Extended Position Description"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fifty-move Rule"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Forsyth-Edwards Notation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Games"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "General Setwise Operations"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Graphics Programming"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Harm Geert Muller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA Journal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Incremental Updates"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "JavaScript"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kathe Spracklen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Linked List"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mailbox"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Make Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Maksim Korzh"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Generation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Moves"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Nibble"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Occupancy"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Perft"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Piece-Lists"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Piece-Sets"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pieces"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quad-Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Reversible Moves"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Hyatt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Side to move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Squares"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Steve Maughan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sven Reichard"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "The Computer History Museum"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Thomas Petzke"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Titboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "University of Maribor"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Unmake Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vector Attacks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vladan Vučković"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Zach Wegner"
+      },
+      {
+        "ns": 0,
+        "*": "Joshua Shriver"
+      },
+      {
+        "ns": 0,
+        "*": "Mahmoud Uthman"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Paul Klee"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Piece Centric",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Board_Representation",
+        "byteoffset": 1230,
+        "anchor": "Piece_Centric"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Square Centric",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Board_Representation",
+        "byteoffset": 1718,
+        "anchor": "Square_Centric"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Hybrid Solutions",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Board_Representation",
+        "byteoffset": 2319,
+        "anchor": "Hybrid_Solutions"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Move Generation",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Board_Representation",
+        "byteoffset": 2795,
+        "anchor": "Move_Generation"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Make and Unmake",
+        "number": "5",
+        "index": "5",
+        "fromtitle": "Board_Representation",
+        "byteoffset": 3142,
+        "anchor": "Make_and_Unmake"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See Also",
+        "number": "6",
+        "index": "6",
+        "fromtitle": "Board_Representation",
+        "byteoffset": 3308,
+        "anchor": "See_Also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "7",
+        "index": "7",
+        "fromtitle": "Board_Representation",
+        "byteoffset": 3586,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "8",
+        "index": "8",
+        "fromtitle": "Board_Representation",
+        "byteoffset": 5110,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1999",
+        "number": "8.1",
+        "index": "9",
+        "fromtitle": "Board_Representation",
+        "byteoffset": 5125,
+        "anchor": "1999"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "8.2",
+        "index": "10",
+        "fromtitle": "Board_Representation",
+        "byteoffset": 5642,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "8.3",
+        "index": "11",
+        "fromtitle": "Board_Representation",
+        "byteoffset": 6860,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "9",
+        "index": "12",
+        "fromtitle": "Board_Representation",
+        "byteoffset": 7857,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "10",
+        "index": "13",
+        "fromtitle": "Board_Representation",
+        "byteoffset": 8839,
+        "anchor": "References"
+      }
+    ]
+  }
+}

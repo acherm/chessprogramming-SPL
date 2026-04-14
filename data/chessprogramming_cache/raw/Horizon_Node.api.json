@@ -1,0 +1,198 @@
+{
+  "parse": {
+    "title": "Horizon Node",
+    "pageid": 1001,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Search\" title=\"Search\">Search</a> * <a href=\"/Node\" title=\"Node\">Node</a> * Horizon Node</b>\n</p><p><b>Horizon nodes</b> are <a href=\"/Node\" title=\"Node\">nodes</a> at <a href=\"/Depth\" title=\"Depth\">depth</a> zero, where a <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">quiescence search</a> is performed. The definition is taken from the papers of <a href=\"/Ernst_A._Heinz\" title=\"Ernst A. Heinz\">Ernst A. Heinz</a> <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup> depth == 0 nodes <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>. If the horizon node is an expected <a href=\"/Node_Types#CUT\" title=\"Node Types\">Cut-Node</a>, confirmed by the evaluated <a href=\"/Quiescence_Search#StandPat\" title=\"Quiescence Search\">standing pat</a> <a href=\"/Score\" title=\"Score\">score</a> already greater or equal than <a href=\"/Beta\" title=\"Beta\">beta</a>, the horizon node is a <a href=\"/Leaf_Node\" title=\"Leaf Node\">leaf</a> with the <a href=\"/Lower_Bound\" title=\"Lower Bound\">lower bound</a> score of beta (<a href=\"/Fail-Hard\" title=\"Fail-Hard\">fail-hard</a>) or the stand pat score (<a href=\"/Fail-Soft\" title=\"Fail-Soft\">fail-soft</a>). Otherwise, winning captures (or checks) may either cause a <a href=\"/Beta-Cutoff\" title=\"Beta-Cutoff\">beta-cutoff</a> or raise <a href=\"/Alpha\" title=\"Alpha\">alpha</a> with an <a href=\"/Exact_Score\" title=\"Exact Score\">exact score</a> at <a href=\"/Node_Types#PV\" title=\"Node Types\">PV-Nodes</a>. At expected <a href=\"/Node_Types#ALL\" title=\"Node Types\">All-Nodes</a> with evaluated score (far) below alpha, if no <a href=\"/index.php?title=Tactical_moves&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Tactical moves (page does not exist)\">tactical move</a> is available, or due to <a href=\"/Delta_Pruning\" title=\"Delta Pruning\">Delta Pruning</a> good enough to raise alpha, those <a href=\"/Leaf_Node\" title=\"Leaf Node\">leaves</a> return alpha (<a href=\"/Fail-Hard\" title=\"Fail-Hard\">fail-hard</a>) as an <a href=\"/Upper_Bound\" title=\"Upper Bound\">upper bound</a>. This may also appear, if this horizon node was not a leaf, since some captures were not pruned, but tried without raising alpha. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Horizon_Observatory\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Horizon Observatory</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#See_also\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#External_Links\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#References\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Horizon_Observatory\">Horizon Observatory</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Horizon_Node&amp;action=edit&amp;section=1\" title=\"Edit section: Horizon Observatory\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"floatnone\"><a href=\"/File:Hoheward-Panorama.jpg\" class=\"image\"><img alt=\"Hoheward-Panorama.jpg\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Hoheward-Panorama.jpg/1280px-Hoheward-Panorama.jpg\" width=\"1024\" height=\"190\" style=\"vertical-align: text-bottom\" class=\"thumbborder\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Hoheward-Panorama.jpg/1920px-Hoheward-Panorama.jpg 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Hoheward-Panorama.jpg/3840px-Hoheward-Panorama.jpg 2x\" /></a></div>\n<p><a rel=\"nofollow\" class=\"external text\" href=\"https://de.wikipedia.org/wiki/Halde_Hoheward#Horizontobservatorium\">Horizon Observatory</a> (left) and horizontal <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Sundial\">Sundial</a> with <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Obelisk\">Obelisk</a> (right), <a rel=\"nofollow\" class=\"external text\" href=\"https://de.wikipedia.org/wiki/Halde_Hoheward\">Hoheward Spoil tip</a>, <a href=\"/Category:Industrial_Heritage_Trail\" title=\"Category:Industrial Heritage Trail\">The Industrial Heritage Trail</a>  <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>\n</p>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Horizon_Node&amp;action=edit&amp;section=2\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Frontier_Nodes\" title=\"Frontier Nodes\">Frontier Nodes</a></li>\n<li> <a href=\"/Horizon_Effect\" title=\"Horizon Effect\">Horizon Effect</a></li>\n<li> <a href=\"/Leaf_Node\" title=\"Leaf Node\">Leaf Node</a></li>\n<li> <a href=\"/Quiescent_Node\" title=\"Quiescent Node\">Quiescent Node</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Horizon_Node&amp;action=edit&amp;section=3\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Category:Karl_Jenkins\" title=\"Category:Karl Jenkins\">Karl Jenkins</a> - <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/In_These_Stones_Horizons_Sing\">In These Stones Horizons Sing</a> (4th movement), <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> Commissioned for the opening of <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wales_Millennium_Centre\">Wales Millennium Centre</a>, first performed at its opening on November 29, 2004</dd>\n<dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/u3HTUzSnEbs?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Horizon_Node&amp;action=edit&amp;section=4\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a href=\"/Ernst_A._Heinz\" title=\"Ernst A. Heinz\">Ernst A. Heinz</a> (<b>1998</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://people.csail.mit.edu/heinz/dt/node18.html\">Extended futility pruning</a></i>. <a href=\"/ICGA_Journal#21_2\" title=\"ICGA Journal\">ICCA Journal, Vol. 21, No 2</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://people.csail.mit.edu/heinz/ps/ext_fut.ps.gz\">ps</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=387518\">Re: simple node definitions question</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">CCC</a>, September 13, 2004</span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\">360–degree <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Panorama\">Panorama</a> Photo by <a rel=\"nofollow\" class=\"external text\" href=\"https://commons.wikimedia.org/wiki/User:Panofreak\">Panofreak</a>, April 12, 2009, <a rel=\"nofollow\" class=\"external text\" href=\"https://de.wikipedia.org/wiki/Halde_Hoheward\">Hoheward Spoil tip</a> in <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Herten\">Herten</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/North_Rhine-Westphalia\">North Rhine-Westphalia</a>, Germany, <a href=\"/Category:Industrial_Heritage_Trail\" title=\"Category:Industrial Heritage Trail\">The Industrial Heritage Trail</a> , view over the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Ruhr\">Ruhr area</a>. The observatory consists of a circular, flat surface of 88 m diameter, and a center forum lowered by 1.50 m with 35 m diameter with two arcs spanning <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Meridian_%28astronomy%29\">meridian</a> and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Celestial_equator\">celestial equator</a>. The horizon observatory is a modern version of <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Prehistory\">prehistoric</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Stone_circle\">stone circles</a> and monuments such as <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Stonehenge\">Stonehenge</a>. If the observer is located exactly in the lowered center, the plateau of the tip spreads in all directions like an artificial horizon, and with the help of bearing points the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Sunrise\">sunrise</a> and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Sunset\">sunset</a> at <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Summer_solstice\">summer solstice</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Winter_solstice\">winter solstice</a> or <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Equinox\">equinox</a> can be observed, by means of further bearing points also <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Moon\">moon</a> solstices and the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Precession\">precession</a> of <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Earth%27s_rotation\">Earth's axis</a> based on bearings of <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Fixed_stars\">fixed stars</a>. The arcs divide the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Celestial_sphere\">celestial sphere</a> in eastern and western half as well as in <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Northern_Hemisphere\">northern</a> and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Southern_Hemisphere\">southern hemisphere</a> and therefore serve as a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Solar_calendar\">solar calendar</a> at day, and at night, with the help of a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Luminous_paint\">self-luminous</a> scale as a guide of the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Night_sky\">night sky</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.halden.ruhr/halden.html\">Halden im Ruhrgebiet</a> (German)</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Node\" title=\"Node\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260228215206\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.066 seconds\nReal time usage: 0.594 seconds\nPreprocessor visited node count: 66/1000000\nPreprocessor generated node count: 166/1000000\nPost‐expand include size: 26/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1001-0!canonical and timestamp 20260228215205 and revision id 5606\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Industrial_Heritage_Trail"
+      },
+      {
+        "sortkey": "",
+        "*": "Karl_Jenkins"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Beta-Cutoff"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Delta Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ernst A. Heinz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Exact Score"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fail-Hard"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fail-Soft"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Frontier Nodes"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Horizon Effect"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA Journal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Leaf Node"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lower Bound"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Node"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Node Types"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiescence Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiescent Node"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Hyatt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Score"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Upper Bound"
+      },
+      {
+        "ns": 0,
+        "*": "Tactical moves"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Industrial Heritage Trail"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Karl Jenkins"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Horizon Observatory",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Horizon_Node",
+        "byteoffset": 1638,
+        "anchor": "Horizon_Observatory"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Horizon_Node",
+        "byteoffset": 4477,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Horizon_Node",
+        "byteoffset": 4568,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Horizon_Node",
+        "byteoffset": 5044,
+        "anchor": "References"
+      }
+    ]
+  }
+}

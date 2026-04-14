@@ -1,0 +1,204 @@
+{
+  "git_history": {
+    "commits": [
+      {
+        "sha": "3ffe70a",
+        "date": "2026-03-01 11:23:57 +0100",
+        "subject": "Add CPW variability mining pipeline with safe resumable crawling",
+        "files_changed": 1261,
+        "insertions": 408776,
+        "deletions": 0,
+        "category": "feature_model_mining"
+      },
+      {
+        "sha": "2f957dd",
+        "date": "2026-03-01 15:35:51 +0100",
+        "subject": "Improve feature mining precision with core anchors and strict noise filtering",
+        "files_changed": 16,
+        "insertions": 3669,
+        "deletions": 3270,
+        "category": "feature_model_mining"
+      },
+      {
+        "sha": "932eb04",
+        "date": "2026-03-05 13:43:41 +0100",
+        "subject": "Enforce executable variant constraints and add perft benchmarking workflows",
+        "files_changed": 1563,
+        "insertions": 368229,
+        "deletions": 55723,
+        "category": "model_refinement"
+      },
+      {
+        "sha": "518d523",
+        "date": "2026-03-05 20:42:24 +0100",
+        "subject": "Improve engine strength and add tournament assessment artifacts",
+        "files_changed": 31,
+        "insertions": 3718,
+        "deletions": 46,
+        "category": "benchmarking"
+      },
+      {
+        "sha": "bbb79ca",
+        "date": "2026-04-02 19:09:02 +0200",
+        "subject": "Modularize engine variation points and document feature interactions",
+        "files_changed": 71,
+        "insertions": 4755,
+        "deletions": 692,
+        "category": "modularity_refactoring"
+      },
+      {
+        "sha": "748f796",
+        "date": "2026-04-03 15:28:05 +0200",
+        "subject": "Promote evaluation leaves into hierarchical groups",
+        "files_changed": 66,
+        "insertions": 6308,
+        "deletions": 3018,
+        "category": "modularity_refactoring"
+      },
+      {
+        "sha": "bedf3d1",
+        "date": "2026-04-04 13:17:59 +0200",
+        "subject": "Implement real engine feature backends and runtime book/pondering",
+        "files_changed": 57,
+        "insertions": 3857,
+        "deletions": 810,
+        "category": "feature_completion"
+      },
+      {
+        "sha": "5259dc6",
+        "date": "2026-04-04 13:29:42 +0200",
+        "subject": "Update README for executable feature status",
+        "files_changed": 1,
+        "insertions": 102,
+        "deletions": 2,
+        "category": "other"
+      },
+      {
+        "sha": "c5c01a2",
+        "date": "2026-04-04 16:14:32 +0200",
+        "subject": "Add setup variability model and setup-based tournament tooling",
+        "files_changed": 28,
+        "insertions": 2910,
+        "deletions": 10,
+        "category": "deep_variability"
+      },
+      {
+        "sha": "7b1682d",
+        "date": "2026-04-05 08:07:40 +0200",
+        "subject": "Add controlled tournament artifacts and setup comparison",
+        "files_changed": 14,
+        "insertions": 408,
+        "deletions": 0,
+        "category": "deep_variability"
+      },
+      {
+        "sha": "0a72c9b",
+        "date": "2026-04-05 20:04:03 +0200",
+        "subject": "Optimize common search path and document anchor assessment",
+        "files_changed": 35,
+        "insertions": 2023,
+        "deletions": 100,
+        "category": "commonality_optimization"
+      },
+      {
+        "sha": "2aaf95e",
+        "date": "2026-04-06 01:29:14 +0200",
+        "subject": "Add 20-game 2500 anchor match artifacts",
+        "files_changed": 4,
+        "insertions": 380,
+        "deletions": 0,
+        "category": "benchmarking"
+      }
+    ],
+    "summary": {
+      "count": 12,
+      "insertions": 805135,
+      "deletions": 63671,
+      "files_changed": 3147,
+      "categories": {
+        "feature_model_mining": 2,
+        "model_refinement": 1,
+        "benchmarking": 2,
+        "modularity_refactoring": 2,
+        "feature_completion": 1,
+        "other": 1,
+        "deep_variability": 2,
+        "commonality_optimization": 1
+      }
+    }
+  },
+  "feature_metrics": {
+    "cpw_cached_pages": 1316,
+    "modeled_features": 74,
+    "compile_time_options": 53,
+    "mixed_or_runtime_options": 3,
+    "compile_flags": 56,
+    "runtime_flags": 3,
+    "feature_traces": 74,
+    "engine_feature_matrix_rows": 242,
+    "setup_variant_rows": 17,
+    "setup_feature_rows": 56
+  },
+  "test_metrics": {
+    "collected_tests": 35,
+    "python_source_files": 16,
+    "c_source_files": 6,
+    "script_files": 25,
+    "variant_configs": 18
+  },
+  "benchmark_metrics": {
+    "equal_condition_scores": {
+      "best": {
+        "score_pct": 87.5,
+        "wins": 7,
+        "losses": 1,
+        "draws": 0
+      },
+      "random": {
+        "score_pct": 56.2,
+        "wins": 4,
+        "losses": 3,
+        "draws": 1
+      },
+      "worst": {
+        "score_pct": 6.2,
+        "wins": 0,
+        "losses": 7,
+        "draws": 1
+      }
+    },
+    "best2_elo_estimates": [
+      {
+        "player": "elo_variant_fixed_01",
+        "elo_estimate": 1421.5,
+        "elo_ci95": 252.4
+      },
+      {
+        "player": "elo_variant_fixed_02",
+        "elo_estimate": 1099.5,
+        "elo_ci95": 306.7
+      }
+    ],
+    "stockfish_anchors": {
+      "sf2500_score_pct": 65.0,
+      "sf2700_score_pct": 30.0,
+      "sf2500_score": 13.0,
+      "sf2700_score": 6.0,
+      "sf2500_illegal": 0,
+      "sf2700_illegal": 0
+    },
+    "commonality_depth_shift": {
+      "avg_prev_depth": 6.333333333333333,
+      "avg_new_depth": 6.666666666666667,
+      "avg_prev_nps": 465246.3333333333,
+      "avg_new_nps": 606391.6666666666
+    },
+    "random_perft_diversity": {
+      "variants": 5,
+      "feature_count_min": 22,
+      "feature_count_max": 30,
+      "perft_sec_min": 15.326,
+      "perft_sec_max": 19.863
+    }
+  }
+}

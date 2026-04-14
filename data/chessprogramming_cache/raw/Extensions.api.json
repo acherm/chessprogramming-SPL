@@ -1,0 +1,708 @@
+{
+  "parse": {
+    "title": "Extensions",
+    "pageid": 962,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Search\" title=\"Search\">Search</a> * <a href=\"/Selectivity\" title=\"Selectivity\">Selectivity</a> * Extensions</b>\n</p><p>Many programs <b>extend</b> certain moves to try and find better moves faster, or to resolve tactical \"noise\" resulting from the <a href=\"/Horizon_Effect\" title=\"Horizon Effect\">horizon effect</a>. To extend a move, its <a href=\"/Depth\" title=\"Depth\">search depth</a> (draft) is incremented by some amount, typically one <a href=\"/Ply\" title=\"Ply\">ply</a>. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Inside_the_Loop\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Inside the Loop</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Classification\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Classification</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Types\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Types</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Fractional_Extensions\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Fractional Extensions</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#Conditions.2FRestrictions\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Conditions/Restrictions</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-6\"><a href=\"#Non-reductions\"><span class=\"tocnumber\">5.1</span> <span class=\"toctext\">Non-reductions</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#See_also\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-8\"><a href=\"#Publications\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">Publications</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#1980_...\"><span class=\"tocnumber\">7.1</span> <span class=\"toctext\">1980 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#1990_...\"><span class=\"tocnumber\">7.2</span> <span class=\"toctext\">1990 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#2000_...\"><span class=\"tocnumber\">7.3</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-12\"><a href=\"#2010_...\"><span class=\"tocnumber\">7.4</span> <span class=\"toctext\">2010 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-13\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-14\"><a href=\"#1996_...\"><span class=\"tocnumber\">8.1</span> <span class=\"toctext\">1996 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-15\"><a href=\"#2000_..._2\"><span class=\"tocnumber\">8.2</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-16\"><a href=\"#2005_...\"><span class=\"tocnumber\">8.3</span> <span class=\"toctext\">2005 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-17\"><a href=\"#2010_..._2\"><span class=\"tocnumber\">8.4</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-18\"><a href=\"#2015_...\"><span class=\"tocnumber\">8.5</span> <span class=\"toctext\">2015 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-19\"><a href=\"#External_Links\"><span class=\"tocnumber\">9</span> <span class=\"toctext\">External Links</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-20\"><a href=\"#Search_Extension\"><span class=\"tocnumber\">9.1</span> <span class=\"toctext\">Search Extension</span></a></li>\n<li class=\"toclevel-2 tocsection-21\"><a href=\"#Misc\"><span class=\"tocnumber\">9.2</span> <span class=\"toctext\">Misc</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-22\"><a href=\"#References\"><span class=\"tocnumber\">10</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Inside_the_Loop\">Inside the Loop</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Extensions&amp;action=edit&amp;section=1\" title=\"Edit section: Inside the Loop\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Some extensions may be determined inside the move loop before or after <a href=\"/Make_Move\" title=\"Make Move\">making the move</a>, the latter case often delayed to the recursively called search routine by some programs:\n</p>\n<pre>\nfor each move m € of all moves {\n  makeMove(m);\n  int ext = determineExtension( m, depth, node_type, ...); /* 0 or 1 */\n  score = -search(ply + 1, depth + ext - 1, -beta, -alpha);\n  unmakeMove(m);\n  ...\n}\n</pre>\n<h1><span class=\"mw-headline\" id=\"Classification\">Classification</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Extensions&amp;action=edit&amp;section=2\" title=\"Edit section: Classification\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><a href=\"/Bruce_Moreland\" title=\"Bruce Moreland\">Bruce Moreland</a> has classified extensions as either win-seeking, loss-seeking, or neutral <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup>&#160;:\n</p>\n<ol><li> Win-seeking extension: If I stop searching now I'll fail low, but I think there might be something good here if I look a little further.</li>\n<li> Loss-seeking extension: If I stop searching now I'll fail high, but I think I'm in trouble.</li>\n<li> Neutral extension: This is a forcing sequence, and if I stop searching now I won't know how it ends.</li></ol>\n<h1><span class=\"mw-headline\" id=\"Types\">Types</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Extensions&amp;action=edit&amp;section=3\" title=\"Edit section: Types\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<table class=\"wikitable\">\n\n<tr>\n<th> type\n</th>\n<th> typical class\n</th></tr>\n<tr>\n<td>  <a href=\"/Botvinnik-Markoff_Extension\" title=\"Botvinnik-Markoff Extension\">Botvinnik-Markoff Extension</a>\n</td>\n<td style=\"text-align:right;\"> loss-seeking\n</td></tr>\n<tr>\n<td>  <a href=\"/Capture_Extensions\" title=\"Capture Extensions\">Capture Extensions</a>\n</td>\n<td style=\"text-align:right;\"> neutral\n</td></tr>\n<tr>\n<td>  <a href=\"/Check_Extensions\" title=\"Check Extensions\">Check Extensions</a>\n</td>\n<td style=\"text-align:right;\"> neutral\n</td></tr>\n<tr>\n<td>  <a href=\"/Mate_Threat_Extensions\" title=\"Mate Threat Extensions\">Mate Threat Extensions</a>\n</td>\n<td style=\"text-align:right;\"> win-seeking\n</td></tr>\n<tr>\n<td>  <a href=\"/One_Reply_Extensions\" title=\"One Reply Extensions\">One Reply Extensions</a>\n</td>\n<td style=\"text-align:right;\"> loss-seeking\n</td></tr>\n<tr>\n<td>  <a href=\"/Passed_Pawn_Extensions\" title=\"Passed Pawn Extensions\">Passed Pawn Extensions</a>\n</td>\n<td style=\"text-align:right;\"> neutral\n</td></tr>\n<tr>\n<td>  <a href=\"/PV_Extensions\" title=\"PV Extensions\">PV Extensions</a>\n</td>\n<td style=\"text-align:right;\"> neutral\n</td></tr>\n<tr>\n<td>  <a href=\"/Recapture_Extensions\" title=\"Recapture Extensions\">Recapture Extensions</a>\n</td>\n<td style=\"text-align:right;\"> neutral\n</td></tr>\n<tr>\n<td>  <a href=\"/Singular_Extensions\" title=\"Singular Extensions\">Singular Extensions</a>\n</td>\n<td style=\"text-align:right;\"> neutral\n</td></tr></table>\n<p><span id=\"FractionalExtensions\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Fractional_Extensions\">Fractional Extensions</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Extensions&amp;action=edit&amp;section=4\" title=\"Edit section: Fractional Extensions\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>This technique involves passing fractional <a href=\"/Depth\" title=\"Depth\">depths</a> to the search function. This is typically implemented by defining one <a href=\"/Ply\" title=\"Ply\">ply</a> to be a number greater than one. Then an extension can be added that does not yet extend the search, but further down the tree may cause an extension when another fractional extension causes the net extension to exceed one ply. Fractional extensions were first described by <a href=\"/David_Levy\" title=\"David Levy\">David Levy's</a>, <a href=\"/David_Broughton\" title=\"David Broughton\">David Broughton's</a> and <a href=\"/Mark_Taylor\" title=\"Mark Taylor\">Mark Taylor's</a> paper on their <a href=\"/SEX_Algorithm\" title=\"SEX Algorithm\">SEX Algorithm</a>, in conjunction with \"negative\" extensions aka. fractional reductions and even <a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">LMR</a> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>.\n</p>\n<h1><span class=\"mw-headline\" id=\"Conditions.2FRestrictions\">Conditions/Restrictions</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Extensions&amp;action=edit&amp;section=5\" title=\"Edit section: Conditions/Restrictions\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Some programs restrict extensions, with either a maximum limit, or via other conditions, such as depth or iteration. Care must be taken so that the search is not extended infinitely (see <a href=\"/Search_Explosion\" title=\"Search Explosion\">search explosion</a>). Some programs vary the extension based on the expected <a href=\"/Node_Types\" title=\"Node Types\">node type</a>. For example, in an expected <a href=\"/Node_Types#ALL\" title=\"Node Types\">All-node</a>, it might use 1/2 a ply extension for a pawn to the 7th, but a full ply on the <a href=\"/Node_Types#PV\" title=\"Node Types\">PV-node</a> research.\n</p>\n<h2><span class=\"mw-headline\" id=\"Non-reductions\">Non-reductions</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Extensions&amp;action=edit&amp;section=6\" title=\"Edit section: Non-reductions\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>In contemporary, heavily reducing programs former typical extensions are often used in an inverted manner: to flag moves as exempt from reductions.\n</p>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Extensions&amp;action=edit&amp;section=7\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Reductions\" title=\"Reductions\">Reductions</a></li></ul>\n<dl><dd> <a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">Late Move Reductions</a></dd></dl>\n<ul><li> <a href=\"/Markian_Hlynka#PreSearching\" title=\"Markian Hlynka\">Pre-Search</a></li>\n<li> <a href=\"/Pruning\" title=\"Pruning\">Pruning</a></li>\n<li> <a href=\"/SEX_Algorithm\" title=\"SEX Algorithm\">SEX Algorithm</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Extensions&amp;action=edit&amp;section=8\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1980_...\">1980 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Extensions&amp;action=edit&amp;section=9\" title=\"Edit section: 1980 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Hermann_Kaindl\" title=\"Hermann Kaindl\">Hermann Kaindl</a> (<b>1983</b>). <i>Searching to Variable Depth in Computer Chess.</i> Proceedings of <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/conf/ijcai/ijcai83.html\">IJCAI 83</a>, pp. 760-762. Karlsruhe. <a rel=\"nofollow\" class=\"external text\" href=\"http://ijcai.org/Past%20Proceedings/IJCAI-83-VOL-2/PDF/039.pdf\">pdf</a></li>\n<li> <a href=\"/Thomas_Anantharaman\" title=\"Thomas Anantharaman\">Thomas Anantharaman</a>, <a href=\"/Murray_Campbell\" title=\"Murray Campbell\">Murray Campbell</a>, <a href=\"/Feng-hsiung_Hsu\" title=\"Feng-hsiung Hsu\">Feng-hsiung Hsu</a> (<b>1988</b>). <i>Singular extensions: Adding Selectivity to Brute-Force Searching</i>. AAAI Spring Symposium, Computer Game Playing, pp. 8-13. Also published in <a href=\"/ICGA_Journal#11_4\" title=\"ICGA Journal\">ICCA Journal, Vol. 11, No. 4</a>, republished (1990) in <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_%28journal%29\">Artificial Intelligence</a>, Vol. 43, No. 1, pp. 99-109. ISSN 0004-3702.</li>\n<li> <a href=\"/David_Levy\" title=\"David Levy\">David Levy</a>, <a href=\"/David_Broughton\" title=\"David Broughton\">David Broughton</a>, <a href=\"/Mark_Taylor\" title=\"Mark Taylor\">Mark Taylor</a> (<b>1989</b>). <i>The SEX Algorithm in Computer Chess</i>. <a href=\"/ICGA_Journal#12_1\" title=\"ICGA Journal\">ICCA Journal, Vol. 12, No. 1</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1990_...\">1990 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Extensions&amp;action=edit&amp;section=10\" title=\"Edit section: 1990 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Thomas_Anantharaman\" title=\"Thomas Anantharaman\">Thomas Anantharaman</a> (<b>1991</b>). <i>Extension Heuristics</i>. <a href=\"/ICGA_Journal#14_2\" title=\"ICGA Journal\">ICCA Journal, Vol. 14, No. 2</a></li>\n<li> <a href=\"/Chun_Ye\" title=\"Chun Ye\">Chun Ye</a> (<b>1992</b>). <i>Experiments in Selective Search Extensions</i>. MSc. thesis, Department of Computing Science, <a href=\"/University_of_Alberta\" title=\"University of Alberta\">University of Alberta</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://era.library.ualberta.ca/public/datastream/get/uuid:e4fbf48d-7603-490f-85cc-5497bbecf5a8/DS1\">pdf</a></li>\n<li> <a href=\"/Chun_Ye\" title=\"Chun Ye\">Chun Ye</a>, <a href=\"/Tony_Marsland\" title=\"Tony Marsland\">Tony Marsland</a> (<b>1992</b>). <i>Experiments in Forward Pruning with Limited Extensions.</i> <a href=\"/ICGA_Journal#15_2\" title=\"ICGA Journal\">ICCA Journal, Vol. 15, No. 2</a></li>\n<li> <a href=\"/Chun_Ye\" title=\"Chun Ye\">Chun Ye</a>, <a href=\"/Tony_Marsland\" title=\"Tony Marsland\">Tony Marsland</a> (<b>1992</b>). <i>Selective Extensions in Game-Tree Search.</i> <a href=\"/3rd_Computer_Olympiad#Workshop\" title=\"3rd Computer Olympiad\">Heuristic Programming in AI 3</a></li>\n<li> <a href=\"/Don_Beal\" title=\"Don Beal\">Don Beal</a>, <a href=\"/Martin_C._Smith\" title=\"Martin C. Smith\">Martin C. Smith</a> (<b>1995</b>). <i>Quantification of Search-Extension Benefits.</i> <a href=\"/ICGA_Journal#18_4\" title=\"ICGA Journal\">ICCA Journal, Vol. 18, No. 4</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Extensions&amp;action=edit&amp;section=11\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Yngvi_Bj%C3%B6rnsson\" title=\"Yngvi Björnsson\">Yngvi Björnsson</a>, <a href=\"/Tony_Marsland\" title=\"Tony Marsland\">Tony Marsland</a> (<b>2001</b>). <i>Learning Search Control in Adversary Games</i>. <a href=\"/Advances_in_Computer_Games_9\" title=\"Advances in Computer Games 9\">Advances in Computer Games 9</a>, pp. 157-174. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.ru.is/faculty/yngvi/pdf/BjornssonM01b.pdf\">pdf</a></li>\n<li> <a href=\"/Yoshimasa_Tsuruoka\" title=\"Yoshimasa Tsuruoka\">Yoshimasa Tsuruoka</a>, <a href=\"/Daisaku_Yokoyama\" title=\"Daisaku Yokoyama\">Daisaku Yokoyama</a>, <a href=\"/Takashi_Chikayama\" title=\"Takashi Chikayama\">Takashi Chikayama</a> (<b>2002</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.2.9258\">Game-Tree Search Algorithm based on Realization Probability</a></i>. <a href=\"/ICGA_Journal#25_3\" title=\"ICGA Journal\">ICGA Journal, Vol. 25, No. 3</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.2.9258&amp;rep=rep1&amp;type=pdf\">pdf</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www-tsujii.is.s.u-tokyo.ac.jp/~tsuruoka/papers/icga02.pdf\">pdf</a></li>\n<li> <a href=\"/David_Levy\" title=\"David Levy\">David Levy</a> (<b>2002</b>) <i><a rel=\"nofollow\" class=\"external text\" href=\"http://ilk.uvt.nl/icga/journal/contents/content25-3.htm#SOME%20COMMENTS%20ON%20REALIZATION%20PROBABILITIES\">SOME COMMENTS ON REALIZATION PROBABILITIES AND THE SEX ALGORITHM</a></i>. <a href=\"/ICGA_Journal#25_3\" title=\"ICGA Journal\">ICGA Journal, Vol. 25, No. 3</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Extensions&amp;action=edit&amp;section=12\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/index.php?title=P%C3%A1lmi_Skowronski&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Pálmi Skowronski (page does not exist)\">Pálmi Skowronski</a>, <a href=\"/Yngvi_Bj%C3%B6rnsson\" title=\"Yngvi Björnsson\">Yngvi Björnsson</a>, <a href=\"/Mark_Winands\" title=\"Mark Winands\">Mark Winands</a> (<b>2010</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.sciweavers.org/publications/automated-discovery-search-extension-features\">Automated Discovery of Search-Extension Features</a></i>. <a href=\"/Advances_in_Computer_Games_12\" title=\"Advances in Computer Games 12\">Advances in Computer Games 12</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.hr.is/faculty/yngvi/pdf/SkowronskiBW09.pdf\">pdf</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Extensions&amp;action=edit&amp;section=13\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1996_...\">1996 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Extensions&amp;action=edit&amp;section=14\" title=\"Edit section: 1996 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/1uVIWZFB41k/VUcAUkzyFd0J\">Fractional depth increments</a> by S. Read, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, January 18, 1996</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/tcjwWnFhXt4/ifkLE7GwfSEJ\">Crafty V11.3</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, October 22, 1996&#160;» <a href=\"/Crafty\" title=\"Crafty\">Crafty</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=12201\">\"Suspicious move\" extension</a> by <a href=\"/David_Eppstein\" title=\"David Eppstein\">David Eppstein</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 20, 1997</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=13993\">Extensions?!</a> by <a href=\"/Daniel_Homan\" title=\"Daniel Homan\">Daniel Homan</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 13, 1998</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=17954\">Move Extensions</a> by <a href=\"/Roberto_Waldteufel\" title=\"Roberto Waldteufel\">Roberto Waldteufel</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 04, 1998</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=20167\">Extend or not extend in a nullmove tree</a> by <a href=\"/Roland_Pfister\" title=\"Roland Pfister\">Roland Pfister</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 08, 1998&#160;» <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">Null Move Pruning</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=21654\">Selective deepening and Hashtables</a> by <a href=\"/Werner_Inmann\" title=\"Werner Inmann\">Werner Inmann</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 30, 1998</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=21888\">search extension</a> by <a href=\"/Werner_Inmann\" title=\"Werner Inmann\">Werner Inmann</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 08, 1998</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=43380\">King danger extensions</a> by <a href=\"/James_Robertson\" title=\"James Robertson\">James Robertson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 16, 1999</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=45304\">full-ply search extension leads to crash city!</a> by <a href=\"/Dave_Gomboc\" title=\"Dave Gomboc\">Dave Gomboc</a>,  <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 07, 1999</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=50627\">Extensions and Futility Pruning</a> by <a href=\"/James_Robertson\" title=\"James Robertson\">James Robertson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 04, 1999&#160;» <a href=\"/Futility_Pruning\" title=\"Futility Pruning\">Futility Pruning</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=52090\">Q. about Rebel extensions</a> by <a href=\"/R%C3%A9mi_Coulom\" title=\"Rémi Coulom\">Rémi Coulom</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 18, 1999&#160;» <a href=\"/Rebel\" title=\"Rebel\">Rebel</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_..._2\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Extensions&amp;action=edit&amp;section=15\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=87191\">What is the use of extensions?</a> by <a href=\"/Leonid_Liberman\" title=\"Leonid Liberman\">Leonid</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 09, 2000</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=206802\">No explosions</a> by <a href=\"/Matthias_Gemuh\" title=\"Matthias Gemuh\">Matthias Gemuh</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 11, 2002&#160;» <a href=\"/Search_Explosion\" title=\"Search Explosion\">Search Explosion</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=208272\">Extensions</a> by <a href=\"/Benny_Antonsson\" title=\"Benny Antonsson\">Benny Antonsson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 18, 2002</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=247564\">I need help with Search/Selective Extension</a> by <a href=\"/Scott_Farrell\" title=\"Scott Farrell\">Scott Farrell</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 24, 2002</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=18&amp;t=43060\">wacnew.epd &amp; single search improvements (extensions)</a> by <a href=\"/Stefan_Knappe\" title=\"Stefan Knappe\">Stefan Knappe</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, June 19, 2003&#160;» <a href=\"/Matador\" title=\"Matador\">Matador</a>, <a href=\"/Win_at_Chess\" title=\"Win at Chess\">Win at Chess</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=303131\">Problem with extending to maxdepth</a> by <a href=\"/Albert_Bertilsson\" title=\"Albert Bertilsson\">Albert Bertilsson</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 26, 2003</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=338851\">Evaluation-based Reductions and/or Extensions</a> by <a href=\"/Tom_Likens\" title=\"Tom Likens\">Tom Likens</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 28, 2003&#160;» <a href=\"/Reductions\" title=\"Reductions\">Reductions</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=356488\">extensions + reductions + pruning = confusion</a> by <a href=\"/Johan_de_Koning\" title=\"Johan de Koning\">Johan de Koning</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 24, 2004 (was <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=356109\">Shredder 8 secret: search depth?</a>)</li></ul>\n<h2><span class=\"mw-headline\" id=\"2005_...\">2005 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Extensions&amp;action=edit&amp;section=16\" title=\"Edit section: 2005 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=1754&amp;p=8190\">Limiting extensions</a> by <a href=\"/David_B._Weller\" title=\"David B. Weller\">David B. Weller</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, February 23, 2005&#160;» <a href=\"/GES\" title=\"GES\">GES</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=4952\">Worthless extension ideas...</a> by <a href=\"/Mark_Lefler\" title=\"Mark Lefler\">mjlef</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, June 06, 2006</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=14594\">PVS extension up</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 21, 2007 </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=14860\">Delaying Extensions Idea (does anyone do this)?</a> by <a href=\"/Mark_Lefler\" title=\"Mark Lefler\">Mark Lefler</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 03, 2007</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=20680\">Threat extension</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 15, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=21403\">Search extensions at promising trajectories</a> by <a href=\"/Reinhard_Scharnagl\" title=\"Reinhard Scharnagl\">Reinhard Scharnagl</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 28, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?t=49446\">extensions</a> by <a href=\"/Daniel_Shawul\" title=\"Daniel Shawul\">Daniel Shawul</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard programming Forum</a>, August 26, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=26632\">Extensions, anyone?</a> by <a href=\"/Gregory_Strong\" title=\"Gregory Strong\">Gregory Strong</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 20, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=27017\">Extensions: everywhere or near the tips?</a> by <a href=\"/Alvaro_Cardoso\" title=\"Alvaro Cardoso\">Alvaro Cardoso</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 15, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=31220\">Stupid Extension Problem/Question</a> by <a href=\"/John_Merlino\" title=\"John Merlino\">John Merlino</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 23, 2009&#160;» <a href=\"/Repetitions\" title=\"Repetitions\">Repetitions</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_..._2\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Extensions&amp;action=edit&amp;section=17\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=31505\">Problem with exploding tree because of extensions</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 05, 2010&#160;» <a href=\"/Search_Explosion\" title=\"Search Explosion\">Search Explosion</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=32940\">Restricting extensions to the left most branches?</a> by <a href=\"/Michael_Sherwin\" title=\"Michael Sherwin\">Michael Sherwin</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 27, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=5&amp;t=248\">\"Automated Discovery of Search Extensions\"</a> by <a href=\"/Mark_Watkins\" title=\"Mark Watkins\">Mark Watkins</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">OpenChess - Programming and Technical Discussions</a>, June 22, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=40984\">Loss-seeking extension/threatened pieces</a> by <a href=\"/Evert_Glebbeek\" title=\"Evert Glebbeek\">Evert Glebbeek</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 03, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=54281\">search extensions</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 08, 2014&#160;» <a href=\"/Singular_Extensions\" title=\"Singular Extensions\">Singular Extensions</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2015_...\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Extensions&amp;action=edit&amp;section=18\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=56311\">Adding an Extension Results in Deeper General Search!</a> by <a href=\"/Steve_Maughan\" title=\"Steve Maughan\">Steve Maughan</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 10, 2015&#160;» <a href=\"/Passed_Pawn_Extensions\" title=\"Passed Pawn Extensions\">Passed Pawn Extensions</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=5&amp;t=2968\">Search extensions</a> by ppyvabw, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">OpenChess Forum</a>, March 17, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=59598\">Extensions in the days of LMR?</a> by <a href=\"/Martin_Fierz\" title=\"Martin Fierz\">Martin Fierz</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 22, 2016&#160;» <a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">LMR</a> </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=67131\">Depth extensions and effect on transposition queries</a> by <a href=\"/index.php?title=Kenneth_Jones&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Kenneth Jones (page does not exist)\">Kenneth Jones</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 16, 2018&#160;» <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Table</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=67823\">Horizon effect and extensions</a> by <a href=\"/Vivien_Clauzon\" title=\"Vivien Clauzon\">Vivien Clauzon</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 25, 2018&#160;» <a href=\"/Horizon_Effect\" title=\"Horizon Effect\">Horizon Effect</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=70165\">delaying tactics: prune or extend?</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 10, 2019&#160;» <a href=\"/Selectivity\" title=\"Selectivity\">Selectivity</a>, <a href=\"/Tactics\" title=\"Tactics\">Tactics</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Extensions&amp;action=edit&amp;section=19\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Search_Extension\">Search Extension</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Extensions&amp;action=edit&amp;section=20\" title=\"Edit section: Search Extension\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://web.archive.org/web/20070607151732/www.brucemo.com/compchess/programming/extensions.htm\">Search Extension</a> from <a href=\"/Bruce_Moreland\" title=\"Bruce Moreland\">Bruce Moreland's</a> <a rel=\"nofollow\" class=\"external text\" href=\"http://web.archive.org/web/20070607231311/www.brucemo.com/compchess/programming/index.htm\">Programming Topics</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.frayn.net/beowulf/theory.html#extend\">Computer Chess Programming Theory - Search Extensions</a> by <a href=\"/Colin_Frayn\" title=\"Colin Frayn\">Colin Frayn</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.3dkingdoms.com/chess/implementation.htm\">Programming Details - Slow Chess | Extensions Used, Detailed Description</a> by <a href=\"/Jonathan_Kreuzer\" title=\"Jonathan Kreuzer\">Jonathan Kreuzer</a>&#160;» <a href=\"/Slow_Chess\" title=\"Slow Chess\">Slow Chess</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Misc\">Misc</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Extensions&amp;action=edit&amp;section=21\" title=\"Edit section: Misc\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Extension\">Extension from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Extension_%28metaphysics%29\">Extension (metaphysics) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Extension_%28music%29\">Extension (music) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Jazz_chord#Extensions\">Jazz chord - Extensions from Wikipedia</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Extensions&amp;action=edit&amp;section=22\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://web.archive.org/web/20070607151732/www.brucemo.com/compchess/programming/extensions.htm\">Search Extension</a> from <a href=\"/Bruce_Moreland\" title=\"Bruce Moreland\">Bruce Moreland's</a> <a rel=\"nofollow\" class=\"external text\" href=\"http://web.archive.org/web/20070607231311/www.brucemo.com/compchess/programming/index.htm\">Programming Topics</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a href=\"/David_Levy\" title=\"David Levy\">David Levy</a>, <a href=\"/David_Broughton\" title=\"David Broughton\">David Broughton</a>, <a href=\"/Mark_Taylor\" title=\"Mark Taylor\">Mark Taylor</a> (<b>1989</b>). <i>The SEX Algorithm in Computer Chess</i>. <a href=\"/ICGA_Journal#12_1\" title=\"ICGA Journal\">ICCA Journal, Vol. 12, No. 1</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=5&amp;t=248\">\"Automated Discovery of Search Extensions\"</a> by <a href=\"/Mark_Watkins\" title=\"Mark Watkins\">Mark Watkins</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">OpenChess - Programming and Technical Discussions</a>, June 22, 2010</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Selectivity\" title=\"Selectivity\">Up one level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301140539\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.020 seconds\nReal time usage: 0.021 seconds\nPreprocessor visited node count: 143/1000000\nPreprocessor generated node count: 228/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:962-0!canonical and timestamp 20260301140539 and revision id 22558\n -->\n"
+    },
+    "categories": [],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "3rd Computer Olympiad"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Games 12"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Games 9"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Albert Bertilsson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alvaro Cardoso"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Benny Antonsson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Botvinnik-Markoff Extension"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bruce Moreland"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Capture Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Check Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chun Ye"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Colin Frayn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Crafty"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Daisaku Yokoyama"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Daniel Homan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Daniel Shawul"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dave Gomboc"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David B. Weller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David Broughton"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David Eppstein"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David Levy"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Don Beal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ed Schroder"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evert Glebbeek"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Feng-hsiung Hsu"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Futility Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "GES"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gregory Strong"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Harm Geert Muller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hermann Kaindl"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Horizon Effect"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA Journal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "James Robertson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Johan de Koning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "John Merlino"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jonathan Kreuzer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Late Move Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Leonid Liberman"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Make Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mark Lefler"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mark Taylor"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mark Watkins"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mark Winands"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Markian Hlynka"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Martin C. Smith"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Martin Fierz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Matador"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mate Threat Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Matthias Gemuh"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michael Sherwin"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Murray Campbell"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Node Types"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Oliver Brausch"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "One Reply Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "PV Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Passed Pawn Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ply"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rebel"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Recapture Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Reinhard Scharnagl"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Repetitions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Hyatt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Roberto Waldteufel"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Roland Pfister"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rémi Coulom"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SEX Algorithm"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Scott Farrell"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search Explosion"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Selectivity"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Singular Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Slow Chess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stefan Knappe"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Steve Maughan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tactics"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Takashi Chikayama"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Thomas Anantharaman"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tom Likens"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tony Marsland"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "University of Alberta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vivien Clauzon"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Werner Inmann"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Win at Chess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Yngvi Björnsson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Yoshimasa Tsuruoka"
+      },
+      {
+        "ns": 0,
+        "*": "Pálmi Skowronski"
+      },
+      {
+        "ns": 0,
+        "*": "Kenneth Jones"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Inside the Loop",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Extensions",
+        "byteoffset": 346,
+        "anchor": "Inside_the_Loop"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Classification",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Extensions",
+        "byteoffset": 773,
+        "anchor": "Classification"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Types",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Extensions",
+        "byteoffset": 1500,
+        "anchor": "Types"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Fractional Extensions",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Extensions",
+        "byteoffset": 2251,
+        "anchor": "Fractional_Extensions"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Conditions/Restrictions",
+        "number": "5",
+        "index": "5",
+        "fromtitle": "Extensions",
+        "byteoffset": 3106,
+        "anchor": "Conditions.2FRestrictions"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Non-reductions",
+        "number": "5.1",
+        "index": "6",
+        "fromtitle": "Extensions",
+        "byteoffset": 3613,
+        "anchor": "Non-reductions"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "6",
+        "index": "7",
+        "fromtitle": "Extensions",
+        "byteoffset": 3782,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "7",
+        "index": "8",
+        "fromtitle": "Extensions",
+        "byteoffset": 3918,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1980 ...",
+        "number": "7.1",
+        "index": "9",
+        "fromtitle": "Extensions",
+        "byteoffset": 3934,
+        "anchor": "1980_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1990 ...",
+        "number": "7.2",
+        "index": "10",
+        "fromtitle": "Extensions",
+        "byteoffset": 4821,
+        "anchor": "1990_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "7.3",
+        "index": "11",
+        "fromtitle": "Extensions",
+        "byteoffset": 5673,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "7.4",
+        "index": "12",
+        "fromtitle": "Extensions",
+        "byteoffset": 6582,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "8",
+        "index": "13",
+        "fromtitle": "Extensions",
+        "byteoffset": 7127,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1996 ...",
+        "number": "8.1",
+        "index": "14",
+        "fromtitle": "Extensions",
+        "byteoffset": 7142,
+        "anchor": "1996_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "8.2",
+        "index": "15",
+        "fromtitle": "Extensions",
+        "byteoffset": 8825,
+        "anchor": "2000_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2005 ...",
+        "number": "8.3",
+        "index": "16",
+        "fromtitle": "Extensions",
+        "byteoffset": 10131,
+        "anchor": "2005_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "8.4",
+        "index": "17",
+        "fromtitle": "Extensions",
+        "byteoffset": 11646,
+        "anchor": "2010_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "8.5",
+        "index": "18",
+        "fromtitle": "Extensions",
+        "byteoffset": 12503,
+        "anchor": "2015_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "9",
+        "index": "19",
+        "fromtitle": "Extensions",
+        "byteoffset": 13528,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Search Extension",
+        "number": "9.1",
+        "index": "20",
+        "fromtitle": "Extensions",
+        "byteoffset": 13546,
+        "anchor": "Search_Extension"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Misc",
+        "number": "9.2",
+        "index": "21",
+        "fromtitle": "Extensions",
+        "byteoffset": 14129,
+        "anchor": "Misc"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "10",
+        "index": "22",
+        "fromtitle": "Extensions",
+        "byteoffset": 14493,
+        "anchor": "References"
+      }
+    ]
+  }
+}

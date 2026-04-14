@@ -1,0 +1,372 @@
+{
+  "parse": {
+    "title": "SCP",
+    "pageid": 3218,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Engines\" title=\"Engines\">Engines</a> * SCP</b>\n</p><p><b>SCP</b>, (Stanback Chess Program, also mentioned as JSCP)<br />\nan <a href=\"/Category:Open_Source\" title=\"Category:Open Source\">open source chess program</a> by <a href=\"/John_Stanback\" title=\"John Stanback\">John Stanback</a>, written in <a href=\"/C\" title=\"C\">C</a> and published in May 1987 at <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">comp.sources.games</a> <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup>. SCP later evolved to <a href=\"/GNU_Chess\" title=\"GNU Chess\">GNU Chess 2-4</a>, and was also ported to the <a href=\"/Amiga\" title=\"Amiga\">Amiga</a> as <i>Chess</i> and <i>Chess 2.0</i>, the latter with a mouse-driven <a href=\"/GUI\" title=\"GUI\">GUI</a> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>. A <a href=\"/WinBoard\" title=\"WinBoard\">WinBoard</a> compatible version of SCP was most recently updated by <a href=\"/Jim_Ablett\" title=\"Jim Ablett\">Jim Ablett</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>, hosted by <a href=\"/Kirill_Kryukov\" title=\"Kirill Kryukov\">Kirill Kryukov</a> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>.\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Description\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Description</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-2\"><a href=\"#Search\"><span class=\"tocnumber\">1.1</span> <span class=\"toctext\">Search</span></a></li>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#Repetitions\"><span class=\"tocnumber\">1.2</span> <span class=\"toctext\">Repetitions</span></a></li>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#Evaluation\"><span class=\"tocnumber\">1.3</span> <span class=\"toctext\">Evaluation</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#Publications\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Publications</span></a></li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#See_also\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Forum Posts</span></a></li>\n<li class=\"toclevel-1 tocsection-8\"><a href=\"#External_Links\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-9\"><a href=\"#References\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Description\">Description</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=SCP&amp;action=edit&amp;section=1\" title=\"Edit section: Description\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Search\">Search</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=SCP&amp;action=edit&amp;section=2\" title=\"Edit section: Search\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>SCP <a href=\"/Board_Representation\" title=\"Board Representation\">represents the board</a> as 12x12 <a href=\"/Mailbox\" title=\"Mailbox\">mailbox</a> <a href=\"/Array\" title=\"Array\">array</a> with <a href=\"/Piece-Lists\" title=\"Piece-Lists\">piece lists</a>, and uses full-width <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">alpha-beta</a> with <a href=\"/Extensions\" title=\"Extensions\">extensions</a> on <a href=\"/Check\" title=\"Check\">checks</a>, <a href=\"/Check_Extensions\" title=\"Check Extensions\">check evasions</a>, <a href=\"/Promotions\" title=\"Promotions\">promotions</a>, <a href=\"/Mate_Threat_Extensions\" title=\"Mate Threat Extensions\">threats</a> and threats to multiple pieces. Capture sequences are handled by a <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">separate search routine</a>. \n<span id=\"Repetitions\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Repetitions\">Repetitions</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=SCP&amp;action=edit&amp;section=3\" title=\"Edit section: Repetitions\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>SCP seems to originate the <a href=\"/Repetitions\" title=\"Repetitions\">repetition</a> counting algorithm, also found in some <a href=\"/GNU_Chess\" title=\"GNU Chess\">GNU Chess</a> versions, <a href=\"/TSCP\" title=\"TSCP\">TSCP</a> <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup>, and <a href=\"/Belzebub\" title=\"Belzebub\">Belzebub</a>. It may detect false repetitions in case of exchanging two unequal pieces <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup>.\n</p>\n<pre>\n  for (i = GameCnt; i &gt; Game50; i--)  {\n    m = GameList[i]; f = m&gt;&gt;8; t = m &amp; 0xFF;\n    if (t&#160;!= 255 &amp;&amp; f&#160;!= 255) {\n      b[f]++; b[t]--;\n      if (b[f] == 0) c--; else c++;\n      if (b[t] == 0) c--; else c++;\n      if (c == 0) r++;\n    }\n  }\n</pre>\n<h2><span class=\"mw-headline\" id=\"Evaluation\">Evaluation</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=SCP&amp;action=edit&amp;section=4\" title=\"Edit section: Evaluation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>SCP's <a href=\"/Evaluation\" title=\"Evaluation\">evaluation</a> considers <a href=\"/Material\" title=\"Material\">material</a>, <a href=\"/Piece-Square_Tables\" title=\"Piece-Square Tables\">piece-square tables</a> for knights, bishops and <a href=\"/Passed_Pawn\" title=\"Passed Pawn\">passed pawns</a>, <a href=\"/Mobility\" title=\"Mobility\">piece mobility</a>, <a href=\"/Pawn_Structure\" title=\"Pawn Structure\">pawn structure</a>, <a href=\"/Rook_on_Open_File\" title=\"Rook on Open File\">rook on (half) open files</a>, and some <a href=\"/King_Safety\" title=\"King Safety\">king safety</a> issues and positive <a href=\"/King_Centralization\" title=\"King Centralization\">king centre proximity</a> in the endgame.\n</p>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=SCP&amp;action=edit&amp;section=5\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Gerald_Tesauro\" title=\"Gerald Tesauro\">Gerald Tesauro</a> (<b>2001</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://dl.acm.org/citation.cfm?id=644397\">Comparison Training of Chess Evaluation Functions</a></i>. In  <a href=\"/Johannes_F%C3%BCrnkranz\" title=\"Johannes Fürnkranz\">Johannes Fürnkranz</a>, <a href=\"/Miroslav_Kubat\" title=\"Miroslav Kubat\">Miroslav Kubat</a> (eds.) (<b>2001</b>). <i><a href=\"/index.php?title=Thttps://www.novapublishers.com/catalog/product_info.php%3Fproducts_id%3D720&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Thttps://www.novapublishers.com/catalog/product info.php?products id=720 (page does not exist)\">Machines that learn to play games</a></i>, 117–130, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Nova_Science_Publishers\">Nova Science Publishers</a>&#160;» <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">Automated Tuning</a>, <a href=\"/Deep_Blue\" title=\"Deep Blue\">Deep Blue</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=SCP&amp;action=edit&amp;section=6\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/GNU_Chess\" title=\"GNU Chess\">GNU Chess</a></li>\n<li> <a href=\"/TSCP\" title=\"TSCP\">TSCP</a></li>\n<li> <a href=\"/Zarkov\" title=\"Zarkov\">Zarkov</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=SCP&amp;action=edit&amp;section=7\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/comp.sources.games/zs_1mrpdseE/YL2yGrzoXrEJ\">v01i023: chess - C source for chess</a> by <a href=\"/John_Stanback\" title=\"John Stanback\">John Stanback</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">comp.sources.games</a>, May 21, 1987</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess/HG6FoUy9K18/YqrV-dNZhoUJ\">SCP: ANSI C chess program package available via ftp</a> by <a href=\"/Steven_Edwards\" title=\"Steven Edwards\">Steven Edwards</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rec.games.chess</a>, December 26, 1993</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=74307\">SCP source now at my site</a> by <a href=\"/index.php?title=Pete_Galati&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Pete Galati (page does not exist)\">Pete Galati</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 19, 1999</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=85776\">Winboard compatible version of SCP?</a> by Scott Ludwig, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 03, 2000</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=169105\">An Oldie, but a Goodie: Port of ancient SCP program plays itself...</a> by <a href=\"/Dann_Corbit\" title=\"Dann Corbit\">Dann Corbit</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 10, 2001</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=14436\">SCP 1.0d update</a> by <a href=\"/Jim_Ablett\" title=\"Jim Ablett\">Jim Ablett</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>,  June 11, 2007</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=29106\">SCP/Gnuchess 2.02 JA by John Stanback - Update</a> by <a href=\"/Jim_Ablett\" title=\"Jim Ablett\">Jim Ablett</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 25, 2009</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=SCP&amp;action=edit&amp;section=8\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://john.stanback.net/\">John Stanback's Home Page</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://web.archive.org/web/20071221115817/http://classicchess.googlepages.com/Chess.htm\">Classic Computer Chess - ... The programs of yesteryear</a> by <a href=\"/Carey_Bloodworth\" title=\"Carey Bloodworth\">Carey</a>, hosted by the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Internet_Archive\">Internet Archive</a> <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://kirr.homeunix.org/chess/engines/Jim%20Ablett/SCP/\">SCP</a> maintained and updated by <a href=\"/Jim_Ablett\" title=\"Jim Ablett\">Jim Ablett</a>, hosted by <a href=\"/Kirill_Kryukov\" title=\"Kirill Kryukov\">Kirill Kryukov</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.mobygames.com/game/chess_______\">Chess for Amiga (1987)</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/MobyGames\">MobyGames</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.mobygames.com/game/amiga/chess-20\">Chess 2.0 for Amiga (1989)</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/MobyGames\">MobyGames</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=SCP&amp;action=edit&amp;section=9\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/comp.sources.games/zs_1mrpdseE/YL2yGrzoXrEJ\">v01i023: chess - C source for chess</a> by <a href=\"/John_Stanback\" title=\"John Stanback\">John Stanback</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">comp.sources.games</a>, May 21, 1987</span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.mobygames.com/game/amiga/chess-20\">Chess 2.0 for Amiga (1989)</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/MobyGames\">MobyGames</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=29106\">SCP/Gnuchess 2.02 JA by John Stanback - Update</a> by <a href=\"/Jim_Ablett\" title=\"Jim Ablett\">Jim Ablett</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 25, 2009</span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://kirr.homeunix.org/chess/engines/Jim%20Ablett/SCP/\">SCP</a> maintained and updated by <a href=\"/Jim_Ablett\" title=\"Jim Ablett\">Jim Ablett</a>, hosted by <a href=\"/Kirill_Kryukov\" title=\"Kirill Kryukov\">Kirill Kryukov</a></span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=119911\">Re: Detecting three-fold repetition?</a> by <a href=\"/John_Stanback\" title=\"John Stanback\">John Stanback</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 17, 2000</span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=490672&amp;t=45846\">Re: Move Tables - explain as if I'm five</a> by <a href=\"/Karlo_Balla\" title=\"Karlo Balla\">Karlo Bala Jr.</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 05, 2012</span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=56938&amp;start=2\">Re: Old programs CHAOS and USC</a> by <a href=\"/Dann_Corbit\" title=\"Dann Corbit\">Dann Corbit</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 11, 2015</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Engines\" title=\"Engines\">Up one level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301055053\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.015 seconds\nReal time usage: 0.016 seconds\nPreprocessor visited node count: 147/1000000\nPreprocessor generated node count: 304/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:3218-0!canonical and timestamp 20260301055053 and revision id 18023\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Open_Source"
+      },
+      {
+        "sortkey": "",
+        "*": "68000"
+      },
+      {
+        "sortkey": "",
+        "*": "8086"
+      },
+      {
+        "sortkey": "",
+        "*": "Amiga"
+      },
+      {
+        "sortkey": "",
+        "*": "PC"
+      },
+      {
+        "sortkey": "",
+        "*": "Acronym"
+      },
+      {
+        "sortkey": "",
+        "*": "CP_Suffix"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha-Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Amiga"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Array"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Automated Tuning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Belzebub"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Board Representation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "C"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Carey Bloodworth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Check"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Check Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dann Corbit"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Deep Blue"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engines"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "GNU Chess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "GUI"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gerald Tesauro"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jim Ablett"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Johannes Fürnkranz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "John Stanback"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Karlo Balla"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "King Centralization"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "King Safety"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kirill Kryukov"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mailbox"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mate Threat Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Material"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Miroslav Kubat"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mobility"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Passed Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Structure"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Piece-Lists"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Piece-Square Tables"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Promotions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiescence Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Repetitions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rook on Open File"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Steven Edwards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "TSCP"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "WinBoard"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Zarkov"
+      },
+      {
+        "ns": 0,
+        "*": "Thttps://www.novapublishers.com/catalog/product info.php?products id=720"
+      },
+      {
+        "ns": 0,
+        "*": "Pete Galati"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Open Source"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Description",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "SCP",
+        "byteoffset": 1200,
+        "anchor": "Description"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Search",
+        "number": "1.1",
+        "index": "2",
+        "fromtitle": "SCP",
+        "byteoffset": 1214,
+        "anchor": "Search"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Repetitions",
+        "number": "1.2",
+        "index": "3",
+        "fromtitle": "SCP",
+        "byteoffset": 1697,
+        "anchor": "Repetitions"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Evaluation",
+        "number": "1.3",
+        "index": "4",
+        "fromtitle": "SCP",
+        "byteoffset": 2529,
+        "anchor": "Evaluation"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "2",
+        "index": "5",
+        "fromtitle": "SCP",
+        "byteoffset": 2941,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "3",
+        "index": "6",
+        "fromtitle": "SCP",
+        "byteoffset": 3401,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "4",
+        "index": "7",
+        "fromtitle": "SCP",
+        "byteoffset": 3453,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "5",
+        "index": "8",
+        "fromtitle": "SCP",
+        "byteoffset": 4555,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "6",
+        "index": "9",
+        "fromtitle": "SCP",
+        "byteoffset": 5424,
+        "anchor": "References"
+      }
+    ]
+  }
+}

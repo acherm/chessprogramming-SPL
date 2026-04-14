@@ -1,0 +1,457 @@
+{
+  "parse": {
+    "title": "GreKo",
+    "pageid": 4417,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Engines\" title=\"Engines\">Engines</a> * GreKo</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:194px;\"><a href=\"http://aartbik.blogspot.de/2011/04/greko-chess-engine.html\"><img alt=\"\" src=\"/images/5/5b/Greko.JPG\" width=\"192\" height=\"320\" class=\"thumbimage\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Greko.JPG\" class=\"internal\" title=\"Enlarge\"></a></div>GreKo for <a href=\"/Android\" title=\"Android\">Android</a> <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>GreKo</b>,<br />\na <a href=\"/Chess_Engine_Communication_Protocol\" title=\"Chess Engine Communication Protocol\">Chess Engine Communication Protocol</a> compliant <a href=\"/Category:Open_Source\" title=\"Category:Open Source\">open source engine</a> by <a href=\"/Vladimir_Medvedev\" title=\"Vladimir Medvedev\">Vladimir Medvedev</a>, written in <a href=\"/Cpp\" title=\"Cpp\">C++</a> and relying on the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Standard_Template_Library\">Standard Template Library</a>. Starting the development in 2002 <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>, GreKo was first a classical <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">alpha-beta</a> searcher within an <a href=\"/Iterative_Deepening\" title=\"Iterative Deepening\">iterative deepening</a> framework, performing an <a href=\"/Evaluation\" title=\"Evaluation\">evaluation</a> considering <a href=\"/Material\" title=\"Material\">material</a> and various positional aspects such as <a href=\"/Pawn_Structure\" title=\"Pawn Structure\">pawn structure</a>. <a href=\"/Check_Extensions\" title=\"Check Extensions\">Checks</a>, <a href=\"/Recapture_Extensions\" title=\"Recapture Extensions\">recaptures</a> and <a href=\"/Passed_Pawn_Extensions\" title=\"Passed Pawn Extensions\">passers arriving the seventh rank</a> were <a href=\"/Extensions\" title=\"Extensions\">extended</a>. The <a href=\"/Opening_Book\" title=\"Opening Book\">opening book</a> utilizes the <a href=\"/Transposition_Table\" title=\"Transposition Table\">hash table</a> to recognize <a href=\"/Transposition\" title=\"Transposition\">transpositions</a>. \n</p><p>Over the time, GreKo experienced various changes, applying a <a href=\"/0x88\" title=\"0x88\">0x88</a> board with <a href=\"/Piece-Lists\" title=\"Piece-Lists\">piece lists</a>, a hybrid <a href=\"/Bitboards\" title=\"Bitboards\">bitboard</a>-0x88 approach, and in 2008, <a href=\"/Magic_Bitboards\" title=\"Magic Bitboards\">Magic bitboards</a>. Search has become <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">PVS</a>, <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">null move pruning</a> with <a href=\"/Depth_Reduction_R\" title=\"Depth Reduction R\">R=4</a>, and a lot of new evaluation terms such as <a href=\"/Mobility\" title=\"Mobility\">mobility</a> and <a href=\"/Material#Balance\" title=\"Material\">material imbalances</a> were added, and <a href=\"/Learning\" title=\"Learning\">position learning</a> applied. Since version 5.0, GreKo further supports <a href=\"/UCI\" title=\"UCI\">UCI</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>. In April 2011, GreKo was ported by <a href=\"/Aart_Bik\" title=\"Aart Bik\">Aart Bik</a> for <a href=\"/Android\" title=\"Android\">Android</a> using the <a href=\"/GUI\" title=\"GUI\">GUI</a> of his <a href=\"/Chess_for_Android\" title=\"Chess for Android\">Chess for Android</a> application <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>. GreKo 2015 ML, released in July 2016 <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup>, features a command for learning from a <a href=\"/Portable_Game_Notation\" title=\"Portable Game Notation\">PGN</a> file. The algorithm is similar to <a href=\"/Texel%27s_Tuning_Method\" title=\"Texel&#39;s Tuning Method\">Texel's Tuning Method</a>, but using <a href=\"/Evaluation_Function\" title=\"Evaluation Function\">evaluation function</a> instead of expensive <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">quiescence search</a> for making predictions of game results <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup>.\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Tournament_Play\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Tournament Play</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Etymology\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Etymology</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Derivatives\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Derivatives</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#See_also\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-6\"><a href=\"#2002...\"><span class=\"tocnumber\">5.1</span> <span class=\"toctext\">2002...</span></a></li>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#2005_...\"><span class=\"tocnumber\">5.2</span> <span class=\"toctext\">2005 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#2010_...\"><span class=\"tocnumber\">5.3</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#2015_...\"><span class=\"tocnumber\">5.4</span> <span class=\"toctext\">2015 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#2020_...\"><span class=\"tocnumber\">5.5</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-11\"><a href=\"#External_Links\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-12\"><a href=\"#References\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Tournament_Play\">Tournament Play</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=GreKo&amp;action=edit&amp;section=1\" title=\"Edit section: Tournament Play\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>GreKo participated at the <a href=\"/CCCCISC_2008\" title=\"CCCCISC 2008\">1st Computer Chess Championship of CIS Countries</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Moscow\">Moscow</a> 2008. \n</p>\n<h1><span class=\"mw-headline\" id=\"Etymology\">Etymology</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=GreKo&amp;action=edit&amp;section=2\" title=\"Edit section: Etymology\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>The program's name is dedicated to the Italian historical chess master <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Gioachino_Greco\">Gioachino Greco</a> and is <a href=\"/Category:Acronym\" title=\"Category:Acronym\">acronym</a> of the <b>Gre</b>at <b>Ko</b>mbinator <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup>. \n</p>\n<h1><span class=\"mw-headline\" id=\"Derivatives\">Derivatives</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=GreKo&amp;action=edit&amp;section=3\" title=\"Edit section: Derivatives\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Igel\" title=\"Igel\">Igel</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=GreKo&amp;action=edit&amp;section=4\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Greco\" title=\"Greco\">Greco</a></li>\n<li> <a href=\"/Point_Value_by_Regression_Analysis\" title=\"Point Value by Regression Analysis\">Point Value by Regression Analysis</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=GreKo&amp;action=edit&amp;section=5\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"2002...\">2002...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=GreKo&amp;action=edit&amp;section=6\" title=\"Edit section: 2002...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/yHBbFa1GcSo/nkiYjGAo30sJ\">GreKo chess engine</a> by <a href=\"/Vladimir_Medvedev\" title=\"Vladimir Medvedev\">Vladimir R. Medvedev</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, April 01, 2002 </li></ul>\n<h2><span class=\"mw-headline\" id=\"2005_...\">2005 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=GreKo&amp;action=edit&amp;section=7\" title=\"Edit section: 2005 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=2&amp;t=2178&amp;start=15\">GreKo</a> by <a href=\"/Vladimir_Medvedev\" title=\"Vladimir Medvedev\">Vladimir Medvedev</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, April 05, 2005</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=13951\">GreKo 5.3&#160;: 2256</a> by <a href=\"/Patrick_Buchmann\" title=\"Patrick Buchmann\">Patrick Buchmann</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 22, 2007</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=15485\">GreKo 5.4&#160;: 2278</a> by <a href=\"/Patrick_Buchmann\" title=\"Patrick Buchmann\">Patrick Buchmann</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 31, 2007</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=18687\">GreKo 5.5&#160;: 2293</a> by <a href=\"/Patrick_Buchmann\" title=\"Patrick Buchmann\">Patrick Buchmann</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 02, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=20667\">GreKo 5.6&#160;: 2282</a> by <a href=\"/Patrick_Buchmann\" title=\"Patrick Buchmann\">Patrick Buchmann</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 14, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=21265\">GreKo 5.7&#160;: 2302</a> by <a href=\"/Patrick_Buchmann\" title=\"Patrick Buchmann\">Patrick Buchmann</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 20, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=21356\">GreKo 5.7.1</a> by <a href=\"/Vladimir_Medvedev\" title=\"Vladimir Medvedev\">Vladimir Medvedev</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 25, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=22781\">GreKo 5.9&#160;: 2315</a> by <a href=\"/Patrick_Buchmann\" title=\"Patrick Buchmann\">Patrick Buchmann</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 03, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=24116\">GreKo 6.0&#160;: 2292</a> by <a href=\"/Patrick_Buchmann\" title=\"Patrick Buchmann\">Patrick Buchmann</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 01, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=25573\">GreKo 6.25&#160;: 2295</a> by <a href=\"/Patrick_Buchmann\" title=\"Patrick Buchmann\">Patrick Buchmann</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 22, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=28206\">GreKo 6.5&#160;: 2299</a> by <a href=\"/Patrick_Buchmann\" title=\"Patrick Buchmann\">Patrick Buchmann</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 01, 2009</li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=GreKo&amp;action=edit&amp;section=8\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=31606\">Test tournament starts: Gaviota, Daydreamer, Greko, Atak</a> by <a href=\"/Harun_Taner\" title=\"Harun Taner\">Harun Taner</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 10, 2010&#160;» <a href=\"/Gaviota\" title=\"Gaviota\">Gaviota</a>, <a href=\"/Daydreamer\" title=\"Daydreamer\">Daydreamer</a>, <a class=\"mw-selflink selflink\">GreKo</a>, <a href=\"/Atak\" title=\"Atak\">Atak</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=38804\">GreKo for Android</a> by <a href=\"/Aart_Bik\" title=\"Aart Bik\">Aart Bik</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 20, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=2&amp;t=52691\">GreKo 9.8</a> by <a href=\"/Vladimir_Medvedev\" title=\"Vladimir Medvedev\">Vladimir Medvedev</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, December 31, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?p=564820\">GreKo 12.0 2002-2014 12 years development, Congrats!</a> by <a href=\"/Jose_Maria_Velasco\" title=\"Jose Maria Velasco\">José Mº Velasco</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 02, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=2&amp;t=53267\">GreKo 12.1</a> by <a href=\"/Vladimir_Medvedev\" title=\"Vladimir Medvedev\">Vladimir Medvedev</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, October 07, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=53997\">GreKo 12.1</a> by <a href=\"/index.php?title=Werner_Sch%C3%BCle&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Werner Schüle (page does not exist)\">Werner Schüle</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 09, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=2&amp;t=53320\">GreKo 12.5</a> by <a href=\"/Vladimir_Medvedev\" title=\"Vladimir Medvedev\">Vladimir Medvedev</a>,  <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, December 21, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=54729\">GreKo 12.5</a> by <a href=\"/Graham_Banks\" title=\"Graham Banks\">Graham Banks</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 22, 2014</li></ul>\n<h2><span class=\"mw-headline\" id=\"2015_...\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=GreKo&amp;action=edit&amp;section=9\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=2&amp;t=53335\">New site for GreKo</a> by <a href=\"/Vladimir_Medvedev\" title=\"Vladimir Medvedev\">Vladimir Medvedev</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, January 14, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=2&amp;t=53404\">GreKo 12.6</a> by <a href=\"/Vladimir_Medvedev\" title=\"Vladimir Medvedev\">Vladimir Medvedev</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, April 25, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=2&amp;t=53424\">GreKo 12.8</a> by <a href=\"/Vladimir_Medvedev\" title=\"Vladimir Medvedev\">Vladimir Medvedev</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, May 19, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=2&amp;t=53475\">GreKo 12.9</a> by <a href=\"/Vladimir_Medvedev\" title=\"Vladimir Medvedev\">Vladimir Medvedev</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, August 02, 2015 </li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=2&amp;t=53475&amp;start=1\">Re: GreKo 12.9 - Updated to 13.0.</a> by <a href=\"/Vladimir_Medvedev\" title=\"Vladimir Medvedev\">Vladimir Medvedev</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, October 01, 2015</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=2&amp;t=53523\">GreKo 13.1</a> by <a href=\"/Vladimir_Medvedev\" title=\"Vladimir Medvedev\">Vladimir Medvedev</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, October 07, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=2&amp;t=53557\">GreKo 2015</a> by <a href=\"/Vladimir_Medvedev\" title=\"Vladimir Medvedev\">Vladimir Medvedev</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, November 18, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=58331\">GreKo 2015</a> by <a href=\"/index.php?title=Werner_Sch%C3%BCle&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Werner Schüle (page does not exist)\">Werner Schüle</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 22, 2015</li></ul>\n<p><b>2016</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=60792\">GreKo 2015 ML</a> by <a href=\"/Vladimir_Medvedev\" title=\"Vladimir Medvedev\">Vladimir Medvedev</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 12, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=60902\">GreKo 2015 ML: tuning evaluation (article in Russian)</a> by <a href=\"/Vladimir_Medvedev\" title=\"Vladimir Medvedev\">Vladimir Medvedev</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 22, 2016&#160;» <a href=\"/Texel%27s_Tuning_Method\" title=\"Texel&#39;s Tuning Method\">Texel's Tuning Method</a> <sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=2&amp;t=53807\">GreKo 2016</a> by <a href=\"/Vladimir_Medvedev\" title=\"Vladimir Medvedev\">Vladimir Medvedev</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, December 30, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=62679\">GreKo 2016 released!</a> by <a href=\"/G%C3%BCnther_Simon\" title=\"Günther Simon\">Günther Simon</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 31, 2016</li></ul>\n<p><b>2018</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66271\">GreKo 2017, fixed</a> by <a href=\"/Vladimir_Medvedev\" title=\"Vladimir Medvedev\">Vladimir Medvedev</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 08, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66461\">GreKo 2018.01</a> by <a href=\"/Vladimir_Medvedev\" title=\"Vladimir Medvedev\">Vladimir Medvedev</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 31, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66704\">GreKo 2018.02</a> by <a href=\"/Vladimir_Medvedev\" title=\"Vladimir Medvedev\">Vladimir Medvedev</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 27, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=68277\">GreKo 2018.08</a> by <a href=\"/Vladimir_Medvedev\" title=\"Vladimir Medvedev\">Vladimir Medvedev</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 22, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=69440\">GreKo 2018</a> by <a href=\"/Vladimir_Medvedev\" title=\"Vladimir Medvedev\">Vladimir Medvedev</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 31, 2018</li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=GreKo&amp;action=edit&amp;section=10\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=76209&amp;start=221\">Re: New engine releases &amp; news 2021</a> by <a href=\"/Vladimir_Medvedev\" title=\"Vladimir Medvedev\">Vladimir Medvedev</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 14, 2021</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=76209&amp;start=398\">Re: New engine releases &amp; news 2021</a> by <a href=\"/Vladimir_Medvedev\" title=\"Vladimir Medvedev\">Vladimir Medvedev</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 03, 2021</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=76209&amp;start=442\">Re: New engine releases &amp; news 2021</a> (GreKo 2021.06) by <a href=\"/Vladimir_Medvedev\" title=\"Vladimir Medvedev\">Vladimir Medvedev</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 30, 2021</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=GreKo&amp;action=edit&amp;section=11\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://greko.su/\">Шахматная программа GreKo</a> <sup id=\"cite_ref-9\" class=\"reference\"><a href=\"#cite_note-9\">&#91;9&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://habrahabr.ru/post/305604/\">Самообучение шахматной программы / Хабрахабр</a> by <a href=\"/Vladimir_Medvedev\" title=\"Vladimir Medvedev\">Vladimir Medvedev</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Habrahabr\">Habrahabr</a>, July 21, 2016 (Russian)&#160;» <a href=\"/Texel%27s_Tuning_Method\" title=\"Texel&#39;s Tuning Method\">Texel's Tuning Method</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://greko.su/index_en.html\">GreKo chess engine</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://sourceforge.net/projects/greko/files/\">GreKo - Browse Files at SourceForge.net</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://sites.google.com/site/grekochess/\">GreKo - Download</a> <sup id=\"cite_ref-10\" class=\"reference\"><a href=\"#cite_note-10\">&#91;10&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.sdchess.ru/Greko.htm\">Greko by Vladimir Medvedev, Russia</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://www.sdchess.ru/\">sdchess.ru</a> (Russian)</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://aartbik.blogspot.de/2011/04/greko-chess-engine.html\">Aart's Blog: GreKo Chess Engine</a>, April 20, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.computerchess.org.uk/ccrl/4040/cgi/compare_engines.cgi?family=GreKo&amp;print=Rating+list&amp;print=Results+table&amp;print=LOS+table&amp;print=Ponder+hit+table&amp;print=Eval+difference+table&amp;print=Comopp+gamenum+table&amp;print=Overlap+table&amp;print=Score+with+common+opponents\">GreKo</a> in <a href=\"/CCRL\" title=\"CCRL\">CCRL 40/40</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=GreKo&amp;action=edit&amp;section=12\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://aartbik.blogspot.de/2011/04/greko-chess-engine.html\">Aart's Blog: GreKo Chess Engine</a>, April 20, 2011</span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/yHBbFa1GcSo/nkiYjGAo30sJ\">GreKo chess engine</a> by <a href=\"/Vladimir_Medvedev\" title=\"Vladimir Medvedev\">Vladimir Medvedev</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, April 01, 2002</span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.sdchess.ru/Greko.htm\">Greko by Vladimir Medvedev, Russia</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://www.sdchess.ru/\">sdchess.ru</a> (Russian)</span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=38804\">GreKo for Android</a> by <a href=\"/Aart_Bik\" title=\"Aart Bik\">Aart Bik</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 20, 2011</span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=60792\">GreKo 2015 ML</a> by <a href=\"/Vladimir_Medvedev\" title=\"Vladimir Medvedev\">Vladimir Medvedev</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 12, 2016</span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\">greko-2015-ml.zip/history.txt</span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=2&amp;t=2178&amp;start=15\">GreKo</a> by <a href=\"/Vladimir_Medvedev\" title=\"Vladimir Medvedev\">Vladimir Medvedev</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, April 05, 2005</span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://habrahabr.ru/post/305604/\">Самообучение шахматной программы / Хабрахабр</a> by <a href=\"/Vladimir_Medvedev\" title=\"Vladimir Medvedev\">Vladimir Medvedev</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Habrahabr\">Habrahabr</a>, July 21, 2016 (Russian) <a rel=\"nofollow\" class=\"external text\" href=\"https://translate.google.com/translate?sl=ru&amp;tl=en&amp;js=y&amp;prev=_t&amp;hl=de&amp;ie=UTF-8&amp;u=https%3A%2F%2Fhabrahabr.ru%2Fpost%2F305604%2F&amp;edit-text=\">translated</a> by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Google_Translate\">Google Translate</a></span>\n</li>\n<li id=\"cite_note-9\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-9\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=2&amp;t=53335\">New site for GreKo</a> by <a href=\"/Vladimir_Medvedev\" title=\"Vladimir Medvedev\">Vladimir Medvedev</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, January 14, 2015</span>\n</li>\n<li id=\"cite_note-10\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-10\">↑</a></span> <span class=\"reference-text\">does not only provide GreKo, but also a <a href=\"/Kaissa\" title=\"Kaissa\">Kaissa</a> <a href=\"/IBM_PC\" title=\"IBM PC\">PC</a> port in <a href=\"/C\" title=\"C\">Turbo C</a> from 1992, and a listing of the <a href=\"/ITEP_Chess_Program\" title=\"ITEP Chess Program\">ITEP Chess Program</a> for the <a href=\"/M-20\" title=\"M-20\">M-20</a> computer</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Engines\" title=\"Engines\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301074425\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.027 seconds\nReal time usage: 0.028 seconds\nPreprocessor visited node count: 191/1000000\nPreprocessor generated node count: 390/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:4417-0!canonical and timestamp 20260301074425 and revision id 25367\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "WinBoard"
+      },
+      {
+        "sortkey": "",
+        "*": "XBoard"
+      },
+      {
+        "sortkey": "",
+        "*": "UCI"
+      },
+      {
+        "sortkey": "",
+        "*": "Android"
+      },
+      {
+        "sortkey": "",
+        "*": "Mac"
+      },
+      {
+        "sortkey": "",
+        "*": "Open_Source"
+      },
+      {
+        "sortkey": "",
+        "*": "Acronym"
+      },
+      {
+        "sortkey": "",
+        "*": "Chess_Legend"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "0x88"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aart Bik"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha-Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Android"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Atak"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "C"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCCCISC 2008"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCRL"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Check Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Engine Communication Protocol"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess for Android"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cpp"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Daydreamer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth Reduction R"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engines"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation Function"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "GUI"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gaviota"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Graham Banks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Greco"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Günther Simon"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Harun Taner"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "IBM PC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ITEP Chess Program"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Igel"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iterative Deepening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jose Maria Velasco"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kaissa"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Learning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "M-20"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Magic Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Material"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mobility"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Opening Book"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Passed Pawn Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Patrick Buchmann"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Structure"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Piece-Lists"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Point Value by Regression Analysis"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Portable Game Notation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiescence Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Recapture Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Texel's Tuning Method"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "UCI"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vladimir Medvedev"
+      },
+      {
+        "ns": 0,
+        "*": "Werner Schüle"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Acronym"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Open Source"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Tournament Play",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "GreKo",
+        "byteoffset": 2776,
+        "anchor": "Tournament_Play"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Etymology",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "GreKo",
+        "byteoffset": 2941,
+        "anchor": "Etymology"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Derivatives",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "GreKo",
+        "byteoffset": 3334,
+        "anchor": "Derivatives"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "GreKo",
+        "byteoffset": 3360,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "5",
+        "index": "5",
+        "fromtitle": "GreKo",
+        "byteoffset": 3425,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2002...",
+        "number": "5.1",
+        "index": "6",
+        "fromtitle": "GreKo",
+        "byteoffset": 3439,
+        "anchor": "2002..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2005 ...",
+        "number": "5.2",
+        "index": "7",
+        "fromtitle": "GreKo",
+        "byteoffset": 3651,
+        "anchor": "2005_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "5.3",
+        "index": "8",
+        "fromtitle": "GreKo",
+        "byteoffset": 5052,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "5.4",
+        "index": "9",
+        "fromtitle": "GreKo",
+        "byteoffset": 6284,
+        "anchor": "2015_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "5.5",
+        "index": "10",
+        "fromtitle": "GreKo",
+        "byteoffset": 9228,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "6",
+        "index": "11",
+        "fromtitle": "GreKo",
+        "byteoffset": 9730,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "7",
+        "index": "12",
+        "fromtitle": "GreKo",
+        "byteoffset": 11100,
+        "anchor": "References"
+      }
+    ]
+  }
+}

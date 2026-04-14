@@ -1,0 +1,101 @@
+{
+  "roles": {
+    "best": "phase3_full_eval",
+    "worst": "phase1_minimax",
+    "random": "phase2_10x12_ab_pvs_id"
+  },
+  "condition": "equal_condition depth=3 tc=inf openings=encounter/plies8 rounds=2 games_per_encounter=2",
+  "players": [
+    {
+      "role": "best",
+      "variant_name": "phase3_full_eval",
+      "config_path": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/c_engine_pl/variants/phase3_full_eval.json",
+      "binary_path": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/outputs/controlled_equal_condition_tournament_best_worst_random/variant_bins/best_phase3_full_eval",
+      "condition": "depth=3 tc=inf",
+      "setup_summary": "EqualCondition: depth=3, tc=inf"
+    },
+    {
+      "role": "worst",
+      "variant_name": "phase1_minimax",
+      "config_path": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/c_engine_pl/variants/phase1_minimax.json",
+      "binary_path": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/outputs/controlled_equal_condition_tournament_best_worst_random/variant_bins/worst_phase1_minimax",
+      "condition": "depth=3 tc=inf",
+      "setup_summary": "EqualCondition: depth=3, tc=inf"
+    },
+    {
+      "role": "random",
+      "variant_name": "phase2_10x12_ab_pvs_id",
+      "config_path": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/c_engine_pl/variants/phase2_10x12_ab_pvs_id.json",
+      "binary_path": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/outputs/controlled_equal_condition_tournament_best_worst_random/variant_bins/random_phase2_10x12_ab_pvs_id",
+      "condition": "depth=3 tc=inf",
+      "setup_summary": "EqualCondition: depth=3, tc=inf"
+    }
+  ],
+  "perft": [
+    {
+      "role": "best",
+      "variant_name": "phase3_full_eval",
+      "perft_depth": 5,
+      "pass": true,
+      "reference_nodes": 4865609
+    },
+    {
+      "role": "worst",
+      "variant_name": "phase1_minimax",
+      "perft_depth": 5,
+      "pass": true,
+      "reference_nodes": 4865609
+    },
+    {
+      "role": "random",
+      "variant_name": "phase2_10x12_ab_pvs_id",
+      "perft_depth": 5,
+      "pass": true,
+      "reference_nodes": 4865609
+    }
+  ],
+  "game_count": 12,
+  "standings": [
+    {
+      "role": "best",
+      "variant_name": "phase3_full_eval",
+      "condition": "depth=3 tc=inf",
+      "games": 8,
+      "wins": 7,
+      "draws": 0,
+      "losses": 1,
+      "score": 7.0,
+      "score_pct": 87.5
+    },
+    {
+      "role": "random",
+      "variant_name": "phase2_10x12_ab_pvs_id",
+      "condition": "depth=3 tc=inf",
+      "games": 8,
+      "wins": 4,
+      "draws": 1,
+      "losses": 3,
+      "score": 4.5,
+      "score_pct": 56.2
+    },
+    {
+      "role": "worst",
+      "variant_name": "phase1_minimax",
+      "condition": "depth=3 tc=inf",
+      "games": 8,
+      "wins": 0,
+      "draws": 1,
+      "losses": 7,
+      "score": 0.5,
+      "score_pct": 6.2
+    }
+  ],
+  "artifacts": {
+    "players_csv": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/outputs/controlled_equal_condition_tournament_best_worst_random/players.csv",
+    "games_csv": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/outputs/controlled_equal_condition_tournament_best_worst_random/games.csv",
+    "standings_csv": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/outputs/controlled_equal_condition_tournament_best_worst_random/standings.csv",
+    "perft_csv": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/outputs/controlled_equal_condition_tournament_best_worst_random/perft.csv",
+    "pgn": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/outputs/controlled_equal_condition_tournament_best_worst_random/games.pgn",
+    "log": "/Users/mathieuacher/SANDBOX/chessprogramming-vm/outputs/controlled_equal_condition_tournament_best_worst_random/cutechess.log"
+  }
+}

@@ -1,0 +1,255 @@
+{
+  "parse": {
+    "title": "Checks and Pinned Pieces (Bitboards)",
+    "pageid": 1140,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Board_Representation\" title=\"Board Representation\">Board Representation</a> * <a href=\"/Bitboards\" title=\"Bitboards\">Bitboards</a> * Checks and Pinned Pieces</b>\n</p><p>This is about whether the <a href=\"/King\" title=\"King\">king</a> is in <a href=\"/Check\" title=\"Check\">check</a>. If so, one likely uses a specialized check evasion <a href=\"/Move_Generation\" title=\"Move Generation\">move generator</a>. One may also trigger search <a href=\"/Extensions\" title=\"Extensions\">extensions</a> - based on the king is in check - or based on the check evasion move generator only reports one valid move. Related to determining <a href=\"/Discovered_Check\" title=\"Discovered Check\">discovered check</a> is to look for <a href=\"/Pin#AbsolutePin\" title=\"Pin\">absolute pins</a>.\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Checks\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Checks</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-2\"><a href=\"#On_the_Fly\"><span class=\"tocnumber\">1.1</span> <span class=\"toctext\">On the Fly</span></a></li>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#By_Move\"><span class=\"tocnumber\">1.2</span> <span class=\"toctext\">By Move</span></a>\n<ul>\n<li class=\"toclevel-3 tocsection-4\"><a href=\"#Direct_Check\"><span class=\"tocnumber\">1.2.1</span> <span class=\"toctext\">Direct Check</span></a></li>\n<li class=\"toclevel-3 tocsection-5\"><a href=\"#Discovered_Check\"><span class=\"tocnumber\">1.2.2</span> <span class=\"toctext\">Discovered Check</span></a></li>\n</ul>\n</li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#Absolute_Pins\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Absolute Pins</span></a></li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#Opposite_Ray-Directions\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Opposite Ray-Directions</span></a></li>\n<li class=\"toclevel-1 tocsection-8\"><a href=\"#See_also\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-9\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Forum Posts</span></a></li>\n<li class=\"toclevel-1 tocsection-10\"><a href=\"#References\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Checks\">Checks</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Checks_and_Pinned_Pieces_(Bitboards)&amp;action=edit&amp;section=1\" title=\"Edit section: Checks\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Whether the king is in check may be determined on the fly by looking up attacks to the king square - or based on the last move made by the other, probably checking side. Another option is to determine check giving moves already at generation time, and to flag moves accordantly.\n<span id=\"ChecksOnTheFly\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"On_the_Fly\">On the Fly</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Checks_and_Pinned_Pieces_(Bitboards)&amp;action=edit&amp;section=2\" title=\"Edit section: On the Fly\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Whether a king is in check can be determined by the attacked-routine mentioned in <a href=\"/Square_Attacked_By#AnyAttackBySide\" title=\"Square Attacked By\">Square Attacked By</a>. We pass the square of the king and opposite <a href=\"/Color\" title=\"Color\">color</a> for the potential attackers.\n</p><p>If one needs the set of attackers, either empty, single or double populated - one likely better relies on a specialized <a href=\"/Square_Attacked_By#ByAllPieces\" title=\"Square Attacked By\">attacksTo-routine</a> for each side, e.g. as member of the <a href=\"/Bitboard_Board-Definition\" title=\"Bitboard Board-Definition\">standard bitboard board-definition</a>:\n</p>\n<pre>\nU64 CBoard::attacksToKing(enumSquare squareOfKing, enumColor colorOfKing) {\n   U64 opPawns, opKnights, opRQ, opBQ;\n   opPawns     = pieceBB[nBlackPawn   - colorOfKing];\n   opKnights   = pieceBB[nBlackKnight - colorOfKing];\n   opRQ = opBQ = pieceBB[nBlackQueen  - colorOfKing];\n   opRQ       |= pieceBB[nBlackRook   - colorOfKing];\n   opBQ       |= pieceBB[nBlackBishop - colorOfKing];\n   return (arrPawnAttacks[colorOfKing][squareOfKing] &amp; opPawns)\n        | (arrKnightAttacks[squareOfKing]            &amp; opKnights)\n        | (bishopAttacks (occupiedBB, squareOfKing)  &amp; opBQ)\n        | (rookAttacks   (occupiedBB, squareOfKing)  &amp; opRQ)\n       &#160;;\n}\n</pre>\n<h2><span class=\"mw-headline\" id=\"By_Move\">By Move</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Checks_and_Pinned_Pieces_(Bitboards)&amp;action=edit&amp;section=3\" title=\"Edit section: By Move\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Another idea is to determine the check inside the search-routine by the last <a href=\"/Moves\" title=\"Moves\">move</a> done by the opponent. It might be a direct or discovered <a href=\"/Check\" title=\"Check\">check</a> - or in case of <a href=\"/Double_Check\" title=\"Double Check\">double check</a>, both. With bitboards the possible savings to determine checks by last move seems negligible - and one probably better relies on the branch-less <a href=\"/Checks_and_Pinned_Pieces_(Bitboards)#ChecksOnTheFly\" title=\"Checks and Pinned Pieces (Bitboards)\">on the fly solution</a>, since we may reuse the rook-wise and bishop-wise attacks for other purposes - like determining absolute pinned pieces, kingsafety-evaluation, and/or whether the opponent side threatens checks or discovered checks.\n</p>\n<h3><span class=\"mw-headline\" id=\"Direct_Check\">Direct Check</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Checks_and_Pinned_Pieces_(Bitboards)&amp;action=edit&amp;section=4\" title=\"Edit section: Direct Check\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p>For the direct check we may use the routine mentioned in <a href=\"/Square_Attacked_By#AttackedByPieceOnSquare\" title=\"Square Attacked By\">Square Attacked By</a>:\n</p>\n<pre>\nif ( isAttacked(squareOfKing, move.to, move.piece(), occupiedBB) ) -&gt; direct check\n</pre>\n<h3><span class=\"mw-headline\" id=\"Discovered_Check\">Discovered Check</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Checks_and_Pinned_Pieces_(Bitboards)&amp;action=edit&amp;section=5\" title=\"Edit section: Discovered Check\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p>One solution is to determine the <a href=\"/Direction\" title=\"Direction\">direction</a> between the <a href=\"/Origin_Square\" title=\"Origin Square\">from-square</a> and the king square (e.g. by 0x88 difference). If both squares share a common line, one calls an appropriate sliding ray- or line-attack getter with king square and occupancy, to look whether this set intersects the possible opponing sliders of that ray. One also has to prove, whether a possible true result was not caused by a direct check of a sliding capture.\n<span id=\"AbsolutePins\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Absolute_Pins\">Absolute Pins</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Checks_and_Pinned_Pieces_(Bitboards)&amp;action=edit&amp;section=6\" title=\"Edit section: Absolute Pins\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>To detect <a href=\"/Pin#AbsolutePin\" title=\"Pin\">absolute pins</a> is necessary for <a href=\"/Legal_Move\" title=\"Legal Move\">legal</a> <a href=\"/Move_Generation\" title=\"Move Generation\">move generation</a> and may be considered in <a href=\"/Evaluation\" title=\"Evaluation\">evaluation</a>. While there are different approaches, the most common for programs based on single sliding piece attacks rather than direction wise set-wise attack getter, relies on the <a href=\"/X-ray_Attacks_(Bitboards)#ModifyingOccupancy\" title=\"X-ray Attacks (Bitboards)\">xrayRookAttacks</a> or <a href=\"/X-ray_Attacks_(Bitboards)#ModifyingOccupancy\" title=\"X-ray Attacks (Bitboards)\">xrayBishopAttacks</a> routines - called with square of own king and own pieces as blockers. An <a href=\"/Square_Attacked_By#Obstructed\" title=\"Square Attacked By\">in-between lookup</a> (Obstructed) determines the set of pinned pieces while <a href=\"/Bitboard_Serialization\" title=\"Bitboard Serialization\">traversing</a> the pinning pieces <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup>.\n</p>\n<pre>\npinned = 0;\npinner = xrayRookAttacks(occupiedBB, ownPieces, squareOfKing) &amp; opRQ;\nwhile ( pinner ) {\n   int sq  = bitScanForward(pinner);\n   pinned |= obstructed(sq, squareOfKing) &amp; ownPieces;\n   pinner &amp;= pinner - 1;\n}\npinner = xrayBishopAttacks(occupiedBB, ownPieces, squareOfKing) &amp; opBQ;\nwhile ( pinner ) {\n   int sq  = bitScanForward(pinner);\n   pinned |= obstructed(sq, squareOfKing) &amp; ownPieces;\n   pinner &amp;= pinner - 1;\n}\n</pre>\n<p><span id=\"OppositeRay\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Opposite_Ray-Directions\">Opposite Ray-Directions</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Checks_and_Pinned_Pieces_(Bitboards)&amp;action=edit&amp;section=7\" title=\"Edit section: Opposite Ray-Directions\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Another idea to determine absolute pins as well as distant check block-targets, or possible discovered check origins, is to apply disjoint direction-wise attacks, as demonstrated in the <a href=\"/DirGolem\" title=\"DirGolem\">DirGolem</a> proposal, where this technique is used for all eight ray-directions. The intersection of direction attacks of potential pinning sliding pieces with the opposite ray-direction attacks of the king treated as sliding super piece, gains enough information if further intersected by empty squares, own, or opponent pieces. For instance as illustrated with a black rook and white king on the same rank, with no, one and two pieces inbetween:\n</p><p>No obstruction, king in check. In-between intersection consists of empty squares as target set to block the distant check:\n</p>\n<pre>\n     . r . . . . K .     \nr-&gt;  . . 1 1 1 1 1 .      \n&lt;-K  . 1 1 1 1 1 . .\n&amp;    . . 1 1 1 1 . .  \n</pre>\n<p>One piece in-between. Intersection leaves a pinned piece if of king color, otherwise a possible discovered checker:\n</p>\n<pre>\n     . r . . x . K .  \nr-&gt;  . . 1 1 1 . . .             \n&lt;-K  . . . . 1 1 . .\n&amp;    . . . . 1 . . .\n</pre>\n<p>Two (or more) pieces in-between. Intersection is null:\n</p>\n<pre>\n      . r . x x . K .  \nr-&gt;   . . 1 1 . . . .\n&lt;-K   . . . . 1 1 . .\n&amp;     . . . . . . . .   \n</pre>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Checks_and_Pinned_Pieces_(Bitboards)&amp;action=edit&amp;section=8\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Check\" title=\"Check\">Check</a></li>\n<li> <a href=\"/DirGolem\" title=\"DirGolem\">DirGolem</a></li>\n<li> <a href=\"/Discovered_Check\" title=\"Discovered Check\">Discovered Check</a></li>\n<li> <a href=\"/Double_Check\" title=\"Double Check\">Double Check</a></li>\n<li> <a href=\"/Pin\" title=\"Pin\">Pin</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Checks_and_Pinned_Pieces_(Bitboards)&amp;action=edit&amp;section=9\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=334869\">Fast check detection in bitboard engine</a> by <a href=\"/Jean-Francois_Romang\" title=\"Jean-Francois Romang\">Jean-Francois Romang</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 10, 2003</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=6064&amp;p=29127\">Bitboards and inCheck</a> by <a href=\"/Andreas_Guettinger\" title=\"Andreas Guettinger\">Andreas Guettinger</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, January 03, 2007</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=22550\">Bitboard of Pinned Pieces</a> by <a href=\"/Grant_Osborne\" title=\"Grant Osborne\">Grant Osborne</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 24, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=41351\">Check detection and move generation using bitboards</a> by <a href=\"/Lasse_Hansen\" title=\"Lasse Hansen\">Lasse Hansen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 06, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=79617\">Pinned Pieces With Bitboards</a> by Andrew Zhuo, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 01, 2022</li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Checks_and_Pinned_Pieces_(Bitboards)&amp;action=edit&amp;section=10\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=79617&amp;start=2\">Re: Pinned Pieces With Bitboards</a> by tcusr, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 01, 2022</span>\n</li>\n</ol></div>\n<p><a href=\"/Bitboards\" title=\"Bitboards\">Up one Level</a>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260228115226\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.009 seconds\nReal time usage: 0.010 seconds\nPreprocessor visited node count: 114/1000000\nPreprocessor generated node count: 220/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1140-0!canonical and timestamp 20260228115226 and revision id 26410\n -->\n"
+    },
+    "categories": [],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Checks and Pinned Pieces (Bitboards)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Andreas Guettinger"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboard Board-Definition"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboard Serialization"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Board Representation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Check"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Color"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "DirGolem"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Direction"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Discovered Check"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Double Check"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Grant Osborne"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jean-Francois Romang"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "King"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lasse Hansen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Legal Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Generation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Moves"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Origin Square"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pin"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Square Attacked By"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "X-ray Attacks (Bitboards)"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Checks",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Checks_and_Pinned_Pieces_(Bitboards)",
+        "byteoffset": 520,
+        "anchor": "Checks"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "On the Fly",
+        "number": "1.1",
+        "index": "2",
+        "fromtitle": "Checks_and_Pinned_Pieces_(Bitboards)",
+        "byteoffset": 843,
+        "anchor": "On_the_Fly"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "By Move",
+        "number": "1.2",
+        "index": "3",
+        "fromtitle": "Checks_and_Pinned_Pieces_(Bitboards)",
+        "byteoffset": 2028,
+        "anchor": "By_Move"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Direct Check",
+        "number": "1.2.1",
+        "index": "4",
+        "fromtitle": "Checks_and_Pinned_Pieces_(Bitboards)",
+        "byteoffset": 2689,
+        "anchor": "Direct_Check"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Discovered Check",
+        "number": "1.2.2",
+        "index": "5",
+        "fromtitle": "Checks_and_Pinned_Pieces_(Bitboards)",
+        "byteoffset": 2930,
+        "anchor": "Discovered_Check"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Absolute Pins",
+        "number": "2",
+        "index": "6",
+        "fromtitle": "Checks_and_Pinned_Pieces_(Bitboards)",
+        "byteoffset": 3449,
+        "anchor": "Absolute_Pins"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Opposite Ray-Directions",
+        "number": "3",
+        "index": "7",
+        "fromtitle": "Checks_and_Pinned_Pieces_(Bitboards)",
+        "byteoffset": 4800,
+        "anchor": "Opposite_Ray-Directions"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "4",
+        "index": "8",
+        "fromtitle": "Checks_and_Pinned_Pieces_(Bitboards)",
+        "byteoffset": 6085,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "5",
+        "index": "9",
+        "fromtitle": "Checks_and_Pinned_Pieces_(Bitboards)",
+        "byteoffset": 6176,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "6",
+        "index": "10",
+        "fromtitle": "Checks_and_Pinned_Pieces_(Bitboards)",
+        "byteoffset": 6935,
+        "anchor": "References"
+      }
+    ]
+  }
+}

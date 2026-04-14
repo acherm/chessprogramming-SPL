@@ -1,0 +1,569 @@
+{
+  "parse": {
+    "title": "Razoring",
+    "pageid": 1000,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Search\" title=\"Search\">Search</a> * <a href=\"/Selectivity\" title=\"Selectivity\">Selectivity</a> * <a href=\"/Reductions\" title=\"Reductions\">Reductions</a> * Razoring</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"/File:William_of_Ockham_-_Logica_1341.jpg\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/William_of_Ockham_-_Logica_1341.jpg/330px-William_of_Ockham_-_Logica_1341.jpg\" width=\"300\" height=\"280\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/a/ab/William_of_Ockham_-_Logica_1341.jpg 1.5x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:William_of_Ockham_-_Logica_1341.jpg\" class=\"internal\" title=\"Enlarge\"></a></div><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Occam%27s_razor\">Occam's razor</a> <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p>Unlike <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">Alpha-Beta</a>, classical <b>Razoring</b> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup> <a href=\"/Pruning\" title=\"Pruning\">prunes</a> branches forward, if the static evaluation of a move is less than or equal to <a href=\"/Alpha\" title=\"Alpha\">Alpha</a>. It assumes that from any given position my opponent will be able to find at least one move that improves his position, the <a href=\"/Null_Move_Observation\" title=\"Null Move Observation\">Null Move Observation</a>. There are various implementations of Razoring, somehow diminishing <a href=\"/Pruning\" title=\"Pruning\">pruning</a> and <a href=\"/Reductions\" title=\"Reductions\">reductions</a> near the <a href=\"/Horizon_Node\" title=\"Horizon Node\">horizon</a>. Razoring either prunes forward based on a reduced search, even the <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">quiescence search</a>, or it reduces based on <a href=\"/Evaluation\" title=\"Evaluation\">evaluation</a> or quiescence search as well. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Pre_Frontier_Nodes\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Pre Frontier Nodes</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Deep_Razoring\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Deep Razoring</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Limited_Razoring\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Limited Razoring</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Amir_Ban.27s_Definition\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Amir Ban's Definition</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#Implementation\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Implementation</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-6\"><a href=\"#Stockfish\"><span class=\"tocnumber\">5.1</span> <span class=\"toctext\">Stockfish</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#Historical_Implementations\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Historical Implementations</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#Crafty_15.17\"><span class=\"tocnumber\">6.1</span> <span class=\"toctext\">Crafty 15.17</span></a></li>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#Dropping_into_Q-search\"><span class=\"tocnumber\">6.2</span> <span class=\"toctext\">Dropping into Q-search</span></a></li>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#Strelka\"><span class=\"tocnumber\">6.3</span> <span class=\"toctext\">Strelka</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-11\"><a href=\"#See_also\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-12\"><a href=\"#Publications\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">Publications</span></a></li>\n<li class=\"toclevel-1 tocsection-13\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">9</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-14\"><a href=\"#1995_...\"><span class=\"tocnumber\">9.1</span> <span class=\"toctext\">1995 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-15\"><a href=\"#2000_...\"><span class=\"tocnumber\">9.2</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-16\"><a href=\"#2005_...\"><span class=\"tocnumber\">9.3</span> <span class=\"toctext\">2005 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-17\"><a href=\"#2010_...\"><span class=\"tocnumber\">9.4</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-18\"><a href=\"#2015_...\"><span class=\"tocnumber\">9.5</span> <span class=\"toctext\">2015 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-19\"><a href=\"#2020_...\"><span class=\"tocnumber\">9.6</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-20\"><a href=\"#External_Links\"><span class=\"tocnumber\">10</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-21\"><a href=\"#References\"><span class=\"tocnumber\">11</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Pre_Frontier_Nodes\">Pre Frontier Nodes</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Razoring&amp;action=edit&amp;section=1\" title=\"Edit section: Pre Frontier Nodes\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>The idea introduced by <a href=\"/John_Birmingham\" title=\"John Birmingham\">John Birmingham</a> and <a href=\"/Peter_Kent\" title=\"Peter Kent\">Peter Kent</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup> was applied at so-called <a href=\"/Pre_Frontier_Node\" title=\"Pre Frontier Node\">pre frontier</a> (<span style=\"background-color: #d6d6d6;\">depth = 2</span>) expected <a href=\"/Node_Types#ALL\" title=\"Node Types\">All-Nodes</a>. Before searching deeper, all <a href=\"/Move_Generation\" title=\"Move Generation\">moves were generated</a>, <a href=\"/Make_Move\" title=\"Make Move\">made</a>, <a href=\"/Evaluation\" title=\"Evaluation\">evaluated</a>, <a href=\"/Unmake_Move\" title=\"Unmake Move\">unmade</a> and then inserted inside a sorted <a href=\"/Move_List\" title=\"Move List\">move list</a>. While fetching the sorted moves in decreasing order - as long as the evaluation of each move exceeds <a href=\"/Alpha\" title=\"Alpha\">alpha</a> - they were tried as usual. Once a move statically does no longer improve <a href=\"/Alpha\" title=\"Alpha\">alpha</a>, this and all further moves (sorted below) are pruned without any further investigation.\n</p>\n<h1><span class=\"mw-headline\" id=\"Deep_Razoring\">Deep Razoring</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Razoring&amp;action=edit&amp;section=2\" title=\"Edit section: Deep Razoring\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>There is even a more aggressive pruning technique at <span style=\"background-color: #d6d6d6;\">depth = 4</span> nodes, called Deep Razoring. The weaker assumption is my opponent will be able to improve his position with a <i>yourmove-mymove-yourmove</i> sequence.\n<span id=\"LimitedRazoring\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Limited_Razoring\">Limited Razoring</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Razoring&amp;action=edit&amp;section=3\" title=\"Edit section: Limited Razoring\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><a href=\"/Ernst_A._Heinz\" title=\"Ernst A. Heinz\">Ernst A. Heinz</a> introduced <i>Limited Razoring</i>, pushing the idea of <a href=\"/Futility_Pruning\" title=\"Futility Pruning\">futility pruning</a> one step further to pre-pre-frontier nodes (<span style=\"background-color: #d6d6d6;\">depth = 3</span>), he combines it with the depth-reduction mechanism of deep razoring <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup> .\n</p>\n<pre>\nfscore = mat_balance(current) + razor_margin;\nif (!extend\n &amp;&amp; (depth == PRE_PRE_FRONRIER)\n &amp;&amp; (fscore &lt;= alpha)\n &amp;&amp; (opposing_pieces(current) &gt; 3)\n   ) depth = PRE_FRONRIER;\n</pre>\n<h1><span class=\"mw-headline\" id=\"Amir_Ban.27s_Definition\">Amir Ban's Definition</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Razoring&amp;action=edit&amp;section=4\" title=\"Edit section: Amir Ban&#039;s Definition\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><a href=\"/Amir_Ban\" title=\"Amir Ban\">Amir Ban</a> in a <a href=\"/CCC\" title=\"CCC\">CCC</a> discussion with <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a> on Razoring versus <a href=\"/Pruning\" title=\"Pruning\">Pruning</a> <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup>&#160;:\n</p>\n<pre>Razoring is supposed to be a sort of forward pruning where rather than skipping an entire subtree, you search it to a reduced depth, typically one less than normal depth. The advantage is that you get most of the saving but with much lower risk than pruning entire subtrees. Razoring is the only forward pruning technique <a href=\"/Junior\" title=\"Junior\">Junior</a> uses, with a depth reduction of one (half-ply). Seems like <a href=\"/Crafty\" title=\"Crafty\">Crafty</a> uses the same definition ... \n</pre>\n<h1><span class=\"mw-headline\" id=\"Implementation\">Implementation</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Razoring&amp;action=edit&amp;section=5\" title=\"Edit section: Implementation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Stockfish\">Stockfish</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Razoring&amp;action=edit&amp;section=6\" title=\"Edit section: Stockfish\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>In 2022 razoring was reintroduced to <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a> <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup> by <a href=\"/Michael_Chaly\" title=\"Michael Chaly\">Michael Chaly</a>. The implementation features a quadratic depth-dependent margin. Certain precautions were made later on to prevent razoring from interfering with mate finding.\n</p>\n<pre>\n// Step 7. Razoring (~1 Elo)\n// If eval is really low check with qsearch if it can exceed alpha, if it can't,\n// return a fail low.\nif (eval &lt; alpha - 512 - 293 * depth * depth)\n{\n    value = qsearch&lt;NonPV&gt;(pos, ss, alpha - 1, alpha);\n    if (value &lt; alpha &amp;&amp; std::abs(value) &lt; VALUE_TB_WIN_IN_MAX_PLY)\n        return value;\n}\n</pre>\n<h1><span class=\"mw-headline\" id=\"Historical_Implementations\">Historical Implementations</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Razoring&amp;action=edit&amp;section=7\" title=\"Edit section: Historical Implementations\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Crafty_15.17\">Crafty 15.17</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Razoring&amp;action=edit&amp;section=8\" title=\"Edit section: Crafty 15.17\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>This code snippet appears in <a href=\"/Crafty\" title=\"Crafty\">Crafty 15.17</a> <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup> (~1998) <sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup> with <a href=\"/Extensions#FractionalExtensions\" title=\"Extensions\">fractional</a> reductions based on <a href=\"/Evaluation\" title=\"Evaluation\">evaluation</a> at <a href=\"/Pre_Frontier_Node\" title=\"Pre Frontier Node\">pre frontier nodes</a> (<span style=\"background-color: #d6d6d6;\">depth = 2</span>), already controversially discussed between <a href=\"/Vincent_Diepeveen\" title=\"Vincent Diepeveen\">Vincent Diepeveen</a> and <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a> in 2002 <sup id=\"cite_ref-9\" class=\"reference\"><a href=\"#cite_note-9\">&#91;9&#93;</a></sup>&#160;:\n</p>\n<pre>\n/*\n ----------------------------------------------------------\n|                                                          |\n|   now we toss in the \"razoring\" trick, which simply says |\n|   if we are doing fairly badly, we can reduce the depth  |\n|   an additional ply, if there was nothing at the current |\n|   ply that caused an extension.                          |\n|                                                          |\n ----------------------------------------------------------\n*/\n      if (depth&lt;3*INCREMENT_PLY &amp;&amp; depth&gt;=2*INCREMENT_PLY &amp;&amp;\n         &#160;!tree-&gt;in_check[ply] &amp;&amp; extensions == -60) {\n        register int value=-Evaluate(tree,ply+1,ChangeSide(wtm),\n                                     -(beta+51),-(alpha-51));\n        if (value+50 &lt; alpha) extensions-=60;\n      }\n</pre>\n<h2><span class=\"mw-headline\" id=\"Dropping_into_Q-search\">Dropping into Q-search</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Razoring&amp;action=edit&amp;section=9\" title=\"Edit section: Dropping into Q-search\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>A different razoring approach was proposed by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a> in <a href=\"/CCC\" title=\"CCC\">CCC</a> <sup id=\"cite_ref-10\" class=\"reference\"><a href=\"#cite_note-10\">&#91;10&#93;</a></sup> based on an idea by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a> <sup id=\"cite_ref-11\" class=\"reference\"><a href=\"#cite_note-11\">&#91;11&#93;</a></sup> , and abandoned in Crafty after cluster testing <sup id=\"cite_ref-12\" class=\"reference\"><a href=\"#cite_note-12\">&#91;12&#93;</a></sup> . Dropping into the <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">quiescence search</a> is intended inside a <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">PVS</a> framework at strong expected <a href=\"/Node_Types#ALL\" title=\"Node Types\">All-nodes</a> near the tips (pre-pre-frontier nodes or below, <span style=\"background-color: #d6d6d6;\">depth &lt;= 3</span>), that is a <a href=\"/Null_Window\" title=\"Null Window\">null window</a> (<span style=\"background-color: #d6d6d6;\">alpha = beta - 1</span>) is passed, and the static <a href=\"/Evaluation\" title=\"Evaluation\">evaluation</a> is by a margin (~three pawns) below beta (or &lt;= alpha). If under these conditions the quiescence search confirms the fail-low characteristics, its score is trusted and returned.\n</p>\n<pre>\n/*\n************************************************************\n*                                                          *\n* now we try a quick Razoring test. If we are within 3     *\n* plies of a tip, and the current eval is 3 pawns (or      *\n* more) below beta, then we just drop into a q-search      *\n* to try to get a quick cutoff without searching more in   *\n* a position where we are way down in material.            *\n*                                                          *\n************************************************************\n*/\nif (razoring_allowed &amp;&amp; depth &lt;= razor_depth) {\n   if (alpha == beta - 1) { // null window&#160;?\n      if (Evaluate(tree, ply, wtm, alpha, beta) + razor_margin &lt; beta) { // likely a fail-low node&#160;?\n         value = QuiesceChecks(tree, alpha, beta, wtm, ply);\n         if (value &lt; beta)\n            return value; // fail soft\n      }\n   }\n}\n</pre>\n<h2><span class=\"mw-headline\" id=\"Strelka\">Strelka</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Razoring&amp;action=edit&amp;section=10\" title=\"Edit section: Strelka\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Similar code appears in <a href=\"/Jury_Osipov\" title=\"Jury Osipov\">Jury Osipov's</a> <a href=\"/Category:Open_Source\" title=\"Category:Open Source\">open source engine</a> <a href=\"/Strelka\" title=\"Strelka\">Strelka 2.0</a> <sup id=\"cite_ref-13\" class=\"reference\"><a href=\"#cite_note-13\">&#91;13&#93;</a></sup> , failing a bit harder. The interesting thing is the missing <span style=\"background-color: #d6d6d6;\">new_value &lt; beta</span> condition in the <span style=\"background-color: #d6d6d6;\">depth = 1</span> case. If the static <a href=\"/Evaluation\" title=\"Evaluation\">evaluation</a> indicates a <a href=\"/Node_Types#ALL\" title=\"Node Types\">fail-low node</a>, but q-search <a href=\"/Fail-High\" title=\"Fail-High\">fails high</a>, the score of the reduced fail-high search is returned, since there was obviously a winning capture raising the score, and one assumes a <a href=\"/Quiet_Moves\" title=\"Quiet Moves\">quiet move</a> near the horizon will not do better <sup id=\"cite_ref-14\" class=\"reference\"><a href=\"#cite_note-14\">&#91;14&#93;</a></sup> .\n</p><p><i>Strelka.c line 393</i> (slightly modified for clarification) <a href=\"/User:GerdIsenberg\" class=\"mw-redirect\" title=\"User:GerdIsenberg\">user:GerdIsenberg</a>\n</p>\n<pre>\n  value = eval + 125;\n  if (value &lt; beta) {\n    if (depth == 1) {\n      new_value = qsearch(...);\n      return max(new_value, value);\n    }\n    value += 175;\n    if (value &lt; beta &amp;&amp; depth &lt;= 3) {\n      new_value = qsearch(...);\n      if (new_value &lt; beta)\n         return max(new_value, value);\n    }\n  }\n</pre>\n<p>In the <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Rybka Forum</a> thread on <a href=\"/Strelka\" title=\"Strelka\">Strelka 2.0</a> <sup id=\"cite_ref-15\" class=\"reference\"><a href=\"#cite_note-15\">&#91;15&#93;</a></sup> , <a href=\"/Anthony_Cozzie\" title=\"Anthony Cozzie\">Anthony Cozzie</a> states on this feature <sup id=\"cite_ref-16\" class=\"reference\"><a href=\"#cite_note-16\">&#91;16&#93;</a></sup>&#160;:\n</p>\n<pre>I'm also pretty amazed at how aggressively the search prunes. Not only will Strelka drop straight into the q-search on a depth-3 search, but because it orders all captures first, it will reduce almost all noncapture/check moves.\n</pre>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Razoring&amp;action=edit&amp;section=11\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Classical Razoring is known for being risky. It likely was a progress in <a href=\"/Claude_Shannon\" title=\"Claude Shannon\">Shannon</a> <a href=\"/Type_B_Strategy\" title=\"Type B Strategy\">Type-B</a> programs and a fixed width. Todays programs more likely rely on:\n</p>\n<ul><li> <a href=\"/Futility_Pruning\" title=\"Futility Pruning\">Futility Pruning</a></li>\n<li> <a href=\"/Futility_Pruning#Extendedfutilityprunning\" title=\"Futility Pruning\">Extended Futility Pruning</a></li>\n<li> <a href=\"/AEL-Pruning\" title=\"AEL-Pruning\">AEL-Pruning</a></li>\n<li> <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">Null Move Pruning</a></li>\n<li> and various <a href=\"/Reductions\" title=\"Reductions\">Reductions</a> (and <a href=\"/Extensions\" title=\"Extensions\">Extensions</a>) depending on depth left, and probably expected node type.</li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Razoring&amp;action=edit&amp;section=12\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/John_Birmingham\" title=\"John Birmingham\">John Birmingham</a>, <a href=\"/Peter_Kent\" title=\"Peter Kent\">Peter Kent</a> (<b>1977</b>). <i>Tree-searching and tree-pruning techniques</i>. <a href=\"/Advances_in_Computer_Chess_1\" title=\"Advances in Computer Chess 1\">Advances in Computer Chess 1</a>, reprinted 1988 in <a href=\"/Computer_Chess_Compendium\" title=\"Computer Chess Compendium\">Computer Chess Compendium</a></li>\n<li> <a href=\"/Ernst_A._Heinz\" title=\"Ernst A. Heinz\">Ernst A. Heinz</a> (<b>1998</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://people.csail.mit.edu/heinz/dt/node18.html\">Extended Futility Pruning</a>.</i> <a href=\"/ICGA_Journal#21_2\" title=\"ICGA Journal\">ICCA Journal, Vol. 21, No. 2</a>, including <a rel=\"nofollow\" class=\"external text\" href=\"http://people.csail.mit.edu/heinz/dt/node28.html\">Limited Razoring at Pre-Pre-Frontier Nodes</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Razoring&amp;action=edit&amp;section=13\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1995_...\">1995 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Razoring&amp;action=edit&amp;section=14\" title=\"Edit section: 1995 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=28706\">limited razoring question</a> by <a href=\"/Werner_Inmann\" title=\"Werner Inmann\">Werner Inmann</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 03, 1998</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=40931\">Razoring?</a> by <a href=\"/Steve_Maughan\" title=\"Steve Maughan\">Steve Maughan</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 26, 1999</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=64838\">razoring?</a> by <a href=\"/Scott_Gasch\" title=\"Scott Gasch\">Scott Gasch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 16, 1999</li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Razoring&amp;action=edit&amp;section=15\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=246598\">razoring in crafty version 16.9, mid 1999</a> by <a href=\"/Vincent_Diepeveen\" title=\"Vincent Diepeveen\">Vincent Diepeveen</a>, August 21, 2002</li></ul>\n<h2><span class=\"mw-headline\" id=\"2005_...\">2005 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Razoring&amp;action=edit&amp;section=16\" title=\"Edit section: 2005 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=24286\">Razoring...</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 09, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=29777\">futility pruning - razoring</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 16, 2009&#160;» <a href=\"/Futility_Pruning\" title=\"Futility Pruning\">Futility Pruning</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=30802\">Futility pruning, Ext futility pruning and Limited Razoring</a> by Jesper Nielsen, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 26, 2009</li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Razoring&amp;action=edit&amp;section=17\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=38407\">Bad Pruning</a> by <a href=\"/Onno_Garms\" title=\"Onno Garms\">Onno Garms</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 13, 2011&#160;» <a href=\"/Onno\" title=\"Onno\">Onno</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=3&amp;t=1477&amp;start=20#p13017\">Re: Still waiting on Ed</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">OpenChess Forum</a>, July 07, 2011&#160;» on <a href=\"/Crafty\" title=\"Crafty\">Crafty</a> 22.1 vs. 23.4. differences</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=43165\">futility pruning, razoring question</a> by <a href=\"/Marco_Belli\" title=\"Marco Belli\">Marco Belli</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 04, 2012&#160;» <a href=\"/Futility_Pruning\" title=\"Futility Pruning\">Futility Pruning</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=46130\">Razoring / Lazy eval question</a> by <a href=\"/index.php?title=Jerry_Donald&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Jerry Donald (page does not exist)\">Jerry Donald</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 24, 2012&#160;» <a href=\"/Lazy_Evaluation\" title=\"Lazy Evaluation\">Lazy Evaluation</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=49863\">Null move, razoring and mate threats</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 28, 2013&#160;» <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">Null Move Pruning</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2015_...\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Razoring&amp;action=edit&amp;section=18\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=57287\">Razoring vs Futility pruning</a> by <a href=\"/Shawn_Chidester\" title=\"Shawn Chidester\">Shawn Chidester</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 16, 2015&#160;» <a href=\"/Futility_Pruning\" title=\"Futility Pruning\">Futility Pruning</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=57843\">Verification of pruning techniques</a> by <a href=\"/Shawn_Chidester\" title=\"Shawn Chidester\">Shawn Chidester</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 04, 2015&#160;» <a href=\"/Pruning\" title=\"Pruning\">Pruning</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Razoring&amp;action=edit&amp;section=19\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=72857\">Is razoring useless in modern engines&#160;?</a> by <a href=\"/index.php?title=Alayan_Feh&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Alayan Feh (page does not exist)\">Alayan Feh</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 20, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=74425\">Questions on Razoring and Code Structure for Pruning</a> by Cheney, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 09, 2020&#160;» <a href=\"/Pruning\" title=\"Pruning\">Pruning</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Razoring&amp;action=edit&amp;section=20\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Razor\">Razor from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Razor_Blade\">Razor Blade from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Razor_cut\">Razor (hair) cut from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://liswiki.org/wiki/Razoring\">Razoring</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://liswiki.org/wiki/Main_Page\">Library and Information Science Wiki</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.computermuseum.li/Testpage/UNISYS-History.htm#RemRandShaver\">UNISYS-History - A 1955 Remington Rand electric shaver</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Philishave\">Philishave from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Occam%27s_razor\">Occam's razor from Wikipedia</a></li>\n<li> <a href=\"/Category:Frank_Zappa\" title=\"Category:Frank Zappa\">Frank Zappa</a> -  <a rel=\"nofollow\" class=\"external text\" href=\"http://wiki.killuglyradio.com/wiki/Occam%27s_Razor\">Occam's Razor</a> from <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/One_Shot_Deal\">One Shot Deal</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> <a href=\"/Category:Frank_Zappa\" title=\"Category:Frank Zappa\">Frank Zappa</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Warren_Cuccurullo\">Warren Cuccurullo</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://wiki.killuglyradio.com/wiki/Denny_Walley\">Denny Walley</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Ike_Willis\">Ike Willis</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Tommy_Mars\">Tommy Mars</a>,  <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Peter_Wolf_%28producer%29\">Peter Wolf</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Arthur_Barrow\">Arthur Barrow</a>, <a href=\"/Category:Vinnie_Colaiuta\" title=\"Category:Vinnie Colaiuta\">Vinnie Colaiuta</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Ed_Mann\">Ed Mann</a></dd>\n<dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/dp93bcp4HCM?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Razoring&amp;action=edit&amp;section=21\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap mw-references-columns\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/William_of_Ockham\">William of Ockham</a> – Sketch labeled \"frater Occham iste\", from a manuscript of Ockham's Summa Logicae, 1341</span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a href=\"/John_Birmingham\" title=\"John Birmingham\">John Birmingham</a>, <a href=\"/Peter_Kent\" title=\"Peter Kent\">Peter Kent</a> (<b>1977</b>). <i>Tree-searching and tree-pruning techniques</i>. <a href=\"/Advances_in_Computer_Chess_1\" title=\"Advances in Computer Chess 1\">Advances in Computer Chess 1</a>, reprinted 1988 in <a href=\"/Computer_Chess_Compendium\" title=\"Computer Chess Compendium\">Computer Chess Compendium</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a href=\"/John_Birmingham\" title=\"John Birmingham\">John Birmingham</a>, <a href=\"/Peter_Kent\" title=\"Peter Kent\">Peter Kent</a> (<b>1977</b>). <i>Tree-searching and tree-pruning techniques</i>. <a href=\"/Advances_in_Computer_Chess_1\" title=\"Advances in Computer Chess 1\">Advances in Computer Chess 1</a>, reprinted 1988 in <a href=\"/Computer_Chess_Compendium\" title=\"Computer Chess Compendium\">Computer Chess Compendium</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a href=\"/Ernst_A._Heinz\" title=\"Ernst A. Heinz\">Ernst A. Heinz</a> (<b>1998</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://people.csail.mit.edu/heinz/dt/node18.html\">Extended Futility Pruning</a>.</i> <a href=\"/ICGA_Journal#21_2\" title=\"ICGA Journal\">ICCA Journal, Vol. 21, No. 2</a>, including <a rel=\"nofollow\" class=\"external text\" href=\"http://people.csail.mit.edu/heinz/dt/node28.html\">Limited Razoring at Pre-Pre-Frontier Nodes</a></span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=41065\">Re: Razoring?</a> by <a href=\"/Amir_Ban\" title=\"Amir Ban\">Amir Ban</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 27, 1999</span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/official-stockfish/Stockfish/pull/3921\">Reintroduce razoring. by Vizvezdenec · Pull Request #3921 · official-stockfish/Stockfish · GitHub</a>, Github, February 4, 2022</span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"ftp://ftp.cis.uab.edu/pub/hyatt\">Robert Hyatt's FTP Page</a>, &lt;source&gt; <a rel=\"nofollow\" class=\"external text\" href=\"ftp://ftp.cis.uab.edu/pub/hyatt/source/crafty-15.17.zip\">crafty-15.17.zip</a>, search.c</span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=439367&amp;t=41597\">Re: Razoring</a> by <a href=\"/Sven_Sch%C3%BCle\" title=\"Sven Schüle\">Sven Schüle</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 25, 2011</span>\n</li>\n<li id=\"cite_note-9\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-9\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=246598\">razoring in crafty version 16.9, mid 1999</a> by <a href=\"/Vincent_Diepeveen\" title=\"Vincent Diepeveen\">Vincent Diepeveen</a>, August 21, 2002</span>\n</li>\n<li id=\"cite_note-10\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-10\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=24286\">Razoring...</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 09, 2008</span>\n</li>\n<li id=\"cite_note-11\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-11\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=439431&amp;t=41597\">Re: Razoring</a> by <a href=\"/Marco_Costalba\" title=\"Marco Costalba\">Marco Costalba</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 26, 2011</span>\n</li>\n<li id=\"cite_note-12\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-12\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=291637&amp;t=29777\">Re: futility pruning - razoring</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 16, 2009</span>\n</li>\n<li id=\"cite_note-13\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-13\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.sdchess.ru/download_engines.htm\">Download</a> by <a rel=\"nofollow\" class=\"external text\" href=\"http://www.sdchess.ru/\">sdchess.ru</a></span>\n</li>\n<li id=\"cite_note-14\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-14\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/8695c3373be2b379#\">Razoring</a> by <a href=\"/index.php?title=Joe_Stella&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Joe Stella (page does not exist)\">Joe Stella</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, August 31, 1995</span>\n</li>\n<li id=\"cite_note-15\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-15\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://rybkaforum.net/cgi-bin/rybkaforum/topic_show.pl?tid=3006\">Strelka 2.0</a> by <a href=\"/Vasik_Rajlich\" title=\"Vasik Rajlich\">Vasik Rajlich</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Rybka Forum</a>, January 11, 2008</span>\n</li>\n<li id=\"cite_note-16\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-16\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://rybkaforum.net/cgi-bin/rybkaforum/topic_show.pl?tid=3006;pg=4\">Strelka 2.0 pg 4</a> by <a href=\"/Anthony_Cozzie\" title=\"Anthony Cozzie\">Anthony Cozzie</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Rybka Forum</a>, January 11, 2008</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Reductions\" title=\"Reductions\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301122325\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.087 seconds\nReal time usage: 0.649 seconds\nPreprocessor visited node count: 370/1000000\nPreprocessor generated node count: 768/1000000\nPost‐expand include size: 27/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1000-0!canonical and timestamp 20260301122324 and revision id 27126\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Ban_Quotes"
+      },
+      {
+        "sortkey": "",
+        "*": "Cozzie_Quotes"
+      },
+      {
+        "sortkey": "",
+        "*": "Vinnie_Colaiuta"
+      },
+      {
+        "sortkey": "",
+        "*": "Frank_Zappa"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "AEL-Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 1"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha-Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Amir Ban"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Anthony Cozzie"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Claude Shannon"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Compendium"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Crafty"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Don Dailey"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ernst A. Heinz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fail-High"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Futility Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Horizon Node"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA Journal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "John Birmingham"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jon Dart"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Junior"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jury Osipov"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lazy Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Make Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marco Belli"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marco Costalba"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michael Chaly"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Generation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move List"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Node Types"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Observation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Window"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Onno"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Onno Garms"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter Kent"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pre Frontier Node"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiescence Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiet Moves"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Hyatt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Scott Gasch"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Selectivity"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Shawn Chidester"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Steve Maughan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stockfish"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Strelka"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sven Schüle"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tord Romstad"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Type B Strategy"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Unmake Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vasik Rajlich"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vincent Diepeveen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Werner Inmann"
+      },
+      {
+        "ns": 0,
+        "*": "Joe Stella"
+      },
+      {
+        "ns": 0,
+        "*": "Jerry Donald"
+      },
+      {
+        "ns": 0,
+        "*": "Alayan Feh"
+      },
+      {
+        "ns": 2,
+        "exists": "",
+        "*": "User:GerdIsenberg"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Frank Zappa"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Open Source"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Vinnie Colaiuta"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Pre Frontier Nodes",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Razoring",
+        "byteoffset": 1220,
+        "anchor": "Pre_Frontier_Nodes"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Deep Razoring",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Razoring",
+        "byteoffset": 2150,
+        "anchor": "Deep_Razoring"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Limited Razoring",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Razoring",
+        "byteoffset": 2462,
+        "anchor": "Limited_Razoring"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Amir Ban's Definition",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Razoring",
+        "byteoffset": 3235,
+        "anchor": "Amir_Ban.27s_Definition"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Implementation",
+        "number": "5",
+        "index": "5",
+        "fromtitle": "Razoring",
+        "byteoffset": 3904,
+        "anchor": "Implementation"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Stockfish",
+        "number": "5.1",
+        "index": "6",
+        "fromtitle": "Razoring",
+        "byteoffset": 3923,
+        "anchor": "Stockfish"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Historical Implementations",
+        "number": "6",
+        "index": "7",
+        "fromtitle": "Razoring",
+        "byteoffset": 4705,
+        "anchor": "Historical_Implementations"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Crafty 15.17",
+        "number": "6.1",
+        "index": "8",
+        "fromtitle": "Razoring",
+        "byteoffset": 4735,
+        "anchor": "Crafty_15.17"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Dropping into Q-search",
+        "number": "6.2",
+        "index": "9",
+        "fromtitle": "Razoring",
+        "byteoffset": 6377,
+        "anchor": "Dropping_into_Q-search"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Strelka",
+        "number": "6.3",
+        "index": "10",
+        "fromtitle": "Razoring",
+        "byteoffset": 8543,
+        "anchor": "Strelka"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "7",
+        "index": "11",
+        "fromtitle": "Razoring",
+        "byteoffset": 10600,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "8",
+        "index": "12",
+        "fromtitle": "Razoring",
+        "byteoffset": 11052,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "9",
+        "index": "13",
+        "fromtitle": "Razoring",
+        "byteoffset": 11524,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1995 ...",
+        "number": "9.1",
+        "index": "14",
+        "fromtitle": "Razoring",
+        "byteoffset": 11539,
+        "anchor": "1995_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "9.2",
+        "index": "15",
+        "fromtitle": "Razoring",
+        "byteoffset": 11893,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2005 ...",
+        "number": "9.3",
+        "index": "16",
+        "fromtitle": "Razoring",
+        "byteoffset": 12043,
+        "anchor": "2005_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "9.4",
+        "index": "17",
+        "fromtitle": "Razoring",
+        "byteoffset": 12491,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "9.5",
+        "index": "18",
+        "fromtitle": "Razoring",
+        "byteoffset": 13322,
+        "anchor": "2015_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "9.6",
+        "index": "19",
+        "fromtitle": "Razoring",
+        "byteoffset": 13649,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "10",
+        "index": "20",
+        "fromtitle": "Razoring",
+        "byteoffset": 13973,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "11",
+        "index": "21",
+        "fromtitle": "Razoring",
+        "byteoffset": 15433,
+        "anchor": "References"
+      }
+    ]
+  }
+}

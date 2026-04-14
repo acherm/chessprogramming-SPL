@@ -1,0 +1,469 @@
+{
+  "parse": {
+    "title": "Tapered Eval",
+    "pageid": 1536,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Evaluation\" title=\"Evaluation\">Evaluation</a> * Tapered Eval</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"/File:Polyphony2.JPG\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Polyphony2.JPG/330px-Polyphony2.JPG\" width=\"300\" height=\"238\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Polyphony2.JPG/500px-Polyphony2.JPG 1.5x, https://upload.wikimedia.org/wikipedia/commons/a/a4/Polyphony2.JPG 2x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Polyphony2.JPG\" class=\"internal\" title=\"Enlarge\"></a></div><a href=\"/Category:Paul_Klee\" title=\"Category:Paul Klee\">Paul Klee</a> - Ad Parnassum, 1932 <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup></div></div></div> \n<p><b>Tapered Eval</b>,<br />\na technique used in evaluation to make a smooth transition between the <a href=\"/Game_Phases\" title=\"Game Phases\">phases of the game</a> using a fine grained numerical game phase value considering type of captured pieces so far. The technique requires aggregating two distinct <a href=\"/Score\" title=\"Score\">scores</a> for the position, with weights corresponding to the <a href=\"/Opening\" title=\"Opening\">opening</a> and <a href=\"/Endgame\" title=\"Endgame\">endgame</a>. The current game phase is then used to <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Interpolation\">interpolate</a> between these values. The idea behind Tapered Eval is to remove <a href=\"/Evaluation_Discontinuity\" title=\"Evaluation Discontinuity\">evaluation discontinuity</a>. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#History\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">History</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Implementation_example\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Implementation example</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#See_also\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Selected_Publications\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Selected Publications</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-6\"><a href=\"#2005_...\"><span class=\"tocnumber\">5.1</span> <span class=\"toctext\">2005 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#2010_...\"><span class=\"tocnumber\">5.2</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#2015_...\"><span class=\"tocnumber\">5.3</span> <span class=\"toctext\">2015 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#2020_...\"><span class=\"tocnumber\">5.4</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-10\"><a href=\"#External_Links\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-11\"><a href=\"#References\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"History\">History</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Tapered_Eval&amp;action=edit&amp;section=1\" title=\"Edit section: History\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Though Tapered Eval has been used for many years (for example <a href=\"/The_King\" title=\"The King\">The King</a>, as <a href=\"/The_King#Description\" title=\"The King\">described</a> in 1991 <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup> and <a href=\"/Phalanx\" title=\"Phalanx\">Phalanx</a>), and was already mentioned by <a href=\"/Hans_Berliner\" title=\"Hans Berliner\">Hans Berliner</a> in 1979 <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>, the technique gained massive popularity only during the past few years, with the release of <a href=\"/Fruit\" title=\"Fruit\">Fruit</a> and the growing awareness among programmers of the sensitivity of the evaluation function to discontinuity. <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup>. <a href=\"/Zurichess\" title=\"Zurichess\">Zurichess</a> by <a href=\"/Alexandru_Mosoi\" title=\"Alexandru Mosoi\">Alexandru Moșoi</a> uses the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/TensorFlow\">TensorFlow</a> library for <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">automated tuning</a> - in a two layers <a href=\"/Neural_Networks\" title=\"Neural Networks\">neural network</a>, the second layer is for phasing endgame and middlegame scores <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup>.\n</p>\n<h1><span class=\"mw-headline\" id=\"Implementation_example\">Implementation example</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Tapered_Eval&amp;action=edit&amp;section=2\" title=\"Edit section: Implementation example\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Tapered Eval is done as follows in <a href=\"/Fruit\" title=\"Fruit\">Fruit</a> (similar implementations can be found in engines like <a href=\"/Crafty\" title=\"Crafty\">Crafty</a> and <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a> etc.). The scaling looks like this:\n</p>\n<pre>\neval = ((opening * (256 - phase)) + (endgame * phase)) / 256\n</pre>\n<p>Where <i>opening</i> is the evaluation of the position with middle game in mind (e.g. keep kings protected behind their pawn covers) and <i>endgame</i> is the evaluation with endgame in mind (e.g. activate the kings). Both these evaluations are done in parallel when evaluating a position.\n</p><p>The <i>phase</i> is evaluated like this (code specifics left out):\n</p>\n<pre>\nPawnPhase = 0\nKnightPhase = 1\nBishopPhase = 1\nRookPhase = 2\nQueenPhase = 4\nTotalPhase = PawnPhase*16 + KnightPhase*4 + BishopPhase*4 + RookPhase*4 + QueenPhase*2\n\nphase = TotalPhase\n\nphase -= wp * PawnPhase // Where wp is the number of white pawns currently on the board\nphase -= wn * Knight    // White knights\n...\nphase -= br * RookPhase\nphase -= bq * QueenPhase\n\nphase = (phase * 256 + (TotalPhase / 2)) / TotalPhase\n</pre>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Tapered_Eval&amp;action=edit&amp;section=3\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Evaluation_Discontinuity\" title=\"Evaluation Discontinuity\">Evaluation Discontinuity</a></li>\n<li> <a href=\"/Evaluation_Philosophy\" title=\"Evaluation Philosophy\">Evaluation Philosophy</a></li>\n<li> <a href=\"/Game_Phases\" title=\"Game Phases\">Game Phases</a></li>\n<li> <a href=\"/Neural_Networks\" title=\"Neural Networks\">Neural Networks</a></li>\n<li> <a href=\"/PeSTO%27s_Evaluation_Function\" title=\"PeSTO&#39;s Evaluation Function\">PeSTO's Evaluation Function</a></li>\n<li> <a href=\"/Stockfish#EvaluationGuide\" title=\"Stockfish\">Stockfish Evaluation Guide</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Selected_Publications\">Selected Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Tapered_Eval&amp;action=edit&amp;section=4\" title=\"Edit section: Selected Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Hans_Berliner\" title=\"Hans Berliner\">Hans Berliner</a> (<b>1979</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.bkgm.com/articles/Berliner/EvaluationFunctionsLargeDomains/\">On the Construction of Evaluation Functions for Large Domains</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.bkgm.com/articles/Berliner/EvaluationFunctionsLargeDomains/#sec-3\">III. Smoothness</a>, <a href=\"/Conferences#IJCAI1979\" title=\"Conferences\">IJCAI 1979</a>,  Tokyo, Vol. 1</li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Tapered_Eval&amp;action=edit&amp;section=5\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"2005_...\">2005 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Tapered_Eval&amp;action=edit&amp;section=6\" title=\"Edit section: 2005 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=16162\">designing neural networks</a> by <a href=\"/Gerd_Isenberg\" title=\"Gerd Isenberg\">Gerd Isenberg</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 31, 2007</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=220004&amp;t=23894\">Re: Lemming Poll</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 22, 2008&#160;» <a href=\"/Crafty\" title=\"Crafty\">Crafty</a>, <a href=\"/LearningLemming\" title=\"LearningLemming\">LearningLemming</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=23860\">Superlinear interpolator: a nice novelity&#160;?</a> by <a href=\"/Marco_Costalba\" title=\"Marco Costalba\">Marco Costalba</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 20, 2008&#160;» <a href=\"/SIMD_and_SWAR_Techniques\" title=\"SIMD and SWAR Techniques\">SIMD and SWAR Techniques</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?p=301746#301746\">Re: talk about IPP's evaluation</a> by <a href=\"/Richard_Vida\" title=\"Richard Vida\">Richard Vida</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 07, 2009&#160;» <a href=\"/Ippolit\" title=\"Ippolit\">Ippolit</a>, <a href=\"/SIMD_and_SWAR_Techniques\" title=\"SIMD and SWAR Techniques\">SIMD and SWAR Techniques</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Tapered_Eval&amp;action=edit&amp;section=7\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=38523\">My experience with Linux/GCC</a> by <a href=\"/Richard_Vida\" title=\"Richard Vida\">Richard Vida</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 23, 2011&#160;» <a href=\"/C\" title=\"C\">C</a>, <a href=\"/Linux\" title=\"Linux\">Linux</a>, <a href=\"/SIMD_and_SWAR_Techniques\" title=\"SIMD and SWAR Techniques\">SIMD and SWAR Techniques</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=42054\">two values in one integer</a> by <a href=\"/index.php?title=Pierre_Bokma&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Pierre Bokma (page does not exist)\">Pierre Bokma</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 18, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=51656\">Tapered evaluation</a> by <a href=\"/Marco_Pampaloni\" title=\"Marco Pampaloni\">Marco Pampaloni</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 18, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=53220\">advanced tapered evalutation</a> by <a href=\"/Marco_Belli\" title=\"Marco Belli\">Marco Belli</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 08, 2014&#160;» <a href=\"/SSE\" title=\"SSE\">SSE</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2015_...\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Tapered_Eval&amp;action=edit&amp;section=8\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=55519\">Why do some programs evaluate MidGame and EndGame together?</a> by <a href=\"/Syed_Fahad\" title=\"Syed Fahad\">Syed Fahad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 01, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=57181\">Tapered Eval</a> by <a href=\"/Robert_Pope\" title=\"Robert Pope\">Robert Pope</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 05, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=60565\">is phase a good indicator of game progress?</a> by <a href=\"/Alexandru_Mosoi\" title=\"Alexandru Mosoi\">Alexandru Mosoi</a>, June 23, 2016&#160;» <a href=\"/Game_Phases\" title=\"Game Phases\">Game Phases</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=60883&amp;start=4\">Re: Deep Learning Chess Engine&#160;?</a> by <a href=\"/Alexandru_Mosoi\" title=\"Alexandru Mosoi\">Alexandru Mosoi</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 21, 2016&#160;» <a href=\"/Deep_Learning\" title=\"Deep Learning\">Deep Learning</a>, <a href=\"/Zurichess\" title=\"Zurichess\">Zurichess</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61571\">Tapered Evaluation Questions</a> by Jayakiran Akurathi, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 01, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61850\">couple of questions about stockfish code&#160;?</a> by <a href=\"/index.php?title=Mahmoud_Uthman&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Mahmoud Uthman (page does not exist)\">Mahmoud Uthman</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 26, 2016&#160;» <a href=\"/SIMD_and_SWAR_Techniques\" title=\"SIMD and SWAR Techniques\">SIMD and SWAR Techniques</a>, <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=62153\">Define end game</a> by <a href=\"/Laurie_Tunnicliffe\" title=\"Laurie Tunnicliffe\">Laurie Tunnicliffe</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 16, 2016&#160;» <a href=\"/Endgame\" title=\"Endgame\">Endgame</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=5&amp;t=3088\">Early / middle / end game transitions?</a> by notachessplayer, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">OpenChess Forum</a>, February 19, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/fishcooking/8h-TH6YckMI/uFUb6H6eDAAJ\">Four game phases</a> by <a href=\"/Stefan_Geschwentner\" title=\"Stefan Geschwentner\">Stefan Geschwentner</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">FishCooking</a>, February 20, 2017&#160;» <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65466\">Tapered Eval between 4 phases</a> by <a href=\"/Andrew_Grant\" title=\"Andrew Grant\">Andrew Grant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 16, 2017</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65466&amp;start=4\">Re: Tapered Eval between 4 phases</a> by <a href=\"/Jonathan_Rosenthal\" title=\"Jonathan Rosenthal\">Jonathan Rosenthal</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 16, 2017&#160;» <a href=\"/Winter\" title=\"Winter\">Winter</a></dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?t=65466&amp;start=7\">Re: Tapered Eval between 4 phases</a> by <a href=\"/Youri_Matiounine\" title=\"Youri Matiounine\">Youri Matiounine</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 16, 2017&#160;» <a href=\"/AVX2\" title=\"AVX2\">AVX2</a></dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=68311&amp;start=19\">Re: New uci engine: Rofchade</a> by <a href=\"/Ronald_Friederich\" title=\"Ronald Friederich\">Ronald Friederich</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 28, 2018&#160;» <a href=\"/RofChade\" title=\"RofChade\">RofChade</a>,  <a href=\"/Piece-Square_Tables\" title=\"Piece-Square Tables\">Piece-Square Tables</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/fishcooking/6grLq5OEr9g/ERbVn0uDBQAJ\">Four-way evaluation trick?</a> by <a href=\"/Nick_Pelling\" title=\"Nick Pelling\">Nick Pelling</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">FishCooking</a>, September 07, 2018&#160;» <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/fishcooking/znU1a7aZ2XI/yJDFtOQnAwAJ\">mg vs eg eval</a> by <a href=\"/Joost_VandeVondele\" title=\"Joost VandeVondele\">Joost VandeVondele</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">FishCooking</a>, October 06, 2019&#160;» <a href=\"/Middlegame\" title=\"Middlegame\">Middlegame</a>, <a href=\"/Endgame\" title=\"Endgame\">Endgame</a>, <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Tapered_Eval&amp;action=edit&amp;section=9\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=76265\">Tapered Evaluation and MSE (Texel Tuning)</a> by <a href=\"/Michael_Hoffmann\" title=\"Michael Hoffmann\">Michael Hoffmann</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 10, 2021&#160;» <a href=\"/Texel%27s_Tuning_Method\" title=\"Texel&#39;s Tuning Method\">Texel's Tuning Method</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=77474\">Evaluation tapering methods</a> by <a href=\"/Martin_Bryant\" title=\"Martin Bryant\">Martin Bryant</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 12, 2021</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=77546\">Game Phase and tapered PSQT evaluation</a> by Jon12345, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 23, 2021&#160;» <a href=\"/PeSTO%27s_Evaluation_Function\" title=\"PeSTO&#39;s Evaluation Function\">PeSTO's Evaluation Function</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Tapered_Eval&amp;action=edit&amp;section=10\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://hxim.github.io/Stockfish-Evaluation-Guide/\">Stockfish Evaluation Guide</a>&#160;» <a href=\"/Stockfish#EvaluationGuide\" title=\"Stockfish\">Stockfish Evaluation Guide</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://mediocrechess.blogspot.com/2011/10/guide-tapered-eval.html\">Tapered Eval</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://mediocrechess.varten.org/index.html\">Mediocre Chess</a> by <a href=\"/Jonatan_Pettersson\" title=\"Jonatan Pettersson\">Jonatan Pettersson</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Taper\">Taper from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Cone_%28geometry%29\">Cone (geometry) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Interpolation\">Interpolation from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Fuzzy_logic\">Fuzzy logic from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/T-norm_fuzzy_logics\">T-norm fuzzy logics from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Potentiometer#Linear_taper_potentiometer\">Linear taper potentiometer from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Sigmoid_function\">Sigmoid function from Wikipedia</a></li>\n<li> <a href=\"/Category:Association_P.C.\" title=\"Category:Association P.C.\">Association P.C.</a> - Frau Theunissen´s Kegel, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.discogs.com/Association-PC-Erna-Morena/master/248647\">Erna Morena</a> (1973),  <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> <a href=\"/Category:Pierre_Courbois\" title=\"Category:Pierre Courbois\">Pierre Courbois</a>, <a href=\"/Category:Jasper_van_%27t_Hof\" title=\"Category:Jasper van &#39;t Hof\">Jasper van 't Hof</a>, <a href=\"/Category:Toto_Blanke\" title=\"Category:Toto Blanke\">Toto Blanke</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://de.wikipedia.org/wiki/Sigi_Busch\">Sigi Busch</a>, and <a rel=\"nofollow\" class=\"external text\" href=\"https://de.wikipedia.org/wiki/Heiner_Wiberny\">Heiner Wiberny</a></dd>\n<dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/YPFEcXTxcMA?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Tapered_Eval&amp;action=edit&amp;section=11\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a href=\"/Category:Paul_Klee\" title=\"Category:Paul Klee\">Paul Klee</a> - <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/File:Polyphony2.JPG\">Ad Parnassum</a>, 1932, oil colors, stamped lines, dots stamped in white color and later repainted, on casein paint on canvas on stretcher frame, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Museum_of_Fine_Arts_Berne\">Museum of Fine Arts Berne</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Paul_Klee\">Paul Klee from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Gradus_ad_Parnassum\">Gradus ad Parnassum - Wikipedia</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a href=\"/Don_Beal\" title=\"Don Beal\">Don Beal</a> (<b>1991</b>). <i>Report on the <a href=\"/WMCCC_1991\" title=\"WMCCC 1991\">11th World Microcomputer Chess Championship</a></i>. <a href=\"/ICGA_Journal#14_2\" title=\"ICGA Journal\">ICCA Journal, Vol. 14, No. 2</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a href=\"/Hans_Berliner\" title=\"Hans Berliner\">Hans Berliner</a> (<b>1979</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.bkgm.com/articles/Berliner/EvaluationFunctionsLargeDomains/\">On the Construction of Evaluation Functions for Large Domains</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.bkgm.com/articles/Berliner/EvaluationFunctionsLargeDomains/#sec-3\">III. Smoothness</a>, <a href=\"/Conferences#IJCAI1979\" title=\"Conferences\">IJCAI 1979</a>,  Tokyo, Vol. 1</span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=470681\">Re: Secrets of Rybka and Fruit from my point of view</a> by <a href=\"/Stuart_Cracraft\" title=\"Stuart Cracraft\">Stuart Cracraft</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 15, 2005</span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=60883&amp;start=1\">Re: Deep Learning Chess Engine&#160;?</a> by <a href=\"/Alexandru_Mosoi\" title=\"Alexandru Mosoi\">Alexandru Mosoi</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 21, 2016</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Evaluation\" title=\"Evaluation\">Up one level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301075924\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.124 seconds\nReal time usage: 0.653 seconds\nPreprocessor visited node count: 154/1000000\nPreprocessor generated node count: 330/1000000\nPost‐expand include size: 26/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1536-0!canonical and timestamp 20260301075923 and revision id 25214\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Paul_Klee"
+      },
+      {
+        "sortkey": "",
+        "*": "Association_P.C."
+      },
+      {
+        "sortkey": "",
+        "*": "Pierre_Courbois"
+      },
+      {
+        "sortkey": "",
+        "*": "Jasper_van_'t_Hof"
+      },
+      {
+        "sortkey": "",
+        "*": "Toto_Blanke"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "AVX2"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alexandru Mosoi"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Andrew Grant"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Automated Tuning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "C"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Conferences"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Crafty"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Deep Learning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Don Beal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Endgame"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation Discontinuity"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation Philosophy"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fruit"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Game Phases"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gerd Isenberg"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hans Berliner"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA Journal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ippolit"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jonatan Pettersson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jonathan Rosenthal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Joost VandeVondele"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Laurie Tunnicliffe"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "LearningLemming"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Linux"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marco Belli"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marco Costalba"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marco Pampaloni"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Martin Bryant"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michael Hoffmann"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Middlegame"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Neural Networks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Nick Pelling"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Opening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "PeSTO's Evaluation Function"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Phalanx"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Piece-Square Tables"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Richard Vida"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Hyatt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Pope"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "RofChade"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ronald Friederich"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SIMD and SWAR Techniques"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SSE"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Score"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stefan Geschwentner"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stockfish"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stuart Cracraft"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Syed Fahad"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Texel's Tuning Method"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "The King"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "WMCCC 1991"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Winter"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Youri Matiounine"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Zurichess"
+      },
+      {
+        "ns": 0,
+        "*": "Pierre Bokma"
+      },
+      {
+        "ns": 0,
+        "*": "Mahmoud Uthman"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Association P.C."
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Jasper van 't Hof"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Paul Klee"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Pierre Courbois"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Toto Blanke"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "History",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Tapered_Eval",
+        "byteoffset": 1250,
+        "anchor": "History"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Implementation example",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Tapered_Eval",
+        "byteoffset": 2770,
+        "anchor": "Implementation_example"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Tapered_Eval",
+        "byteoffset": 3817,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Selected Publications",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Tapered_Eval",
+        "byteoffset": 4022,
+        "anchor": "Selected_Publications"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "5",
+        "index": "5",
+        "fromtitle": "Tapered_Eval",
+        "byteoffset": 4370,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2005 ...",
+        "number": "5.1",
+        "index": "6",
+        "fromtitle": "Tapered_Eval",
+        "byteoffset": 4385,
+        "anchor": "2005_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "5.2",
+        "index": "7",
+        "fromtitle": "Tapered_Eval",
+        "byteoffset": 5085,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "5.3",
+        "index": "8",
+        "fromtitle": "Tapered_Eval",
+        "byteoffset": 5673,
+        "anchor": "2015_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "5.4",
+        "index": "9",
+        "fromtitle": "Tapered_Eval",
+        "byteoffset": 8198,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "6",
+        "index": "10",
+        "fromtitle": "Tapered_Eval",
+        "byteoffset": 8701,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "7",
+        "index": "11",
+        "fromtitle": "Tapered_Eval",
+        "byteoffset": 10183,
+        "anchor": "References"
+      }
+    ]
+  }
+}

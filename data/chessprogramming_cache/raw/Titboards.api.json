@@ -1,0 +1,120 @@
+{
+  "parse": {
+    "title": "Titboards",
+    "pageid": 1626,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Board_Representation\" title=\"Board Representation\">Board Representation</a> * <a href=\"/Bitboards\" title=\"Bitboards\">Bitboards</a> * <a href=\"/Sliding_Piece_Attacks\" title=\"Sliding Piece Attacks\">Sliding Piece Attacks</a> * Titboards</b>\n</p><p><b>Titboards</b>,<br />\na bitboard-based <a href=\"/Move_Generation\" title=\"Move Generation\">move generation</a> technique invented by <a href=\"/Zach_Wegner\" title=\"Zach Wegner\">Zach Wegner</a> <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup> and first implemented by Malik Tremain <sup id=\"cite_ref-TDFA_2-0\" class=\"reference\"><a href=\"#cite_note-TDFA-2\">&#91;2&#93;</a></sup>. Titboards are based on an extension of bitboards to ternary boards, hence the name (\"bit\" means binary digit, \"tit\" mean <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Ternary_numeral_system\">ternary digit</a>). Titboards are only used for move generation, not for any other purposes that typical bitboard attack-getters will be used for.\n</p><p>The idea of titboards is to eliminate <a href=\"/BitScan\" title=\"BitScan\">bitscans</a>. Typical bitboard move generation techniques generate a bitboard, intersect it with the set of allowable <a href=\"/Squares\" title=\"Squares\">squares</a> (empty or enemy-occupied), and then <a href=\"/Bitboard_Serialization\" title=\"Bitboard Serialization\">serialize</a> that into a list of moves. Titboards take a bitboard occupancy for each side for just one rank, file, or diagonal, and convert them to ternary representations and add them together. This index can determine which squares can actually be moved to, instead of just attacked. It is used in a lookup table of 3^7=2187 entries per <a href=\"/Direction\" title=\"Direction\">direction</a> per square.\n</p><p>Titboards are not typically used (there is one known engine that implements them <sup id=\"cite_ref-TDFA_2-1\" class=\"reference\"><a href=\"#cite_note-TDFA-2\">&#91;2&#93;</a></sup>). This is because they are currently slower than modern alternatives while being harder to implement. They require a large look-up table (~8.9 MB) and they work very differently from modern generation techniques likes <a href=\"/Magic_Bitboards\" title=\"Magic Bitboards\">Magic Bitboards</a>, where they require each direction to be calculated individually {File, Rank, Diagonal, Anti-Diagonal}. For each direction they require the input of (square, us, them), as a pose to (square, occupied) which is more commonly used.\n</p>\n<h1><span class=\"mw-headline\" id=\"Speed\">Speed</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Titboards&amp;action=edit&amp;section=1\" title=\"Edit section: Speed\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Testing shows that titboards have no speed advantage over magic bitboards on modern hardware, however, the gap seemingly narrows on older CPUs that offer less efficient bitscan operations. A full array of results can be found here<sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>.\n</p>\n<pre>\nCPU: AMD Ryzen 9 5950X 16-Core Processor\n\nTitboard perft group:\nAll tests completed with mean nps: 22290500\n\nPext perft group:\nAll tests completed with mean nps: 40633688\n\nMagic Bitboard perft group:\nAll tests completed with mean nps: 37989088\n</pre>\n<pre>\nCPU: Ryzen 5 5600x\nTitboard perft group:\nAll tests completed with mean nps: 21250050\n\nPext perft group:\nAll tests completed with mean nps: 36773955\n\nMagic Bitboard perft group:\nAll tests completed with mean nps: 34421651\n</pre>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Titboards&amp;action=edit&amp;section=2\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=5623\">Yet another new bitboard move generation method</a> by <a href=\"/Zach_Wegner\" title=\"Zach Wegner\">Zach Wegner</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, September 22, 2006&#160;» <a href=\"/Move_Generation\" title=\"Move Generation\">Move Generation</a></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=5623&amp;start=6\">Re: Yet another new bitboard move generation method</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, October 01, 2006 <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Titboards&amp;action=edit&amp;section=3\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=4&amp;t=5623&amp;p=27838\">Yet another new bitboard move generation method</a> by <a href=\"/Zach_Wegner\" title=\"Zach Wegner\">Zach Wegner</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, September 22, 2006</span>\n</li>\n<li id=\"cite_note-TDFA-2\"><span class=\"mw-cite-backlink\">↑ <sup><a href=\"#cite_ref-TDFA_2-0\">2.0</a></sup> <sup><a href=\"#cite_ref-TDFA_2-1\">2.1</a></sup></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/TiltedDFA/TDFA\">TDFA - Titboard Engine</a> by Malik Tremain, January 22, 2024</span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/TiltedDFA/TDFA/blob/3c4110f860f9c98b619a3f2565d139c92fe606c8/RunResults.txt\">TDFA - Perft result comparison</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=52861&amp;start=8\">Re: multi-dimensional piece/square tables</a> by Tony P., <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 28, 2020&#160;» <a href=\"/Piece-Square_Tables\" title=\"Piece-Square Tables\">Piece-Square Tables</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Sliding_Piece_Attacks\" title=\"Sliding Piece Attacks\">Up one level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301061658\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.010 seconds\nReal time usage: 0.010 seconds\nPreprocessor visited node count: 97/1000000\nPreprocessor generated node count: 220/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1626-0!canonical and timestamp 20260301061658 and revision id 27166\n -->\n"
+    },
+    "categories": [],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "BitScan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboard Serialization"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Board Representation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Direction"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Harm Geert Muller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Magic Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Generation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Piece-Square Tables"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sliding Piece Attacks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Squares"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Zach Wegner"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Speed",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Titboards",
+        "byteoffset": 2098,
+        "anchor": "Speed"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Titboards",
+        "byteoffset": 2971,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Titboards",
+        "byteoffset": 3593,
+        "anchor": "References"
+      }
+    ]
+  }
+}

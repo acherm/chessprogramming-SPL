@@ -1,0 +1,253 @@
+{
+  "parse": {
+    "title": "Null Window",
+    "pageid": 1073,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Dictionary\" title=\"Dictionary\">Dictionary</a> * Null Window</b>\n</p><p>A <b>Null Window</b>, also called <b>Zero Window</b>, <b>Scout Window</b> or <b>Narrow Window</b>, is a way to reduce the <a href=\"/Search_Space\" title=\"Search Space\">search space</a> in <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">alpha-beta</a> like <a href=\"/Search\" title=\"Search\">search</a> algorithms, to perform a boolean test, whether a <a href=\"/Moves\" title=\"Moves\">move</a> produces a worse or better score than a passed value. Null window searches are the base of <a href=\"/Scout\" title=\"Scout\">Scout</a>, <a href=\"/NegaScout\" title=\"NegaScout\">NegaScout</a> or <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">Principal Variation Search</a>, and <a href=\"/MTD(f)\" title=\"MTD(f)\">MTD(f)</a>.  \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#History\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">History</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Applications\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Applications</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#See_Also\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">See Also</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Forum Posts</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#External_Links\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#References\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"History\">History</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Window&amp;action=edit&amp;section=1\" title=\"Edit section: History\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Null windows were first described by <a href=\"/Judea_Pearl\" title=\"Judea Pearl\">Judea Pearl</a>, when introducing his <a href=\"/Scout\" title=\"Scout\">Scout</a> algorithm in April 1980 <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup>. Independently, null window searches were further elaborated by <a href=\"/John_Philip_Fishburn\" title=\"John Philip Fishburn\">John Philip Fishburn</a> in the <a href=\"/ACM#SIG\" title=\"ACM\">SIGART</a> Bulletin, Issue 72, July 1980 <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>, who was already trying to get this published starting in August 1979. Fishburn was somewhat disappointed in the speedup (or lack thereof) that he measured on <a href=\"/Checkers\" title=\"Checkers\">checkers</a> lookahead trees. However when he went to work at <a href=\"/Bell_Laboratories\" title=\"Bell Laboratories\">Bell Labs</a> in 1981, <a href=\"/Ken_Thompson\" title=\"Ken Thompson\">Ken Thompson</a> told him that he had read the SIGART paper, and had sped up <a href=\"/Belle\" title=\"Belle\">Belle</a> by 1.5x with null windows <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>.\n</p>\n<h1><span class=\"mw-headline\" id=\"Applications\">Applications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Window&amp;action=edit&amp;section=2\" title=\"Edit section: Applications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Null window searches are performed in\n</p>\n<ul><li> <a href=\"/MTD(f)\" title=\"MTD(f)\">MTD(f)</a></li>\n<li> <a href=\"/Multi-Cut\" title=\"Multi-Cut\">Multi-Cut</a> to prove no singularity</li>\n<li> <a href=\"/NegaC*\" title=\"NegaC*\">NegaC*</a></li>\n<li> <a href=\"/NegaScout\" title=\"NegaScout\">NegaScout</a></li>\n<li> <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">Null Move Pruning</a> to prove a null move <a href=\"/Fail-High\" title=\"Fail-High\">fails high</a></li>\n<li> <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">Principal Variation Search</a></li>\n<li> <a href=\"/ProbCut\" title=\"ProbCut\">ProbCut</a> for the reduced search</li>\n<li> <a href=\"/Scout\" title=\"Scout\">Scout</a></li>\n<li> <a href=\"/SSS*_and_Dual*#SSStarandDualStarAsMT\" title=\"SSS* and Dual*\">SSS* and Dual* as MT</a></li></ul>\n<p>A null window search can never return an <a href=\"/Exact_Score\" title=\"Exact Score\">exact score</a> with <span style=\"background-color: rgb(224, 224, 224)\"><a href=\"/Alpha\" title=\"Alpha\">alpha</a> &lt; score &lt; <a href=\"/Beta\" title=\"Beta\">beta</a></span> and therefor a <a href=\"/Principal_Variation\" title=\"Principal Variation\">principal variation</a>, but either an <a href=\"/Upper_Bound\" title=\"Upper Bound\">upper bound</a> with <span style=\"background-color: rgb(224, 224, 224)\">score &lt; beta</span> (<span style=\"background-color: rgb(240, 224, 224)\">score &lt;= alpha</span>) or a <a href=\"/Lower_Bound\" title=\"Lower Bound\">lower bound</a> with <span style=\"background-color: rgb(224, 224, 224)\">score &gt;= beta</span> (<span style=\"background-color: rgb(240, 224, 224)\">score &gt; alpha</span>). \n</p><p>With integers a null-window is defined as <span style=\"background-color: rgb(224, 224, 224)\">alpha == beta - 1</span>.\n</p>\n<h1><span class=\"mw-headline\" id=\"See_Also\">See Also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Window&amp;action=edit&amp;section=3\" title=\"Edit section: See Also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">Alpha-Beta</a></li>\n<li> <a href=\"/Aspiration_Windows\" title=\"Aspiration Windows\">Aspiration Windows</a></li>\n<li> <a href=\"/Window\" title=\"Window\">Window</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Window&amp;action=edit&amp;section=4\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=20596\">Zero-width Window Null Move Search</a> by <a href=\"/index.php?title=Dezhi_Zhao&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Dezhi Zhao (page does not exist)\">Dezhi Zhao</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 15, 1998</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=24883\">when to try zero window search</a> by <a href=\"/index.php?title=Andrew_Short&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Andrew Short (page does not exist)\">Andrew Short</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 14, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=33084\">Zero window TT entry</a> by <a href=\"/Vlad_Stamate\" title=\"Vlad Stamate\">Vlad Stamate</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 05, 2010&#160;» <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Table</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Window&amp;action=edit&amp;section=5\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Negascout\">Negascout from Wikipedia</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Null_Window&amp;action=edit&amp;section=6\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a href=\"/Judea_Pearl\" title=\"Judea Pearl\">Judea Pearl</a> (<b>1980</b>). <i>Scout: A Simple Game-Searching Algorithm with Proven Optimal Properties</i>. Proceedings of the First Annual National Conference on Artificial Intelligence. Stanford. <a rel=\"nofollow\" class=\"external text\" href=\"http://ftp.cs.ucla.edu/pub/stat_ser/scout.pdf\">pdf</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a href=\"/John_Philip_Fishburn\" title=\"John Philip Fishburn\">John Philip Fishburn</a> (<b>1980</b>). <i>An optimization of alpha-beta search</i>, SIGART Bulletin, Issue 72</span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a href=\"/John_Philip_Fishburn\" title=\"John Philip Fishburn\">John Philip Fishburn</a>, personal communication</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Dictionary\" title=\"Dictionary\">Up one level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301144758\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.010 seconds\nReal time usage: 0.010 seconds\nPreprocessor visited node count: 75/1000000\nPreprocessor generated node count: 154/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1073-0!canonical and timestamp 20260301144758 and revision id 1371\n -->\n"
+    },
+    "categories": [],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ACM"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha-Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aspiration Windows"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bell Laboratories"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Belle"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Checkers"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dictionary"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Exact Score"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fail-High"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "John Philip Fishburn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Judea Pearl"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ken Thompson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lower Bound"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "MTD(f)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Moves"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Multi-Cut"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "NegaC*"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "NegaScout"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ProbCut"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SSS* and Dual*"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Scout"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search Space"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Upper Bound"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Vlad Stamate"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Window"
+      },
+      {
+        "ns": 0,
+        "*": "Dezhi Zhao"
+      },
+      {
+        "ns": 0,
+        "*": "Andrew Short"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "History",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Null_Window",
+        "byteoffset": 491,
+        "anchor": "History"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Applications",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Null_Window",
+        "byteoffset": 1579,
+        "anchor": "Applications"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See Also",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Null_Window",
+        "byteoffset": 2663,
+        "anchor": "See_Also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Null_Window",
+        "byteoffset": 2730,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "5",
+        "index": "5",
+        "fromtitle": "Null_Window",
+        "byteoffset": 3158,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "6",
+        "index": "6",
+        "fromtitle": "Null_Window",
+        "byteoffset": 3246,
+        "anchor": "References"
+      }
+    ]
+  }
+}

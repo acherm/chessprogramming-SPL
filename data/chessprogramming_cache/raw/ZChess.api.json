@@ -1,0 +1,314 @@
+{
+  "parse": {
+    "title": "ZChess",
+    "pageid": 5031,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Engines\" title=\"Engines\">Engines</a> * ZChess</b>\n</p><p><b>ZChess</b>,<br />\na <a href=\"/WinBoard\" title=\"WinBoard\">WinBoard</a> compatible chess engine by <a href=\"/Franck_Zibi\" title=\"Franck Zibi\">Franck Zibi</a>, written in <a href=\"/Cpp\" title=\"Cpp\">C++</a>, in April 2001 renamed to <a href=\"/Pharaon\" title=\"Pharaon\">Pharaon</a>. ZChess evolved from a <a href=\"/C\" title=\"C\">C</a> port of <a href=\"/HpChess\" title=\"HpChess\">HpChess</a> incorporating <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Object-oriented_programming\">object oriented</a> paradigms, and using a <a href=\"/Bitboards\" title=\"Bitboards\">bitboard</a> board representation <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup> and in particular <a href=\"/Rotated_Bitboards\" title=\"Rotated Bitboards\">rotated bitboards</a> to generate sliding piece attacks. \nZChess applies <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">PVS</a> with <a href=\"/Iterative_Deepening\" title=\"Iterative Deepening\">iterative deepening</a> and <a href=\"/Aspiration_Windows\" title=\"Aspiration Windows\">aspiration windows</a>, using a <a href=\"/Transposition_Table\" title=\"Transposition Table\">transposition table</a> with multiple probes, <a href=\"/Pawn_Hash_Table\" title=\"Pawn Hash Table\">pawn-</a> and <a href=\"/King_Safety\" title=\"King Safety\">king safety</a> <a href=\"/Hash_Table\" title=\"Hash Table\">hash tables</a>, <a href=\"/Static_Exchange_Evaluation\" title=\"Static Exchange Evaluation\">SEE</a> for <a href=\"/Move_Ordering\" title=\"Move Ordering\">move ordering</a> and <a href=\"/Pruning\" title=\"Pruning\">pruning</a>, <a href=\"/Null_Move_Pruning#AdaptiveNullMovePruning\" title=\"Null Move Pruning\">adaptive null move pruning</a> with <a href=\"/Depth_Reduction_R\" title=\"Depth Reduction R\">R</a> = 2, 3, and heavily prunes not only in <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">quiescence search</a>. Move ordering considers <a href=\"/Hash_Move\" title=\"Hash Move\">hash-table move</a>, winning <a href=\"/Captures\" title=\"Captures\">captures</a> by SEE, <a href=\"/Killer_Heuristic\" title=\"Killer Heuristic\">killer heuristic</a>, <a href=\"/Countermove_Heuristic\" title=\"Countermove Heuristic\">counter move heuristic</a>, and <a href=\"/History_Heuristic\" title=\"History Heuristic\">history heuristic</a> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>.\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Tournaments\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Tournaments</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Selected_Games\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Selected Games</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#FCCC_1998\"><span class=\"tocnumber\">2.1</span> <span class=\"toctext\">FCCC 1998</span></a></li>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#WMCCC_2000\"><span class=\"tocnumber\">2.2</span> <span class=\"toctext\">WMCCC 2000</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#See_also\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Forum Posts</span></a></li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#External_Links\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-8\"><a href=\"#References\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Tournaments\">Tournaments</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=ZChess&amp;action=edit&amp;section=1\" title=\"Edit section: Tournaments\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>ZChess had its debut at the <a href=\"/FCCC_1997\" title=\"FCCC 1997\">FCCC 1997</a> and became runner up behind <a href=\"/Chess_Wizard\" title=\"Chess Wizard\">Chess Wizard</a> at the <a href=\"/FCCC_1998\" title=\"FCCC 1998\">FCCC 1998</a>. It further participated at the <a href=\"/WMCCC_2000\" title=\"WMCCC 2000\">WMCCC 2000</a> in London, the <a href=\"/IPCCC_2001\" title=\"IPCCC 2001\">IPCCC 2001</a> and <a href=\"/CCT2\" title=\"CCT2\">CCT2</a> online tournament, before it was renamed to <a href=\"/Pharaon\" title=\"Pharaon\">Pharaon</a>. Against humans, ZChess 1.2 played the <a href=\"/Aubervilliers_Rapid_Open#1999\" title=\"Aubervilliers Rapid Open\">1999 Aubervilliers Tournament</a>, scoring 9½/12 (one loss) with a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Performance_rating_%28chess%29#Performance_rating\">TPR</a> of 2300 <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Elo_rating_system\">Elo</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>.\n</p>\n<h1><span class=\"mw-headline\" id=\"Selected_Games\">Selected Games</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=ZChess&amp;action=edit&amp;section=2\" title=\"Edit section: Selected Games\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"FCCC_1998\">FCCC 1998</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=ZChess&amp;action=edit&amp;section=3\" title=\"Edit section: FCCC 1998\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p><a href=\"/FCCC_1998\" title=\"FCCC 1998\">FCCC 1998</a>, round 10, <a class=\"mw-selflink selflink\">ZChess</a> - <a href=\"/Chess_Guru\" title=\"Chess Guru\">Chess Guru</a> \n</p>\n<pre>\n[Event \"6th French CCC\"]\n[Site \"Clichy, FRA\"]\n[Date \"1998.09.27\"]\n[Round \"10\"]\n[White \"ZChess\"]\n[Black \"Chess Guru\"]\n[Result \"1-0\"]\n[ECO \"B81\"]\n\n1.e4 c5 2.Nf3 d6 3.d4 cxd4 4.Nxd4 Nf6 5.Nc3 e6 6.g4 h6 7.Rg1 Be7 8.Be3\nNc6 9.Qf3 Bd7 10.O-O-O Nxd4 11.Rxd4 Qa5 12.Rd1 Bc6 13.g5 hxg5 14.Rxg5 \nd5 15.Rxg7 dxe4 16.Qf4 Kf8 17.Rg2 Nh5 18.Qg4 Bb4 19.Nb1 Nf6 20.Qg7+ \nKe7 21.Rg5 Bd5 22.Rg6 Nh7 23.Rh6 Rag8 24.Bg5+ Ke8 25.Qe5 f6 26.Bxf6 \nNxf6 27.Rxf6 Ke7 28.a3 Bc4 29.Qf4 Qh5 30.axb4 e5 31.Qxe4 Kxf6 32.Bxc4 \nRd8 33.Nd2 Rd7 34.f4 Ke7 35.Bb5 Rdd8 36.Qxb7+ Kf8 37.Qc7 Qh4 38.fxe5\nRh7 39.Qc5+ Kg8 40.Rg1+ Kh8 41.e6 Qf6 42.Ne4 Qf4+ 43.Kb1 Qxe4 44.Qc3+ \nQd4 45.Rd1 1-0\n</pre>\n<h2><span class=\"mw-headline\" id=\"WMCCC_2000\">WMCCC 2000</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=ZChess&amp;action=edit&amp;section=4\" title=\"Edit section: WMCCC 2000\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p><a href=\"/WMCCC_2000\" title=\"WMCCC 2000\">WMCCC 2000</a>, round 6, <a href=\"/Junior\" title=\"Junior\">Junior</a> - <a class=\"mw-selflink selflink\">ZChess</a> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup> <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup>\n</p>\n<pre>\n[Event \"WMCCC 2000\"]\n[Site \"London, UK\"]\n[Date \"2000.08.24\"]\n[Round \"6\"]\n[White \"Junior\"]\n[Black \"ZChess\"]\n[Result \"1/2-1/2\"]\n\n1.e4 c6 2.d4 d5 3.Nd2 dxe4 4.Nxe4 Nd7 5.Ng5 Ngf6 6.Bd3 e6 7.N1f3 Bd6 \n8.Qe2 h6 9.Ne4 Nxe4 10.Qxe4 Qc7 11.Qg4 Kf8 12.O-O c5 13.Re1 b6 14.c3 \nBb7 15.h4 Rd8 16.Qh3 Bf4 17.a4 Bxc1 18.Raxc1 Qf4 19.Qg3 Qxg3 20.fxg3 \nKe7 21.Bb5 a5 22.Rcd1 g5 23.d5 Nf6 24.c4 Rhg8 25.Rd2 Rd6 26.b3 Rg7 \n27.Rde2 Ng4 28.Nd2 Nf6 29.hxg5 hxg5 30.Nf3 Ng4 31.Re4 Nh6 32.g4 Kd8 \n33.R4e2 Rg6 34.Ne5 Rf6 35.Re3 exd5 36.cxd5 Rxd5 37.Nc4 Kc8 38.Re8+ Rd8 \n39.Rxd8+ Kxd8 40.Rd1+ Kc7 41.Rd7+ Kb8 42.Rd8+ Kc7 43.Rd7+ Kb8 1/2-1/2 \n</pre>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=ZChess&amp;action=edit&amp;section=5\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Pharaon\" title=\"Pharaon\">Pharaon</a></li>\n<li> <a href=\"/Z-Chess\" title=\"Z-Chess\">Z-Chess</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=ZChess&amp;action=edit&amp;section=6\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=127888\">ANN&#160;: ZChess 2.0 (London) Released</a> by <a href=\"/Franck_Zibi\" title=\"Franck Zibi\">Franck Zibi</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 02, 2000</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=127895\">ZChess 2.0 running the gauntlet</a> by CLiebert, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 02, 2000</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=18&amp;t=32639\">ZChess getting much stronger...</a> by CLiebert, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, November 10, 2000</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=46037\">ZChess 2.00 (London) in concerto&#160;!</a> by <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/profile.php?mode=viewprofile&amp;u=881\">Ruxy Sylwyka</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 17, 2012</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=ZChess&amp;action=edit&amp;section=7\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.game-ai-forum.org/icga-tournaments/program.php?id=124\">ZChess' ICGA Tournaments</a> (includes <a href=\"/Pharaon\" title=\"Pharaon\">Pharaon</a>)</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.fzibi.com/pharaon/history.htm\">Pharaon History</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.fzibi.com/pharaon/auber99.htm\">ZChess at the 1999 Aubervilliers Tournament</a>&#160;» <a href=\"/Aubervilliers_Rapid_Open#1999\" title=\"Aubervilliers Rapid Open\">Aubervilliers Rapid Open 1999</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.rebel.nl/authors.htm\">Meet the Authors</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.365chess.com/players/Comp_ZChess_1.2\">Comp ZChess 1.2 chess games - 365Chess.com</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=ZChess&amp;action=edit&amp;section=8\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.fzibi.com/cchess/bitboards.htm\">Introduction to Bitboards</a> by <a href=\"/Franck_Zibi\" title=\"Franck Zibi\">Franck Zibi</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.fzibi.com/pharaon/history.htm\">Pharaon History</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.fzibi.com/pharaon/auber99.htm\">ZChess at the 1999 Aubervilliers Tournament</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.game-ai-forum.org/icga-tournaments/round.php?tournament=31&amp;round=6&amp;id=5\">London 2000 - Chess - Round 6 - Game 5 (ICGA Tournaments)</a></span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=125984\">Junior-zchess is going to be a draw</a> by <a href=\"/Uri_Blass\" title=\"Uri Blass\">Uri Blass</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August, 24, 2000</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Engines\" title=\"Engines\">Up one level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301132034\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.011 seconds\nReal time usage: 0.012 seconds\nPreprocessor visited node count: 123/1000000\nPreprocessor generated node count: 254/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:5031-0!canonical and timestamp 20260301132034 and revision id 14902\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "WinBoard"
+      },
+      {
+        "sortkey": "",
+        "*": "Chess_Suffix"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aspiration Windows"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aubervilliers Rapid Open"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "C"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCT2"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Captures"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Guru"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Wizard"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Countermove Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cpp"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth Reduction R"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ed Schroder"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engines"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "FCCC 1997"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "FCCC 1998"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Franck Zibi"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hash Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hash Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "History Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "HpChess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "IPCCC 2001"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iterative Deepening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Junior"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Killer Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "King Safety"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Ordering"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Hash Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pharaon"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiescence Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rotated Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Static Exchange Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Uri Blass"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "WMCCC 2000"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "WinBoard"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Z-Chess"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Tournaments",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "ZChess",
+        "byteoffset": 1470,
+        "anchor": "Tournaments"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Selected Games",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "ZChess",
+        "byteoffset": 2122,
+        "anchor": "Selected_Games"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "FCCC 1998",
+        "number": "2.1",
+        "index": "3",
+        "fromtitle": "ZChess",
+        "byteoffset": 2139,
+        "anchor": "FCCC_1998"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "WMCCC 2000",
+        "number": "2.2",
+        "index": "4",
+        "fromtitle": "ZChess",
+        "byteoffset": 2872,
+        "anchor": "WMCCC_2000"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "3",
+        "index": "5",
+        "fromtitle": "ZChess",
+        "byteoffset": 3863,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "4",
+        "index": "6",
+        "fromtitle": "ZChess",
+        "byteoffset": 3903,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "5",
+        "index": "7",
+        "fromtitle": "ZChess",
+        "byteoffset": 4552,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "6",
+        "index": "8",
+        "fromtitle": "ZChess",
+        "byteoffset": 5083,
+        "anchor": "References"
+      }
+    ]
+  }
+}

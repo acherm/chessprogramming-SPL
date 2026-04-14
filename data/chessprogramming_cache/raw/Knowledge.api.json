@@ -1,0 +1,1420 @@
+{
+  "parse": {
+    "title": "Knowledge",
+    "pageid": 1310,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * Knowledge</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"http://chgs.elevator.umn.edu/asset/viewAsset/57f3b6787d58ae5f74bf8ba9#57f3b6d77d58ae5574bf8bc6\"><img alt=\"\" src=\"/images/thumb/1/18/Knowledgeable.jpg/300px-Knowledgeable.jpg\" width=\"300\" height=\"206\" class=\"thumbimage\" srcset=\"/images/1/18/Knowledgeable.jpg 1.5x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Knowledgeable.jpg\" class=\"internal\" title=\"Enlarge\"></a></div><a href=\"/Category:Samuel_Bak\" title=\"Category:Samuel Bak\">Samuel Bak</a> - Knowledgeable <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>Knowledge</b> is the possession of information, its acquisition involves complex <a href=\"/Cognition\" title=\"Cognition\">cognitive</a> processes: <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Perception\">perception</a>, <a href=\"/Learning\" title=\"Learning\">learning</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Communication\">communication</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Association\">association</a> and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Reasoning\">reasoning</a>.\n</p><p>Inside a chess program, knowledge is manifested either as <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Procedural_knowledge\">procedural</a> or as <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Declarative_knowledge\">declarative knowledge</a>. The declarative <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/A_priori_and_a_posteriori\">a priori</a> knowledge about the <a href=\"/Rules_of_Chess\" title=\"Rules of Chess\">rules of chess</a> is immanent inside the <a href=\"/Move_Generation\" title=\"Move Generation\">move generator</a> in conjunction with <a href=\"/Check\" title=\"Check\">check</a> detection. Further declarative knowledge is coded as <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Rule_of_thumb\">rules of thumb</a> of the <a href=\"/Evaluation\" title=\"Evaluation\">evaluation</a> function, as well as persistent perfect knowledge from <a href=\"/Retrograde_Analysis\" title=\"Retrograde Analysis\">retrograde analysis</a>, or as <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Empirical\">empirical</a> knowledge mostly from human <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Experience\">experience</a>, to retrieve <a href=\"/Moves\" title=\"Moves\">moves</a> from an hand crafted <a href=\"/Opening_Book\" title=\"Opening Book\">opening book</a>. Procedural knowledge is applied by <a href=\"/Learning\" title=\"Learning\">Learning</a>, as well to backup declarative knowledge by <a href=\"/Search\" title=\"Search\">Search</a>. However, the Search versus Knowledge trade-off in computer chess and games refers heuristic or perfect knowledge. \n<span id=\"SearchversusKnowledge\"></span>\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Search_versus_Knowledge\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Search versus Knowledge</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-2\"><a href=\"#In_Practice\"><span class=\"tocnumber\">1.1</span> <span class=\"toctext\">In Practice</span></a></li>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#HiTech_versus_LoTech\"><span class=\"tocnumber\">1.2</span> <span class=\"toctext\">HiTech versus LoTech</span></a></li>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#Ed_Schr.C3.B6der.27s_Conclusion\"><span class=\"tocnumber\">1.3</span> <span class=\"toctext\">Ed Schröder's Conclusion</span></a></li>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#Search_versus_Evaluation\"><span class=\"tocnumber\">1.4</span> <span class=\"toctext\">Search versus Evaluation</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#Knowing\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Knowing</span></a></li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#Declarative_Knowledge\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Declarative Knowledge</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#A_Priori\"><span class=\"tocnumber\">3.1</span> <span class=\"toctext\">A Priori</span></a></li>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#Heuristic_Knowledge\"><span class=\"tocnumber\">3.2</span> <span class=\"toctext\">Heuristic Knowledge</span></a></li>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#Empirical_Knowledge\"><span class=\"tocnumber\">3.3</span> <span class=\"toctext\">Empirical Knowledge</span></a></li>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#Perfect_Knowledge\"><span class=\"tocnumber\">3.4</span> <span class=\"toctext\">Perfect Knowledge</span></a>\n<ul>\n<li class=\"toclevel-3 tocsection-12\"><a href=\"#Interior_Node_Recognizer\"><span class=\"tocnumber\">3.4.1</span> <span class=\"toctext\">Interior Node Recognizer</span></a></li>\n<li class=\"toclevel-3 tocsection-13\"><a href=\"#Endgame_Databases\"><span class=\"tocnumber\">3.4.2</span> <span class=\"toctext\">Endgame Databases</span></a></li>\n</ul>\n</li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-14\"><a href=\"#Procedural_Knowledge\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Procedural Knowledge</span></a></li>\n<li class=\"toclevel-1 tocsection-15\"><a href=\"#See_also\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-16\"><a href=\"#Publications\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">Publications</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-17\"><a href=\"#1970_...\"><span class=\"tocnumber\">6.1</span> <span class=\"toctext\">1970 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-18\"><a href=\"#1975_...\"><span class=\"tocnumber\">6.2</span> <span class=\"toctext\">1975 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-19\"><a href=\"#1980_...\"><span class=\"tocnumber\">6.3</span> <span class=\"toctext\">1980 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-20\"><a href=\"#1985_...\"><span class=\"tocnumber\">6.4</span> <span class=\"toctext\">1985 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-21\"><a href=\"#1990_...\"><span class=\"tocnumber\">6.5</span> <span class=\"toctext\">1990 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-22\"><a href=\"#1995_...\"><span class=\"tocnumber\">6.6</span> <span class=\"toctext\">1995 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-23\"><a href=\"#2000_...\"><span class=\"tocnumber\">6.7</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-24\"><a href=\"#2005_...\"><span class=\"tocnumber\">6.8</span> <span class=\"toctext\">2005 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-25\"><a href=\"#2010_...\"><span class=\"tocnumber\">6.9</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-26\"><a href=\"#2020_...\"><span class=\"tocnumber\">6.10</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-27\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-28\"><a href=\"#1996_...\"><span class=\"tocnumber\">7.1</span> <span class=\"toctext\">1996 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-29\"><a href=\"#2000_..._2\"><span class=\"tocnumber\">7.2</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-30\"><a href=\"#2005_..._2\"><span class=\"tocnumber\">7.3</span> <span class=\"toctext\">2005 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-31\"><a href=\"#2010_..._2\"><span class=\"tocnumber\">7.4</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-32\"><a href=\"#2015_...\"><span class=\"tocnumber\">7.5</span> <span class=\"toctext\">2015 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-33\"><a href=\"#External_Links\"><span class=\"tocnumber\">8</span> <span class=\"toctext\">External Links</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-34\"><a href=\"#Knowledge\"><span class=\"tocnumber\">8.1</span> <span class=\"toctext\">Knowledge</span></a></li>\n<li class=\"toclevel-2 tocsection-35\"><a href=\"#Related_Topics\"><span class=\"tocnumber\">8.2</span> <span class=\"toctext\">Related Topics</span></a></li>\n<li class=\"toclevel-2 tocsection-36\"><a href=\"#Types_of_Knowledge\"><span class=\"tocnumber\">8.3</span> <span class=\"toctext\">Types of Knowledge</span></a></li>\n<li class=\"toclevel-2 tocsection-37\"><a href=\"#Musicvideos\"><span class=\"tocnumber\">8.4</span> <span class=\"toctext\">Musicvideos</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-38\"><a href=\"#References\"><span class=\"tocnumber\">9</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Search_versus_Knowledge\">Search versus Knowledge</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=1\" title=\"Edit section: Search versus Knowledge\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>The trade-offs of <a href=\"/Search\" title=\"Search\">search</a> versus Knowledge <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup> \n</p>\n<table>\n\n<tr style=\"vertical-align:top;\">\n<td> <div class=\"floatnone\"><a href=\"/File:KnowledeSearch.JPG\" class=\"image\"><img alt=\"KnowledeSearch.JPG\" src=\"/images/c/ca/KnowledeSearch.JPG\" width=\"389\" height=\"274\" style=\"vertical-align: text-bottom\" class=\"thumbborder\" /></a></div>\n</td>\n<td> Curves A and B represent a fixed performance level, say 2000 for B and 2200 for A. The curves indicate that there are many ways to archive that level of performance, either by little knowledge and lot of search, or vice versa. If a program has archived point P on curve B, it may improve between search only (point S) or knowledge only (point K).\n</td></tr></table>\n<p><span id=\"InPractice\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"In_Practice\">In Practice</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=2\" title=\"Edit section: In Practice\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p><a href=\"/Andreas_Junghanns\" title=\"Andreas Junghanns\">Andreas Junghanns</a> and <a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a> in <i>Search versus knowledge in game-playing programs revisited</i> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>:\n</p>\n<pre>The difficulty lies in quantifying the knowledge axis. Perfect knowledge assumes an <a href=\"/Oracle\" title=\"Oracle\">oracle</a>, which for most games we do not have. However, we can approximate an oracle by using a high-quality, game playing program that performs deep searches. Although not perfect, it is the best approximation available. Using this, how can we measure the quality of knowledge in the program?\n</pre>\n<pre>A heuristic evaluation function, as judged by an oracle, can be viewed as a combination of two things: oracle knowledge and noise. The oracle knowledge is beneficial and improves the program' s play. The noise, on the other hand, represents the inaccuracies in the program' s knowledge. It can be introduced by several things, including knowledge that is missing, over- or under-valued, and/or irrelevant. As the noise level increase, the beneficial contribution of the knowledge is overshadowed.\n</pre>\n<pre>By definition, an oracle has no noise. We can measure the quality of the heuristic evaluation in a program by the amount of noise that is added into it. To measure this, we add a <a href=\"/Pseudorandom_Number_Generator\" title=\"Pseudorandom Number Generator\">random number</a> to each <a href=\"/Search_with_Random_Leaf_Values\" title=\"Search with Random Leaf Values\">leaf node evaluation</a> ... \n</pre>\n<h2><span class=\"mw-headline\" id=\"HiTech_versus_LoTech\">HiTech versus LoTech</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=3\" title=\"Edit section: HiTech versus LoTech\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>At the <a href=\"/Advances_in_Computer_Chess_5\" title=\"Advances in Computer Chess 5\">Advances in Computer Chess 5</a> conference 1987, <a href=\"/Hans_Berliner\" title=\"Hans Berliner\">Hans Berliner</a> et al. introduced an interesting experiment. <a href=\"/HiTech\" title=\"HiTech\">HiTech</a> with a sophisticated evaluation competed versus LoTech, almost the same program but a rudimentary evaluation, at different <a href=\"/Depth\" title=\"Depth\">search depths</a> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>. According to <a href=\"/Peter_Kouwenhoven\" title=\"Peter Kouwenhoven\">Peter Kouwenhoven</a> <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup>, Berliner's conclusion was that more was to be won by increasing HiTech's knowledge at constant speed rather than further increasing its speed while keeping knowledge constant. The abstract from the extended 1990 paper  <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup>:\n</p>\n<pre>Chess programs can differ in depth of search or in the evaluation function applied to leaf nodes or both. Over the past 10 years, the notion that the principal way to <a href=\"/Playing_Strength\" title=\"Playing Strength\">strengthen</a> a chess program is to improve its depth of search has held sway. Improving depth of search undoubtedly does improve a program's strength. However, projections of potential gain have time and again been found to overestimate the actual gain.\n</pre>\n<pre>We examine the notion that it is possible to project the playing strength of chess programs by having different versions of the same program (differing only in depth of search) play each other. Our data indicates that once a depth of “tactical sufficiency” is reached, a knowledgeable program can beat a significantly less knowledgeable one almost all of the time when both are searching to the same depth. This suggests that once a certain knowledge gap has been opened up, it cannot be overcome by small increments in searching depth. The conclusion from this work is that extending the depth of search without increasing the present level of knowledge will not in any foreseeable time lead to World Championship level chess. The approach of increasing knowledge has been taken in the HiTech chess machine. \n</pre>\n<h2><span class=\"mw-headline\" id=\"Ed_Schr.C3.B6der.27s_Conclusion\">Ed Schröder's Conclusion</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=4\" title=\"Edit section: Ed Schröder&#039;s Conclusion\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p><a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a> concluded HiTech's extra knowledge was just worth one <a href=\"/Ply\" title=\"Ply\">ply</a> in the computer-computer area <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup><sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup>, and further elaborated on <a href=\"/Tactics\" title=\"Tactics\">tactical</a> evaluation knowledge helpful in early <a href=\"/Rebel\" title=\"Rebel\">Rebel</a> searching 5-7 plies versus Rebel searching 13-15 plies on 2001 hardware <sup id=\"cite_ref-9\" class=\"reference\"><a href=\"#cite_note-9\">&#91;9&#93;</a></sup> <sup id=\"cite_ref-10\" class=\"reference\"><a href=\"#cite_note-10\">&#91;10&#93;</a></sup>:\n</p>\n<pre>Some specific chess knowledge through the years become out-dated due to the speed of nowadays computers. An example: In the early days of computer chess, say the period 1985-1989 I as hardware had a <a href=\"/6502\" title=\"6502\">6502</a> running at 5 Mhz. <a href=\"/Rebel\" title=\"Rebel\">Rebel</a> at that time could only search 5-7 plies on tournament time control. Such a low depth guarantees you one thing: <a href=\"/Horizon_Effect\" title=\"Horizon Effect\">horizon effects</a> all over, thus losing the game.\n</pre>\n<pre>To escape from the horizon effect all kind of tricks were invented, chess knowledge about dangerous <a href=\"/Pin\" title=\"Pin\">pins</a>, <a href=\"/Knight_Pattern#KnightForks\" title=\"Knight Pattern\">knight forks</a>, <a href=\"/Double_Attack\" title=\"Double Attack\">double attacks</a>, <a href=\"/Overloading\" title=\"Overloading\">overloading of pieces</a> and reward those aspects in <a href=\"/Evaluation\" title=\"Evaluation\">eval</a>. Complicated and processor time consuming software it was (15-20% less performance) but it did the trick escaping from the horizon effect in a reasonable way.\n</pre>\n<pre>Today we run chess program on 1500 Mhz machines and instead of the 5-7 plies Rebel now gets 13-15 plies in the middle game and the horizon effect which was a major problem at 5 Mhz slowly was fading away.\n</pre>\n<pre>So I wondered, what if I throw that complicated \"anti-horizon\" code out of Rebel, is it still needed? So I tried and found out that Rebel played as good with the \"anti-horizon\" code as without the code. In other words, the net gain was a \"free\" speed gain of 15-20%, thus an improvement.\n</pre>\n<pre>One aspect of chess programming is that your program is in a constant state of change due to the state of art of nowadays available hardware. I am sure a Rebel at 10 Ghz several parts of Rebel need a face-lift to get the maximum out of the new speed monster. \n</pre>\n<p><span id=\"SearchVersusEvaluation\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Search_versus_Evaluation\">Search versus Evaluation</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=5\" title=\"Edit section: Search versus Evaluation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p><a href=\"/Mark_Uniacke\" title=\"Mark Uniacke\">Mark Uniacke</a> in a reply to <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, on <a href=\"/Search\" title=\"Search\">Search</a> or <a href=\"/Evaluation\" title=\"Evaluation\">Evaluation</a>, mentioning the <a href=\"/1st_Computer_Olympiad#Chess\" title=\"1st Computer Olympiad\">1st Computer Olympiad</a>, <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">Null Move Pruning</a>, <a href=\"/HIARCS\" title=\"HIARCS\">HIARCS</a>, <a href=\"/Woodpusher\" title=\"Woodpusher\">Woodpusher</a>, <a href=\"/E6P\" title=\"E6P\">E6P</a>, <a href=\"/Rebel\" title=\"Rebel\">Rebel</a>, <a href=\"/Fritz\" title=\"Fritz\">Fritz</a> ...  <sup id=\"cite_ref-11\" class=\"reference\"><a href=\"#cite_note-11\">&#91;11&#93;</a></sup>:\n</p>\n<pre>I am not saying search is the only reason but that search is more significant in the Elo jump than other factors. Thanks for the interesting history which in general I agree with but I should add for clarification...\n</pre>\n<pre>In 1989 I was exposed to the  <a href=\"/Null_Move\" title=\"Null Move\">null move</a> in <a href=\"/HIARCS\" title=\"HIARCS\">HIARCS'</a> first official computer tournament at the <a href=\"/1st_Computer_Olympiad\" title=\"1st Computer Olympiad\">Olympiad</a> in London. <a href=\"/John_Hamlen\" title=\"John Hamlen\">John Hamlen</a> had written his program <a href=\"/Woodpusher\" title=\"Woodpusher\">Woodpusher</a> as part of his M.Sc project investigating the null move exclamation and although Woodpusher did not do well in that tournament I had the good fortune to discuss null move with John and reading his project which interested me very much. John and I had many discussions on computer chess over the following months.\nThat Olympiad probably had an impact on you too and not only because <a href=\"/Rebel\" title=\"Rebel\">Rebel</a> won Gold above <a href=\"/Mephisto_Portorose\" title=\"Mephisto Portorose\">Mephisto X</a> and <a href=\"/Fidelity\" title=\"Fidelity\">Fidelity X</a> for the first time but because there was a program there running quite fast (at that time in history) called <a href=\"/E6P\" title=\"E6P\">E6P</a> (so named because it could reach 6 ply full width!) running on an Acorn <a href=\"/ARM2\" title=\"ARM2\">ARM</a> <a href=\"/Acorn_Archimedes\" title=\"Acorn Archimedes\">based machine</a>. <a href=\"/Jan_Louwman\" title=\"Jan Louwman\">Jan</a> was operating Rebel at the tournament as you know and I noticed Jan take a keen interest in this new machine. \n</pre>\n<pre><a href=\"/Frans_Morsch\" title=\"Frans Morsch\">Frans</a> was using null move in <a href=\"/Fritz\" title=\"Fritz\">Fritz 2</a> in <a href=\"/WCCC_1992\" title=\"WCCC 1992\">Madrid 1992</a> (I am not sure about Fritz 1). I am sure you remember that tournament fondly. I remember at Madrid having a discussion with a few programmers including <a href=\"/Richard_Lang\" title=\"Richard Lang\">Richard</a> about what on earth was Fritz 2 doing to reach the <a href=\"/Depth\" title=\"Depth\">depths</a> it was attaining, this seed of interest made me investigate search enhancements carefully after Madrid and it was then that I began re-investigating the null move. It was not long before HIARCS began using null moves too and by Christmas 1992 I had a working implementation which gave a big jump over Hiarcs 1 which had only been released shortly before. I had much fun playing my Hiarcs 1.n against <a href=\"/Mephisto_RISC\" title=\"Mephisto RISC\">Mephisto Risc 1</a> in late 1992, early 1993 and that sort of closes the circle on the E6P story. Even so, the null move idea still evolved and my implementation today is much better than it was initially and so it can be for other ideas. We can all profit from these techniques but some gain more than others if they find new ways to exploit it.\n\nRebel 7/8/9 and Hiarcs 5/6/7 battled hard in those years and my big jump to the top of the rating lists happened partly because of a search change to Hiarcs 5/6 which led at one stage to a 71 Elo lead on the SSDF. I recall Rebel and Hiarcs exchanging the lead on the <a href=\"/SSDF\" title=\"SSDF\">SSDF</a> list a number of times in those years. So we agree the impact search has made on computer chess progress is clear. Now we diverge on what might be the reason for new progress in the field.\nClearly we have good search enhancements on <a href=\"/Node_Types#CUT\" title=\"Node Types\">cut nodes</a> and <a href=\"/Node_Types#ALL\" title=\"Node Types\">all nodes</a>, but that does not mean they cannot be improved and enhanced or in fact that another technique might prove to be superior or complementary. Meanwhile there can be no doubt that progress is made positionally irrespective of search but I do not believe it can be the reason for a breakthrough jump in chess strength but rather a steady climb.\n\nBut wait!\nMaybe there is a middle way, a third avenue of improvement which sort of falls between the two pillars of search and evaluation and that is search intelligence. Something both of us have practiced in our programs for years but maybe not properly exploited. The ability of the eval to have a more significant impact on the search than traditionally has been the case. I think this area has been relatively unexplored and offers interesting potential. \n</pre>\n<h1><span class=\"mw-headline\" id=\"Knowing\">Knowing</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=6\" title=\"Edit section: Knowing\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Chunking\" title=\"Chunking\">Chunking</a></li>\n<li> <a href=\"/Cognition\" title=\"Cognition\">Cognition</a></li>\n<li> <a href=\"/Learning\" title=\"Learning\">Learning</a></li>\n<li> <a href=\"/Pattern_Recognition\" title=\"Pattern Recognition\">Pattern Recognition</a></li>\n<li> <a href=\"/Planning\" title=\"Planning\">Planning</a></li></ul>\n<p><span id=\"DeclarativeKnowledge\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Declarative_Knowledge\">Declarative Knowledge</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=7\" title=\"Edit section: Declarative Knowledge\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"A_Priori\">A Priori</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=8\" title=\"Edit section: A Priori\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Rules_of_Chess\" title=\"Rules of Chess\">Rules of Chess</a></li>\n<li> <a href=\"/Move_Generation\" title=\"Move Generation\">Move Generation</a></li>\n<li> <a href=\"/Check\" title=\"Check\">In Check</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Heuristic_Knowledge\">Heuristic Knowledge</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=9\" title=\"Edit section: Heuristic Knowledge\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Evaluation\" title=\"Evaluation\">Evaluation</a></li>\n<li> <a href=\"/Move_Ordering\" title=\"Move Ordering\">Move Ordering</a></li>\n<li> <a href=\"/Selectivity\" title=\"Selectivity\">Selectivity</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Empirical_Knowledge\">Empirical Knowledge</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=10\" title=\"Edit section: Empirical Knowledge\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">Automated Tuning</a></li>\n<li> <a href=\"/Opening_Book\" title=\"Opening Book\">Opening Book</a></li></ul>\n<p><span id=\"PerfectKnowledge\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Perfect_Knowledge\">Perfect Knowledge</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=11\" title=\"Edit section: Perfect Knowledge\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Perfect Knowledge usually incorporates <a href=\"/Retrograde_Analysis\" title=\"Retrograde Analysis\">analysis</a> or stored results from exhaustive search, which requires no further search at <a href=\"/Interior_Node\" title=\"Interior Node\">interior nodes</a> except the <a href=\"/Root\" title=\"Root\">root</a>. An <a href=\"/Oracle\" title=\"Oracle\">oracle</a> might be considered as \"perfect\" <a href=\"/Evaluation\" title=\"Evaluation\">evaluation</a>.\n</p>\n<ul><li> <a href=\"/Oracle\" title=\"Oracle\">Oracle</a></li>\n<li> <a href=\"/Retrograde_Analysis\" title=\"Retrograde Analysis\">Retrograde Analysis</a></li></ul>\n<p><span id=\"InteriorNodeRecognizers\"></span>\n</p>\n<h3><span class=\"mw-headline\" id=\"Interior_Node_Recognizer\">Interior Node Recognizer</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=12\" title=\"Edit section: Interior Node Recognizer\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<ul><li> <a href=\"/Interior_Node_Recognizer\" title=\"Interior Node Recognizer\">Interior Node Recognizer</a></li></ul>\n<h3><span class=\"mw-headline\" id=\"Endgame_Databases\">Endgame Databases</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=13\" title=\"Edit section: Endgame Databases\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p>as probed inside a Recognizer framework, if a certain material constellation is detected.\n</p>\n<ul><li> <a href=\"/Endgame_Tablebases\" title=\"Endgame Tablebases\">Endgame Tablebases</a></li>\n<li> <a href=\"/Endgame_Bitbases\" title=\"Endgame Bitbases\">Endgame Bitbases</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Procedural_Knowledge\">Procedural Knowledge</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=14\" title=\"Edit section: Procedural Knowledge\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Search\" title=\"Search\">Search</a></li>\n<li> <a href=\"/Checkmate\" title=\"Checkmate\">Checkmate</a></li>\n<li> <a href=\"/Stalemate\" title=\"Stalemate\">Stalemate</a></li>\n<li> <a href=\"/Fifty-move_Rule\" title=\"Fifty-move Rule\">Fifty-move Rule</a></li>\n<li> <a href=\"/Repetitions\" title=\"Repetitions\">Repetitions</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=15\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Artificial_Intelligence\" title=\"Artificial Intelligence\">Artificial Intelligence</a></li>\n<li> <a href=\"/Depth#DiminishingReturns\" title=\"Depth\">Diminishing Returns</a></li>\n<li> <a href=\"/Memory\" title=\"Memory\">Memory</a></li>\n<li> <a href=\"/Opponent_Model_Search\" title=\"Opponent Model Search\">Opponent Model Search</a></li>\n<li> <a href=\"/index.php?title=Psychology&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Psychology (page does not exist)\">Psychology</a></li>\n<li> <a href=\"/Strategy\" title=\"Strategy\">Strategy</a></li>\n<li> <a href=\"/Tactics\" title=\"Tactics\">Tactics</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=16\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1970_...\">1970 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=17\" title=\"Edit section: 1970 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Marvin_Minsky\" title=\"Marvin Minsky\">Marvin Minsky</a> (<b>1974</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://web.media.mit.edu/~minsky/papers/Frames/frames.html\">Framework for Representing Knowledge 1974</a></i>. <a href=\"/Massachusetts_Institute_of_Technology\" title=\"Massachusetts Institute of Technology\">MIT</a>-AI Laboratory Memo 306</li>\n<li> <a href=\"/index.php?title=Coen_Zuidema&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Coen Zuidema (page does not exist)\">Coen Zuidema</a> (<b>1974</b>). <i>Chess: How to Program the Exceptions?</i> Technical Report IW21/74, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Centrum_Wiskunde_%26_Informatica\">Mathematical Center Amdsterdam</a>. <a rel=\"nofollow\" class=\"external text\" href=\"http://oai.cwi.nl/oai/asset/9480/9480A.pdf\">pdf</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1975_...\">1975 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=18\" title=\"Edit section: 1975 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Donald_Michie\" title=\"Donald Michie\">Donald Michie</a> (<b>1976</b>). <i>An Advice-Taking System for Computer Chess.</i> Computer Bulletin, Ser. 2, Vol. 10, pp. 12-14. ISSN 0010-4531.</li>\n<li> <a href=\"/Jack_Good\" title=\"Jack Good\">Jack Good</a> (<b>1977</b>). <i>Dynamic Probability, Computer Chess, and the Measurement of Knowledge.</i> Machine Intelligence, Vol. 8 (eds. E. Elcock and <a href=\"/Donald_Michie\" title=\"Donald Michie\">Donald Michie</a>), pp. 139-150. Ellis Horwood, Chichester.</li>\n<li> <a href=\"/Ivan_Bratko\" title=\"Ivan Bratko\">Ivan Bratko</a>, <a href=\"/Danny_Kopec\" title=\"Danny Kopec\">Danny Kopec</a>, <a href=\"/Donald_Michie\" title=\"Donald Michie\">Donald Michie</a> (<b>1978</b>). <i>Pattern-Based Representation of Chess Endgame Knowledge</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://comjnl.oxfordjournals.org/content/21/2.toc\">The Computer Journal, Vol. 21, No. 2</a>, pp. 149-153. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.sci.brooklyn.cuny.edu/%7Ekopec/Publications/Publications/O_44_C.pdf\">pdf</a></li>\n<li> <a href=\"/Donald_Michie\" title=\"Donald Michie\">Donald Michie</a>, <a href=\"/Ivan_Bratko\" title=\"Ivan Bratko\">Ivan Bratko</a> (<b>1978</b>). <i>Advice Table Representations of Chess End-Game Knowledge</i>. Proceedings 3rd AISB/GI Conference, pp. 194-200.</li>\n<li> <a href=\"/David_Wilkins\" title=\"David Wilkins\">David Wilkins</a> (<b>1979</b>). <i>Using Patterns and Plans to Solve Problems and Control Search</i>. Ph.D. thesis, Computer Science Dept, <a href=\"/Stanford_University\" title=\"Stanford University\">Stanford University</a>, AI Lab Memo AIM-329</li>\n<li> <a href=\"/Max_Bramer\" title=\"Max Bramer\">Max Bramer</a>, <a href=\"/Mike_Clarke\" title=\"Mike Clarke\">Mike Clarke</a> (<b>1979</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.sciencedirect.com/science/article/pii/S0020737379800139\">A Model for the Representation of Pattern-Knowledge for the Endgame in Chess</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.interaction-design.org/references/periodicals/international_journal_of_man-machine_studies_volume_11.html\">International  Journal of Man-Machine Studies, Vol. 11, No.5</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1980_...\">1980 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=19\" title=\"Edit section: 1980 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Ivan_Bratko\" title=\"Ivan Bratko\">Ivan Bratko</a>, <a href=\"/Donald_Michie\" title=\"Donald Michie\">Donald Michie</a> (<b>1980</b>). <i>A Representation of Pattern-Knowledge in Chess Endgames</i>. <a href=\"/Advances_in_Computer_Chess_2\" title=\"Advances in Computer Chess 2\">Advances in Computer Chess 2</a></li>\n<li> <a href=\"/David_Wilkins\" title=\"David Wilkins\">David Wilkins</a> (<b>1980</b>). <i>Using patterns and plans in chess</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_%28journal%29\">Artificial Intelligence</a>, vol. 14, pp. 165-203. Reprinted (<b>1988</b>) in <a href=\"/Computer_Chess_Compendium\" title=\"Computer Chess Compendium\">Computer Chess Compendium</a></li>\n<li> <a href=\"/David_Wilkins\" title=\"David Wilkins\">David Wilkins</a> (<b>1982</b>). <i>Using Knowledge to Control Tree Searching</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_%28journal%29\">Artificial Intelligence</a>, vol. 18, pp. 1-51.</li>\n<li> <a href=\"/Alen_Shapiro\" title=\"Alen Shapiro\">Alen Shapiro</a>, <a href=\"/Tim_Niblett\" title=\"Tim Niblett\">Tim Niblett</a> (<b>1982</b>). <i>Automatic Induction of Classification Rules for Chess End game.</i> <a href=\"/Advances_in_Computer_Chess_3\" title=\"Advances in Computer Chess 3\">Advances in Computer Chess 3</a></li>\n<li> <a href=\"/Hans_Berliner\" title=\"Hans Berliner\">Hans Berliner</a> (<b>1982</b>). <i>Search vs. knowledge: an analysis from the domain of games</i>. Technical Report Department of Computer Science, <a href=\"/Carnegie_Mellon_University\" title=\"Carnegie Mellon University\">Carnegie Mellon University</a></li>\n<li> <a href=\"/Allen_Newell\" title=\"Allen Newell\">Allen Newell</a> (<b>1982</b>). <i>The Knowledge Level</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_%28journal%29\">Artificial Intelligence</a>, Vol. 18, No. 1</li>\n<li> <a href=\"/Raymond_Smullyan\" title=\"Raymond Smullyan\">Raymond Smullyan</a> (<b>1982</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.mit.edu/people/dpolicar/writing/prose/text/epistemologicalNightmare.html\">An Epistemological Nightmare</a></i>. <a href=\"/Massachusetts_Institute_of_Technology\" title=\"Massachusetts Institute of Technology\">MIT</a></li>\n<li> <a href=\"/David_Wilkins\" title=\"David Wilkins\">David Wilkins</a> (<b>1983</b>). <i>Using chess knowledge to reduce search</i>. In <a href=\"/Chess_Skill_in_Man_and_Machine\" title=\"Chess Skill in Man and Machine\">Chess Skill in Man and Machine</a> (<a href=\"/Peter_W._Frey\" title=\"Peter W. Frey\">Peter W. Frey</a>, ed.), Ch. 10, 2nd Edition, Springer-Verlag.</li>\n<li> <a href=\"/Danny_Kopec\" title=\"Danny Kopec\">Danny Kopec</a> (<b>1983</b>). <i>Human and Machine Representations of Knowledge</i>. Ph.D. thesis, <a href=\"/University_of_Edinburgh\" title=\"University of Edinburgh\">University of Edinburgh</a>, supervisor: <a href=\"/Donald_Michie\" title=\"Donald Michie\">Donald Michie</a></li>\n<li> <a href=\"/Alen_Shapiro\" title=\"Alen Shapiro\">Alen Shapiro</a> (<b>1983</b>). <i>The Role of Structured Induction in Expert Systems</i>. <a href=\"/University_of_Edinburgh\" title=\"University of Edinburgh\">University of Edinburgh</a>, Machine Intelligence Research Unit (Ph.D. thesis) <sup id=\"cite_ref-12\" class=\"reference\"><a href=\"#cite_note-12\">&#91;12&#93;</a></sup> </li>\n<li> <a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a> (<b>1984</b>). <i>The Relative Importance of Knowledge</i>. <a href=\"/ICGA_Journal#7_3\" title=\"ICGA Journal\">ICCA Journal, Vol. 7, No. 3</a></li>\n<li> <a href=\"/Albrecht_Heeffer\" title=\"Albrecht Heeffer\">Albrecht Heeffer</a> (<b>1984</b>). <i>Automated Acquisition on Concepts for the Description of Middle-game Positions in Chess</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Turing_Institute\">Turing Institute</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Glasgow\">Glasgow</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Scotland\">Scotland</a>, TIRM-84-005</li></ul>\n<h2><span class=\"mw-headline\" id=\"1985_...\">1985 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=20\" title=\"Edit section: 1985 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Albrecht_Heeffer\" title=\"Albrecht Heeffer\">Albrecht Heeffer</a> (<b>1985</b>). <i>Validating Concepts from Automated Acquisition Systems</i>. <a href=\"/Conferences#IJCAI\" title=\"Conferences\">IJCAI 85</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://ijcai.org/Past%20Proceedings/IJCAI-85-VOL1/PDF/118.pdf\">pdf</a></li>\n<li> <a href=\"/Reiner_Seidel\" title=\"Reiner Seidel\">Reiner Seidel</a> (<b>1985</b>). <i>Grammatical Description of Chess Positions, Data-Base versus Human Knowledge</i>. <a href=\"/ICGA_Journal#8_3\" title=\"ICGA Journal\">ICCA Journal, Vol. 8, No. 3</a></li>\n<li> <a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a>, <a href=\"/Tony_Marsland\" title=\"Tony Marsland\">Tony Marsland</a> (<b>1985</b>). <i>The Utility of Expert Knowledge</i>. Proceedings <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/%7Eley/db/conf/ijcai/ijcai85.html\">IJCAI 85</a>, pp. 585-587. Los Angeles. </li>\n<li> <a href=\"/Alen_Shapiro\" title=\"Alen Shapiro\">Alen Shapiro</a>, <a href=\"/Donald_Michie\" title=\"Donald Michie\">Donald Michie</a> (<b>1986</b>). <i>A Self-commenting Facility for Inductively Synthesised Endgame Expertise</i>. <a href=\"/Advances_in_Computer_Chess_4\" title=\"Advances in Computer Chess 4\">Advances in Computer Chess 4</a></li>\n<li> <a href=\"/Bernd_Owsnicki-Klewe\" title=\"Bernd Owsnicki-Klewe\">Bernd Owsnicki</a>, <a href=\"/Kai_von_Luck\" title=\"Kai von Luck\">Kai von Luck</a> (<b>1986</b>). <i>N.N.: A Case Study in Chess Knowledge Representation</i>. <a href=\"/Advances_in_Computer_Chess_4\" title=\"Advances in Computer Chess 4\">Advances in Computer Chess 4</a></li>\n<li> <a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a> (<b>1986</b>). <i>Experiments in Search and Knowledge</i>. Ph.D. Thesis, <a href=\"/University_of_Waterloo\" title=\"University of Waterloo\">University of Waterloo</a>. Reprinted as Technical Report TR 86-12, Department of Computing Science, <a href=\"/University_of_Alberta\" title=\"University of Alberta\">University of Alberta</a>, Edmonton, Alberta.</li>\n<li> <a href=\"/Peter_W._Frey\" title=\"Peter W. Frey\">Peter W. Frey</a> (<b>1986</b>). <i>Fuzzy Production Rules in Chess</i>. <a href=\"/ICGA_Journal#9_4\" title=\"ICGA Journal\">ICCA Journal, Vol. 9, No. 4</a></li>\n<li> <a href=\"/Peter_W._Frey\" title=\"Peter W. Frey\">Peter W. Frey</a> (<b>1986</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://archive.org/stream/byte-magazine-1986-11/1986_11_BYTE_11-12_Knowledge_Representation#page/n175/mode/2up\">A Bit-Mapped Classifier</a></i>. <a href=\"/Byte_Magazine#BYTE1112\" title=\"Byte Magazine\">BYTE, Vol. 11, No. 12</a>, pp. 161-172.</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Subhash_Kak\">Subhash Kak</a> (<b>1987</b>). <i>Patanjali and Cognitive Science</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.vitastapublishing.com/\">Vitasta Publishing</a> <sup id=\"cite_ref-13\" class=\"reference\"><a href=\"#cite_note-13\">&#91;13&#93;</a></sup></li>\n<li> <a href=\"/Alen_Shapiro\" title=\"Alen Shapiro\">Alen Shapiro</a> (<b>1987</b>). <i>Structured Induction in Expert Systems</i>. Turing Institute Press in association with Addison-Wesley Publishing Company, Workingham, UK. ISBN 0-201-178133. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.amazon.com/exec/obidos/ASIN/0201178133/acmorg-20\">amazon</a><sup id=\"cite_ref-14\" class=\"reference\"><a href=\"#cite_note-14\">&#91;14&#93;</a></sup></li>\n<li> <a href=\"/Stephen_Muggleton\" title=\"Stephen Muggleton\">Stephen Muggleton</a> (<b>1988</b>). <i>Inductive Acquisition of Chess Strategies</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.doc.ic.ac.uk/%7Eshm/MI/mi11.html\">Machine Intelligence 11</a> (eds. <a href=\"/Jean_Hayes_Michie\" title=\"Jean Hayes Michie\">Jean Hayes Michie</a>, <a href=\"/Donald_Michie\" title=\"Donald Michie\">Donald Michie</a>, and J. Richards), pp. 375-389. Clarendon Press, Oxford, U.K. ISBN 0-19-853718-2.</li>\n<li> <a href=\"/Reiner_Seidel\" title=\"Reiner Seidel\">Reiner Seidel</a>(<b>1989</b>). <i>A Model of Chess Knowledge - Planning Structures and Constituent Analysis</i>. <a href=\"/Advances_in_Computer_Chess_5\" title=\"Advances in Computer Chess 5\">Advances in Computer Chess 5</a></li>\n<li> <a href=\"/Hans_Berliner\" title=\"Hans Berliner\">Hans Berliner</a>, <a href=\"/Carl_Ebeling\" title=\"Carl Ebeling\">Carl Ebeling</a> (<b>1989</b>). <i>Pattern Knowledge and Search: The SUPREM Architecture.</i> Artificial Intelligence, Vol. 38, No. 2, pp. 161-198. ISSN 0004-3702.</li></ul>\n<dl><dd> Revised as <a href=\"/Hans_Berliner\" title=\"Hans Berliner\">Hans Berliner</a>, <a href=\"/Carl_Ebeling\" title=\"Carl Ebeling\">Carl Ebeling</a> (<b>1990</b>). <i>Hitech</i>. <a href=\"/Computers,_Chess,_and_Cognition\" title=\"Computers, Chess, and Cognition\">Computers, Chess, and Cognition</a></dd></dl>\n<ul><li> <a href=\"/Hans_Berliner\" title=\"Hans Berliner\">Hans Berliner</a>, <a href=\"/Gordon_Goetsch\" title=\"Gordon Goetsch\">Gordon Goetsch</a>, <a href=\"/Murray_Campbell\" title=\"Murray Campbell\">Murray Campbell</a>, <a href=\"/Carl_Ebeling\" title=\"Carl Ebeling\">Carl Ebeling</a> (<b>1989</b>). <i>Measuring the Performance Potential of Chess Programs,</i> <a href=\"/Advances_in_Computer_Chess_5\" title=\"Advances in Computer Chess 5\">Advances in Computer Chess 5</a></li>\n<li> <a href=\"/Hermann_Kaindl\" title=\"Hermann Kaindl\">Hermann Kaindl</a> (<b>1989</b>). <i>Towards a Theory of Knowledge</i>. <a href=\"/Advances_in_Computer_Chess_5\" title=\"Advances in Computer Chess 5\">Advances in Computer Chess 5</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1990_...\">1990 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=21\" title=\"Edit section: 1990 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Hans_Berliner\" title=\"Hans Berliner\">Hans Berliner</a>, <a href=\"/Gordon_Goetsch\" title=\"Gordon Goetsch\">Gordon Goetsch</a>, <a href=\"/Murray_Campbell\" title=\"Murray Campbell\">Murray Campbell</a>, <a href=\"/Carl_Ebeling\" title=\"Carl Ebeling\">Carl Ebeling</a> (<b>1990</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.sciencedirect.com/science?_ob=ArticleURL&amp;_udi=B6TYF-47WTT8W-3J&amp;_user=10&amp;_coverDate=04%2F30%2F1990&amp;_rdoc=1&amp;_fmt=high&amp;_orig=search&amp;_origin=search&amp;_sort=d&amp;_docanchor=&amp;view=c&amp;_searchStrId=1541914346&amp;_rerunOrigin=google&amp;_acct=C000050221&amp;_version=1&amp;_urlVersion=0&amp;_userid=10&amp;md5=a43185e00b7d7d4550af0add28ff36b8&amp;searchtype=a\">Measuring the Performance Potential of Chess Programs</a>.</i> Artificial Intelligence, Vol. 43, No. 1</li>\n<li> <a href=\"/index.php?title=Kiyoshi_Shirayanagi&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Kiyoshi Shirayanagi (page does not exist)\">Kiyoshi Shirayanagi</a> (<b>1990</b>). <i>Knowledge Representation and its Refinement in Go Programs</i>. <a href=\"/Computers,_Chess,_and_Cognition\" title=\"Computers, Chess, and Cognition\">Computers, Chess, and Cognition</a></li>\n<li> <a href=\"/Robert_Levinson\" title=\"Robert Levinson\">Robert Levinson</a>, <a href=\"/Feng-hsiung_Hsu\" title=\"Feng-hsiung Hsu\">Feng-hsiung Hsu</a>, <a href=\"/Tony_Marsland\" title=\"Tony Marsland\">Tony Marsland</a>, <a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a>, <a href=\"/David_Wilkins\" title=\"David Wilkins\">David Wilkins</a> (<b>1991</b>). <i>The Role of Chess in Artificial Intelligence Research</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://dli.iiit.ac.in/ijcai/IJCAI-91-VOL1/CONTENT/content.htm\">IJCAI 1991</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://dli.iiit.ac.in/ijcai/IJCAI-91-VOL1/PDF/084.pdf\">pdf</a>, also in <a href=\"/ICGA_Journal#14_3\" title=\"ICGA Journal\">ICCA Journal, Vol. 14, No. 3</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.ai.sri.com/%7Ewilkins/papers/chess-panel.pdf\">pdf</a></li>\n<li> <a href=\"/Christian_Posthoff\" title=\"Christian Posthoff\">Christian Posthoff</a>, <a href=\"/Michael_Schlosser\" title=\"Michael Schlosser\">Michael Schlosser</a>, <a href=\"/Jens_Zeidler\" title=\"Jens Zeidler\">Jens Zeidler</a> (<b>1993</b>). <i>Search vs. Knowledge? - Search and Knowledge!</i> In: Proc. 3rd KADS Meeting, Munich, March 8-9 1993, Siemens AG, Corporate Research and Development, 305-326, 1993.</li>\n<li> <a href=\"/index.php?title=Steven_Walczak&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Steven Walczak (page does not exist)\">Steven Walczak</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cise.ufl.edu/~ddd/\">Douglas D. Dankel II</a> (<b>1993</b>). <i>Acquiring Tactical and Strategic Knowledge with a Generalized Method for Chunking of Game Pieces</i>. International Journal of Intelligent Systems 8 (2), 249-270.</li>\n<li> <a href=\"/Christian_Posthoff\" title=\"Christian Posthoff\">Christian Posthoff</a>, <a href=\"/Michael_Schlosser\" title=\"Michael Schlosser\">Michael Schlosser</a>, <a href=\"/Rainer_Staudte\" title=\"Rainer Staudte\">Rainer Staudte</a>, <a href=\"/Jens_Zeidler\" title=\"Jens Zeidler\">Jens Zeidler</a> (<b>1994</b>). <i>Transformations of Knowledge</i>. <a href=\"/Advances_in_Computer_Chess_7\" title=\"Advances in Computer Chess 7\">Advances in Computer Chess 7</a></li>\n<li> <a href=\"/Robert_Levinson\" title=\"Robert Levinson\">Robert Levinson</a>, <a href=\"/index.php?title=Gil_Fuchs&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Gil Fuchs (page does not exist)\">Gil Fuchs</a> (<b>1994</b>). <i>A Pattern-Weight Formulation of Search Knowledge</i>. UCSC-CRL-94-10, <a rel=\"nofollow\" class=\"external text\" href=\"http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.35.1027\">CiteSeerX</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1995_...\">1995 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=22\" title=\"Edit section: 1995 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Richard_Fikes\" title=\"Richard Fikes\">Richard Fikes</a> (<b>1996</b>). <i>Ontologies: What Are They, and Where's The Research?</i> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/conf/kr/kr96.html#Fikes96\">KR 1996</a></li>\n<li> <a href=\"/Andreas_Junghanns\" title=\"Andreas Junghanns\">Andreas Junghanns</a>, <a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a> (<b>1997</b>). <i>Search versus knowledge in game-playing programs revisited</i>. <a href=\"/Conferences#IJCAI1997\" title=\"Conferences\">IJCAI-97</a>, Vol 1, <a rel=\"nofollow\" class=\"external text\" href=\"http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.32.168&amp;rep=rep1&amp;type=pdf\">pdf</a></li>\n<li> <a href=\"/Johannes_F%C3%BCrnkranz\" title=\"Johannes Fürnkranz\">Johannes Fürnkranz</a> (<b>1997</b>). <i>Knowledge Discovery in Chess Databases: A Research Proposal.</i> Technical Report OEFAI-TR-97-33, Austrian Research Institute for Artificial Intelligence,  <a rel=\"nofollow\" class=\"external text\" href=\"http://www.ke.informatik.tu-darmstadt.de/%7Ejuffi/publications/chess-ws.ps.gz\">zipped ps</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.top-5000.nl/ps/Knowledge%20discovery%20in%20chess%20databases%20-%20a%20research%20proposal.pdf\">pdf</a> <sup id=\"cite_ref-15\" class=\"reference\"><a href=\"#cite_note-15\">&#91;15&#93;</a></sup></li>\n<li> <a href=\"/Krzysztof_Krawiec\" title=\"Krzysztof Krawiec\">Krzysztof Krawiec</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/pers/hd/s/Slowinski:Roman.html\">Roman Slowinski</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/pers/hd/s/Szczesniak:Irmina.html\">Irmina Szczesniak</a> (<b>1998</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/chapter/10.1007%2F3-540-69115-4_60\">Pedagogical Method for Extraction of Symbolic Knowledge from Neural Networks</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/book/10.1007%2F3-540-69115-4\">Rough Sets and Current Trends in Computing 1998</a></li>\n<li> <a href=\"/Edward_John_Quigley\" title=\"Edward John Quigley\">Edward J. Quigley</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.ischool.pitt.edu/people/debons.php\">Anthony Debons</a> (<b>1999</b>). <i>Interrogative Theory of Information and Knowledge</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/conf/sigcpr/sigcpr1999.html#QuigleyD99\">SIGCPR '99</a>,  <a rel=\"nofollow\" class=\"external text\" href=\"http://www.thirdwave-websites.com/datainfoknow.pdf\">pdf</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=23\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Michael_Thielscher\" title=\"Michael Thielscher\">Michael Thielscher</a> (<b>2000</b>). <i>Representing the Knowledge of a Robot</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/conf/kr/kr2000.html#Thielscher00\">KR 2000</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.35.477\">CiteSeerX</a></li>\n<li> <a href=\"/Krzysztof_Krawiec\" title=\"Krzysztof Krawiec\">Krzysztof Krawiec</a> (<b>2002</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/article/10.1023/A:1020984725014\">Genetic Programming-based Construction of Features for Machine Learning and Knowledge Discovery Tasks</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.informatik.uni-trier.de/~ley/db/journals/gpem/gpem3.html#Krawiec02\">Genetic Programming and Evolvable Machines, Vol. 3</a>, No. 4</li>\n<li> <a href=\"/Stuart_Russell\" title=\"Stuart Russell\">Stuart Russell</a>, <a href=\"/Peter_Norvig\" title=\"Peter Norvig\">Peter Norvig</a> (<b>2003</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://aima.cs.berkeley.edu/\">Artificial Intelligence: A Modern Approach</a></i>, 2nd edition, <a rel=\"nofollow\" class=\"external text\" href=\"http://books.google.com/books?id=8jZBksh-bUMC&amp;dq=isbn:0137903952&amp;hl=en\">3rd edition 2009</a></li>\n<li> <a href=\"/Stuart_Russell\" title=\"Stuart Russell\">Stuart Russell</a> (<b>2003</b>). <i>Rationality and Intelligence.</i> In Renee Elio (Ed.), Common sense, reasoning, and rationality, Oxford University Press, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.berkeley.edu/%7Erussell/papers/aij-cnt.pdf\">pdf</a></li>\n<li> <a href=\"/Aleksander_Sadikov\" title=\"Aleksander Sadikov\">Aleksander Sadikov</a>, <a href=\"/Ivan_Bratko\" title=\"Ivan Bratko\">Ivan Bratko</a>, <a href=\"/Igor_Kononenko\" title=\"Igor Kononenko\">Igor Kononenko</a> (<b>2003</b>). <i>Search versus Knowledge: An Empirical Study of Minimax on KRK</i>. <a href=\"/Advances_in_Computer_Games_10\" title=\"Advances in Computer Games 10\">Advances in Computer Games 10</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.ailab.si/sasha/acg2003.pdf\">pdf</a></li>\n<li> <a href=\"/index.php?title=Tristan_Caulfield&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Tristan Caulfield (page does not exist)\">Tristan Caulfield</a> (<b>2004</b>). <i>Acquiring and Using Knowledge in Computer Chess</i>. BSc Computer Science, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/University_of_Bath\">University of Bath</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://opus.bath.ac.uk/16854/1/CSBU\">pdf</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://people.virginia.edu/~ema3z/\">Elias M. Awad</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.goodreads.com/author/show/4245178.Hassan_Ghaziri\">Hassan M. Ghaziri</a> (<b>2004,2010</b>). <i>Knowledge Management Systems</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.pearsoned.co.in/web/books/9788131714034_Knowledge-Management_Hassan-M-Ghaziri.aspx\">Pearson Education India</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://turing.une.edu.au/~comp292/Lectures/HEADER_KM_2004_LEC_NOTES/HEADER_KM_2004_LEC_NOTES.html\">Knowledge Management Systems - Lecture Notes</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.latex2html.org/\">LaTeX2HTML</a> by <a rel=\"nofollow\" class=\"external text\" href=\"http://www.astro.ku.dk/software/latex2html/manual/manual.html\">Nikos Drakos</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://maths.mq.edu.au/~ross/\">Ross Moore</a></li>\n<li> <a href=\"/Nick_Pelling\" title=\"Nick Pelling\">Nick Pelling</a> (<b>2004</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.nickpelling.com/dissertation/\">The Network Is The Knowledge: Ideology &amp; Strategy in Mintzberg's Ten Schools</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Master_of_Business_Administration\">MBA</a> dissertation, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Kingston_University\">Kingston University</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Kingston_Business_School\">Business School</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Surrey\">Surrey</a>, UK</li></ul>\n<h2><span class=\"mw-headline\" id=\"2005_...\">2005 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=24\" title=\"Edit section: 2005 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Christian_Posthoff\" title=\"Christian Posthoff\">Christian Posthoff</a>, <a href=\"/Michael_Schlosser\" title=\"Michael Schlosser\">Michael Schlosser</a> (<b>2005</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/chapter/10.1007%2F3-540-60217-8_17\">Optimal strategies — Learning from examples — Boolean equations</a></i>. in <a rel=\"nofollow\" class=\"external text\" href=\"https://www.researchgate.net/profile/Klaus_Jantke\">Klaus P. Jantke</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://www.fbi.h-da.de/organisation/personen/lange-steffen.html\">Steffen Lange</a> (eds.)  (<b>2005</b>). <a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/book/10.1007/3-540-60217-8\">Algorithmic Learning for Knowledge-Based Systems</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Lecture_Notes_in_Computer_Science\">Lecture Notes in Computer Science</a> 961, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Springer_Science%2BBusiness_Media\">Springer</a></li>\n<li> <a href=\"/Aleksander_Sadikov\" title=\"Aleksander Sadikov\">Aleksander Sadikov</a>, <a href=\"/Ivan_Bratko\" title=\"Ivan Bratko\">Ivan Bratko</a> (<b>2006</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://link.springer.com/chapter/10.1007/978-3-540-75538-8_15\">Search Versus Knowledge Revisited Again</a></i>. <a href=\"/CG_2006\" title=\"CG 2006\">CG 2006</a></li>\n<li> <a href=\"/index.php?title=David_J._Stracuzzi&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"David J. Stracuzzi (page does not exist)\">David J. Stracuzzi</a> (<b>2006</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://scholarworks.umass.edu/dissertations/AAI3242366/\">Scalable Knowledge Acquisition through Cumulative Learning and Memory Organization</a></i>. Ph.D. thesis, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/University_of_Massachusetts_Amherst\">University of Massachusetts Amherst</a>, advisor <a href=\"/Paul_E._Utgoff\" title=\"Paul E. Utgoff\">Paul E. Utgoff</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://stracuzzi.info/david/manuscripts/dissertation06.pdf\">pdf</a></li>\n<li> <a href=\"/Guillaume_Chaslot\" title=\"Guillaume Chaslot\">Guillaume Chaslot</a>, <a href=\"/index.php?title=Louis_Chatriot&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Louis Chatriot (page does not exist)\">Louis Chatriot</a>, <a href=\"/index.php?title=Christophe_Fiter&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Christophe Fiter (page does not exist)\">Christophe Fiter</a>, <a href=\"/Sylvain_Gelly\" title=\"Sylvain Gelly\">Sylvain Gelly</a>, <a href=\"/Jean-Baptiste_Hoock\" title=\"Jean-Baptiste Hoock\">Jean-Baptiste Hoock</a>, <a href=\"/index.php?title=Julien_P%C3%A9rez&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Julien Pérez (page does not exist)\">Julien Pérez</a>, <a href=\"/index.php?title=Arpad_Rimmel&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Arpad Rimmel (page does not exist)\">Arpad Rimmel</a>, <a href=\"/Olivier_Teytaud\" title=\"Olivier Teytaud\">Olivier Teytaud</a> (<b>2008</b>). <i>Combining expert, offline, transient and online knowledge in Monte-Carlo exploration</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.lri.fr/~teytaud/eg.pdf\">pdf</a></li>\n<li> <a href=\"/Guillaume_Chaslot\" title=\"Guillaume Chaslot\">Guillaume Chaslot</a>, <a href=\"/index.php?title=Christophe_Fiter&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Christophe Fiter (page does not exist)\">Christophe Fiter</a>, <a href=\"/Jean-Baptiste_Hoock\" title=\"Jean-Baptiste Hoock\">Jean-Baptiste Hoock</a>, <a href=\"/index.php?title=Arpad_Rimmel&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Arpad Rimmel (page does not exist)\">Arpad Rimmel</a>, <a href=\"/Olivier_Teytaud\" title=\"Olivier Teytaud\">Olivier Teytaud</a> (<b>2009</b>). <i>Adding Expert Knowledge and Exploration in Monte-Carlo Tree Search</i>. <a href=\"/Advances_in_Computer_Games_12\" title=\"Advances in Computer Games 12\">Advances in Computer Games 12</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.personeel.unimaas.nl/g-chaslot/papers/acg09.pdf\">pdf</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.lri.fr/~rimmel/publi/EK_explo.pdf\">pdf</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=25\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Matej_Guid\" title=\"Matej Guid\">Matej Guid</a> (<b>2010</b>). <i>Search and Knowledge for Human and Machine Problem Solving</i>, Ph.D. thesis, <a href=\"/University_of_Ljubljana\" title=\"University of Ljubljana\">University of Ljubljana</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://eprints.fri.uni-lj.si/1113/1/Matej__Guid.disertacija.pdf\">pdf</a> <sup id=\"cite_ref-16\" class=\"reference\"><a href=\"#cite_note-16\">&#91;16&#93;</a></sup></li>\n<li> <a href=\"/Shi-Jim_Yen\" title=\"Shi-Jim Yen\">Shi-Jim Yen</a>, <a href=\"/Jung-Kuei_Yang\" title=\"Jung-Kuei Yang\">Jung-Kuei Yang</a>, <a href=\"/Kuo-Yuan_Kao\" title=\"Kuo-Yuan Kao\">Kuo-Yuan Kao</a>, <a href=\"/index.php?title=Tai-Ning_Yang&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Tai-Ning Yang (page does not exist)\">Tai-Ning Yang</a> (<b>2012</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.sciencedirect.com/science/article/pii/S0950705112001293\">Bitboard Knowledge Base System and Elegant Search Architectures for Connect6</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://www.journals.elsevier.com/knowledge-based-systems/\">Knowledge-Based Systems</a>, Vol. 34</li>\n<li> <a href=\"/Bo-Nian_Chen\" title=\"Bo-Nian Chen\">Bo-Nian Chen</a>, <a href=\"/Hung-Jui_Chang\" title=\"Hung-Jui Chang\">Hung-Jui Chang</a>, <a href=\"/Shun-Chin_Hsu\" title=\"Shun-Chin Hsu\">Shun-Chin Hsu</a>, <a href=\"/Jr-Chang_Chen\" title=\"Jr-Chang Chen\">Jr-Chang Chen</a>, <a href=\"/Tsan-sheng_Hsu\" title=\"Tsan-sheng Hsu\">Tsan-sheng Hsu</a> (<b>2013</b>). <i>Multilevel Inference in Chinese Chess Endgame Knowledge Bases</i>. <a href=\"/ICGA_Journal#36_4\" title=\"ICGA Journal\">ICGA Journal, Vol. 36, No. 4</a>&#160;» <a href=\"/Chinese_Chess\" title=\"Chinese Chess\">Chinese Chess</a>, <a href=\"/Endgame_Tablebases\" title=\"Endgame Tablebases\">Endgame Tablebases</a></li>\n<li> <a href=\"/Bo-Nian_Chen\" title=\"Bo-Nian Chen\">Bo-Nian Chen</a>, <a href=\"/Hung-Jui_Chang\" title=\"Hung-Jui Chang\">Hung-Jui Chang</a>, <a href=\"/Shun-Chin_Hsu\" title=\"Shun-Chin Hsu\">Shun-Chin Hsu</a>, <a href=\"/Jr-Chang_Chen\" title=\"Jr-Chang Chen\">Jr-Chang Chen</a>, <a href=\"/Tsan-sheng_Hsu\" title=\"Tsan-sheng Hsu\">Tsan-sheng Hsu</a> (<b>2014</b>). <i>Advanced Meta-knowledge for Chinese Chess Endgame Knowledge Bases</i>. <a href=\"/ICGA_Journal#37_1\" title=\"ICGA Journal\">ICGA Journal, Vol 37, No. 1</a></li>\n<li> <a href=\"/Tamal_T._Biswas\" title=\"Tamal T. Biswas\">Tamal T. Biswas</a>, <a href=\"/Kenneth_W._Regan\" title=\"Kenneth W. Regan\">Kenneth W. Regan</a> (<b>2015</b>). <i>Quantifying Depth and Complexity of Thinking and Knowledge</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.icaart.org/EuropeanProjectSpace.aspx?y=2015\">ICAART 2015</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cse.buffalo.edu/~regan/papers/pdf/BiReICAART15CR.pdf\">pdf</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=26\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/index.php?title=Thomas_McGrath&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Thomas McGrath (page does not exist)\">Thomas McGrath</a>, <a href=\"/index.php?title=Andrei_Kapishnikov&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Andrei Kapishnikov (page does not exist)\">Andrei Kapishnikov</a>, <a href=\"/index.php?title=Nenad_Toma%C5%A1ev&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Nenad Tomašev (page does not exist)\">Nenad Tomašev</a>, <a href=\"/index.php?title=Adam_Pearce&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Adam Pearce (page does not exist)\">Adam Pearce</a>, <a href=\"/Demis_Hassabis\" title=\"Demis Hassabis\">Demis Hassabis</a>, <a href=\"/index.php?title=Been_Kim&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Been Kim (page does not exist)\">Been Kim</a>, <a href=\"/index.php?title=Ulrich_Paquet&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Ulrich Paquet (page does not exist)\">Ulrich Paquet</a>, <a href=\"/index.php?title=Vladimir_Kramnik&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Vladimir Kramnik (page does not exist)\">Vladimir Kramnik</a> (<b>2021</b>). <i>Acquisition of Chess Knowledge in AlphaZero</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/2111.09259\">arXiv:2111.09259</a>&#160;» <a href=\"/AlphaZero\" title=\"AlphaZero\">AlphaZero</a> <sup id=\"cite_ref-17\" class=\"reference\"><a href=\"#cite_note-17\">&#91;17&#93;</a></sup></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=27\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1996_...\">1996 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=28\" title=\"Edit section: 1996 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/d/msg/rec.games.chess.computer/47bgYzU2kyQ/BKAn9pqUtogJ\">Incoporating chess knowledge in chess programs</a> by <a href=\"/Valavan_Manohararajah\" title=\"Valavan Manohararajah\">Valavan Manohararajah</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, June 26, 1996</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/99eec6923b0481db\">computer chess \"oracle\" ideas...</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, April 1, 1997&#160;» <a href=\"/Oracle\" title=\"Oracle\">Oracle</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=20531\">Knowledge is not elegant</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 14, 1998</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/e917da2d88146756\">The end of computer chess progress?</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, March 06, 1999</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=77234\">The Limits of Positional Knowledge</a> by Michael Neish from <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 11, 1999</li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_..._2\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=29\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=261167\">suggestions for (a new generation of) chess knowledge using engines</a> by <a href=\"/index.php?title=Ingo_Lindam&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Ingo Lindam (page does not exist)\">Ingo Lindam</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 23, 2002</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=261636\">likelihood instead of pawnunits? + chess knowledge</a> by <a href=\"/index.php?title=Ingo_Lindam&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Ingo Lindam (page does not exist)\">Ingo Lindam</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 25, 2002</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=389133\">Knowledge</a> by <a href=\"/Sergei_Markoff\" title=\"Sergei Markoff\">Sergei S. Markoff</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 26, 2004</li></ul>\n<h2><span class=\"mw-headline\" id=\"2005_..._2\">2005 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=30\" title=\"Edit section: 2005 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=480599\">The superior Rybka chess knowledge</a> by <a href=\"/Chrilly_Donninger\" title=\"Chrilly Donninger\">Chrilly Donninger</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 18, 2006&#160;» <a href=\"/Rybka\" title=\"Rybka\">Rybka</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=486851\">knowledge and blitz; search and long games</a> by Joseph Ciarrochi, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 15, 2006</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.hiarcs.net/forums/viewtopic.php?t=402\">Search or Evaluation?</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Hiarcs Forum</a>, October 05, 2007&#160;» <a href=\"/Search\" title=\"Search\">Search</a>, <a href=\"/Evaluation\" title=\"Evaluation\">Evaluation</a></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.hiarcs.net/forums/viewtopic.php?p=2944\">Re: Search or Evaluation?</a> by <a href=\"/Mark_Uniacke\" title=\"Mark Uniacke\">Mark Uniacke</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Hiarcs Forum</a>, October 14, 2007</dd></dl>\n<h2><span class=\"mw-headline\" id=\"2010_..._2\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=31\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=36031\">hardware advances - a different perspective</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 09, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=36040\">old crafty vs new crafty on new hardware</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 11, 2010&#160;» <a href=\"/Crafty\" title=\"Crafty\">Crafty</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=36050\">Crafty tests show that Software has advanced more</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 12, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=36059\">Final results - Crafty - hardware vs software</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 13, 2010&#160;» <a href=\"/Crafty\" title=\"Crafty\">Crafty</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=36058\">Deep Blue vs Rybka</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 13, 2010&#160;» <a href=\"/Deep_Blue\" title=\"Deep Blue\">Deep Blue</a>, <a href=\"/Rybka\" title=\"Rybka\">Rybka</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=36088\">hardware doubling number for Crafty</a> by <a href=\"/Robert_Hyatt\" title=\"Robert Hyatt\">Robert Hyatt</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 15, 2010&#160;» <a href=\"/Crafty\" title=\"Crafty\">Crafty</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=40166\">Ahhh... the holy grail of computer chess</a> by <a href=\"/Marcel_van_Kervinck\" title=\"Marcel van Kervinck\">Marcel van Kervinck</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 23, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=48743\">Is search irrelevant when computing ahead of very big trees?</a> by <a href=\"/Fermin_Serrano\" title=\"Fermin Serrano\">Fermin Serrano</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 24, 2013&#160;» <a href=\"/Search\" title=\"Search\">Search</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=49190\">Improve the search or the evaluation?</a> by <a href=\"/Jens_B%C3%A6k_Nielsen\" title=\"Jens Bæk Nielsen\">Jens Bæk Nielsen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 31, 2013&#160;» <a href=\"/Knowledge#SearchVersusEvaluation\" title=\"Knowledge\">Search versus Evaluation</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=49906\">Slow Searchers?</a> by Michael Neish, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 02, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=54697\">Chessprogams with the most chessknowing</a> by Joe Boden, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 19, 2014</li></ul>\n<h2><span class=\"mw-headline\" id=\"2015_...\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=32\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=55752\">An attempt to measure the knowledge of engines</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 23, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=54697&amp;start=44\">Re: Chessprogams with the most chessknowing</a> by <a href=\"/index.php?title=Vincent_Lejeune&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Vincent Lejeune (page does not exist)\">Vincent Lejeune</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 18, 2017</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=54697&amp;start=46\">Re: Chessprogams with the most chessknowing</a> by <a href=\"/Alvaro_Cardoso\" title=\"Alvaro Cardoso\">Alvaro Cardoso</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 18, 2017</dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=54697&amp;start=47\">Re: Chessprogams with the most chessknowing</a> by <a href=\"/Mark_Lefler\" title=\"Mark Lefler\">Mark Lefler</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 18, 2017&#160;» <a href=\"/Komodo\" title=\"Komodo\">Komodo</a></dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=54697&amp;start=50\">Re: Chessprogams with the most chessknowing</a> by <a href=\"/Marco_Costalba\" title=\"Marco Costalba\">Marco Costalba</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 19, 2017&#160;» <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a></dd></dl>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=33\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Knowledge\">Knowledge</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=34\" title=\"Edit section: Knowledge\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Knowledge\">Knowledge from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Knowledge_acquisition\">Knowledge acquisition from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Knowledge_discovery\">Knowledge discovery from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Knowledge_engineering\">Knowledge engineering from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Knowledge_Engineering_Environment\">Knowledge Engineering Environment from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Knowledge_extraction\">Knowledge extraction from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Knowledge_management\">Knowledge management from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Knowledge_representation_and_reasoning\">Knowledge representation and reasoning from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Knowledge_transfer\">Knowledge transfer from Wikipedia</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Related_Topics\">Related Topics</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=35\" title=\"Edit section: Related Topics\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Awareness\">Awareness from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Belief\">Belief from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Cognition\">Cognition from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Consciousness\">Consciousness from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Data_mining\">Data mining from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Epistemology\">Epistemology from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Experience\">Experience from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Expert\">Expert from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Expert_system\">Expert system from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Imagination\">Imagination from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Instinct\">Instinct from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Intelligence\">Intelligence from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Intuition_%28philosophy%29\">Intuition (philosophy) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Intuition_%28psychology%29\">Intuition (psychology) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Learning\">Learning from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Mind\">Mind from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Ontology_%28information_science%29\">Ontology (information science) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Paradigm\">Paradigm from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Philosophy\">Philosophy from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Philosophy_of_mind\">Philosophy of mind from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Psychology\">Psychology from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Science\">Science from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Scientia_potentia_est\">Scientia potentia est - knowledge is power - Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Skill\">Skill from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Thought\">Thought from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Understanding\">Understanding from Wikipedia</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Types_of_Knowledge\">Types of Knowledge</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=36\" title=\"Edit section: Types of Knowledge\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/A_priori_and_a_posteriori\">A priori and a posteriori from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Common_knowledge\">Common knowledge from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Common_knowledge_%28logic%29\">Common knowledge (logic) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://decisionautomation.com/glossary/14.php\">Declarative Knowledge</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://decisionautomation.com/\">Decision Automation Resources</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Descriptive_knowledge\">Descriptive knowledge from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Dispersed_knowledge\">Dispersed knowledge from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Distributed_knowledge\">Distributed knowledge from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Metaknowledge\">Metaknowledge from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Mutual_knowledge_%28logic%29\">Mutual knowledge (logic) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Procedural_knowledge\">Procedural knowledge from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.ehhs.cmich.edu/%7Ermscott/643declarative.html\">Teaching Declarative Knowledge</a> by <a rel=\"nofollow\" class=\"external text\" href=\"http://www.ehhs.cmich.edu/%7Ermscott/index.html\">Renay M. Scott</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Musicvideos\">Musicvideos</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=37\" title=\"Edit section: Musicvideos\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <span id=\"youknow\"></span><a href=\"/Category:Mahavishnu_Orchestra\" title=\"Category:Mahavishnu Orchestra\">Mahavishnu Orchestra</a> - <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/The_Inner_Mounting_Flame\">You Know You Know</a>, August 17, 1972, more recent <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/3sat\">3Sat</a> broadcast <sup id=\"cite_ref-18\" class=\"reference\"><a href=\"#cite_note-18\">&#91;18&#93;</a></sup>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> <a href=\"/Category:John_McLaughlin\" title=\"Category:John McLaughlin\">John McLaughlin</a>, <a href=\"/Category:Billy_Cobham\" title=\"Category:Billy Cobham\">Billy Cobham</a>, <a href=\"/Category:Rick_Laird\" title=\"Category:Rick Laird\">Rick Laird</a>, <a href=\"/Category:Jan_Hammer\" title=\"Category:Jan Hammer\">Jan Hammer</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Jerry_Goodman\">Jerry Goodman</a></dd>\n<dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/ujcYw2QTPzM?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<ul><li> <a href=\"/Category:Bir%C3%A9li_Lagr%C3%A8ne\" title=\"Category:Biréli Lagrène\">Biréli Lagrène</a> - Si Tu Savais, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.djangostation.com/Live-Jazz-a-Vienne,060.html\">Biréli Lagrène &amp; Friends Live Jazz A Vienne 2002</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/2yfQN8-tVlQ?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Knowledge&amp;action=edit&amp;section=38\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap mw-references-columns\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://chgs.elevator.umn.edu/asset/viewAsset/57f3b6787d58ae5f74bf8ba9#57f3b6d77d58ae5574bf8bc6\">Chess in the Art of Samuel Bak</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.chgs.umn.edu/\">Center for Holocaust &amp; Genocide Studies</a>, <a href=\"/University_of_Minnesota\" title=\"University of Minnesota\">University of Minnesota</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a> (<b>1997</b>). <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.ualberta.ca/%7Ejonathan/OJA/oja.html\">One Jump Ahead</a> <i>Challenging Human Supremacy in Checkers</i>, Springer, ISBN 0-387-94930-5, Prelude to Disaster, pp. 255-256 or pp. 249-250 in the <a rel=\"nofollow\" class=\"external text\" href=\"http://www.springer.com/computer/artificial/book/978-0-387-76575-4\">Second Edition, 2009</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a href=\"/Andreas_Junghanns\" title=\"Andreas Junghanns\">Andreas Junghanns</a>, <a href=\"/Jonathan_Schaeffer\" title=\"Jonathan Schaeffer\">Jonathan Schaeffer</a> (<b>1997</b>). <i>Search versus knowledge in game-playing programs revisited</i>. <a href=\"/Conferences#IJCAI1997\" title=\"Conferences\">IJCAI-97</a>, Vol 1, <a rel=\"nofollow\" class=\"external text\" href=\"http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.32.168&amp;rep=rep1&amp;type=pdf\">pdf</a>, 3 Search Versus Knowledge: Practise</span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a href=\"/Hans_Berliner\" title=\"Hans Berliner\">Hans Berliner</a>, <a href=\"/Gordon_Goetsch\" title=\"Gordon Goetsch\">Gordon Goetsch</a>, <a href=\"/Murray_Campbell\" title=\"Murray Campbell\">Murray Campbell</a>, <a href=\"/Carl_Ebeling\" title=\"Carl Ebeling\">Carl Ebeling</a> (<b>1989</b>). <i>Measuring the Performance Potential of Chess Programs</i>, <a href=\"/Advances_in_Computer_Chess_5\" title=\"Advances in Computer Chess 5\">Advances in Computer Chess 5</a></span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a href=\"/Peter_Kouwenhoven\" title=\"Peter Kouwenhoven\">Peter Kouwenhoven</a> (<b>1987</b>). <i>Advances in Computer Chess, The 5th Triennial Conference</i>. <a href=\"/ICGA_Journal#10_2\" title=\"ICGA Journal\">ICCA Journal, Vol. 10, No. 2</a> (report)</span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a href=\"/Hans_Berliner\" title=\"Hans Berliner\">Hans Berliner</a>, <a href=\"/Gordon_Goetsch\" title=\"Gordon Goetsch\">Gordon Goetsch</a>, <a href=\"/Murray_Campbell\" title=\"Murray Campbell\">Murray Campbell</a>, <a href=\"/Carl_Ebeling\" title=\"Carl Ebeling\">Carl Ebeling</a> (<b>1990</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.sciencedirect.com/science?_ob=ArticleURL&amp;_udi=B6TYF-47WTT8W-3J&amp;_user=10&amp;_coverDate=04%2F30%2F1990&amp;_rdoc=1&amp;_fmt=high&amp;_orig=search&amp;_origin=search&amp;_sort=d&amp;_docanchor=&amp;view=c&amp;_searchStrId=1541914346&amp;_rerunOrigin=google&amp;_acct=C000050221&amp;_version=1&amp;_urlVersion=0&amp;_userid=10&amp;md5=a43185e00b7d7d4550af0add28ff36b8&amp;searchtype=a\">Measuring the Performance Potential of Chess Programs</a>.</i> Artificial Intelligence, Vol. 43, No. 1</span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.rebel.nl/ches2010.htm\">Chess in 2010</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, The Berliner Experiment</span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/e917da2d88146756\">The end of computer chess progress?</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, March 06, 1999</span>\n</li>\n<li id=\"cite_note-9\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-9\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=198940\">Re: Intelligent software, please</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 26, 2001</span>\n</li>\n<li id=\"cite_note-10\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-10\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.schach-computer.info/wiki/index.php/Schr%C3%B6der,_Ed\">Schröder, Ed</a> (German) from <a rel=\"nofollow\" class=\"external text\" href=\"http://www.schach-computer.info/wiki/index.php/Hauptseite_En\">Schachcomputer.info - Wiki</a> also refers the post by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a></span>\n</li>\n<li id=\"cite_note-11\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-11\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.hiarcs.net/forums/viewtopic.php?p=2944\">Re: Search or Evaluation?</a> by <a href=\"/Mark_Uniacke\" title=\"Mark Uniacke\">Mark Uniacke</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Hiarcs Forum</a>, October 14, 2007</span>\n</li>\n<li id=\"cite_note-12\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-12\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://archive.ics.uci.edu/ml/datasets/Chess+%28King-Rook+vs.+King-Pawn%29\">UCI Machine Learning Repository: Chess (King-Rook vs. King-Pawn) Data Set</a></span>\n</li>\n<li id=\"cite_note-13\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-13\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Patanjali\">Patanjali from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-14\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-14\">↑</a></span> <span class=\"reference-text\"><a href=\"/Dap_Hartmann\" title=\"Dap Hartmann\">Dap Hartmann</a> (<b>1988</b>). <a href=\"/Alen_Shapiro\" title=\"Alen Shapiro\">Alen D. Shapiro</a>: <i>Structured Induction in Expert Systems</i>. <a href=\"/ICGA_Journal#11_4\" title=\"ICGA Journal\">ICCA Journal, Vol. 11, No. 4</a></span>\n</li>\n<li id=\"cite_note-15\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-15\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Knowledge_discovery\">Knowledge discovery from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-16\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-16\">↑</a></span> <span class=\"reference-text\"><a href=\"/Dap_Hartmann\" title=\"Dap Hartmann\">Dap Hartmann</a> (<b>2010</b>). <i>How can Humans learn from Computers?</i> Review on <a href=\"/Matej_Guid\" title=\"Matej Guid\">Matej Guid's</a> Ph.D. thesis, <a href=\"/ICGA_Journal#33_4\" title=\"ICGA Journal\">ICGA Journal, Vol. 33, No. 4</a></span>\n</li>\n<li id=\"cite_note-17\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-17\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.chessbase.com/post/acquisition-of-chess-knowledge-in-alphazero\">Acquisition of Chess Knowledge in AlphaZero</a>, <a href=\"/ChessBase\" title=\"ChessBase\">ChessBase News</a>, November 18, 2021</span>\n</li>\n<li id=\"cite_note-18\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-18\">↑</a></span> <span class=\"reference-text\">Original <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/ZDF\">ZDF</a> broadcast \"<a rel=\"nofollow\" class=\"external text\" href=\"https://de.wikipedia.org/wiki/ZDF_Sonntagskonzert\">Sonntagskonzert</a>\", September 17, 1972, recorded at <a rel=\"nofollow\" class=\"external text\" href=\"http://www.abendzeitung-muenchen.de/inhalt.deutsches-museum-kongresshalle-wird-zur-event-location-gaudi-und-tralala.0fbdbcaa-3122-4466-a8b3-69a7de1bde68.html\">Kongresshalle</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Deutsches_Museum\">Deutschen Museum</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Munich\">Munich</a>, \"Jazz Now\", August 17, 1972, curator <a rel=\"nofollow\" class=\"external text\" href=\"http://alchetron.com/Joachim-Ernst-Berendt-780489-W\">Joachim-Ernst Berendt</a>, see <a rel=\"nofollow\" class=\"external text\" href=\"http://www.bathedinlightning.com/bonus%20material/the_mahavishnu_orchestra_on_film.html\">The Mahavishnu Orchestra On Film</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.embryo.de/MUENCHEN-72_KPL.pdf\">MUENCHEN-72_KPL.pdf</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.spiegel.de/spiegel/print/d-42891878.html\">Diese Woche im Fernsehen</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Der_Spiegel\">Der Spiegel</a> 38/1972 (German), <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/1972_Summer_Olympics\">1972 Summer Olympics</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Main_Page\" title=\"Main Page\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301060533\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.059 seconds\nReal time usage: 0.062 seconds\nPreprocessor visited node count: 423/1000000\nPreprocessor generated node count: 828/1000000\nPost‐expand include size: 54/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1310-0!canonical and timestamp 20260301060533 and revision id 26000\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Quotes"
+      },
+      {
+        "sortkey": "",
+        "*": "Berliner_Quotes"
+      },
+      {
+        "sortkey": "",
+        "*": "Schaeffer_Quotes"
+      },
+      {
+        "sortkey": "",
+        "*": "Samuel_Bak"
+      },
+      {
+        "sortkey": "",
+        "*": "Mahavishnu_Orchestra"
+      },
+      {
+        "sortkey": "",
+        "*": "Billy_Cobham"
+      },
+      {
+        "sortkey": "",
+        "*": "Jan_Hammer"
+      },
+      {
+        "sortkey": "",
+        "*": "Rick_Laird"
+      },
+      {
+        "sortkey": "",
+        "*": "John_McLaughlin"
+      },
+      {
+        "sortkey": "",
+        "*": "Biréli_Lagrène"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Knowledge"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "1st Computer Olympiad"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "6502"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ARM2"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Acorn Archimedes"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 2"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 3"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 4"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 5"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 7"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Games 10"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Games 12"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Albrecht Heeffer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aleksander Sadikov"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alen Shapiro"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Allen Newell"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "AlphaZero"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alvaro Cardoso"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Andreas Junghanns"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Artificial Intelligence"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Automated Tuning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bernd Owsnicki-Klewe"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bo-Nian Chen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Byte Magazine"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CG 2006"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Carl Ebeling"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Carnegie Mellon University"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Check"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Checkmate"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ChessBase"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Skill in Man and Machine"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chinese Chess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chrilly Donninger"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Christian Posthoff"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chunking"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cognition"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Compendium"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computers, Chess, and Cognition"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Conferences"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Crafty"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Danny Kopec"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dap Hartmann"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "David Wilkins"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Deep Blue"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Demis Hassabis"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Don Dailey"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Donald Michie"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Double Attack"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "E6P"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ed Schroder"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Edward John Quigley"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Endgame Bitbases"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Endgame Tablebases"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Feng-hsiung Hsu"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fermin Serrano"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fidelity"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fifty-move Rule"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Frans Morsch"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fritz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gordon Goetsch"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Guillaume Chaslot"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "HIARCS"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hans Berliner"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hermann Kaindl"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "HiTech"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Horizon Effect"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hung-Jui Chang"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA Journal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Igor Kononenko"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Interior Node"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Interior Node Recognizer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ivan Bratko"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jack Good"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jan Louwman"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jean-Baptiste Hoock"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jean Hayes Michie"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jens Bæk Nielsen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jens Zeidler"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Johannes Fürnkranz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "John Hamlen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jonathan Schaeffer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jr-Chang Chen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jung-Kuei Yang"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kai Laskos"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kai von Luck"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kenneth W. Regan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Knight Pattern"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Komodo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Krzysztof Krawiec"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kuo-Yuan Kao"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Learning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marcel van Kervinck"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marco Costalba"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mark Lefler"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mark Uniacke"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marvin Minsky"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Massachusetts Institute of Technology"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Matej Guid"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Max Bramer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Memory"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mephisto Portorose"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mephisto RISC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michael Schlosser"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michael Thielscher"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mike Clarke"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Generation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Ordering"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Moves"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Murray Campbell"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Nick Pelling"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Node Types"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Olivier Teytaud"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Opening Book"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Opponent Model Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Oracle"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Overloading"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pattern Recognition"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Paul E. Utgoff"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter Kouwenhoven"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter Norvig"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter W. Frey"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pin"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Planning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Playing Strength"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ply"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pseudorandom Number Generator"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rainer Staudte"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Raymond Smullyan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rebel"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Reiner Seidel"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Repetitions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Retrograde Analysis"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Richard Fikes"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Richard Lang"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Hyatt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Levinson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Root"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rules of Chess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rybka"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SSDF"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search with Random Leaf Values"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Selectivity"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sergei Markoff"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Shi-Jim Yen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Shun-Chin Hsu"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stalemate"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stanford University"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stephen Muggleton"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stockfish"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Strategy"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stuart Russell"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sylvain Gelly"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tactics"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tamal T. Biswas"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tim Niblett"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tony Marsland"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tsan-sheng Hsu"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "University of Alberta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "University of Edinburgh"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "University of Ljubljana"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "University of Minnesota"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "University of Waterloo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Valavan Manohararajah"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "WCCC 1992"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Woodpusher"
+      },
+      {
+        "ns": 0,
+        "*": "Psychology"
+      },
+      {
+        "ns": 0,
+        "*": "Coen Zuidema"
+      },
+      {
+        "ns": 0,
+        "*": "Kiyoshi Shirayanagi"
+      },
+      {
+        "ns": 0,
+        "*": "Steven Walczak"
+      },
+      {
+        "ns": 0,
+        "*": "Gil Fuchs"
+      },
+      {
+        "ns": 0,
+        "*": "Tristan Caulfield"
+      },
+      {
+        "ns": 0,
+        "*": "David J. Stracuzzi"
+      },
+      {
+        "ns": 0,
+        "*": "Louis Chatriot"
+      },
+      {
+        "ns": 0,
+        "*": "Christophe Fiter"
+      },
+      {
+        "ns": 0,
+        "*": "Julien Pérez"
+      },
+      {
+        "ns": 0,
+        "*": "Arpad Rimmel"
+      },
+      {
+        "ns": 0,
+        "*": "Tai-Ning Yang"
+      },
+      {
+        "ns": 0,
+        "*": "Thomas McGrath"
+      },
+      {
+        "ns": 0,
+        "*": "Andrei Kapishnikov"
+      },
+      {
+        "ns": 0,
+        "*": "Nenad Tomašev"
+      },
+      {
+        "ns": 0,
+        "*": "Adam Pearce"
+      },
+      {
+        "ns": 0,
+        "*": "Been Kim"
+      },
+      {
+        "ns": 0,
+        "*": "Ulrich Paquet"
+      },
+      {
+        "ns": 0,
+        "*": "Vladimir Kramnik"
+      },
+      {
+        "ns": 0,
+        "*": "Ingo Lindam"
+      },
+      {
+        "ns": 0,
+        "*": "Vincent Lejeune"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Billy Cobham"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Biréli Lagrène"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Jan Hammer"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:John McLaughlin"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Mahavishnu Orchestra"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Rick Laird"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Samuel Bak"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Search versus Knowledge",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Knowledge",
+        "byteoffset": 2010,
+        "anchor": "Search_versus_Knowledge"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "In Practice",
+        "number": "1.1",
+        "index": "2",
+        "fromtitle": "Knowledge",
+        "byteoffset": 2896,
+        "anchor": "In_Practice"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "HiTech versus LoTech",
+        "number": "1.2",
+        "index": "3",
+        "fromtitle": "Knowledge",
+        "byteoffset": 4517,
+        "anchor": "HiTech_versus_LoTech"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Ed Schröder's Conclusion",
+        "number": "1.3",
+        "index": "4",
+        "fromtitle": "Knowledge",
+        "byteoffset": 7226,
+        "anchor": "Ed_Schr.C3.B6der.27s_Conclusion"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Search versus Evaluation",
+        "number": "1.4",
+        "index": "5",
+        "fromtitle": "Knowledge",
+        "byteoffset": 9939,
+        "anchor": "Search_versus_Evaluation"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Knowing",
+        "number": "2",
+        "index": "6",
+        "fromtitle": "Knowledge",
+        "byteoffset": 14146,
+        "anchor": "Knowing"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Declarative Knowledge",
+        "number": "3",
+        "index": "7",
+        "fromtitle": "Knowledge",
+        "byteoffset": 14283,
+        "anchor": "Declarative_Knowledge"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "A Priori",
+        "number": "3.1",
+        "index": "8",
+        "fromtitle": "Knowledge",
+        "byteoffset": 14308,
+        "anchor": "A_Priori"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Heuristic Knowledge",
+        "number": "3.2",
+        "index": "9",
+        "fromtitle": "Knowledge",
+        "byteoffset": 14387,
+        "anchor": "Heuristic_Knowledge"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Empirical Knowledge",
+        "number": "3.3",
+        "index": "10",
+        "fromtitle": "Knowledge",
+        "byteoffset": 14468,
+        "anchor": "Empirical_Knowledge"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Perfect Knowledge",
+        "number": "3.4",
+        "index": "11",
+        "fromtitle": "Knowledge",
+        "byteoffset": 14571,
+        "anchor": "Perfect_Knowledge"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Interior Node Recognizer",
+        "number": "3.4.1",
+        "index": "12",
+        "fromtitle": "Knowledge",
+        "byteoffset": 14966,
+        "anchor": "Interior_Node_Recognizer"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Endgame Databases",
+        "number": "3.4.2",
+        "index": "13",
+        "fromtitle": "Knowledge",
+        "byteoffset": 15030,
+        "anchor": "Endgame_Databases"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Procedural Knowledge",
+        "number": "4",
+        "index": "14",
+        "fromtitle": "Knowledge",
+        "byteoffset": 15194,
+        "anchor": "Procedural_Knowledge"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "5",
+        "index": "15",
+        "fromtitle": "Knowledge",
+        "byteoffset": 15304,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "6",
+        "index": "16",
+        "fromtitle": "Knowledge",
+        "byteoffset": 15485,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1970 ...",
+        "number": "6.1",
+        "index": "17",
+        "fromtitle": "Knowledge",
+        "byteoffset": 15501,
+        "anchor": "1970_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1975 ...",
+        "number": "6.2",
+        "index": "18",
+        "fromtitle": "Knowledge",
+        "byteoffset": 15973,
+        "anchor": "1975_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1980 ...",
+        "number": "6.3",
+        "index": "19",
+        "fromtitle": "Knowledge",
+        "byteoffset": 17386,
+        "anchor": "1980_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1985 ...",
+        "number": "6.4",
+        "index": "20",
+        "fromtitle": "Knowledge",
+        "byteoffset": 19793,
+        "anchor": "1985_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1990 ...",
+        "number": "6.5",
+        "index": "21",
+        "fromtitle": "Knowledge",
+        "byteoffset": 22992,
+        "anchor": "1990_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1995 ...",
+        "number": "6.6",
+        "index": "22",
+        "fromtitle": "Knowledge",
+        "byteoffset": 24967,
+        "anchor": "1995_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "6.7",
+        "index": "23",
+        "fromtitle": "Knowledge",
+        "byteoffset": 26705,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2005 ...",
+        "number": "6.8",
+        "index": "24",
+        "fromtitle": "Knowledge",
+        "byteoffset": 29264,
+        "anchor": "2005_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "6.9",
+        "index": "25",
+        "fromtitle": "Knowledge",
+        "byteoffset": 31162,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "6.10",
+        "index": "26",
+        "fromtitle": "Knowledge",
+        "byteoffset": 32670,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "7",
+        "index": "27",
+        "fromtitle": "Knowledge",
+        "byteoffset": 33151,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1996 ...",
+        "number": "7.1",
+        "index": "28",
+        "fromtitle": "Knowledge",
+        "byteoffset": 33166,
+        "anchor": "1996_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "7.2",
+        "index": "29",
+        "fromtitle": "Knowledge",
+        "byteoffset": 34059,
+        "anchor": "2000_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2005 ...",
+        "number": "7.3",
+        "index": "30",
+        "fromtitle": "Knowledge",
+        "byteoffset": 34518,
+        "anchor": "2005_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "7.4",
+        "index": "31",
+        "fromtitle": "Knowledge",
+        "byteoffset": 35176,
+        "anchor": "2010_..._2"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "7.5",
+        "index": "32",
+        "fromtitle": "Knowledge",
+        "byteoffset": 36916,
+        "anchor": "2015_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "8",
+        "index": "33",
+        "fromtitle": "Knowledge",
+        "byteoffset": 37744,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Knowledge",
+        "number": "8.1",
+        "index": "34",
+        "fromtitle": "Knowledge",
+        "byteoffset": 37762,
+        "anchor": "Knowledge"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Related Topics",
+        "number": "8.2",
+        "index": "35",
+        "fromtitle": "Knowledge",
+        "byteoffset": 38633,
+        "anchor": "Related_Topics"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Types of Knowledge",
+        "number": "8.3",
+        "index": "36",
+        "fromtitle": "Knowledge",
+        "byteoffset": 40618,
+        "anchor": "Types_of_Knowledge"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Musicvideos",
+        "number": "8.4",
+        "index": "37",
+        "fromtitle": "Knowledge",
+        "byteoffset": 41774,
+        "anchor": "Musicvideos"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "9",
+        "index": "38",
+        "fromtitle": "Knowledge",
+        "byteoffset": 43703,
+        "anchor": "References"
+      }
+    ]
+  }
+}

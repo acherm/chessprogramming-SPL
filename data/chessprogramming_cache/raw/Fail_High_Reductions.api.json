@@ -1,0 +1,230 @@
+{
+  "parse": {
+    "title": "Fail-High Reductions",
+    "pageid": 996,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Search\" title=\"Search\">Search</a> * <a href=\"/Selectivity\" title=\"Selectivity\">Selectivity</a> * <a href=\"/Reductions\" title=\"Reductions\">Reductions</a> * Fail-High Reductions</b>\n</p><p><b>Fail-high reductions</b> (FHR), <br />\nas proposed and examined by <a href=\"/Rainer_Feldmann\" title=\"Rainer Feldmann\">Rainer Feldmann</a> <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup>, and implemented in the program <a href=\"/Zugzwang_(Program)\" title=\"Zugzwang (Program)\">Zugzwang</a>, are based on the <a href=\"/Null_Move_Observation\" title=\"Null Move Observation\">Null Move Observation</a> (NMO) - similar to the <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">Null Move Heuristic</a> (NMH). The idea is to search to shallower <a href=\"/Depth\" title=\"Depth\">depth</a> at <a href=\"/Chess_Position\" title=\"Chess Position\">positions</a> that are seemingly quiet and where the side to move has established a substantial advantage, according to a static <a href=\"/Evaluation\" title=\"Evaluation\">evaluation</a>. Apart from the <a href=\"/Evaluation_Function\" title=\"Evaluation Function\">evaluation function</a>, the heuristic requires an additional function that returns a value indicating threats against the side to move and therefor the quietness of a position.\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Implementation\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Implementation</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#See_also\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Publications\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Publications</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Forum Posts</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#References\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Implementation\">Implementation</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Fail-High_Reductions&amp;action=edit&amp;section=1\" title=\"Edit section: Implementation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>FHR is applied at expected <a href=\"/Node_Types#CUT\" title=\"Node Types\">Fail-high or Cut-Nodes</a> <a href=\"/Recursion\" title=\"Recursion\">recursively</a> inside a <a href=\"/NegaScout\" title=\"NegaScout\">NegaScout</a>-framework. Feldmann's implementation did no re-search with the original depth, if the shallow search didn't confirm the fail high. While NMH relies on a dynamic search, but cuts the whole subtree - FHR uses a static threat detection. FHR is not as vulnerable as NMH in situations, where the NMO fails - namely in <a href=\"/Zugzwang\" title=\"Zugzwang\">zugzwang</a>.\n</p>\n<pre>\neval, threat&#160;:= evaluate(...);\nif ( eval - threat &gt;= beta &amp;&amp; alpha == beta - 1) \n  reduce depth by one\n</pre>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Fail-High_Reductions&amp;action=edit&amp;section=2\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Double_Null_Move\" title=\"Double Null Move\">Double Null Move</a></li>\n<li> <a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">Late Move Reductions</a></li>\n<li> <a href=\"/Multi-Cut\" title=\"Multi-Cut\">Multi-Cut</a></li>\n<li> <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">Null Move Pruning</a></li>\n<li> <a href=\"/Null_Move_Reductions\" title=\"Null Move Reductions\">Null Move Reductions</a></li>\n<li> <a href=\"/ProbCut\" title=\"ProbCut\">ProbCut</a></li>\n<li> <a href=\"/Zugzwang\" title=\"Zugzwang\">Zugzwang</a></li>\n<li> <a href=\"/Zugzwang_(Program)\" title=\"Zugzwang (Program)\">Zugzwang (Program)</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Fail-High_Reductions&amp;action=edit&amp;section=3\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Rainer_Feldmann\" title=\"Rainer Feldmann\">Rainer Feldmann</a> (<b>1997</b>). <i>Fail-High Reductions.</i> <a href=\"/Advances_in_Computer_Chess_8\" title=\"Advances in Computer Chess 8\">Advances in Computer Chess 8</a>, available as <a rel=\"nofollow\" class=\"external text\" href=\"http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=4399933A9FAE32A9C855DED714120C66?doi=10.1.1.51.4897&amp;rep=rep1&amp;type=pdf\">pdf</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.51.4897\">CiteSeerX</a></li>\n<li> <a href=\"/Rainer_Feldmann\" title=\"Rainer Feldmann\">Rainer Feldmann</a>, <a href=\"/Burkhard_Monien\" title=\"Burkhard Monien\">Burkhard Monien</a> (<b>1998</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www2.cs.uni-paderborn.de/fachbereich/AG/monien/PUBLICATIONS/ABSTRACTS/FM_T3E.html\">Selective Game Tree Search on a Cray T3E</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www2.cs.uni-paderborn.de/fachbereich/AG/monien/PUBLICATIONS/POSTSCRIPTS/FM_T3E.ps.Z\">ps</a></li>\n<li> <a href=\"/Yngvi_Bj%C3%B6rnsson\" title=\"Yngvi Björnsson\">Yngvi Björnsson</a>, <a href=\"/Tony_Marsland\" title=\"Tony Marsland\">Tony Marsland</a> (<b>2000</b>). <i>Selective Depth-First Search Methods</i>. Games in AI Research (eds. <a href=\"/Jaap_van_den_Herik\" title=\"Jaap van den Herik\">Jaap van den Herik</a> and <a href=\"/Hiroyuki_Iida\" title=\"Hiroyuki Iida\">Hiroyuki Iida</a>), pp. 31-45. <a href=\"/Maastricht_University\" title=\"Maastricht University\">Universiteit Maastricht</a>, Maastricht, The Netherlands. ISBN 90-621-6416-1. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.ualberta.ca/%7Etony/RecentPapers/nec97w.pdf\">pdf preprint</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Fail-High_Reductions&amp;action=edit&amp;section=4\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess.computer/browse_frm/thread/548e7af6ccc53474\">Fail High reductions</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, October 7, 1996</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=304136\">Fail high reductions</a> by <a href=\"/Russell_Reagan\" title=\"Russell Reagan\">Russell Reagan</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 01, 2003</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=395592\">Fail High Reductions - question about researches</a> by <a href=\"/Anastasios_Milikas\" title=\"Anastasios Milikas\">milix</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 11, 2004 </li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Fail-High_Reductions&amp;action=edit&amp;section=5\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a href=\"/Rainer_Feldmann\" title=\"Rainer Feldmann\">Rainer Feldmann</a> (<b>1997</b>). <i>Fail-High Reductions.</i> <a href=\"/Advances_in_Computer_Chess_8\" title=\"Advances in Computer Chess 8\">Advances in Computer Chess 8</a>, available as <a rel=\"nofollow\" class=\"external text\" href=\"http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=4399933A9FAE32A9C855DED714120C66?doi=10.1.1.51.4897&amp;rep=rep1&amp;type=pdf\">pdf</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.51.4897\">CiteSeerX</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Reductions\" title=\"Reductions\">Up one level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260228195122\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.007 seconds\nReal time usage: 0.008 seconds\nPreprocessor visited node count: 46/1000000\nPreprocessor generated node count: 94/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:996-0!canonical and timestamp 20260228195122 and revision id 2081\n -->\n"
+    },
+    "categories": [],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 8"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Anastasios Milikas"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Burkhard Monien"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Position"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Double Null Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation Function"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hiroyuki Iida"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jaap van den Herik"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jon Dart"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Late Move Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Maastricht University"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Multi-Cut"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "NegaScout"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Node Types"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Observation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ProbCut"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rainer Feldmann"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Recursion"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Russell Reagan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Selectivity"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tony Marsland"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Yngvi Björnsson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Zugzwang"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Zugzwang (Program)"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Implementation",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Fail-High_Reductions",
+        "byteoffset": 1136,
+        "anchor": "Implementation"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Fail-High_Reductions",
+        "byteoffset": 1724,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Fail-High_Reductions",
+        "byteoffset": 1908,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Fail-High_Reductions",
+        "byteoffset": 2892,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "5",
+        "index": "5",
+        "fromtitle": "Fail-High_Reductions",
+        "byteoffset": 3370,
+        "anchor": "References"
+      }
+    ]
+  }
+}

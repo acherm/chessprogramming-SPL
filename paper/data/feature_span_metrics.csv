@@ -1,0 +1,57 @@
+feature,family,compile_flag,guarded_nonempty_loc,direct_files,seed_functions,seed_nonempty_loc,span_functions,span_files,span_nonempty_loc,span_guard_ratio
+Bitboards,BoardRepresentation,CFG_BITBOARDS,45,2,8,208,65,4,2641,58.69
+10x12 Board,BoardRepresentation,CFG_10X12_BOARD,11,2,8,208,65,4,2641,240.09
+0x88,BoardRepresentation,CFG_0X88,9,2,8,208,65,4,2641,293.44
+Mailbox,BoardRepresentation,CFG_MAILBOX,5,2,5,81,38,4,2071,414.2
+Fifty-Move Rule,Search,CFG_FIFTY_MOVE_RULE,20,1,5,731,57,3,1930,96.5
+Threefold Repetition,Search,CFG_THREEFOLD_REPETITION,20,1,5,731,57,3,1930,96.5
+En Passant,MoveGeneration,CFG_EN_PASSANT,36,2,3,469,51,3,1908,53.0
+Piece Lists,BoardRepresentation,CFG_PIECE_LISTS,86,2,12,930,50,2,1773,20.62
+Move Generation,MoveGeneration,CFG_MOVE_GENERATION,6,1,2,26,52,3,1760,293.33
+Legal Move Generation,MoveGeneration,CFG_LEGAL_MOVE_GENERATION,1,1,1,15,50,2,1719,1719.0
+Pseudo-Legal Move Generation,MoveGeneration,CFG_PSEUDO_LEGAL_MOVE_GENERATION,1,1,1,15,50,2,1719,1719.0
+Magic Bitboards,MoveGeneration,CFG_MAGIC_BITBOARDS,279,1,11,530,36,4,1688,6.05
+Unmake Move,BoardRepresentation,CFG_UNMAKE_MOVE,11,2,4,122,40,2,1510,137.27
+Transposition Table,TranspositionTable,CFG_TRANSPOSITION_TABLE,98,1,3,128,45,2,1383,14.11
+Copy-Make,BoardRepresentation,CFG_COPY_MAKE,7,2,3,60,32,2,1261,180.14
+Castling,MoveGeneration,CFG_CASTLING,120,2,2,352,30,2,1260,10.5
+Opening Book,Opening,CFG_OPENING_BOOK,233,3,10,402,46,3,1247,5.35
+Hash Move,Ordering Heuristics,CFG_HASH_MOVE,16,2,4,529,33,3,1140,71.25
+Iterative Deepening,Search,CFG_ITERATIVE_DEEPENING,18,1,2,182,40,5,1125,62.5
+Killer Heuristic,Ordering Heuristics,CFG_KILLER_HEURISTIC,11,1,2,75,32,3,1077,97.91
+History Heuristic,Ordering Heuristics,CFG_HISTORY_HEURISTIC,4,1,2,75,32,3,1077,269.25
+Move Ordering,Search,CFG_MOVE_ORDERING,34,1,1,53,31,3,1074,31.59
+Time Management,TimeManagement,CFG_TIME_MANAGEMENT,10,1,1,152,37,3,1018,101.8
+Replacement Schemes,TT Support,CFG_REPLACEMENT_SCHEMES,9,1,1,53,28,2,987,109.67
+Null Move Pruning,PruningReductions,CFG_NULL_MOVE_PRUNING,108,1,7,454,26,2,971,8.99
+FEN,Protocol,CFG_FEN,21,2,3,84,26,4,960,45.71
+Delta Pruning,PruningReductions,CFG_DELTA_PRUNING,22,1,3,172,25,2,959,43.59
+Late Move Reductions,PruningReductions,CFG_LATE_MOVE_REDUCTIONS,34,1,3,416,24,2,956,28.12
+Futility Pruning,PruningReductions,CFG_FUTILITY_PRUNING,18,1,2,410,24,2,956,53.11
+Razoring,PruningReductions,CFG_RAZORING,18,1,2,410,24,2,956,53.11
+Quiescence Search,Search,CFG_QUIESCENCE_SEARCH,6,1,2,410,24,2,956,159.33
+Zobrist Hashing,TT Support,CFG_ZOBRIST_HASHING,16,1,7,66,40,3,915,57.19
+Pondering,TimeManagement,CFG_PONDERING,242,2,11,404,23,4,841,3.48
+UCI,Protocol,CFG_UCI,3,1,1,207,19,4,773,257.67
+Negamax,Search,CFG_NEGAMAX,4,1,2,37,29,4,742,185.5
+Make Move,BoardRepresentation,CFG_MAKE_MOVE,6,1,2,128,29,3,730,121.67
+Alpha-Beta,Search,CFG_ALPHA_BETA,6,1,2,39,21,4,460,76.67
+Minimax,Search,CFG_MINIMAX,4,1,2,37,21,4,460,115.0
+Principal Variation Search,Search,CFG_PRINCIPAL_VARIATION_SEARCH,3,1,2,39,21,4,460,153.33
+Aspiration Windows,Search,CFG_ASPIRATION_WINDOWS,29,1,1,50,19,2,421,14.52
+Pawn Hash Table,TT Support,CFG_PAWN_HASH_TABLE,13,1,2,81,19,4,381,29.31
+Tapered Eval,Evaluation,CFG_TAPERED_EVAL,8,1,3,95,22,4,344,43.0
+Piece-Square Tables,Evaluation,CFG_PIECE_SQUARE_TABLES,34,1,2,112,19,4,314,9.24
+Evaluation,Evaluation,CFG_EVALUATION,3,1,2,112,19,4,314,104.67
+Mobility,Evaluation,CFG_MOBILITY,2,1,2,68,16,4,297,148.5
+Static Exchange Evaluation,Evaluation,CFG_STATIC_EXCHANGE_EVALUATION,2,1,2,86,12,4,236,118.0
+Bishop Pair,Piece Coordination,CFG_BISHOP_PAIR,1,1,1,60,5,4,136,136.0
+Connected Pawn,Pawn Structure,CFG_CONNECTED_PAWN,1,1,1,60,5,4,136,136.0
+Doubled Pawn,Pawn Structure,CFG_DOUBLED_PAWN,1,1,1,60,5,4,136,136.0
+Isolated Pawn,Pawn Structure,CFG_ISOLATED_PAWN,1,1,1,60,5,4,136,136.0
+King Activity,King Terms,CFG_KING_ACTIVITY,1,1,1,60,5,4,136,136.0
+King Pressure,King Terms,CFG_KING_SAFETY,1,1,1,60,5,4,136,136.0
+King Shelter,King Terms,CFG_KING_SHELTER,1,1,1,60,5,4,136,136.0
+Passed Pawn,Pawn Structure,CFG_PASSED_PAWN,1,1,1,60,5,4,136,136.0
+Rook on Open File,Piece Coordination,CFG_ROOK_OPEN_FILE,1,1,1,60,5,4,136,136.0
+Rook Semi-Open File,Piece Coordination,CFG_ROOK_SEMI_OPEN_FILE,1,1,1,60,5,4,136,136.0

@@ -1,0 +1,344 @@
+{
+  "parse": {
+    "title": "Engine Similarity",
+    "pageid": 6157,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Engines\" title=\"Engines\">Engines</a> * Similarity</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"/File:Phylogenetic_tree.svg\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Phylogenetic_tree.svg/330px-Phylogenetic_tree.svg.png\" width=\"300\" height=\"163\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Phylogenetic_tree.svg/500px-Phylogenetic_tree.svg.png 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Phylogenetic_tree.svg/960px-Phylogenetic_tree.svg.png 2x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Phylogenetic_tree.svg\" class=\"internal\" title=\"Enlarge\"></a></div>A <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Dendrogram\">dendrogram</a> of the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Tree_of_life\">Tree of Life</a> <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div>\n<p><b>Engine Similarity</b>,<br />\na loosely defined relation between (two) chess engines concerning their positional playing style, therefor mostly dependent on their <a href=\"/Evaluation\" title=\"Evaluation\">evaluation</a> features and weights.\nOne approach to assess engine similarity is to <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Similarity_measure\">count</a> how often these engines agree with the same move after a shallow <a href=\"/Search\" title=\"Search\">search</a>\nover a set of carefully selected, quiet <a href=\"/Test-Positions\" title=\"Test-Positions\">test positions</a> with apparently several possible best moves - another, in <b>k-best</b> mode, how often they propose the same ranking of k moves.\nA relative high similarity measure between two engines <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup> could be a symptom of using similar evaluation ideas, features and weights, along with <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">automated tuning</a> (or trainig), or even code copying aka <a href=\"/Category:Clone\" title=\"Category:Clone\">cloning</a>. \nSimilarity testing is intended as first automated \"<a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Screening_(medicine)\">screening</a>\" to trigger further investigations in case moves are too similar.\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Similarity_Testers\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Similarity Testers</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#See_also\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Publications\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Publications</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#1999\"><span class=\"tocnumber\">4.1</span> <span class=\"toctext\">1999</span></a></li>\n<li class=\"toclevel-2 tocsection-6\"><a href=\"#2000_...\"><span class=\"tocnumber\">4.2</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#2010_...\"><span class=\"tocnumber\">4.3</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#2015_...\"><span class=\"tocnumber\">4.4</span> <span class=\"toctext\">2015 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#2020_...\"><span class=\"tocnumber\">4.5</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-10\"><a href=\"#External_Links\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">External Links</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#Chess_Engines\"><span class=\"tocnumber\">5.1</span> <span class=\"toctext\">Chess Engines</span></a></li>\n<li class=\"toclevel-2 tocsection-12\"><a href=\"#Misc\"><span class=\"tocnumber\">5.2</span> <span class=\"toctext\">Misc</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-13\"><a href=\"#References\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Similarity_Testers\">Similarity Testers</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Similarity&amp;action=edit&amp;section=1\" title=\"Edit section: Similarity Testers\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>In December 2010, <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a> published <b>SIM03</b> to test the similary with a set of <a href=\"/UCI\" title=\"UCI\">UCI</a> compliant engines with <b>8238</b> in-build positions - still freely available from the <a href=\"/Komodo\" title=\"Komodo\">Komodo</a> site <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>.\nA pair of different chess engines could then be compared for similarity by matching up and counting the number of positions for which each engine chose the same move.\n<b>SIMEX</b> is a more user friendly successor by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup> using external <a href=\"/Extended_Position_Description\" title=\"Extended Position Description\">EPD</a>-files.\nOverall similarity of multiple engines may be visualized as <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Hierarchical_clustering\">hierarchical clustering</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Dendrogram\">dendrogram</a> <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup>. \n</p>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Similarity&amp;action=edit&amp;section=2\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Category:Clone\" title=\"Category:Clone\">Category:Clone</a></li>\n<li> <a href=\"/Category:Derivative\" title=\"Category:Derivative\">Category:Derivative</a></li>\n<li> <a href=\"/ICGA_Investigations\" title=\"ICGA Investigations\">ICGA Investigations</a></li>\n<li> <a href=\"/Engine_Testing\" title=\"Engine Testing\">Engine Testing</a></li>\n<li> <a href=\"/Match_Statistics\" title=\"Match Statistics\">Match Statistics</a></li>\n<li> <a href=\"/Playing_Strength\" title=\"Playing Strength\">Playing Strength</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Similarity&amp;action=edit&amp;section=3\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Ingo_Alth%C3%B6fer\" title=\"Ingo Althöfer\">Ingo Althöfer</a> (<b>1997</b>). <i>On the k-best Mode in Computer Chess: Measuring the Similarity of Move Proposals.</i> <a href=\"/ICGA_Journal#20_3\" title=\"ICGA Journal\">ICCA Journal, Vol. 20, No. 3</a></li>\n<li> <a href=\"/Mark_Levene\" title=\"Mark Levene\">Mark Levene</a>, <a href=\"/Judit_Bar-Ilan\" title=\"Judit Bar-Ilan\">Judit Bar-Ilan</a> (<b>2005</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.researchgate.net/publication/220174440_Comparing_Move_Choices_of_Chess_Search_Engines\">Comparing Move Choices of Chess Search Engines</a></i>. <a href=\"/ICGA_Journal#28_2\" title=\"ICGA Journal\">ICGA Journal, Vol. 28, No. 2</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.dcs.bbk.ac.uk/~mark/download/fritz_junior_icga.pdf\">pdf</a></li>\n<li> <a href=\"/Paolo_Ciancarini\" title=\"Paolo Ciancarini\">Paolo Ciancarini</a>, <a href=\"/index.php?title=Gian_Piero_Favini&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Gian Piero Favini (page does not exist)\">Gian Piero Favini</a> (<b>2009</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.sciencedirect.com/science/article/pii/S1875952109000020\">Detecting clones in game-playing software</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.journals.elsevier.com/entertainment-computing/\">Entertainment Computing</a>, Vol. 1, No. 1</li>\n<li> <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/Adam_Hair\" title=\"Adam Hair\">Adam Hair</a>, <a href=\"/Mark_Watkins\" title=\"Mark Watkins\">Mark Watkins</a> (<b>2014</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.sciencedirect.com/science/article/pii/S1875952113000177\">Move Similarity Analysis in Chess Programs</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.journals.elsevier.com/entertainment-computing/\">Entertainment Computing</a>, Vol. 5, No. 3, <a rel=\"nofollow\" class=\"external text\" href=\"http://magma.maths.usyd.edu.au/~watkins/papers/DHW.pdf\">preprint as pdf</a> <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Similarity&amp;action=edit&amp;section=4\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1999\">1999</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Similarity&amp;action=edit&amp;section=5\" title=\"Edit section: 1999\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=40708\">Chess program similarity experiment</a> by <a href=\"/Bruce_Moreland\" title=\"Bruce Moreland\">Bruce Moreland</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 24, 1999</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=40940\">This test is not scientific!</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 26, 1999</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=40948\">Re: This test is not scientific!</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 26, 1999</dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=41059\">Comparing Bionic-Impakt vs Bionic</a> by <a href=\"/Albrecht_Heeffer\" title=\"Albrecht Heeffer\">Albrecht Heeffer</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 27, 1999&#160;» <a href=\"/Bionic_Impakt\" title=\"Bionic Impakt\">Bionic Impakt</a>, <a href=\"/Bionic\" title=\"Bionic\">Bionic</a></dd></dl>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Similarity&amp;action=edit&amp;section=6\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://rybkaforum.net/cgi-bin/rybkaforum/topic_show.pl?tid=6772\">question to vas on similarity of rybka 1.0 to fruit</a> by duncan, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Rybka Forum</a>, August 25, 2008</li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Similarity&amp;action=edit&amp;section=7\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=37308\">Similarity Detector Available</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 26, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=37381\">Cluster analysis of similarity test</a> by <a href=\"/Miguel_A._Ballicora\" title=\"Miguel A. Ballicora\">Miguel A. Ballicora</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 31, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=38086\">Similarity testing for source code</a> by <a href=\"/Mark_Lefler\" title=\"Mark Lefler\">Mark Lefler</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 16, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=38772\">Pairwise Analysis of Chess Engine Move Selections</a> by <a href=\"/Adam_Hair\" title=\"Adam Hair\">Adam Hair</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 17, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=10&amp;t=40795\">Fritz and Naum shown as Rybka/Strelka clones</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a> (Engine Origins), October 17, 2011</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=42737\">Pairwise Analysis of Chess Engine Move Selections Revisited</a> by <a href=\"/Adam_Hair\" title=\"Adam Hair\">Adam Hair</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 04, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=44874\">Similarity tool myth - debunked</a> by <a href=\"/Don_Dailey\" title=\"Don Dailey\">Don Dailey</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 23, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-chess.org/viewtopic.php?f=5&amp;t=2531\">Fritz 11</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Rebel</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">OpenChess Forum</a>, December 10, 2013 </li></ul>\n<h2><span class=\"mw-headline\" id=\"2015_...\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Similarity&amp;action=edit&amp;section=8\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=55066\">Similarity test</a> by <a href=\"/Martin_Sedlak\" title=\"Martin Sedlak\">Martin Sedlak</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 24, 2015&#160;» <a href=\"/Cheng\" title=\"Cheng\">Cheng</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=60012\">Similarity test for Capivara &gt; version 0.0.8 available?</a> by <a href=\"/G%C3%BCnther_Simon\" title=\"Günther Simon\">Günther Simon</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 01, 2016&#160;» <a href=\"/Capivara\" title=\"Capivara\">Capivara</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=62364\">New Similarity Dendrogram</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 03, 2016 (Images broken links)</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=70197\">Experiment 11 - Similarity between the top engines back then and now</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 14, 2019</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=70390\">How to measure overall similarity</a> by <a href=\"/Ferdinand_Mosca\" title=\"Ferdinand Mosca\">Ferdinand Mosca</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 02, 2019 </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=70633\">Why all Lc0 runs result in such similarity of quiet moves selection?</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 01, 2019</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=71497\">Similarity tester - 2nd generation - BETA</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 09, 2019</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=71610\">What the heck happens here?</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 20, 2019</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=71709\">SIMEX 2.1</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 01, 2019 </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=71892\">Similarity Report 2019</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a> (Engine Origins), September 23, 2019</li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Similarity&amp;action=edit&amp;section=9\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=75797\">Maybe not the best diversity of strongest chess engines under development</a> by <a href=\"/Kai_Laskos\" title=\"Kai Laskos\">Kai Laskos</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 14, 2020&#160;» <a href=\"/NNUE\" title=\"NNUE\">NNUE</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=76833\">NNUE Research Project</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 10, 2021&#160;» <a href=\"/NNUE\" title=\"NNUE\">NNUE</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=76840\">Simex including NNUE</a> by jjoshua2, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 11, 2021&#160;» <a href=\"/NNUE\" title=\"NNUE\">NNUE</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Similarity&amp;action=edit&amp;section=10\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Chess_Engines\">Chess Engines</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Similarity&amp;action=edit&amp;section=11\" title=\"Edit section: Chess Engines\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://komodochess.com/downloads.htm\">Komodo Chess Engine - Official Site</a> with Similary tester version 03 download</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://rebel13.nl/misc/simex.html\">Similary tester 2nd generation</a> (SIMEX) by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://rebel13.nl/misc/sim2019.html\">Similarity Report 2019</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://rebel13.nl/home/nnue.html\">nnue | Home of the Dutch Rebel</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>&#160;» <a href=\"/NNUE\" title=\"NNUE\">NNUE</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/fsmosca/Similarity-Dendrogram\">GitHub - fsmosca/Similarity-Dendrogram: Plot dendrogram on chess engines similarity</a> by <a href=\"/Ferdinand_Mosca\" title=\"Ferdinand Mosca\">Ferdinand Mosca</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Misc\">Misc</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Similarity&amp;action=edit&amp;section=12\" title=\"Edit section: Misc\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Similarity\">Similarity from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Similarity_(geometry)\">Similarity (geometry) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Lexical_similarity\">Lexical similarity from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Semantic_similarity\">Semantic similarity from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Structural_similarity\">Structural similarity from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Similarity_measure\">Similarity measure from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Dendrogram\">Dendrogram from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Hierarchical_clustering\">Hierarchical clustering from Wikipedia</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Engine_Similarity&amp;action=edit&amp;section=13\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\">\nA <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Phylogenetic_tree\">phylogenetic tree</a> of <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Life\">living things</a>, based on <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/RNA\">RNA</a> data and proposed by <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Carl_Woese\">Carl Woese</a>, \nshowing the separation of <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Bacteria\">bacteria</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Archaea\">archaea</a>, and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Eukaryote\">eukaryotes</a>. \nTrees constructed with other genes are generally similar, although they may place some early-branching groups very differently, thanks to <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Long_branch_attraction\">long branch attraction</a>. The exact relationships of the three domains are still being debated, as is the position of the root of the tree. It has also been suggested that due to <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Horizontal_gene_transfer\">lateral gene transfer</a>, a tree may not be the best representation of the genetic relationships of all organisms. For instance some genetic evidence suggests that eukaryotes evolved from the union of some bacteria and archaea (one becoming an <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Organelle\">organelle</a> and the other the main <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Cell_(biology)\">cell</a>).\nAutor: Eric Gaba, September 2006, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wikimedia_Commons\">Wikimedia Commons</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\">i.e. &gt; 65% in SIM03</span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://komodochess.com/downloads.htm\">Komodo Chess Engine - Official Site</a> with Similary tester version 03 download</span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=71709\">SIMEX 2.1</a> provided by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 01, 2019</span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=70390\">How to measure overall similarity</a> by <a href=\"/Ferdinand_Mosca\" title=\"Ferdinand Mosca\">Ferdinand Mosca</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 02, 2019</span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=38772\">Pairwise Analysis of Chess Engine Move Selections</a> by <a href=\"/Adam_Hair\" title=\"Adam Hair\">Adam Hair</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 17, 2011</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Engines\" title=\"Engines\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260228181810\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.078 seconds\nReal time usage: 0.640 seconds\nPreprocessor visited node count: 139/1000000\nPreprocessor generated node count: 266/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:6157-0!canonical and timestamp 20260228181809 and revision id 24003\n -->\n"
+    },
+    "categories": [],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Adam Hair"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Albrecht Heeffer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Automated Tuning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bionic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bionic Impakt"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bruce Moreland"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Capivara"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cheng"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Don Dailey"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ed Schroder"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engine Testing"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engines"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Extended Position Description"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ferdinand Mosca"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Günther Simon"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA Investigations"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA Journal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ingo Althöfer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Judit Bar-Ilan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kai Laskos"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Komodo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mark Lefler"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mark Levene"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mark Watkins"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Martin Sedlak"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Match Statistics"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Miguel A. Ballicora"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "NNUE"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Paolo Ciancarini"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Playing Strength"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Test-Positions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "UCI"
+      },
+      {
+        "ns": 0,
+        "*": "Gian Piero Favini"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Clone"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Derivative"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Similarity Testers",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Engine_Similarity",
+        "byteoffset": 2636,
+        "anchor": "Similarity_Testers"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Engine_Similarity",
+        "byteoffset": 3791,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Engine_Similarity",
+        "byteoffset": 3980,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Engine_Similarity",
+        "byteoffset": 5280,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1999",
+        "number": "4.1",
+        "index": "5",
+        "fromtitle": "Engine_Similarity",
+        "byteoffset": 5295,
+        "anchor": "1999"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "4.2",
+        "index": "6",
+        "fromtitle": "Engine_Similarity",
+        "byteoffset": 5862,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "4.3",
+        "index": "7",
+        "fromtitle": "Engine_Similarity",
+        "byteoffset": 6061,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "4.4",
+        "index": "8",
+        "fromtitle": "Engine_Similarity",
+        "byteoffset": 7272,
+        "anchor": "2015_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "4.5",
+        "index": "9",
+        "fromtitle": "Engine_Similarity",
+        "byteoffset": 8850,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "5",
+        "index": "10",
+        "fromtitle": "Engine_Similarity",
+        "byteoffset": 9339,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Chess Engines",
+        "number": "5.1",
+        "index": "11",
+        "fromtitle": "Engine_Similarity",
+        "byteoffset": 9357,
+        "anchor": "Chess_Engines"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Misc",
+        "number": "5.2",
+        "index": "12",
+        "fromtitle": "Engine_Similarity",
+        "byteoffset": 9966,
+        "anchor": "Misc"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "6",
+        "index": "13",
+        "fromtitle": "Engine_Similarity",
+        "byteoffset": 10664,
+        "anchor": "References"
+      }
+    ]
+  }
+}

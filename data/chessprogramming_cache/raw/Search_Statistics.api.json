@@ -1,0 +1,385 @@
+{
+  "parse": {
+    "title": "Search Statistics",
+    "pageid": 1672,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Engine_Testing\" title=\"Engine Testing\">Engine Testing</a> * Search Statistics</b>\n</p><p><b>Search statistics</b> refers to counting various appearances of interest inside the <a href=\"/Search\" title=\"Search\">search</a> or <a href=\"/Evaluation\" title=\"Evaluation\">evaluation</a> routines and to analyze their relationships to eventually spot <a href=\"/Engine_Testing#bugs\" title=\"Engine Testing\">bugs</a> or unfavorable conditions in <a href=\"/Move_Ordering\" title=\"Move Ordering\">move ordering</a>.\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Node_Statistics\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Node Statistics</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-2\"><a href=\"#Cutoffs\"><span class=\"tocnumber\">1.1</span> <span class=\"toctext\">Cutoffs</span></a></li>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#Re-Searches\"><span class=\"tocnumber\">1.2</span> <span class=\"toctext\">Re-Searches</span></a></li>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#Root_Statistics\"><span class=\"tocnumber\">1.3</span> <span class=\"toctext\">Root Statistics</span></a></li>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#Selectivity\"><span class=\"tocnumber\">1.4</span> <span class=\"toctext\">Selectivity</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#TT_Statistics\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">TT Statistics</span></a></li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#See_also\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-8\"><a href=\"#Publications\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Publications</span></a></li>\n<li class=\"toclevel-1 tocsection-9\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#1994_...\"><span class=\"tocnumber\">5.1</span> <span class=\"toctext\">1994 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#2000_...\"><span class=\"tocnumber\">5.2</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-12\"><a href=\"#2010_...\"><span class=\"tocnumber\">5.3</span> <span class=\"toctext\">2010 ...</span></a></li>\n</ul>\n</li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Node_Statistics\">Node Statistics</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Statistics&amp;action=edit&amp;section=1\" title=\"Edit section: Node Statistics\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Of interest is the appearance of searched <a href=\"/Node\" title=\"Node\">nodes</a> inside an <a href=\"/Iterative_Deepening\" title=\"Iterative Deepening\">iterative deepening framework</a> and the ratio of <a href=\"/Quiescent_Node\" title=\"Quiescent Node\">quiescent nodes</a>, per <a href=\"/Depth\" title=\"Depth\">depth</a> and/or aggregated, in conjunction with <a href=\"/Branching_Factor#EffectiveBranchingFactor\" title=\"Branching Factor\">effective branching factor</a> (EBF) and of course <a href=\"/Nodes_per_Second\" title=\"Nodes per Second\">nodes per second</a>.\n</p>\n<h2><span class=\"mw-headline\" id=\"Cutoffs\">Cutoffs</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Statistics&amp;action=edit&amp;section=2\" title=\"Edit section: Cutoffs\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Inside <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">Alpha-beta</a>- or <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">PV-search</a> it is of particular interest to count how often a node <a href=\"/Fail-High\" title=\"Fail-High\">failes high</a> or not, in relation to its <a href=\"/Node_Types\" title=\"Node Types\">node types</a>, that is expected <a href=\"/Node_Types#CUT\" title=\"Node Types\">cut-Nodes</a> or expected <a href=\"/Node_Types#ALL\" title=\"Node Types\">All-nodes</a>. If a fail-high occurs, it is illuminative to know whether the fail-high move it was tried first, early or late and what <a href=\"/Move_Ordering\" title=\"Move Ordering\">move ordering</a> classification like move from the <a href=\"/Transposition_Table\" title=\"Transposition Table\">transposition table</a>, <a href=\"/Captures\" title=\"Captures\">winning captures</a>, <a href=\"/Killer_Move\" title=\"Killer Move\">killer moves</a>, etc. was applied.\n</p>\n<h2><span class=\"mw-headline\" id=\"Re-Searches\">Re-Searches</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Statistics&amp;action=edit&amp;section=3\" title=\"Edit section: Re-Searches\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>At <a href=\"/Node_Types#PV\" title=\"Node Types\">PV-nodes</a> inside a <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">alpha-beta</a>- or <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">PV-search</a> the number of re-searches does concern, and how often a re-search does improve alpha (or even performs a cutoff) or not.\n</p>\n<h2><span class=\"mw-headline\" id=\"Root_Statistics\">Root Statistics</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Statistics&amp;action=edit&amp;section=4\" title=\"Edit section: Root Statistics\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>The <a href=\"/Root\" title=\"Root\">Root</a> as distinguished PV-node specially with <a href=\"/Aspiration_Windows\" title=\"Aspiration Windows\">aspiration window</a> often has its own statistics related to how much relative time (nodes) of the whole <a href=\"/Iteration\" title=\"Iteration\">iteration</a> is performed per each root-move, and how often another best move was found. In conjunction with static move properties, score graph by searched depth so far, etc., these statistic based informations may be considered in <a href=\"/Time_Management\" title=\"Time Management\">time management</a> to possibly decide about a new iteration.\n</p>\n<h2><span class=\"mw-headline\" id=\"Selectivity\">Selectivity</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Statistics&amp;action=edit&amp;section=5\" title=\"Edit section: Selectivity\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>Counting the various <a href=\"/Extensions\" title=\"Extensions\">extensions</a>, <a href=\"/Reductions\" title=\"Reductions\">reductions</a> and <a href=\"/Pruning\" title=\"Pruning\">forward pruning</a> decisions in relation with <a href=\"/Branching_Factor#EffectiveBranchingFactor\" title=\"Branching Factor\">effective branching factor</a> might also spot some deficiency inside the search.\n<span id=\"TTStatistics\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"TT_Statistics\">TT Statistics</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Statistics&amp;action=edit&amp;section=6\" title=\"Edit section: TT Statistics\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Statistics of the <a href=\"/Transposition_Table\" title=\"Transposition Table\">transposition table</a> covers number of probes and stores, fill level, and number of probe hits, likely differentiated by sufficient <a href=\"/Depth\" title=\"Depth\">draft</a> and <a href=\"/Node_Types\" title=\"Node Types\">type of stored node</a>.\n</p>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Statistics&amp;action=edit&amp;section=7\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/index.php?title=Profiling&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Profiling (page does not exist)\">Profiling</a></li>\n<li> <a href=\"/Match_Statistics\" title=\"Match Statistics\">Match Statistics</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Statistics&amp;action=edit&amp;section=8\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Hermann_Kaindl\" title=\"Hermann Kaindl\">Hermann Kaindl</a> (<b>1988</b>). <i>Useful Statistics from Tournament Programs</i>. <a href=\"/ICGA_Journal#11_4\" title=\"ICGA Journal\">ICCA Journal, Vol. 11, No. 4</a>&#160;» <a href=\"/Merlin\" title=\"Merlin\">Merlin</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Statistics&amp;action=edit&amp;section=9\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1994_...\">1994 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Statistics&amp;action=edit&amp;section=10\" title=\"Edit section: 1994 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://groups.google.com/group/rec.games.chess/browse_frm/thread/32af80f05abdc805\">COMPUTER CHESS: statistics</a> by <a href=\"/Deniz_Yuret\" title=\"Deniz Yuret\">Deniz Yuret</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, October 27, 1994</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=13052\">Cutoff Statistics</a> by <a href=\"/Roland_Pfister\" title=\"Roland Pfister\">Roland Pfister</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December, 18, 1997</li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Statistics&amp;action=edit&amp;section=11\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=92156\">A matter of statistics</a> by <a href=\"/index.php?title=Tijs_van_Dam&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Tijs van Dam (page does not exist)\">Tijs van Dam</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 26, 2000</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=115020\">Re: The Scalable Search Test / Results of \"Der Bringer\"</a> by <a href=\"/Gerrit_Reubold\" title=\"Gerrit Reubold\">Gerrit Reubold</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 18, 2000</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=129504\">Faster, deeper and more of such...</a> by <a href=\"/Ed_Schroder\" title=\"Ed Schroder\">Ed Schröder</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 14, 2000&#160;» <a href=\"/Depth#DiminishingReturns\" title=\"Depth\">Diminishing Returns</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=143022\">Hash table efficiency</a> by <a href=\"/Miguel_A._Ballicora\" title=\"Miguel A. Ballicora\">Miguel A. Ballicora</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 05, 2000&#160;» <a href=\"/Gaviota\" title=\"Gaviota\">Gaviota</a>, <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Table</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=359148\">Hash table statistics</a> by <a href=\"/index.php?title=Andrew_Wagner&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Andrew Wagner (page does not exist)\">Andrew Wagner</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 08, 2004</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=20562\">What is the Ideal Output for Understanding a Chess Engine?</a> by Rick Fadden, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 07, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=27737\">Search statistics</a> by henkf, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 04, 2009</li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Statistics&amp;action=edit&amp;section=12\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=42665\">make and unmake stadistics</a> by <a href=\"/Fermin_Serrano\" title=\"Fermin Serrano\">Fermin Serrano</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 28, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=45264\">Probabilistic approach to optimize search tree</a> by <a href=\"/Sergei_Markoff\" title=\"Sergei Markoff\">Sergei S. Markoff</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 22, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=49871\">Search statistics</a> by <a href=\"/Robert_Pope\" title=\"Robert Pope\">Robert Pope</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 30, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=51075\">pruning statistics</a> by <a href=\"/Jon_Dart\" title=\"Jon Dart\">Jon Dart</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 27, 2014&#160;» <a href=\"/Pruning\" title=\"Pruning\">Pruning</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61401\">Best move statistics</a> by <a href=\"/Matthew_Lai\" title=\"Matthew Lai\">Matthew Lai</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 12, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63280\">Move ordering statistics</a> by <a href=\"/index.php?title=Sander_Maassen_vd_Brink&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Sander Maassen vd Brink (page does not exist)\">Sander Maassen vd Brink</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 26, 2017&#160;» <a href=\"/Move_Ordering\" title=\"Move Ordering\">Move Ordering</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63555\">Testing for Move Ordering Improvements</a> by <a href=\"/index.php?title=Cheney_Nattress&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Cheney Nattress (page does not exist)\">Cheney Nattress</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 25, 2017&#160;» <a href=\"/Move_Ordering\" title=\"Move Ordering\">Move Ordering</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66335\">Komodo 11.2.2 - Initial position until depth 54</a> by <a href=\"/Andreas_Strangm%C3%BCller\" title=\"Andreas Strangmüller\">Andreas Strangmüller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 15, 2018&#160;» <a href=\"/Komodo\" title=\"Komodo\">Komodo</a>, <a href=\"/Initial_Position\" title=\"Initial Position\">Initial Position</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=66340\">Stockfish 8 - Initial position until depth 59</a> by <a href=\"/Andreas_Strangm%C3%BCller\" title=\"Andreas Strangmüller\">Andreas Strangmüller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 16, 2018&#160;» <a href=\"/Stockfish\" title=\"Stockfish\">Stockfish</a></li></ul>\n<p><b><a href=\"/Engine_Testing\" title=\"Engine Testing\">Up one level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301134328\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.008 seconds\nReal time usage: 0.009 seconds\nPreprocessor visited node count: 48/1000000\nPreprocessor generated node count: 54/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1672-0!canonical and timestamp 20260301134328 and revision id 17077\n -->\n"
+    },
+    "categories": [],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha-Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Andreas Strangmüller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aspiration Windows"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Branching Factor"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Captures"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Deniz Yuret"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ed Schroder"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engine Testing"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fail-High"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fermin Serrano"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gaviota"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gerrit Reubold"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hermann Kaindl"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA Journal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Initial Position"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iteration"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iterative Deepening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Jon Dart"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Killer Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Komodo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Match Statistics"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Matthew Lai"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Merlin"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Miguel A. Ballicora"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Ordering"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Node"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Node Types"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Nodes per Second"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiescent Node"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Robert Pope"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Roland Pfister"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Root"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sergei Markoff"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stockfish"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Time Management"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "*": "Profiling"
+      },
+      {
+        "ns": 0,
+        "*": "Tijs van Dam"
+      },
+      {
+        "ns": 0,
+        "*": "Andrew Wagner"
+      },
+      {
+        "ns": 0,
+        "*": "Sander Maassen vd Brink"
+      },
+      {
+        "ns": 0,
+        "*": "Cheney Nattress"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Node Statistics",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Search_Statistics",
+        "byteoffset": 355,
+        "anchor": "Node_Statistics"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Cutoffs",
+        "number": "1.1",
+        "index": "2",
+        "fromtitle": "Search_Statistics",
+        "byteoffset": 740,
+        "anchor": "Cutoffs"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Re-Searches",
+        "number": "1.2",
+        "index": "3",
+        "fromtitle": "Search_Statistics",
+        "byteoffset": 1365,
+        "anchor": "Re-Searches"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Root Statistics",
+        "number": "1.3",
+        "index": "4",
+        "fromtitle": "Search_Statistics",
+        "byteoffset": 1614,
+        "anchor": "Root_Statistics"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Selectivity",
+        "number": "1.4",
+        "index": "5",
+        "fromtitle": "Search_Statistics",
+        "byteoffset": 2136,
+        "anchor": "Selectivity"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "TT Statistics",
+        "number": "2",
+        "index": "6",
+        "fromtitle": "Search_Statistics",
+        "byteoffset": 2442,
+        "anchor": "TT_Statistics"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "3",
+        "index": "7",
+        "fromtitle": "Search_Statistics",
+        "byteoffset": 2688,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "4",
+        "index": "8",
+        "fromtitle": "Search_Statistics",
+        "byteoffset": 2740,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "5",
+        "index": "9",
+        "fromtitle": "Search_Statistics",
+        "byteoffset": 2903,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1994 ...",
+        "number": "5.1",
+        "index": "10",
+        "fromtitle": "Search_Statistics",
+        "byteoffset": 2917,
+        "anchor": "1994_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "5.2",
+        "index": "11",
+        "fromtitle": "Search_Statistics",
+        "byteoffset": 3232,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "5.3",
+        "index": "12",
+        "fromtitle": "Search_Statistics",
+        "byteoffset": 4269,
+        "anchor": "2010_..."
+      }
+    ]
+  }
+}

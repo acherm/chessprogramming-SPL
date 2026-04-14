@@ -1,0 +1,188 @@
+{
+  "parse": {
+    "title": "Pablo San Segundo",
+    "pageid": 5151,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/People\" title=\"People\">People</a> * Pablo San Segundo</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:222px;\"><a href=\"/File:San_segundo_carrillo_pablo_20081119_olympiade_dresden.jpg\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/San_segundo_carrillo_pablo_20081119_olympiade_dresden.jpg/250px-San_segundo_carrillo_pablo_20081119_olympiade_dresden.jpg\" width=\"220\" height=\"341\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/San_segundo_carrillo_pablo_20081119_olympiade_dresden.jpg/330px-San_segundo_carrillo_pablo_20081119_olympiade_dresden.jpg 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/San_segundo_carrillo_pablo_20081119_olympiade_dresden.jpg/500px-San_segundo_carrillo_pablo_20081119_olympiade_dresden.jpg 2x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:San_segundo_carrillo_pablo_20081119_olympiade_dresden.jpg\" class=\"internal\" title=\"Enlarge\"></a></div>Pablo San Segundo <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div>\n<p><b>Pablo San Segundo Carrillo</b>,<br />\na Spanish <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Grandmaster_%28chess%29\">chess grandmaster</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Spanish_Chess_Championship\">Spanish chess champion</a> in 1997 and member of the Olympic team since 1994, computer scientist and associate professor at the <a href=\"/Technical_University_of_Madrid\" title=\"Technical University of Madrid\">Universidad Politécnica de Madrid</a> (UPM). \nHis research interests include <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Heuristic\">heuristics</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Combinatorics\">combinatorics</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Game_theory\">game theory</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Graph_theory\">graph theory</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Clique_problem\">clique problems</a> and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Graph_coloring#Vertex_coloring\">vertex coloring</a>, and <a href=\"/Artificial_Intelligence\" title=\"Artificial Intelligence\">AI</a> search- and <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Optimization_problem\">optimization problems</a> in general, specially applying <a href=\"/Bitboards\" title=\"Bitboards\">bitboards</a>. \nIn their 2005 paper, <i>Bitboards: A New Approach</i> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup> , Pablo San Segundo and <a href=\"/Ram%C3%B3n_Gal%C3%A1n\" title=\"Ramón Galán\">Ramón Galán</a> mention <a href=\"/BitScan#BitscanByModulo\" title=\"BitScan\">Bitscan by Modulo</a> for finding 1-bits in a practically no space consuming way, at that time likely not yet aware of <a href=\"/BitScan#DeBruijnMultiplation\" title=\"BitScan\">De Bruijn multiplication</a> as proposed by <a href=\"/Charles_Leiserson\" title=\"Charles Leiserson\">Charles Leiserson</a> et al. in 1998 <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>, which is however mentioned in Segundo et al. 2011 on <a href=\"#BBMC\">BBMC</a> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#BITSCAN\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">BITSCAN</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#GRAPH\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">GRAPH</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#Selected_Publications\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Selected Publications</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#2005_...\"><span class=\"tocnumber\">3.1</span> <span class=\"toctext\">2005 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#2010_...\"><span class=\"tocnumber\">3.2</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-6\"><a href=\"#2015_...\"><span class=\"tocnumber\">3.3</span> <span class=\"toctext\">2015 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#External_Links\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-8\"><a href=\"#References\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"BITSCAN\">BITSCAN</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pablo_San_Segundo&amp;action=edit&amp;section=1\" title=\"Edit section: BITSCAN\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Pablo San Segundo has released BITSCAN, an efficient <a href=\"/Cpp#Libraries\" title=\"Cpp\">C++ library</a> for bitstrings which is optimized for scanning bit vectors of any size, and which he used to implement <span id=\"BBMC\"></span>BBMC (BB-MaxClique), a state of the art <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Clique_problem\">maximum clique algorithm</a> <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup>. \nBBMC encodes the graph problem as bitstrings and uses bitmasks to implement the basic computations in the search. BITSCAN is publicly available a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/GitHub\">GitHub</a> repository <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup>.\n</p>\n<h1><span class=\"mw-headline\" id=\"GRAPH\">GRAPH</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pablo_San_Segundo&amp;action=edit&amp;section=2\" title=\"Edit section: GRAPH\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>GRAPH, a small <a href=\"/Cpp#Libraries\" title=\"Cpp\">C++ library</a> with a number of data types for bit-encoded graphs using <a href=\"#BITSCAN\">BITSCAN</a> has  been released <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup>. \n</p>\n<h1><span class=\"mw-headline\" id=\"Selected_Publications\">Selected Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pablo_San_Segundo&amp;action=edit&amp;section=3\" title=\"Edit section: Selected Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup> \n</p>\n<h2><span class=\"mw-headline\" id=\"2005_...\">2005 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pablo_San_Segundo&amp;action=edit&amp;section=4\" title=\"Edit section: 2005 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a class=\"mw-selflink selflink\">Pablo San Segundo</a>, <a href=\"/Ram%C3%B3n_Gal%C3%A1n\" title=\"Ramón Galán\">Ramón Galán</a> (<b>2005</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.actapress.com/Abstract.aspx?paperId=18953\">Bitboards: A New Approach</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/db/conf/aia/aia2005.html\">AIA 2005</a></li>\n<li> <a class=\"mw-selflink selflink\">Pablo San Segundo</a>, <a href=\"/Ram%C3%B3n_Gal%C3%A1n\" title=\"Ramón Galán\">Ramón Galán</a>, <a href=\"/Fernando_Mat%C3%ADa\" title=\"Fernando Matía\">Fernando Matía</a>, <a href=\"/Diego_Rodr%C3%ADguez-Losada\" title=\"Diego Rodríguez-Losada\">Diego Rodríguez-Losada</a>, <a href=\"/Agust%C3%ADn_Jim%C3%A9nez\" title=\"Agustín Jiménez\">Agustín Jiménez</a> (<b>2006</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://ieeexplore.ieee.org/document/4031890\">Efficient Search Using Bitboard Models</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/db/conf/ictai/ictai2006.html\">ICTAI 2006</a></li>\n<li> <a class=\"mw-selflink selflink\">Pablo San Segundo</a>, <a href=\"/Diego_Rodr%C3%ADguez-Losada\" title=\"Diego Rodríguez-Losada\">Diego Rodríguez-Losada</a>, <a href=\"/Ram%C3%B3n_Gal%C3%A1n\" title=\"Ramón Galán\">Ramón Galán</a>, <a href=\"/Fernando_Mat%C3%ADa\" title=\"Fernando Matía\">Fernando Matía</a>, <a href=\"/Agust%C3%ADn_Jim%C3%A9nez\" title=\"Agustín Jiménez\">Agustín Jiménez</a> (<b>2007</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://ieeexplore.ieee.org/document/4410262\">Exploiting CPU Bit Parallel Operations to Improve Efficiency in Search</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/db/conf/ictai/ictai2007-1.html\">ICTAI 2007</a></li>\n<li> <a class=\"mw-selflink selflink\">Pablo San Segundo</a>, <a href=\"/Agust%C3%ADn_Jim%C3%A9nez\" title=\"Agustín Jiménez\">Agustín Jiménez</a>  (<b>2007</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://ieeexplore.ieee.org/document/5366833\">Using Graphs to Derive CSP Heuristics and its Application to Sudoku</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/db/conf/ictai/ictai2009.html\">ICTAI 2009</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pablo_San_Segundo&amp;action=edit&amp;section=5\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a class=\"mw-selflink selflink\">Pablo San Segundo</a>, <a href=\"/Diego_Rodr%C3%ADguez-Losada\" title=\"Diego Rodríguez-Losada\">Diego Rodríguez-Losada</a>, <a href=\"/Fernando_Mat%C3%ADa\" title=\"Fernando Matía\">Fernando Matía</a>, <a href=\"/Ram%C3%B3n_Gal%C3%A1n\" title=\"Ramón Galán\">Ramón Galán</a> (<b>2010</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://dl.acm.org/citation.cfm?id=1824946&amp;dl\">Fast exact feature based data correspondence search with an efficient bit-parallel MCP solver</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/db/journals/apin/apin32.html\">Applied Intelligence Vol. 32 No. 3</a> <sup id=\"cite_ref-9\" class=\"reference\"><a href=\"#cite_note-9\">&#91;9&#93;</a></sup></li>\n<li> <a class=\"mw-selflink selflink\">Pablo San Segundo</a>, <a href=\"/Diego_Rodr%C3%ADguez-Losada\" title=\"Diego Rodríguez-Losada\">Diego Rodríguez-Losada</a>, <a href=\"/Agust%C3%ADn_Jim%C3%A9nez\" title=\"Agustín Jiménez\">Agustín Jiménez</a> (<b>2011</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.sciencedirect.com/science/article/pii/S0305054810001504\">An exact bit-parallel algorithm for the maximum clique problem</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/db/journals/cor/cor38.html\">Computers &amp; Operations Research, Vol. 38, No. 2</a></li>\n<li> <a class=\"mw-selflink selflink\">Pablo San Segundo</a> (<b>2011</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://link.springer.com/article/10.1007%2Fs10898-011-9653-x\">New decision rules for exact search in N-Queens</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/db/journals/jgo/jgo51.html\">Journal of Global Optimization, Vol. 51, No. 3</a></li>\n<li> <a class=\"mw-selflink selflink\">Pablo San Segundo</a> (<b>2012</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.sciencedirect.com/science/article/pii/S0305054811002966\">A new DSATUR-based algorithm for exact vertex coloring</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/db/journals/cor/cor39.html\">Computers &amp; Operations Research, Vol. 39, No. 7</a></li>\n<li> <a class=\"mw-selflink selflink\">Pablo San Segundo</a>, <a href=\"/Diego_Rodr%C3%ADguez-Losada\" title=\"Diego Rodríguez-Losada\">Diego Rodríguez-Losada</a> (<b>2013</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://ieeexplore.ieee.org/document/6527958\">Robust Global Feature Based Data Association With a Sparse Bit Optimized Maximum Clique Algorithm</a></i>. <a href=\"/IEEE#Tor\" title=\"IEEE\">IEEE Transactions on Robotics</a>, Vol. 29, No. 5</li>\n<li> <a class=\"mw-selflink selflink\">Pablo San Segundo</a>, <a href=\"/Fernando_Mat%C3%ADa\" title=\"Fernando Matía\">Fernando Matía</a>, <a href=\"/Diego_Rodr%C3%ADguez-Losada\" title=\"Diego Rodríguez-Losada\">Diego Rodríguez-Losada</a>, <a href=\"/index.php?title=Miguel_Hernando&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Miguel Hernando (page does not exist)\">Miguel Hernando</a> (<b>2013</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://link.springer.com/article/10.1007/s11590-011-0431-y\">An improved bit parallel exact maximum clique algorithm</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/db/journals/ol/ol7.html\">Optimization Letters, Vol. 7</a>, No. 3</li>\n<li> <a href=\"/Diego_Rodr%C3%ADguez-Losada\" title=\"Diego Rodríguez-Losada\">Diego Rodríguez-Losada</a>, <a class=\"mw-selflink selflink\">Pablo San Segundo</a>, <a href=\"/index.php?title=Miguel_Hernando&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Miguel Hernando (page does not exist)\">Miguel Hernando</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/pers/hd/p/Puente:Paloma_de_la\">Paloma de la Puente</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/pers/hd/v/Valero=Gomez:Alberto\">Alberto Valero-Gomez</a> (<b>2013</b>). <i>GPU-Mapping: Robotic Map Building with Graphical Multiprocessors</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/db/journals/ram/ram20.html\">IEEE Robotics &amp; Automation Magazine, Vol. 20, No. 2</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://www.acin.tuwien.ac.at/fileadmin/acin/v4r/v4r/GPUMap_RAM2013.pdf\">pdf</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2015_...\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pablo_San_Segundo&amp;action=edit&amp;section=6\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a class=\"mw-selflink selflink\">Pablo San Segundo</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.org/pers/hd/n/Nikolaev:Alexey\">Alexey Nikolaev</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://scholar.google.ru/citations?user=MUQcdkAAAAAJ&amp;hl=ru\">Mikhail Batsyn</a> (<b>2015</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.sciencedirect.com/science/article/pii/S0305054815001549\">Infra-chromatic bound for exact maximum clique search</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/db/journals/cor/cor64.html\">Computers &amp; Operations Research, Vol. 64, No. 4</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/pers/hd/k/Komosko:Larisa\">Larisa Komosko</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://scholar.google.ru/citations?user=MUQcdkAAAAAJ&amp;hl=ru\">Mikhail Batsyn</a>, <a class=\"mw-selflink selflink\">Pablo San Segundo</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Panos_M._Pardalos\">Panos M. Pardalos</a> (<b>2016</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://link.springer.com/article/10.1007/s10878-015-9862-1\">A fast greedy sequential heuristic for the vertex colouring problem based on bitwise operations</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/db/journals/jco/jco31.html\">Journal of Combinatorial Optimization, Vol. 31, No- 4</a></li>\n<li> <a class=\"mw-selflink selflink\">Pablo San Segundo</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/pers/hd/a/Artieda:Jorge\">Jorge Artieda</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://scholar.google.com/citations?user=BTW2e5AAAAAJ&amp;hl=en\">Darren Strash</a> (<b>2017</b>). <i>Efficiently Enumerating all Maximal Cliques with Bit-Parallelism</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1801.00202\">arXiv:1801.00202</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pablo_San_Segundo&amp;action=edit&amp;section=7\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/psanse\">psanse (Pablo San Segundo) · GitHub</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://scholar.google.com/citations?user=FVMSpIkAAAAJ&amp;hl=en\">Pablo San Segundo - Google Scholar Citations</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://es.wikipedia.org/wiki/Pablo_San_Segundo_Carrillo\">Pablo San Segundo Carrillo from Wikipedia.es</a> (Spanish)</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://ratings.fide.com/card.phtml?event=2200082\">San Segundo Carrillo, Pablo FIDE Chess Profile</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.chessgames.com/perl/chessplayer?pid=89330\">The chess games of Pablo San Segundo-Carrillo</a> from <a rel=\"nofollow\" class=\"external text\" href=\"http://www.chessgames.com/index.html\">chessgames.com</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.chessbase.com/post/ponomariov-catches-nakamura-loses-tiebreak\">Donostia-San Sebastian Chess Festival</a> by <a rel=\"nofollow\" class=\"external text\" href=\"http://www.davidllada.com/\">David Llada</a>, <a href=\"/ChessBase\" title=\"ChessBase\">ChessBase news</a>, June 17, 2009</li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Pablo_San_Segundo&amp;action=edit&amp;section=8\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\">Pablo San Segundo at the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/38th_Chess_Olympiad\">38th Chess Olympiad, Dresden 2008</a>, Photo by <a rel=\"nofollow\" class=\"external text\" href=\"http://commons.wikimedia.org/wiki/User:Samson1964\">Frank Hoppe</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://es.wikipedia.org/wiki/Pablo_San_Segundo_Carrillo\">Pablo San Segundo Carrillo from Wikipedia.es</a> (Spanish)</span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a class=\"mw-selflink selflink\">Pablo San Segundo</a>, <a href=\"/Ram%C3%B3n_Gal%C3%A1n\" title=\"Ramón Galán\">Ramón Galán</a> (<b>2005</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.actapress.com/Abstract.aspx?paperId=18953\">Bitboards: A New Approach</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/db/conf/aia/aia2005.html\">AIA 2005</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a href=\"/Charles_Leiserson\" title=\"Charles Leiserson\">Charles E. Leiserson</a>, <a href=\"/Harald_Prokop\" title=\"Harald Prokop\">Harald Prokop</a>, <a href=\"/Keith_H._Randall\" title=\"Keith H. Randall\">Keith H. Randall</a> (<b>1998</b>). <i>Using de Bruijn Sequences to Index a 1 in a Computer Word</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://supertech.csail.mit.edu/papers/debruijn.pdf\">pdf</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a class=\"mw-selflink selflink\">Pablo San Segundo</a>, <a href=\"/Diego_Rodr%C3%ADguez-Losada\" title=\"Diego Rodríguez-Losada\">Diego Rodríguez-Losada</a>, <a href=\"/Agust%C3%ADn_Jim%C3%A9nez\" title=\"Agustín Jiménez\">Agustín Jiménez</a> (<b>2011</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.sciencedirect.com/science/article/pii/S0305054810001504\">An exact bit-parallel algorithm for the maximum clique problem</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/db/journals/cor/cor38.html\">Computers &amp; Operations Research, Vol. 38, No. 2</a>, 2 Preliminaries 2.2 Bit-parallel computation</span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a class=\"mw-selflink selflink\">Pablo San Segundo</a>, <a href=\"/Diego_Rodr%C3%ADguez-Losada\" title=\"Diego Rodríguez-Losada\">Diego Rodríguez-Losada</a>, <a href=\"/Agust%C3%ADn_Jim%C3%A9nez\" title=\"Agustín Jiménez\">Agustín Jiménez</a> (<b>2011</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.sciencedirect.com/science/article/pii/S0305054810001504\">An exact bit-parallel algorithm for the maximum clique problem</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/db/journals/cor/cor38.html\">Computers &amp; Operations Research, Vol. 38, No. 2</a></span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/psanse/bitscan\">GitHub - psanse/bitscan: C++ library for bit twiddling</a></span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/psanse/graph\">GitHub - psanse/graph: graph library for bit-encoded graphs with BITSCAN</a></span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://dblp.uni-trier.de/pers/hd/s/Segundo:Pablo_San.html\">dblp: Pablo San Segundo</a></span>\n</li>\n<li id=\"cite_note-9\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-9\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Clique_problem\">Clique problem from Wikipedia</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/People\" title=\"People\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301085431\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.093 seconds\nReal time usage: 0.617 seconds\nPreprocessor visited node count: 162/1000000\nPreprocessor generated node count: 344/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:5151-0!canonical and timestamp 20260301085430 and revision id 10447\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "Segundo",
+        "*": "Chess_Player"
+      },
+      {
+        "sortkey": "Segundo",
+        "*": "Researcher"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Agustín Jiménez"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Artificial Intelligence"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "BitScan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Charles Leiserson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ChessBase"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Cpp"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Diego Rodríguez-Losada"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fernando Matía"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Harald Prokop"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "IEEE"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Keith H. Randall"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "People"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ramón Galán"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Technical University of Madrid"
+      },
+      {
+        "ns": 0,
+        "*": "Miguel Hernando"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "BITSCAN",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Pablo_San_Segundo",
+        "byteoffset": 2702,
+        "anchor": "BITSCAN"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "GRAPH",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Pablo_San_Segundo",
+        "byteoffset": 3679,
+        "anchor": "GRAPH"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Selected Publications",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Pablo_San_Segundo",
+        "byteoffset": 3950,
+        "anchor": "Selected_Publications"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2005 ...",
+        "number": "3.1",
+        "index": "4",
+        "fromtitle": "Pablo_San_Segundo",
+        "byteoffset": 4072,
+        "anchor": "2005_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "3.2",
+        "index": "5",
+        "fromtitle": "Pablo_San_Segundo",
+        "byteoffset": 5136,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "3.3",
+        "index": "6",
+        "fromtitle": "Pablo_San_Segundo",
+        "byteoffset": 7531,
+        "anchor": "2015_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "4",
+        "index": "7",
+        "fromtitle": "Pablo_San_Segundo",
+        "byteoffset": 8786,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "5",
+        "index": "8",
+        "fromtitle": "Pablo_San_Segundo",
+        "byteoffset": 9564,
+        "anchor": "References"
+      }
+    ]
+  }
+}

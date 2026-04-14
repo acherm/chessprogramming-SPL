@@ -1,0 +1,310 @@
+{
+  "parse": {
+    "title": "Eval Tuning in Deep Thought",
+    "pageid": 1611,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">Automated Tuning</a> * Eval Tuning in Deep Thought</b>\n</p><p><b>Eval Tuning in Deep Thought</b>,<br />\nthis page is a formatted reprint of <a href=\"/Andreas_Nowatzyk\" title=\"Andreas Nowatzyk\">Andreas Nowatzyk's</a> explanations of the <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">Eval Tuning</a> source code <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup> of <a href=\"/Deep_Thought\" title=\"Deep Thought\">Deep Thought</a> from January 2000 <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup> , hosted by <a href=\"/Tim_Mann\" title=\"Tim Mann\">Tim Mann</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>&#160;:\n</p>\n<pre><a href=\"/Andreas_Nowatzyk\" title=\"Andreas Nowatzyk\">Andreas Nowatzyk</a> was one of the contributors to the <a href=\"/Deep_Thought\" title=\"Deep Thought\">Deep Thought</a> project while he was in grad school. A few years ago when he and I were both working for Compaq's research labs in Palo Alto, Andreas sent me a copy of Deep Thought's evaluation function tuning program and asked me to put it on the Web for him, since he no longer has an interest in computer chess. \n</pre>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#The_Files\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">The Files</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-2\"><a href=\"#The_Basic_Method\"><span class=\"tocnumber\">1.1</span> <span class=\"toctext\">The Basic Method</span></a></li>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#Running_the_Code\"><span class=\"tocnumber\">1.2</span> <span class=\"toctext\">Running the Code</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Forum Posts</span></a></li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#External_Links\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#References\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"The_Files\">The Files</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Eval_Tuning_in_Deep_Thought&amp;action=edit&amp;section=1\" title=\"Edit section: The Files\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>in this directory constitute the tuning program that was used by <a href=\"/Deep_Thought\" title=\"Deep Thought\">Deep Thought</a> to adjust its <a href=\"/Evaluation\" title=\"Evaluation\">evaluation function</a> parameters based on a set of some 868 grand-master games. I forgot where these games came from, but we did not type them in. It was last used in the summer of 1988 and it is believed that this program might be of historical interest to some chess programmers. The Deep Thought hardware is probably no longer functional and without the actual Deep Thought program, this code can only show how DT evaluated <a href=\"/Chess_Position\" title=\"Chess Position\">chess positions</a>, but it can not play any chess.\n</p><p>This program was written by me during the Spring of 1988 and included suggestions and feedback from the entire Deep Thought team (<a href=\"/Feng-hsiung_Hsu\" title=\"Feng-hsiung Hsu\">Feng H. Hsu</a>, <a href=\"/Thomas_Anantharaman\" title=\"Thomas Anantharaman\">Thomas S. Anantharaman</a>, <a href=\"/Murray_Campbell\" title=\"Murray Campbell\">Murray S. Campbell</a>, <a href=\"/Mike_Browne\" title=\"Mike Browne\">Mike C. Browne</a> and <a href=\"/Andreas_Nowatzyk\" title=\"Andreas Nowatzyk\">myself</a>). It includes the DT evaluation function, which was developed by Murray.\n</p><p>This file gives a brief description how this tuning program worked and how to use it. Expect some errors and omissions because I'm writing this from memory, 12 years after I last touched this code.\n</p>\n<h2><span class=\"mw-headline\" id=\"The_Basic_Method\">The Basic Method</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Eval_Tuning_in_Deep_Thought&amp;action=edit&amp;section=2\" title=\"Edit section: The Basic Method\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>The basic method used the mathematical concept of <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Least_squares\">least square fitting</a>. This was hardly new and it had been applied to chess evaluation functions before. However, there are plenty of details on exactly how to go about this, and our approach likely differed from earlier work.<br />\n</p><p>Let's suppose that the evaluation function is a weighted sum of positional features (later referred to as a feature vector):<br />\n</p>\n<div class=\"floatnone\"><a href=\"/File:DTEValFormula.jpg\" class=\"image\"><img alt=\"DTEValFormula.jpg\" src=\"/images/8/8b/DTEValFormula.jpg\" width=\"251\" height=\"56\" style=\"vertical-align: text-bottom\" /></a></div>\nFor a given chess position <p> (= position of pieces on the board plus <a href=\"/Castling_Rights\" title=\"Castling Rights\">castle</a> and <a href=\"/En_passant\" title=\"En passant\">enpassant</a> status), the evaluation &lt;E(P)&gt; is the sum of the features recognized by Deep Thought &lt;Fi(P)&gt; times the weight given to each feature &lt;Ai&gt;. For example, a feature may be the number of white pawns minus the number of black pawns. The corresponding weight would be the value for one pawn. There were roughly 100 features that Deep Though used. Some were implemented via a <a href=\"/Piece-Square_Tables\" title=\"Piece-Square Tables\">piece-placement table</a> that could give a different weight for each piece depending on where it is on the board. For example, a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Gradient\">gradient</a> in the pawn value could be used to add a bonus for advanced pawns. <a href=\"/King_Centralization\" title=\"King Centralization\">King centrality</a> was implemented likewise. There were five other tables in the hardware for more complex features, that could detect <a href=\"/Open_File\" title=\"Open File\">open files</a>, <a href=\"/Passed_Pawn\" title=\"Passed Pawn\">passed</a>/<a href=\"/Doubled_Pawn\" title=\"Doubled Pawn\">doubled pawns</a> etc. (four <a href=\"/Pawn_Structure\" title=\"Pawn Structure\">pawn structure</a> tables of 8192 entries each, a rook evaluation table with 2048 entries and the 1024 entry piece/placement table along with a few special bonus registers made up the DT evaluation hardware. While these nearly 40,000 programmable parameters of the DT hardware could be regarded as the components of DT's evaluation function, they all were derived from the 89 to ~100 parameters mentioned earlier). The basic DT move cycle consisted of computing these tables before every search so that the weights of the evaluation function could be adjusted according to the overall situation of the game (opening, mid-game, endgame, etc.). This took some time, so DT was not good at fast games (keep in mind that DT used '88 hardware and the VME interface from the host, a <a href=\"/Sun#3\" title=\"Sun\">Sun 3</a> or 4, was not a spead deamon).\n<br /><br />\nNow suppose you had an <a href=\"/Oracle\" title=\"Oracle\">oracle</a> that could give the correct evaluation for a position O(P). If we use this oracle on a sufficiently large set of positions &lt;Pj&gt; then we could minimize the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Mean_squared_error\">squared evaluation error</a> sum:<br />\n<div class=\"floatnone\"><a href=\"/File:DTEValError.jpg\" class=\"image\"><img alt=\"DTEValError.jpg\" src=\"/images/3/3a/DTEValError.jpg\" width=\"299\" height=\"69\" style=\"vertical-align: text-bottom\" /></a></div>\n<p>via <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Partial_derivative\">partial differentiation</a> of this expression for each parameter &lt;Ai&gt;. This leads to a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/System_of_linear_equations\">linear equation system</a> with one equation for each unknown parameter of DT's evaluation function. If the positions are sufficiently varied (they usually were), then this equation system can be solved and out come the best values for our evaluation parameters.\n<br /><br />\nThe trouble was, we did not have such an oracle. So the next best thing we had is the evaluation of DT. Murray made some initial guesses for each parameter &lt;Ai&gt; and we used that as a starting point. Obviously, if we use our own &lt;E(P)&gt; as an oracle, we get the same parameters out of the least square fit as we put in. So this is just a cumbersome way to compute the identity: New(Ai) = Old(Ai) for all &lt;i=1..100&gt;. However, this was a great debugging tool to see that we got the mathematics right.\n<br /><br />\nIn the tuning case, we did not just take the top-level evaluation, rather we let DT <a href=\"/Search\" title=\"Search\">search</a> shallow 3<a href=\"/Ply\" title=\"Ply\">ply</a> trees with <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">quiescence extensions</a>. The evaluation function is then computed symbolically: rather then plugging in values, we propagated the feature vector of the best leaf node to the top. The search itself was controlled by the current best guess of the evaluation parameters. These were full <a href=\"/Minimax\" title=\"Minimax\">min/max</a> searches, rather than <a href=\"/Alpha-Beta\" title=\"Alpha-Beta\">alpha/beta</a> searches. The tuning program cannot actually search these trees because it does not know what a <a href=\"/Legal_Move\" title=\"Legal Move\">legal chess move</a> is. Instead, the actual DT was used to pre-search these trees and the results were stored in a database (dbf_all). The tuning program merely traverses these trees.\n<br /><br />\nNow we are still lacking an oracle. Instead we assumed that in our collection of grand-master games, the winner of each games should serve as a substitute oracle for DT. Discarding the moves of the losing side and the first few <a href=\"/Opening_Book\" title=\"Opening Book\">opening moves</a>, we considered all available moves for each positions. Each position was searched and evaluated. Suppose that there were 20 legal moves in one position &lt;Px&gt; then each of these moves lead to a new position &lt;P0&gt; ... &lt;P19&gt;, for which we get the evaluations &lt;E(P0)&gt; ... &lt;E(P19)&gt;. Let's assume that the winning GM played the move leading to &lt;P0&gt; from &lt;Px&gt;. Then there are two cases:\n</p>\n<ol><li> DT's evaluation concurs, that is: E(P0) &gt; E(P1...19)</li>\n<li> DT evaluated some other move as best.</li></ol>\n<p><br />\nSo the objective of our tuning procedure was to maximize the first case and minimize the second case.\n<br /><br />\nThe GM games tell us which moves are better, relative to other moves. So rather than having an absolute oracle that assigns an absolute value to a position, we have a kind of relative oracle: The move from &lt;Px&gt; to &lt;P0&gt; is expected to be better than the moves from &lt;Px&gt; to &lt;P1..19&gt;. Hence &lt;E(P0) - E(Px)&gt; ought to be larger than &lt;E(P1..19) - E(Px)&gt;. These differences of evaluations were used for the tuning process, but this did not change much: we still end up with linear combinations of elements of the feature vector that can be dealt with via least square fitting. In the program and on the display, the evaluations &lt;Ex&gt;, &lt;E0&gt; and &lt;En, n=1...&gt; refer to the evaluation of the root position, the position of the winning GM move and the evaluation of move &lt;n&gt;.\n<br /><br />\nNaturally, not all changes to the evaluation of the board are positional in nature and/or are captured by the evaluation function. The fact that the pre-computed search trees include the results after quiescence search should minimize differences due to exchanges, but this is not always the case. Therefore in order to avoid interference from elements that DT discovers via search and not via its evaluation function, the tuning program includes a threshold: if the evaluation of the <a href=\"/Root\" title=\"Root\">root position</a> and the position after a move differ by too much (more than 64 = half of a pawn value), then it is assumed that there is something going on that the evaluation function cannot grasp and this data-point is ignored (out-of-bound).\n<br /><br />\nThe first idea was to apply a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Forcing_function_%28differential_equations%29\">force function</a>. Instead of using &lt;E(P)&gt; as an oracle, we used &lt;E(P) + G(P)&gt; as an oracle. A simple force function &lt;G(P)&gt; would be used to add a constant force value if the position is the result of the GM move and 0 otherwise.\n<br /><br />\nThis doesn't really work as it leads to a value inflation. So instead of adding no bonus for the wrong positions, we add &lt;- force/n&gt;, where &lt;n&gt; is the number of wrong moves (positions).\n<br /><br />\nThis is in fact what an early version of the tuning code did. Add a small force as described above, compute a new parameter set via least square approximation and iterate until the number of correctly evaluated positions does not increase anymore.\n<br /><br />\nThis works, but it did not really yield better play of DT. It became clear that maximizing the agreement between DT's evaluation and the GM move choices and better play were not really the same thing. Also, DT searched 9+ plys and we could tune only on 3ply searches due to compute time limitations.\n<br /><br />\nWe observed that deeper searches in the tuning code lead to better results, even though it could be argued that evaluations should be <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Orthogonality#Statistics.2C_econometrics.2C_and_economics\">orthogonal</a> to searching. Perhaps an explanation for this effect is that deeper searches lead to more differences in the positions that are being related because they are more moves apart. Therefore, the tuning process collects more information on how individual components of the evaluation relate to each other. For example, the tuning process did result in a better understanding of the <a href=\"/Point_Value\" title=\"Point Value\">piece-values</a> with respect to each others and as a function of the amount of material left on the board (this was used to control the transitions from <a href=\"/Opening\" title=\"Opening\">opening</a>, <a href=\"/Middlegame\" title=\"Middlegame\">mid-game</a> to <a href=\"/Endgame\" title=\"Endgame\">end-game</a>).\n<br /><br />\nThe next refinement was to make the force dependent on the amount of miss-evaluation. If DT is just a little bit off, use a small force, if DT misses the position in a big way, add more force. This relationship was subject to much debate and it is unclear which <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Monotonic_function\">monotonic function</a> is best suited. Hence, the tuning program gives a number of options from <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Linear_function\">linear</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Quadratic_function\">quadratic</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Square_root\">square-root</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Logarithm\">logarithmic</a>, to <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Multiplicative_inverse\">reciprocal</a> (the idea behind a reciprocal force function was this: if DT is just a little off then there is hope that it can <a href=\"/Learning\" title=\"Learning\">learn</a> how to evaluate this position correctly. If it is off by a lot, don't bother to try - it will only screw up things elsewhere because this is likely due to a concept that is missing from DT's evaluation function). Which force-function to use eventually depended on which parameters were subjected to tuning and became more of a <a href=\"/Trial_and_Error\" title=\"Trial and Error\">trial and error</a> procedure.\n<br /><br />\nA somewhat different idea for a force function was to count how many moves were evaluated ahead of the GM-move. If this is 0, DT's evaluation function is on target. Numbers greater than 0 are undesirable and lead to an increased correcting force. This number was also used to compute a histogram to see how DT's evaluation function scores against GM moves (see the *.stat files after a <a href=\"/Iteration\" title=\"Iteration\">multi-iteration</a> tuning run). This is to be taken with a large <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Grain_of_salt\">grain of salt</a>, because the 3ply searches are clearly not good enough to isolate positional evaluation from <a href=\"/Tactics\" title=\"Tactics\">tactics</a>.\n<br /><br />\nAt this point things started to improve somewhat (mostly measured via self-play tournaments starting from various seed positions). But also funny things happened to DT's evaluation function: the range of values that it would produce during a search became smaller. The evaluation function became less discriminative: the values for the good and bad moves were progressively moving closer together. It did match more GM moves and played slightly better, but it also became more erratic. Interestingly, this reduction in value range was not due to simply reducing the weight for the positional components of the evaluation function, rather it involved balancing the various components against each other.\n<br /><br />\nSo a compensating force was added to the correction force so that it would also encourage to keep a certain variance of evaluations. You see this in the code commented as variance compensation.\n<br /><br />\nAs we learned how to tune more effectively, it became clear that tuning all parameters at once was not necessarily a good idea. Certain parameters were used very infrequently in our set of GM games, so allowing these to be tuned can pick up the wrong idea for lack of sufficient data points. 868 games were not really enough to tune this many parameters.\n<br /><br />\nIt also became clear that the best parameter sets were usually obtained after 10-15 iterations, and before the maximum match to the GM games was reached, which typically required 20 to 30 iterations.\n<br /><br />\nFinally, the last improvement of the tuning came after we added the ability to tune tables. In the DT evaluation function are a number of tables, for example the pawn advancement gradient, or the King centrality table. Instead of just making up a linear gradient, we allowed the tuning code to change the values of these table and allow more complex gradients. This resulted in some strange 3D curves that upon inspection by Murray were found to contain some known chess heuristics, which were not originally part of DT's evaluation function (for example: the pawn advancement gradient became more pronounced near the center and tapered off towards the promotion squares). However, the overall impact of table fitting was minor and was never fully exploited because the code became stable only near the end of DT's life and we did not have enough compute cycles to experiment a lot with it. The few experiments we did were great fun because we extracted some general rules out of the game database in an unbiased, neutral and fully automated way. This was quite important because we had to avoid the slightest hint of suspicion that we took anything from the competing <a href=\"/HiTech\" title=\"HiTech\">Hitech</a> effort, which was the officially funded chess project at <a href=\"/Carnegie_Mellon_University\" title=\"Carnegie Mellon University\">CMU</a> at that time. Because of our automated tuning process, we had a demonstratably independent and effective way to incorporate chess <a href=\"/Knowledge\" title=\"Knowledge\">knowledge</a> into DT.\n</p>\n<h2><span class=\"mw-headline\" id=\"Running_the_Code\">Running the Code</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Eval_Tuning_in_Deep_Thought&amp;action=edit&amp;section=3\" title=\"Edit section: Running the Code\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>I just compiled the tuning code on an Compaq/Alpha <a href=\"/Unix\" title=\"Unix\">Unix</a> workstation and it survived 12 years of bit-rot. So you may get it to run as well. Here are a few hints on how to play with it:\n</p>\n<ul><li> The database is a binary file and the moves are stored in 2 byte fields. These may need to be swapped depending on the <a href=\"/Endianness\" title=\"Endianness\">byte-order</a> of your computer. Either enable or disable the \"SUN_ENDIANESS\" #define.</li>\n<li> When it runs, it needs a very wide terminal window to show the board and all Eval-parameters (142 columns).</li>\n<li> After starting the tuning program via 'texam dbf_all' you should see a small chess board and the set of parameters, their weights and contributions to the current position. At this point there are several single character commands available:</li></ul>\n<table>\n\n<tr>\n<th rowspan=\"8\"> <span style=\"color: #ffffff;\">WWW</span>\n</th>\n<td style=\"text-align:center;\"> ' '\n</td>\n<td>  (space bar) steps through all legal moves\n</td></tr>\n<tr>\n<td style=\"text-align:center;\"> n\n</td>\n<td>  steps through the move played by the GM\n</td></tr>\n<tr>\n<td style=\"text-align:center;\"> N\n</td>\n<td>  goes to the beginning of the next game\n</td></tr>\n<tr>\n<td style=\"text-align:center;\"> g\n</td>\n<td>  goes to a specific game, the number of which is prompted\n</td></tr>\n<tr>\n<td style=\"text-align:center;\"> f\n</td>\n<td>  does a parameter fit\n</td></tr>\n<tr>\n<td style=\"text-align:center;\"> S/R\n</td>\n<td>  saves and restores a parameter set to/from a file (*.par)\n</td></tr>\n<tr>\n<td style=\"text-align:center;\"> F\n</td>\n<td>  does a multi-iteration fit (a *.stat file will be generated<br />\n<p>along with parameter file after each iteration. The *.stat file<br />\nsummarizes the fit, shows tends and gives the error-distributions) \n</p>\n</td></tr>\n<tr>\n<td style=\"text-align:center;\"> q\n</td>\n<td>  exits the program\n</td></tr></table>\n<dl><dd> For the other commands (there are several more, you would need to look into the source code. In particular, there are ways to edit parameters manually and to control if they should participate in a tuning run or not)</dd></dl>\n<ul><li> All of this assumes a <a href=\"/Unix\" title=\"Unix\">Unix</a> system with the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Curses_%28programming_library%29\">curses library</a>.</li>\n<li> There are 5 parameter files included in this directory. Q*.par were certain starting points during development and the other ones appeared to be the most recent ones. I don't know which parameter set was used in what DT game: I have hundreds of them and no idea which one was used for what. The USO.par file is probably the set that was used by DT in the <a href=\"/ACM_1988\" title=\"ACM 1988\">1988 US open tournament</a>.</li></ul>\n<p>I would like to thank <a href=\"/Feng-hsiung_Hsu\" title=\"Feng-hsiung Hsu\">Feng H. Hsu</a> and <a href=\"/Murray_Campbell\" title=\"Murray Campbell\">Murray Campbell</a> for their permission to release this code. Also let me add a note of appreciation for the Computer Science Department at the <a href=\"/Carnegie_Mellon_University\" title=\"Carnegie Mellon University\">Carnegie Mellon University</a>, its open and free-spirited environment made the Deep Thought project possible. If you would like to know more about the roots of <a href=\"/ChipTest\" title=\"ChipTest\">Chiptest</a> and Deep Thought, look out for Feng Hsu's upcoming book on his <a href=\"/Deep_Blue\" title=\"Deep Blue\">Deep Blue</a> experience <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup> .\n</p>\n<dl><dd> Share and enjoy,</dd>\n<dd> -- A. Nowatzyk</dd>\n<dd> January 2000</dd></dl>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Eval_Tuning_in_Deep_Thought&amp;action=edit&amp;section=4\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=128297\">Deep Thought's tuning code and eval function!</a> by <a href=\"/Severi_Salminen\" title=\"Severi Salminen\">Severi Salminen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 05, 2000</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Eval_Tuning_in_Deep_Thought&amp;action=edit&amp;section=5\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.tim-mann.org/deepthought.html\">Deep Thought at Tim Mann's Chess Pages</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.tim-mann.org/DT_eval_tune.tar.gz\">Source code to tune Deep Thought's evaluation</a> in tar.gz format.</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.tim-mann.org/DT_eval_tune.txt\">Andreas Nowatzyk's explanations of the the source code</a>, January 2000</li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Eval_Tuning_in_Deep_Thought&amp;action=edit&amp;section=6\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.tim-mann.org/DT_eval_tune.tar.gz\">Source code to tune Deep Thought's evaluation</a> in tar.gz format</span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.tim-mann.org/DT_eval_tune.txt\">Andreas Nowatzyk's explanations of the the source code</a>, January 2000</span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.tim-mann.org/deepthought.html\">Deep Thought at Tim Mann's Chess Pages</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a href=\"/Feng-hsiung_Hsu\" title=\"Feng-hsiung Hsu\">Feng-hsiung Hsu</a> (<b>2002</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://press.princeton.edu/titles/7342.html\">Behind Deep Blue: Building the Computer that Defeated the World Chess Champion</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Princeton_University_Press\">Princeton University Press</a></span>\n</li>\n</ol></div>\n<b><a href=\"/Automated_Tuning\" title=\"Automated Tuning\">Up one Level</a></b></p>\n\n<!-- \nNewPP limit report\nCached time: 20260228233821\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.024 seconds\nReal time usage: 0.026 seconds\nPreprocessor visited node count: 84/1000000\nPreprocessor generated node count: 176/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1611-0!canonical and timestamp 20260228233821 and revision id 10338\n -->\n"
+    },
+    "categories": [],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ACM 1988"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Alpha-Beta"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Andreas Nowatzyk"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Automated Tuning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Carnegie Mellon University"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Castling Rights"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Position"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ChipTest"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Deep Blue"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Deep Thought"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Doubled Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "En passant"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Endgame"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Endianness"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Feng-hsiung Hsu"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "HiTech"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iteration"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "King Centralization"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Knowledge"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Learning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Legal Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Middlegame"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mike Browne"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Minimax"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Murray Campbell"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Open File"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Opening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Opening Book"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Oracle"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Passed Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Structure"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Piece-Square Tables"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ply"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Point Value"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiescence Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Root"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Severi Salminen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sun"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tactics"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Thomas Anantharaman"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tim Mann"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Trial and Error"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Unix"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "The Files",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Eval_Tuning_in_Deep_Thought",
+        "byteoffset": 1036,
+        "anchor": "The_Files"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "The Basic Method",
+        "number": "1.1",
+        "index": "2",
+        "fromtitle": "Eval_Tuning_in_Deep_Thought",
+        "byteoffset": 2239,
+        "anchor": "The_Basic_Method"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Running the Code",
+        "number": "1.2",
+        "index": "3",
+        "fromtitle": "Eval_Tuning_in_Deep_Thought",
+        "byteoffset": 15883,
+        "anchor": "Running_the_Code"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "2",
+        "index": "4",
+        "fromtitle": "Eval_Tuning_in_Deep_Thought",
+        "byteoffset": 19072,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "3",
+        "index": "5",
+        "fromtitle": "Eval_Tuning_in_Deep_Thought",
+        "byteoffset": 19237,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "4",
+        "index": "6",
+        "fromtitle": "Eval_Tuning_in_Deep_Thought",
+        "byteoffset": 19566,
+        "anchor": "References"
+      }
+    ]
+  }
+}

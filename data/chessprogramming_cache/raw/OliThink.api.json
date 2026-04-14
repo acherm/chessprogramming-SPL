@@ -1,0 +1,575 @@
+{
+  "parse": {
+    "title": "OliThink",
+    "pageid": 1616,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Engines\" title=\"Engines\">Engines</a> * OliThink</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:187px;\"><a href=\"http://brausch.org/home/chess/index.html\"><img alt=\"\" src=\"/images/0/06/Ot5image.jpg\" width=\"185\" height=\"185\" class=\"thumbimage\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Ot5image.jpg\" class=\"internal\" title=\"Enlarge\"></a></div>OliThink5 Java online <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>OliThink</b>,<br />\nan <a href=\"/Category:Open_Source\" title=\"Category:Open Source\">open source chess engine</a> supporting the <a href=\"/Chess_Engine_Communication_Protocol\" title=\"Chess Engine Communication Protocol\">Chess Engine Communication Protocol</a> written by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a> with <a href=\"/C\" title=\"C\">C</a> and <a href=\"/Java\" title=\"Java\">Java</a> versions available, and binaries running under <a href=\"/Windows\" title=\"Windows\">Windows</a>, <a href=\"/Linux\" title=\"Linux\">Linux</a> and <a href=\"/Mac_OS\" title=\"Mac OS\">Mac OS</a> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>. The completely rewritten OliThink 5.x has a very fast <a href=\"/Move_Generation\" title=\"Move Generation\">move generator</a> based on the framework of the <a href=\"/Perft\" title=\"Perft\">Perft</a> program OliPerft with a plain <a href=\"/Bitboards\" title=\"Bitboards\">bitboard</a> board representation without any <a href=\"/Piece-Lists\" title=\"Piece-Lists\">piece-lists</a> or <a href=\"/Array\" title=\"Array\">board arrays</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>. OliThink's <a href=\"/Evaluation\" title=\"Evaluation\">evaluation</a> consists almost of <a href=\"/Material\" title=\"Material\">material balance</a> and <a href=\"/Mobility\" title=\"Mobility\">mobility</a>, plus a very simple <a href=\"/Pawn_Structure\" title=\"Pawn Structure\">pawn structure</a> evaluation, rewarding <a href=\"/Passed_Pawn\" title=\"Passed Pawn\">passed pawns</a>. OliThink 4.13 played the <a href=\"/CCT6\" title=\"CCT6\">CCT6</a> in 2004, with four points out of nine games <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>. In June 2020, after a long break, Oliver Brausch published OliThink <b>5.4.0</b> with a big leap in <a href=\"/Playing_Strength\" title=\"Playing Strength\">playing strength</a> due to modifications in <a href=\"/Draw_Evaluation\" title=\"Draw Evaluation\">evaluation</a> of likely <a href=\"/Draw\" title=\"Draw\">drawn</a> <a href=\"/Endgame\" title=\"Endgame\">endgames</a> <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup>.\n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Description\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Description</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-2\"><a href=\"#Search\"><span class=\"tocnumber\">1.1</span> <span class=\"toctext\">Search</span></a></li>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#Sliding_Piece_Attacks\"><span class=\"tocnumber\">1.2</span> <span class=\"toctext\">Sliding Piece Attacks</span></a>\n<ul>\n<li class=\"toclevel-3 tocsection-4\"><a href=\"#C_Source\"><span class=\"tocnumber\">1.2.1</span> <span class=\"toctext\">C Source</span></a></li>\n<li class=\"toclevel-3 tocsection-5\"><a href=\"#Java_Source\"><span class=\"tocnumber\">1.2.2</span> <span class=\"toctext\">Java Source</span></a></li>\n</ul>\n</li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#Selected_Games\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Selected Games</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#SEE\"><span class=\"tocnumber\">2.1</span> <span class=\"toctext\">SEE</span></a></li>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#Bodo\"><span class=\"tocnumber\">2.2</span> <span class=\"toctext\">Bodo</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-9\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#1998_...\"><span class=\"tocnumber\">3.1</span> <span class=\"toctext\">1998 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#2000_...\"><span class=\"tocnumber\">3.2</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-12\"><a href=\"#2005_...\"><span class=\"tocnumber\">3.3</span> <span class=\"toctext\">2005 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-13\"><a href=\"#2010_...\"><span class=\"tocnumber\">3.4</span> <span class=\"toctext\">2010 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-14\"><a href=\"#2020_...\"><span class=\"tocnumber\">3.5</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-15\"><a href=\"#External_Links\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-16\"><a href=\"#References\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Description\">Description</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=OliThink&amp;action=edit&amp;section=1\" title=\"Edit section: Description\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Search\">Search</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=OliThink&amp;action=edit&amp;section=2\" title=\"Edit section: Search\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>OliThink's <a href=\"/Search\" title=\"Search\">search</a> relies on <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">PVS</a> without <a href=\"/Aspiration_Windows\" title=\"Aspiration Windows\">aspiration windows</a> in its <a href=\"/Iterative_Deepening\" title=\"Iterative Deepening\">iterative deepening</a> loop <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup>, along with a fixed sized <a href=\"/Transposition_Table\" title=\"Transposition Table\">transposition table</a>. It further applies flexible <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">null move pruning</a>, <a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">late move reductions</a> <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup>, <a href=\"/Internal_Iterative_Deepening\" title=\"Internal Iterative Deepening\">IID</a>, <a href=\"/One_Reply_Extensions\" title=\"One Reply Extensions\">singular reply-</a>, <a href=\"/Check_Extensions\" title=\"Check Extensions\">check-</a> and <a href=\"/Passed_Pawn_Extensions\" title=\"Passed Pawn Extensions\">passed pawn extensions</a> <sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup>. <a href=\"/Move_Ordering\" title=\"Move Ordering\">Move ordering</a> considers <a href=\"/PV-Move\" title=\"PV-Move\">PV-moves</a> stored in a <a href=\"/Triangular_PV-Table\" title=\"Triangular PV-Table\">triangular PV-Table</a>, <a href=\"/SEE_-_The_Swap_Algorithm\" title=\"SEE - The Swap Algorithm\">SEE</a>, <a href=\"/Killer_Heuristic\" title=\"Killer Heuristic\">killer-</a> and <a href=\"/History_Heuristic\" title=\"History Heuristic\">history heuristic</a>. \n<span id=\"SlidingPieceAttacks\"></span>\n</p>\n<h2><span class=\"mw-headline\" id=\"Sliding_Piece_Attacks\">Sliding Piece Attacks</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=OliThink&amp;action=edit&amp;section=3\" title=\"Edit section: Sliding Piece Attacks\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>OliThink pre 5 versions used <a href=\"/Rotated_Bitboards\" title=\"Rotated Bitboards\">rotated bitboards</a> to determine <a href=\"/Sliding_Piece_Attacks\" title=\"Sliding Piece Attacks\">sliding piece attacks</a>. Since version 5, only the usual <a href=\"/Occupancy\" title=\"Occupancy\">occupancy</a> is used to <a href=\"/Occupancy_of_any_Line\" title=\"Occupancy of any Line\">map the masked line to an index</a>, for <a href=\"/Files\" title=\"Files\">files</a> and <a href=\"/Diagonals\" title=\"Diagonals\">diagonals</a> by a <a href=\"/General_Setwise_Operations#Multiplication\" title=\"General Setwise Operations\">north-fill multiplication</a> and right shift as also applied in <a href=\"/Kindergarten_Bitboards\" title=\"Kindergarten Bitboards\">kindergarten bitboards</a> <sup id=\"cite_ref-9\" class=\"reference\"><a href=\"#cite_note-9\">&#91;9&#93;</a></sup>, with the addition not only to lookup attack bitboards, but also <a href=\"/X-ray_Attacks_(Bitboards)#Xray1\" title=\"X-ray Attacks (Bitboards)\">X-ray attacks</a> through the first blocking pieces (if any) of both <a href=\"/Direction\" title=\"Direction\">ray-directions</a> <sup id=\"cite_ref-10\" class=\"reference\"><a href=\"#cite_note-10\">&#91;10&#93;</a></sup> . A pre-initialized <a href=\"/Array\" title=\"Array\">array</a> of 8 times 4K bitboards (256 Kbyte in total) is used for attacks on <a href=\"/Ranks\" title=\"Ranks\">ranks</a>, files, diagonals and <a href=\"/Anti-Diagonals\" title=\"Anti-Diagonals\">anti-diagonals</a> in its lower half, while the upper half holds appropriate x-ray attacks. Per line, a 12-bit index is composed of the 6-bit square index and a 6-bit occupancy key <sup id=\"cite_ref-11\" class=\"reference\"><a href=\"#cite_note-11\">&#91;11&#93;</a></sup>. \n</p>\n<h3><span class=\"mw-headline\" id=\"C_Source\">C Source</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=OliThink&amp;action=edit&amp;section=4\" title=\"Edit section: C Source\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p>These are the relevant code snippets and data declarations of the attack and x-ray attack getter in the <a href=\"/C\" title=\"C\">C</a> source, initialization omitted <sup id=\"cite_ref-12\" class=\"reference\"><a href=\"#cite_note-12\">&#91;12&#93;</a></sup>&#160;: \n</p>\n<pre>\nstatic u64 rays[0x8000]; /* 256 KByte */\nu64 bmask45[64];\nu64 bmask135[64];\n\n#define BOARD (colorb[0] | colorb[1])\n\n#define RATT1(f)  rays[((f) &lt;&lt; 6) | key000(BOARD, f)         ]\n#define RATT2(f)  rays[((f) &lt;&lt; 6) | key090(BOARD, f) | 0x1000]\n#define BATT3(f)  rays[((f) &lt;&lt; 6) | key045(BOARD, f) | 0x2000]\n#define BATT4(f)  rays[((f) &lt;&lt; 6) | key135(BOARD, f) | 0x3000]\n#define RXRAY1(f) rays[((f) &lt;&lt; 6) | key000(BOARD, f) | 0x4000]\n#define RXRAY2(f) rays[((f) &lt;&lt; 6) | key090(BOARD, f) | 0x5000]\n#define BXRAY3(f) rays[((f) &lt;&lt; 6) | key045(BOARD, f) | 0x6000]\n#define BXRAY4(f) rays[((f) &lt;&lt; 6) | key135(BOARD, f) | 0x7000]\n\nint key000(u64 b, int f) {return (int) ((b &gt;&gt; ((f &amp; 56) + 1)) &amp; 0x3F);}\nint key090(u64 b, int f) {\n   u64 _b = (b &gt;&gt; (f&amp;7)) &amp; 0x0101010101010101LL;\n  _b = _b * 0x0080402010080400LL;\n   return (int)(_b &gt;&gt; 58);\n}\nint keyDiag(u64 _b) {\n   _b = _b * 0x0202020202020202LL;\n   return (int)(_b &gt;&gt; 58);\n}\nint key045(u64 b, int f) {return keyDiag(b &amp; bmask45[f]);}\nint key135(u64 b, int f) {return keyDiag(b &amp; bmask135[f]);}\n</pre>\n<h3><span class=\"mw-headline\" id=\"Java_Source\">Java Source</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=OliThink&amp;action=edit&amp;section=5\" title=\"Edit section: Java Source\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h3>\n<p>In <a href=\"/Java\" title=\"Java\">Java</a>, the code looks quite similar, embedded inside the class OliThink <sup id=\"cite_ref-13\" class=\"reference\"><a href=\"#cite_note-13\">&#91;13&#93;</a></sup>:\n</p>\n<pre>\nfinal static long[] rays = new long[0x8000];\nfinal static long[] bmask45 = new long[64];\nfinal static long[] bmask135 = new long[64];\n\nstatic long BOARD() { return (colorb[0] | colorb[1]); }\n\nstatic long RATT1(int f)  {return rays[((f) &lt;&lt; 6) | key000(BOARD(), f)         ];}\nstatic long RATT2(int f)  {return rays[((f) &lt;&lt; 6) | key090(BOARD(), f) | 0x1000];}\nstatic long BATT3(int f)  {return rays[((f) &lt;&lt; 6) | key045(BOARD(), f) | 0x2000];}\nstatic long BATT4(int f)  {return rays[((f) &lt;&lt; 6) | key135(BOARD(), f) | 0x3000];}\nstatic long RXRAY1(int f) {return rays[((f) &lt;&lt; 6) | key000(BOARD(), f) | 0x4000];}\nstatic long RXRAY2(int f) {return rays[((f) &lt;&lt; 6) | key090(BOARD(), f) | 0x5000];}\nstatic long BXRAY3(int f) {return rays[((f) &lt;&lt; 6) | key045(BOARD(), f) | 0x6000];}\nstatic long BXRAY4(int f) {return rays[((f) &lt;&lt; 6) | key135(BOARD(), f) | 0x7000];}\n\nstatic int key000(long b, int f) {return (int) ((b &gt;&gt; ((f &amp; 56) + 1)) &amp; 0x3f);}\nstatic int key090(long b, int f) {\n   long _b = (b &gt;&gt; (f&amp;7)) &amp; 0x0101010101010101L;\n   _b = _b * 0x0080402010080400L;\n   return (int)((_b &gt;&gt; 58) &amp; 0x3F);\n}\nstatic int keyDiag(long _b) {\n   _b = _b * 0x0202020202020202L;\n   return (int)((_b &gt;&gt; 58) &amp; 0x3F);\n}\nstatic int key045(long b, int f) {return keyDiag(b &amp; bmask45[f]);}\nstatic int key135(long b, int f) {return keyDiag(b &amp; bmask135[f]);}\n</pre>\n<h1><span class=\"mw-headline\" id=\"Selected_Games\">Selected Games</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=OliThink&amp;action=edit&amp;section=6\" title=\"Edit section: Selected Games\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"SEE\">SEE</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=OliThink&amp;action=edit&amp;section=7\" title=\"Edit section: SEE\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p><a href=\"/CCT6\" title=\"CCT6\">CCT6</a>, <a href=\"/SEE\" title=\"SEE\">SEE</a> - <a class=\"mw-selflink selflink\">OliThink 4.13</a> <sup id=\"cite_ref-14\" class=\"reference\"><a href=\"#cite_note-14\">&#91;14&#93;</a></sup>\n</p>\n<pre>\n[Event \"CCT6\"]\n[Site \"Internet Chess Club\"]\n[Date \"2004.01.31\"]\n[Round \"3\"]\n[White \"SEE\"]\n[Black \"OliThink 4.13\"]\n[Result \"0-1\"]\n\n1.Nf3 d5 2.d4 e6 3.Bd2 c5 4.e3 Nc6 5.Bb5 Bd7 6.O-O Qb6 7.Nc3 cxd4 8.Nxd4 Nxd4 9.Bxd7+ \nKxd7 10.exd4 Qxd4 11.Qe2 Nf6 12.Be3 Qb4 13.a3 Qa5 14.b4 Qa6 15.Qxa6 bxa6 16.Bd4 Rc8 \n17.Ra2 a5 18.b5 Bc5 19.Ne2 Bxd4 20.Nxd4 a4 21.Rb2 Rc3 22.Ra1 Rb8 23.Nc6 Rc8 24.Ne5+ \nKe8 25.Raa2 Ne4 26.Nc6 a6 27.Na7 R8c7 28.b6 Rb7 29.Rb4 Nd6 30.g3 Nc4 31.Nc6 Kd7 32.Nd4 \nNxb6 33.Ne2 Rc5 34.Rab2 Kc6 35.Kg2 e5 36.c3 f6 37.Rb1 a5 38.R4b2 g5 39.f3 h5 40.g4 h4 \n41.Kf2 Rb8 42.Ke1 Kc7 43.Kf2 Nd7 44.Rxb8 Nxb8 45.Ke3 Nd7 46.Kf2 Nb6 47.Ke3 Nc4+ 48.Kd3 \nNxa3 49.Ra1 Nc4 50.Rb1 a3 51.Nc1 Nb2+ 52.Kc2 d4 53.Na2 d3+ 54.Kd2 Rd5 55.c4 Nxc4+ \n56.Ke1 d2+ 57.Ke2 Nb2 58.Rd1 Nxd1 0-1\n</pre>\n<h2><span class=\"mw-headline\" id=\"Bodo\">Bodo</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=OliThink&amp;action=edit&amp;section=8\" title=\"Edit section: Bodo\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p><a href=\"/CCT6\" title=\"CCT6\">CCT6</a>, <a href=\"/Bodo\" title=\"Bodo\">Bodo</a> - <a class=\"mw-selflink selflink\">OliThink 4.13</a> <sup id=\"cite_ref-15\" class=\"reference\"><a href=\"#cite_note-15\">&#91;15&#93;</a></sup>\n</p>\n<pre>\n[Event \"CCT6\"]\n[Site \"Internet Chess Club\"]\n[Date \"2004.02.01\"]\n[Round \"9\"]\n[White \"Bodo\"]\n[Black \"OliThink 4.13\"]\n[Result \"1-0\"]\n\n1.Nf3 d5 2.g3 g6 3.Bg2 Bg7 4.d4 Nf6 5.Ne5 c6 6.O-O Nbd7 7.c4 Ne4 8.cxd5 Nxe5 9.dxe5 \ncxd5 10.Qa4+ Bd7 11.Qb4 Bxe5 12.Qxb7 Nf6 13.Nc3 e6 14.e4 Bxc3 15.bxc3 Nxe4 16.Bxe4 dxe4 \n17.Bh6 f5 18.Rfd1 Rc8 19.Qxa7 Rg8 20.Rab1 Rc7 21.Qd4 Qc8 22.Qf6 g5 23.Rb8 Qxb8 24.Bxg5 \nRxg5 25.Qh8+ Ke7 26.Qxb8 Rc8 27.Qd6+ Kf6  1-0\n</pre>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=OliThink&amp;action=edit&amp;section=9\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1998_...\">1998 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=OliThink&amp;action=edit&amp;section=10\" title=\"Edit section: 1998 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=35039\">OliThink 2.2.1 released</a> by Ralph Jörg Hellmig, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 07, 1998</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=18&amp;t=30365\">Olithink, test it!</a> by Carlos E.A. Drake, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, September 24, 1999</li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=OliThink&amp;action=edit&amp;section=11\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=117574\">OliThink bug? 1 0 Winboard tournament</a> by Aloisio Ponti Lopes, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 02, 2000</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?t=33442&amp;p=126595\">Olithink 3.0.1</a> by Martin G, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, March 26, 2001</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=18&amp;t=33452\">Olithink</a> by <a href=\"/Dann_Corbit\" title=\"Dann Corbit\">Dann Corbit</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, March 28, 2001</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?f=18&amp;t=44158\">Bug in OliThink 4.1.0</a> by <a href=\"/Tord_Romstad\" title=\"Tord Romstad\">Tord Romstad</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 16, 2003</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=344036\">Question about details of hashing (olithink)</a> by <a href=\"/Michel_Langeveld\" title=\"Michel Langeveld\">Michel Langeveld</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 22, 2004</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=345028\">Looking for a last moment operator for Olithink 4.1.3 for CCT-6</a> by <a href=\"/Dann_Corbit\" title=\"Dann Corbit\">Dann Corbit</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 26, 2004&#160;» <a href=\"/CCT6\" title=\"CCT6\">CCT6</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=345136\">Re: Watch Olithink</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 27, 2004</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=346403\">Olithink @ CCT6</a> by <a href=\"/Peter_Skinner\" title=\"Peter Skinner\">Peter Skinner</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 01, 2004</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=346753\">OliThink@CCT6 - Programmers View</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 03, 2004</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.open-aurec.com/wbforum/viewtopic.php?t=432\">OliThink 5</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">Winboard Forum</a>, October 29, 2004</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://groups.google.com/forum/?fromgroups=#!topic/rec.games.chess.computer/klZ5HcMNLVU\">OliThink 5</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/Computer_Chess_Forums\" title=\"Computer Chess Forums\">rgcc</a>, October 30, 2004</li></ul>\n<h2><span class=\"mw-headline\" id=\"2005_...\">2005 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=OliThink&amp;action=edit&amp;section=12\" title=\"Edit section: 2005 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=166649&amp;t=18750\">Re: Question about SEE (Static exchange evaluation)</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 18, 2007&#160;» <a href=\"/X-ray_Attacks_(Bitboards)\" title=\"X-ray Attacks (Bitboards)\">X-ray Attacks</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=18590\">OliPerft with divide Option as Pre Version for OliThink 5</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 27, 2007&#160;» <a href=\"/Perft\" title=\"Perft\">Perft</a></li></ul>\n<p><b>2008</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=18854\">Problem with Transposition Table and Repitition-Draw</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 11, 2008&#160;» <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Table</a>, <a href=\"/Repetitions\" title=\"Repetitions\">Repetitions</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=18906\">OliThink 5.0.4 - GNU Chess 5.0.7 Bullet</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 13, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=19182\">OliThink 5.0.8 released</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 25, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=19273\">The limits of \"Just-mobility-evaluation\"</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 29, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=19438\">OliThink 5.0.9 released</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 06, 2008 </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=20241\">OliThink 5.1.0 released</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 19, 2008 </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=20281\">OliThink 5.1.1 released</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 21, 2008 </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=20505\">OliThink 5.1.2 released</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 03, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=20537\">OliThink couldn't win K+B+P vs K against Toga</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 05, 2008&#160;» <a href=\"/Toga\" title=\"Toga\">Toga</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=20620\">OliThink 5.1.3 released</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 11, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=24423\">OliThink 5.1.4 released</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 16, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=24478\">Tournament with OliThink, Crafty and Glaurung. OliThink 5.1.</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 19, 2008&#160;» <a href=\"/Crafty\" title=\"Crafty\">Crafty</a>, <a href=\"/Glaurung\" title=\"Glaurung\">Glaurung</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=24482\">OliThink 5.1.6 released</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 19, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=24596\">OliThink 5.1.7 released</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 27, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=24622\">Olithink 5.1.8 released because of better ChessDM vs Crafty</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 29, 2008</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=24724\">Kindergarten Bitboard Approach by Gerd Isenberg</a> by <a href=\"/Edsel_Apostol\" title=\"Edsel Apostol\">Edsel Apostol</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 05, 2008&#160;» <a href=\"/Kindergarten_Bitboards\" title=\"Kindergarten Bitboards\">Kindergarten Bitboards</a></li></ul>\n<p><b>2009</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=29794\">Bug found in OliThink 5.1.9 =&gt; Corrected code (5.2.0) only</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 18, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=29867\">OliThink 5.2.1 Java</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 25, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=30790\">OliThink5 Java can be played in browser with self written GUI</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 25, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=30793\">OliThink GUI in Java... Complete source posted</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 25, 2009&#160;» <a href=\"/GUI\" title=\"GUI\">GUI</a>, <a href=\"/Java\" title=\"Java\">Java</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=30955\">OliThink 5.2.2 released with 48MB Hashsize</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 05, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=31099\">OliThink 5.2.3 released</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 16, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=31197\">OliThink 5.2.4 released</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 22, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=31259\">OliThink 5.2.5 released</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 25, 2009</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=31364\">OliThink 5.2.6 released introducing LMR</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 31, 2009</li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=OliThink&amp;action=edit&amp;section=13\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=31477\">OliThink 5.2.7 released</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 05, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=31505\">Problem with exploding tree because of extensions</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 05, 2010&#160;» <a href=\"/Search_Explosion\" title=\"Search Explosion\">Search Explosion</a>, <a href=\"/Extensions\" title=\"Extensions\">Extensions</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=31597\">OliThink 5.2.9 released</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 09, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=32040\">OliThink 5.3.0 released</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 25, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=35502\">OliThink 5.3.0 Java performance</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 18, 2010</li></ul>\n<p><b>2011</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=39142\">Olithink</a> by colin, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 22, 2011</li></ul>\n<p><b>2012</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=42084\">Open Source Blitz Rating List: Olithink 5.3.0</a> by Lucas Braesch, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 21, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=42664\">OliThink 5.3.1 released (Win, Mac, Linux and Java)</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 28, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=42681\">Open Source Bullet: Olithink 5.3.1</a> by Lucas Braesch, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 29, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=42714\">OliThink 5.3.2 released (Source, Windows, Mac and Linux)</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 02, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=42757\">Open Source Bullet: Olithink 5.3.2, Diablo 1.4</a> by Lucas Braesch, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 05, 2012</li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=OliThink&amp;action=edit&amp;section=14\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=74203\">OliThink 5.4.0 has been published with an big leap in strength for only 3 lines of code</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 16, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=74256\">Java vs C. It's not like one would think</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 22, 2020&#160;» <a href=\"/Java\" title=\"Java\">Java</a>, <a href=\"/C\" title=\"C\">C</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=74821\">An undetected bug for 10 years</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 18, 2020&#160;» <a href=\"/Diagonals#TwoSquares\" title=\"Diagonals\">Two Squares on a Diagonal</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=75060\">Official Release of OliThink 5.7.5 including a Java-GUI</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 09, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=75670\">Ancient olithink fossils</a> by <a href=\"/Dann_Corbit\" title=\"Dann Corbit\">Dann Corbit</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 03, 2020</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=75670&amp;start=1\">Re: Ancient olithink fossils</a> by Ajedrecista, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 03, 2020</dd></dl>\n<p><b>2021</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=77339\">OliThink 5.9.5 is very small</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 18, 2021</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=77339&amp;start=44\">Re: OliThink 5.9.5 is very small</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 06, 2021&#160;» <a href=\"/Kindergarten_Bitboards\" title=\"Kindergarten Bitboards\">Kindergarten Bitboards</a></dd></dl>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=OliThink&amp;action=edit&amp;section=15\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/olithink/OliThink\">GitHub - olithink/OliThink: OliThink 5</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://brausch.org/home/chess/index.html\">Chess Engine OliThink</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://computerchess.org.uk/ccrl/4040/cgi/engine_details.cgi?print=Details+%28text%29&amp;eng=OliThink%205.3.0\">OliThink 5.3.0</a> in <a href=\"/CCRL\" title=\"CCRL\">CCRL 40/40</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.computerchess.org.uk/ccrl/4040/cgi/engine_details.cgi?match_length=30&amp;print=Details+%28text%29&amp;eng=OliThink%205.3.2%2064-bit\">OliThink 5.3.2 64-bit</a> in <a href=\"/CCRL\" title=\"CCRL\">CCRL 40/40</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=OliThink&amp;action=edit&amp;section=16\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap mw-references-columns\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://brausch.org/home/chess/index.html\">Chess Engine OliThink by Oliver Brausch</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://brausch.org/home/chess/index.html\">Chess Engine OliThink</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=18590\">OliPerft with divide Option as Pre Version for OliThink 5</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 27, 2007</span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=346753\">OliThink@CCT6 - Programmers View</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 03, 2004</span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=74203\">OliThink 5.4.0 has been published with an big leap in strength for only 3 lines of code</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 16, 2020</span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=20505\">OliThink 5.1.2 released</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 03, 2008</span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=31364\">OliThink 5.2.6 released introducing LMR</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 31, 2009</span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=20281\">OliThink 5.1.1 released</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 21, 2008</span>\n</li>\n<li id=\"cite_note-9\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-9\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=24724\">Kindergarten Bitboard Approach by Gerd Isenberg</a> by <a href=\"/Edsel_Apostol\" title=\"Edsel Apostol\">Edsel Apostol</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 05, 2008</span>\n</li>\n<li id=\"cite_note-10\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-10\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?topic_view=threads&amp;p=166649&amp;t=18750\">Re: Question about SEE (Static exchange evaluation)</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 18, 2007</span>\n</li>\n<li id=\"cite_note-11\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-11\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=77339&amp;start=44\">Re: OliThink 5.9.5 is very small</a> by <a href=\"/Oliver_Brausch\" title=\"Oliver Brausch\">Oliver Brausch</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 06, 2021</span>\n</li>\n<li id=\"cite_note-12\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-12\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/olithink/OliThink/commit/78fa794f777bd5e851fc0abbcfc1bca22e6c0dcf\">5.9.8a Half sized bitboards  (slightly edited)</a></span>\n</li>\n<li id=\"cite_note-13\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-13\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://brausch.org/home/chess/index.html\">Chess Engine OliThink - OliThink Source Code Vers. 5.3.2 Java - olithink.java (slightly edited)</a></span>\n</li>\n<li id=\"cite_note-14\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-14\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.vrichey.de/cct6/\">CCT6</a> hosted by <a href=\"/index.php?title=Volker_Richey&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Volker Richey (page does not exist)\">Volker Richey</a></span>\n</li>\n<li id=\"cite_note-15\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-15\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.vrichey.de/cct6/\">CCT6</a> hosted by <a href=\"/index.php?title=Volker_Richey&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Volker Richey (page does not exist)\">Volker Richey</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Engines\" title=\"Engines\">Up one level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301095214\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.034 seconds\nReal time usage: 0.036 seconds\nPreprocessor visited node count: 314/1000000\nPreprocessor generated node count: 648/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1616-0!canonical and timestamp 20260301095214 and revision id 24939\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Open_Source"
+      },
+      {
+        "sortkey": "",
+        "*": "WinBoard"
+      },
+      {
+        "sortkey": "",
+        "*": "XBoard"
+      },
+      {
+        "sortkey": "",
+        "*": "X86"
+      },
+      {
+        "sortkey": "",
+        "*": "X64"
+      },
+      {
+        "sortkey": "",
+        "*": "Java"
+      },
+      {
+        "sortkey": "",
+        "*": "Linux"
+      },
+      {
+        "sortkey": "",
+        "*": "Mac"
+      },
+      {
+        "sortkey": "",
+        "*": "Windows"
+      },
+      {
+        "sortkey": "",
+        "*": "Thought"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Anti-Diagonals"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Array"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aspiration Windows"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bodo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "C"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCRL"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCT6"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Check Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess Engine Communication Protocol"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Computer Chess Forums"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Crafty"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dann Corbit"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Diagonals"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Direction"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Draw"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Draw Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Edsel Apostol"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Endgame"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engines"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Files"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "GUI"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "General Setwise Operations"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Glaurung"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "History Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Internal Iterative Deepening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iterative Deepening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Java"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Killer Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Kindergarten Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Late Move Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Linux"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mac OS"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Material"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michel Langeveld"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mobility"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Generation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Ordering"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Occupancy"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Occupancy of any Line"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Oliver Brausch"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "One Reply Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "PV-Move"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Passed Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Passed Pawn Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Structure"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Perft"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Peter Skinner"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Piece-Lists"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Playing Strength"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ranks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Repetitions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rotated Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SEE"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SEE - The Swap Algorithm"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search Explosion"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Sliding Piece Attacks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Toga"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tord Romstad"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Triangular PV-Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Windows"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "X-ray Attacks (Bitboards)"
+      },
+      {
+        "ns": 0,
+        "*": "Volker Richey"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Open Source"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Description",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "OliThink",
+        "byteoffset": 1956,
+        "anchor": "Description"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Search",
+        "number": "1.1",
+        "index": "2",
+        "fromtitle": "OliThink",
+        "byteoffset": 1970,
+        "anchor": "Search"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Sliding Piece Attacks",
+        "number": "1.2",
+        "index": "3",
+        "fromtitle": "OliThink",
+        "byteoffset": 3209,
+        "anchor": "Sliding_Piece_Attacks"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "C Source",
+        "number": "1.2.1",
+        "index": "4",
+        "fromtitle": "OliThink",
+        "byteoffset": 4756,
+        "anchor": "C_Source"
+      },
+      {
+        "toclevel": 3,
+        "level": "3",
+        "line": "Java Source",
+        "number": "1.2.2",
+        "index": "5",
+        "fromtitle": "OliThink",
+        "byteoffset": 6110,
+        "anchor": "Java_Source"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Selected Games",
+        "number": "2",
+        "index": "6",
+        "fromtitle": "OliThink",
+        "byteoffset": 7701,
+        "anchor": "Selected_Games"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "SEE",
+        "number": "2.1",
+        "index": "7",
+        "fromtitle": "OliThink",
+        "byteoffset": 7718,
+        "anchor": "SEE"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Bodo",
+        "number": "2.2",
+        "index": "8",
+        "fromtitle": "OliThink",
+        "byteoffset": 8632,
+        "anchor": "Bodo"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "3",
+        "index": "9",
+        "fromtitle": "OliThink",
+        "byteoffset": 9216,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1998 ...",
+        "number": "3.1",
+        "index": "10",
+        "fromtitle": "OliThink",
+        "byteoffset": 9231,
+        "anchor": "1998_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "3.2",
+        "index": "11",
+        "fromtitle": "OliThink",
+        "byteoffset": 9536,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2005 ...",
+        "number": "3.3",
+        "index": "12",
+        "fromtitle": "OliThink",
+        "byteoffset": 11147,
+        "anchor": "2005_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "3.4",
+        "index": "13",
+        "fromtitle": "OliThink",
+        "byteoffset": 15285,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "3.5",
+        "index": "14",
+        "fromtitle": "OliThink",
+        "byteoffset": 16887,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "4",
+        "index": "15",
+        "fromtitle": "OliThink",
+        "byteoffset": 18229,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "5",
+        "index": "16",
+        "fromtitle": "OliThink",
+        "byteoffset": 18751,
+        "anchor": "References"
+      }
+    ]
+  }
+}

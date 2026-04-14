@@ -1,0 +1,532 @@
+{
+  "parse": {
+    "title": "Wasp",
+    "pageid": 3230,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Engines\" title=\"Engines\">Engines</a> * Wasp</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:242px;\"><a href=\"/File:Vespula_germanica_Richard_Bartz.jpg\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Vespula_germanica_Richard_Bartz.jpg/250px-Vespula_germanica_Richard_Bartz.jpg\" width=\"240\" height=\"320\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Vespula_germanica_Richard_Bartz.jpg/500px-Vespula_germanica_Richard_Bartz.jpg 1.5x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Vespula_germanica_Richard_Bartz.jpg\" class=\"internal\" title=\"Enlarge\"></a></div>Wasp <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>Wasp</b>,<br />\n<a href=\"/John_Stanback\" title=\"John Stanback\">John Stanback's</a> new <a href=\"/UCI\" title=\"UCI\">UCI</a> compliant chess engine and complete rewrite of <a href=\"/Zarkov\" title=\"Zarkov\">Zarkov</a>, first released short after <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/June_solstice\">June solstice</a> 2016, announced <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup> and hosted by <a href=\"/Frank_Quisinsky\" title=\"Frank Quisinsky\">Frank Quisinsky</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup>. As a <a href=\"/Bitboards\" title=\"Bitboards\">bitboard</a> engine,  Wasp is compiled for modern <a href=\"/X86-64\" title=\"X86-64\">64 bit CPU's</a> with <a href=\"/Population_Count\" title=\"Population Count\">popcnt</a> and <a href=\"/BitScan\" title=\"BitScan\">bitscan</a> instructions. Wasp <b>2.00</b>, released in April 2017, is able to use multiple <a href=\"/Thread\" title=\"Thread\">threads</a> performing a <a href=\"/Lazy_SMP\" title=\"Lazy SMP\">Lazy SMP</a> search <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>. \nIn 2020, John Stanback played with tiny <a href=\"/Neural_Networks\" title=\"Neural Networks\">neural networks</a> to learn how to <a href=\"/Neural_Networks#Backpropagation\" title=\"Neural Networks\">backpropagate</a> errors using Wasp's <a href=\"/Evaluation\" title=\"Evaluation\">evaluation</a> as the target, and then rewrote Wasp's evaluation function with fast <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">tuning</a> in mind, quite similar to the tiny NN approach <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup>. Along with Wasp <b>5.00</b>, released in November 2021, the evaluation function emerged to an <a href=\"/NNUE\" title=\"NNUE\">NNUE</a> with 1830 inputs, 192 neurons in the first hidden layer, 16 neurons in the second hidden layer, and two neurons in the third hidden layer. It was trained using positions from games between Wasp and other engines of roughly similar strength <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup>. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Features\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Features</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-2\"><a href=\"#Search\"><span class=\"tocnumber\">1.1</span> <span class=\"toctext\">Search</span></a></li>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#Evaluation\"><span class=\"tocnumber\">1.2</span> <span class=\"toctext\">Evaluation</span></a></li>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#Misc\"><span class=\"tocnumber\">1.3</span> <span class=\"toctext\">Misc</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#See_also\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#2016_...\"><span class=\"tocnumber\">3.1</span> <span class=\"toctext\">2016 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#2020_...\"><span class=\"tocnumber\">3.2</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-9\"><a href=\"#External_Links\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">External Links</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#Chess_Engine\"><span class=\"tocnumber\">4.1</span> <span class=\"toctext\">Chess Engine</span></a></li>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#Misc_2\"><span class=\"tocnumber\">4.2</span> <span class=\"toctext\">Misc</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-12\"><a href=\"#References\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Features\">Features</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Wasp&amp;action=edit&amp;section=1\" title=\"Edit section: Features\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup>\n</p>\n<h2><span class=\"mw-headline\" id=\"Search\"><a href=\"/Search\" title=\"Search\">Search</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Wasp&amp;action=edit&amp;section=2\" title=\"Edit section: Search\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Iterative_Deepening\" title=\"Iterative Deepening\">Iterative Deepening</a></li>\n<li> <a href=\"/Aspiration_Windows\" title=\"Aspiration Windows\">Aspiration Windows</a></li>\n<li> <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">Principal Variation Search</a></li>\n<li> <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Table</a></li>\n<li> <a href=\"/Extensions\" title=\"Extensions\">Extensions</a>\n<ul><li> <a href=\"/Check_Extensions\" title=\"Check Extensions\">Check Extensions</a></li>\n<li> <a href=\"/Passed_Pawn_Extensions\" title=\"Passed Pawn Extensions\">Passed Pawn Extensions</a> (to 7th rank if <a href=\"/Depth\" title=\"Depth\">depth</a> is low)</li>\n<li> <a href=\"/Extensions#FractionalExtensions\" title=\"Extensions\">Fractional</a>\n<ul><li> <a href=\"/Capture_Extensions\" title=\"Capture Extensions\">Capture Extensions</a></li>\n<li> <a href=\"/PV_Extensions\" title=\"PV Extensions\">PV Extensions</a></li></ul></li></ul></li>\n<li> <a href=\"/Pruning\" title=\"Pruning\">Pruning</a>/<a href=\"/Reductions\" title=\"Reductions\">Reductions</a>\n<ul><li> <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">Quiescence Search</a></li>\n<li> <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">Null Move Pruning</a></li>\n<li> <a href=\"/Futility_Pruning\" title=\"Futility Pruning\">Futility Pruning</a></li>\n<li> <a href=\"/Reverse_Futility_Pruning\" title=\"Reverse Futility Pruning\">Reverse Futility Pruning</a></li>\n<li> <a href=\"/Futility_Pruning#MoveCountBasedPruning\" title=\"Futility Pruning\">Late Move Pruning</a></li>\n<li> <a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">Late Move Reductions</a></li></ul></li>\n<li> <a href=\"/Move_Ordering\" title=\"Move Ordering\">Move Ordering</a>\n<ul><li> <a href=\"/Killer_Heuristic\" title=\"Killer Heuristic\">Killer Heuristic</a></li>\n<li> <a href=\"/History_Heuristic\" title=\"History Heuristic\">History Heuristic</a></li>\n<li> <a href=\"/Internal_Iterative_Deepening\" title=\"Internal Iterative Deepening\">Internal Iterative Deepening</a></li>\n<li> <a href=\"/MVV-LVA\" title=\"MVV-LVA\">MVV/LVA</a></li>\n<li> <a href=\"/Static_Exchange_Evaluation\" title=\"Static Exchange Evaluation\">Static Exchange Evaluation</a></li></ul></li>\n<li> <a href=\"/Lazy_SMP\" title=\"Lazy SMP\">Lazy SMP</a> (Wasp 2.00)</li></ul>\n<h2><span class=\"mw-headline\" id=\"Evaluation\"><a href=\"/Evaluation\" title=\"Evaluation\">Evaluation</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Wasp&amp;action=edit&amp;section=3\" title=\"Edit section: Evaluation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/NNUE\" title=\"NNUE\">NNUE</a> (Wasp <b>5.00</b>)</li>\n<li> Wasp does not use <a href=\"/Lazy_Evaluation\" title=\"Lazy Evaluation\">Lazy Evaluation</a> (Opposed to <a href=\"/Zarkov\" title=\"Zarkov\">Zarkov</a>)</li>\n<li> <a href=\"/Tapered_Eval\" title=\"Tapered Eval\">Tapered Eval</a></li>\n<li> <a href=\"/Material\" title=\"Material\">Material</a></li>\n<li> <a href=\"/Piece-Square_Tables\" title=\"Piece-Square Tables\">Piece-Square Tables</a></li>\n<li> <a href=\"/Evaluation_Hash_Table\" title=\"Evaluation Hash Table\">Evaluation Hash Table</a></li>\n<li> <a href=\"/Pawn_Hash_Table\" title=\"Pawn Hash Table\">Pawn Hash Table</a></li>\n<li> <a href=\"/Pawn_Structure\" title=\"Pawn Structure\">Pawn Structure</a>\n<ul><li> <a href=\"/Passed_Pawn\" title=\"Passed Pawn\">Passed Pawn</a></li>\n<li> <a href=\"/Candidate_Passed_Pawn\" title=\"Candidate Passed Pawn\">Candidate Passed Pawn</a></li>\n<li> <a href=\"/Weak_Pawns\" title=\"Weak Pawns\">Weak Pawns</a></li>\n<li> <a href=\"/Backward_Pawn\" title=\"Backward Pawn\">Backward Pawn</a></li>\n<li> <a href=\"/Doubled_Pawn\" title=\"Doubled Pawn\">Doubled Pawn</a></li>\n<li> <a href=\"/Isolated_Pawn\" title=\"Isolated Pawn\">Isolated Pawn</a></li></ul></li>\n<li> <a href=\"/Mobility\" title=\"Mobility\">Mobility</a></li>\n<li> <a href=\"/Trapped_Pieces\" title=\"Trapped Pieces\">Trapped Pieces</a></li>\n<li> <a href=\"/Outposts\" title=\"Outposts\">Outposts</a></li>\n<li> <a href=\"/Rook_on_Open_File\" title=\"Rook on Open File\">Rook on open/half-open file</a></li>\n<li> <a href=\"/Rook_on_Seventh\" title=\"Rook on Seventh\">Rook on Seventh</a></li>\n<li> <a href=\"/King_Safety\" title=\"King Safety\">King Safety</a></li>\n<li> <a href=\"/King_Pawn_Tropism\" title=\"King Pawn Tropism\">King Pawn Tropism</a> in <a href=\"/Endgame\" title=\"Endgame\">Endgame</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Misc\">Misc</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Wasp&amp;action=edit&amp;section=4\" title=\"Edit section: Misc\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/KPK\" title=\"KPK\">KPK base</a></li>\n<li> <a href=\"/UCI\" title=\"UCI\">UCI</a></li>\n<li> <a href=\"/Chess960\" title=\"Chess960\">Chess960</a> (Wasp 5.20)</li></ul>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Wasp&amp;action=edit&amp;section=5\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Category:Arthropod\" title=\"Category:Arthropod\">Arthropod</a></li>\n<li> <a href=\"/Buzz\" title=\"Buzz\">Buzz</a></li>\n<li> <a href=\"/GNU_Chess\" title=\"GNU Chess\">GNU Chess</a></li>\n<li> <a href=\"/SCP\" title=\"SCP\">SCP</a></li>\n<li> <a href=\"/Zarkov\" title=\"Zarkov\">Zarkov</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Wasp&amp;action=edit&amp;section=6\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"2016_...\">2016 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Wasp&amp;action=edit&amp;section=7\" title=\"Edit section: 2016 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=60550\">Wasp 1.01 x64 by John Stanback released ...</a> by <a href=\"/Frank_Quisinsky\" title=\"Frank Quisinsky\">Frank Quisinsky</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 22, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=60667\">Wasp 1.02 by John Stanback available ...</a> by <a href=\"/Frank_Quisinsky\" title=\"Frank Quisinsky\">Frank Quisinsky</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 01, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=60694\">Wasp until move 42...</a> by <a href=\"/Fernando_Villegas\" title=\"Fernando Villegas\">Fernando Villegas</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 05, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61560\">Wasp by John Stanback is clear for take-off on runway 1.25!</a> by <a href=\"/Frank_Quisinsky\" title=\"Frank Quisinsky\">Frank Quisinsky</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 30, 2016</li></ul>\n<p><b>2017</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63783\">Wasp 2.00 by John Stanback ... with Lazy SMP!</a> by <a href=\"/Frank_Quisinsky\" title=\"Frank Quisinsky\">Frank Quisinsky</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 21, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63894\">Wasp 2.01 by John Stanback available ...</a> by <a href=\"/Frank_Quisinsky\" title=\"Frank Quisinsky\">Frank Quisinsky</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 04, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=63903&amp;start=13\">Re: Symmetric multiprocessing (SMP) scaling - SF8 and K10.4</a> by <a href=\"/John_Stanback\" title=\"John Stanback\">John Stanback</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 06, 2017&#160;» <a href=\"/Lazy_SMP\" title=\"Lazy SMP\">Lazy SMP</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65791\">Wasp 2.60 by John Stanback released!</a> by <a href=\"/Frank_Quisinsky\" title=\"Frank Quisinsky\">Frank Quisinsky</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 22, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65805\">Wasp and a question</a> by <a href=\"/Fernando_Villegas\" title=\"Fernando Villegas\">Fernando Villegas</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 23, 2017</li></ul>\n<p><b>2018</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=67410\">Wasp 3.00 available ...</a>  by <a href=\"/Frank_Quisinsky\" title=\"Frank Quisinsky\">Frank Quisinsky</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 11, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=68154&amp;start=7\">Re: Lazy SMP and 44 cores</a> by <a href=\"/John_Stanback\" title=\"John Stanback\">John Stanback</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 08, 2018&#160;» <a href=\"/Lazy_SMP\" title=\"Lazy SMP\">Lazy SMP</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=69256\">Wasp 3.50 by John Stanback available!</a> by <a href=\"/Frank_Quisinsky\" title=\"Frank Quisinsky\">Frank Quisinsky</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 14, 2018</li></ul>\n<p><b>2019</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=70444\">Wasp 3.60 available (for DGT Pi too, for chess computer lovers)</a> by <a href=\"/Frank_Quisinsky\" title=\"Frank Quisinsky\">Frank Quisinsky</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 07, 2019&#160;» <a href=\"/DGT_Pi\" title=\"DGT Pi\">DGT Pi</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=71744\">Wasp 3.75 by John Stanback released ...</a> by <a href=\"/Frank_Quisinsky\" title=\"Frank Quisinsky\">Frank Quisinsky</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 06, 2019</li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Wasp&amp;action=edit&amp;section=8\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=74174\">Wasp 4.00 by John Stanback available!</a> by <a href=\"/Frank_Quisinsky\" title=\"Frank Quisinsky\">Frank Quisinsky</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 14, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=75794\">Wasp NN</a> by <a href=\"/Ted_Summers\" title=\"Ted Summers\">Ted Summers</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 14, 2020</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=75794&amp;start=4\">Re: Wasp NN</a> by <a href=\"/John_Stanback\" title=\"John Stanback\">John Stanback</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 14, 2020</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=75896\">Wasp 4.08 dev</a> by <a href=\"/Frank_Quisinsky\" title=\"Frank Quisinsky\">Frank Quisinsky</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 22, 2020</li></ul>\n<p><b>2021</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=76205\">Wasp 4.5 Released</a> by <a href=\"/John_Stanback\" title=\"John Stanback\">John Stanback</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 01, 2021</li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=76205&amp;start=14\">Re: Wasp 4.5 Released</a> by <a href=\"/John_Stanback\" title=\"John Stanback\">John Stanback</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 03, 2021&#160;» <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">Automated Tuning</a></dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=78687\">Wasp 5.00 released</a> by <a href=\"/John_Stanback\" title=\"John Stanback\">John Stanback</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 18, 2021</li></ul>\n<p><b>2022</b>\n</p>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=79034\">Wasp 5.20 Released</a> by <a href=\"/John_Stanback\" title=\"John Stanback\">John Stanback</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 02, 2022</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=79675\">Wasp 5.50 Released</a> by <a href=\"/John_Stanback\" title=\"John Stanback\">John Stanback</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 12, 2022</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Wasp&amp;action=edit&amp;section=9\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Chess_Engine\">Chess Engine</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Wasp&amp;action=edit&amp;section=10\" title=\"Edit section: Chess Engine\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.amateurschach.de/main/_wasp.htm\">Frank's Chess Page, Wasp by John Stanback</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://computerchess.org.uk/ccrl/4040/cgi/compare_engines.cgi?family=Wasp&amp;print=Rating+list&amp;print=Results+table&amp;print=LOS+table&amp;print=Ponder+hit+table&amp;print=Eval+difference+table&amp;print=Comopp+gamenum+table&amp;print=Overlap+table&amp;print=Score+with+common+opponents\">Wasp</a> in <a href=\"/CCRL\" title=\"CCRL\">CCRL 40/15</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Misc_2\">Misc</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Wasp&amp;action=edit&amp;section=11\" title=\"Edit section: Misc\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wiktionary.org/wiki/WASP\">WASP - Wiktionary</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wiktionary.org/wiki/wasp\">wasp - Wiktionary</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wasp\">Wasp from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wasp_(disambiguation)\">Wasp (disambiguation) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/W.A.S.P.\">W.A.S.P.</a> - <a rel=\"nofollow\" class=\"external text\" href=\"http://www.azlyrics.com/lyrics/wasp/mantronic.html\">Mantronic</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Inside_the_Electric_Circus\">Inside the Electric Circus</a> (1986), <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/YouTube\">YouTube</a> Video</li></ul>\n<dl><dd> <div class='embedvideo ev_inline ev_top autoResize' style=' width: 646px;'><div class='embedvideowrap' style='width: 640px;'><iframe src=\"//www.youtube.com/embed/JrF2btiNBCg?\" width=\"640\" height=\"360\" frameborder=\"0\" allowfullscreen=\"true\"></iframe></div></div></dd></dl>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Wasp&amp;action=edit&amp;section=12\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Vespula\">Vespula</a> is a small genus of social wasps, widely distributed in the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Northern_Hemisphere\">Northern Hemisphere</a>. Along with members of their sister genus <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Dolichovespula\">Dolichovespula</a>, they are collectively known by the common name <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Yellow_jacket\">yellow jackets</a> (or yellow-jackets) in <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/North_America\">North America</a>. Vespula species have a shorter malar space and a more pronounced tendency to nest underground, but are otherwise nearly indistinguishable from Dolichovespula. As shown a <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Vespula_germanica\">Vespula germanica</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://commons.wikimedia.org/wiki/File:Vespula_germanica_Richard_Bartz.jpg\">Image</a> by <a rel=\"nofollow\" class=\"external text\" href=\"https://commons.wikimedia.org/wiki/User:Richard_Bartz\">Richard Bartz</a>, August 10, 2007, <a rel=\"nofollow\" class=\"external text\" href=\"https://creativecommons.org/licenses/by-sa/2.5/deed.en\">CC BY-SA 2.5</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wikimedia_Commons\">Wikimedia Commons</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wasp\">Wasp from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=60550\">Wasp 1.01 x64 by John Stanback released ...</a> by <a href=\"/Frank_Quisinsky\" title=\"Frank Quisinsky\">Frank Quisinsky</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 22, 2016</span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.amateurschach.de/main/_wasp.htm\">Frank's Chess Page, Wasp by John Stanback</a>, June 22, 2016</span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63783\">Wasp 2.00 by John Stanback ... with Lazy SMP!</a> by <a href=\"/Frank_Quisinsky\" title=\"Frank Quisinsky\">Frank Quisinsky</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 21, 2017</span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=75794&amp;start=4\">Re: Wasp NN</a> by <a href=\"/John_Stanback\" title=\"John Stanback\">John Stanback</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 14, 2020</span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=78687\">Wasp 5.00 released</a> by <a href=\"/John_Stanback\" title=\"John Stanback\">John Stanback</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 18, 2021</span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\">based on <a rel=\"nofollow\" class=\"external text\" href=\"http://www.amateurschach.de/main/wasp/release_notes_101.txt\">Wasp Release Notes</a> by <a href=\"/John_Stanback\" title=\"John Stanback\">John Stanback</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Engines\" title=\"Engines\">Up one level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260228095958\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.085 seconds\nReal time usage: 0.620 seconds\nPreprocessor visited node count: 154/1000000\nPreprocessor generated node count: 326/1000000\nPost‐expand include size: 26/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:3230-0!canonical and timestamp 20260228095957 and revision id 26445\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "UCI"
+      },
+      {
+        "sortkey": "",
+        "*": "Chess960"
+      },
+      {
+        "sortkey": "",
+        "*": "X86"
+      },
+      {
+        "sortkey": "",
+        "*": "X64"
+      },
+      {
+        "sortkey": "",
+        "*": "PC"
+      },
+      {
+        "sortkey": "",
+        "*": "Windows"
+      },
+      {
+        "sortkey": "",
+        "*": "NNUE"
+      },
+      {
+        "sortkey": "",
+        "*": "Arthropod"
+      },
+      {
+        "sortkey": "",
+        "*": "Music"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aspiration Windows"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Automated Tuning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Backward Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "BitScan"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Buzz"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCRL"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Candidate Passed Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Capture Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Check Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chess960"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "DGT Pi"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Doubled Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Endgame"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engines"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation Hash Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Fernando Villegas"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Frank Quisinsky"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Futility Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "GNU Chess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "History Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Internal Iterative Deepening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Isolated Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iterative Deepening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "John Stanback"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "KPK"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Killer Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "King Pawn Tropism"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "King Safety"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Late Move Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lazy Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lazy SMP"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "MVV-LVA"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Material"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mobility"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Ordering"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "NNUE"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Neural Networks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Outposts"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "PV Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Passed Pawn"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Passed Pawn Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Hash Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Structure"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Piece-Square Tables"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Population Count"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiescence Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Reverse Futility Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rook on Open File"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Rook on Seventh"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "SCP"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Static Exchange Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tapered Eval"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ted Summers"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Thread"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Trapped Pieces"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "UCI"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Weak Pawns"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "X86-64"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Zarkov"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Arthropod"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Features",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Wasp",
+        "byteoffset": 3152,
+        "anchor": "Features"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Search",
+        "number": "1.1",
+        "index": "2",
+        "fromtitle": "Wasp",
+        "byteoffset": 3285,
+        "anchor": "Search"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Evaluation",
+        "number": "1.2",
+        "index": "3",
+        "fromtitle": "Wasp",
+        "byteoffset": 4036,
+        "anchor": "Evaluation"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Misc",
+        "number": "1.3",
+        "index": "4",
+        "fromtitle": "Wasp",
+        "byteoffset": 4589,
+        "anchor": "Misc"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "2",
+        "index": "5",
+        "fromtitle": "Wasp",
+        "byteoffset": 4655,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "3",
+        "index": "6",
+        "fromtitle": "Wasp",
+        "byteoffset": 4753,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2016 ...",
+        "number": "3.1",
+        "index": "7",
+        "fromtitle": "Wasp",
+        "byteoffset": 4767,
+        "anchor": "2016_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "3.2",
+        "index": "8",
+        "fromtitle": "Wasp",
+        "byteoffset": 6946,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "4",
+        "index": "9",
+        "fromtitle": "Wasp",
+        "byteoffset": 8186,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Chess Engine",
+        "number": "4.1",
+        "index": "10",
+        "fromtitle": "Wasp",
+        "byteoffset": 8203,
+        "anchor": "Chess_Engine"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Misc",
+        "number": "4.2",
+        "index": "11",
+        "fromtitle": "Wasp",
+        "byteoffset": 8602,
+        "anchor": "Misc_2"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "5",
+        "index": "12",
+        "fromtitle": "Wasp",
+        "byteoffset": 9231,
+        "anchor": "References"
+      }
+    ]
+  }
+}

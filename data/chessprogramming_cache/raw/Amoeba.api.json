@@ -1,0 +1,382 @@
+{
+  "parse": {
+    "title": "Amoeba",
+    "pageid": 4470,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Engines\" title=\"Engines\">Engines</a> * Amoeba</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"/File:Nelder-Mead_Simionescu.gif\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Nelder-Mead_Simionescu.gif/330px-Nelder-Mead_Simionescu.gif\" width=\"300\" height=\"300\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Nelder-Mead_Simionescu.gif/500px-Nelder-Mead_Simionescu.gif 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Nelder-Mead_Simionescu.gif/960px-Nelder-Mead_Simionescu.gif 2x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Nelder-Mead_Simionescu.gif\" class=\"internal\" title=\"Enlarge\"></a></div><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Nelder%E2%80%93Mead_method\">Amoeba search</a> of <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Test_functions_for_optimization\">Simionescu function</a> <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>Amoeba</b>,<br />\nan <a href=\"/UCI\" title=\"UCI\">UCI</a> compliant <a href=\"/Category:Open_Source\" title=\"Category:Open Source\">open source chess engine</a> by <a href=\"/Richard_Delorme\" title=\"Richard Delorme\">Richard Delorme</a>, written in the <a href=\"/D_(Programming_Language)\" title=\"D (Programming Language)\">D programming language</a>, first released in May 2016 <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>, licensed under the <a href=\"/Free_Software_Foundation#GPL\" title=\"Free Software Foundation\">GPL v3.0</a>. Amoeba uses the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Nelder%E2%80%93Mead_method\">Nelder–Mead method</a> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup> or downhill simplex method <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup> to <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">tune</a> its <a href=\"/Evaluation\" title=\"Evaluation\">evaluation</a> parameters, also called <b>amoeba</b> method and eponym of the program <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup>. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Features\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Features</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-2\"><a href=\"#Board_Representation\"><span class=\"tocnumber\">1.1</span> <span class=\"toctext\">Board Representation</span></a></li>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#Search\"><span class=\"tocnumber\">1.2</span> <span class=\"toctext\">Search</span></a></li>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#Evaluation\"><span class=\"tocnumber\">1.3</span> <span class=\"toctext\">Evaluation</span></a></li>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#Tournament_Manager\"><span class=\"tocnumber\">1.4</span> <span class=\"toctext\">Tournament Manager</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#See_also\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-7\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#2016_...\"><span class=\"tocnumber\">3.1</span> <span class=\"toctext\">2016 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#2020_...\"><span class=\"tocnumber\">3.2</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-10\"><a href=\"#External_Links\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">External Links</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#Chess_Engine\"><span class=\"tocnumber\">4.1</span> <span class=\"toctext\">Chess Engine</span></a></li>\n<li class=\"toclevel-2 tocsection-12\"><a href=\"#Misc\"><span class=\"tocnumber\">4.2</span> <span class=\"toctext\">Misc</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-13\"><a href=\"#References\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Features\">Features</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Amoeba&amp;action=edit&amp;section=1\" title=\"Edit section: Features\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p><sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup>\n</p>\n<h2><span class=\"mw-headline\" id=\"Board_Representation\"><a href=\"/Board_Representation\" title=\"Board Representation\">Board Representation</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Amoeba&amp;action=edit&amp;section=2\" title=\"Edit section: Board Representation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Bitboards\" title=\"Bitboards\">Bitboards</a> </li>\n<li> <a href=\"/Hyperbola_Quintessence\" title=\"Hyperbola Quintessence\">Hyperbola Quintessence</a> and <a href=\"/First_Rank_Attacks#AttacksOnAllRanks\" title=\"First Rank Attacks\">Rank Attacks</a></li>\n<li> <a href=\"/Mailbox\" title=\"Mailbox\">Mailbox</a></li>\n<li> <a href=\"/Move_Generation#Staged\" title=\"Move Generation\">Staged Move Generation</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Search\"><a href=\"/Search\" title=\"Search\">Search</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Amoeba&amp;action=edit&amp;section=3\" title=\"Edit section: Search\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Iterative_Deepening\" title=\"Iterative Deepening\">Iterative Deepening</a></li>\n<li> <a href=\"/Aspiration_Windows\" title=\"Aspiration Windows\">Aspiration Windows</a> (improved in 2.6)</li>\n<li> <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">Principal Variation Search</a></li>\n<li> <a href=\"/Transposition_Table\" title=\"Transposition Table\">Transposition Table</a>  (improved in 2.6)</li>\n<li> <a href=\"/Check_Extensions\" title=\"Check Extensions\">Check Extensions</a></li>\n<li> <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">Null Move Pruning</a></li>\n<li> <a href=\"/Reverse_Futility_Pruning\" title=\"Reverse Futility Pruning\">Reverse Futility Pruning</a></li>\n<li> <a href=\"/Razoring\" title=\"Razoring\">Razoring</a></li>\n<li> <a href=\"/Mate_Distance_Pruning\" title=\"Mate Distance Pruning\">Mate Distance Pruning</a></li>\n<li> <a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">Late Move Reductions</a>  (improved in 2.6)</li>\n<li> <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">Quiescence Search</a></li>\n<li> <a href=\"/Internal_Iterative_Deepening\" title=\"Internal Iterative Deepening\">Internal Iterative Deepening</a></li>\n<li> <a href=\"/Static_Exchange_Evaluation\" title=\"Static Exchange Evaluation\">Static Exchange Evaluation</a>  (SEE pruning improved in 2.6)</li></ul>\n<h2><span class=\"mw-headline\" id=\"Evaluation\"><a href=\"/Evaluation\" title=\"Evaluation\">Evaluation</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Amoeba&amp;action=edit&amp;section=4\" title=\"Edit section: Evaluation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Tapered_Eval\" title=\"Tapered Eval\">Tapered Eval</a></li>\n<li> <a href=\"/Lazy_Evaluation\" title=\"Lazy Evaluation\">Lazy Evaluation</a></li>\n<li> <a href=\"/Mobility\" title=\"Mobility\">Mobility</a></li>\n<li> <a href=\"/Pawn_Structure\" title=\"Pawn Structure\">Pawn Structure</a></li>\n<li> <a href=\"/Tempo\" title=\"Tempo\">Tempo</a></li>\n<li> <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">Automated Tuning</a> using <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Nelder%E2%80%93Mead_method\">Nelder–Mead method</a> aka Amoeba method</li></ul>\n<h2><span class=\"mw-headline\" id=\"Tournament_Manager\"><span id=\"TournamentManager\"></span><a href=\"/Tournament_Manager\" title=\"Tournament Manager\">Tournament Manager</a></span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Amoeba&amp;action=edit&amp;section=5\" title=\"Edit section: Tournament Manager\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<dl><dd> With the release of Amoeba <b>2.1</b>, the code of a tournament manager was published also written in <a href=\"/D_(Programming_Language)\" title=\"D (Programming Language)\">D language</a>, used to validate or reject Amoeba changes <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup>. So far only with fixed time per move, it </dd></dl>\n<ul><li> can use various <a href=\"/Opening_Book\" title=\"Opening Book\">openings</a> from <a href=\"/Portable_Game_Notation\" title=\"Portable Game Notation\">pgn file</a></li>\n<li> can play several games in parallel</li>\n<li> can set H0 &amp; H1 <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Statistical_hypothesis_testing\">hypothesis</a> for <a href=\"/Match_Statistics#SPRT\" title=\"Match Statistics\">SPRT</a> <sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup> </li>\n<li> can saves played game to a pgn file</li></ul>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Amoeba&amp;action=edit&amp;section=6\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Dumb\" title=\"Dumb\">Dumb</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Amoeba&amp;action=edit&amp;section=7\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"2016_...\">2016 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Amoeba&amp;action=edit&amp;section=8\" title=\"Edit section: 2016 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=60228\">amoeba a new UCI engine</a> by <a href=\"/Richard_Delorme\" title=\"Richard Delorme\">Richard Delorme</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 20, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=61022\">Amoeba 1.3 released</a> by <a href=\"/Richard_Delorme\" title=\"Richard Delorme\">Richard Delorme</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 03, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=62293\">Amoeba 2.0</a> by <a href=\"/Richard_Delorme\" title=\"Richard Delorme\">Richard Delorme</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 27, 2016</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=62921\">amoeba 2.1</a> by <a href=\"/Richard_Delorme\" title=\"Richard Delorme\">Richard Delorme</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 24, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=62922\">sprt tourney manager</a> by <a href=\"/Richard_Delorme\" title=\"Richard Delorme\">Richard Delorme</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 24, 2017&#160;» <a href=\"#TournamentManager\">Amoeba Tournament Manager</a>, <a href=\"/Match_Statistics#SPRT\" title=\"Match Statistics\">SPRT</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63324\">amoeba 2.2 released</a> by <a href=\"/G%C3%BCnther_Simon\" title=\"Günther Simon\">Günther Simon</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 03, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63775\">Amoeba 2.4</a> by <a href=\"/Richard_Delorme\" title=\"Richard Delorme\">Richard Delorme</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 19, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64212\">Amoeba 2.5</a> by <a href=\"/Richard_Delorme\" title=\"Richard Delorme\">Richard Delorme</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, June 07, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65255\">Amoeba 2.6</a> by <a href=\"/Richard_Delorme\" title=\"Richard Delorme\">Richard Delorme</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 22, 2017 </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=65981\">Amoeba 2.7</a> by <a href=\"/Richard_Delorme\" title=\"Richard Delorme\">Richard Delorme</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 11, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=66877\">Amoeba 2.8</a> by <a href=\"/Richard_Delorme\" title=\"Richard Delorme\">Richard Delorme</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 18, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=69754&amp;start=60\">Re: New engine releases 2019</a> (Amoeba 3.0) by <a href=\"/Richard_Delorme\" title=\"Richard Delorme\">Richard Delorme</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 28, 2019</li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Amoeba&amp;action=edit&amp;section=9\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=72613&amp;start=41\">Re: New engine releases 2020</a> (Amoeba 3.1) by <a href=\"/Richard_Delorme\" title=\"Richard Delorme\">Richard Delorme</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 16, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=72613&amp;start=284\">Re: New engine releases 2020</a> (Amoeba 3.2) by <a href=\"/Richard_Delorme\" title=\"Richard Delorme\">Richard Delorme</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 25, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=76209&amp;start=140\">Re: New engine releases &amp; news 2021</a> (Amoeba 3.3) by <a href=\"/Richard_Delorme\" title=\"Richard Delorme\">Richard Delorme</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 14, 2021</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=76209&amp;start=950\">Re: New engine releases &amp; news 2021</a> (Amoeba 3.4) by <a href=\"/Richard_Delorme\" title=\"Richard Delorme\">Richard Delorme</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 16, 2021</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Amoeba&amp;action=edit&amp;section=10\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Chess_Engine\">Chess Engine</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Amoeba&amp;action=edit&amp;section=11\" title=\"Edit section: Chess Engine\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/abulmo/amoeba\">GitHub - abulmo/amoeba: an UCI chess engine in d language</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.computerchess.org.uk/ccrl/4040/cgi/compare_engines.cgi?family=Amoeba&amp;print=Rating+list&amp;print=Results+table&amp;print=LOS+table&amp;print=Ponder+hit+table&amp;print=Eval+difference+table&amp;print=Comopp+gamenum+table&amp;print=Overlap+table&amp;print=Score+with+common+opponents\">Amoeba</a> in <a href=\"/CCRL\" title=\"CCRL\">CCRL 40/40</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Misc\">Misc</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Amoeba&amp;action=edit&amp;section=12\" title=\"Edit section: Misc\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Amoeba\">Amoeba from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wiktionary.org/wiki/amoeba\">amoeba - Wiktionary</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Amoeba_(genus)\">Amoeba (genus) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Amoeba_(disambiguation)\">Amoeba (disambiguation) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Amoeba_(mathematics)\">Amoeba (mathematics) from Wikipedia</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Amoeba&amp;action=edit&amp;section=13\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\">Animated <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Nelder%E2%80%93Mead_method\">Nelder-Mead minimum search</a> of <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Test_functions_for_optimization\">Simionescu function</a>, by Pasimi, November 22, 2016, <a rel=\"nofollow\" class=\"external text\" href=\"https://creativecommons.org/licenses/by-sa/4.0/deed.en\">CC BY-SA 4.0</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Wikimedia_Commons\">Wikimedia Commons</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=60228\">amoeba a new UCI engine</a> by <a href=\"/Richard_Delorme\" title=\"Richard Delorme\">Richard Delorme</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, May 20, 2016</span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/John_Nelder\">John Nelder</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://de.wikipedia.org/wiki/Roger_Mead\">Roger Mead</a> (<b>1965</b>). <i>A Simplex Method for Function Minimization</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/The_Computer_Journal\">The Computer Journal</a>, Vol. 7, No. 4, doi:<a rel=\"nofollow\" class=\"external text\" href=\"http://comjnl.oxfordjournals.org/content/7/4/308\">10.1093/comjnl/7.4.308</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a href=\"/Mathematician#MHWright\" title=\"Mathematician\">Margaret H. Wright</a> (<b>2012</b>). <i>Nelder, Mead, and the Other Simplex Method</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://www.math.uni-bielefeld.de/documenta/Welcome-eng.html\">Documenta Mathematica</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://www.math.uni-bielefeld.de/documenta/vol-ismp/vol-ismp.html\">Extra Volume Optimization Stories</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.math.uiuc.edu/documenta/vol-ismp/42_wright-margaret.pdf\">pdf</a></span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/abulmo/amoeba/blob/master/README.md\">amoeba/README.md at master · abulmo/amoeba · GitHub</a></span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\">Features as mentioned in <a rel=\"nofollow\" class=\"external text\" href=\"https://github.com/abulmo/amoeba/blob/master/README.md\">amoeba/README.md at master · abulmo/amoeba · GitHub</a></span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=62922\">sprt tourney manager</a> by <a href=\"/Richard_Delorme\" title=\"Richard Delorme\">Richard Delorme</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 24, 2017</span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=57465\">The SPRT without draw model, elo model or whatever...</a> by <a href=\"/Michel_Van_den_Bergh\" title=\"Michel Van den Bergh\">Michel Van den Bergh</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 01, 2015</span>\n</li>\n</ol></div>\n<p><b><a href=\"/Engines\" title=\"Engines\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260228181552\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.123 seconds\nReal time usage: 0.709 seconds\nPreprocessor visited node count: 168/1000000\nPreprocessor generated node count: 332/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:4470-0!canonical and timestamp 20260228181552 and revision id 26139\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "UCI"
+      },
+      {
+        "sortkey": "",
+        "*": "D-Proglanguage"
+      },
+      {
+        "sortkey": "",
+        "*": "Open_Source"
+      },
+      {
+        "sortkey": "",
+        "*": "GPL"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aspiration Windows"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Automated Tuning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bitboards"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Board Representation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCRL"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Check Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "D (Programming Language)"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dumb"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engines"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "First Rank Attacks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Free Software Foundation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Günther Simon"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Hyperbola Quintessence"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Internal Iterative Deepening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iterative Deepening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Late Move Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lazy Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mailbox"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Match Statistics"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mate Distance Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mathematician"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Michel Van den Bergh"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mobility"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Generation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Opening Book"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Structure"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Portable Game Notation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiescence Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Razoring"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Reverse Futility Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Richard Delorme"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Static Exchange Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tapered Eval"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tempo"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tournament Manager"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "UCI"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Open Source"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Features",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Amoeba",
+        "byteoffset": 2146,
+        "anchor": "Features"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Board Representation",
+        "number": "1.1",
+        "index": "2",
+        "fromtitle": "Amoeba",
+        "byteoffset": 2302,
+        "anchor": "Board_Representation"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Search",
+        "number": "1.2",
+        "index": "3",
+        "fromtitle": "Amoeba",
+        "byteoffset": 2501,
+        "anchor": "Search"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Evaluation",
+        "number": "1.3",
+        "index": "4",
+        "fromtitle": "Amoeba",
+        "byteoffset": 2953,
+        "anchor": "Evaluation"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Tournament Manager",
+        "number": "1.4",
+        "index": "5",
+        "fromtitle": "Amoeba",
+        "byteoffset": 3186,
+        "anchor": "Tournament_Manager"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "2",
+        "index": "6",
+        "fromtitle": "Amoeba",
+        "byteoffset": 4081,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "3",
+        "index": "7",
+        "fromtitle": "Amoeba",
+        "byteoffset": 4104,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2016 ...",
+        "number": "3.1",
+        "index": "8",
+        "fromtitle": "Amoeba",
+        "byteoffset": 4118,
+        "anchor": "2016_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "3.2",
+        "index": "9",
+        "fromtitle": "Amoeba",
+        "byteoffset": 5708,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "4",
+        "index": "10",
+        "fromtitle": "Amoeba",
+        "byteoffset": 6388,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Chess Engine",
+        "number": "4.1",
+        "index": "11",
+        "fromtitle": "Amoeba",
+        "byteoffset": 6405,
+        "anchor": "Chess_Engine"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Misc",
+        "number": "4.2",
+        "index": "12",
+        "fromtitle": "Amoeba",
+        "byteoffset": 6817,
+        "anchor": "Misc"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "5",
+        "index": "13",
+        "fromtitle": "Amoeba",
+        "byteoffset": 7219,
+        "anchor": "References"
+      }
+    ]
+  }
+}

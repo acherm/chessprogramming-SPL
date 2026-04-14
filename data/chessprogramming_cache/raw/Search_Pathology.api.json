@@ -1,0 +1,418 @@
+{
+  "parse": {
+    "title": "Search Pathology",
+    "pageid": 1047,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Search\" title=\"Search\">Search</a> * Pathology</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"/File:Membranous_nephropathy_-_mpas_-_very_high_mag.jpg\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Membranous_nephropathy_-_mpas_-_very_high_mag.jpg/330px-Membranous_nephropathy_-_mpas_-_very_high_mag.jpg\" width=\"300\" height=\"200\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Membranous_nephropathy_-_mpas_-_very_high_mag.jpg/500px-Membranous_nephropathy_-_mpas_-_very_high_mag.jpg 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Membranous_nephropathy_-_mpas_-_very_high_mag.jpg/960px-Membranous_nephropathy_-_mpas_-_very_high_mag.jpg 2x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Membranous_nephropathy_-_mpas_-_very_high_mag.jpg\" class=\"internal\" title=\"Enlarge\"></a></div>Micrograph of membranous nephropathy <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>Pathology</b> in game-trees is a counterintuitive phenomenon where a <a href=\"/Depth\" title=\"Depth\">deeper</a> <a href=\"/Minimax\" title=\"Minimax\">minimax</a> search results in worse play. It was discovered by <a href=\"/Don_Beal\" title=\"Don Beal\">Don Beal</a> <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>, who constructed a simple mathematical model to analyze the minimax algorithm. To his surprise, the analysis of the model showed that the backed-up values were actually somewhat less trustworthy than the heuristic values themselves. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Decision_vs_Evaluation\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Decision vs Evaluation</span></a></li>\n<li class=\"toclevel-1 tocsection-2\"><a href=\"#Random_Evaluations\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">Random Evaluations</span></a></li>\n<li class=\"toclevel-1 tocsection-3\"><a href=\"#See_also\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-4\"><a href=\"#Publications\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Publications</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-5\"><a href=\"#1979\"><span class=\"tocnumber\">4.1</span> <span class=\"toctext\">1979</span></a></li>\n<li class=\"toclevel-2 tocsection-6\"><a href=\"#1980_...\"><span class=\"tocnumber\">4.2</span> <span class=\"toctext\">1980 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#1985_...\"><span class=\"tocnumber\">4.3</span> <span class=\"toctext\">1985 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#1990_...\"><span class=\"tocnumber\">4.4</span> <span class=\"toctext\">1990 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#1995_...\"><span class=\"tocnumber\">4.5</span> <span class=\"toctext\">1995 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#2000_...\"><span class=\"tocnumber\">4.6</span> <span class=\"toctext\">2000 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#2005_...\"><span class=\"tocnumber\">4.7</span> <span class=\"toctext\">2005 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-12\"><a href=\"#2010_...\"><span class=\"tocnumber\">4.8</span> <span class=\"toctext\">2010 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-13\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">Forum Posts</span></a></li>\n<li class=\"toclevel-1 tocsection-14\"><a href=\"#External_Links\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">External Links</span></a></li>\n<li class=\"toclevel-1 tocsection-15\"><a href=\"#References\"><span class=\"tocnumber\">7</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Decision_vs_Evaluation\">Decision vs Evaluation</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Pathology&amp;action=edit&amp;section=1\" title=\"Edit section: Decision vs Evaluation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Independently, pathology in game trees was coined by <a href=\"/Dana_S._Nau\" title=\"Dana S. Nau\">Dana S. Nau</a>, who discovered pathology to exist in a large class of games <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup> under the assumption of independence of sibling values of trees with low branching factor (i.e. binary trees) with game theoretic leaf values of win and loss {1, -1}. In a simulation, Nau introduced strong dependencies between sibling nodes and discovered that this can cause search-depth pathology to disappear. While Nau was primarily concerned with decision accuracy, Beal <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>, as well as <a href=\"/Ivan_Bratko\" title=\"Ivan Bratko\">Bratko</a> and <a href=\"/Matja%C5%BE_Gams\" title=\"Matjaž Gams\">Gams</a> <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup> were concerned with evaluation accuracy.\n<span id=\"RandomEvaluations\"></span>\n</p>\n<h1><span class=\"mw-headline\" id=\"Random_Evaluations\">Random Evaluations</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Pathology&amp;action=edit&amp;section=2\" title=\"Edit section: Random Evaluations\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<p>Quite contrary to pathology in chess, Beal and others demonstrated <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup>, that deeper <a href=\"/Search_with_Random_Leaf_Values\" title=\"Search with Random Leaf Values\">search with random leaf values</a> yields to better play. As a quintessence, <a href=\"/Dana_S._Nau\" title=\"Dana S. Nau\">Dana S. Nau</a> et al. suggested an <i>Error minimizing minimax search</i> in their recent paper <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup> .\n</p>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Pathology&amp;action=edit&amp;section=3\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/Conspiracy_Numbers\" title=\"Conspiracy Numbers\">Conspiracy Numbers</a></li>\n<li> <a href=\"/Depth\" title=\"Depth\">Depth</a></li>\n<li> <a href=\"/Depth#DiminishingReturns\" title=\"Depth\">Diminishing Returns</a></li>\n<li> <a href=\"/Score#Grain\" title=\"Score\">Score Granularity</a></li>\n<li> <a href=\"/Search_Instability\" title=\"Search Instability\">Search Instability</a></li>\n<li> <a href=\"/Search_with_Random_Leaf_Values\" title=\"Search with Random Leaf Values\">Search with Random Leaf Values</a></li>\n<li> <a href=\"/Singular_Extensions#SingularityAndPathology\" title=\"Singular Extensions\">Singularity and Pathology</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Publications\">Publications</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Pathology&amp;action=edit&amp;section=4\" title=\"Edit section: Publications\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"1979\">1979</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Pathology&amp;action=edit&amp;section=5\" title=\"Edit section: 1979\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Dana_S._Nau\" title=\"Dana S. Nau\">Dana S. Nau</a> (<b>1979</b>). <i>Quality of Decision Versus Depth of Search on Game Trees.</i> Ph.D. dissertation, <a href=\"/Duke_University\" title=\"Duke University\">Duke University</a></li>\n<li> <a href=\"/Dana_S._Nau\" title=\"Dana S. Nau\">Dana S. Nau</a> (<b>1979</b>). <i>Preliminary results regarding quality of play versus depth of search in game playing.</i> First Internat. Symposium on Policy Analysis and Information Systems,  <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.umd.edu/%7Enau/papers/nau79preliminary.pdf\">pdf</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1980_...\">1980 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Pathology&amp;action=edit&amp;section=6\" title=\"Edit section: 1980 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Don_Beal\" title=\"Don Beal\">Don Beal</a> (<b>1980</b>). <i>An analysis of minimax</i>. <a href=\"/Advances_in_Computer_Chess_2\" title=\"Advances in Computer Chess 2\">Advances in Computer Chess 2</a></li>\n<li> <a href=\"/Dana_S._Nau\" title=\"Dana S. Nau\">Dana S. Nau</a> (<b>1980</b>). <i>Pathology on game trees: A summary of results.</i> In Proceedings of the National Conference on Artificial Intelligence (AAAI), pp. 102–104, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.umd.edu/%7Enau/papers/pathology-aaai80.pdf\">pdf</a></li>\n<li> <a href=\"/Dana_S._Nau\" title=\"Dana S. Nau\">Dana S. Nau</a> (<b>1982</b>). <i>An Investigation of the Causes of Pathology in Games.</i> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_%28journal%29\">Artificial Intelligence</a>, Vol. 19, 257–278, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/University_of_Maryland,_College_Park\">University of Maryland, College Park</a>, Recommended by <a href=\"/Judea_Pearl\" title=\"Judea Pearl\">Judea Pearl</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.umd.edu/%7Enau/papers/nau82investigation.pdf\">pdf</a></li>\n<li> <a href=\"/Ivan_Bratko\" title=\"Ivan Bratko\">Ivan Bratko</a>, <a href=\"/Matja%C5%BE_Gams\" title=\"Matjaž Gams\">Matjaž Gams</a> (<b>1982</b>). <i>Error Analysis of the Minimax Principle</i>. <a href=\"/Advances_in_Computer_Chess_3\" title=\"Advances in Computer Chess 3\">Advances in Computer Chess 3</a></li>\n<li> <a href=\"/Don_Beal\" title=\"Don Beal\">Don Beal</a> (<b>1982</b>). <i>Benefits of minimax search</i>. <a href=\"/Advances_in_Computer_Chess_3\" title=\"Advances in Computer Chess 3\">Advances in Computer Chess 3</a></li>\n<li> <a href=\"/Dana_S._Nau\" title=\"Dana S. Nau\">Dana S. Nau</a> (<b>1983</b>). <i>Decision quality as a function of search depth on game trees.</i> <a href=\"/ACM#Journal\" title=\"ACM\">Journal of the ACM</a>, Vol. 30, No. 4, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.umd.edu/%7Enau/papers/nau83decision.pdf\">pdf</a></li>\n<li> <a href=\"/Dana_S._Nau\" title=\"Dana S. Nau\">Dana S. Nau</a> (<b>1983</b>). <i>Pathology on game trees revisited, and an alternative to minimaxing.</i> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_%28journal%29\">Artificial Intelligence</a>, Vol. 21, No. 1-2, Reprinted in <a href=\"/Judea_Pearl\" title=\"Judea Pearl\">Judea Pearl</a> (ed.), Search and Heuristics, North-Holland Publishing Company, Amsterdam, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.umd.edu/%7Enau/papers/nau83pathology.pdf\">pdf</a></li>\n<li> <a href=\"/Judea_Pearl\" title=\"Judea Pearl\">Judea Pearl</a> (<b>1983</b>). <i>On the Nature of Pathology in Game Searching</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_%28journal%29\">Artificial Intelligence</a>, Vol. 20</li>\n<li> <a href=\"/Chun-Hung_Tzeng\" title=\"Chun-Hung Tzeng\">Chun-Hung Tzeng</a>, <a href=\"/Paul_W._Purdom\" title=\"Paul W. Purdom\">Paul W. Purdom</a> (<b>1983</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.aaai.org/Library/AAAI/1983/aaai83-080.php\">A Theory of Game Trees</a></i>. <a href=\"/Conferences#AAAI-83\" title=\"Conferences\">AAAI-83</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1985_...\">1985 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Pathology&amp;action=edit&amp;section=7\" title=\"Edit section: 1985 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Bruce_Abramson\" title=\"Bruce Abramson\">Bruce Abramson</a> (<b>1985</b>). <i>A Cure for Pathological Behavior in Games that Use Minimax.</i> <a href=\"/Laveen_Kanal#Uncertainty_AI_1\" title=\"Laveen Kanal\">Uncertainty in Artificial Intelligence 1</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://arxiv.org/abs/1304.3444\">arXiv:1304.3444</a></li>\n<li> <a href=\"/Agata_Muszycka-Jones\" title=\"Agata Muszycka-Jones\">Agata Muszycka</a> (<b>1985</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://spectrum.library.concordia.ca/3343/\">Game Trees: Searching Techniques and Pathological Phenomenon</a></i>. Masters thesis, Department of Computer Science, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Concordia_University\">Concordia University</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Montreal\">Montreal</a></li>\n<li> <a href=\"/Bruce_Abramson\" title=\"Bruce Abramson\">Bruce Abramson</a> (<b>1986</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://www.sciencedirect.com/science/article/pii/B9780444700582500413\">An Explanation of and Cure for Minimax Pathology</a></i>. <a href=\"/Laveen_Kanal#Uncertainty_AI_2\" title=\"Laveen Kanal\">Uncertainty in Artificial Intelligence 2</a></li>\n<li> <a href=\"/G%C3%BCnther_Schr%C3%BCfer\" title=\"Günther Schrüfer\">Günther Schrüfer</a> (<b>1986</b>). <i>Presence and Absence of Pathology on Game Trees</i>. <a href=\"/Advances_in_Computer_Chess_4\" title=\"Advances in Computer Chess 4\">Advances in Computer Chess 4</a></li>\n<li> <a href=\"/Ingo_Alth%C3%B6fer\" title=\"Ingo Althöfer\">Ingo Althöfer</a> (<b>1988</b>). <i>Root Evaluation Errors: How they Arise and Propagate</i>. <a href=\"/ICGA_Journal#11_23\" title=\"ICGA Journal\">ICCA Journal, Vol. 11, Nos. 2/3</a></li>\n<li> <a href=\"/Liwu_Li\" title=\"Liwu Li\">Liwu Li</a> (<b>1989</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://doi.org/10.7939/R3VX06F26\">Probabilistic Analysis of Search</a></i>. Ph.D. thesis, <a href=\"/University_of_Alberta\" title=\"University of Alberta\">University of Alberta</a>, advisor <a href=\"/Tony_Marsland\" title=\"Tony Marsland\">Tony Marsland</a> </li></ul>\n<h2><span class=\"mw-headline\" id=\"1990_...\">1990 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Pathology&amp;action=edit&amp;section=8\" title=\"Edit section: 1990 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Liwu_Li\" title=\"Liwu Li\">Liwu Li</a>, <a href=\"/Tony_Marsland\" title=\"Tony Marsland\">Tony Marsland</a> (<b>1990</b>). <i>On Minimax Game Tree Search Pathology and Node-value Dependence</i>. TR90-24, <a href=\"/University_of_Alberta\" title=\"University of Alberta\">University of Alberta</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://webdocs.cs.ualberta.ca/~tony/TechnicalReports/TR90-24.pdf\">pdf</a></li>\n<li> <a href=\"/Ingo_Alth%C3%B6fer\" title=\"Ingo Althöfer\">Ingo Althöfer</a> (<b>1991</b>). <i>On Pathology in Game Tree and other Recursion Tree Models</i>, Habilitation Thesis (June 1991), Faculty of Mathematics, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/University_of_Bielefeld\">University of Bielefeld</a></li>\n<li> <a href=\"/Don_Beal\" title=\"Don Beal\">Don Beal</a>, <a href=\"/Martin_C._Smith\" title=\"Martin C. Smith\">Martin C. Smith</a> (<b>1994</b>). <i>Random Evaluations in Chess</i>. <a href=\"/ICGA_Journal#17_1\" title=\"ICGA Journal\">ICCA Journal, Vol. 17, No. 1</a></li>\n<li> <a href=\"/Don_Beal\" title=\"Don Beal\">Don Beal</a>, <a href=\"/Martin_C._Smith\" title=\"Martin C. Smith\">Martin C. Smith</a> (<b>1994</b>). <i>Random Evaluations in Chess</i>. <a href=\"/Advances_in_Computer_Chess_7\" title=\"Advances in Computer Chess 7\">Advances in Computer Chess 7</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"1995_...\">1995 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Pathology&amp;action=edit&amp;section=9\" title=\"Edit section: 1995 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Mark_Levene\" title=\"Mark Levene\">Mark Levene</a>, <a href=\"/Trevor_Fenner\" title=\"Trevor Fenner\">Trevor Fenner</a> (<b>1995</b>). <i>A Partial Analysis of Minimaxing Game Trees with Random Leaf Values</i>. <a href=\"/ICGA_Journal#18_1\" title=\"ICGA Journal\">ICCA Journal, Vol. 18, No. 1</a></li>\n<li> <a href=\"/Ingo_Alth%C3%B6fer\" title=\"Ingo Althöfer\">Ingo Althöfer</a>, <a href=\"/Mathematician#ImreLeader\" title=\"Mathematician\">Imre Leader</a> (<b>1995</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://epubs.siam.org/doi/abs/10.1137/S0895480192240470\">Correlation of Boolean Functions and Pathology in Recursion Trees</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/SIAM_Journal_on_Discrete_Mathematics\">SIAM Journal on Discrete Mathematics</a>, Vol. 8, No. 4</li>\n<li> <a href=\"/Don_Beal\" title=\"Don Beal\">Don Beal</a> (<b>1999</b>). <i>The Nature of MINIMAX Search</i>. Ph.D. thesis, IKAT, ISBN 90-62-16-6348</li></ul>\n<h2><span class=\"mw-headline\" id=\"2000_...\">2000 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Pathology&amp;action=edit&amp;section=10\" title=\"Edit section: 2000 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Mark_Levene\" title=\"Mark Levene\">Mark Levene</a>, <a href=\"/Trevor_Fenner\" title=\"Trevor Fenner\">Trevor Fenner</a> (<b>2001</b>). <i>The Effect of Mobility on Minimaxing of Game Trees with Random Leaf Values</i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_%28journal%29\">Artificial Intelligence</a>, Vol. 130, No. 1, Review in <a href=\"/ICGA_Journal#18_1\" title=\"ICGA Journal\">ICGA Journal, Vol. 24, No. 4</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2005_...\">2005 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Pathology&amp;action=edit&amp;section=11\" title=\"Edit section: 2005 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Mitja_Lu%C5%A1trek\" title=\"Mitja Luštrek\">Mitja Luštrek</a>, <a href=\"/Matja%C5%BE_Gams\" title=\"Matjaž Gams\">Matjaž Gams</a>, <a href=\"/Ivan_Bratko\" title=\"Ivan Bratko\">Ivan Bratko</a> (<b>2005</b>). <i>Why Minimax Works: An Alternative Explanation</i>. <a href=\"/Conferences#IJCAI2005\" title=\"Conferences\">IJCAI 2005</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://www.ijcai.org/Proceedings/05/Papers/1223.pdf\">pdf</a></li>\n<li> <a href=\"/Aleksander_Sadikov\" title=\"Aleksander Sadikov\">Aleksander Sadikov</a>, <a href=\"/Ivan_Bratko\" title=\"Ivan Bratko\">Ivan Bratko</a>, <a href=\"/Igor_Kononenko\" title=\"Igor Kononenko\">Igor Kononenko</a> (<b>2005</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.sciencedirect.com/science?_ob=ArticleURL&amp;_udi=B6V1G-4HCN79X-1&amp;_user=10&amp;_coverDate=12%2F14%2F2005&amp;_rdoc=1&amp;_fmt=high&amp;_orig=search&amp;_sort=d&amp;_docanchor=&amp;view=c&amp;_acct=C000050221&amp;_version=1&amp;_urlVersion=0&amp;_userid=10&amp;md5=79f966215bea9b7461b6877c9373b0bf\">Bias and Pathology in Minimax Search</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Theoretical_Computer_Science_%28journal%29\">Theoretical Computer Science</a>,, Vol. 349, 2, <a rel=\"nofollow\" class=\"external text\" href=\"http://lkm.fri.uni-lj.si/xaigor/slo/clanki/Sadikov_final.pdf\">pdf</a></li>\n<li> <a href=\"/Mitja_Lu%C5%A1trek\" title=\"Mitja Luštrek\">Mitja Luštrek</a>, <a href=\"/Matja%C5%BE_Gams\" title=\"Matjaž Gams\">Matjaž Gams</a>, <a href=\"/Ivan_Bratko\" title=\"Ivan Bratko\">Ivan Bratko</a> (<b>2006</b>). <i>Is Real-Valued Minimax Pathological</i>? <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_%28journal%29\">Artificial Intelligence</a>, Vol. 170, <a rel=\"nofollow\" class=\"external text\" href=\"https://dis.ijs.si/MitjaL/documents/Is_Real-Valued_Minimax_Pathological-AIJ-06.pdf\">pdf</a></li>\n<li> <a href=\"/index.php?title=Brandon_Wilson&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Brandon Wilson (page does not exist)\">Brandon Wilson</a>, <a href=\"/Austin_Parker\" title=\"Austin Parker\">Austin Parker</a>, <a href=\"/Dana_S._Nau\" title=\"Dana S. Nau\">Dana S. Nau</a> (<b>2009</b>). <i>Error Minimizing Minimax: Avoiding Search Pathology in Game Trees</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.umd.edu/~nau/papers/wilson2009error.pdf\">pdf</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2010_...\">2010 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Pathology&amp;action=edit&amp;section=12\" title=\"Edit section: 2010 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a href=\"/Dana_S._Nau\" title=\"Dana S. Nau\">Dana S. Nau</a>, <a href=\"/Mitja_Lu%C5%A1trek\" title=\"Mitja Luštrek\">Mitja Luštrek</a>, <a href=\"/Austin_Parker\" title=\"Austin Parker\">Austin Parker</a>, <a href=\"/Ivan_Bratko\" title=\"Ivan Bratko\">Ivan Bratko</a>, <a href=\"/Matja%C5%BE_Gams\" title=\"Matjaž Gams\">Matjaž Gams</a> (<b>2010</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.sciencedirect.com/science/article/pii/S0004370210001402\">When is it better not to look ahead?</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_%28journal%29\">Artificial Intelligence</a>, Vol. 174, No. 16–17, <a rel=\"nofollow\" class=\"external text\" href=\"http://dis.ijs.si/mitjal/documents/Nau-When_is_it_better_not_to_look_ahead-AIJ-10.pdf\">preprint as pdf</a></li>\n<li> <a href=\"/Mitja_Lu%C5%A1trek\" title=\"Mitja Luštrek\">Mitja Luštrek</a>, <a href=\"/Ivan_Bratko\" title=\"Ivan Bratko\">Ivan Bratko</a>, <a href=\"/Matja%C5%BE_Gams\" title=\"Matjaž Gams\">Matjaž Gams</a> (<b>2011</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"http://www.sciencedirect.com/science/article/pii/S0304397511009522\">Independent-valued minimax&#160;: Pathological or beneficial?</a></i> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Theoretical_Computer_Science_%28journal%29\">Theoretical Computer Science</a>, Vol. 422, <a rel=\"nofollow\" class=\"external text\" href=\"http://dis.ijs.si/MitjaL/documents/Independent-valued_minimax-Pathological_or_beneficial-TCS-12.pdf\">pdf</a></li>\n<li> <a href=\"/index.php?title=Inon_Zuckerman&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Inon Zuckerman (page does not exist)\">Inon Zuckerman</a>, <a href=\"/index.php?title=Brandon_Wilson&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Brandon Wilson (page does not exist)\">Brandon Wilson</a>, <a href=\"/Dana_S._Nau\" title=\"Dana S. Nau\">Dana S. Nau</a> (<b>2018</b>). <i><a rel=\"nofollow\" class=\"external text\" href=\"https://onlinelibrary.wiley.com/doi/abs/10.1111/coin.12162\">Avoiding game-tree pathology in 2-player adversarial search</a></i>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Computational_Intelligence_(journal)\">Computational Intelligence</a>, Vol. 34, No. 2</li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Pathology&amp;action=edit&amp;section=13\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.stmintz.com/ccc/index.php?id=476965\">Theory: Deeper Search creating worse performance due to PE</a> by <a href=\"/Charles_Roberson\" title=\"Charles Roberson\">Charles Roberson</a>, January 04, 2006</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=35538\">Pathology on Game trees</a> by <a href=\"/Gerd_Isenberg\" title=\"Gerd Isenberg\">Gerd Isenberg</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 22, 2010</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=58527&amp;start=10\">Re: Null Move in Quiescent search</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 10, 2015&#160;» <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">Null Move Pruning</a>, <a href=\"/Quiescence_Search\" title=\"Quiescence Search\">Quiescence Search</a></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=58527&amp;start=11\">Re: Null Move in Quiescent search</a> by <a href=\"/Marcel_van_Kervinck\" title=\"Marcel van Kervinck\">Marcel van Kervinck</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 10, 2015&#160;» <a href=\"/Proof-Number_Search#PDS\" title=\"Proof-Number Search\">PDS</a></dd>\n<dd> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=58527&amp;start=16\">Re: Null Move in Quiescent search</a> by <a href=\"/Harm_Geert_Muller\" title=\"Harm Geert Muller\">Harm Geert Muller</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 12, 2015</dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63803\">random evaluation perturbation factor</a> by <a href=\"/Stuart_Cracraft\" title=\"Stuart Cracraft\">Stuart Cracraft</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 24, 2017</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Pathology&amp;action=edit&amp;section=14\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pathology_%28disambiguation%29\">Pathology (disambiguation) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pathological_%28mathematics%29\">Pathological (mathematics) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pathology\">Pathology from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pathological_science\">Pathological science from Wikipedia</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=Search_Pathology&amp;action=edit&amp;section=15\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\">Very high magnification <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Micrograph\">micrograph</a> of <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Membranous_nephropathy\">membranous nephropathy</a>, abbreviated MN. MN may also be referred to as membranous glomerulonephritis, abbreviated MGN. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Kidney_biopsy\">Kidney biopsy</a>. <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Jones_stain\">Jones stain</a>, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Pathology\">Pathology from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a href=\"/Don_Beal\" title=\"Don Beal\">Don Beal</a> (<b>1980</b>). <i>An analysis of minimax</i>. <a href=\"/Advances_in_Computer_Chess_2\" title=\"Advances in Computer Chess 2\">Advances in Computer Chess 2</a></span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a href=\"/Dana_S._Nau\" title=\"Dana S. Nau\">Dana S. Nau</a> (<b>1982</b>). <i>An Investigation of the Causes of Pathology in Games.</i> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Artificial_Intelligence_%28journal%29\">Artificial Intelligence</a>, Vol. 19, 257–278, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/University_of_Maryland,_College_Park\">University of Maryland, College Park</a>, Recommended by <a href=\"/Judea_Pearl\" title=\"Judea Pearl\">Judea Pearl</a>, <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.umd.edu/%7Enau/papers/nau82investigation.pdf\">pdf</a></span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a href=\"/Don_Beal\" title=\"Don Beal\">Don Beal</a> (<b>1982</b>). <i>Benefits of minimax search</i>. <a href=\"/Advances_in_Computer_Chess_3\" title=\"Advances in Computer Chess 3\">Advances in Computer Chess 3</a></span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a href=\"/Ivan_Bratko\" title=\"Ivan Bratko\">Ivan Bratko</a>, <a href=\"/Matja%C5%BE_Gams\" title=\"Matjaž Gams\">Matjaž Gams</a> (<b>1982</b>). <i>Error Analysis of the Minimax Principle</i>. <a href=\"/Advances_in_Computer_Chess_3\" title=\"Advances in Computer Chess 3\">Advances in Computer Chess 3</a></span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a href=\"/Don_Beal\" title=\"Don Beal\">Don Beal</a>, <a href=\"/Martin_C._Smith\" title=\"Martin C. Smith\">Martin C. Smith</a> (<b>1994</b>). <i>Random Evaluations in Chess</i>. <a href=\"/ICGA_Journal#17_1\" title=\"ICGA Journal\">ICCA Journal, Vol. 17, No. 1</a></span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a href=\"/index.php?title=Brandon_Wilson&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Brandon Wilson (page does not exist)\">Brandon Wilson</a>, <a href=\"/Austin_Parker\" title=\"Austin Parker\">Austin Parker</a>, <a href=\"/Dana_S._Nau\" title=\"Dana S. Nau\">Dana S. Nau</a> (<b>2009</b>). <i>Error Minimizing Minimax: Avoiding Search Pathology in Game Trees</i>. <a rel=\"nofollow\" class=\"external text\" href=\"http://www.cs.umd.edu/~nau/papers/wilson2009error.pdf\">pdf</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Search\" title=\"Search\">Up one Level</a></b>\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301153519\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.078 seconds\nReal time usage: 0.616 seconds\nPreprocessor visited node count: 162/1000000\nPreprocessor generated node count: 308/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:1047-0!canonical and timestamp 20260301153519 and revision id 24144\n -->\n"
+    },
+    "categories": [],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ACM"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 2"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 3"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 4"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Advances in Computer Chess 7"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Agata Muszycka-Jones"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aleksander Sadikov"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Austin Parker"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Bruce Abramson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Charles Roberson"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Chun-Hung Tzeng"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Conferences"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Conspiracy Numbers"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Dana S. Nau"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Depth"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Don Beal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Duke University"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Gerd Isenberg"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Günther Schrüfer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Harm Geert Muller"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "ICGA Journal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Igor Kononenko"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ingo Althöfer"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ivan Bratko"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Judea Pearl"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Laveen Kanal"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Liwu Li"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Marcel van Kervinck"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mark Levene"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Martin C. Smith"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mathematician"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Matjaž Gams"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Minimax"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mitja Luštrek"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Paul W. Purdom"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Proof-Number Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Quiescence Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Score"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search Instability"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Search with Random Leaf Values"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Singular Extensions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Stuart Cracraft"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tony Marsland"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Trevor Fenner"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "University of Alberta"
+      },
+      {
+        "ns": 0,
+        "*": "Brandon Wilson"
+      },
+      {
+        "ns": 0,
+        "*": "Inon Zuckerman"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Decision vs Evaluation",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "Search_Pathology",
+        "byteoffset": 1125,
+        "anchor": "Decision_vs_Evaluation"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Random Evaluations",
+        "number": "2",
+        "index": "2",
+        "fromtitle": "Search_Pathology",
+        "byteoffset": 2449,
+        "anchor": "Random_Evaluations"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "3",
+        "index": "3",
+        "fromtitle": "Search_Pathology",
+        "byteoffset": 3109,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Publications",
+        "number": "4",
+        "index": "4",
+        "fromtitle": "Search_Pathology",
+        "byteoffset": 3383,
+        "anchor": "Publications"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1979",
+        "number": "4.1",
+        "index": "5",
+        "fromtitle": "Search_Pathology",
+        "byteoffset": 3399,
+        "anchor": "1979"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1980 ...",
+        "number": "4.2",
+        "index": "6",
+        "fromtitle": "Search_Pathology",
+        "byteoffset": 3799,
+        "anchor": "1980_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1985 ...",
+        "number": "4.3",
+        "index": "7",
+        "fromtitle": "Search_Pathology",
+        "byteoffset": 5717,
+        "anchor": "1985_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1990 ...",
+        "number": "4.4",
+        "index": "8",
+        "fromtitle": "Search_Pathology",
+        "byteoffset": 6974,
+        "anchor": "1990_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "1995 ...",
+        "number": "4.5",
+        "index": "9",
+        "fromtitle": "Search_Pathology",
+        "byteoffset": 7696,
+        "anchor": "1995_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2000 ...",
+        "number": "4.6",
+        "index": "10",
+        "fromtitle": "Search_Pathology",
+        "byteoffset": 8313,
+        "anchor": "2000_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2005 ...",
+        "number": "4.7",
+        "index": "11",
+        "fromtitle": "Search_Pathology",
+        "byteoffset": 8631,
+        "anchor": "2005_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2010 ...",
+        "number": "4.8",
+        "index": "12",
+        "fromtitle": "Search_Pathology",
+        "byteoffset": 9928,
+        "anchor": "2010_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "5",
+        "index": "13",
+        "fromtitle": "Search_Pathology",
+        "byteoffset": 11107,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "6",
+        "index": "14",
+        "fromtitle": "Search_Pathology",
+        "byteoffset": 12086,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "7",
+        "index": "15",
+        "fromtitle": "Search_Pathology",
+        "byteoffset": 12479,
+        "anchor": "References"
+      }
+    ]
+  }
+}

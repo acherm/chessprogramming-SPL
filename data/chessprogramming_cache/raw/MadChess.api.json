@@ -1,0 +1,459 @@
+{
+  "parse": {
+    "title": "MadChess",
+    "pageid": 3844,
+    "redirects": [],
+    "text": {
+      "*": "<div class=\"mw-parser-output\"><p><b><a href=\"/Main_Page\" title=\"Main Page\">Home</a> * <a href=\"/Engines\" title=\"Engines\">Engines</a> * MadChess</b>\n</p>\n<div class=\"thumb tright\"><div class=\"thumbinner\" style=\"width:302px;\"><a href=\"/File:Alfred_E._Neumann.jpg\" class=\"image\"><img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Alfred_E._Neumann.jpg/330px-Alfred_E._Neumann.jpg\" width=\"300\" height=\"391\" class=\"thumbimage\" srcset=\"https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Alfred_E._Neumann.jpg/500px-Alfred_E._Neumann.jpg 1.5x, https://upload.wikimedia.org/wikipedia/commons/2/21/Alfred_E._Neumann.jpg 2x\" /></a>  <div class=\"thumbcaption\"><div class=\"magnify\"><a href=\"/File:Alfred_E._Neumann.jpg\" class=\"internal\" title=\"Enlarge\"></a></div>Me Worry? <sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">&#91;1&#93;</a></sup></div></div></div> \n<p><b>MadChess</b>,<br />\nan <a href=\"/UCI\" title=\"UCI\">UCI</a> compliant <a href=\"/Category:Open_Source\" title=\"Category:Open Source\">open source chess engine</a> by <a href=\"/Erik_Madsen\" title=\"Erik Madsen\">Erik Madsen</a>, written in <a href=\"/C_sharp\" title=\"C sharp\">C#</a> to run under the <a href=\"/Windows\" title=\"Windows\">Windows</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/.NET_Framework\">.NET framework</a>. It was first released under the <a href=\"/Free_Software_Foundation#GPL\" title=\"Free Software Foundation\">GNU General Public License Version 3</a> as successor of Erik's former C# engine <a href=\"/RumbleMinze\" title=\"RumbleMinze\">RumbleMinze</a> in October 2012 <sup id=\"cite_ref-2\" class=\"reference\"><a href=\"#cite_note-2\">&#91;2&#93;</a></sup>, and features adjustable <a href=\"/Playing_Strength\" title=\"Playing Strength\">playing strength</a> with improved algorithms since MadChess <b>1.4</b> <sup id=\"cite_ref-3\" class=\"reference\"><a href=\"#cite_note-3\">&#91;3&#93;</a></sup> <sup id=\"cite_ref-4\" class=\"reference\"><a href=\"#cite_note-4\">&#91;4&#93;</a></sup>.  MadChess <b>2.1</b>, released in February 2017 is using <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/.NET_Framework#.NET_Core\">.NET Core</a>, <a href=\"/Microsoft\" title=\"Microsoft\">Microsoft’s</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Cross-platform\">cross-platform</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Free_and_open-source_software\">free and open-source</a> managed software framework to support not only <a href=\"/Windows\" title=\"Windows\">Windows</a>, but <a href=\"/Linux\" title=\"Linux\">Linux</a>, and <a href=\"/Mac_OS\" title=\"Mac OS\">Mac</a> <sup id=\"cite_ref-5\" class=\"reference\"><a href=\"#cite_note-5\">&#91;5&#93;</a></sup> <sup id=\"cite_ref-6\" class=\"reference\"><a href=\"#cite_note-6\">&#91;6&#93;</a></sup>. \n</p>\n<div id=\"toc\" class=\"toc\"><div class=\"toctitle\"><h2>Contents</h2></div>\n<ul>\n<li class=\"toclevel-1 tocsection-1\"><a href=\"#Description\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">Description</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-2\"><a href=\"#Move_Generation\"><span class=\"tocnumber\">1.1</span> <span class=\"toctext\">Move Generation</span></a></li>\n<li class=\"toclevel-2 tocsection-3\"><a href=\"#Search\"><span class=\"tocnumber\">1.2</span> <span class=\"toctext\">Search</span></a></li>\n<li class=\"toclevel-2 tocsection-4\"><a href=\"#Evaluation\"><span class=\"tocnumber\">1.3</span> <span class=\"toctext\">Evaluation</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-5\"><a href=\"#See_also\"><span class=\"tocnumber\">2</span> <span class=\"toctext\">See also</span></a></li>\n<li class=\"toclevel-1 tocsection-6\"><a href=\"#Forum_Posts\"><span class=\"tocnumber\">3</span> <span class=\"toctext\">Forum Posts</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-7\"><a href=\"#2012\"><span class=\"tocnumber\">3.1</span> <span class=\"toctext\">2012</span></a></li>\n<li class=\"toclevel-2 tocsection-8\"><a href=\"#2013\"><span class=\"tocnumber\">3.2</span> <span class=\"toctext\">2013</span></a></li>\n<li class=\"toclevel-2 tocsection-9\"><a href=\"#2014\"><span class=\"tocnumber\">3.3</span> <span class=\"toctext\">2014</span></a></li>\n<li class=\"toclevel-2 tocsection-10\"><a href=\"#2015_...\"><span class=\"tocnumber\">3.4</span> <span class=\"toctext\">2015 ...</span></a></li>\n<li class=\"toclevel-2 tocsection-11\"><a href=\"#2020_...\"><span class=\"tocnumber\">3.5</span> <span class=\"toctext\">2020 ...</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-12\"><a href=\"#Blog_Posts\"><span class=\"tocnumber\">4</span> <span class=\"toctext\">Blog Posts</span></a></li>\n<li class=\"toclevel-1 tocsection-13\"><a href=\"#External_Links\"><span class=\"tocnumber\">5</span> <span class=\"toctext\">External Links</span></a>\n<ul>\n<li class=\"toclevel-2 tocsection-14\"><a href=\"#Chess_Engine\"><span class=\"tocnumber\">5.1</span> <span class=\"toctext\">Chess Engine</span></a></li>\n<li class=\"toclevel-2 tocsection-15\"><a href=\"#Misc\"><span class=\"tocnumber\">5.2</span> <span class=\"toctext\">Misc</span></a></li>\n</ul>\n</li>\n<li class=\"toclevel-1 tocsection-16\"><a href=\"#References\"><span class=\"tocnumber\">6</span> <span class=\"toctext\">References</span></a></li>\n</ul>\n</div>\n\n<h1><span class=\"mw-headline\" id=\"Description\">Description</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MadChess&amp;action=edit&amp;section=1\" title=\"Edit section: Description\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Move_Generation\">Move Generation</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MadChess&amp;action=edit&amp;section=2\" title=\"Edit section: Move Generation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p><span id=\"MoveGeneration\"></span>MadChess applies an incremental <a href=\"/Move_Generation\" title=\"Move Generation\">move generation</a>, using the C# <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Generator_%28computer_programming%29#C.23\">yield statement</a> <sup id=\"cite_ref-7\" class=\"reference\"><a href=\"#cite_note-7\">&#91;7&#93;</a></sup> <sup id=\"cite_ref-8\" class=\"reference\"><a href=\"#cite_note-8\">&#91;8&#93;</a></sup> <sup id=\"cite_ref-9\" class=\"reference\"><a href=\"#cite_note-9\">&#91;9&#93;</a></sup> <sup id=\"cite_ref-10\" class=\"reference\"><a href=\"#cite_note-10\">&#91;10&#93;</a></sup> <sup id=\"cite_ref-11\" class=\"reference\"><a href=\"#cite_note-11\">&#91;11&#93;</a></sup> using <a href=\"/Incremental_Updates\" title=\"Incremental Updates\">incrementally updated</a> <a href=\"/Piece-Lists\" title=\"Piece-Lists\">list of attackers</a> for any <a href=\"/Ranks\" title=\"Ranks\">rank</a>, <a href=\"/Files\" title=\"Files\">file</a>, <a href=\"/Diagonals\" title=\"Diagonals\">diagonal</a>, or <a href=\"/Anti-Diagonals\" title=\"Anti-Diagonals\">anti-diagonal</a>. \n</p>\n<h2><span class=\"mw-headline\" id=\"Search\">Search</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MadChess&amp;action=edit&amp;section=3\" title=\"Edit section: Search\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>MadChess performs a <a href=\"/Principal_Variation_Search\" title=\"Principal Variation Search\">principal variation search</a> along with <a href=\"/Transposition_Table\" title=\"Transposition Table\">transposition table</a>, <a href=\"/Killer_Heuristic\" title=\"Killer Heuristic\">killer</a> and <a href=\"/History_Heuristic\" title=\"History Heuristic\">history heuristic</a>, <a href=\"/Null_Move_Pruning\" title=\"Null Move Pruning\">null move pruning</a> and <a href=\"/Late_Move_Reductions\" title=\"Late Move Reductions\">late move reductions</a> inside an <a href=\"/Iterative_Deepening\" title=\"Iterative Deepening\">iterative deepening</a> framework with <a href=\"/Aspiration_Windows\" title=\"Aspiration Windows\">aspiration</a>. It eliminates all <a href=\"/Reductions\" title=\"Reductions\">reductions</a> and lazy evaluation along the principal variation.\n</p>\n<h2><span class=\"mw-headline\" id=\"Evaluation\">Evaluation</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MadChess&amp;action=edit&amp;section=4\" title=\"Edit section: Evaluation\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<p>The <a href=\"/Evaluation\" title=\"Evaluation\">evaluation</a> might be <a href=\"/Lazy_Evaluation\" title=\"Lazy Evaluation\">lazy</a> with respect to bounds, and otherwise uses a <a href=\"/Tapered_Eval\" title=\"Tapered Eval\">tapered evaluation</a> on <a href=\"/Game_Phases\" title=\"Game Phases\">game phase</a> between speculative computed <a href=\"/Middlegame\" title=\"Middlegame\">middlegame</a> and <a href=\"/Endgame\" title=\"Endgame\">endgame</a> <a href=\"/Score\" title=\"Score\">scores</a>, considering <a href=\"/Piece-Square_Tables\" title=\"Piece-Square Tables\">piece-square tables</a>, <a href=\"/Mobility\" title=\"Mobility\">mobility</a>, <a href=\"/Pawn_Structure\" title=\"Pawn Structure\">pawn structure</a>, and <a href=\"/King_Safety\" title=\"King Safety\">king safety</a> and various <a href=\"/Evaluation_of_Pieces\" title=\"Evaluation of Pieces\">piece evaluation</a> terms. \n</p>\n<h1><span class=\"mw-headline\" id=\"See_also\">See also</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MadChess&amp;action=edit&amp;section=5\" title=\"Edit section: See also\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a href=\"/index.php?title=Madness_Schach&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Madness Schach (page does not exist)\">Madness Schach</a></li>\n<li> <a href=\"/Matchess\" title=\"Matchess\">Matchess</a></li>\n<li> <a href=\"/RumbleMinze\" title=\"RumbleMinze\">RumbleMinze</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"Forum_Posts\">Forum Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MadChess&amp;action=edit&amp;section=6\" title=\"Edit section: Forum Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"2012\">2012</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MadChess&amp;action=edit&amp;section=7\" title=\"Edit section: 2012\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=45723\">MadChess 1.0 Released (C# .NET Engine)</a> by <a href=\"/Erik_Madsen\" title=\"Erik Madsen\">Erik Madsen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 25, 2012</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=45795\">Score Inaccuracy: An Engine Weakening Algorithm</a> by <a href=\"/Erik_Madsen\" title=\"Erik Madsen\">Erik Madsen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 31, 2012&#160;» <a href=\"/Playing_Strength\" title=\"Playing Strength\">Playing Strength</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2013\">2013</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MadChess&amp;action=edit&amp;section=8\" title=\"Edit section: 2013\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=46790\">MadChess 1.1 Released</a> by <a href=\"/Erik_Madsen\" title=\"Erik Madsen\">Erik Madsen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, January 06, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=47457\">MadChess 1.2 Released</a> by <a href=\"/Erik_Madsen\" title=\"Erik Madsen\">Erik Madsen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, March 09, 2013</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=49497\">MadChess 1.3 Released</a> by <a href=\"/Erik_Madsen\" title=\"Erik Madsen\">Erik Madsen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 28, 2013</li></ul>\n<h2><span class=\"mw-headline\" id=\"2014\">2014</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MadChess&amp;action=edit&amp;section=9\" title=\"Edit section: 2014\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=51973\">MadChess UCI_LimitStrength Algorithm</a> by <a href=\"/Erik_Madsen\" title=\"Erik Madsen\">Erik Madsen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 12, 2014&#160;» <a href=\"/UCI\" title=\"UCI\">UCI</a>, <a href=\"/Playing_Strength\" title=\"Playing Strength\">Playing Strength</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=51974\">MadChess 1.4 Released</a> by <a href=\"/Erik_Madsen\" title=\"Erik Madsen\">Erik Madsen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 12, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=53654\">MadChess With Odds Versus Elite Engines</a> by <a href=\"/Erik_Madsen\" title=\"Erik Madsen\">Erik Madsen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, September 11, 2014</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=54320\">MadChess 2.0 Development</a> by <a href=\"/Erik_Madsen\" title=\"Erik Madsen\">Erik Madsen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 12, 2014</li></ul>\n<h2><span class=\"mw-headline\" id=\"2015_...\">2015 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MadChess&amp;action=edit&amp;section=10\" title=\"Edit section: 2015 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=57920\">MadChess 2.0 Released</a> by <a href=\"/Erik_Madsen\" title=\"Erik Madsen\">Erik Madsen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 12, 2015</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63248\">MadChess 2.1 Released - Supports Windows, Linux, Mac</a> by <a href=\"/Erik_Madsen\" title=\"Erik Madsen\">Erik Madsen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 23, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=64504\">MadChess 2.2 Released</a> by <a href=\"/Erik_Madsen\" title=\"Erik Madsen\">Erik Madsen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 04, 2017</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=68759\">MadChess 3.0 Beta</a> by <a href=\"/Erik_Madsen\" title=\"Erik Madsen\">Erik Madsen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 29, 2018</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=69035\">Particle Swarm Optimization Code</a> by <a href=\"/Erik_Madsen\" title=\"Erik Madsen\">Erik Madsen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, November 24, 2018&#160;» <a href=\"/Automated_Tuning\" title=\"Automated Tuning\">Automated Tuning</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"2020_...\">2020 ...</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MadChess&amp;action=edit&amp;section=11\" title=\"Edit section: 2020 ...\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=68759&amp;start=19\">Re: MadChess 3.0 Beta</a> by <a href=\"/Erik_Madsen\" title=\"Erik Madsen\">Erik Madsen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, July 23, 2020</li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=74931\">Engine Crash Detective Story</a> by <a href=\"/Erik_Madsen\" title=\"Erik Madsen\">Erik Madsen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 29, 2020&#160;» <a href=\"/Debugging\" title=\"Debugging\">Debugging</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=76115\">Are Aspiration Windows Worthless?</a> by <a href=\"/Erik_Madsen\" title=\"Erik Madsen\">Erik Madsen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 20, 2020&#160;» <a href=\"/Aspiration_Windows\" title=\"Aspiration Windows\">Aspiration Windows</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=2&amp;t=77125\">MadChess 3.0 Released</a> by <a href=\"/Erik_Madsen\" title=\"Erik Madsen\">Erik Madsen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>,  April 19, 2021</li></ul>\n<h1><span class=\"mw-headline\" id=\"Blog_Posts\">Blog Posts</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MadChess&amp;action=edit&amp;section=12\" title=\"Edit section: Blog Posts\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.madchess.net/2020/02/01/madchess-3-0-beta-5c5d4fc-piece-mobility/\">MadChess 3.0 Beta 5c5d4fc (Piece Mobility)</a> by <a href=\"/Erik_Madsen\" title=\"Erik Madsen\">Erik Madsen</a>, February 1, 2020&#160;» <a href=\"/Mobility\" title=\"Mobility\">Mobility</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.madchess.net/2020/02/08/madchess-3-0-beta-4478cb8-late-move-pruning/\">MadChess 3.0 Beta 6f3d17a (Late Move Pruning)</a> by <a href=\"/Erik_Madsen\" title=\"Erik Madsen\">Erik Madsen</a>, February 8, 2020&#160;» <a href=\"/Futility_Pruning#MoveCountBasedPruning\" title=\"Futility Pruning\">LMP</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.madchess.net/2020/07/23/madchess-3-0-beta-bef88d5-tweak-search-tune-eval/\">MadChess 3.0 Beta bef88d5 (Tweak Search, Tune Eval)</a> by <a href=\"/Erik_Madsen\" title=\"Erik Madsen\">Erik Madsen</a>, July 23, 2020 </li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.madchess.net/2020/08/29/madchess-3-0-beta-2d855ec-crash-bug/\">MadChess 3.0 Beta 2d855ec (Crash Bug) – MadChess</a> by <a href=\"/Erik_Madsen\" title=\"Erik Madsen\">Erik Madsen</a>, August 29, 2020 <sup id=\"cite_ref-12\" class=\"reference\"><a href=\"#cite_note-12\">&#91;12&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.madchess.net/2020/12/20/madchess-3-0-beta-4b7963b-remove-aspiration-windows/\">MadChess 3.0 Beta 4b7963b (Remove Aspiration Windows) – MadChess</a> by <a href=\"/Erik_Madsen\" title=\"Erik Madsen\">Erik Madsen</a>, December 20, 2020&#160;» <a href=\"/Aspiration_Windows\" title=\"Aspiration Windows\">Aspiration Windows</a> <sup id=\"cite_ref-13\" class=\"reference\"><a href=\"#cite_note-13\">&#91;13&#93;</a></sup></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.madchess.net/2021/04/19/madchess-3-0-released/\">MadChess 3.0 Released – MadChess</a> by <a href=\"/Erik_Madsen\" title=\"Erik Madsen\">Erik Madsen</a>, April 19, 2021</li></ul>\n<h1><span class=\"mw-headline\" id=\"External_Links\">External Links</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MadChess&amp;action=edit&amp;section=13\" title=\"Edit section: External Links\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<h2><span class=\"mw-headline\" id=\"Chess_Engine\">Chess Engine</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MadChess&amp;action=edit&amp;section=14\" title=\"Edit section: Chess Engine\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.madchess.net/\">MadChess</a></li></ul>\n<dl><dd> <a rel=\"nofollow\" class=\"external text\" href=\"https://www.madchess.net/page/User-Guide\">MadChess - User Guide</a></dd></dl>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"http://www.computerchess.org.uk/ccrl/4040/cgi/compare_engines.cgi?family=MadChess&amp;print=Rating+list&amp;print=Results+table&amp;print=LOS+table&amp;print=Ponder+hit+table&amp;print=Eval+difference+table&amp;print=Comopp+gamenum+table&amp;print=Overlap+table&amp;print=Score+with+common+opponents\">MadChess</a> in <a href=\"/CCRL\" title=\"CCRL\">CCRL 40/40</a></li></ul>\n<h2><span class=\"mw-headline\" id=\"Misc\">Misc</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MadChess&amp;action=edit&amp;section=15\" title=\"Edit section: Misc\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h2>\n<ul><li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/MAD\">MAD from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Mad_%28magazine%29\">Mad (magazine) from Wikipedia</a></li>\n<li> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Insanity\">Insanity from Wikipedia</a></li></ul>\n<h1><span class=\"mw-headline\" id=\"References\">References</span><span class=\"mw-editsection\"><span class=\"mw-editsection-bracket\">[</span><a href=\"/index.php?title=MadChess&amp;action=edit&amp;section=16\" title=\"Edit section: References\">edit</a><span class=\"mw-editsection-bracket\">]</span></span></h1>\n<div class=\"mw-references-wrap mw-references-columns\"><ol class=\"references\">\n<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">↑</a></span> <span class=\"reference-text\">A postcard with the <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Public_domain\">public domain</a> \"<a rel=\"nofollow\" class=\"external text\" href=\"http://en.wiktionary.org/wiki/what_me_worry\">me worry?</a>\" face that later inspired <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Mad_%28magazine%29\">Mad magazine's</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Alfred_E._Neuman\">Alfred E. Neuman</a>,  ca. 1910s, <a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Alfred_E._Neuman\">Alfred E. Neuman from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-2\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-2\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=45723\">MadChess 1.0 Released (C# .NET Engine)</a> by <a href=\"/Erik_Madsen\" title=\"Erik Madsen\">Erik Madsen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 25, 2012</span>\n</li>\n<li id=\"cite_note-3\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-3\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=51973\">MadChess UCI_LimitStrength Algorithm</a> by <a href=\"/Erik_Madsen\" title=\"Erik Madsen\">Erik Madsen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, April 12, 2014</span>\n</li>\n<li id=\"cite_note-4\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-4\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.madchess.net/page/User-Guide\">MadChess - User Guide</a></span>\n</li>\n<li id=\"cite_note-5\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-5\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.madchess.net/2017/02/22/madchess-2-1-released/\">MadChess 2.1 Released – MadChess</a>, February 22, 2017</span>\n</li>\n<li id=\"cite_note-6\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-6\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum/viewtopic.php?t=63248\">MadChess 2.1 Released - Supports Windows, Linux, Mac</a> by <a href=\"/Erik_Madsen\" title=\"Erik Madsen\">Erik Madsen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, February 23, 2017</span>\n</li>\n<li id=\"cite_note-7\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-7\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://talkchess.com/forum/viewtopic.php?p=485936#485936\">Re: Question About CPP-C#, Performance, and Square Representation</a> by <a href=\"/Erik_Madsen\" title=\"Erik Madsen\">Erik Madsen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, October 03, 2012</span>\n</li>\n<li id=\"cite_note-8\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-8\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://msdn.microsoft.com/en-us/library/9k7k7cf0.aspx\">yield - MSDN C# Reference</a></span>\n</li>\n<li id=\"cite_note-9\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-9\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://startbigthinksmall.wordpress.com/2008/06/09/behind-the-scenes-of-the-c-yield-keyword/\">Behind the scenes of the C# yield keyword | Struggles</a> by <a rel=\"nofollow\" class=\"external text\" href=\"http://startbigthinksmall.wordpress.com/\">Lars Corneliussen</a>, June 9, 2008</span>\n</li>\n<li id=\"cite_note-10\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-10\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Generator_%28computer_programming%29\">Generator (computer programming) from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-11\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-11\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"https://en.wikipedia.org/wiki/Coroutine\">Coroutine from Wikipedia</a></span>\n</li>\n<li id=\"cite_note-12\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-12\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=74931\">Engine Crash Detective Story</a> by <a href=\"/Erik_Madsen\" title=\"Erik Madsen\">Erik Madsen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, August 29, 2020</span>\n</li>\n<li id=\"cite_note-13\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-13\">↑</a></span> <span class=\"reference-text\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.talkchess.com/forum3/viewtopic.php?f=7&amp;t=76115\">Are Aspiration Windows Worthless?</a> by <a href=\"/Erik_Madsen\" title=\"Erik Madsen\">Erik Madsen</a>, <a href=\"/CCC\" title=\"CCC\">CCC</a>, December 20, 2020&#160;» <a href=\"/Aspiration_Windows\" title=\"Aspiration Windows\">Aspiration Windows</a></span>\n</li>\n</ol></div>\n<p><b><a href=\"/Engines\" title=\"Engines\">Up one level</a></b>[[Category:Mac]\n</p>\n<!-- \nNewPP limit report\nCached time: 20260301084255\nCache expiry: 86400\nDynamic content: false\nCPU time usage: 0.083 seconds\nReal time usage: 0.631 seconds\nPreprocessor visited node count: 250/1000000\nPreprocessor generated node count: 504/1000000\nPost‐expand include size: 0/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 2/40\nExpensive parser function count: 0/100\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%    0.000      1 -total\n-->\n</div>\n<!-- Saved in parser cache with key oscar70_mw1-mw_:pcache:idhash:3844-0!canonical and timestamp 20260301084254 and revision id 24400\n -->\n"
+    },
+    "categories": [
+      {
+        "sortkey": "",
+        "*": "Disease"
+      },
+      {
+        "sortkey": "",
+        "*": "UCI"
+      },
+      {
+        "sortkey": "",
+        "*": "Open_Source"
+      },
+      {
+        "sortkey": "",
+        "*": "GPL"
+      },
+      {
+        "sortkey": "",
+        "*": "C_sharp"
+      },
+      {
+        "sortkey": "",
+        "*": "Windows"
+      },
+      {
+        "sortkey": "",
+        "*": "Linux"
+      },
+      {
+        "sortkey": "",
+        "*": "PC"
+      },
+      {
+        "sortkey": "",
+        "*": "X86"
+      },
+      {
+        "sortkey": "",
+        "*": "X64"
+      },
+      {
+        "sortkey": "",
+        "*": "Chess_Suffix"
+      }
+    ],
+    "links": [
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Anti-Diagonals"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Aspiration Windows"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Automated Tuning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCC"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "CCRL"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "C sharp"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Debugging"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Diagonals"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Endgame"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Engines"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Erik Madsen"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Evaluation of Pieces"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Files"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Free Software Foundation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Futility Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Game Phases"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "History Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Incremental Updates"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Iterative Deepening"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Killer Heuristic"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "King Safety"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Late Move Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Lazy Evaluation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Linux"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mac OS"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Main Page"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Matchess"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Microsoft"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Middlegame"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Mobility"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Move Generation"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Null Move Pruning"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Pawn Structure"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Piece-Lists"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Piece-Square Tables"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Playing Strength"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Principal Variation Search"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Ranks"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Reductions"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "RumbleMinze"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Score"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Tapered Eval"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Transposition Table"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "UCI"
+      },
+      {
+        "ns": 0,
+        "exists": "",
+        "*": "Windows"
+      },
+      {
+        "ns": 0,
+        "*": "Madness Schach"
+      },
+      {
+        "ns": 14,
+        "exists": "",
+        "*": "Category:Open Source"
+      }
+    ],
+    "sections": [
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Description",
+        "number": "1",
+        "index": "1",
+        "fromtitle": "MadChess",
+        "byteoffset": 2089,
+        "anchor": "Description"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Move Generation",
+        "number": "1.1",
+        "index": "2",
+        "fromtitle": "MadChess",
+        "byteoffset": 2103,
+        "anchor": "Move_Generation"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Search",
+        "number": "1.2",
+        "index": "3",
+        "fromtitle": "MadChess",
+        "byteoffset": 3237,
+        "anchor": "Search"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Evaluation",
+        "number": "1.3",
+        "index": "4",
+        "fromtitle": "MadChess",
+        "byteoffset": 3745,
+        "anchor": "Evaluation"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "See also",
+        "number": "2",
+        "index": "5",
+        "fromtitle": "MadChess",
+        "byteoffset": 4242,
+        "anchor": "See_also"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Forum Posts",
+        "number": "3",
+        "index": "6",
+        "fromtitle": "MadChess",
+        "byteoffset": 4308,
+        "anchor": "Forum_Posts"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2012",
+        "number": "3.1",
+        "index": "7",
+        "fromtitle": "MadChess",
+        "byteoffset": 4322,
+        "anchor": "2012"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2013",
+        "number": "3.2",
+        "index": "8",
+        "fromtitle": "MadChess",
+        "byteoffset": 4647,
+        "anchor": "2013"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2014",
+        "number": "3.3",
+        "index": "9",
+        "fromtitle": "MadChess",
+        "byteoffset": 5031,
+        "anchor": "2014"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2015 ...",
+        "number": "3.4",
+        "index": "10",
+        "fromtitle": "MadChess",
+        "byteoffset": 5607,
+        "anchor": "2015_..."
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "2020 ...",
+        "number": "3.5",
+        "index": "11",
+        "fromtitle": "MadChess",
+        "byteoffset": 6315,
+        "anchor": "2020_..."
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "Blog Posts",
+        "number": "4",
+        "index": "12",
+        "fromtitle": "MadChess",
+        "byteoffset": 6914,
+        "anchor": "Blog_Posts"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "External Links",
+        "number": "5",
+        "index": "13",
+        "fromtitle": "MadChess",
+        "byteoffset": 8335,
+        "anchor": "External_Links"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Chess Engine",
+        "number": "5.1",
+        "index": "14",
+        "fromtitle": "MadChess",
+        "byteoffset": 8352,
+        "anchor": "Chess_Engine"
+      },
+      {
+        "toclevel": 2,
+        "level": "2",
+        "line": "Misc",
+        "number": "5.2",
+        "index": "15",
+        "fromtitle": "MadChess",
+        "byteoffset": 8779,
+        "anchor": "Misc"
+      },
+      {
+        "toclevel": 1,
+        "level": "1",
+        "line": "References",
+        "number": "6",
+        "index": "16",
+        "fromtitle": "MadChess",
+        "byteoffset": 8996,
+        "anchor": "References"
+      }
+    ]
+  }
+}

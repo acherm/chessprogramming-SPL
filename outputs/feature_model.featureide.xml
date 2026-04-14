@@ -1,0 +1,405 @@
+<?xml version='1.0' encoding='utf-8'?>
+<featureModel>
+  <struct>
+    <and name="ChessEngineProductLine">
+      <alt name="BoardRepresentation">
+        <feature name="0x88" />
+        <feature name="10x12 Board" />
+        <feature name="Bitboards" />
+        <feature name="Copy-Make" />
+        <feature name="Mailbox" />
+        <feature name="Make Move" />
+        <feature name="Piece Lists" />
+        <feature name="Unmake Move" />
+      </alt>
+      <feature name="Endgame" />
+      <alt name="Evaluation">
+        <feature name="Evaluation" />
+        <or name="King Terms">
+          <feature name="King Activity" />
+          <feature name="King Pressure" />
+          <feature name="King Shelter" />
+        </or>
+        <feature name="Mobility" />
+        <or name="Pawn Structure">
+          <feature name="Connected Pawn" />
+          <feature name="Doubled Pawn" />
+          <feature name="Isolated Pawn" />
+          <feature name="Passed Pawn" />
+        </or>
+        <or name="Piece Coordination">
+          <feature name="Bishop Pair" />
+          <feature name="Rook on Open File" />
+          <feature name="Rook Semi-Open File" />
+        </or>
+        <feature name="Piece-Square Tables" />
+        <feature name="Static Exchange Evaluation" />
+        <feature name="Tapered Eval" />
+      </alt>
+      <or name="MoveGeneration">
+        <feature name="Castling" />
+        <feature name="En Passant" />
+        <feature name="Legal Move Generation" />
+        <feature name="Magic Bitboards" />
+        <feature name="Move Generation" />
+        <feature name="Pseudo-Legal Move Generation" />
+      </or>
+      <or name="Opening">
+        <feature name="Opening Book" />
+      </or>
+      <feature name="Parallelism" />
+      <or name="Protocol">
+        <feature name="FEN" />
+        <feature name="UCI" />
+      </or>
+      <or name="PruningReductions">
+        <feature name="Delta Pruning" />
+        <feature name="Futility Pruning" />
+        <feature name="Late Move Reductions" />
+        <feature name="Null Move Pruning" />
+        <feature name="Razoring" />
+      </or>
+      <or name="Search">
+        <feature name="Alpha-Beta" />
+        <feature name="Aspiration Windows" />
+        <feature name="Fifty-Move Rule" />
+        <feature name="Iterative Deepening" />
+        <feature name="Minimax" />
+        <and name="Move Ordering">
+          <or name="Ordering Heuristics">
+            <feature name="Hash Move" />
+            <feature name="History Heuristic" />
+            <feature name="Killer Heuristic" />
+          </or>
+        </and>
+        <feature name="Negamax" />
+        <feature name="Principal Variation Search" />
+        <feature name="Quiescence Search" />
+        <feature name="Threefold Repetition" />
+      </or>
+      <or name="TimeManagement">
+        <feature name="Pondering" />
+        <feature name="Time Management" />
+      </or>
+      <or name="TranspositionTable">
+        <feature name="Transposition Table" />
+        <or name="TT Support">
+          <feature name="Pawn Hash Table" />
+          <feature name="Replacement Schemes" />
+          <feature name="Zobrist Hashing" />
+        </or>
+      </or>
+      <feature name="Tuning" />
+    </and>
+  </struct>
+  <constraints>
+    <rule>
+      <imp>
+        <var>Magic Bitboards</var>
+        <var>Bitboards</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Legal Move Generation</var>
+        <var>Move Generation</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Pseudo-Legal Move Generation</var>
+        <var>Move Generation</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Copy-Make</var>
+        <var>Make Move</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Unmake Move</var>
+        <var>Make Move</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Castling</var>
+        <var>Legal Move Generation</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>En Passant</var>
+        <var>Legal Move Generation</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Minimax</var>
+        <var>Make Move</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Minimax</var>
+        <var>Unmake Move</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Alpha-Beta</var>
+        <var>Make Move</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Alpha-Beta</var>
+        <var>Unmake Move</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Alpha-Beta</var>
+        <var>Castling</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Alpha-Beta</var>
+        <var>En Passant</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Alpha-Beta</var>
+        <var>Threefold Repetition</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Alpha-Beta</var>
+        <var>Fifty-Move Rule</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Negamax</var>
+        <var>Make Move</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Negamax</var>
+        <var>Unmake Move</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Quiescence Search</var>
+        <var>Make Move</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Quiescence Search</var>
+        <var>Unmake Move</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Hash Move</var>
+        <var>Transposition Table</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Hash Move</var>
+        <var>Move Ordering</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Killer Heuristic</var>
+        <var>Move Ordering</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>History Heuristic</var>
+        <var>Move Ordering</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Pawn Hash Table</var>
+        <var>Zobrist Hashing</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Replacement Schemes</var>
+        <var>Transposition Table</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Principal Variation Search</var>
+        <var>Alpha-Beta</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Aspiration Windows</var>
+        <var>Alpha-Beta</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Null Move Pruning</var>
+        <var>Alpha-Beta</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Late Move Reductions</var>
+        <var>Alpha-Beta</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Futility Pruning</var>
+        <var>Alpha-Beta</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Delta Pruning</var>
+        <var>Quiescence Search</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Passed Pawn</var>
+        <var>Evaluation</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Isolated Pawn</var>
+        <var>Evaluation</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Doubled Pawn</var>
+        <var>Evaluation</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Connected Pawn</var>
+        <var>Evaluation</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Bishop Pair</var>
+        <var>Evaluation</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Rook on Open File</var>
+        <var>Evaluation</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>Rook Semi-Open File</var>
+        <var>Evaluation</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>King Pressure</var>
+        <var>Evaluation</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>King Shelter</var>
+        <var>Evaluation</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>King Activity</var>
+        <var>Evaluation</var>
+      </imp>
+    </rule>
+    <rule>
+      <imp>
+        <var>King Activity</var>
+        <var>Tapered Eval</var>
+      </imp>
+    </rule>
+    <rule>
+      <not>
+        <and>
+          <var>Minimax</var>
+          <var>Negamax</var>
+        </and>
+      </not>
+    </rule>
+    <rule>
+      <not>
+        <and>
+          <var>Bitboards</var>
+          <var>Mailbox</var>
+        </and>
+      </not>
+    </rule>
+    <rule>
+      <not>
+        <and>
+          <var>Bitboards</var>
+          <var>0x88</var>
+        </and>
+      </not>
+    </rule>
+    <rule>
+      <not>
+        <and>
+          <var>Bitboards</var>
+          <var>10x12 Board</var>
+        </and>
+      </not>
+    </rule>
+    <rule>
+      <not>
+        <and>
+          <var>Mailbox</var>
+          <var>0x88</var>
+        </and>
+      </not>
+    </rule>
+    <rule>
+      <not>
+        <and>
+          <var>Mailbox</var>
+          <var>10x12 Board</var>
+        </and>
+      </not>
+    </rule>
+    <rule>
+      <not>
+        <and>
+          <var>0x88</var>
+          <var>10x12 Board</var>
+        </and>
+      </not>
+    </rule>
+  </constraints>
+</featureModel>
