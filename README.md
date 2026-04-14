@@ -15,7 +15,7 @@ It contains four main elements:
 - `c_engine_pl/`: C implementation of the chess-engine SPL, including feature-controlled variants.
 - `tests/`: Python test suite covering mining, constraints, code generation, and the executable family.
 - `scripts/`: Analysis and experiment scripts copied from the workspace.
-- `data/chessprogramming_cache/`: Local snapshot of the Chessprogramming.org corpus used during the study.
+- `data/chessprogramming_cache/`: Cache metadata for the Chessprogramming.org snapshot used during the study. Public redistribution of mirrored page bodies is intentionally omitted from this repository.
 - `outputs/`: Generated experiment outputs, reports, plots, and benchmark artifacts.
 - `paper/data/`: Session-analysis reports and generated tables/figures that fed the short paper.
 - `sessions/`: Codex session artifacts and trimming metadata.
@@ -35,5 +35,19 @@ The experiment thread was not cut at a fixed date. Instead, explicit paper-editi
 ## Notes
 
 - This repository is intentionally artifact-oriented. It does not include the final paper source.
+- The public artifact omits mirrored CPW page payloads. To rebuild the cache locally, install the package and run the pipeline, for example:
+
+```bash
+pip install -e .
+PYTHONPATH=src python3 -m cpw_variability.cli fetch --seed implementation --mode snapshot --max-pages 1500
+```
+
+  or rerun the full pipeline:
+
+```bash
+pip install -e .
+PYTHONPATH=src python3 -m cpw_variability.cli run-all --seed implementation --mode snapshot --max-pages 1500
+```
+
 - Several scripts reflect the original working environment and may still contain absolute paths from the study workspace.
 - The included Codex sessions come from local Codex Desktop storage and were copied into this standalone artifact.
