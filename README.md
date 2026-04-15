@@ -4,15 +4,6 @@ Automated pipeline that mines chessprogramming.org into a traceable SPL feature 
 
 > **Status.** The current product line combines a 1,316-page chessprogramming.org snapshot, a 74-feature implementation-backed feature model, and 7,537 non-empty lines of maintained C code, together with the infrastructure that derives many robust and strength-diverse variants from that model. As is normal for ongoing development at this scale, there is room for improvement — across the C engine, the feature model, and the experimental pipeline — and some of it is already tracked and actionable as open issues.
 
-## Feature Model
-
-The canonical feature model lives in `outputs/feature_model.json` and is also exported as FeatureIDE XML, UVL, FAMILIAR (FML), and a visual SVG. See [`FEATURE_MODEL.md`](FEATURE_MODEL.md) for:
-
-- what each artefact contains and how they relate,
-- how to regenerate the derived views (`scripts/render_feature_model.py`, `scripts/export_feature_model.py`),
-- the normalization pipeline applied before rendering/exporting (still under discussion),
-- known limitations and the planned evolution of the model.
-
 ## Implementation-Oriented Model
 
 The feature model is mined with a product-line implementation objective:
@@ -30,6 +21,8 @@ Each feature record in `outputs/feature_model.json` includes:
 - `variability_stage`: `compile_time`, `runtime`, or `mixed`
 - `compile_flag`: suggested compile-time symbol (for example, `CFG_ALPHA_BETA`)
 - `runtime_flag`: suggested runtime switch when relevant
+
+The model is also exported to FeatureIDE XML, UVL, FAMILIAR (FML), and an SVG diagram under `outputs/feature_model.*` — see [`FEATURE_MODEL.md`](FEATURE_MODEL.md).
 
 Depth behavior:
 
