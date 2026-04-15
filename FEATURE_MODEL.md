@@ -1,6 +1,6 @@
 # Feature Model Artefacts
 
-The repository ships a mined feature model of the chess engine product line, plus tooling to visualize it and export it to alternative textual formats. The model is **mined automatically** from chessprogramming.org and from the implementation, and therefore has known limitations — see the *Known limitations* section below.
+The repository ships a 74-feature implementation-backed feature model of the chess engine product line — mined from a 1,316-page chessprogramming.org snapshot and from the C engine product line itself — plus tooling to visualize it and export it to alternative textual formats. The model drives variant derivation, constraint validation, and the experimental infrastructure. Like any model of a real system at this scale it is not final; see *Known limitations and evolution* below for the areas currently under active work.
 
 ## Raw artefacts
 
@@ -67,12 +67,12 @@ The visualization then shows a plain mandatory edge (filled circle, no triangle)
 
 ## Known limitations and evolution
 
-The feature model is **mined, imperfect, and expected to evolve**. Examples of things to be aware of:
+The model is expected to evolve as mining heuristics, manual curation, and implementation coverage improve. Current known items worth reviewing:
 
-- The `alt`/`or` choice in the mined XML does not always reflect the most natural modeling choice — some groups that are modeled as `alt` (XOR) may be more faithfully rendered as `or` or even `and` once the semantics is reviewed manually.
-- The duplicate-name artefact above is a mining artefact; the "right" interpretation is still under discussion.
+- The `alt`/`or` choice in the mined XML does not always reflect the most natural modeling choice — some groups modeled as `alt` (XOR) may be more faithfully rendered as `or` or even `and` after manual review.
+- The duplicate-name artefact described above is a mining artefact; the "right" interpretation is still under discussion.
 - Single-child groups (like `Opening → Opening Book`) may or may not be the intent of the miner.
 - Cross-tree constraints are extracted heuristically and may be incomplete or overly tight.
 - Feature naming mixes CamelCase, hyphenated, and space-separated conventions depending on the source.
 
-Many issues — across the code, the feature model, and the experimental pipeline — have been reported and are being actively worked on. Expect the model and its derived artefacts to change as mining heuristics, manual curation, and implementation coverage improve.
+Several of these items are already tracked as open issues alongside other improvements to the C engine and the experimental pipeline.
