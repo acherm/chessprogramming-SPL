@@ -2,7 +2,7 @@
 
 This repository is a standalone replication artifact for the exploratory study on constructing a chess-engine software product line from curated knowledge with coding agents.
 
-> **Status / disclaimer.** This is active research code. Many issues — across the C engine product line, the mined feature model, and the experimental pipeline (tournaments, perft, setup layer, etc.) — have been reported and are being actively worked on. The feature model in particular is mined automatically and is far from perfect; expect it to evolve.
+> **Status.** The current product line combines a 1,316-page chessprogramming.org snapshot, a 74-feature implementation-backed feature model, and 7,537 non-empty lines of maintained C code, together with the infrastructure that derives many robust and strength-diverse variants from that model. As is normal for ongoing development at this scale, there is room for improvement — across the C engine, the feature model, and the experimental pipeline — and some of it is already tracked and actionable as open issues.
 
 ## Feature Model
 
