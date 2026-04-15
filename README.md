@@ -2,6 +2,17 @@
 
 Automated pipeline that mines chessprogramming.org into a traceable SPL feature model and engine/feature matrix.
 
+> **Status / disclaimer.** This is active research code. Many issues — across the C engine product line, the mined feature model, and the experimental pipeline (tournaments, perft, setup layer, etc.) — have been reported and are being actively worked on. The feature model in particular is mined automatically and is far from perfect; expect it to evolve.
+
+## Feature Model
+
+The canonical feature model lives in `outputs/feature_model.json` and is also exported as FeatureIDE XML, UVL, FAMILIAR (FML), and a visual SVG. See [`FEATURE_MODEL.md`](FEATURE_MODEL.md) for:
+
+- what each artefact contains and how they relate,
+- how to regenerate the derived views (`scripts/render_feature_model.py`, `scripts/export_feature_model.py`),
+- the normalization pipeline applied before rendering/exporting (still under discussion),
+- known limitations and the planned evolution of the model.
+
 ## Implementation-Oriented Model
 
 The feature model is mined with a product-line implementation objective:
