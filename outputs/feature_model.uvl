@@ -1,0 +1,139 @@
+// Chess engine product line — generated from FeatureIDE XML
+features
+	ChessEngineProductLine
+		optional
+			BoardRepresentation
+				alternative
+					"0x88"
+					"10x12 Board"
+					Bitboards
+					"Copy-Make"
+					Mailbox
+					"Make Move"
+					"Piece Lists"
+					"Unmake Move"
+			Endgame
+			Evaluation
+				alternative
+					"King Terms"
+						or
+							"King Activity"
+							"King Pressure"
+							"King Shelter"
+					Mobility
+					"Pawn Structure"
+						or
+							"Connected Pawn"
+							"Doubled Pawn"
+							"Isolated Pawn"
+							"Passed Pawn"
+					"Piece Coordination"
+						or
+							"Bishop Pair"
+							"Rook on Open File"
+							"Rook Semi-Open File"
+					"Piece-Square Tables"
+					"Static Exchange Evaluation"
+					"Tapered Eval"
+			"Move Generation"
+				or
+					Castling
+					"En Passant"
+					"Legal Move Generation"
+					"Magic Bitboards"
+					"Pseudo-Legal Move Generation"
+			Opening
+				mandatory
+					"Opening Book"
+			Parallelism
+			Protocol
+				or
+					FEN
+					UCI
+			PruningReductions
+				or
+					"Delta Pruning"
+					"Futility Pruning"
+					"Late Move Reductions"
+					"Null Move Pruning"
+					Razoring
+			Search
+				or
+					"Alpha-Beta"
+					"Aspiration Windows"
+					"Fifty-Move Rule"
+					"Iterative Deepening"
+					Minimax
+					"Move Ordering"
+						optional
+							"Ordering Heuristics"
+								or
+									"Hash Move"
+									"History Heuristic"
+									"Killer Heuristic"
+					Negamax
+					"Principal Variation Search"
+					"Quiescence Search"
+					"Threefold Repetition"
+			"Time Management"
+				mandatory
+					Pondering
+			"Transposition Table"
+				mandatory
+					"TT Support"
+						or
+							"Pawn Hash Table"
+							"Replacement Schemes"
+							"Zobrist Hashing"
+			Tuning
+
+constraints
+	"Magic Bitboards" => Bitboards
+	"Legal Move Generation" => "Move Generation"
+	"Pseudo-Legal Move Generation" => "Move Generation"
+	"Copy-Make" => "Make Move"
+	"Unmake Move" => "Make Move"
+	Castling => "Legal Move Generation"
+	"En Passant" => "Legal Move Generation"
+	Minimax => "Make Move"
+	Minimax => "Unmake Move"
+	"Alpha-Beta" => "Make Move"
+	"Alpha-Beta" => "Unmake Move"
+	"Alpha-Beta" => Castling
+	"Alpha-Beta" => "En Passant"
+	"Alpha-Beta" => "Threefold Repetition"
+	"Alpha-Beta" => "Fifty-Move Rule"
+	Negamax => "Make Move"
+	Negamax => "Unmake Move"
+	"Quiescence Search" => "Make Move"
+	"Quiescence Search" => "Unmake Move"
+	"Hash Move" => "Transposition Table"
+	"Hash Move" => "Move Ordering"
+	"Killer Heuristic" => "Move Ordering"
+	"History Heuristic" => "Move Ordering"
+	"Pawn Hash Table" => "Zobrist Hashing"
+	"Replacement Schemes" => "Transposition Table"
+	"Principal Variation Search" => "Alpha-Beta"
+	"Aspiration Windows" => "Alpha-Beta"
+	"Null Move Pruning" => "Alpha-Beta"
+	"Late Move Reductions" => "Alpha-Beta"
+	"Futility Pruning" => "Alpha-Beta"
+	"Delta Pruning" => "Quiescence Search"
+	"Passed Pawn" => Evaluation
+	"Isolated Pawn" => Evaluation
+	"Doubled Pawn" => Evaluation
+	"Connected Pawn" => Evaluation
+	"Bishop Pair" => Evaluation
+	"Rook on Open File" => Evaluation
+	"Rook Semi-Open File" => Evaluation
+	"King Pressure" => Evaluation
+	"King Shelter" => Evaluation
+	"King Activity" => Evaluation
+	"King Activity" => "Tapered Eval"
+	!((Minimax & Negamax))
+	!((Bitboards & Mailbox))
+	!((Bitboards & "0x88"))
+	!((Bitboards & "10x12 Board"))
+	!((Mailbox & "0x88"))
+	!((Mailbox & "10x12 Board"))
+	!(("0x88" & "10x12 Board"))
